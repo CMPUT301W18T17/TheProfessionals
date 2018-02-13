@@ -1,0 +1,40 @@
+
+### Use Case Name: 
+View my Task Details
+
+### Participating Actors:
+Task Provider
+
+### Goal:
+For the task provider to see a list of his/her tasks assigned to them
+
+### Trigger:
+User selects “View my tasks”
+
+### Precondition:  
+User has account. (User does not have to have assigned tasks)
+
+### Postcondition:  
+User will either see a list of his/her tasks in status “Assigned” or, will see an empty screen informing the user they have no tasks currentlyr 
+
+### Flow:
+
+**Basic Flow:**
+1. System will present a scrollable list of tasks. Each item will show the amount of  my bid, the status (either “Assigned” or “Completed”), the name of the requester, and the title of the task. There is also an option to view only those in “Assigned” or “Completed”
+1. User selects “Assigned”
+1. System filters list to only present tasks in status “Assigned”. The system presents a UI similar to 1, except “Assigned” is clearly selected. 
+1. User selects “Completed” 
+1. System filters list to only present tasks in status “Completed”. The system presents a UI similar to 1, except “Completed” is clearly selecte
+
+
+**Alternative Flow:**  
+*View Task*  
+[3|5].1 User Selects an item   
+[3|5].2 System proceeds to US 06.03.01
+stem proceeds  to US 09.02.01  
+
+**Exception Flow:**  
+*No tasks Assigned*  
+1.1 System will present blank screen with message telling the user they have no assigned tasks, and presents a button/action to view all unassigned tasks.   
+1.2 User follows action item.   
+1.3 System takes user to US 04.02.01  
