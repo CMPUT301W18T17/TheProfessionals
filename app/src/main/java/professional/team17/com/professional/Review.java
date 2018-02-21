@@ -1,17 +1,22 @@
 package professional.team17.com.professional;
 
+import java.util.Date;
+
 public class Review {
 
     private Double score;
     private String comment;
     private String profileName; //person who gave review
     private String reviewTitle;
+    private Date date;
 
     public Review(Double score, String reviewer, String comment, String title) {
         this.score = score;
         this.profileName = reviewer;
         this.comment = comment;
         this.reviewTitle = title;
+        this.date = new Date();
+
 
     }
 
@@ -19,6 +24,7 @@ public class Review {
         this.score = score;
         this.profileName = reviewer;
         this.reviewTitle = title;
+        this.date = new Date();
     }
     /* GETTERS */
 
@@ -56,6 +62,11 @@ public class Review {
 
     public void setReviewTitle(String title) {
         this.reviewTitle = title;
+    }
+
+    public Date getDate(){
+        return this.date;
+
     }
 
 }
