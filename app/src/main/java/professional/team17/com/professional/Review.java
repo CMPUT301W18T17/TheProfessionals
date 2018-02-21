@@ -7,57 +7,58 @@ public class Review {
     private String profileName; //person who gave review
     private String reviewTitle;
 
-    public Review(Double score, String reviewer, String comment, String title){
+    public Review(Double score, String reviewer, String comment, String title) {
         this.score = score;
-        this.profileName  = reviewer;
+        this.profileName = reviewer;
         this.comment = comment;
         this.reviewTitle = title;
 
     }
 
-    public Review(Double score, String reviewer, String title){
+    public Review(Double score, String reviewer, String title) {
         this.score = score;
-        this.profileName  = reviewer;
+        this.profileName = reviewer;
         this.reviewTitle = title;
     }
     /* GETTERS */
 
-    public Double getScore(){
+    public Double getScore() {
         return this.score;
     }
 
-    public String getComment(){
+    public String getComment() {
         return this.comment;
     }
 
-    public String getProfileName(){
+    public String getProfileName() {
         return this.profileName;
     }
 
-    public String getReviewTitle(){
+    public String getReviewTitle() {
         return this.reviewTitle;
     }
-  
-}
+
 
     /*SETTERS*/
-    public void setScore(Double score){
+    public void setScore(Double score) {
         this.score = score;
     }
 
 
-    public void setComment(String comment){
+    public void setComment(String comment) {
         this.comment = comment;
 
     }
 
-    private void setProfileName(String name){
+    private void setProfileName(String name) {
         this.profileName = name;
     }
 
-    public void setReviewTitle(String title){
+    public void setReviewTitle(String title) {
         this.reviewTitle = title;
     }
+
+}
 
 
 
