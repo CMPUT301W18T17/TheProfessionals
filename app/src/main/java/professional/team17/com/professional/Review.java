@@ -1,7 +1,7 @@
 package professional.team17.com.professional;
 
 /**
- * Created by Hailan on 2018-02-20.
+ * Created by ??? 2018-02-2?.
  */
 
 public class Review {
