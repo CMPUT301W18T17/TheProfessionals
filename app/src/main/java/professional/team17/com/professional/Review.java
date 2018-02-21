@@ -1,9 +1,5 @@
 package professional.team17.com.professional;
 
-/**
- * Created by ag on 2018-02-20.
- */
-
 public class Review {
 
     private Double score;
@@ -41,6 +37,8 @@ public class Review {
     public String getReviewTitle(){
         return this.reviewTitle;
     }
+  
+}
 
     /*SETTERS*/
     public void setScore(Double score){
@@ -65,4 +63,4 @@ public class Review {
 
 
 
-}
+
