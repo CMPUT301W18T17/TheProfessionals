@@ -46,8 +46,17 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
 
         amount = 9.99;
         bid.setAmount(amount);
-
         assertEquals(amount, bid.getAmount());
+
+        boolean exception = false;
+        try{
+            bid.setAmount(10.2831);
+        } catch(IllegalArgumentException e){
+            exception = true;
+        }
+
+        assertTrue(exception);
+
     }
 
     public void testGetStatus(){
