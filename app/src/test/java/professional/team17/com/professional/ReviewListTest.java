@@ -19,17 +19,17 @@ public class ReviewListTest extends ActivityInstrumentationTestCase2 {
 
     public void testAddReview() { //same as the test for hasReview
         ReviewList reviews = new ReviewList();
-        //Review review = new Review();
-        //reviews.add(review);
-        //assertTrue(reviews.hasReview(review));
+        Review review = new Review(5.0, "reviewer","comment", "title");
+        reviews.addReview(review);
+        assertTrue(reviews.hasReview(review));
     }
 
     public void testDeleteReview() {
         ReviewList reviews = new ReviewList();
-        //Review review = new Review();
-        //reviews.add(review);
-        //reviews.delete(review);
-        //assertFalse(reviews.hasReview(review));
+        Review review = new Review(5.0, "reviewer","comment", "title" );
+        reviews.addReview(review);
+        reviews.deleteReview(review);
+        assertFalse(reviews.hasReview(review));
     }
 
 
@@ -63,8 +63,7 @@ public class ReviewListTest extends ActivityInstrumentationTestCase2 {
 
     }
 
-    // test for getTweets() -- sould return a list of tweets in chronological order
-    public void testgetTweets(){
+    public void testGetReview(){
         ReviewList reviews = new ReviewList();
 
         Review review1 = new Review(3.5, "a1", "t1");

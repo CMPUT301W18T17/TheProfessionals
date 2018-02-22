@@ -53,7 +53,7 @@ public class ReviewList {
     public String getAvgString(){
        double sum = getAvg();
        String sumText = String.format("%.2f", sum); //format to two decimals
-      return sumText;
+       return sumText;
  }
 
 
