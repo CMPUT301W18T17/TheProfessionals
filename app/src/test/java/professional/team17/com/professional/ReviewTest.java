@@ -5,75 +5,71 @@ import android.test.ActivityInstrumentationTestCase2;
 import java.util.Date;
 
 /**
- * Created by Richard on 2018/2/21.
+ * Created by Zhipeng Zhang on 2018-02-21.
  */
 
 public class ReviewTest extends ActivityInstrumentationTestCase2 {
 
-    private Double score, returnScore, newScore;
-    private String comment, returnComment, newComment;
-    private String profileName, returnProfileName; //person who gave review
-    private String reviewTitle, returnReviewTitle, newReviewTitle;
+    private double score = 2.3;
+    private double newScore = 4.0;
+    private String comment = "Comment";
+    private String newComment = "New Comment";
+    private String profileName = "Name";
+    private String reviewTitle = "Title";
+    private String newReviewTitle = "New Title";
     private Date date, returnDate;
-    String strDate, strReturnDate;
+    private String strDate, strReturnDate;
 
     public ReviewTest(){
         super(Review.class);
     }
+
     /* Test for Getters */
-    public void TestGetScore(){
-        Review review = new Review(this.score, this.profileName, this.comment, this.reviewTitle);
-        returnScore = review.getScore();
-        assertEquals(returnScore, this.score);
+    public void testGetScore(){
+        Review review = new Review(score, profileName, comment, reviewTitle);
+        assertEquals(score, review.getScore());
     }
 
-    public void TestGetComment(){
-        Review review = new Review(this.score, this.profileName, this.comment, this.reviewTitle);
-        returnComment = review.getComment();
-        assertEquals(returnComment, this.comment);
+    public void testGetComment(){
+        Review review = new Review(score, profileName, comment, reviewTitle);
+        assertEquals(comment, review.getComment());
     }
 
-    public void TestGetProfileName(){
-        Review review = new Review(this.score, this.profileName, this.comment, this.reviewTitle);
-        returnProfileName = review.getProfileName();
-        assertEquals(returnProfileName, this.profileName);
+    public void testGetProfileName(){
+        Review review = new Review(score, profileName, comment, reviewTitle);
+        assertEquals(profileName, review.getProfileName());
     }
 
-    public void TestGetReviewTitle(){
-        Review review = new Review(this.score, this.profileName, this.comment, this.reviewTitle);
-        returnReviewTitle = review.getReviewTitle();
-        assertEquals(returnReviewTitle, this.reviewTitle);
+    public void testGetReviewTitle(){
+        Review review = new Review(score, profileName, comment, reviewTitle);
+        assertEquals(reviewTitle, review.getReviewTitle());
     }
 
-    public void TestGetDate(){
-        Review review = new Review(this.score, this.profileName, this.comment, this.reviewTitle);
+    public void testGetDate(){
+        Review review = new Review(score, profileName, comment, reviewTitle);
         returnDate = review.getDate();
         strReturnDate = returnDate.toString();
         date = new Date();
         strDate = date.toString();
-        assertEquals(strReturnDate, this.strDate);
+        assertEquals(strReturnDate, strDate);
     }
 
     /* Test for Setters */
-    public void TestSetScore(){
-        Review review = new Review(this.score, this.profileName, this.comment, this.reviewTitle);
-        review.setScore(this.newScore);
-        returnScore = review.getScore();
-        assertEquals(returnScore, this.newScore);
+    public void testSetScore(){
+        Review review = new Review(score, profileName, comment, reviewTitle);
+        review.setScore(newScore);
+        assertEquals(newScore, review.getScore());
     }
 
-    public void TestSetComment(){
-        Review review = new Review(this.score, this.profileName, this.comment, this.reviewTitle);
-        review.setComment(this.newComment);
-        returnComment = review.getComment();
-        assertEquals(returnComment, this.newComment);
+    public void testSetComment(){
+        Review review = new Review(score, profileName, comment, reviewTitle);
+        review.setComment(newComment);
+        assertEquals(newComment, review.getComment());
     }
 
-    public void TestSetReviewTitle(){
-        Review review = new Review(this.score, this.profileName, this.comment, this.reviewTitle);
-        review.setReviewTitle(this.newReviewTitle);
-        returnReviewTitle = review.getReviewTitle();
-        assertEquals(returnReviewTitle, this.newReviewTitle);
+    public void testSetReviewTitle(){
+        Review review = new Review(score, profileName, comment, reviewTitle);
+        review.setReviewTitle(newReviewTitle);
+        assertEquals(newReviewTitle, review.getReviewTitle());
     }
-
 }
