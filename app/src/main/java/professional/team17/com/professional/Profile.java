@@ -5,4 +5,14 @@ package professional.team17.com.professional;
  */
 
 public class Profile {
+
+    private String userName;
+
+    public Profile(String userName){
+        this.userName = userName;
+    }
+
+    public String getUniqueID() {
+        return userName;
+    }
 }
