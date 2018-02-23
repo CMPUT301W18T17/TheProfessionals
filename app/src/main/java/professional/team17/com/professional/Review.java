@@ -16,8 +16,6 @@ public class Review {
         this.comment = comment;
         this.reviewTitle = title;
         this.date = new Date();
-
-
     }
 
     public Review(Double score, String reviewer, String title) {

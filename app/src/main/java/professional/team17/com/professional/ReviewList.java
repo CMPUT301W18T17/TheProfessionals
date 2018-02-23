@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-/**
- * Created by Hailan on 2018-02-20.
- */
-
 public class ReviewList {
     private ArrayList<Review> reviews = new ArrayList<Review>();
 

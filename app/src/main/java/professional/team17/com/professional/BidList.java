@@ -2,10 +2,6 @@ package professional.team17.com.professional;
 
 import java.util.ArrayList;
 
-/**
- * Created by Hailan on 2018-02-20.
- */
-
 public class BidList {
     private ArrayList<Bid> bids = new ArrayList<Bid>();
 
