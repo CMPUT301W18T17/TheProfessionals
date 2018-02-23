@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="io.searchbox:jest-droid:2.0.0@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.searchbox/jest-droid/2.0.0/3ae3b1d37582f9469dfd1ee20b15b3e0ec3a01c5/jest-droid-2.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.searchbox/jest-droid/2.0.0/8dc55c0d42c47de7307ceecb8b7b260ce37709a5/jest-droid-2.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
