@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class ElasticSearchController {
     private static JestDroidClient client;
-    private static String server = "http://cmput301.softwareprocess.es:8080/INDEXNAME"; //TODO COMPLETE name
+    private static String server = "http://cmput301.softwareprocess.es:8080/CMPUT301W18T09/NAME"; //TODO COMPLETE name
 
     public static class AddTask extends AsyncTask<Task, Void, Void> {
 //TODO Complete
