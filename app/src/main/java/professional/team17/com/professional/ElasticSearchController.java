@@ -24,7 +24,7 @@ public class ElasticSearchController {
     private static String server = "http://cmput301.softwareprocess.es:8080/INDEXNAME"; //TODO COMPLETE name
 
     public static class AddTask extends AsyncTask<Task, Void, Void> {
-
+//TODO Complete
         @Override
         protected Void doInBackground(Task... Tasks) {
             verifySettings();
@@ -34,7 +34,7 @@ public class ElasticSearchController {
 
 
     public static class GetTasks extends AsyncTask<String, Void, TaskList> {
-
+        //TODO Complete
         @Override
         protected TaskList doInBackground(String... TaskList) {
             verifySettings();
@@ -45,7 +45,7 @@ public class ElasticSearchController {
 
 
     public static class GetTask extends AsyncTask<String, Void, Task> {
-
+        //TODO Complete
         @Override
         protected Task doInBackground(String... Task) {
             verifySettings();
@@ -56,7 +56,7 @@ public class ElasticSearchController {
     }
 
     public static class AddProfile extends AsyncTask<Profile, Void, Void> {
-
+        //TODO Complete
         @Override
         protected Void doInBackground(Profile... Profiles) {
             verifySettings();
@@ -66,7 +66,7 @@ public class ElasticSearchController {
 
 
     public static class GetProfile extends AsyncTask<String, Void, Profile> {
-
+        //TODO Complete
         @Override
         protected Profile doInBackground(String... search_parameters) {
             verifySettings();
@@ -77,7 +77,7 @@ public class ElasticSearchController {
 
 //TODO Updates may be redundant and can be absorbed into adds
     public static class UpdateProfile extends AsyncTask<Profile, Void, Void> {
-
+    //TODO Complete
         @Override
         protected Void doInBackground(Profile... Profiles) {
             verifySettings();
@@ -87,7 +87,7 @@ public class ElasticSearchController {
 
 
     public static class UpdateTask extends AsyncTask<Task, Void, Void> {
-
+        //TODO Complete
         @Override
         protected Void doInBackground(Task... Profiles) {
             verifySettings();
