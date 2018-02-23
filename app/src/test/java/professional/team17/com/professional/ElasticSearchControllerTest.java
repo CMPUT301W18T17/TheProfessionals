@@ -2,6 +2,7 @@ package professional.team17.com.professional;
 
 import android.test.ActivityInstrumentationTestCase2;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 
 import java.util.Date;
@@ -17,14 +18,25 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
     Task task2 = new Task("TaskRequester2", "Title2", "Description2", "Location2", date, "Task ID2");
     Task task3 = new Task("TaskRequester3", "Title3", "Description3", "Location3", date, "Task ID3");
 
-    public ElasticSearchControllerTest(){
+    public ElasticSearchControllerTest() {
         super(ElasticSearchController.class);
     }
 
-    public void AddTaskTest(){
+    public void AddTaskTest() {
         ElasticSearchController.AddTask addTask = new ElasticSearchController.AddTask();
-        ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
+        ElasticSearchController.GetTask getTask = new ElasticSearchController.GetTask();
         addTask.execute(task1);
-        assertTrue(getTasks.hasTask(task1));
+
+        String id = task1.getUniqueID();
+        String search1 = "{ \"query\": \"term\" : { \"id\" : \"idfill\" } }";
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = (JsonObject) jsonParser.parse(search1);
+        jsonObject.getAsJsonObject("query").getAsJsonObject("term").addProperty("id", id);
+        getTask.execute(jsonObject.toString());
+        try {
+            Task task = getTask.get();
+            assertEquals(task, task1);
+        } catch (Exception e) {
+        }
     }
 }
