@@ -24,4 +24,9 @@ public class BidList {
     public void delete(Bid bid){
         bids.remove(bid);
     }
+
+    //remove all bids bud the one plugged in
+    public void deleteAllExcept(Bid bid){
+
+    }
 }
