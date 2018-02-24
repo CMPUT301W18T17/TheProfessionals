@@ -1,5 +1,7 @@
 package professional.team17.com.professional;
 
+import android.provider.ContactsContract;
+
 import java.util.ArrayList;
 
 public class Profile {
@@ -63,4 +65,10 @@ public class Profile {
     public ArrayList<String> getBlackListedBy() {
         return blackListedBy;
     }
+
+    public void addToBlackList(Profile profile){
+        blackList.add(profile.getUserName());
+
+    }
+
 }

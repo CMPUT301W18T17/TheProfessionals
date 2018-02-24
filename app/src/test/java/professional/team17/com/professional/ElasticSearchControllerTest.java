@@ -18,9 +18,11 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
     Task task2 = new Task("TaskRequester2", "Title2", "Description2", "Location2", date, "Task ID2");
     Task task3 = new Task("TaskRequester3", "Title3", "Description3", "Location3", date, "Task ID3");
 
-    Profile profile1 = new Profile("userName1");
-    Profile profile2 = new Profile("userName2");
-    Profile profile3 = new Profile("userName3");
+
+    Profile profile1 = new Profile("Mary1", "mair1", "mair@email1.ca", "111-1111");
+    Profile profile2 = new Profile("Mary2", "mair2", "mair@email2.ca", "111-1111");
+    Profile profile3 = new Profile("Mary3", "mair3", "mair@email3.ca", "111-1111");
+
 
     public ElasticSearchControllerTest() {
         super(ElasticSearchController.class);
@@ -116,7 +118,7 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
 
         addProfile.execute(profile1);
 
-        String id = profile1.getUniqueID(); //this is what we search with
+        String id = profile1.getUserName(); //this is what we search with
         String search = "{ \"query\": \"term\" : { \"id\" : \"idfill\" } }"; //this is the json standard for searching tasks by id
         JsonParser jsonParser = new JsonParser(); //create a new parser
         JsonObject jsonObject = (JsonObject) jsonParser.parse(search); //parse the string json into a jsonobject
@@ -137,9 +139,9 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         addProfile.execute(profile2);
         addProfile.execute(profile3);
 
-        String id1 = profile1.getUniqueID(); //this is what we search with
-        String id2 = profile2.getUniqueID(); //this is what we search with
-        String id3 = profile3.getUniqueID(); //this is what we search with
+        String id1 = profile1.getUserName(); //this is what we search with
+        String id2 = profile2.getUserName(); //this is what we search with
+        String id3 = profile3.getUserName(); //this is what we search with
         String search = "{ \"query\": \"term\" : { \"id\" : \"idfill\" } }"; //this is the json standard for searching tasks by id
 
 
@@ -188,7 +190,7 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         // Update it with profile 1
         updateProfile.execute(profile1);
 
-        String id = profile1.getUniqueID(); //this is what we search with
+        String id = profile1.getUserName(); //this is what we search with
         String search = "{ \"query\": \"term\" : { \"id\" : \"idfill\" } }"; //this is the json standard for searching tasks by id
         JsonParser jsonParser = new JsonParser(); //create a new parser
         JsonObject jsonObject = (JsonObject) jsonParser.parse(search); //parse the string json into a jsonobject
