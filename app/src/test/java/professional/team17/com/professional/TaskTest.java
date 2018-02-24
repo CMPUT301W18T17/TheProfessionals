@@ -158,7 +158,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
         task.clearBids();
         assertEquals(bids, task.getBids());
     }
-
+/* I think this is pushed to bidlist
     public void getLowestBidTest(){
         Task task = new Task(profileName, name, description, location, date, uniqueID);
         Bid bid = new Bid("name", 0);
@@ -168,6 +168,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
         int lowestBid = task.getLowestBid();
         assertEquals(lowestBid, task.getLowestBid());
     }
+    */
 
     public void getStatusTest() {
         Task task = new Task(profileName, name, description, location, date, uniqueID);;
