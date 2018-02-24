@@ -55,13 +55,13 @@ public class TaskTest2 extends ActivityInstrumentationTestCase2 {
         assertEquals(newDesc, task.getDescription());
     }
 
-    public void getLocationTest() {
+    public void testgetLocation() {
         String location = "location";
         Task task = new Task("Testing", "Tast Title", "Task Description", location,  new Date(), "Task ID");
         assertEquals(location, task.getLocation());
     }
 
-    public void setLocationTest() {
+    public void testsetLocation() {
         String location = "location";
         Task task = new Task("Testing", "Tast Title", "Task Description", location,  new Date(), "Task ID");
         String location2 = "Testing";
@@ -69,40 +69,40 @@ public class TaskTest2 extends ActivityInstrumentationTestCase2 {
         assertEquals(location, task.getLocation());
     }
 
-    public void getDateTest() {
+    public void testgetDate() {
         Date date = new Date();
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", date, "Task ID");
         assertEquals(date, task.getDate());
     }
 
-    public void setDateTest() {
+    public void testsetDate() {
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         Date date = new Date();
         task.setDate(date);
         assertEquals(date, task.getDate());
     }
 
-    public void getUniqueIDTest() {
+    public void testgetUniqueID() {
         //TODO implement with id generator once implemented perhaps deprecate as id maybe should be static
 
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         assertEquals("Task ID", task.getUniqueID());
     }
 
-    public void setUniqueIDTest() {
+    public void testsetUniqueID() {
         //TODO implement with id generator once implemented perhaps deprecate as id maybe should be static
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         assertEquals("Task ID", task.getUniqueID());
     }
 
-    public void getPhotosTest() {
+    public void testgetPhotos() {
         //TODO implement with photo repr (string or mem location)
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         ArrayList<String> photos = new ArrayList<>();
         assertEquals(photos, task.getPhotos());
     }
 
-    public void setPhotosTest() {
+    public void testsetPhotos() {
         //TODO implement with photo repr (string or mem location)
         ArrayList<String> photos = new ArrayList<>();
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
@@ -110,14 +110,14 @@ public class TaskTest2 extends ActivityInstrumentationTestCase2 {
         assertEquals(photos, task.getPhotos());
     }
 
-    public void addPhotoTest(){
+    public void testaddPhoto(){
         //TODO implement with photo repr (string or mem location)
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         task.addPhoto("test");
         assertEquals("test", task.getPhotos());
     }
 
-    public void removePhotoTest(){
+    public void testremovePhoto(){
         //TODO implement with photo repr (string or mem location)
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         task.addPhoto("test");
@@ -128,12 +128,12 @@ public class TaskTest2 extends ActivityInstrumentationTestCase2 {
 
 
 
-    public void getStatusTest() {
+    public void testgetStatus() {
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         assertEquals("Requested", task.getStatus());
     }
 
-    public void setStatusTest() {
+    public void testsetStatus() {
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         task.setStatus("Testing");
         assertEquals("Testing", task.getStatus());
