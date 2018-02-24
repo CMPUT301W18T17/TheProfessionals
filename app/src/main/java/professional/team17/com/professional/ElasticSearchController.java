@@ -21,13 +21,15 @@ import java.util.ArrayList;
 
 public class ElasticSearchController {
     private static JestDroidClient client;
-    private static String server = "http://cmput301.softwareprocess.es:8080/CMPUT301W18T09/NAME"; //TODO COMPLETE name
+    private static String profile = "http://cmput301.softwareprocess.es:8080/CMPUT301W18T17/profile"; //TODO COMPLETE name
+    private static String task = "http://cmput301.softwareprocess.es:8080/CMPUT301W18T17/task"; //TODO COMPLETE name
+
 
     public static class AddTask extends AsyncTask<Task, Void, Void> {
 //TODO Complete
         @Override
         protected Void doInBackground(Task... Tasks) {
-            verifySettings();
+            verifySettings(task);
             return null;
         }
     }
@@ -37,7 +39,7 @@ public class ElasticSearchController {
         //TODO Complete
         @Override
         protected TaskList doInBackground(String... TaskList) {
-            verifySettings();
+            verifySettings(task);
             TaskList tasks= new TaskList();
             return tasks;
         }
@@ -48,7 +50,7 @@ public class ElasticSearchController {
         //TODO Complete
         @Override
         protected Task doInBackground(String... Task) {
-            verifySettings();
+            verifySettings(task);
             //TODO currently null for stub
             Task task = null;
             return task;
@@ -59,7 +61,7 @@ public class ElasticSearchController {
         //TODO Complete
         @Override
         protected Void doInBackground(Profile... Profiles) {
-            verifySettings();
+            verifySettings(profile);
             return null;
         }
     }
@@ -69,7 +71,7 @@ public class ElasticSearchController {
         //TODO Complete
         @Override
         protected Profile doInBackground(String... search_parameters) {
-            verifySettings();
+            verifySettings(profile);
             Profile profile = new Profile();
             return profile;
         }
@@ -80,7 +82,7 @@ public class ElasticSearchController {
     //TODO Complete
         @Override
         protected Void doInBackground(Profile... Profiles) {
-            verifySettings();
+            verifySettings(profile);
             return null;
         }
     }
@@ -90,12 +92,12 @@ public class ElasticSearchController {
         //TODO Complete
         @Override
         protected Void doInBackground(Task... Profiles) {
-            verifySettings();
+            verifySettings(task);
             return null;
         }
     }
 
-    public static void verifySettings() {
+    public static void verifySettings(String server) {
             if (client == null) {
                 //TODO Complete connection
               /*  DroidClientConfig.Builder builder = new DroidClientConfig.Builder(server);
