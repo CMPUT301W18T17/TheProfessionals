@@ -3,11 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TheProfessionals.iml" filepath="$PROJECT_DIR$/TheProfessionals.iml" />
-      <module fileurl="file://C:\Users\Logan Yue\Documents\CMPUT301\TheProfessionals\TheProfessionals.iml" filepath="C:\Users\Logan Yue\Documents\CMPUT301\TheProfessionals\TheProfessionals.iml" />
       <module fileurl="file://C:\Users\Claude\Desktop\301 Project\TheProfessionals\TheProfessionals.iml" filepath="C:\Users\Claude\Desktop\301 Project\TheProfessionals\TheProfessionals.iml" />
+      <module fileurl="file://C:\Users\Logan Yue\Documents\CMPUT301\TheProfessionals\TheProfessionals.iml" filepath="C:\Users\Logan Yue\Documents\CMPUT301\TheProfessionals\TheProfessionals.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Claude\Desktop\301 Project\TheProfessionals\app\app.iml" filepath="C:\Users\Claude\Desktop\301 Project\TheProfessionals\app\app.iml" />
       <module fileurl="file://C:\Users\Logan Yue\Documents\CMPUT301\TheProfessionals\app\app.iml" filepath="C:\Users\Logan Yue\Documents\CMPUT301\TheProfessionals\app\app.iml" />
+      <module fileurl="file://C:\Users\Claude\Desktop\301 Project\TheProfessionals\app\app.iml" filepath="C:\Users\Claude\Desktop\301 Project\TheProfessionals\app\app.iml" />
     </modules>
   </component>
 </project>
