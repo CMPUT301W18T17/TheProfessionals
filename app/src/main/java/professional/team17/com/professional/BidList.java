@@ -29,4 +29,16 @@ public class BidList {
     public void deleteAllExcept(Bid bid){
 
     }
+
+    public Bid getLowest(){
+        //TODO
+        return null;
+    }
+
+    public int getSize(){
+        return bids.size();
+    }
+    public boolean isEmpty(){
+        return bids.size()==0;
+    }
 }

@@ -14,17 +14,28 @@ public class Task {
     private ArrayList<Bid> bids;
     private String status;
 
-
-
-    public Task(String profileName, String name, String description, String location, Date date, String ID) {
+    public Task(String profileName, String name, String description, String location, Date Date, String ID) {
         this.profileName = profileName;
         this.name = name;
         this.description = description;
         this.location = location;
-        this.date = date;
+        this.date = null;
         this.uniqueID = ID;
         this.status = "Requested";
     }
+
+
+    public Task(String profileName, String name, String description, String location, String ID) {
+        this.profileName = profileName;
+        this.name = name;
+        this.description = description;
+        this.location = location;
+        this.date = null;
+        this.uniqueID = ID;
+        this.status = "Requested";
+    }
+
+
 
     public String getProfileName() {
         return profileName;
@@ -108,10 +119,6 @@ public class Task {
 
     public void clearBids(){
         this.bids.clear();
-    }
-
-    public int getLowestBid(){
-        /* implement this later */
     }
 
     public String getStatus() {

@@ -17,14 +17,14 @@ public class TaskListTest extends ActivityInstrumentationTestCase2 {
 
     public void testAddTask(){ //same as the test for hasTask
         TaskList tasks = new TaskList();
-        Task task = new Task("TaskRequester1", "Title1", "Description1", "Location1");
+        Task task = new Task("TaskRequester1", "Title1", "Description1", "Location1", "ID1");
         tasks.addTask(task);
         assertTrue(tasks.hasTask(task));
     }
 
     public void testDeleteTask(){
         TaskList tasks = new TaskList();
-        Task task = new Task("TaskRequester2", "Title2", "Description2", "Location2");
+        Task task = new Task("TaskRequester2", "Title2", "Description2", "Location2", "ID@");
         tasks.addTask(task);
         tasks.deleteTask(task);
         assertFalse(tasks.hasTask(task));
@@ -33,9 +33,9 @@ public class TaskListTest extends ActivityInstrumentationTestCase2 {
     public void testGetTasks(){
         TaskList tasks = new TaskList();
 
-        Task task1 = new Task("TaskRequester1", "Title1", "Description1", "Location1");
-        Task task2 = new Task("TaskRequester2", "Title2", "Description2", "Location2");
-        Task task3 = new Task("TaskRequester3", "Title3", "Description3", "Location3");
+        Task task1 = new Task("TaskRequester1", "Title1", "Description1", "Location1", "ID1");
+        Task task2 = new Task("TaskRequester2", "Title2", "Description2", "Location2", "ID2");
+        Task task3 = new Task("TaskRequester3", "Title3", "Description3", "Location3", "ID3");
 
         tasks.addTask(task1);
         tasks.addTask(task2);

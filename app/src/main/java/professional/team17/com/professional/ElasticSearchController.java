@@ -72,9 +72,11 @@ public class ElasticSearchController {
         @Override
         protected Profile doInBackground(String... search_parameters) {
             verifySettings(profile);
-            Profile profile = new Profile();
-            return profile;
+          //  Profile profile = new Profile();
+        //    return profile;
+            return null;
         }
+
     }
 
 //TODO Updates may be redundant and can be absorbed into adds

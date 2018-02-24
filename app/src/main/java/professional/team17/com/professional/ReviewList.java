@@ -59,4 +59,9 @@ public class ReviewList {
         //see https://stackoverflow.com/questions/5927109/sort-objects-in-arraylist-by-date
         return reviews;
     }
+
+
+    public boolean isEmpty(){
+        return reviews.size()==0;
+    }
 }

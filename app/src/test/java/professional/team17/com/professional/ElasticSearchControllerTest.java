@@ -26,7 +26,7 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         super(ElasticSearchController.class);
     }
 
-    public void AddTaskTest() {
+    public void testAddTaskTest() {
         ElasticSearchController.AddTask addTask = new ElasticSearchController.AddTask();
         ElasticSearchController.GetTask getTask = new ElasticSearchController.GetTask();
         addTask.execute(task1);
@@ -44,7 +44,7 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         }
     }
 
-    public void GetTasksTest(){
+    public void testGetTasksTest(){
         ElasticSearchController.AddTask addTask = new ElasticSearchController.AddTask();
         ElasticSearchController.GetTask getTask = new ElasticSearchController.GetTask();
         addTask.execute(task1);
@@ -91,7 +91,7 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         }
     }
 
-    public void GetTaskTest(){
+    public void testGetTaskTest(){
         ElasticSearchController.AddTask addTask = new ElasticSearchController.AddTask();
         ElasticSearchController.GetTask getTask = new ElasticSearchController.GetTask();
         addTask.execute(task1);
@@ -110,7 +110,7 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         }
     }
 
-    public void AddProfileTest() {
+    public void testAddProfileTest() {
         ElasticSearchController.AddProfile addProfile = new ElasticSearchController.AddProfile();
         ElasticSearchController.GetProfile getProfile = new ElasticSearchController.GetProfile();
 
@@ -129,7 +129,7 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         }
     }
 
-    public void GetProfileTest(){
+    public void testGetProfileTest(){
         ElasticSearchController.AddProfile addProfile = new ElasticSearchController.AddProfile();
         ElasticSearchController.GetProfile getProfile = new ElasticSearchController.GetProfile();
 
@@ -177,7 +177,7 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         }
     }
 
-    public void UpdateProfileTest() {
+    public void testUpdateProfileTest() {
         ElasticSearchController.UpdateProfile updateProfile = new ElasticSearchController.UpdateProfile();
         ElasticSearchController.AddProfile addProfile = new ElasticSearchController.AddProfile();
         ElasticSearchController.GetProfile getProfile = new ElasticSearchController.GetProfile();
@@ -201,7 +201,7 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         }
     }
 
-    public void UpdateTaskTest() {
+    public void testUpdateTaskTest() {
         ElasticSearchController.UpdateTask updateTask = new ElasticSearchController.UpdateTask();
         ElasticSearchController.AddTask addTask = new ElasticSearchController.AddTask();
         ElasticSearchController.GetTask getTask = new ElasticSearchController.GetTask();
