@@ -17,37 +17,37 @@ public class TaskTest2 extends ActivityInstrumentationTestCase2 {
 
 
 
-    public void testgetProfileName() {
+    public void testGetProfileName() {
 
 
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         assertEquals("Testing", task.getProfileName());
     }
 
-    public void testsetProfileName() {
+    public void testSetProfileName() {
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         task.setProfileName("new Name");
         assertEquals("new Name", task.getProfileName());
     }
 
-    public void testgetNameTest() {
+    public void testGetNameTest() {
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         assertEquals("Tast Title", task.getName());
     }
 
-    public void testsetName() {
+    public void testSetName() {
         String name  = "Testing";
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         task.setName(name);
         assertEquals(name, task.getName());
     }
 
-    public void testgetDescription() {
+    public void testGetDescription() {
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         assertEquals("Task Description", task.getDescription());
     }
 
-    public void testsetDescription() {
+    public void testSetDescription() {
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         assertEquals("Task Description", task.getDescription());
         String newDesc = "Testing";
@@ -55,13 +55,13 @@ public class TaskTest2 extends ActivityInstrumentationTestCase2 {
         assertEquals(newDesc, task.getDescription());
     }
 
-    public void testgetLocation() {
+    public void testGetLocation() {
         String location = "location";
         Task task = new Task("Testing", "Tast Title", "Task Description", location,  new Date(), "Task ID");
         assertEquals(location, task.getLocation());
     }
 
-    public void testsetLocation() {
+    public void testSetLocation() {
         String location = "location";
         Task task = new Task("Testing", "Tast Title", "Task Description", location,  new Date(), "Task ID");
         String location2 = "Testing";
@@ -69,40 +69,40 @@ public class TaskTest2 extends ActivityInstrumentationTestCase2 {
         assertEquals(location, task.getLocation());
     }
 
-    public void testgetDate() {
+    public void testGetDate() {
         Date date = new Date();
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", date, "Task ID");
         assertEquals(date, task.getDate());
     }
 
-    public void testsetDate() {
+    public void testSetDate() {
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         Date date = new Date();
         task.setDate(date);
         assertEquals(date, task.getDate());
     }
 
-    public void testgetUniqueID() {
+    public void testGetUniqueID() {
         //TODO implement with id generator once implemented perhaps deprecate as id maybe should be static
 
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         assertEquals("Task ID", task.getUniqueID());
     }
 
-    public void testsetUniqueID() {
+    public void testSetUniqueID() {
         //TODO implement with id generator once implemented perhaps deprecate as id maybe should be static
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         assertEquals("Task ID", task.getUniqueID());
     }
 
-    public void testgetPhotos() {
+    public void testGetPhotos() {
         //TODO implement with photo repr (string or mem location)
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         ArrayList<String> photos = new ArrayList<>();
         assertEquals(photos, task.getPhotos());
     }
 
-    public void testsetPhotos() {
+    public void testSetPhotos() {
         //TODO implement with photo repr (string or mem location)
         ArrayList<String> photos = new ArrayList<>();
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
@@ -110,14 +110,14 @@ public class TaskTest2 extends ActivityInstrumentationTestCase2 {
         assertEquals(photos, task.getPhotos());
     }
 
-    public void testaddPhoto(){
+    public void testAddPhoto(){
         //TODO implement with photo repr (string or mem location)
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         task.addPhoto("test");
         assertEquals("test", task.getPhotos());
     }
 
-    public void testremovePhoto(){
+    public void testRemovePhoto(){
         //TODO implement with photo repr (string or mem location)
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         task.addPhoto("test");
@@ -126,14 +126,12 @@ public class TaskTest2 extends ActivityInstrumentationTestCase2 {
         assertEquals("test2", task.getPhotos());
     }
 
-
-
-    public void testgetStatus() {
+    public void testGetStatus() {
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         assertEquals("Requested", task.getStatus());
     }
 
-    public void testsetStatus() {
+    public void testSetStatus() {
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), "Task ID");
         task.setStatus("Testing");
         assertEquals("Testing", task.getStatus());
