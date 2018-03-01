@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Professional</string>
+    <string name="username">Username:</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
