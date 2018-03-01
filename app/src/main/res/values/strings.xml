@@ -4,4 +4,6 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="status">"Status</string>
+    <string name="requester_title">Requester View |</string>
+    <string name="provider_title">Provider View |</string>
 </resources>

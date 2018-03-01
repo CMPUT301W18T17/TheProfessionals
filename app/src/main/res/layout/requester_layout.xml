@@ -63,7 +63,7 @@
     <ImageView
         android:id="@+id/titleBarBGRequester"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toStartOf="@+id/userMenuButton"
         app:layout_constraintHorizontal_bias="0.5"
@@ -76,20 +76,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="TextView"
-        android:textSize="24sp"
+        android:text="@string/requester_title"
+        android:textSize="18sp"
         android:typeface="normal"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="33dp" />
+        tools:layout_editor_absoluteY="25dp" />
 
     <ImageView
         android:id="@+id/userMenuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/titleBarBGRequester"
         app:srcCompat="@drawable/user_icon"
         tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/activityTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/titleView"
+        app:layout_constraintStart_toEndOf="@+id/titleView" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="398dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/addTaskRequesterButton"
+        app:layout_constraintTop_toBottomOf="@+id/titleBarBGRequester"
+        tools:layout_editor_absoluteX="-12dp">
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
