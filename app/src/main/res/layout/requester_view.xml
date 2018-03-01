@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/addTaskRequesterButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/biddedTasksRequesterButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/add_task_requester" />
+
+    <ImageView
+        android:id="@+id/biddedTasksRequesterButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/acceptedTasksRequesterButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/addTaskRequesterButton"
+        app:srcCompat="@drawable/bidded_tasks_requester" />
+
+    <ImageView
+        android:id="@+id/acceptedTasksRequesterButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/requestedTasksRequesterButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/biddedTasksRequesterButton"
+        app:srcCompat="@drawable/accepted_tasks_requester" />
+
+    <ImageView
+        android:id="@+id/requestedTasksRequesterButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/switchViewRequesterButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/acceptedTasksRequesterButton"
+        app:srcCompat="@drawable/requested_tasks_requester" />
+
+    <ImageView
+        android:id="@+id/switchViewRequesterButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/requestedTasksRequesterButton"
+        app:srcCompat="@drawable/switch_view_requester" />
+
+    <ImageView
+        android:id="@+id/titleBarBGRequester"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toStartOf="@+id/userMenuButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/title_bg_requester" />
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textSize="24sp"
+        android:typeface="normal"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+    <ImageView
+        android:id="@+id/userMenuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/titleBarBGRequester"
+        app:srcCompat="@drawable/user_icon"
+        tools:layout_editor_absoluteY="0dp" />
+
+</android.support.constraint.ConstraintLayout>
