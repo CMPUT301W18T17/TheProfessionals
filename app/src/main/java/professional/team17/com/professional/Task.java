@@ -1,9 +1,10 @@
 package professional.team17.com.professional;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Task {
+public class Task implements Serializable{
     private String profileName;     /* person who requested the task */
     private String name;
     private String description;

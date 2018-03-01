@@ -2,24 +2,23 @@ package professional.team17.com.professional;
 
 import java.util.ArrayList;
 
-public class TaskList {
-    private ArrayList<Task> tasks = new ArrayList<Task>();
+public class TaskList extends ArrayList<Task>{
 
     public TaskList(){
         // Nothing
     }
 
     public boolean hasTask(Task task){
-        return tasks.contains(task);
+        return this.contains(task);
     }
 
-    public void addTask(Task task){ tasks.add(task); }
+    public void addTask(Task task){ this.add(task); }
 
     public void deleteTask(Task task){
-        tasks.remove(task);
+        this.remove(task);
     }
 
     public ArrayList<Task> getTasks() {
-        return tasks;
+        return this;
     }
 }
