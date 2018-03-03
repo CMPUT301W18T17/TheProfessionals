@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import java.util.Date;
 
 public class Search_Activity extends AppCompatActivity {
     private ArrayAdapterSearchResults searchAdapterHelper;
     private ListView listView;
+    private SearchView searchView;
 
     //TODO DELETE
     private TaskList dummyTaskList;
@@ -35,18 +37,39 @@ public class Search_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_);
+        setContentView(R.layout.activity_search);
         getTasks();
         searchAdapterHelper = new ArrayAdapterSearchResults(this, dummyTaskList);
         listView =findViewById(R.id.Search_Activity_list);
         listView.setAdapter(searchAdapterHelper);
         listView.setOnItemClickListener(clickListener);
+        searchView = (SearchView) findViewById(R.id.Search_Activity_Input);
+        searchView.setQueryHint("Enter search");
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //SearchAdapter mSearchAdapter = new SearchAdapter(MainActivity.this, dictionaryObject);
+                //listView.setAdapter(mSearchAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    }
+                });
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
 
     /**
      * This is an anonymous method to create a click listener for the listview rows. If the row
-     * is selected, it packages up the subscription selected and the position to EditSubscriptActivity
+     * is selected, it packages up the task selected and the position to ViewTaskBidded
      */
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
