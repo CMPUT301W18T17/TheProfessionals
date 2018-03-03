@@ -104,19 +104,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
+            android:clickable="true"
             app:layout_constraintBottom_toTopOf="@+id/Search_Activity_list"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:padding="8dp"
-            android:scrollbars="none" />
 
         <ListView
             android:id="@+id/Search_Activity_list"
