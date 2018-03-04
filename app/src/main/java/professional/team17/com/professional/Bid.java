@@ -1,10 +1,12 @@
 package professional.team17.com.professional;
 
+import java.io.Serializable;
+
 /**
  * Created by Logan Yue on 2018-02-20.
  */
 
-public class Bid {
+public class Bid implements Serializable{
 
     private String name;
     private double amount;

@@ -1,8 +1,12 @@
 package professional.team17.com.professional;
 
-import java.util.ArrayList;
+import android.util.Log;
 
-public class BidList extends ArrayList<Bid>{
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class BidList extends ArrayList<Bid> implements Serializable{
     private Bid lowest;
 
     public BidList(){
@@ -19,8 +23,7 @@ public class BidList extends ArrayList<Bid>{
     }
 
     //add bid and keep track of lowest
-    @Override
-    public boolean add(Bid bid){
+    public void addBids(Bid bid){
         if (this.isEmpty()){
             lowest = bid;
         }
@@ -28,7 +31,6 @@ public class BidList extends ArrayList<Bid>{
             lowest =  bid;
         }
         this.add(bid);
-        return true;
     }
 
     public void delete(Bid bid){
@@ -68,5 +70,20 @@ public class BidList extends ArrayList<Bid>{
     }
     public boolean isEmpty(){
         return this.size()==0;
+    }
+
+
+    /**
+     *
+     * @param userName, representing the user name being looked for
+     * @return boolean
+     */
+    public boolean userBidded(String userName) {
+        for (int i = 0; i < this.size(); i++) {
+            if (Objects.equals(this.get(i).getName(),userName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

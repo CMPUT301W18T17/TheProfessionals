@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -23,13 +24,15 @@ public class Search_Activity extends AppCompatActivity {
     //TODO DELETE METHOD
     public void dummyDate(){
         dummyTaskList = new TaskList();
-        user= new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
+        user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
         Task task1 = new Task("ProfileName1", "Name1", "Description", "Location1","ID1" );
         Task task2 = new Task("ProfileName2", "Name2", "Description", "Location2","ID2" );
         Task task3 = new Task("ProfileName3", "Name3", "Description", "Location3","ID3" );
         dummyTaskList.addTask(task1);
         dummyTaskList.addTask(task2);
         dummyTaskList.addTask(task3);
+        task1.addBid(new Bid("john123", 234.3));
+        task1.addBid(new Bid("ProfileName4", 23.40));
     }
 
 
@@ -77,9 +80,11 @@ public class Search_Activity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             TaskList taskList = dummyTaskList;
             Task task = taskList.get(position);
-            Intent intention = new Intent(Search_Activity.this, MainActivity.class);
+            Log.i("TASK", "onItemClick: "+task);
+            Intent intention = new Intent(Search_Activity.this, ProviderViewTask.class);
             intention.putExtra("Task", task);
             intention.putExtra("position", position);
+            intention.putExtra("profile", user);
             startActivity(intention);
         }
 

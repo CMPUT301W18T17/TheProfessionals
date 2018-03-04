@@ -1,10 +1,11 @@
 package professional.team17.com.professional;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class ReviewList {
+public class ReviewList implements Serializable {
     private ArrayList<Review> reviews = new ArrayList<Review>();
 
     public ReviewList(){

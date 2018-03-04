@@ -117,7 +117,7 @@
             app:layout_constraintTop_toBottomOf="@+id/provider_view_task_title" />
 
         <TextView
-            android:id="@+id/provider_view_statusType"
+            android:id="@+id/provider_view_task_statusType"
             android:layout_width="72dp"
             android:layout_height="25dp"
             android:layout_marginStart="8dp"
@@ -174,16 +174,27 @@
             android:layout_marginTop="8dp"
             android:text="Date"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/provider_view_statusType" />
+            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_statusType" />
 
         <TextView
-            android:id="@+id/provider_view_statusType"
+            android:id="@+id/provider_view_task_statusType"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:text="StatusType"
+            app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_status"
+            tools:layout_editor_absoluteX="49dp" />
+
+        <Button
+            android:id="@+id/provider_view_task_bidButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="StatusType"
-            app:layout_constraintStart_toEndOf="@+id/provider_view_task_status"
-            tools:layout_editor_absoluteY="375dp" />
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <TextView

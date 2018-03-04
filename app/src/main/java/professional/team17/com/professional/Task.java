@@ -109,11 +109,16 @@ public class Task implements Serializable{
     }
 
 
+    /**
+     *
+     * @param bid
+     */
     public void addBid(Bid bid){
+        //if requested, update to Bidded
         if (isRequested()){
             setBidded();
         }
-        this.bids.add(bid);
+       this.bids.addBids(bid);
     }
 
     public void removeBid(Bid bid){
@@ -132,21 +137,47 @@ public class Task implements Serializable{
         this.status = status;
     }
 
+    /**
+     * Set status to bidded, with better control of words
+     */
     public void setBidded(){
         this.status = "Bidded";
     }
 
+    /**
+     *
+     * @return boolean value on whether status is Assigned
+     */
     public boolean isAssigned() {
         return this.status=="Assigned";
     }
 
+    /**
+     *
+     * @return boolean value on whether status is Requested
+     */
     public boolean isRequested() {
         return this.status=="Requested";
     }
+
+    /**
+     *
+     * @return boolean value on whether status is Bidded
+     */
     public boolean isBidded() {
         return this.status=="Bidded";
     }
+
+    /**
+     *
+     * @return boolean value on whether status is Done
+     */
     public boolean isDone() {
         return this.status=="Done";
     }
+
+    public String toString(){
+        return this.name;
+    }
+
 }

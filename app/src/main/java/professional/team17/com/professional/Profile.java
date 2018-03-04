@@ -2,9 +2,10 @@ package professional.team17.com.professional;
 
 import android.provider.ContactsContract;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Profile {
+public class Profile implements Serializable {
 
     private String name;
     public String userName;
