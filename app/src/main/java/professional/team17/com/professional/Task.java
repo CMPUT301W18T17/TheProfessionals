@@ -1,8 +1,12 @@
 package professional.team17.com.professional;
 
+import android.util.Log;
+
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class Task implements Serializable{
     private String profileName;     /* person who requested the task */
@@ -75,6 +79,17 @@ public class Task implements Serializable{
     public Date getDate() {
         return date;
     }
+
+    /**
+     *
+     * @return date represented as string
+     */
+    public String getDateAsString() {
+        String myFormat = "dd/MM/yyyy";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
+        return dateFormat.format(this.date);
+    }
+
 
     public void setDate(Date date) {
         this.date = date;
@@ -149,7 +164,7 @@ public class Task implements Serializable{
      * @return boolean value on whether status is Assigned
      */
     public boolean isAssigned() {
-        return this.status=="Assigned";
+        return this.status.equals("Assigned");
     }
 
     /**
@@ -157,7 +172,7 @@ public class Task implements Serializable{
      * @return boolean value on whether status is Requested
      */
     public boolean isRequested() {
-        return this.status=="Requested";
+        return this.status.equals("Requested");
     }
 
     /**
@@ -165,7 +180,7 @@ public class Task implements Serializable{
      * @return boolean value on whether status is Bidded
      */
     public boolean isBidded() {
-        return this.status=="Bidded";
+        return this.status.equals("Bidded");
     }
 
     /**
@@ -173,7 +188,7 @@ public class Task implements Serializable{
      * @return boolean value on whether status is Done
      */
     public boolean isDone() {
-        return this.status=="Done";
+        return this.status.equals("Done");
     }
 
     public String toString(){
