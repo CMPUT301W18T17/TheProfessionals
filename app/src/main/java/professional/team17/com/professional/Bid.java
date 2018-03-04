@@ -1,6 +1,7 @@
 package professional.team17.com.professional;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  * Created by Logan Yue on 2018-02-20.
@@ -26,6 +27,16 @@ public class Bid implements Serializable{
     }
 
     public double getAmount() {
+        return amount;
+    }
+
+    /**
+     *
+     * @return amount as string to two decimal places
+     */
+    public String getAmountAsString(){
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        String amount = decimalFormat.format(this.amount);
         return amount;
     }
 

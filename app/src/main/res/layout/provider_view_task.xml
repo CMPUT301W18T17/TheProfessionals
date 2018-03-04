@@ -107,23 +107,10 @@
         <TextView
             android:id="@+id/provider_view_task_userName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="16dp"
             android:text="username"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_title" />
-
-        <TextView
-            android:id="@+id/provider_view_task_statusType"
-            android:layout_width="72dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="8dp"
-            android:text="bid"
-            app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_dollar"
-            app:layout_constraintStart_toEndOf="@+id/provider_view_task_dollar" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_Requester"
+            app:layout_constraintStart_toEndOf="@+id/provider_view_task_Requester" />
 
         <TextView
             android:id="@+id/provider_view_task_title"
@@ -141,60 +128,144 @@
             android:id="@+id/provider_view_task_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:text="@string/status"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="8dp" />
-
-        <TextView
-            android:id="@+id/provider_view_task_dollar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="$"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_userName" />
+            app:layout_constraintTop_toBottomOf="@+id/mapView" />
 
         <TextView
             android:id="@+id/provider_view_task_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:text="Description"
+            app:layout_constraintEnd_toStartOf="@+id/provider_view_task_Date"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_bid_date" />
-
-        <TextView
-            android:id="@+id/provider_view_task_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_statusType" />
+            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_title" />
 
         <TextView
             android:id="@+id/provider_view_task_statusType"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
             android:text="StatusType"
             app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_status"
-            tools:layout_editor_absoluteX="49dp" />
+            app:layout_constraintStart_toEndOf="@+id/provider_view_task_status" />
 
         <Button
             android:id="@+id/provider_view_task_bidButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Button"
+            android:layout_height="49dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginStart="8dp"
+            android:visibility="gone"
+            android:text="Place Bid"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/provider_view_task_deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="49dp"
+            android:layout_marginBottom="24dp"
+            android:visibility="gone"
+            android:layout_marginStart="8dp"
+            android:text="Cancel Bid"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_description" />
+
+        <TextView
+            android:id="@+id/provider_view_task_Date"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Task Date:"
+            app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/provider_view_task_description" />
+
+        <TextView
+            android:id="@+id/provider_view_task_date_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Date"
+            app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_Date"
+            app:layout_constraintStart_toEndOf="@+id/provider_view_task_Date" />
+
+        <TextView
+            android:id="@+id/provider_view_task_lowBid"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Lowest Bid: $"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_Requester" />
+
+        <TextView
+            android:id="@+id/provider_view_task_myBid"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            android:text="My Bid: $"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_lowBid" />
+
+        <TextView
+            android:id="@+id/provider_view_task_lowBidInput"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_marginStart="2dp"
+            android:text="LowBidAmount"
+            app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_lowBid"
+            app:layout_constraintStart_toEndOf="@+id/provider_view_task_lowBid" />
+
+        <TextView
+            android:id="@+id/provider_view_task_myBidInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="MyBidAmount"
+            android:visibility="gone"
+            app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_myBid"
+            app:layout_constraintStart_toEndOf="@+id/provider_view_task_myBid" />
+
+        <TextView
+            android:id="@+id/provider_view_task_Requester"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Task Requester:"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_status" />
     </android.support.constraint.ConstraintLayout>
 
     <TextView

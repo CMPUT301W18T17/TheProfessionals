@@ -25,14 +25,16 @@ public class Search_Activity extends AppCompatActivity {
     public void dummyDate(){
         dummyTaskList = new TaskList();
         user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
-        Task task1 = new Task("ProfileName1", "Name1", "Description", "Location1","ID1" );
-        Task task2 = new Task("ProfileName2", "Name2", "Description", "Location2","ID2" );
-        Task task3 = new Task("ProfileName3", "Name3", "Description", "Location3","ID3" );
+        Task task1 = new Task("ProfileName1", "Name1", "Description1", "Location1","ID1" );
+        Task task2 = new Task("ProfileName2", "Name2", "Description2", "Location2","ID2" );
+        Task task3 = new Task("ProfileName3", "Name3", "Description3", "Location3","ID3" );
         dummyTaskList.addTask(task1);
         dummyTaskList.addTask(task2);
         dummyTaskList.addTask(task3);
         task1.addBid(new Bid("john123", 234.3));
         task1.addBid(new Bid("ProfileName4", 23.40));
+        task2.addBid(new Bid("ProfileName4", 277.40));
+
     }
 
 
@@ -80,7 +82,6 @@ public class Search_Activity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             TaskList taskList = dummyTaskList;
             Task task = taskList.get(position);
-            Log.i("TASK", "onItemClick: "+task);
             Intent intention = new Intent(Search_Activity.this, ProviderViewTask.class);
             intention.putExtra("Task", task);
             intention.putExtra("position", position);

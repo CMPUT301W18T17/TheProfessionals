@@ -36,7 +36,7 @@ public class Task implements Serializable{
         this.name = name;
         this.description = description;
         this.location = location;
-        this.date = null;
+        this.date = new Date();
         this.uniqueID = ID;
         this.status = "Requested";
         this.bids = new BidList();
@@ -86,7 +86,7 @@ public class Task implements Serializable{
      */
     public String getDateAsString() {
         String myFormat = "dd/MM/yyyy";
-        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat);
         return dateFormat.format(this.date);
     }
 
@@ -191,6 +191,7 @@ public class Task implements Serializable{
         return this.status.equals("Done");
     }
 
+    //to help with development
     public String toString(){
         return this.name;
     }

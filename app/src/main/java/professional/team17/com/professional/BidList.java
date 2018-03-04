@@ -18,6 +18,18 @@ public class BidList extends ArrayList<Bid> implements Serializable{
         return this.get(index);
     }
 
+    /*
+    * Will return the bid matching the username
+     */
+    public Bid getBid(String userName){
+        for (int i = 0; i < this.size(); i++) {
+            if (this.get(i).getName().equals(userName)) {
+                return get(i);
+            }
+        }
+        return null;
+    }
+
     public boolean hasBid(Bid bid){
         return this.contains(bid);
     }
@@ -75,11 +87,11 @@ public class BidList extends ArrayList<Bid> implements Serializable{
     /**
      *
      * @param userName, representing the user name being looked for
-     * @return boolean
+     * @return boolean true if user name was found in bidlist, false otherwise
      */
     public boolean userBidded(String userName) {
         for (int i = 0; i < this.size(); i++) {
-            if (Objects.equals(this.get(i).getName(),userName)) {
+            if (this.get(i).getName().equals(userName)) {
                 return true;
             }
         }
