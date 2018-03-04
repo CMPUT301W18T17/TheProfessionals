@@ -12,7 +12,7 @@ public class Task implements Serializable{
     private Date date;
     private String uniqueID;
     private ArrayList<String> photos;
-    private ArrayList<Bid> bids;
+    private BidList bids;
     private String status;
 
     public Task(String profileName, String name, String description, String location, Date Date, String ID) {
@@ -23,6 +23,7 @@ public class Task implements Serializable{
         this.date = null;
         this.uniqueID = ID;
         this.status = "Requested";
+        this.bids = new BidList();
     }
 
 
@@ -34,6 +35,7 @@ public class Task implements Serializable{
         this.date = null;
         this.uniqueID = ID;
         this.status = "Requested";
+        this.bids = new BidList();
     }
 
 
@@ -102,20 +104,20 @@ public class Task implements Serializable{
         this.photos.remove(photo);
     }
 
-    public ArrayList<Bid> getBids() {
+    public BidList getBids() {
         return bids;
     }
 
-    public void setBids(ArrayList<Bid> bids) {
-        this.bids = bids;
-    }
 
     public void addBid(Bid bid){
+        if (isRequested()){
+            setBidded();
+        }
         this.bids.add(bid);
     }
 
     public void removeBid(Bid bid){
-        this.bids.remove(bid);
+        this.bids.delete(bid);
     }
 
     public void clearBids(){
@@ -128,5 +130,23 @@ public class Task implements Serializable{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setBidded(){
+        this.status = "Bidded";
+    }
+
+    public boolean isAssigned() {
+        return this.status=="Assigned";
+    }
+
+    public boolean isRequested() {
+        return this.status=="Requested";
+    }
+    public boolean isBidded() {
+        return this.status=="Bidded";
+    }
+    public boolean isDone() {
+        return this.status=="Done";
     }
 }

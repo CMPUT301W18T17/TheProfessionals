@@ -2,37 +2,37 @@ package professional.team17.com.professional;
 
 import java.util.ArrayList;
 
-public class BidList {
-    private ArrayList<Bid> bids;
+public class BidList extends ArrayList<Bid>{
     private Bid lowest;
 
     public BidList(){
         lowest = null;
-        bids = new ArrayList<Bid>();
         // Nothing
     }
 
     public Bid getBid(int index){
-        return bids.get(index);
+        return this.get(index);
     }
 
     public boolean hasBid(Bid bid){
-        return bids.contains(bid);
+        return this.contains(bid);
     }
 
     //add bid and keep track of lowest
-    public void add(Bid bid){
-        if (bids.isEmpty()){
+    @Override
+    public boolean add(Bid bid){
+        if (this.isEmpty()){
             lowest = bid;
         }
         else if (bid.getAmount()<lowest.getAmount()) {
             lowest =  bid;
         }
-        bids.add(bid);
+        this.add(bid);
+        return true;
     }
 
     public void delete(Bid bid){
-        bids.remove(bid);
+        this.remove(bid);
         if (bid==lowest){
             lowest = getLowest();
         }
@@ -50,13 +50,13 @@ public class BidList {
      */
     public Bid getLowest() {
 
-        if (bids.isEmpty()) {
+        if (this.isEmpty()) {
             return null;
         }
-        Bid low = bids.get(0);
-        for (int i = 1; i < bids.size(); i++) {
-            if (bids.get(i).getAmount()<low.getAmount()){
-                low = bids.get(i);
+        Bid low = this.get(0);
+        for (int i = 1; i < this.size(); i++) {
+            if (this.get(i).getAmount()<low.getAmount()){
+                low = this.get(i);
             }
         }
         return low;
@@ -64,9 +64,9 @@ public class BidList {
 
 
     public int getSize(){
-        return bids.size();
+        return this.size();
     }
     public boolean isEmpty(){
-        return bids.size()==0;
+        return this.size()==0;
     }
 }

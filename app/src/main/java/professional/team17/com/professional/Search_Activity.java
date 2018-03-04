@@ -16,13 +16,14 @@ public class Search_Activity extends AppCompatActivity {
     private ListView listView;
     private SearchView searchView;
     private TaskList taskList;
-
+    private Profile user;
     //TODO DELETE
     private TaskList dummyTaskList;
 
     //TODO DELETE METHOD
     public void dummyDate(){
         dummyTaskList = new TaskList();
+        user= new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
         Task task1 = new Task("ProfileName1", "Name1", "Description", "Location1","ID1" );
         Task task2 = new Task("ProfileName2", "Name2", "Description", "Location2","ID2" );
         Task task3 = new Task("ProfileName3", "Name3", "Description", "Location3","ID3" );
