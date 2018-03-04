@@ -51,7 +51,6 @@ public class BidList extends ArrayList<Bid> implements Serializable{
      * @return the bid with lowest bid.amount in the list
      */
     public Bid getLowest() {
-
         if (this.isEmpty()) {
             return null;
         }
