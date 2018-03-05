@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class ProviderViewTask extends AppCompatActivity {
     private Profile user;
@@ -166,7 +163,7 @@ public class ProviderViewTask extends AppCompatActivity {
     public void viewProfile(View v){
         //TODO - would have to search ES currently.
         //Profile profile = null;
-        Intent intention = new Intent(this, MainActivity.class);
+        Intent intention = new Intent(this, LogInActivity.class);
         //intention.putExtra("profile", user);
         startActivity(intention);
 
