@@ -1,15 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_row_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:paddingBottom="10dp"
     android:paddingTop="10dp">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/search_task_row_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif"
+                    android:text="TaskTitle - "
+                    android:textSize="21sp"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/search_task_row_statusText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:paddingRight="20dp"
+                    android:text="Assigned"
+                    android:textSize="15sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/search_task_row_title"
+                    app:layout_constraintStart_toEndOf="@+id/search_task_row_title" />
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/search_task_row_lowbid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="Lowbid: $"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/search_task_row_lowbidAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:text="0.00"
+                    app:layout_constraintStart_toEndOf="@+id/search_task_row_lowbid" />
+
+                <TextView
+                    android:id="@+id/search_task_row_mybid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="My bid: $"
+                    app:layout_constraintStart_toEndOf="@+id/search_task_row_lowbidAmount"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/search_task_row_mybidAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="0.00"
+                    app:layout_constraintStart_toEndOf="@+id/search_task_row_mybid" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -17,48 +113,16 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/search_task_row_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="TaskTitle"
-            android:textSize="21sp" />
-
-        <LinearLayout
+            android:id="@+id/search_task_row_userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/search_task_row_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingRight="15dp"
-                android:text="Status:"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/search_task_row_statusText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingRight="20dp"
-                android:text="Assigned"
-                android:textSize="15sp" />
-
-        </LinearLayout>
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="15dp"
+            android:text="@string/username"
+            android:textSize="19sp"
+            tools:layout_width="wrap_content" />
 
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/search_task_row_userName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginRight="15dp"
-        android:text="@string/username"
-        android:textSize="22sp"
-        tools:layout_width="wrap_content" />
 
 </LinearLayout>
