@@ -41,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
         //TODO save profile to server
         //set profile name as global variable?
 
-        Intent intent = new Intent(this, Search_Activity.class);
+        Intent intent = new Intent(this, SearchActivity.class);
 
         startActivity(intent);
     }

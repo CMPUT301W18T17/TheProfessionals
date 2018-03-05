@@ -24,7 +24,7 @@ public class LogInActivity extends AppCompatActivity {
         //set usernameas global variable?
 
         //can change navigation, this is just a stand in
-        Intent intent = new Intent(this, Search_Activity.class);
+        Intent intent = new Intent(this, SearchActivity.class);
 
         startActivity(intent);
     }

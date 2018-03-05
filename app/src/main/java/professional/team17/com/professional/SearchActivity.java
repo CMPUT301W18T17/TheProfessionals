@@ -4,15 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-public class Search_Activity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
     private ArrayAdapterSearchResults searchAdapterHelper;
     private ListView listView;
     private SearchView searchView;
@@ -82,7 +80,7 @@ public class Search_Activity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             TaskList taskList = dummyTaskList;
             Task task = taskList.get(position);
-            Intent intention = new Intent(Search_Activity.this, ProviderViewTask.class);
+            Intent intention = new Intent(SearchActivity.this, ProviderViewTask.class);
             intention.putExtra("Task", task);
             intention.putExtra("position", position);
             intention.putExtra("profile", user);
