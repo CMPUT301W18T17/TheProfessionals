@@ -6,10 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class ProviderViewTask extends AppCompatActivity {
     private Profile user;
+    private Profile requester;
     private Task task;
     private TextView statusTextField;
     private TextView userNameTextField;
@@ -18,8 +22,10 @@ public class ProviderViewTask extends AppCompatActivity {
     private TextView taskDescriptionTextField;
     private TextView taskLowBidTextField;
     private TextView taskMyBidTextField;
+    private RatingBar requesterAvgTextField;
     private TextView myBidTextView;
     private TextView lowBidTextView;
+    private TextView requesterAvgTextView;
 
 
     //both buttons start as invisible by default
@@ -43,10 +49,12 @@ public class ProviderViewTask extends AppCompatActivity {
 
         user = getUser();
         task = getTask();
+        getRequester();
+
 
         checkStatus();
         fillTask();
-
+        setRating();
     }
 
 
@@ -105,6 +113,22 @@ public class ProviderViewTask extends AppCompatActivity {
     }
 
 
+    public void setRating(){
+        if (requester.getReviewList().isEmpty()==false) {
+
+            requesterAvgTextView = (TextView) findViewById(R.id.provider_view_rating);
+            requesterAvgTextField = (RatingBar) findViewById(R.id.provider_view_rating_bar);
+            requesterAvgTextView.setVisibility(View.VISIBLE);
+            requesterAvgTextField.setVisibility(View.VISIBLE);
+
+            String sAvg = requester.getReviewList().getAvgString();
+            float fAvg = (float) requester.getReviewList().getAvg();
+
+            requesterAvgTextField.setRating(fAvg / 5);
+            requesterAvgTextView.setText(sAvg);
+        }
+    }
+
     /**
      *
      * Sets the proper fields depending on status of task
@@ -137,7 +161,18 @@ public class ProviderViewTask extends AppCompatActivity {
     }
 
 
-    
+    //TODO
+    public void viewProfile(View v){
+        //TODO - would have to search ES currently.
+        //Profile profile = null;
+        Intent intention = new Intent(this, MainActivity.class);
+        //intention.putExtra("profile", user);
+        startActivity(intention);
+
+    }
+
+
+
     //TODO
     public void placeBid(){
 
@@ -161,5 +196,31 @@ public class ProviderViewTask extends AppCompatActivity {
         Intent intent = getIntent();
         Task task = (Task) intent.getSerializableExtra("Task");
         return task;
+    }
+
+    /**
+     *
+     * @return Returns the subscription sent with the Intent
+     */
+    private void getRequester() {
+        if (task.isBidded()){
+            DummyData();
+        }
+        else {
+            DummyData1();
+        }
+    }
+
+    public void DummyData(){
+        requester = new Profile("John Smith", task.getProfileName(), "email", "123123123");
+        ReviewList reviewList  = requester.getReviewList();
+        Review review1 = new Review(5.0, "reviewer","comment", "title");
+        Review review2 = new Review(2.1, "reviewer1","comment", "title");
+        reviewList.addReview(review1);
+        reviewList.addReview(review2);
+    }
+
+    public void DummyData1(){
+        requester = new Profile("John Smith", task.getProfileName(), "email", "123123123");
     }
 }

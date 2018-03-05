@@ -57,7 +57,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginRight="15dp"
-        android:onClick="viewUserInfo"
         android:text="@string/username"
         android:textSize="22sp"
         tools:layout_width="wrap_content" />

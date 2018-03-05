@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class Review {
 
-    private Double score;
+    private double score;
     private String comment;
     private String profileName; //person who gave review
     private String reviewTitle;
     private Date date;
 
-    public Review(Double score, String reviewer, String comment, String title) {
+    public Review(double score, String reviewer, String comment, String title) {
         this.score = score;
         this.profileName = reviewer;
         this.comment = comment;
@@ -18,7 +18,7 @@ public class Review {
         this.date = new Date();
     }
 
-    public Review(Double score, String reviewer, String title) {
+    public Review(double score, String reviewer, String title) {
         this.score = score;
         this.profileName = reviewer;
         this.reviewTitle = title;
