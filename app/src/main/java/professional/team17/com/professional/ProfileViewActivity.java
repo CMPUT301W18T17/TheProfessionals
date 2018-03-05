@@ -17,4 +17,12 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
     }
 
     protected abstract int getLayoutResourceId();
+
+    // don't call setInfo from here. Call it from MyProfileViewActivity or OtherProfileViewActivity
+    protected void setInfo(String aUserName, String aName, String anEmail, String aPhoneNumber) {
+        username.setText(aUserName);
+        name.setText(aName);
+        email.setText(anEmail);
+        phoneNumber.setText(aPhoneNumber);
+    }
 }

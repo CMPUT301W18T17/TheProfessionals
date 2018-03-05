@@ -14,5 +14,9 @@ public class MyProfileViewActivity extends ProfileViewActivity{
     protected int getLayoutResourceId() {
         return R.layout.activity_my_profile_view;
     }
+
+    protected void setInfo(String aUserName, String aName, String anEmail, String aPhoneNumber) {
+        super.setInfo(aUserName, aName, anEmail, aPhoneNumber);
+    }
 }
 
