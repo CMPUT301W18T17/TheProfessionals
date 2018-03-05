@@ -2,6 +2,7 @@ package professional.team17.com.professional;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -174,8 +175,10 @@ public class ProviderViewTask extends AppCompatActivity {
 
 
     //TODO
-    public void placeBid(){
-
+    public void placeBid(View v){
+        FragmentManager fm = getSupportFragmentManager();
+        PlaceBidDialog placeBidDialog = PlaceBidDialog.newInstance("Some Title");
+        placeBidDialog.show(fm, "Test");
 
     }
     /**

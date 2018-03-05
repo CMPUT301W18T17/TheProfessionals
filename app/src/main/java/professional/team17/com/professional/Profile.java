@@ -11,7 +11,7 @@ public class Profile implements Serializable {
     public String userName;
     private String email;
     private String phoneNumber;
-    private ReviewList reivewList;
+    private ReviewList reviewList;
     private ArrayList<String> blackList;
     private ArrayList<String> blackListedBy;
 
@@ -20,7 +20,7 @@ public class Profile implements Serializable {
         this.userName = userName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.reivewList = new ReviewList();
+        this.reviewList = new ReviewList();
         this.blackList = new ArrayList<String>();
         this.blackListedBy = new ArrayList<String>();
     }
@@ -58,6 +58,10 @@ public class Profile implements Serializable {
     }
 
     // for methods involving reviewList, please consult the ReviewList class
+    public ReviewList getReviewList(){
+        return reviewList;
+    }
+
 
     public ArrayList<String> getBlackList() {
         return blackList;
