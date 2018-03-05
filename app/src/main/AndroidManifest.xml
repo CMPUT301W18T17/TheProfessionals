@@ -20,7 +20,8 @@
         <activity android:name=".ProviderViewTask" />
         <activity android:name=".ProfileViewActivity" />
         <activity android:name=".OtherProfileViewActivity" />
-        <activity android:name=".MyProfileViewActivity"></activity>
+        <activity android:name=".MyProfileViewActivity" />
+        <activity android:name=".SignUpActivity"></activity>
     </application>
 
 </manifest>
