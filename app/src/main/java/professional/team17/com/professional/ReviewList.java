@@ -17,8 +17,6 @@ public class ReviewList implements Serializable {
     }
 
 
-
-
     public void addReview(Review review){
         if (this.hasReview(review) == true){
             throw new  IllegalArgumentException("Duplicate Review - cannot be added");
