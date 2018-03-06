@@ -8,8 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class ProviderViewTask extends AppCompatActivity {
+public class ProviderViewTask extends AppCompatActivity implements PlaceBidDialog.EditNameDialogListener {
     private Profile user;
     private Profile requester;
     private Task task;
@@ -30,6 +31,16 @@ public class ProviderViewTask extends AppCompatActivity {
     private Button bidButton;
     private Button deleteButton;
 
+//method on return of place bid
+    public void onFinishEditDialog(String inputText){
+        double bidAmount =  Double.valueOf(inputText);
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(this, "SEARCH ENTERED"+inputText, duration);
+        toast.show();
+        task.addBid(new Bid(user.getUserName(), bidAmount));
+        statusTextField.setText(task.getStatus());
+        fillBidded();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +111,13 @@ public class ProviderViewTask extends AppCompatActivity {
         taskLowBidTextField.setText(bids.getLowest().getAmountAsString());
         if (task.getBids().userBidded(user.getUserName())) {
             //find user bid amount and show cancel bid button
+            if (!bidButton.isShown()){
+                bidButton.setVisibility(View.GONE);
+            }
+            if (!lowBidTextView.isShown()){
+                lowBidTextView.setVisibility(View.VISIBLE);
+                taskLowBidTextField.setVisibility(View.VISIBLE);
+            }
             taskMyBidTextField.setVisibility(View.VISIBLE);
             myBidTextView.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
@@ -174,8 +192,8 @@ public class ProviderViewTask extends AppCompatActivity {
     //TODO
     public void placeBid(View v){
         FragmentManager fm = getSupportFragmentManager();
-        PlaceBidDialog placeBidDialog = PlaceBidDialog.newInstance("Some Title");
-        placeBidDialog.show(fm, "Test");
+        PlaceBidDialog dialogFragment = new PlaceBidDialog ();
+        dialogFragment.show(fm, "Sample Fragment");
 
     }
     /**

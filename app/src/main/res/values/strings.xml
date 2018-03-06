@@ -15,4 +15,5 @@
     <string name="email">E-mail</string>
     <string name="phone_number">Phone Number</string>
     <string name="no_account">Don\'t have an account?</string>
+    <string name="empty_input_numeric">Please enter a value</string>
 </resources>
