@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.PlaceBidDialogListener, CancelBidDialog.CancelBidDialogListener {
+public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
 
     private Profile user;
     private Profile requester;
@@ -76,8 +76,8 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 
 
     //method on return of cancel bid from interface CancelBidDialog.CancelBidDialogListener
-    public void onFinishDeleteDialog(Boolean delete){
-        if (delete==true){
+    public void onFinishConfirmDialog(Boolean confirmed){
+        if (confirmed==true){
             Log.i("DELETE", "onFinishDeleteDialog: ");
             Bid bid = task.getBids().getBid(user.getUserName());
             task.removeBid(bid);
@@ -241,8 +241,18 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     // Method to call fragment to confirm cancel bid
     public void cancelBid(View v){
         FragmentManager fm = getSupportFragmentManager();
-        CancelBidDialog dialogFragment = new CancelBidDialog ();
-        dialogFragment.show(fm, "Sample Fragment");
+        //CancelBidDialog dialogFragment = new CancelBidDialog ();
+
+        ConfirmDialog confirmDialog = new ConfirmDialog();
+        Bundle args = new Bundle();
+        args.putString("title", "Cancddel Bid");
+        args.putString("cancel", "Cancel");
+        args.putString("confirm", "Delete");
+        args.putString("message", "Are you sure you want to delete");
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        confirmDialog.setArguments(args);
+        confirmDialog.show(fm, "Sample Fragment");
     }
     /**
      *
