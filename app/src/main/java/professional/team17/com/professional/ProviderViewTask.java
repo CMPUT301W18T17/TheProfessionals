@@ -245,10 +245,10 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 
         ConfirmDialog confirmDialog = new ConfirmDialog();
         Bundle args = new Bundle();
-        args.putString("title", "Cancddel Bid");
+        args.putString("title", "Cancel Bid");
         args.putString("cancel", "Cancel");
-        args.putString("confirm", "Delete");
-        args.putString("message", "Are you sure you want to delete");
+        args.putString("confirm", "Yes");
+        args.putString("message", "Are you sure you want to delete?");
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         confirmDialog.setArguments(args);
