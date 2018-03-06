@@ -11,7 +11,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ProviderViewTask extends AppCompatActivity implements PlaceBidDialog.PlaceBidDialogListener, CancelBidDialog.CancelBidDialogListener {
+
+public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.PlaceBidDialogListener, CancelBidDialog.CancelBidDialogListener {
+
     private Profile user;
     private Profile requester;
     private Task task;
@@ -47,6 +49,9 @@ public class ProviderViewTask extends AppCompatActivity implements PlaceBidDialo
         taskDescriptionTextField = (TextView) findViewById(R.id.provider_view_task_description);
         taskLowBidTextField = (TextView) findViewById(R.id.provider_view_task_lowBidInput);
         taskMyBidTextField = (TextView) findViewById(R.id.provider_view_task_myBidInput);
+
+        /* Set activity title in layout */
+        this.setActivityTitle("View Task");
 
         user = getUser();
         task = getTask();

@@ -10,7 +10,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends ProviderLayout {
     private ArrayAdapterSearchResults searchAdapterHelper;
     private ListView listView;
     private SearchView searchView;
@@ -45,6 +45,9 @@ public class SearchActivity extends AppCompatActivity {
         listView =findViewById(R.id.Search_Activity_list);
         listView.setAdapter(searchAdapterHelper);
         listView.setOnItemClickListener(clickListener);
+
+        /* Change activity title */
+        this.setActivityTitle("Task Search");
 
 
         searchView = (SearchView) findViewById(R.id.Search_Activity_Input);
