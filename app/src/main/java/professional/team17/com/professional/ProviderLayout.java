@@ -38,6 +38,7 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
      */
     public void setActivityTitle(String title) {
         this.activityTitle = title;
+        activityTitleView.setText(activityTitle);
     }
 
 
