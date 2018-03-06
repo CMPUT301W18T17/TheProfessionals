@@ -10,11 +10,7 @@ public class OtherProfileViewActivity extends ProfileViewActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    protected int getLayoutResourceId() {
-        return R.layout.activity_other_profile_view;
+        currentMode.setText("An User's Profile");
     }
 
     protected void setInfo(String aUserName, String aName, String anEmail, String aPhoneNumber) {

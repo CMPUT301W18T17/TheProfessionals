@@ -6,6 +6,44 @@
     android:layout_height="match_parent"
     tools:context="professional.team17.com.professional.ProfileViewActivity">
 
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="0dp"
+        android:layout_height="189dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:scrollIndicators="top|bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rating2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <RatingBar
+        android:id="@+id/rating2"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginTop="12dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:stepSize="0.1"
+        app:layout_constraintStart_toStartOf="@+id/phoneTV"
+        app:layout_constraintTop_toBottomOf="@+id/phoneTV" />
+
+    <TextView
+        android:id="@+id/providerScoreTV"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/otherPV_pScore"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneTag" />
+
     <TextView
         android:id="@+id/phoneTV"
         android:layout_width="0dp"
@@ -22,9 +60,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/PV_phone"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="252dp" />
+        android:text="@string/phone_number"
+        app:layout_constraintBaseline_toBaselineOf="@+id/phoneTV"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/emailTV"
@@ -40,12 +78,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/PV_email"
-        app:layout_constraintBaseline_toBaselineOf="@+id/emailTV"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="@string/email"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="208dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/currentModeTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -60,7 +98,7 @@
     <TextView
         android:id="@+id/nameTV"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="18dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="@+id/emailTV"
         app:layout_constraintHorizontal_bias="0.0"
@@ -71,11 +109,11 @@
         android:id="@+id/userNameTV"
         android:layout_width="0dp"
         android:layout_height="17dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="@+id/nameTV"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/nameTV"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/currentModeTV" />
 
     <TextView
         android:id="@+id/userNameTag"
@@ -94,5 +132,19 @@
         android:text="@string/PV_name"
         app:layout_constraintBaseline_toBaselineOf="@+id/nameTV"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/profilePic_imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/userNameTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentModeTV"
+        app:srcCompat="@android:drawable/star_big_on" />
 
 </android.support.constraint.ConstraintLayout>
