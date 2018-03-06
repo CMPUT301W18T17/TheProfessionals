@@ -1,5 +1,6 @@
 package professional.team17.com.professional;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_view);
         currentMode = findViewById(R.id.currentModeTV);
+
     }
 
     // don't call setInfo from here. Call it from MyProfileViewActivity or OtherProfileViewActivity

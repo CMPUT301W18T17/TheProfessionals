@@ -104,7 +104,14 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Toast.makeText(ProviderLayout.this, "" + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ProviderLayout.this, "" + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                if(menuItem.getTitle().equals("My Profile")){
+                    Intent intent = new Intent(getApplicationContext(), MyProfileViewActivity.class);
+                    startActivity(intent);
+                } else if (menuItem.getTitle().equals("Edit My Profile")){
+                    Intent intent = new Intent(getApplicationContext(), EditMyProfileActivity.class);
+                    startActivity(intent);
+                }
                 return true;
             }
         });
