@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public abstract class ProfileViewActivity extends AppCompatActivity {
+public abstract class ProfileViewActivity extends ProviderLayout {
     protected TextView username;
     protected TextView name;
     protected TextView email;
