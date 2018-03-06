@@ -29,7 +29,8 @@
                 android:value=".LogInActivity" />
             >
         </activity>
-        <activity android:name=".ProviderLayout"></activity>
+        <activity android:name=".ProviderLayout" />
+        <activity android:name=".RequesterLayout"></activity>
     </application>
 
 </manifest>
