@@ -55,12 +55,21 @@ public class ArrayAdapterSearchResults extends ArrayAdapter<Task> {
                 taskLowBidAmountTextField.setVisibility(View.INVISIBLE);
                 taskMyBidAmountTextField.setVisibility(View.INVISIBLE);
             }
-            else {
+            else if (task.isBidded()){
                 taskLowBidAmountTextField.setText(task.getBids().getLowest().getAmountAsString());
                 taskLowBidTextField.setVisibility(View.VISIBLE);
                 taskMyBidTextField.setVisibility(View.VISIBLE);
                 taskLowBidAmountTextField.setVisibility(View.VISIBLE);
                 taskMyBidAmountTextField.setVisibility(View.VISIBLE);
+                //todo, add in if condition for bidded, pull from global user value
+                /*
+                if task.getBids().userBidded(user.getUserName()){
+
+                                taskMyBidTextField.setVisibility(View.VISIBLE);
+                                taskMyBidAmountTextField.setVisibility(View.VISIBLE);
+                                taskMyBidAmountTextField.setText(bids.getBid(user.getUserName()).getAmountAsString());
+                                }
+                 */
             }
 
 
