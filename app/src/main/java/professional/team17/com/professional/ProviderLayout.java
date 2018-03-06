@@ -49,7 +49,6 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
 
     //TODO uncomment as activities are created
     public void onClick(View view) {
-
         switch (view.getId()){
             /* If user tapped the Bids button */
             case R.id.biddedTasksProviderButton:
@@ -74,17 +73,19 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                 break;
         /* If the user tapped the map button */
             case R.id.taskMapButton:
-            /* Commented out as the activity does not exist yet
-            Intent intent = new Intent(this, MapActivity.class);
-            startActivity(intent);
-            */
+                /* Commented out as the activity does not exist yet
+                Intent intent = new Intent(this, MapActivity.class);
+                startActivity(intent);
+                */
+                break;
         /* If the user taps the switch button */
             case R.id.switchViewProviderButton:
-            /*Commented out as the activity does not exist yet
-            Intent intent = new Intent(this, RequesterListActivity.class);
-            intent.putExtra("Status", "Requested");
-            startActivity(intent);
-            */
+                /*Commented out as the activity does not exist yet
+                Intent intent = new Intent(this, RequesterListActivity.class);
+                intent.putExtra("Status", "Requested");
+                startActivity(intent);
+                */
+                break;
         /* If the user taps the user menu button */
             case R.id.userMenuButton:
                 //TODO implement dropdown menu
@@ -99,7 +100,7 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                 });
 
                 popupMenu.show();
-
+                break;
         }
     }
 
