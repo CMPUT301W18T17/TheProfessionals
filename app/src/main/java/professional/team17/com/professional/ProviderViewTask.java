@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class ProviderViewTask extends AppCompatActivity {
+
+public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.PlaceBidDialogListener, CancelBidDialog.CancelBidDialogListener {
+
     private Profile user;
     private Profile requester;
     private Task task;
@@ -31,6 +35,7 @@ public class ProviderViewTask extends AppCompatActivity {
     private Button deleteButton;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,9 @@ public class ProviderViewTask extends AppCompatActivity {
         taskLowBidTextField = (TextView) findViewById(R.id.provider_view_task_lowBidInput);
         taskMyBidTextField = (TextView) findViewById(R.id.provider_view_task_myBidInput);
 
+        /* Set activity title in layout */
+        this.setActivityTitle("View Task");
+
         user = getUser();
         task = getTask();
         getRequester();
@@ -55,7 +63,37 @@ public class ProviderViewTask extends AppCompatActivity {
         setRating();
     }
 
+    //method on return of place bid from interface
+    public void onFinishPlaceBidDialog(String inputText){
+        double bidAmount =  Double.valueOf(inputText);
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(this, "SEARCH ENTERED"+inputText, duration);
+        toast.show();
+        task.addBid(new Bid(user.getUserName(), bidAmount));
+        statusTextField.setText(task.getStatus());
+        fillBidded();
+    }
 
+
+    //method on return of cancel bid from interface CancelBidDialog.CancelBidDialogListener
+    public void onFinishDeleteDialog(Boolean delete){
+        if (delete==true){
+            Log.i("DELETE", "onFinishDeleteDialog: ");
+            Bid bid = task.getBids().getBid(user.getUserName());
+            task.removeBid(bid);
+        }
+        statusTextField.setText(task.getStatus());
+        if (task.isBidded()) {
+            fillBidded();
+        }
+        if (task.isRequested()) {
+            fillRequested();
+        }
+    }
+
+
+
+    //TODO clean up all filltask(), fillrequested(), fillBidded() and fillAssigned()
     /**
      *
      * @return Returns the subscription sent with the Intent
@@ -72,6 +110,13 @@ public class ProviderViewTask extends AppCompatActivity {
 
     //If status is requested - place bid button will show, and lowest bid text fields hides
     public void fillRequested(){
+        if (deleteButton.isShown()) {
+            deleteButton.setVisibility(View.GONE);
+        }
+        if (myBidTextView.isShown()){
+            taskMyBidTextField.setVisibility(View.INVISIBLE);
+            myBidTextView.setVisibility(View.INVISIBLE);
+        }
         bidButton.setVisibility(View.VISIBLE);
         taskLowBidTextField.setVisibility(View.INVISIBLE);
         lowBidTextView.setVisibility(View.INVISIBLE);
@@ -100,6 +145,13 @@ public class ProviderViewTask extends AppCompatActivity {
         taskLowBidTextField.setText(bids.getLowest().getAmountAsString());
         if (task.getBids().userBidded(user.getUserName())) {
             //find user bid amount and show cancel bid button
+            if (!bidButton.isShown()){
+                bidButton.setVisibility(View.GONE);
+            }
+            if (!lowBidTextView.isShown()){
+                lowBidTextView.setVisibility(View.VISIBLE);
+                taskLowBidTextField.setVisibility(View.VISIBLE);
+            }
             taskMyBidTextField.setVisibility(View.VISIBLE);
             myBidTextView.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
@@ -107,6 +159,13 @@ public class ProviderViewTask extends AppCompatActivity {
         }
         else {
             bidButton.setVisibility(View.VISIBLE);
+            if (deleteButton.isShown()) {
+                deleteButton.setVisibility(View.GONE);
+            }
+            if (myBidTextView.isShown()){
+                taskMyBidTextField.setVisibility(View.INVISIBLE);
+                myBidTextView.setVisibility(View.INVISIBLE);
+            }
         }
     }
 
@@ -171,12 +230,19 @@ public class ProviderViewTask extends AppCompatActivity {
 
 
 
-    //TODO
+    // Method to call fragment to place bid
     public void placeBid(View v){
         FragmentManager fm = getSupportFragmentManager();
-        PlaceBidDialog placeBidDialog = PlaceBidDialog.newInstance("Some Title");
-        placeBidDialog.show(fm, "Test");
+        PlaceBidDialog dialogFragment = new PlaceBidDialog ();
+        dialogFragment.show(fm, "Sample Fragment");
 
+    }
+
+    // Method to call fragment to confirm cancel bid
+    public void cancelBid(View v){
+        FragmentManager fm = getSupportFragmentManager();
+        CancelBidDialog dialogFragment = new CancelBidDialog ();
+        dialogFragment.show(fm, "Sample Fragment");
     }
     /**
      *

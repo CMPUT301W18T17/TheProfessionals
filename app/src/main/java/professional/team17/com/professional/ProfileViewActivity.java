@@ -9,17 +9,22 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
     protected TextView name;
     protected TextView email;
     protected TextView phoneNumber;
+    protected TextView currentMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutResourceId());
+        setContentView(R.layout.activity_profile_view);
+        currentMode = findViewById(R.id.currentModeTV);
     }
-
-    protected abstract int getLayoutResourceId();
 
     // don't call setInfo from here. Call it from MyProfileViewActivity or OtherProfileViewActivity
     protected void setInfo(String aUserName, String aName, String anEmail, String aPhoneNumber) {
+        username =findViewById(R.id.userNameTV);
+        name =findViewById(R.id.nameTV);
+        email = findViewById(R.id.emailTV);
+        phoneNumber = findViewById(R.id.phoneTV);
+
         username.setText(aUserName);
         name.setText(aName);
         email.setText(anEmail);

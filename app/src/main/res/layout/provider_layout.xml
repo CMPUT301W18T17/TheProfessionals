@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/biddedTasksProviderButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/acceptedTasksProviderButton"
@@ -20,7 +20,7 @@
     <ImageView
         android:id="@+id/acceptedTasksProviderButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/searchTasksButton"
@@ -31,7 +31,7 @@
     <ImageView
         android:id="@+id/searchTasksButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/taskMapButton"
@@ -42,7 +42,7 @@
     <ImageView
         android:id="@+id/taskMapButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/switchViewProviderButton"
@@ -53,7 +53,7 @@
     <ImageView
         android:id="@+id/switchViewProviderButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

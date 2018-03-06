@@ -9,11 +9,12 @@
     <string name="PV_myProfile">My Profile</string>
     <string name="PV_username">Username</string>
     <string name="PV_name">Name</string>
-    <string name="PV_email">Email</string>
     <string name="PV_phone">Phone</string>
     <string name="otherPV_pScore">Provider Score</string>
     <string name="full_name">Full Name</string>
     <string name="email">E-mail</string>
     <string name="phone_number">Phone Number</string>
     <string name="no_account">Don\'t have an account?</string>
+    <string name="empty_input_numeric">Please enter a value</string>
+    <string name="cancel_bid">Are you sure you want to remove your bid? \n(This cannot be undone)</string>
 </resources>

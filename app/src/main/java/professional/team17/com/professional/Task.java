@@ -138,6 +138,9 @@ public class Task implements Serializable{
 
     public void removeBid(Bid bid){
         this.bids.delete(bid);
+        if (bids.isEmpty()){
+            setRequested();
+        }
     }
 
     public void clearBids(){
@@ -155,9 +158,17 @@ public class Task implements Serializable{
     /**
      * Set status to bidded, with better control of words
      */
+    public void setRequested(){
+        this.status = "Requested";
+    }
+
+    /**
+     * Set status to bidded, with better control of words
+     */
     public void setBidded(){
         this.status = "Bidded";
     }
+
 
     /**
      *

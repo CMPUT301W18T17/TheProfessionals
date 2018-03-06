@@ -1,17 +1,12 @@
 package professional.team17.com.professional;
 
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.TextViewCompat;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,17 +17,17 @@ import java.math.BigDecimal;
  * Created by ag on 2018-03-04.need to add listender to buttons, check string input, and send it back
  */
 
-public class PlaceBidDialog extends DialogFragment {
+public class CancelBidDialog extends DialogFragment {
 
 
-    public interface PlaceBidDialogListener {
-        void onFinishPlaceBidDialog(String inputText);
+    public interface CancelBidDialogListener {
+        void onFinishDeleteDialog(Boolean delete);
     }
 
-    private PlaceBidDialogListener listener;
+    private CancelBidDialogListener listener;
 
 
-    public PlaceBidDialog() {
+    public CancelBidDialog() {
         // Empty constructor is required for DialogFragment
         // Make sure not to add arguments to the constructor
         // Use `newInstance` instead as shown below
@@ -45,39 +40,24 @@ public class PlaceBidDialog extends DialogFragment {
         // Verify that the host activity implements the callback interface
         try {
             // Instantiate the EditNameDialogListener so we can send events to the host
-            listener = (PlaceBidDialogListener) context;
+            listener = (CancelBidDialogListener) context;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(context.toString()
-                    + " must implement EditNameDialogListener");
+                    + " must implement CancelBidDialogListener");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final View rootView = inflater.inflate(R.layout.place_bid_fragment, container, false);
+        final View rootView = inflater.inflate(R.layout.cancel_bid_fragment, container, false);
         getDialog().setTitle("Place Bid");
 
 
-        Button dismiss = (Button) rootView.findViewById(R.id.place_bid_fragment_cancelButton);
-        Button add = (Button) rootView.findViewById(R.id.place_bid_fragment_addButton);
+        Button dismiss = (Button) rootView.findViewById(R.id.cancel_bid_fragment_cancelButton);
+        Button delete = (Button) rootView.findViewById(R.id.cancel_bid_fragment_deleteButton);
 
-        final EditText bidInput = (EditText) rootView.findViewById(R.id.place_bid_fragment_bid_input);
-        final TextView warning = (TextView) rootView.findViewById(R.id.place_bid_fragment_warning);
-
-
-
-
-        //remove warning text if shown
-        bidInput.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (warning.isShown()){
-                    warning.setVisibility(rootView.GONE);
-                }
-            }
-        });
 
 
         dismiss.setOnClickListener(new View.OnClickListener() {
@@ -89,19 +69,12 @@ public class PlaceBidDialog extends DialogFragment {
         });
 
         //check for empty input, otherwise save
-        add.setOnClickListener(new View.OnClickListener() {
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEmpty(bidInput)==false){
-                    listener.onFinishPlaceBidDialog(bidInput.getText().toString());
+                    listener.onFinishDeleteDialog(true);
                     dismiss();
                 }
-                else {
-                    if (!warning.isShown()) {
-                        warning.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
         });
 
 
