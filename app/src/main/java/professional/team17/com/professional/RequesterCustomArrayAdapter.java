@@ -13,9 +13,9 @@ import android.widget.TextView;
  * Created by Zhipeng Zhang on 2018-03-05.
  */
 
-public class RequesterAssignedListAdapter extends ArrayAdapter<Task> {
+public class RequesterCustomArrayAdapter extends ArrayAdapter<Task> {
 
-        public RequesterAssignedListAdapter(Activity context, TaskList taskArrayList) {
+        public RequesterCustomArrayAdapter(Activity context, TaskList taskArrayList) {
                 super(context, 0,  taskArrayList);
         }
 
@@ -24,7 +24,7 @@ public class RequesterAssignedListAdapter extends ArrayAdapter<Task> {
                 Task task= getItem(position);
                 Log.i("LOOOKINAT", "getView: "+position);
                 if (v == null) {
-                        v = LayoutInflater.from(getContext()).inflate(R.layout.requester_assigned_row, parent, false);
+                        v = LayoutInflater.from(getContext()).inflate(R.layout.requester_custom_array_row, parent, false);
                 }
                 //get view
                 TextView statusTextField = (TextView) v.findViewById(R.id.status);
@@ -36,13 +36,21 @@ public class RequesterAssignedListAdapter extends ArrayAdapter<Task> {
 
                 //plug in item to row
                 statusTextField.setText(task.getStatus());
-                userNameTextField.setText(task.getProfileName());
                 taskTitleTextField.setText(task.getName());
                 Log.i("Task", "getView: "+task.isAssigned()+task.getStatus()+task.getName());
 
-                taskLowBidAmountTextField.setText(task.getBids().getLowest().getAmountAsString());
-                taskLowBidTextField.setVisibility(View.VISIBLE);
-                taskLowBidAmountTextField.setVisibility(View.VISIBLE);
+                if (task.isAssigned()) {
+                        userNameTextField.setText(task.getProfileName());
+                        taskLowBidAmountTextField.setText(task.getBids().getLowest().getAmountAsString());
+                        taskLowBidTextField.setVisibility(View.VISIBLE);
+                        taskLowBidAmountTextField.setVisibility(View.VISIBLE);
+                }
+                else if (task.isBidded() || task.isRequested()){
+                        taskLowBidTextField.setVisibility(View.INVISIBLE);
+                        taskLowBidAmountTextField.setVisibility(View.INVISIBLE);
+                        userNameTextField.setVisibility(View.INVISIBLE);
+                }
+
 
                 return v;
         }

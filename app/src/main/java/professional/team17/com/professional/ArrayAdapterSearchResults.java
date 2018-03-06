@@ -72,6 +72,13 @@ public class ArrayAdapterSearchResults extends ArrayAdapter<Task> {
                  */
             }
 
+            else if (task.isAssigned()){
+                taskLowBidTextField.setVisibility(View.INVISIBLE);
+                taskLowBidAmountTextField.setVisibility(View.INVISIBLE);
+                taskMyBidTextField.setVisibility(View.VISIBLE);
+                taskMyBidAmountTextField.setVisibility(View.VISIBLE);
+            }
+
 
             return v;
         }
