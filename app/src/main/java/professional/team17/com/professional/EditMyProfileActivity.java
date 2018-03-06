@@ -3,15 +3,11 @@ package professional.team17.com.professional;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MyProfileViewActivity extends ProfileViewActivity{
+public class EditMyProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    protected void setInfo(String aUserName, String aName, String anEmail, String aPhoneNumber) {
-        super.setInfo(aUserName, aName, anEmail, aPhoneNumber);
+        setContentView(R.layout.activity_edit_my_profile);
     }
 }
-

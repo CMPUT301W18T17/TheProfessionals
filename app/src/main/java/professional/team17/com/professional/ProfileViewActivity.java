@@ -13,10 +13,8 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutResourceId());
+        setContentView(R.layout.activity_profile_view);
     }
-
-    protected abstract int getLayoutResourceId();
 
     // don't call setInfo from here. Call it from MyProfileViewActivity or OtherProfileViewActivity
     protected void setInfo(String aUserName, String aName, String anEmail, String aPhoneNumber) {

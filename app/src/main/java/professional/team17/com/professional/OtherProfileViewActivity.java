@@ -12,11 +12,6 @@ public class OtherProfileViewActivity extends ProfileViewActivity{
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    protected int getLayoutResourceId() {
-        return R.layout.activity_other_profile_view;
-    }
-
     protected void setInfo(String aUserName, String aName, String anEmail, String aPhoneNumber) {
         super.setInfo(aUserName, aName, anEmail, aPhoneNumber);
         // Make mock ratings and adapter for reviews; Initiate listViewOfRatings here.
