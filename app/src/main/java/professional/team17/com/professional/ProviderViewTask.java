@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-public class ProviderViewTask extends AppCompatActivity {
+public class ProviderViewTask extends ProviderLayout {
     private Profile user;
     private Profile requester;
     private Task task;
@@ -44,6 +44,9 @@ public class ProviderViewTask extends AppCompatActivity {
         taskDescriptionTextField = (TextView) findViewById(R.id.provider_view_task_description);
         taskLowBidTextField = (TextView) findViewById(R.id.provider_view_task_lowBidInput);
         taskMyBidTextField = (TextView) findViewById(R.id.provider_view_task_myBidInput);
+
+        /* Set activity title in layout */
+        this.setActivityTitle("View Task");
 
         user = getUser();
         task = getTask();
