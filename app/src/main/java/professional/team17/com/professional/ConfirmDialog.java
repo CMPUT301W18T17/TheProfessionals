@@ -41,7 +41,7 @@ public class ConfirmDialog extends DialogFragment {
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(context.toString()
-                    + " must implement CancelBidDialogListener");
+                    + " must implement ConfirmDialogListener");
         }
     }
 
@@ -50,21 +50,26 @@ public class ConfirmDialog extends DialogFragment {
 
         final View rootView = inflater.inflate(R.layout.confirmation_fragment, container, false);
         Bundle args = getArguments();
+
+        //get args activity passed into dialog
         String title = args.getString("title");
         String cancelButton = args.getString("cancel");
         String confirmButton = args.getString("confirm");
         String message = args.getString("message");
 
+        //get customizable fields from xml
         Button positive = (Button) rootView.findViewById(R.id.confirm_fragment_positiveButton);
         Button negative = (Button) rootView.findViewById(R.id.confirm_fragment_negButtom);
         TextView dmessage = (TextView) rootView.findViewById(R.id.confirm_fragment_text);
         TextView dtitle = (TextView) rootView.findViewById(R.id.confirm_fragment_title);
 
+        //set text for each customizable field
         positive.setText(confirmButton);
         negative.setText(cancelButton);
         dmessage.setText(message);
         dtitle.setText(title);
 
+        //negative = do nothing
         negative.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -73,7 +78,7 @@ public class ConfirmDialog extends DialogFragment {
             }
         });
 
-        //check for empty input, otherwise save
+        //postive = confirm dialog question/check
         positive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
