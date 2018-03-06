@@ -10,6 +10,7 @@ public class OtherProfileViewActivity extends ProfileViewActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        currentMode.setText("An User's Profile");
     }
 
     protected void setInfo(String aUserName, String aName, String anEmail, String aPhoneNumber) {

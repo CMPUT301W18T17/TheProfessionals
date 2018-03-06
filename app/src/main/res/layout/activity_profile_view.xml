@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/phoneTV" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/providerScoreTV"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -83,7 +83,7 @@
         tools:layout_editor_absoluteY="208dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/currentModeTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -113,7 +113,7 @@
         app:layout_constraintEnd_toEndOf="@+id/nameTV"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/nameTV"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/currentModeTV" />
 
     <TextView
         android:id="@+id/userNameTag"
@@ -144,7 +144,7 @@
         app:layout_constraintBottom_toTopOf="@+id/userNameTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/currentModeTV"
         app:srcCompat="@android:drawable/star_big_on" />
 
 </android.support.constraint.ConstraintLayout>
