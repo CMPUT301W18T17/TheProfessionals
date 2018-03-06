@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/phone_number"
-        app:layout_constraintBaseline_toBaselineOf="@+id/phone"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editPhone"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/email"
-        app:layout_constraintBaseline_toBaselineOf="@+id/email"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editEmail"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -56,7 +56,7 @@
         android:layout_height="15dp"
         android:layout_marginStart="8dp"
         android:text="@string/PV_name"
-        app:layout_constraintBaseline_toBaselineOf="@+id/name"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editName"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
@@ -72,7 +72,7 @@
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/editName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -80,11 +80,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/userName"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
+        app:layout_constraintStart_toStartOf="@+id/showUserName"
+        app:layout_constraintTop_toBottomOf="@+id/showUserName" />
 
     <TextView
-        android:id="@+id/userName"
+        android:id="@+id/showUserName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -106,10 +106,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone" />
+        app:layout_constraintTop_toBottomOf="@+id/editPhone" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/editEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -118,11 +118,11 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintStart_toStartOf="@+id/editName"
+        app:layout_constraintTop_toBottomOf="@+id/editName" />
 
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/editPhone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -130,8 +130,8 @@
         android:ems="10"
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintStart_toStartOf="@+id/editEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
 </android.support.constraint.ConstraintLayout>
 
