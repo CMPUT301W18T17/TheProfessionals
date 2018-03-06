@@ -52,6 +52,56 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/search_task_row_lowbid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="Lowbid: $"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/search_task_row_lowbidAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_weight="1"
+                    android:text="0.00"
+                    app:layout_constraintStart_toEndOf="@+id/search_task_row_lowbid" />
+
+                <TextView
+                    android:id="@+id/search_task_row_mybid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="My bid: $"
+                    app:layout_constraintStart_toEndOf="@+id/search_task_row_lowbidAmount"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/search_task_row_mybidAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="0.00"
+                    app:layout_constraintStart_toEndOf="@+id/search_task_row_mybid" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
