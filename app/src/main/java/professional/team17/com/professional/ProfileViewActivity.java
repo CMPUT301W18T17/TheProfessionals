@@ -3,20 +3,24 @@ package professional.team17.com.professional;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-public abstract class ProfileViewActivity extends ProviderLayout {
+public abstract class ProfileViewActivity extends AppCompatActivity {
     protected TextView username;
     protected TextView name;
     protected TextView email;
     protected TextView phoneNumber;
     protected TextView currentMode;
+    protected Button doneButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_view);
-        currentMode = findViewById(R.id.currentModeTV);
+        currentMode = (TextView) findViewById(R.id.currentModeTV);
+        doneButton = (Button) findViewById(R.id.doneButton);
 
     }
 
@@ -31,5 +35,9 @@ public abstract class ProfileViewActivity extends ProviderLayout {
         name.setText(aName);
         email.setText(anEmail);
         phoneNumber.setText(aPhoneNumber);
+    }
+
+    protected void onClickDone(View view){
+        finish();
     }
 }

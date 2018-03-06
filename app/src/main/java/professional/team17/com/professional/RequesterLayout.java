@@ -20,6 +20,7 @@ public abstract class RequesterLayout extends AppCompatActivity implements Image
     private ImageView requesterRequestedButton;
     private ImageView switchLayoutButton;
     private ImageView userMenuButton;
+    private PopupMenu popupMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,21 +91,35 @@ public abstract class RequesterLayout extends AppCompatActivity implements Image
                 break;
             /* If the user taps the user menu button */
             case R.id.userMenuButton:
-                //TODO implement dropdown menu
-                PopupMenu popupMenu = new PopupMenu(this, userMenuButton);
-                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        Toast.makeText(RequesterLayout.this, "" + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
-                });
-
                 popupMenu.show();
                 break;
         }
     }
 
+    protected void createPopup(){
+        /* Create Popup Menu */
+        popupMenu = new PopupMenu(this, userMenuButton);
+        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                //Toast.makeText(ProviderLayout.this, "" + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                if(menuItem.getTitle().equals("My Profile")){
+                    Intent intent = new Intent(getApplicationContext(), MyProfileViewActivity.class);
+                    startActivity(intent);
+                } else if (menuItem.getTitle().equals("Edit My Profile")){
+                    Intent intent = new Intent(getApplicationContext(), EditMyProfileActivity.class);
+                    startActivity(intent);
+                }
+                return true;
+            }
+        });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        createPopup();
+
+    }
 
 }
