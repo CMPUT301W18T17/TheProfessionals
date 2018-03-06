@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/viewMyProfile"
-        android:title="@string/PV_myProfile"/>
+        android:title="@string/PV_myProfile" />
     <item
         android:id="@+id/editMyProfile"
         android:title="@string/editProfile" />
