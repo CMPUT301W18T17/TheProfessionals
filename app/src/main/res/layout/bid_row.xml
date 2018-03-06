@@ -19,12 +19,12 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <TextView
@@ -36,36 +36,6 @@
                     android:textSize="19sp"
                     tools:layout_width="wrap_content" />
 
-
-                <TextView
-                    android:id="@+id/bid_row_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:layout_weight="1"
-                    android:paddingTop="2dp"
-                    android:text="0.00"
-                    android:textSize="11dp"
-                    android:translationZ="34dp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/bid_row_userName"
-                    app:layout_constraintEnd_toEndOf="@+id/provider_view_rating_bar" />
-
-
-                <RatingBar
-                    android:id="@+id/provider_view_rating_bar"
-                    style="@style/Widget.AppCompat.RatingBar"
-                    android:layout_width="51dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:isIndicator="true"
-                    android:numStars="1"
-                    android:scaleX=".5"
-                    android:scaleY=".5"
-                    android:stepSize=".1"
-                    android:transformPivotX="0dp"
-                    android:transformPivotY="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/bid_row_userName"
-                    app:layout_constraintTop_toTopOf="@+id/bid_row_rating" />
 
             </android.support.constraint.ConstraintLayout>
 
