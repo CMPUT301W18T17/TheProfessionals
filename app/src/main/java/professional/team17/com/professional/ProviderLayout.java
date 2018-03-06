@@ -3,9 +3,12 @@ package professional.team17.com.professional;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public abstract class ProviderLayout extends AppCompatActivity implements ImageView.OnClickListener {
 
@@ -25,12 +28,14 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
 
         /* Setting all View variables */
         activityTitleView = (TextView) findViewById(R.id.activityTitleView);
+
         providerBiddedButton = (ImageView) findViewById(R.id.biddedTasksProviderButton);
         providerAssignedButton = (ImageView) findViewById(R.id.acceptedTasksProviderButton);
         providerSearchButton = (ImageView) findViewById(R.id.searchTasksButton);
         providerMapButton = (ImageView) findViewById(R.id.taskMapButton);
         switchLayoutButton = (ImageView) findViewById(R.id.switchViewProviderButton);
         userMenuButton = (ImageView) findViewById(R.id.userMenuButton);
+
     }
 
     /*
@@ -43,49 +48,59 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
 
 
     //TODO uncomment as activities are created
-    @Override
-    public void onClick(View v) {
-        /* If user tapped the Bids button */
-        if (v == providerBiddedButton) {
-            /* Commented out as the activity does not exist yet
-            Intent intent = new Intent(this, ProviderListActivity.class);
-            intent.putExtra("Status", "Bidded");
-            startActivity(intent);
-            */
-        }
+    public void onClick(View view) {
+
+        switch (view.getId()){
+            /* If user tapped the Bids button */
+            case R.id.biddedTasksProviderButton:
+                /* Commented out as the activity does not exist yet
+                Intent intent = new Intent(this, ProviderListActivity.class);
+                intent.putExtra("Status", "Bidded");
+                startActivity(intent);
+                */
+                break;
         /* If user tapped the assigned button */
-        if (v == providerAssignedButton) {
-            /* Commented out as the activity does not exist yet
-            Intent intent = new Intent(this, ProviderListActivity.class);
-            intent.putExtra("Status", "Assigned");
-            startActivity(intent);
-            */
-        }
+            case R.id.acceptedTasksProviderButton:
+                /* Commented out as the activity does not exist yet
+                Intent intent = new Intent(this, ProviderListActivity.class);
+                intent.putExtra("Status", "Assigned");
+                startActivity(intent);
+                */
+                break;
         /* If the user tapped the search button */
-        if (v == providerSearchButton) {
-            Intent intent = new Intent(this, SearchActivity.class);
-            startActivity(intent);
-        }
+            case R.id.searchTasksButton:
+                Intent intent = new Intent(this, SearchActivity.class);
+                startActivity(intent);
+                break;
         /* If the user tapped the map button */
-        if (v == providerMapButton) {
+            case R.id.taskMapButton:
             /* Commented out as the activity does not exist yet
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
             */
-        }
         /* If the user taps the switch button */
-        if (v == switchLayoutButton) {
+            case R.id.switchViewProviderButton:
             /*Commented out as the activity does not exist yet
             Intent intent = new Intent(this, RequesterListActivity.class);
             intent.putExtra("Status", "Requested");
             startActivity(intent);
             */
-        }
         /* If the user taps the user menu button */
-        if (v == userMenuButton) {
-            //TODO implement dropdown menu
-        }
+            case R.id.userMenuButton:
+                //TODO implement dropdown menu
+                PopupMenu popupMenu = new PopupMenu(this, userMenuButton);
+                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        Toast.makeText(ProviderLayout.this, "" + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
 
+                popupMenu.show();
+
+        }
     }
 
 

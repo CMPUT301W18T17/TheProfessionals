@@ -7,6 +7,7 @@
     <string name="requester_title">Requester View |</string>
     <string name="provider_title">Provider View |</string>
     <string name="PV_myProfile">My Profile</string>
+    <string name="editProfile">Edit My Profile</string>
     <string name="PV_username">Username</string>
     <string name="PV_name">Name</string>
     <string name="PV_phone">Phone</string>
