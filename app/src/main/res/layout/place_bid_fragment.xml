@@ -11,7 +11,7 @@
         android:id="@+id/currentModeTV"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_green_dark"
+        android:background="@color/colorProvider"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
