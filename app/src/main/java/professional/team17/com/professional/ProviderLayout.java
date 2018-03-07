@@ -15,7 +15,7 @@ import android.widget.Toast;
 public abstract class ProviderLayout extends AppCompatActivity implements ImageView.OnClickListener {
 
     private String activityTitle;
-    private TextView activityTitleView;
+    protected TextView activityTitleView;
     private ImageView providerBiddedButton;
     private ImageView providerAssignedButton;
     private ImageView providerSearchButton;
@@ -52,26 +52,23 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
 
     //TODO uncomment as activities are created
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()){
             /* If user tapped the Bids button */
             case R.id.biddedTasksProviderButton:
-                /* Commented out as the activity does not exist yet
-                Intent intent = new Intent(this, ProviderListActivity.class);
+                intent = new Intent(this, ProviderTaskListActivity.class);
                 intent.putExtra("Status", "Bidded");
                 startActivity(intent);
-                */
                 break;
         /* If user tapped the assigned button */
             case R.id.acceptedTasksProviderButton:
-                /* Commented out as the activity does not exist yet
-                Intent intent = new Intent(this, ProviderListActivity.class);
+                intent = new Intent(this, ProviderTaskListActivity.class);
                 intent.putExtra("Status", "Assigned");
                 startActivity(intent);
-                */
                 break;
         /* If the user tapped the search button */
             case R.id.searchTasksButton:
-                Intent intent = new Intent(this, SearchActivity.class);
+                intent = new Intent(this, SearchActivity.class);
                 startActivity(intent);
                 break;
         /* If the user tapped the map button */

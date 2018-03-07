@@ -88,8 +88,8 @@ public class ProviderTaskListActivity extends ProviderLayout {
 
     private TaskList createList(String type) {
         TaskList taskList  = new TaskList();
-        if (type.equals("Requested")) {
-            setActivityTitle("My Requested Tasks");
+        if (type.equals("Bidded")) {
+            setActivityTitle("My Bidded Tasks");
             //get bidded list from es
 
         }
