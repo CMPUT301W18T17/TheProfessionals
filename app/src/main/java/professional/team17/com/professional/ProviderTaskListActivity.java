@@ -1,18 +1,14 @@
 package professional.team17.com.professional;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.Toast;
 
-public class SearchActivity extends ProviderLayout {
-    private ArrayAdapterSearchResults searchAdapterHelper;
+public class ProviderTaskListActivity extends ProviderLayout {
+    private ArrayAdapterSearchResults adapterHelper;
     private ListView listView;
-    private SearchView searchView;
     private TaskList taskList;
     private Profile user;
     //TODO DELETE
@@ -38,39 +34,18 @@ public class SearchActivity extends ProviderLayout {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.provider_tasklist_view);
         taskList = new TaskList();
-        searchAdapterHelper = new ArrayAdapterSearchResults(this, taskList);
-        listView =findViewById(R.id.provider_taskList_view_list);
-        listView.setAdapter(searchAdapterHelper);
+        adapterHelper = new ArrayAdapterSearchResults(this, taskList);
+        listView = findViewById(R.id.provider_taskList_view_list);
+        listView.setAdapter(adapterHelper);
         listView.setOnItemClickListener(clickListener);
+        int type = setProviderViewType();
+        createList(type);
 
-        /* Change activity title */
-        this.setActivityTitle("Task Search");
-
-
-        searchView = (SearchView) findViewById(R.id.Search_Activity_Input);
-        searchView.setQueryHint("Enter search");
+        displayResults();
 
 
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                Context context = getApplicationContext();
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, "SEARCH ENTERED"+query, duration);
-                toast.show();
-                displayResults();
-                searchView.clearFocus(); //remove focus on submit
-                return false;
-            }
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
     }
 
 
@@ -82,7 +57,7 @@ public class SearchActivity extends ProviderLayout {
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             TaskList taskList = dummyTaskList;
             Task task = taskList.get(position);
-            Intent intention = new Intent(SearchActivity.this, ProviderViewTask.class);
+            Intent intention = new Intent(ProviderTaskListActivity.this, ProviderViewTask.class);
             intention.putExtra("Task", task);
             intention.putExtra("position", position);
             intention.putExtra("profile", user);
@@ -90,6 +65,7 @@ public class SearchActivity extends ProviderLayout {
         }
 
     };
+
 
 
     //TODO this will fill results from search (may need to take parameters in bundle)
@@ -102,8 +78,32 @@ public class SearchActivity extends ProviderLayout {
     public void displayResults(){
         taskList.clear();
         taskList.addAll(getTasks());
-        searchAdapterHelper.notifyDataSetChanged();
+        adapterHelper.notifyDataSetChanged();
     }
 
+    private TaskList createList(int type) {
+        TaskList taskList  = new TaskList();
+        if (type ==1) {
+            //get bidded list from es
+
+        }
+        if (type==0) {
+            //get assigned list from es
+        }
+        //delete these two line
+        dummyDate();
+        taskList = dummyTaskList;
+
+
+        return taskList;
+    }
+
+    //activity will pass flag into this 1 = my bids, 0 = assigned
+    private int setProviderViewType() {
+
+        Intent intent = getIntent();
+        int type= intent.getFlags();
+        return type;
+    }
 
 }

@@ -7,7 +7,7 @@
     tools:context="professional.team17.com.professional.SearchActivity">
 
     <ListView
-        android:id="@+id/Search_Activity_list"
+        android:id="@+id/provider_taskList_view_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="30dp"

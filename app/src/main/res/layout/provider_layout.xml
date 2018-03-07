@@ -106,7 +106,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="398dp"
-        android:layout_height="0dp"
+        android:layout_height="409dp"
         app:layout_constraintBottom_toTopOf="@+id/biddedTasksProviderButton"
         app:layout_constraintTop_toBottomOf="@+id/titleBarBGProvider"
         tools:layout_editor_absoluteX="-12dp">

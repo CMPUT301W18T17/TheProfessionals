@@ -20,12 +20,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:clickable="true"
-            app:layout_constraintBottom_toTopOf="@+id/Search_Activity_list"
+            app:layout_constraintBottom_toTopOf="@+id/provider_taskList_view_list"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ListView
-            android:id="@+id/Search_Activity_list"
+            android:id="@+id/provider_taskList_view_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
