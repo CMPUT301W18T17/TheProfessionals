@@ -2,6 +2,7 @@ package professional.team17.com.professional;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -40,9 +41,13 @@ public class ProviderTaskListActivity extends ProviderLayout {
         listView = findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(adapterHelper);
         listView.setOnItemClickListener(clickListener);
-        int type = setProviderViewType();
-        createList(type);
+        String type = setProviderViewType();
 
+        //this is me trying to figure out how to change the title
+        Log.i("TYPE", "onCreate: "+type);
+        createList(type);
+        setActivityTitle("My Requested Tasks");
+        activityTitleView.setText("WEWE");
         displayResults();
 
 
@@ -81,13 +86,15 @@ public class ProviderTaskListActivity extends ProviderLayout {
         adapterHelper.notifyDataSetChanged();
     }
 
-    private TaskList createList(int type) {
+    private TaskList createList(String type) {
         TaskList taskList  = new TaskList();
-        if (type ==1) {
+        if (type.equals("Requested")) {
+            setActivityTitle("My Requested Tasks");
             //get bidded list from es
 
         }
-        if (type==0) {
+        if (type.equals("Assigned")) {
+            setActivityTitle("My Assigned Tasks");
             //get assigned list from es
         }
         //delete these two line
@@ -99,10 +106,10 @@ public class ProviderTaskListActivity extends ProviderLayout {
     }
 
     //activity will pass flag into this 1 = my bids, 0 = assigned
-    private int setProviderViewType() {
+    private String setProviderViewType() {
 
-        Intent intent = getIntent();
-        int type= intent.getFlags();
+        Bundle intent = getIntent().getExtras();
+        String type = intent.getString("Status");
         return type;
     }
 
