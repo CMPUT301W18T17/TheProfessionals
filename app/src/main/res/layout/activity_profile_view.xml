@@ -7,7 +7,7 @@
     tools:context="professional.team17.com.professional.ProfileViewActivity">
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/listViewID"
         android:layout_width="0dp"
         android:layout_height="189dp"
         android:layout_marginBottom="8dp"

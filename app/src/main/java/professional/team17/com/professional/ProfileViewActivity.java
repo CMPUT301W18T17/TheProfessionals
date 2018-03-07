@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public abstract class ProfileViewActivity extends AppCompatActivity {
@@ -14,6 +15,8 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
     protected TextView phoneNumber;
     protected TextView currentMode;
     protected Button doneButton;
+    protected ReviewsAdaptor reviewsAdaptor;
+    protected ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_view);
         currentMode = (TextView) findViewById(R.id.currentModeTV);
         doneButton = (Button) findViewById(R.id.doneButton);
+        listView = (ListView) findViewById(R.id.listViewID);
 
     }
 
@@ -37,7 +41,21 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
         phoneNumber.setText(aPhoneNumber);
     }
 
-    protected void onClickDone(View view){
-        finish();
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        //MockReviews
+        ReviewList aListOfReviews = new ReviewList();
+        Review review1 = new Review(3.5, "a1", "t1");
+        aListOfReviews.addReview(review1);
+        Review review2 = new Review(5.0, "a2", "t2");
+        aListOfReviews.addReview(review2);
+        Review review3 = new Review(5.0, "a3", "t3");
+        aListOfReviews.addReview(review3);
+
+        reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, aListOfReviews);
+        listView.setAdapter(reviewsAdaptor);
+
     }
 }
