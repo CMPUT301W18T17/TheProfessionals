@@ -1,3 +1,11 @@
+/*
+ * RequesterLayout
+ *
+ * March 7, 2018
+ *
+ * Copyright goes here
+ */
+
 package professional.team17.com.professional;
 
 import android.content.Intent;
@@ -10,9 +18,12 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * An abstract activity which implements the navigation for the Requester options.
+ */
 public abstract class RequesterLayout extends AppCompatActivity implements ImageView.OnClickListener {
 
-    private String activityTitle;
+    private String layout;
     private TextView activityTitleView;
     private ImageView requesterAddTaskButton;
     private ImageView requesterBiddedButton;
@@ -22,10 +33,16 @@ public abstract class RequesterLayout extends AppCompatActivity implements Image
     private ImageView userMenuButton;
     private PopupMenu popupMenu;
 
+    /**
+     * On the activity's creation, set all variables.
+     * @param savedInstanceState The activity's previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.requester_layout);
+
+        layout = "Requester";
 
         /* Setting all View variables */
         activityTitleView = (TextView) findViewById(R.id.activityTitleView);
@@ -37,27 +54,45 @@ public abstract class RequesterLayout extends AppCompatActivity implements Image
         userMenuButton = (ImageView) findViewById(R.id.userMenuButton);
     }
 
-    /*
-    Changes the title at the top of the page.
+    /**
+     * Sets the title at the top of the layout.
+     * @param title The title of the activity being displayed.
      */
-    public void setActivityTitle(String title) {
-        this.activityTitle = title;
-        activityTitleView.setText(activityTitle);
+    public void setActivityTitle(final String title) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activityTitleView = (TextView) findViewById(R.id.activityTitleView);
+                activityTitleView.setText(title);
+            }
+        });
     }
 
+    /**
+     * Returns "Provider" or "Requester" depending on which layout the user is in.
+     * @return The layout that the user is in.
+     */
+    public String getLayout(){
+        return layout;
+    }
 
+    /**
+     * Handles all click events for the bottom navigation and the userMenuButton
+     * in the top right corner.
+     * @param view The view object that has been clicked.
+     */
     //TODO uncomment as activities are created
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            /* If user tapped the Bids button */
+            /* If user tapped the add button */
             case R.id.addTaskRequesterButton:
                 /* Commented out as the activity does not exist yet
                 Intent intent = new Intent(this, AddTaskActivity.class);
                 startActivity(intent);
                 */
                 break;
-            /* If user tapped the assigned button */
+            /* If user tapped the bidded button */
             case R.id.biddedTasksRequesterButton:
                 /* Commented out as the activity does not exist yet
                 Intent intent = new Intent(this, RequesterListActivity.class);
@@ -65,7 +100,7 @@ public abstract class RequesterLayout extends AppCompatActivity implements Image
                 startActivity(intent);
                 */
                 break;
-            /* If the user tapped the search button */
+            /* If the user tapped the assigned button */
             case R.id.acceptedTasksRequesterButton:
                 /* Commented out as the activity does not exist yet
                 Intent intent = new Intent(this, RequesterListActivity.class);
@@ -73,7 +108,7 @@ public abstract class RequesterLayout extends AppCompatActivity implements Image
                 startActivity(intent);
                 */
                 break;
-            /* If the user tapped the map button */
+            /* If the user tapped the requested button */
             case R.id.requestedTasksRequesterButton:
                 /* Commented out as the activity does not exist yet
                 Intent intent = new Intent(this, RequesterListActivity.class);
@@ -96,6 +131,9 @@ public abstract class RequesterLayout extends AppCompatActivity implements Image
         }
     }
 
+    /**
+     * Creates the popup menu that is shown when the userMenuButton is clicked.
+     */
     protected void createPopup(){
         /* Create Popup Menu */
         popupMenu = new PopupMenu(this, userMenuButton);
@@ -115,6 +153,10 @@ public abstract class RequesterLayout extends AppCompatActivity implements Image
             }
         });
     }
+
+    /**
+     * On start of the activity, create the popup menu.
+     */
     @Override
     protected void onStart() {
         super.onStart();

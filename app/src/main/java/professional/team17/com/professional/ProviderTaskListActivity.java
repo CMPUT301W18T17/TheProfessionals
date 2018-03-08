@@ -43,15 +43,10 @@ public class ProviderTaskListActivity extends ProviderLayout {
         listView.setOnItemClickListener(clickListener);
         String type = setProviderViewType();
 
-        //this is me trying to figure out how to change the title
-        Log.i("TYPE", "onCreate: "+type);
-        createList(type);
-        setActivityTitle("My Requested Tasks");
-        activityTitleView.setText("WEWE");
-        displayResults();
-
+        this.setActivityTitle("My Requested Tasks");
 
     }
+
 
 
     /**

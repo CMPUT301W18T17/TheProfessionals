@@ -1,3 +1,11 @@
+/*
+ * ProviderLayout
+ *
+ * March 7, 2018
+ *
+ * Copyright info goes here
+ */
+
 package professional.team17.com.professional;
 
 import android.content.Intent;
@@ -12,10 +20,17 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * An abstract activity which implements the navigation for the Provider options.
+ *
+ * @author: Lauren, Hailan, Allison
+ * @see ProviderViewTask
+ * @see ProviderTaskListActivity
+ */
 public abstract class ProviderLayout extends AppCompatActivity implements ImageView.OnClickListener {
 
-    private String activityTitle;
-    protected TextView activityTitleView;
+    private String layout;
+    private TextView activityTitleView;
     private ImageView providerBiddedButton;
     private ImageView providerAssignedButton;
     private ImageView providerSearchButton;
@@ -24,14 +39,20 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
     private ImageView userMenuButton;
     private PopupMenu popupMenu;
 
+    /**
+     * On creation of the activity, assign values to all variables.
+     *
+     * @param savedInstanceState The activity's previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_layout);
 
-        /* Setting all View variables */
-        activityTitleView = (TextView) findViewById(R.id.activityTitleView);
+        /* This is the ProviderLayout, so setting layout to Provider */
+        layout = "Provider";
 
+        /* Setting all View variables */
         providerBiddedButton = (ImageView) findViewById(R.id.biddedTasksProviderButton);
         providerAssignedButton = (ImageView) findViewById(R.id.acceptedTasksProviderButton);
         providerSearchButton = (ImageView) findViewById(R.id.searchTasksButton);
@@ -41,15 +62,35 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
 
     }
 
-    /*
-    Changes the title at the top of the page.
+    /**
+     * Changes the title at the top of the layout.
+     *
+     * @param title The title of the activity being displayed.
      */
-    public void setActivityTitle(String title) {
-        this.activityTitle = title;
-        activityTitleView.setText(activityTitle);
+    public void setActivityTitle(final String title) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activityTitleView = (TextView) findViewById(R.id.activityTitleView);
+                activityTitleView.setText(title);
+            }
+        });
     }
 
+    /**
+     * Returns "Provider" or "Requester" depending on which layout the user is in.
+     * @return The layout that the user is in.
+     */
+    public String getLayout(){
+        return layout;
+    }
 
+    /**
+     * Handles all click events for the bottom navigation and the user button in the
+     * top right corner of the layout.
+     *
+     * @param view The view object that has been clicked.
+     */
     //TODO uncomment as activities are created
     public void onClick(View view) {
         Intent intent;
@@ -94,6 +135,9 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
         }
     }
 
+    /**
+     * Creates the popup menu displayed when the user clicks on the userMenuButton.
+     */
     protected void createPopup(){
         /* Create Popup Menu */
         popupMenu = new PopupMenu(this, userMenuButton);
@@ -113,6 +157,10 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
             }
         });
     }
+
+    /**
+     * When the activity starts, create the popup menu.
+     */
     @Override
     protected void onStart() {
         super.onStart();
