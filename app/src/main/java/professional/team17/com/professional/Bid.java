@@ -1,11 +1,16 @@
+/*
+ * Bid
+ *
+ * February 20, 2018
+ *
+ * Copyright goes here
+ */
+
 package professional.team17.com.professional;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
-/**
- * Created by Logan Yue on 2018-02-20.
- */
 
 public class Bid implements Serializable{
 

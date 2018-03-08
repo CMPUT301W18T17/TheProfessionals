@@ -50,7 +50,6 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         taskLowBidTextField = (TextView) findViewById(R.id.provider_view_task_lowBidInput);
         taskMyBidTextField = (TextView) findViewById(R.id.provider_view_task_myBidInput);
 
-        /* Set activity title in layout */
         this.setActivityTitle("View Task");
 
         user = getUser();
@@ -62,6 +61,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         fillTask();
         setRating();
     }
+
 
     //method on return of place bid from interface
     public void onFinishPlaceBidDialog(String inputText){
