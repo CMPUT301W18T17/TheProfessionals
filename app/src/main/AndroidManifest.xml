@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--suppress ALL -->
+<?xml version="1.0" encoding="utf-8"?><!-- suppress ALL -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="professional.team17.com.professional">
 
@@ -10,16 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".ProviderViewTask"/>
-        <activity android:name=".ProviderTaskListActivity"/>
-
-
-        <activity android:name=".ProfileViewActivity" />
-        <activity android:name=".OtherProfileViewActivity" />
-        <activity android:name=".MyProfileViewActivity" />
         <activity android:name=".LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,23 +16,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".ProviderViewTask" />
+        <activity android:name=".ProfileViewActivity" />
+        <activity android:name=".OtherProfileViewActivity" />
+        <activity android:name=".MyProfileViewActivity" />
         <activity
             android:name=".SignUpActivity"
             android:parentActivityName=".LogInActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LogInActivity" />
-
         </activity>
-
-
-
         <activity android:name=".EditMyProfileActivity" />
-
         <activity android:name=".ProviderLayout" />
         <activity android:name=".RequesterLayout" />
-
+        <activity
+            android:name=".RequesterAddTaskActivity"
+            android:label="@string/title_activity_requester_add_task"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".RequesterEditTaskActivity" />
+        <activity android:name=".RequesterViewListActivity" />
+        <activity
+            android:name=".RequesterViewTaskActivity"
+            android:label="@string/title_activity_requester_view_task"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

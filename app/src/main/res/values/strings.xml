@@ -18,4 +18,6 @@
     <string name="no_account">Don\'t have an account?</string>
     <string name="empty_input_numeric">Please enter a value</string>
     <string name="cancel_bid">Are you sure you want to remove your bid? \n(This cannot be undone)</string>
+    <string name="title_activity_requester_view_task">RequesterViewTaskActivity</string>
+    <string name="title_activity_requester_add_task">RequesterAddTaskActivity</string>
 </resources>

@@ -1,12 +1,18 @@
 package professional.team17.com.professional;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+
+import static android.os.Build.ID;
 
 
 /**
@@ -14,6 +20,8 @@ import android.widget.TextView;
  */
 
 public class RequesterCustomArrayAdapter extends ArrayAdapter<Task> {
+        private Context mcon;
+        private TaskList taskList;
 
         public RequesterCustomArrayAdapter(Activity context, TaskList taskArrayList) {
                 super(context, 0,  taskArrayList);
@@ -21,7 +29,7 @@ public class RequesterCustomArrayAdapter extends ArrayAdapter<Task> {
 
         // aided by https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
         public View getView(int position, View v, ViewGroup parent) {
-                Task task= getItem(position);
+                final Task task= getItem(position);
                 Log.i("LOOOKINAT", "getView: "+position);
                 if (v == null) {
                         v = LayoutInflater.from(getContext()).inflate(R.layout.requester_custom_array_row, parent, false);
@@ -50,10 +58,33 @@ public class RequesterCustomArrayAdapter extends ArrayAdapter<Task> {
                         taskLowBidAmountTextField.setVisibility(View.INVISIBLE);
                         userNameTextField.setVisibility(View.INVISIBLE);
                 }
+                Button delete = (Button)v.findViewById(R.id.delete);
+                Button edit = (Button)v.findViewById(R.id.edit);
+                delete.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                                //do something
+                                taskList.deleteTask(task); //or some other task
+                                notifyDataSetChanged();
+                        }
+                });
+                edit.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View v) {
+                                //do something
+                                Intent intent = new Intent(mcon, RequesterEditTaskActivity.class);
+                                mcon.startActivity(intent);
+                                notifyDataSetChanged();
+                        }
+                });
+
+
 
 
                 return v;
+
         }
+
 
 
 
