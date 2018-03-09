@@ -87,10 +87,8 @@ public abstract class RequesterLayout extends AppCompatActivity implements Image
         switch (view.getId()) {
             /* If user tapped the add button */
             case R.id.addTaskRequesterButton:
-                /* Commented out as the activity does not exist yet
-                Intent intent = new Intent(this, AddTaskActivity.class);
+                Intent intent = new Intent(this, RequesterAddTaskActivity.class);
                 startActivity(intent);
-                */
                 break;
             /* If user tapped the bidded button */
             case R.id.biddedTasksRequesterButton:
