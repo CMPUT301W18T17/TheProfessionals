@@ -71,6 +71,33 @@ public class ElasticSearchController {
         }
     }
 
+
+    // TODO we need a function which adds tweets to elastic search
+    public static class AddTweetsTask extends AsyncTask<Profile, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Profile... tweets) {
+            verifySettings();
+
+            for (Profile profile : tweets) {
+                Index index = new Index.Builder(profile).index("cmput301w18t17").type("profile").build();
+
+                try {
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()){
+                    }
+                    else {
+                        Log.i ("Error", "some error = (");
+                    }
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and send the tweets");
+                }
+
+            }
+            return null;
+        }
+    }
     public static class AddProfile extends AsyncTask<Profile, Void, Void> {
         //TODO Complete
         @Override
@@ -131,10 +158,11 @@ public class ElasticSearchController {
         }
     }
 
-    public static void verifySettings() {
+        public static void verifySettings() {
             if (client == null) {
-                DroidClientConfig.Builder builder = new DroidClientConfig.Builder(server);
-                DroidClientConfig  config = builder.build();
+                DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
+                DroidClientConfig config = builder.build();
+
                 JestClientFactory factory = new JestClientFactory();
                 factory.setDroidClientConfig(config);
                 client = (JestDroidClient) factory.getObject();

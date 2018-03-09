@@ -33,8 +33,12 @@ public class SignUpActivity extends AppCompatActivity {
         String name = nameBox.getText().toString();
         String email = emailBox.getText().toString();
         String phoneNumber = phoneNumberBox.getText().toString();
-        addProfile();
+        Profile profile1 = new Profile(username, name, email, phoneNumber);
+        ElasticSearchController.AddProfile addProfile = new ElasticSearchController.AddProfile();
+        addProfile.execute(profile1);
+        Intent intent = new Intent(this, SearchActivity.class);
 
+        startActivity(intent);
         //TODO check username does not exist using elasticSearch
 
         //TODO exception handling for phone number/email

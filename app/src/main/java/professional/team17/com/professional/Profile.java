@@ -10,11 +10,10 @@ public class Profile implements Serializable {
     private String name;
     public String userName;
     private String email;
-   // private String id;
     private String phoneNumber;
     private ReviewList reviewList;
     private ArrayList<String> blackList;
-    private ArrayList<String> blackListedBy;
+     private ArrayList<String> blackListedBy;
 
     public Profile(String name, String userName, String email, String phoneNumber) {
         this.name = name;
@@ -22,9 +21,9 @@ public class Profile implements Serializable {
         this.email = email;
       //  this.id = null;
         this.phoneNumber = phoneNumber;
-       // this.reviewList = new ReviewList();
-       // this.blackList = new ArrayList<String>();
-       // this.blackListedBy = new ArrayList<String>();
+       this.reviewList = new ReviewList();
+       this.blackList = new ArrayList<String>();
+       this.blackListedBy = new ArrayList<String>();
     }
 
     public String getName() {
@@ -78,7 +77,5 @@ public class Profile implements Serializable {
 
     }
 
-  //  public void setId(String id) {
-     //   this.id = id;
-  //  }
+
 }

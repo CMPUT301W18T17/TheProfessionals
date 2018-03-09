@@ -54,12 +54,12 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 
         user = getUser();
         task = getTask();
-        getRequester();
+        //getRequester();
 
 
         checkStatus();
         fillTask();
-        setRating();
+      //  setRating();
     }
 
 
@@ -169,7 +169,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         }
     }
 
-
+/*
     public void setRating(){
         if (requester.getReviewList().isEmpty()==false) {
 
@@ -185,7 +185,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
             requesterAvgTextView.setText(sAvg);
         }
     }
-
+*/
     /**
      *
      * Sets the proper fields depending on status of task
@@ -278,7 +278,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
      *
      * @return Returns the subscription sent with the Intent
      */
-    private void getRequester() {
+  /*  private void getRequester() {
         if (task.isBidded()){
             DummyData();
         }
@@ -286,16 +286,16 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
             DummyData1();
         }
     }
-
+/*
     public void DummyData(){
         requester = new Profile("John Smith", task.getProfileName(), "email", "123123123");
-        ReviewList reviewList  = requester.getReviewList();
+     //   ReviewList reviewList  = requester.getReviewList();
         Review review1 = new Review(5.0, "reviewer","comment", "title");
         Review review2 = new Review(2.1, "reviewer1","comment", "title");
         reviewList.addReview(review1);
         reviewList.addReview(review2);
     }
-
+*/
     public void DummyData1(){
         requester = new Profile("John Smith", task.getProfileName(), "email", "123123123");
     }
