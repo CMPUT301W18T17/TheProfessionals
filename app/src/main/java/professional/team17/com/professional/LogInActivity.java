@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.searchly.jestdroid.DroidClientConfig;
+
 import javax.security.auth.login.LoginException;
 
 public class LogInActivity extends AppCompatActivity {

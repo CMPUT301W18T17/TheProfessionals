@@ -4,11 +4,15 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
+
 import org.apache.commons.lang3.ObjectUtils;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +111,6 @@ public class ElasticSearchController {
                     if (result.isSucceeded()){
                         id = result.getId();
                         task.setId(result.getId());
-                        Log.i("IDee", "doInBackground: "+result.getId());
                     }
                     else {
                         Log.i ("Error", "some error = (");
@@ -186,15 +189,26 @@ public class ElasticSearchController {
         @Override
         protected TaskList doInBackground(String... search_para) {
             verifySettings();
-
             TaskList taskList = new TaskList();
 
-            Search search = new Search.Builder(search_para[0]).addIndex("cmput301w18t17").addType("task").build();
+            //parse into template
+            String search1 = "{ \"query\": {\"match\" : { \"status\": \"term1\"  }} }";
+            JsonParser jsonParser = new JsonParser();
+            JsonObject jsonObject = (JsonObject)jsonParser.parse(search1);
+            jsonObject.getAsJsonObject("query").getAsJsonObject("match").addProperty("status", search_para[0]);
+
+
+
+            Search search = new Search.Builder(jsonObject.toString())
+                    // multiple index or types can be added.
+                    .addIndex("cmput301w18t17")
+                    .addType("task")
+                    .build();
 
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()){
-                    TaskList foundTask= result.getSourceAsObject(TaskList.class);
+                    List<Task> foundTask= result.getSourceAsObjectList(Task.class);
                     taskList.addAll(foundTask);
                 }
                 else {
