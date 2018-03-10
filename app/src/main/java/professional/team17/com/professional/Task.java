@@ -19,25 +19,25 @@ public class Task implements Serializable{
     private BidList bids;
     private String status;
 
-    public Task(String profileName, String name, String description, String location, Date Date, String ID) {
+    public Task(String profileName, String name, String description, String location, Date Date) {
         this.profileName = profileName;
         this.name = name;
         this.description = description;
         this.location = location;
         this.date = null;
-        this.uniqueID = ID;
+        this.uniqueID = null;
         this.status = "Requested";
         this.bids = new BidList();
     }
 
 
-    public Task(String profileName, String name, String description, String location, String ID) {
+    public Task(String profileName, String name, String description, String location, String uniqueID) {
         this.profileName = profileName;
         this.name = name;
         this.description = description;
         this.location = location;
         this.date = new Date();
-        this.uniqueID = ID;
+        this.uniqueID = null;
         this.status = "Requested";
         this.bids = new BidList();
     }

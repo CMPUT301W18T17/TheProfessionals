@@ -127,7 +127,7 @@ public class RequesterViewListActivity extends AppCompatActivity {
             String ID = Integer.toString(id1);
             // should i generate an id in the addTask?
             //change year from String to Date? or just let the date be String.
-            Task task = new Task(profileName, name, description, location, date, ID);
+            Task task = new Task(profileName, name, description, location, date);
             //System.out.println("------------------------------------------------------");
             //System.out.println(task);
             taskList.addTask(task);

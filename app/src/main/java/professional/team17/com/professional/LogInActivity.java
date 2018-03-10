@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 
 public class LogInActivity extends AppCompatActivity {
+    private Profile profile;
+    private ElasticSearchController elasticSearchController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +22,41 @@ public class LogInActivity extends AppCompatActivity {
 
         EditText usernameBox = (EditText) findViewById(R.id.usernameBox);
         String username = usernameBox.getText().toString();
-        //TODO Elastic search for username and error handling
-        //set usernameas global variable?
+        elasticSearchController = new ElasticSearchController();
+        logIn(username);
+       /* if (!(profile==null)){
+            //good to go
+            //set usernameas global variable?
+        }
+        else {
+            //error with users name
+        }
+*/
 
+    }
+
+
+    private void changeActivity(){
         //can change navigation, this is just a stand in
         Intent intent = new Intent(this, SearchActivity.class);
 
         startActivity(intent);
+
     }
+
+    private void logIn(String username) {
+        ElasticSearchController.GetProfile getProfile = new ElasticSearchController.GetProfile();
+        getProfile.execute(username);
+        try {
+            Profile user = getProfile.get();
+            if (user!=null) {
+                changeActivity();
+            }
+        }
+        catch (Exception e) {
+        }
+    }
+
 
     public void signUp(View view) {
 

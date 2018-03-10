@@ -11,10 +11,15 @@ import com.searchly.jestdroid.JestDroidClient;
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.searchbox.client.JestResult;
 import io.searchbox.core.DocumentResult;
+import io.searchbox.core.Get;
 import io.searchbox.core.Index;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 
 /**
  * Created by ag on 2018-02-22.
@@ -34,96 +39,33 @@ public class ElasticSearchController {
 
 
 
+        public static class AddProfile extends AsyncTask<Profile, Void, Void> {
 
+            @Override
+            protected Void doInBackground(Profile... profiles) {
+                verifySettings();
 
+                for (Profile profile : profiles) {
+                    Index index = new Index.Builder(profile).index("cmput301w18t17").type("profile").id(profile.getUserName()).build();
 
+                    try {
+                        DocumentResult result = client.execute(index);
+                        if (result.isSucceeded()) {
+                            Log.i("PREINLAKD", "doInBackground: ");
 
+                        } else {
+                            Log.i("Error", "some error = (");
 
-    public static class AddTask extends AsyncTask<Task, Void, Void> {
-//TODO Complete
-        @Override
-        protected Void doInBackground(Task... Tasks) {
-            verifySettings();
-            return null;
-        }
-    }
-
-
-    public static class GetTasks extends AsyncTask<String, Void, TaskList> {
-        //TODO Complete
-        @Override
-        protected TaskList doInBackground(String... TaskList) {
-            verifySettings();
-            TaskList tasks= new TaskList();
-            return tasks;
-        }
-    }
-
-
-    public static class GetTask extends AsyncTask<String, Void, Task> {
-        //TODO Complete
-        @Override
-        protected Task doInBackground(String... Task) {
-            verifySettings();
-            //TODO currently null for stub
-            Task task = null;
-            return task;
-        }
-    }
-
-
-    // TODO we need a function which adds tweets to elastic search
-    public static class AddTweetsTask extends AsyncTask<Profile, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Profile... tweets) {
-            verifySettings();
-
-            for (Profile profile : tweets) {
-                Index index = new Index.Builder(profile).index("cmput301w18t17").type("profile").build();
-
-                try {
-                    DocumentResult result = client.execute(index);
-                    if (result.isSucceeded()){
+                        }
                     }
-                    else {
-                        Log.i ("Error", "some error = (");
+                    catch (Exception e) {
+                        Log.i("Error", "The application failed to build and send the profile");
+
                     }
                 }
-                catch (Exception e) {
-                    Log.i("Error", "The application failed to build and send the tweets");
-                }
-
+                return null;
             }
-            return null;
         }
-    }
-    public static class AddProfile extends AsyncTask<Profile, Void, Void> {
-        //TODO Complete
-        @Override
-        protected Void doInBackground(Profile... Profiles) {
-            verifySettings();
-            for (Profile profile : Profiles) {
-                Index index = new Index.Builder(profile).index("cmput301w18t17").type("profile").id("1").build();
-
-                try {
-                    DocumentResult result = client.execute(index);
-                    if (result.isSucceeded()) {
-                        Log.i("PREINLAKD", "doInBackground: ");
-
-                    } else {
-                        Log.i("Error", "some error = (");
-
-                    }
-                }
-                catch (Exception e){
-                        Log.i("Error", "The application failed to build and send the tweets");
-
-                    }
-                }
-            return null;
-            }
-    }
 
 
     public static class GetProfile extends AsyncTask<String, Void, Profile> {
@@ -131,32 +73,53 @@ public class ElasticSearchController {
         @Override
         protected Profile doInBackground(String... search_parameters) {
             verifySettings();
-          //  Profile profile = new Profile();
-        //    return profile;
-            return null;
+            Profile profile = null;
+            Get get = new Get.Builder("cmput301w18t17", search_parameters[0]).type("profile").build();
+
+
+            //Search search = new Search.Builder(search_parameters[0]).addIndex("cmput301w18t17").addType("profile").build()
+            try {
+                JestResult result = client.execute(get);
+                if (result.isSucceeded()) {
+                    profile = result.getSourceAsObject(Profile.class);
+                }
+                else{
+                Log.i("error", "Search query failed to find any thing =/");
+            }
+        }
+
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return profile;
         }
 
     }
 
-//TODO Updates may be redundant and can be absorbed into adds
-    public static class UpdateProfile extends AsyncTask<Profile, Void, Void> {
-    //TODO Complete
-        @Override
-        protected Void doInBackground(Profile... Profiles) {
-            verifySettings();
-            return null;
-        }
-    }
 
 
-    public static class UpdateTask extends AsyncTask<Task, Void, Void> {
-        //TODO Complete
-        @Override
-        protected Void doInBackground(Task... Profiles) {
-            verifySettings();
-            return null;
+
+
+    //TODO Updates may be redundant and can be absorbed into adds
+        public static class UpdateProfile extends AsyncTask<Profile, Void, Void> {
+            //TODO Complete
+            @Override
+            protected Void doInBackground(Profile... Profiles) {
+                verifySettings();
+                return null;
+            }
         }
-    }
+
+
+        public static class UpdateTask extends AsyncTask<Task, Void, Void> {
+            //TODO Complete
+            @Override
+            protected Void doInBackground(Task... Profiles) {
+                verifySettings();
+                return null;
+            }
+        }
 
         public static void verifySettings() {
             if (client == null) {
@@ -168,5 +131,5 @@ public class ElasticSearchController {
                 client = (JestDroidClient) factory.getObject();
             }
         }
-    }
 
+}
