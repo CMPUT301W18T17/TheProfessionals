@@ -1,88 +1,137 @@
+/*
+ * RequesterAddTaskActivity
+ *
+ * March 9, 2018
+ *
+ * Copyright
+ */
+
 package professional.team17.com.professional;
 
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.google.android.gms.maps.MapView;
 
 import java.util.Calendar;
 import java.util.Random;
 
-public class RequesterAddTaskActivity extends AppCompatActivity {
-    private EditText name;
-    private EditText description;
-    private EditText location;
-    private String date1;
-    private String location1;
-    Button chooseDate;
-    Calendar calendar = Calendar.getInstance();
-    int year, month, day, id;
-    String year1,month1,day1;
+/**
+ *
+ * An activity where a user in Requester mode can add a task with status "Requested".
+ *
+ * @author Kaixiang, Lauren
+ * @see RequesterLayout
+ */
+public class RequesterAddTaskActivity extends RequesterLayout {
+    /* Layout objects */
+    private EditText nameField;
+    private EditText descriptionField;
+    private EditText locationField;
+    private TextView textualDateView;
+    private ImageButton addPhotoButton;
+    private ImageButton selectDateButton;
+    private MapView mapView;
+    private Button submitButton;
+    /* other variables */
+    private String dateString;
+    private String locationString;
+    private int year, month, day, id;
+    private String yearString,monthString,dayString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requester_add_task);
-        Button submitButton = (Button) findViewById(R.id.button2);
-        name = (EditText) findViewById(R.id.editText);
-        description = (EditText) findViewById(R.id.editText1);
-        location = (EditText) findViewById(R.id.editText2);
-        //final DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker2);
-        //button to choose date
-        chooseDate = (Button) findViewById(R.id.button3);
-        chooseDate.setOnClickListener(new View.OnClickListener() {
+
+        /* Set activity title */
+        this.setActivityTitle("Add a Task");
+
+        /* Set all view objects */
+        //Button submitButton = (Button) findViewById(R.id.button2);
+        nameField = (EditText) findViewById(R.id.TaskNameField);
+        descriptionField = (EditText) findViewById(R.id.taskDescriptionField);
+        locationField = (EditText) findViewById(R.id.textualAddressField);
+        textualDateView = (TextView) findViewById(R.id.textualDateView);
+        addPhotoButton = (ImageButton) findViewById(R.id.addPhotoButton);
+        selectDateButton = (ImageButton) findViewById(R.id.calendarButton);
+        mapView = (MapView) findViewById(R.id.mapView);
+        submitButton = (Button) findViewById(R.id.submitButton);
+
+        /* Set all onClickListeners */
+        addPhotoButton.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                showDialog(1);
+                //TODO implement photo selection
             }
         });
 
+        selectDateButton.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /* Show the DatePickerDialog */
+                displayDatePicker();
+                /* Get the formatted date */
+                dateString = (String) textualDateView.getText();
+            }
+        });
 
+        submitButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /* Convert user entered values to strings */
+                String title = nameField.getText().toString();
+                String description = descriptionField.getText().toString();
+                locationString = locationField.getText().toString();
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                String name1 = name.getText().toString();
-                String description1 = description.getText().toString();
-                String location1 = location.getText().toString();
-                year = calendar.get(Calendar.YEAR);
-                month = calendar.get(Calendar.MONTH);
-                day = calendar.get(Calendar.DAY_OF_MONTH);
-                year1 = Integer.toString(year);
-                month1 = Integer.toString(month);
-                day1 = Integer.toString(day);
-                date1 = year1+"-"+month1+"-"+day1;
+                /* Create a random ID for the task */
                 Random rand = new Random();
                 id = rand.nextInt(50) + 1;
-                //chooseDate.setText(year + "-" + (month + 1) + "-" + day);
-                //Toast.makeText(requesterAddTaskActivity.this, datePicker.getDayOfMonth()+""+datePicker.getMonth()+""+datePicker.getYear(),Toast.LENGTH_LONG).show();
-                if (name1.length()>0 && name1.length()<30 && description1.length()!=0 &&description1.length()<30){
+
+                /* Create an intent and bundle and store all task info */
+                if (title.length() > 0 && title.length() < 30 && description.length() != 0 && description.length() < 300) {
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
-                    bundle.putString("name" , name1);
-                    bundle.putString("date" , date1);
-                    bundle.putString("description" , description1);
-                    bundle.putString("location" , location1);
+                    bundle.putString("title", title);
+                    bundle.putString("date", dateString);
+                    bundle.putString("description", description);
+                    bundle.putString("location", locationString);
                     bundle.putInt("id", id);
                     intent.putExtras(bundle);
-                    setResult(RequesterViewListActivity.RESULT_OK,intent);
-                    finish();}
-                //adapter.notifyDataSetChanged();
-                //saveInFile();
+                    setResult(RequesterViewListActivity.RESULT_OK, intent);
+                }
+
+                /* Activity finished */
+                finish();
+
             }
         });
     }
+
+
+    /**
+     * Displays the DatePickerDialog fragment, allowing the user to select a date.
+     */
+    private void displayDatePicker(){
+        DialogFragment dateFragment = new DatePickerFragment();
+        dateFragment.show(getFragmentManager(), "datePicker");
+    }
+
+
     /** here we still need to handle 2 things
      * 1. google map
      * 2. add photo(since it nevigate to another interface)
      */
     private String handleGoogleMap(){
         //implement soon
-        return  location1;
+        return  locationString;
     }
     //private imageView UserAddImage(){
         //get the idea from Uml.

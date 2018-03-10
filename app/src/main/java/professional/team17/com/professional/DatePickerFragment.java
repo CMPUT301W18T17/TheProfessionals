@@ -1,0 +1,71 @@
+/*
+ * DatePickerFragment
+ *
+ * March 9, 2018
+ *
+ * Copyright
+ */
+package professional.team17.com.professional;
+
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.os.Bundle;
+import android.widget.DatePicker;
+import android.widget.TextView;
+
+import java.util.Calendar;
+
+/**
+ * A dialog for picking dates. Used in the RequesterAddTask activity.
+ * @author Lauren
+ * @see RequesterAddTaskActivity
+ */
+
+public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
+    private int year;
+    private int month;
+    private int day;
+    private String formattedDate;
+
+    /**
+     * Returns an instance of the date picking dialog fragment, with that day's date selected as
+     * the default.
+     * @param savedInstanceState The previously saved state.
+     * @return An instance of the DatePickerDialog object.
+     */
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState){
+        final Calendar calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        return new DatePickerDialog(getActivity(), this, year, month, day);
+    }
+
+    /**
+     * Handles the date selected by the user by converting it to a string.
+     * @param view The view object that represents the DatePickerDialog instance
+     * @param year The user-selected year
+     * @param month The user-selected month
+     * @param day The user-selected day
+     */
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int day) {
+        String yearString;
+        String monthString;
+        String dayString;
+
+        yearString = Integer.toString(year);
+        monthString = Integer.toString(month);
+        dayString = Integer.toString(day);
+        formattedDate = yearString + "-" + monthString + "-" + dayString;
+
+        TextView textualDateView = getActivity().findViewById(R.id.textualDateView);
+        textualDateView.setText(formattedDate);
+
+    }
+
+}

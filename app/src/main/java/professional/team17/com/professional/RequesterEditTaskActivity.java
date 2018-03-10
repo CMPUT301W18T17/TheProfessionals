@@ -5,9 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.Calendar;
 import java.util.Random;
@@ -28,9 +26,9 @@ public class RequesterEditTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requester_edit_task);
         Button submitButton = (Button) findViewById(R.id.button2);
-        name = (EditText) findViewById(R.id.editText);
-        description = (EditText) findViewById(R.id.editText1);
-        location = (EditText) findViewById(R.id.editText2);
+        name = (EditText) findViewById(R.id.TaskNameField);
+        description = (EditText) findViewById(R.id.taskDescriptionField);
+        location = (EditText) findViewById(R.id.textualAddressField);
         //final DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker2);
         //button to choose date
         chooseDate = (Button) findViewById(R.id.button3);
