@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import javax.security.auth.login.LoginException;
+
 public class LogInActivity extends AppCompatActivity {
     private Profile profile;
     private ElasticSearchController elasticSearchController;

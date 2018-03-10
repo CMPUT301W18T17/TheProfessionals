@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.Date;
+
 public class SignUpActivity extends AppCompatActivity {
 
     private EditText usernameBox;
@@ -35,8 +37,11 @@ public class SignUpActivity extends AppCompatActivity {
         String email = emailBox.getText().toString();
         String phoneNumber = phoneNumberBox.getText().toString();
         Profile profile = new Profile(name, username, email, phoneNumber);
+        Task task = new Task("Testing", "Tast Title", "Task eeDescription", "location", new Date());
+        ElasticSearchController.AddTask addProfile = new ElasticSearchController.AddTask();
+        addProfile.execute(task);
 
-
+        /*
 //if name odes not exist, then allow for profile to be created
         if (allowUsername(username)==true) {
 
@@ -48,7 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
             //TO DO EXCEPTION HANDLING
         }
 
-
+*/
         Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
         //TODO check username does not exist using elasticSearch

@@ -99,7 +99,7 @@ public class Task implements Serializable{
         return uniqueID;
     }
 
-    public void setUniqueID(String ID) {
+    public void setId(String ID) {
         this.uniqueID = ID;
     }
 
@@ -206,5 +206,7 @@ public class Task implements Serializable{
     public String toString(){
         return this.name;
     }
+
+
 
 }

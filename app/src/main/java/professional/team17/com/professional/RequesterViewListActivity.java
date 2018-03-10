@@ -160,7 +160,7 @@ public class RequesterViewListActivity extends AppCompatActivity {
             task1.setDescription(description);
             task1.setDate(date);
             task1.setLocation(location);
-            task1.setUniqueID(ID);
+            task1.setId(ID);
             adapter.notifyDataSetChanged();
             //System.out.println(taskList);
             //System.out.println("------------------------------------------------------");
