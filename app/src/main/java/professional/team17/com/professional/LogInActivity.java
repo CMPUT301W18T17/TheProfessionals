@@ -18,6 +18,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+        elasticSearchController = new ElasticSearchController();
 
     }
 
@@ -26,16 +27,15 @@ public class LogInActivity extends AppCompatActivity {
 
         EditText usernameBox = (EditText) findViewById(R.id.usernameBox);
         String username = usernameBox.getText().toString();
-        elasticSearchController = new ElasticSearchController();
-        logIn(username);
-       /* if (!(profile==null)){
+        Profile profile = elasticSearchController.getProfile(username);
+        if (!(profile==null)){
+            changeActivity();
             //good to go
             //set usernameas global variable?
         }
         else {
             //error with users name
         }
-*/
 
     }
 
@@ -48,18 +48,6 @@ public class LogInActivity extends AppCompatActivity {
 
     }
 
-    private void logIn(String username) {
-        ElasticSearchController.GetProfile getProfile = new ElasticSearchController.GetProfile();
-        getProfile.execute(username);
-        try {
-            Profile user = getProfile.get();
-            if (user!=null) {
-                changeActivity();
-            }
-        }
-        catch (Exception e) {
-        }
-    }
 
 
     public void signUp(View view) {

@@ -42,13 +42,63 @@ public class ElasticSearchController {
     private static String task = "http://cmput301.softwareprocess.es:8080/CMPUT301W18T17/task"; //TODO COMPLETE name
 
 
+
+    public Profile getProfile(String username) {
+        Profile profile = null;
+       ElasticSearchController.GetProfile getprofile = new ElasticSearchController.GetProfile();
+
+        getprofile.execute(username);
+        try {
+            profile = getprofile.get();
+        } catch (Exception e) {
+            return null;
+        }
+
+        return profile;
+
+    }
+
+
+
+    public Boolean addProfile(Profile profile) {
+
+        boolean result;
+        ElasticSearchController.AddProfile addProfile = new ElasticSearchController.AddProfile();
+        addProfile.execute(profile);
+        try {
+            result = addProfile.get();
+        }
+        catch (Exception e) {
+            return false;
+        }
+        return result;
+    }
+
+
+
+    public Boolean profileExists(String username) {
+        boolean result = true;
+        ElasticSearchController.GetProfile getProfile = new ElasticSearchController.GetProfile();
+        getProfile.execute(username);
+        try {
+            Profile profile = getProfile.get();
+            // return false if no profile found
+            if (profile != null || username.isEmpty()) {
+                result = false;
+            }
+        } catch (Exception e) {
+            result = false;
+        }
+        return result;
+    }
+
 //add profile and update via the username
-        public static class AddProfile extends AsyncTask<Profile, Void, Void> {
+        public static class AddProfile extends AsyncTask<Profile, Void, Boolean> {
 
             @Override
-            protected Void doInBackground(Profile... profiles) {
+            protected Boolean doInBackground(Profile... profiles) {
                 verifySettings();
-
+                Boolean success = true;
                 for (Profile profile : profiles) {
                     Index index = new Index.Builder(profile).index("cmput301w18t17").type("profile").id(profile.getUserName()).build();
 
@@ -57,10 +107,11 @@ public class ElasticSearchController {
                     }
                     catch (Exception e) {
                         Log.i("Error", "The application failed to build and send the profile");
+                        success = false;
 
                     }
                 }
-                return null;
+                return success;
             }
         }
 

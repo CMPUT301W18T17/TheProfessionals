@@ -41,27 +41,26 @@ public class SignUpActivity extends AppCompatActivity {
         String phoneNumber = phoneNumberBox.getText().toString();
         Profile profile = new Profile(name, username, email, phoneNumber);
 
-        /*
 //if name odes not exist, then allow for profile to be created
-        if (allowUsername(username)==true) {
+        if (elasticSearchController.profileExists(username)==true) {
 
-            ElasticSearchController.AddProfile addProfile = new ElasticSearchController.AddProfile();
-            addProfile.execute(profile);
+             elasticSearchController.addProfile(profile);
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivity(intent);
+            finish();
 
         }
         else {
             //TO DO EXCEPTION HANDLING
         }
 
-*/
-        Intent intent = new Intent(this, SearchActivity.class);
-        startActivity(intent);
+
         //TODO check username does not exist using elasticSearch
 
         //TODO exception handling for phone number/email
 
     }
-
+/*
     //return tru if username allowed, false otherwise (ie the name exists)
     private boolean allowUsername(String username) {
         ElasticSearchController.GetProfile getUserName = new ElasticSearchController.GetProfile();
@@ -77,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
         return true;
     }
 
-
+*/
     /**
      *
      * @param name
