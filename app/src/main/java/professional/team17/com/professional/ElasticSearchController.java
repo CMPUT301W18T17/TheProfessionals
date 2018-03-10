@@ -193,6 +193,7 @@ public class ElasticSearchController {
 
             //parse into template
             String search1 = "{ \"query\": {\"match\" : { \"status\": \"term1\"  }} }";
+            String search2 = "{ \"query\": {\"bool\" : {\"must\" : { \"match\" : { \"status\": \"Bidded\" }},\"must\" : { \"match\" :{\"profileName\": \"Testing\"}}}}}";
             JsonParser jsonParser = new JsonParser();
             JsonObject jsonObject = (JsonObject)jsonParser.parse(search1);
             jsonObject.getAsJsonObject("query").getAsJsonObject("match").addProperty("status", search_para[0]);
