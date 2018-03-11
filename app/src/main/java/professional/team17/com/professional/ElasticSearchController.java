@@ -29,11 +29,6 @@ import io.searchbox.core.SearchResult;
  * Created by ag on 2018-02-22.
  */
 
-/**
-* TODO Below is build with assumption of two indexes (one for profile, one for tasks)
- * We could also potentially combine profile and tasks into one completely denormalized index
- * http://cmput301.softwareprocess.es:8080/cmput301w18t17
- */
 
 
 public class ElasticSearchController {
@@ -41,19 +36,10 @@ public class ElasticSearchController {
     private static String server = "http://cmput301.softwareprocess.es:8080";
 
 //TODO - all methods (not async should be placed in some other class at some point
-    /**
-     *
-     * @param username - the username to be matched against the task requester for each task
-     * @param status - the status of the task
-     * @return - TaskList of all tasks that match query
-     */
-    public TaskList getTasksRequester(String username, String status) {
+
+
+    private TaskList getTaskList (String search){
         TaskList tasklist = null;
-        String search = "{ \"query\": {" +
-                " \"bool\": {" +
-                "\"must\": [ " +
-                "{\"match\": {\"profileName\": \"" + username + "\"}}," +
-                "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
         ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
@@ -61,9 +47,40 @@ public class ElasticSearchController {
         try {
             tasklist = getTasks.get();
         } catch (Exception e) {
-
         }
         return tasklist;
+
+    }
+
+    /**
+     *
+     * @param username - the username to be matched against the task requester for each task
+     * @param status - the status of the task
+     * @return - TaskList of all tasks that match query
+     */
+    public TaskList getTasksRequester(String username, String status) {
+        String search = "{ \"query\": {" +
+                " \"bool\": {" +
+                "\"must\": [ " +
+                "{\"match\": {\"profileName\": \"" + username + "\"}}," +
+                "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
+        return getTaskList(search);
+    }
+
+
+    /**
+     *
+     * @param username - the username to be matched against the task requester for each task
+     * @param status - the status of the task
+     * @return - TaskList of all tasks that match query
+     */
+    public TaskList getTasksRequester1(String username, String status) {
+        String search = "{ \"query\": {" +
+                " \"bool\": {" +
+                "\"must\": [ " +
+                "{\"match\": {\"profileName\": \"" + username + "\"}}," +
+                "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
+        return getTaskList(search);
     }
 
     /**
@@ -73,21 +90,12 @@ public class ElasticSearchController {
      * @return - TaskList of all tasks that match query
      */
     public TaskList getTasksBidded(String username, String status) {
-        TaskList tasklist = null;
         String search = "{ \"query\": {" +
                 " \"bool\": {" +
                 "\"must\": [ " +
                 "{\"match\": {\"bids.name\": \"" + username + "\"}}," +
                 "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
-        ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
-        getTasks.execute(jsonObject.toString());
-        try {
-            tasklist = getTasks.get();
-        } catch (Exception e) {
-        }
-        return tasklist;
+        return getTaskList(search);
     }
 
     /**
@@ -96,18 +104,8 @@ public class ElasticSearchController {
      * @return - Tasklist - the results matched from elasticSearch
      */
     public TaskList getTasksStatus(String status) {
-        TaskList tasklist = null;
         String search = "{ \"query\": {\"match\" : { \"status\": \""+status+"\"  }} }";
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
-        ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
-        getTasks.execute(jsonObject.toString());
-        try {
-            tasklist = getTasks.get();
-        } catch (Exception e) {
-
-        }
-        return tasklist;
+        return getTaskList(search);
     }
 
     /**
@@ -116,18 +114,8 @@ public class ElasticSearchController {
      * @return   Tasklist - the results matched from elasticSearch
      */
     public TaskList getTasksUsername(String profile) {
-        TaskList tasklist = null;
         String search = "{ \"query\": {\"match\" : { \"profile\": \""+profile+"\"  }} }";
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
-        ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
-        getTasks.execute(jsonObject.toString());
-        try {
-            tasklist = getTasks.get();
-        } catch (Exception e) {
-
-        }
-        return tasklist;
+        return getTaskList(search);
     }
 
 
@@ -218,13 +206,6 @@ public class ElasticSearchController {
         return result;
     }
 
-
-
-
-
-
-
-
     /**
      * This AsyncTask will add a profile to the db (can also be used to update profile)
      */
@@ -240,14 +221,12 @@ public class ElasticSearchController {
                             .type("profile")
                             .id(profile.getUserName())
                             .build();
-
                     try {
                         DocumentResult result = client.execute(index);
                     }
                     catch (Exception e) {
                         Log.i("Error", "The application failed to build and send the profile");
                         success = false;
-
                     }
                 }
                 return success;
@@ -265,22 +244,18 @@ public class ElasticSearchController {
             Get get = new Get.Builder("cmput301w18t17", id[0])
                     .type("profile")
                     .build();
-
             try {
                 JestResult result = client.execute(get);
                 if (result.isSucceeded()) {
                     profile = result.getSourceAsObject(Profile.class);
-
                 }
                 else{
                 Log.i("error", "Search query failed to find any thing =/");
             }
         }
-
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
-
             return profile;
         }
 
@@ -307,7 +282,6 @@ public class ElasticSearchController {
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()){
-                        id = result.getId();
                         task.setId(result.getId());
                     }
                     else {
@@ -361,11 +335,9 @@ public class ElasticSearchController {
         protected Task doInBackground(String... id) {
             verifySettings();
             Task task = null;
-
             Get get = new Get.Builder("cmput301w18t17", id[0])
                     .type("task")
                     .build();
-
             try {
                 JestResult result = client.execute(get);
                 if (result.isSucceeded()) {
@@ -376,11 +348,9 @@ public class ElasticSearchController {
                     Log.i("error", "Search query failed to find any thing =/");
                 }
             }
-
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
-
             return task;
         }
 
@@ -390,18 +360,15 @@ public class ElasticSearchController {
      * This async task will return a list of task dependent on the preformatted query
      */
     public static class GetTasks extends AsyncTask<String, Void, TaskList> {
-        //TODO Complete
         @Override
         protected TaskList doInBackground(String... search_para) {
             verifySettings();
             TaskList taskList = new TaskList();
-
             Search search = new Search.Builder(search_para[0])
                     // multiple index or types can be added.
                     .addIndex("cmput301w18t17")
                     .addType("task")
                     .build();
-
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()){
@@ -415,7 +382,6 @@ public class ElasticSearchController {
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
-
             return taskList;
         }
     }
