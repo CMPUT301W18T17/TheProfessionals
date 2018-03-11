@@ -17,7 +17,8 @@
         android:paddingTop="5dp"
         android:text="Dialog Title"
         android:textColor="@color/cardview_light_background"
-        android:textSize="18sp" />
+        android:textSize="19sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -33,29 +34,39 @@
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingTop="5dp" />
+            android:paddingTop="5dp"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="right"
         android:orientation="horizontal"
         android:padding="3dp">
 
         <Button
             android:id="@+id/confirm_fragment_positiveButton"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Confirm" />
+            android:background="@color/cardview_light_background"
+            android:text="Confirm"
+            android:textColor="@color/colorProvider" />
 
         <Button
             android:id="@+id/confirm_fragment_negButtom"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancel" />
+            android:background="@color/common_google_signin_btn_text_dark_default"
+            android:text="Cancel"
+            android:textColor="@android:color/holo_red_light"
+            android:textColorHighlight="@android:color/holo_red_light"
+            android:textColorLink="@android:color/holo_red_light" />
 
     </LinearLayout>
 

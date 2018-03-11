@@ -251,19 +251,16 @@
                                         <TextView
                                             android:id="@+id/provider_view_task_paragraph"
                                             android:layout_width="0dp"
-                                            android:layout_height="38dp"
-                                            android:layout_marginBottom="32dp"
+                                            android:layout_height="39dp"
                                             android:layout_marginEnd="64dp"
                                             android:layout_marginStart="32dp"
-                                            android:layout_marginTop="8dp"
+                                            android:paddingBottom="15dp"
                                             android:text="TextView"
                                             android:textSize="17sp"
-                                            app:layout_constraintBottom_toBottomOf="parent"
                                             app:layout_constraintEnd_toEndOf="parent"
                                             app:layout_constraintHorizontal_bias="0.0"
                                             app:layout_constraintStart_toStartOf="parent"
-                                            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_description"
-                                            app:layout_constraintVertical_bias="0.25" />
+                                            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_description" />
 
                                         <TextView
                                             android:id="@+id/provider_view_task_status"
