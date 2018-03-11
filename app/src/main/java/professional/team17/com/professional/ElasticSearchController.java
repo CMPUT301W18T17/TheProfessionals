@@ -94,7 +94,7 @@ public class ElasticSearchController {
      * @param status - the status of the task
      * @return - TaskList of all tasks that match query
      */
-    public TaskList getTasksBidded(String username, String status) {
+    public TaskList getTasksBidded(String username, String status) {;
         String search = "{ \"query\": {" +
                 " \"bool\": {" +
                 "\"must\": [ " +

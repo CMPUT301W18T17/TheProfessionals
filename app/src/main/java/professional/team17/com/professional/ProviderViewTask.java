@@ -29,6 +29,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     private TextView myBidTextView;
     private TextView lowBidTextView;
     private TextView requesterAvgTextView;
+    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
 
     //both buttons start as invisible by default
@@ -57,7 +58,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         task = getTask();
         //getRequester();
 
-
+        //Log.i("WEWE", "onCreate: "+user.getUserName());
         checkStatus();
         fillTask();
       //  setRating();
@@ -68,9 +69,11 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     public void onFinishPlaceBidDialog(String inputText){
         double bidAmount =  Double.valueOf(inputText);
         int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(this, "SEARCH ENTERED"+inputText, duration);
+        Toast toast = Toast.makeText(this, "SEARCH ENTERED"+bidAmount, duration);
         toast.show();
         task.addBid(new Bid(user.getUserName(), bidAmount));
+
+
         statusTextField.setText(task.getStatus());
         fillBidded();
     }
@@ -270,9 +273,9 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
      * @return Returns the subscription sent with the Intent
      */
     private Task getTask() {
-        Intent intent = getIntent();
-        Task task = (Task) intent.getSerializableExtra("Task");
-        return task;
+        Bundle intent = getIntent().getExtras();
+        String task = intent.getString("Task");
+        return elasticSearchController.getTask(task);
     }
 
     /**

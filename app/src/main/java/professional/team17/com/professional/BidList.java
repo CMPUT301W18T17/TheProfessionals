@@ -36,12 +36,15 @@ public class BidList extends ArrayList<Bid> implements Serializable{
 
     //add bid and keep track of lowest
     public void addBids(Bid bid){
+        lowest();
         if (this.isEmpty()){
             lowest = bid;
         }
+
         else if (bid.getAmount()<lowest.getAmount()) {
             lowest =  bid;
         }
+
         this.add(bid);
     }
 
@@ -50,6 +53,14 @@ public class BidList extends ArrayList<Bid> implements Serializable{
         if (bid==lowest){
             lowest = getLowest();
         }
+    }
+
+
+    public void lowest(){
+        if (lowest ==null && !this.isEmpty()){
+            this.lowest = getLowest();
+        }
+
     }
 
     //remove all bids bud the one plugged in

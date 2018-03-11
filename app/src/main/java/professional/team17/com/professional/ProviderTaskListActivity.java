@@ -12,13 +12,14 @@ public class ProviderTaskListActivity extends ProviderLayout {
     private ListView listView;
     private TaskList taskList;
     private Profile user;
+    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
     //TODO DELETE
     private TaskList dummyTaskList;
 
     //TODO DELETE METHOD
     public void dummyDate(){
         dummyTaskList = new TaskList();
-        user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
+
         Task task1 = new Task("ProfileName1", "Name1", "Description1", "Location1","ID1" );
         Task task2 = new Task("ProfileName2", "Name2", "Description2", "Location2","ID2" );
         Task task3 = new Task("ProfileName3", "Name3", "Description3", "Location3","ID3" );
@@ -35,6 +36,7 @@ public class ProviderTaskListActivity extends ProviderLayout {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
         setContentView(R.layout.provider_tasklist_view);
         taskList = new TaskList();
         adapterHelper = new ArrayAdapterSearchResults(this, taskList);
@@ -42,8 +44,10 @@ public class ProviderTaskListActivity extends ProviderLayout {
         listView.setAdapter(adapterHelper);
         listView.setOnItemClickListener(clickListener);
         String type = setProviderViewType();
-
-        this.setActivityTitle("My Requested Tasks");
+        createList(type);
+        //taskList = elasticSearchController.getTasksBidded("john123", "Bidded");
+        taskList.addAll(createList(type));
+        //adapterHelper.notifyDataSetChanged();
 
     }
 
@@ -55,13 +59,12 @@ public class ProviderTaskListActivity extends ProviderLayout {
      */
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            TaskList taskList = dummyTaskList;
             Task task = taskList.get(position);
             Intent intention = new Intent(ProviderTaskListActivity.this, ProviderViewTask.class);
-            intention.putExtra("Task", task);
-            intention.putExtra("position", position);
+            intention.putExtra("Task", task.getUniqueID());
             intention.putExtra("profile", user);
             startActivity(intention);
+
         }
 
     };
@@ -82,19 +85,20 @@ public class ProviderTaskListActivity extends ProviderLayout {
     }
 
     private TaskList createList(String type) {
-        TaskList taskList  = new TaskList();
+        TaskList taskList =null;
+        Log.i("DOUR", "createList: "+type);
+
         if (type.equals("Bidded")) {
-            setActivityTitle("My Bidded Tasks");
-            //get bidded list from es
+            taskList = elasticSearchController.getTasksBidded("john123", "Bidded");
+            Log.i("DOUR", "createList: "+taskList);
 
         }
+
         if (type.equals("Assigned")) {
-            setActivityTitle("My Assigned Tasks");
             //get assigned list from es
         }
-        //delete these two line
-        dummyDate();
-        taskList = dummyTaskList;
+       // dummyDate();
+       // taskList = dummyTaskList;
 
 
         return taskList;
