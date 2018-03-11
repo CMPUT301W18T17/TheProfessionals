@@ -133,6 +133,24 @@ public class ElasticSearchController {
         return tasklist;
     }
 
+
+    /**
+     * @param taskid - the unique id being matched against by task
+     * @return Task task - the task returned from the server that matches, null otherwise
+     */
+    public Task getTask(String taskid) {
+        Task task= null;
+        ElasticSearchController.GetTask gettask = new ElasticSearchController.GetTask();
+        gettask.execute(taskid);
+        try {
+            task = gettask.get();
+        } catch (Exception e) {
+            return null;
+        }
+        return task;
+    }
+
+
     /**
      *
      * @param task - the task that will be added/updated within the ES
