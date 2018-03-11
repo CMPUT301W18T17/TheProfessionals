@@ -23,7 +23,7 @@ public class SearchActivity extends ProviderLayout {
         dummyTaskList = new TaskList();
         user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
         Task task1 = new Task("ProfileName1", "Name1", "Description1", "Location1","ID1" );
-        Task task2 = new Task("ProfileName2", "Name2", "Description2", "Location2","ID2" );
+        Task task2 = new Task("ProfileName2", "Name2", "Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2Description2 Description2 Description2 Description2 Description2 Description2Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2", "Location2","ID2" );
         Task task3 = new Task("ProfileName3", "Name3", "Description3", "Location3","ID3" );
         dummyTaskList.addTask(task1);
         dummyTaskList.addTask(task2);

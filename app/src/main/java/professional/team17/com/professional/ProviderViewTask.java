@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,22 +32,22 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 
 
     //both buttons start as invisible by default
-    private Button bidButton;
-    private Button deleteButton;
+    private ImageButton bidButton;
+    private ImageButton deleteButton;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.provider_view_task);
+        setContentView(R.layout.provider_view_task2);
 
         //get textfields ids
         statusTextField = (TextView) findViewById(R.id.provider_view_task_statusType);
         userNameTextField = (TextView) findViewById(R.id.provider_view_task_userName);
         taskTitleTextField = (TextView) findViewById(R.id.provider_view_task_title);
         taskDateTextField = (TextView) findViewById(R.id.provider_view_task_date_input);
-        taskDescriptionTextField = (TextView) findViewById(R.id.provider_view_task_description);
+        taskDescriptionTextField = (TextView) findViewById(R.id.provider_view_task_paragraph);
         taskLowBidTextField = (TextView) findViewById(R.id.provider_view_task_lowBidInput);
         taskMyBidTextField = (TextView) findViewById(R.id.provider_view_task_myBidInput);
 
@@ -199,8 +200,8 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     public void checkStatus() {
 
 
-        bidButton = (Button) findViewById(R.id.provider_view_task_bidButton);
-        deleteButton = (Button) findViewById(R.id.provider_view_task_deleteButton);
+        bidButton = (ImageButton) findViewById(R.id.provider_view_task_AddBid);
+        deleteButton = (ImageButton) findViewById(R.id.provider_view_task_removeBid);
         myBidTextView = (TextView) findViewById(R.id.provider_view_task_myBid);
         lowBidTextView = (TextView) findViewById(R.id.provider_view_task_lowBid);
 

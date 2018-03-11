@@ -38,6 +38,11 @@ public class ElasticSearchController {
 //TODO - all methods (not async should be placed in some other class at some point
 
 
+    /**
+     *
+     * @param search - the jsons  query
+     * @return
+     */
     private TaskList getTaskList (String search){
         TaskList tasklist = null;
         JsonParser jsonParser = new JsonParser();
