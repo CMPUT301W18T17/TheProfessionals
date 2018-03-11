@@ -42,24 +42,97 @@ public class ElasticSearchController {
     private static String task = "http://cmput301.softwareprocess.es:8080/CMPUT301W18T17/task"; //TODO COMPLETE name
 
 
+    /**
+     * @param profile - the profile to be added
+     * @return Boolean value - true means profile was added successfully, false means unsuccessful
+     */
+    public Boolean providerGetTasks(String username, String status) {
+        TaskList tasklist;
+        String search = "{ \"query\": {" +
+                " \"bool\": {" +
+                "\"must\": [ " +
+                "{\"match\": {\"profileName\": \"" + username + "\"}}," +
+                "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
+        Log.i("werwer", "jsonObject" + jsonObject);
+        ElasticSearchController.GetTasks2 getTasks = new ElasticSearchController.GetTasks2();
+        getTasks.execute(jsonObject.toString());
+        try {
+            tasklist = getTasks.get();
+            Log.i("WEEW", "providerGetTasks: " + tasklist.toString());
+        } catch (Exception e) {
 
+        }
+        return true;
+    }
+
+    public TaskList getTasksStatus(String status) {
+        TaskList tasklist = null;
+        String search = "{ \"query\": {\"match\" : { \"status\": \""+status+"\"  }} }";
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
+        Log.i("werwer", "jsonObject" + jsonObject);
+        ElasticSearchController.GetTasks2 getTasks = new ElasticSearchController.GetTasks2();
+        getTasks.execute(jsonObject.toString());
+        try {
+            tasklist = getTasks.get();
+            Log.i("WEEW", "providerGetTasks: " + tasklist.toString());
+        } catch (Exception e) {
+
+        }
+        return tasklist;
+    }
+
+
+    public TaskList getTasksUsername(String profile) {
+        TaskList tasklist = null;
+        String search = "{ \"query\": {\"match\" : { \"profile\": \""+profile+"\"  }} }";
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
+        Log.i("werwer", "jsonObject" + jsonObject);
+        ElasticSearchController.GetTasks2 getTasks = new ElasticSearchController.GetTasks2();
+        getTasks.execute(jsonObject.toString());
+        try {
+            tasklist = getTasks.get();
+            Log.i("WEEW", "providerGetTasks: " + tasklist.toString());
+        } catch (Exception e) {
+
+        }
+        return tasklist;
+    }
+
+    public void addTasks(Task task) {
+        ElasticSearchController.AddTask addtask = new ElasticSearchController.AddTask();
+        addtask.execute(task);
+
+        //now that the id is set, we need to update it into the db
+        ElasticSearchController.UpdateTask updateTask = new ElasticSearchController.UpdateTask();
+        updateTask.execute(task);
+    }
+
+
+    /**
+     * @param username - the username to be searched for in the server
+     * @return Profile profile  - the profile matching the user name, or null if no match
+     */
     public Profile getProfile(String username) {
         Profile profile = null;
-       ElasticSearchController.GetProfile getprofile = new ElasticSearchController.GetProfile();
-
+        ElasticSearchController.GetProfile getprofile = new ElasticSearchController.GetProfile();
         getprofile.execute(username);
         try {
             profile = getprofile.get();
         } catch (Exception e) {
             return null;
         }
-
         return profile;
-
     }
 
 
-
+    /**
+     * @param profile - the profile to be added
+     * @return Boolean value - true means profile was added successfully, false means unsuccessful
+     */
     public Boolean addProfile(Profile profile) {
 
         boolean result;
@@ -67,15 +140,17 @@ public class ElasticSearchController {
         addProfile.execute(profile);
         try {
             result = addProfile.get();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
         return result;
     }
 
 
-
+    /**
+     * @param username - the username that is being looked for in the db
+     * @return boolean value, true meaning the username does exist, false otherwise
+     */
     public Boolean profileExists(String username) {
         boolean result = true;
         ElasticSearchController.GetProfile getProfile = new ElasticSearchController.GetProfile();
@@ -92,7 +167,16 @@ public class ElasticSearchController {
         return result;
     }
 
-//add profile and update via the username
+
+
+
+
+
+
+
+    /**
+     * This AsyncTask will add a profile to the db (can also be used to update profile)
+     */
         public static class AddProfile extends AsyncTask<Profile, Void, Boolean> {
 
             @Override
@@ -100,7 +184,11 @@ public class ElasticSearchController {
                 verifySettings();
                 Boolean success = true;
                 for (Profile profile : profiles) {
-                    Index index = new Index.Builder(profile).index("cmput301w18t17").type("profile").id(profile.getUserName()).build();
+                    Index index = new Index.Builder(profile)
+                            .index("cmput301w18t17")
+                            .type("profile")
+                            .id(profile.getUserName())
+                            .build();
 
                     try {
                         DocumentResult result = client.execute(index);
@@ -115,14 +203,17 @@ public class ElasticSearchController {
             }
         }
 
-
+    /**
+     * This AsyncTask will retrieve profile from the db matching a username.
+     */
     public static class GetProfile extends AsyncTask<String, Void, Profile> {
-        //TODO Complete
         @Override
         protected Profile doInBackground(String... id) {
             verifySettings();
             Profile profile = null;
-            Get get = new Get.Builder("cmput301w18t17", id[0]).type("profile").build();
+            Get get = new Get.Builder("cmput301w18t17", id[0])
+                    .type("profile")
+                    .build();
 
             try {
                 JestResult result = client.execute(get);
@@ -148,6 +239,12 @@ public class ElasticSearchController {
     //ensure the object holds the id.
 //      ElasticSearchController.AddTask addTask = new ElasticSearchController.AddTask();
 //      addTask.execute(task); (or taskid)
+
+    /**
+     *  This AsyncTask will add a task to the db.
+     *  It will then set the task.id equal to the db.id set at time of insertion.
+     *
+     */
     public static class AddTask extends AsyncTask<Task, Void, String> {
 
         @Override
@@ -156,7 +253,10 @@ public class ElasticSearchController {
             String id = null;
 
             for (Task task : tasks) {
-                Index index = new Index.Builder(task).index("cmput301w18t17").type("task").build();
+                Index index = new Index.Builder(task)
+                        .index("cmput301w18t17")
+                        .type("task")
+                        .build();
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()){
@@ -178,6 +278,10 @@ public class ElasticSearchController {
     //  Used to update a task (Must have ID). Must be called after adding a task, as we need to set the id in the es
 //      ElasticSearchController.UpdateTask updateTask = new ElasticSearchController.UpdateTask();
 //      updateTask.execute(task); (or taskid)
+
+    /**
+     *  This AsyncTask will update a task from the db based on a taskid
+     */
     public static class UpdateTask extends AsyncTask<Task, Void, Void> {
 
         @Override
@@ -185,7 +289,11 @@ public class ElasticSearchController {
             verifySettings();
 
             for (Task task : tasks) {
-                Index index = new Index.Builder(task).index("cmput301w18t17").type("task").id(task.getUniqueID()).build();
+                Index index = new Index.Builder(task)
+                        .index("cmput301w18t17")
+                        .type("task")
+                        .id(task.getUniqueID())
+                        .build();
 
                 try {
                     DocumentResult result = client.execute(index);
@@ -198,10 +306,16 @@ public class ElasticSearchController {
             return null;
         }
     }
+
+
 //      Used to get task based on a taskid.
 //      ElasticSearchController.GetTask getTask = new ElasticSearchController.GetTask();
 //      getTask.execute(task.getUniqueID()); (or taskid)
 //      task = getTask.get();
+
+    /**
+     *  This AsyncTask will retrieve a task from the db based on a taskid
+     */
     public static class GetTask extends AsyncTask<String, Void, Task> {
         //TODO Complete
         @Override
@@ -209,7 +323,9 @@ public class ElasticSearchController {
             verifySettings();
             Task task = null;
 
-            Get get = new Get.Builder("cmput301w18t17", id[0]).type("task").build();
+            Get get = new Get.Builder("cmput301w18t17", id[0])
+                    .type("task")
+                    .build();
 
             try {
                 JestResult result = client.execute(get);
@@ -230,7 +346,40 @@ public class ElasticSearchController {
         }
 
     }
+    //      Used to get task based on a taskid.
+//      ElasticSearchController.GetTask getTask = new ElasticSearchController.GetTask();
+//      getTask.execute(task.getUniqueID()); (or taskid)
+//      task = getTask.get();
+    public static class GetTasks2 extends AsyncTask<String, Void, TaskList> {
+        //TODO Complete
+        @Override
+        protected TaskList doInBackground(String... search_para) {
+            verifySettings();
+            TaskList taskList = new TaskList();
 
+            Search search = new Search.Builder(search_para[0])
+                    // multiple index or types can be added.
+                    .addIndex("cmput301w18t17")
+                    .addType("task")
+                    .build();
+
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()){
+                    List<Task> foundTask= result.getSourceAsObjectList(Task.class);
+                    taskList.addAll(foundTask);
+                }
+                else {
+                    Log.i ("error","Search query failed to find any thing =/");
+                }
+            }
+            catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return taskList;
+        }
+    }
     //      Used to get task based on a taskid.
 //      ElasticSearchController.GetTask getTask = new ElasticSearchController.GetTask();
 //      getTask.execute(task.getUniqueID()); (or taskid)
@@ -243,11 +392,11 @@ public class ElasticSearchController {
             TaskList taskList = new TaskList();
 
             //parse into template
-            String search1 = "{ \"query\": {\"match\" : { \"status\": \"term1\"  }} }";
-            String search2 = "{ \"query\": {\"bool\" : {\"must\" : { \"match\" : { \"status\": \"Bidded\" }},\"must\" : { \"match\" :{\"profileName\": \"Testing\"}}}}}";
+            String search1 = "{ \"query\": {\"match\" : { \"profileName\": \"term1\"  }} }";
+
             JsonParser jsonParser = new JsonParser();
             JsonObject jsonObject = (JsonObject)jsonParser.parse(search1);
-            jsonObject.getAsJsonObject("query").getAsJsonObject("match").addProperty("status", search_para[0]);
+            jsonObject.getAsJsonObject("query").getAsJsonObject("match").addProperty("profileName", search_para[0]);
 
 
 
@@ -261,6 +410,7 @@ public class ElasticSearchController {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()){
                     List<Task> foundTask= result.getSourceAsObjectList(Task.class);
+                    Log.i("RERA", "doInBackground: "+foundTask);
                     taskList.addAll(foundTask);
                 }
                 else {

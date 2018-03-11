@@ -43,6 +43,17 @@ public class Task implements Serializable{
     }
 
 
+    public Task(String profileName, String name, String description, String location) {
+        this.profileName = profileName;
+        this.name = name;
+        this.description = description;
+        this.location = location;
+        this.date = new Date();
+        this.uniqueID = null;
+        this.status = "Requested";
+        this.bids = new BidList();
+    }
+
 
     public String getProfileName() {
         return profileName;
@@ -203,8 +214,9 @@ public class Task implements Serializable{
     }
 
     //to help with development
+
     public String toString(){
-        return this.name;
+        return "Name: '" + this.name + "', Status: '" + this.status + "', profile: '" + this.profileName + "', id: '" + this.uniqueID;
     }
 
 
