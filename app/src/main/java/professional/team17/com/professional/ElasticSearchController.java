@@ -39,7 +39,6 @@ import io.searchbox.core.SearchResult;
 public class ElasticSearchController {
     private static JestDroidClient client;
     private static String server = "http://cmput301.softwareprocess.es:8080";
-    private static String task = "http://cmput301.softwareprocess.es:8080/CMPUT301W18T17/task"; //TODO COMPLETE name
 
 //TODO - all methods (not async should be placed in some other class at some point
     /**
@@ -121,12 +120,10 @@ public class ElasticSearchController {
         String search = "{ \"query\": {\"match\" : { \"profile\": \""+profile+"\"  }} }";
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
-        Log.i("werwer", "jsonObject" + jsonObject);
         ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
         getTasks.execute(jsonObject.toString());
         try {
             tasklist = getTasks.get();
-            Log.i("WEEW", "providerGetTasks: " + tasklist.toString());
         } catch (Exception e) {
 
         }
@@ -425,7 +422,7 @@ public class ElasticSearchController {
 
         public static void verifySettings() {
             if (client == null) {
-                DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
+                DroidClientConfig.Builder builder = new DroidClientConfig.Builder(server);
                 DroidClientConfig config = builder.build();
 
                 JestClientFactory factory = new JestClientFactory();
