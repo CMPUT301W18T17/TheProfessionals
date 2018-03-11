@@ -41,13 +41,15 @@ public class ElasticSearchController {
     private static String server = "http://cmput301.softwareprocess.es:8080";
     private static String task = "http://cmput301.softwareprocess.es:8080/CMPUT301W18T17/task"; //TODO COMPLETE name
 
-
+//TODO - all methods (not async should be placed in some other class at some point
     /**
-     * @param profile - the profile to be added
-     * @return Boolean value - true means profile was added successfully, false means unsuccessful
+     *
+     * @param username - the username to be matched against the task requester for each task
+     * @param status - the status of the task
+     * @return - TaskList of all tasks that match query
      */
-    public Boolean providerGetTasks(String username, String status) {
-        TaskList tasklist;
+    public TaskList getTasksRequester(String username, String status) {
+        TaskList tasklist = null;
         String search = "{ \"query\": {" +
                 " \"bool\": {" +
                 "\"must\": [ " +
@@ -55,43 +57,72 @@ public class ElasticSearchController {
                 "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
-        Log.i("werwer", "jsonObject" + jsonObject);
-        ElasticSearchController.GetTasks2 getTasks = new ElasticSearchController.GetTasks2();
+        ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
         getTasks.execute(jsonObject.toString());
         try {
             tasklist = getTasks.get();
-            Log.i("WEEW", "providerGetTasks: " + tasklist.toString());
-        } catch (Exception e) {
-
-        }
-        return true;
-    }
-
-    public TaskList getTasksStatus(String status) {
-        TaskList tasklist = null;
-        String search = "{ \"query\": {\"match\" : { \"status\": \""+status+"\"  }} }";
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
-        Log.i("werwer", "jsonObject" + jsonObject);
-        ElasticSearchController.GetTasks2 getTasks = new ElasticSearchController.GetTasks2();
-        getTasks.execute(jsonObject.toString());
-        try {
-            tasklist = getTasks.get();
-            Log.i("WEEW", "providerGetTasks: " + tasklist.toString());
         } catch (Exception e) {
 
         }
         return tasklist;
     }
 
+    /**
+     *
+     * @param username - the username to be matched against the task bidder username
+     * @param status - the status of the task
+     * @return - TaskList of all tasks that match query
+     */
+    public TaskList getTasksBidded(String username, String status) {
+        TaskList tasklist = null;
+        String search = "{ \"query\": {" +
+                " \"bool\": {" +
+                "\"must\": [ " +
+                "{\"match\": {\"bids.name\": \"" + username + "\"}}," +
+                "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
+        ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
+        getTasks.execute(jsonObject.toString());
+        try {
+            tasklist = getTasks.get();
+        } catch (Exception e) {
+        }
+        return tasklist;
+    }
 
+    /**
+     *
+     * @param status - the task status to be matched against
+     * @return - Tasklist - the results matched from elasticSearch
+     */
+    public TaskList getTasksStatus(String status) {
+        TaskList tasklist = null;
+        String search = "{ \"query\": {\"match\" : { \"status\": \""+status+"\"  }} }";
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
+        ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
+        getTasks.execute(jsonObject.toString());
+        try {
+            tasklist = getTasks.get();
+        } catch (Exception e) {
+
+        }
+        return tasklist;
+    }
+
+    /**
+     *
+     * @param profile - the name that will be matched against the task requester
+     * @return   Tasklist - the results matched from elasticSearch
+     */
     public TaskList getTasksUsername(String profile) {
         TaskList tasklist = null;
         String search = "{ \"query\": {\"match\" : { \"profile\": \""+profile+"\"  }} }";
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
         Log.i("werwer", "jsonObject" + jsonObject);
-        ElasticSearchController.GetTasks2 getTasks = new ElasticSearchController.GetTasks2();
+        ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
         getTasks.execute(jsonObject.toString());
         try {
             tasklist = getTasks.get();
@@ -102,11 +133,16 @@ public class ElasticSearchController {
         return tasklist;
     }
 
+    /**
+     *
+     * @param task - the task that will be added/updated within the ES
+     */
     public void addTasks(Task task) {
         ElasticSearchController.AddTask addtask = new ElasticSearchController.AddTask();
         addtask.execute(task);
 
         //now that the id is set, we need to update it into the db
+        //TODO RESEARCH BETTER WAY
         ElasticSearchController.UpdateTask updateTask = new ElasticSearchController.UpdateTask();
         updateTask.execute(task);
     }
@@ -235,10 +271,6 @@ public class ElasticSearchController {
 
     }
 
-    //  Used to add a task. Will update the task id with the id set by ES. After this, please call update Task, to
-    //ensure the object holds the id.
-//      ElasticSearchController.AddTask addTask = new ElasticSearchController.AddTask();
-//      addTask.execute(task); (or taskid)
 
     /**
      *  This AsyncTask will add a task to the db.
@@ -275,9 +307,6 @@ public class ElasticSearchController {
         }
     }
 
-    //  Used to update a task (Must have ID). Must be called after adding a task, as we need to set the id in the es
-//      ElasticSearchController.UpdateTask updateTask = new ElasticSearchController.UpdateTask();
-//      updateTask.execute(task); (or taskid)
 
     /**
      *  This AsyncTask will update a task from the db based on a taskid
@@ -307,11 +336,6 @@ public class ElasticSearchController {
         }
     }
 
-
-//      Used to get task based on a taskid.
-//      ElasticSearchController.GetTask getTask = new ElasticSearchController.GetTask();
-//      getTask.execute(task.getUniqueID()); (or taskid)
-//      task = getTask.get();
 
     /**
      *  This AsyncTask will retrieve a task from the db based on a taskid
@@ -346,11 +370,11 @@ public class ElasticSearchController {
         }
 
     }
-    //      Used to get task based on a taskid.
-//      ElasticSearchController.GetTask getTask = new ElasticSearchController.GetTask();
-//      getTask.execute(task.getUniqueID()); (or taskid)
-//      task = getTask.get();
-    public static class GetTasks2 extends AsyncTask<String, Void, TaskList> {
+
+    /**
+     * This async task will return a list of task dependent on the preformatted query
+     */
+    public static class GetTasks extends AsyncTask<String, Void, TaskList> {
         //TODO Complete
         @Override
         protected TaskList doInBackground(String... search_para) {
@@ -367,50 +391,6 @@ public class ElasticSearchController {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()){
                     List<Task> foundTask= result.getSourceAsObjectList(Task.class);
-                    taskList.addAll(foundTask);
-                }
-                else {
-                    Log.i ("error","Search query failed to find any thing =/");
-                }
-            }
-            catch (Exception e) {
-                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
-            }
-
-            return taskList;
-        }
-    }
-    //      Used to get task based on a taskid.
-//      ElasticSearchController.GetTask getTask = new ElasticSearchController.GetTask();
-//      getTask.execute(task.getUniqueID()); (or taskid)
-//      task = getTask.get();
-    public static class GetTasks extends AsyncTask<String, Void, TaskList> {
-        //TODO Complete
-        @Override
-        protected TaskList doInBackground(String... search_para) {
-            verifySettings();
-            TaskList taskList = new TaskList();
-
-            //parse into template
-            String search1 = "{ \"query\": {\"match\" : { \"profileName\": \"term1\"  }} }";
-
-            JsonParser jsonParser = new JsonParser();
-            JsonObject jsonObject = (JsonObject)jsonParser.parse(search1);
-            jsonObject.getAsJsonObject("query").getAsJsonObject("match").addProperty("profileName", search_para[0]);
-
-
-
-            Search search = new Search.Builder(jsonObject.toString())
-                    // multiple index or types can be added.
-                    .addIndex("cmput301w18t17")
-                    .addType("task")
-                    .build();
-
-            try {
-                SearchResult result = client.execute(search);
-                if (result.isSucceeded()){
-                    List<Task> foundTask= result.getSourceAsObjectList(Task.class);
-                    Log.i("RERA", "doInBackground: "+foundTask);
                     taskList.addAll(foundTask);
                 }
                 else {

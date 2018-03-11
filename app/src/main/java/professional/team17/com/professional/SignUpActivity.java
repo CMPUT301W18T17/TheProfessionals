@@ -30,6 +30,9 @@ public class SignUpActivity extends AppCompatActivity {
         phoneNumberBox = (EditText) findViewById(R.id.phoneNumberBox);
         elasticSearchController = new ElasticSearchController();
 
+
+
+
     }
     //TODO: back to login navigation
     //this is added in the manifests.xml however, we don't have a toolbar currently?
@@ -41,7 +44,10 @@ public class SignUpActivity extends AppCompatActivity {
         String phoneNumber = phoneNumberBox.getText().toString();
         Profile profile = new Profile(name, username, email, phoneNumber);
 
-//if name odes not exist, then allow for profile to be created
+
+
+
+//TODO check username does not exist using elasticSearch *DONE HERE - but further checking required
         if (elasticSearchController.profileExists(username)==true) {
 
              elasticSearchController.addProfile(profile);
@@ -55,42 +61,12 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
 
-        //TODO check username does not exist using elasticSearch
+
 
         //TODO exception handling for phone number/email
 
     }
-/*
-    //return tru if username allowed, false otherwise (ie the name exists)
-    private boolean allowUsername(String username) {
-        ElasticSearchController.GetProfile getUserName = new ElasticSearchController.GetProfile();
-        getUserName.execute(username);
-        try {
-            Profile profile1 = getUserName.get();
-            if (profile1 != null) {
-                return false;
-            }
-        } catch (Exception e) {
-            return true;
-        }
-        return true;
-    }
 
-*/
-    /**
-     *
-     * @param name
-     * @return boolean value where true means username does not exist, false if it does.
-     */
-    /*
-    public boolean allowUsername(String name){
-        if (elasticSearchController.checkUsername(name)) {
-            return false;
-        }
-        return true;
-    }
-
-*/
         //TODO for time being keep in controller, but we can generalize later as we see the methods we need
         //TODO save profile to server
         //set profile name as global variable?
