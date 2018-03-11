@@ -73,7 +73,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         toast.show();
         task.addBid(new Bid(user.getUserName(), bidAmount));
 
-
+        elasticSearchController.updateTasks(task);
         statusTextField.setText(task.getStatus());
         fillBidded();
     }
@@ -86,6 +86,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
             Bid bid = task.getBids().getBid(user.getUserName());
             task.removeBid(bid);
         }
+        elasticSearchController.updateTasks(task);
         statusTextField.setText(task.getStatus());
         if (task.isBidded()) {
             fillBidded();
@@ -93,6 +94,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         if (task.isRequested()) {
             fillRequested();
         }
+
     }
 
 

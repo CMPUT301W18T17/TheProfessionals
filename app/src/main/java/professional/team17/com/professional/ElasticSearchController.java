@@ -73,20 +73,6 @@ public class ElasticSearchController {
     }
 
 
-    /**
-     *
-     * @param username - the username to be matched against the task requester for each task
-     * @param status - the status of the task
-     * @return - TaskList of all tasks that match query
-     */
-    public TaskList getTasksRequester1(String username, String status) {
-        String search = "{ \"query\": {" +
-                " \"bool\": {" +
-                "\"must\": [ " +
-                "{\"match\": {\"profileName\": \"" + username + "\"}}," +
-                "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
-        return getTaskList(search);
-    }
 
     /**
      *
@@ -143,7 +129,7 @@ public class ElasticSearchController {
 
     /**
      *
-     * @param task - the task that will be added/updated within the ES
+     * @param task - the task that will be added within the ES
      */
     public void addTasks(Task task) {
         ElasticSearchController.AddTask addtask = new ElasticSearchController.AddTask();
@@ -153,6 +139,17 @@ public class ElasticSearchController {
         //TODO RESEARCH BETTER WAY
         ElasticSearchController.UpdateTask updateTask = new ElasticSearchController.UpdateTask();
         updateTask.execute(task);
+    }
+
+
+    /**
+     *
+     * @param task - the task that will be added within the ES
+     */
+    public void updateTasks(Task task) {
+        ElasticSearchController.UpdateTask updatetask = new ElasticSearchController.UpdateTask();
+        updatetask.execute(task);
+
     }
 
 
