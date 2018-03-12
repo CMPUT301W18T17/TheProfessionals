@@ -37,15 +37,23 @@ public class BidList extends ArrayList<Bid> implements Serializable{
     //add bid and keep track of lowest
     public void addBids(Bid bid){
         lowest();
+        if (userBidded(bid.getName())) {
+            updateBid(bid.getName(), bid.getAmount());
+            return;
+        }
         if (this.isEmpty()){
             lowest = bid;
         }
-
         else if (bid.getAmount()<lowest.getAmount()) {
             lowest =  bid;
         }
-
         this.add(bid);
+    }
+
+    private void updateBid(String name, double amount) {
+        Bid bid = getBid(name);
+        bid.setAmount(amount);
+        lowest();
     }
 
     public void delete(Bid bid){
@@ -85,6 +93,7 @@ public class BidList extends ArrayList<Bid> implements Serializable{
         }
         return low;
     }
+
 
 
     public int getSize(){

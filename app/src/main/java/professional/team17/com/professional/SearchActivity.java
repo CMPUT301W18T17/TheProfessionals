@@ -19,24 +19,8 @@ public class SearchActivity extends ProviderLayout {
 
     //TODO DELETE
     private Profile user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
-    private TaskList dummyTaskList;
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
-    //TODO DELETE METHOD
-    public void dummyDate(){
-        dummyTaskList = new TaskList();
-
-        Task task1 = new Task("ProfileName1", "Name1", "Description1", "Location1","ID1" );
-        Task task2 = new Task("ProfileName2", "Name2", "Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2Description2 Description2 Description2 Description2 Description2 Description2Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2", "Location2","ID2" );
-        Task task3 = new Task("ProfileName3", "Name3", "Description3", "Location3","ID3" );
-        dummyTaskList.addTask(task1);
-        dummyTaskList.addTask(task2);
-        dummyTaskList.addTask(task3);
-        task1.addBid(new Bid("john123", 234.3));
-        task1.addBid(new Bid("ProfileName4", 23.40));
-        task2.addBid(new Bid("ProfileName4", 277.40));
-
-    }
 
 
     @Override
@@ -73,7 +57,6 @@ public class SearchActivity extends ProviderLayout {
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, "SEARCH ENTERED"+query, duration);
                 toast.show();
-                displayResults();
                 searchView.clearFocus(); //remove focus on submit
                 return false;
             }
@@ -102,18 +85,8 @@ public class SearchActivity extends ProviderLayout {
     };
 
 
-    //TODO this will fill results from search (may need to take parameters in bundle)
-    public TaskList getTasks() {
-        dummyDate();
-        return dummyTaskList;
-    }
 
-    //This updates the adapter with the results
-    public void displayResults(){
-        taskList.clear();
-        taskList.addAll(getTasks());
-        searchAdapterHelper.notifyDataSetChanged();
-    }
+
 
 
     public TaskList getOpenTasks() {
