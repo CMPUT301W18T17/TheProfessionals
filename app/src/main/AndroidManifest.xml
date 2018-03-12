@@ -21,6 +21,7 @@
         <activity android:name=".ProfileViewActivity" />
         <activity android:name=".OtherProfileViewActivity" />
         <activity android:name=".MyProfileViewActivity" />
+        <activity android:name=".ProviderTaskListActivity" />
         <activity
             android:name=".SignUpActivity"
             android:parentActivityName=".LogInActivity">
