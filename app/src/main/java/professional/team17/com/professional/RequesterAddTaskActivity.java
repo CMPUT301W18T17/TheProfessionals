@@ -41,11 +41,16 @@ public class RequesterAddTaskActivity extends RequesterLayout {
     private MapView mapView;
     private Button submitButton;
     /* other variables */
+    private Task task;
     private String dateString;
     private String locationString;
     private int year, month, day, id;
     private String yearString,monthString,dayString;
 
+    /**
+     * On creation of the activity, set all view objects and onClickListeners.
+     * @param savedInstanceState The activity's previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,25 +96,18 @@ public class RequesterAddTaskActivity extends RequesterLayout {
                 String description = descriptionField.getText().toString();
                 locationString = locationField.getText().toString();
 
-                /* Create a random ID for the task */
-                Random rand = new Random();
-                id = rand.nextInt(50) + 1;
 
                 /* Create an intent and bundle and store all task info */
-                if (title.length() > 0 && title.length() < 30 && description.length() != 0 && description.length() < 300) {
-                    Intent intent = new Intent();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("title", title);
-                    bundle.putString("date", dateString);
-                    bundle.putString("description", description);
-                    bundle.putString("location", locationString);
-                    bundle.putInt("id", id);
-                    intent.putExtras(bundle);
-                    setResult(RequesterViewListActivity.RESULT_OK, intent);
-                }
+               addToServer(title, description);
 
-                /* Activity finished */
-                finish();
+
+                /* Activity finished, start RequesterViewListActivity */
+                Bundle bundle = new Bundle(1);
+                bundle.putString("ID", task.getUniqueID());
+                Intent intent = new Intent(RequesterAddTaskActivity.this, RequesterViewListActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
 
             }
         });
@@ -124,18 +122,29 @@ public class RequesterAddTaskActivity extends RequesterLayout {
         dateFragment.show(getFragmentManager(), "datePicker");
     }
 
-
-    /** here we still need to handle 2 things
-     * 1. google map
-     * 2. add photo(since it nevigate to another interface)
+    /**
+     * Add the task to the ElasticSearch server.
+     * @param title Task title
+     * @param description Task description
      */
-    private String handleGoogleMap(){
-        //implement soon
-        return  locationString;
+    private void addToServer(String title, String description){
+        //TODO delete this temp variable
+        String username = "placeholder";
+        task = new Task(username, title, description, locationString, dateString);
+        ElasticSearchController elasticSearchController = new ElasticSearchController();
+        elasticSearchController.addTasks(task);
     }
-    //private imageView UserAddImage(){
-        //get the idea from Uml.
-        //return imageView;
+
+    /**
+     * Saves the task locally for offline functionality.
+     */
+    //private void saveInFile(){
+    //TODO offline functionality in project 5
+    //}
+
+
+
+    //TODO photo and location handling in project 5
     }
 
 

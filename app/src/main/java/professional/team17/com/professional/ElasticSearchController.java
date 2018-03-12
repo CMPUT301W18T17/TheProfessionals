@@ -129,7 +129,6 @@ public class ElasticSearchController {
 
     /**
      *
-     * @param task - the task that will be added within the ES
      */
     public void addTasks(Task task) {
         ElasticSearchController.AddTask addtask = new ElasticSearchController.AddTask();
