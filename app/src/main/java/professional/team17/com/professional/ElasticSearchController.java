@@ -130,14 +130,21 @@ public class ElasticSearchController {
     /**
      *
      */
-    public void addTasks(Task task) {
+    public String addTasks(Task task) {
+        String id;
         ElasticSearchController.AddTask addtask = new ElasticSearchController.AddTask();
         addtask.execute(task);
-
+        try {
+            id = addtask.get();
+        }
+        catch (Exception e){
+            id = null;
+        }
         //now that the id is set, we need to update it into the db
         //TODO RESEARCH BETTER WAY
         ElasticSearchController.UpdateTask updateTask = new ElasticSearchController.UpdateTask();
         updateTask.execute(task);
+        return id;
     }
 
 
