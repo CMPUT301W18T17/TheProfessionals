@@ -5,4 +5,5 @@ package professional.team17.com.professional;
  */
 
 public class ProviderTaskController {
+
 }

@@ -48,6 +48,7 @@ public class Task implements Serializable{
         this.bids = new BidList();
     }
 
+
     /**
      *
      * @param profileName - String username of requested
@@ -280,6 +281,18 @@ public class Task implements Serializable{
         this.status = "Requested";
     }
 
+
+    /**
+     *
+     * @param bid - the bid selected for the task
+     */
+    public void chooseBid(Bid bid){
+        this.status ="Assigned";
+        this.clearBids();
+        this.addBid(bid);
+
+    }
+
     /**
      *
      * @param bid - the bid selected for the task
@@ -289,6 +302,8 @@ public class Task implements Serializable{
         this.clearBids();
         this.addBid(bid);
     }
+
+
 
     /**
      * Will change the status to Done
@@ -301,7 +316,7 @@ public class Task implements Serializable{
     /**
      * Will change the status to Requested
      */
-    public void setBidded(){
+    private void setBidded(){
         this.status = "Bidded";
     }
 
