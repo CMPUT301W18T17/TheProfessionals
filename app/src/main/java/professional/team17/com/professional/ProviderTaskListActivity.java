@@ -95,6 +95,7 @@ public class ProviderTaskListActivity extends ProviderLayout {
         }
 
         if (type.equals("Assigned")) {
+            taskList = elasticSearchController.getTasksBidded("john123", "Assigned");
             //get assigned list from es
         }
        // dummyDate();

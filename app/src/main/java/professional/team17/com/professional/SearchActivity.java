@@ -9,19 +9,23 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import java.util.Collection;
+
 public class SearchActivity extends ProviderLayout {
     private ArrayAdapterSearchResults searchAdapterHelper;
     private ListView listView;
     private SearchView searchView;
     private TaskList taskList;
-    private Profile user;
+
     //TODO DELETE
+    private Profile user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
     private TaskList dummyTaskList;
+    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
     //TODO DELETE METHOD
     public void dummyDate(){
         dummyTaskList = new TaskList();
-        user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
+
         Task task1 = new Task("ProfileName1", "Name1", "Description1", "Location1","ID1" );
         Task task2 = new Task("ProfileName2", "Name2", "Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2Description2 Description2 Description2 Description2 Description2 Description2Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2 Description2", "Location2","ID2" );
         Task task3 = new Task("ProfileName3", "Name3", "Description3", "Location3","ID3" );
@@ -44,6 +48,13 @@ public class SearchActivity extends ProviderLayout {
         listView =findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(searchAdapterHelper);
         listView.setOnItemClickListener(clickListener);
+
+        //taskList = elasticSearchController.getTasksBidded("john123", "Bidded");
+        taskList.addAll(getOpenTasks());
+
+
+        //adapterHelper.notifyDataSetChanged();
+
 
         /* Change activity title */
         this.setActivityTitle("Task Search");
@@ -80,13 +91,12 @@ public class SearchActivity extends ProviderLayout {
      */
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            TaskList taskList = dummyTaskList;
             Task task = taskList.get(position);
             Intent intention = new Intent(SearchActivity.this, ProviderViewTask.class);
-            intention.putExtra("Task", task);
-            intention.putExtra("position", position);
+            intention.putExtra("Task", task.getUniqueID());
             intention.putExtra("profile", user);
             startActivity(intention);
+
         }
 
     };
@@ -106,4 +116,9 @@ public class SearchActivity extends ProviderLayout {
     }
 
 
+    public TaskList getOpenTasks() {
+        TaskList tasklist = new TaskList();
+        tasklist = elasticSearchController.getTasksStatus("Requested");
+        return tasklist;
+    }
 }
