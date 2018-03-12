@@ -20,7 +20,10 @@ import android.widget.Toast;
  */
 public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
 
+    //TODO below item is needed for protoype, part 5 persistence will remove this
     private Profile user;
+
+    //TODO both items below can be put in controller (project part 5)
     private Task task;
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
@@ -46,7 +49,10 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     private ImageButton appendButton;
 
 
-
+    /**
+     * On creation of the activity, set all view objects
+     * @param savedInstanceState The activity's previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

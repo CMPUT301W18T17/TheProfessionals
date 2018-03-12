@@ -7,35 +7,34 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+
+/**
+ *
+ * An activity where the provider can see the tasks - with different ui depending
+ * On the task status, and input
+ * @author Allison
+ * @see ElasticSearchController, ArrayAdapterSearchResults TaskLIst, Profile
+ */
 public class ProviderTaskListActivity extends ProviderLayout {
     private ArrayAdapterSearchResults adapterHelper;
     private ListView listView;
+
+    //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
-    private Profile user;
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
-    //TODO DELETE
-    private TaskList dummyTaskList;
 
-    //TODO DELETE METHOD
-    public void dummyDate(){
-        dummyTaskList = new TaskList();
-
-        Task task1 = new Task("ProfileName1", "Name1", "Description1", "Location1","ID1" );
-        Task task2 = new Task("ProfileName2", "Name2", "Description2", "Location2","ID2" );
-        Task task3 = new Task("ProfileName3", "Name3", "Description3", "Location3","ID3" );
-        dummyTaskList.addTask(task1);
-        dummyTaskList.addTask(task2);
-        dummyTaskList.addTask(task3);
-        task1.addBid(new Bid("john123", 234.3));
-        task1.addBid(new Bid("ProfileName4", 23.40));
-        task2.addBid(new Bid("ProfileName4", 277.40));
-
-    }
+    //TODO below item is needed for protoype, part 5 persistence will remove this
+    private Profile user;
 
 
+    /**
+     * On creation of the activity, set all view objects
+     * @param savedInstanceState The activity's previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //TODO Delete after project part 5 with persistenct
         user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
         setContentView(R.layout.provider_tasklist_view);
         taskList = new TaskList();
@@ -45,17 +44,14 @@ public class ProviderTaskListActivity extends ProviderLayout {
         listView.setOnItemClickListener(clickListener);
         String type = setProviderViewType();
         createList(type);
-        //taskList = elasticSearchController.getTasksBidded("john123", "Bidded");
         taskList.addAll(createList(type));
-        //adapterHelper.notifyDataSetChanged();
+        adapterHelper.notifyDataSetChanged();
 
     }
 
-
-
     /**
      * This is an anonymous method to create a click listener for the listview rows. If the row
-     * is selected, it packages up the task selected and the position to ViewTaskBidded
+     * is selected, it packages up the task selected and the position to ProviderViewTask
      */
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -70,44 +66,32 @@ public class ProviderTaskListActivity extends ProviderLayout {
     };
 
 
-
-    //TODO this will fill results from search (may need to take parameters in bundle)
-    public TaskList getTasks() {
-        dummyDate();
-        return dummyTaskList;
-    }
-
-    //This updates the adapter with the results
-    public void displayResults(){
-        taskList.clear();
-        taskList.addAll(getTasks());
-        adapterHelper.notifyDataSetChanged();
-    }
-
+    /**
+     *
+     * @param type - a string representing the status of the task being displayed
+     * @return tasklist - a list of tasks of either the tasks assigned to the user,
+     * of, tasks the user has bidded on.
+     */
     private TaskList createList(String type) {
         TaskList taskList =null;
-        Log.i("DOUR", "createList: "+type);
-
         if (type.equals("Bidded")) {
             taskList = elasticSearchController.getTasksBidded("john123", "Bidded");
-            Log.i("DOUR", "createList: "+taskList);
-
         }
-
         if (type.equals("Assigned")) {
             taskList = elasticSearchController.getTasksBidded("john123", "Assigned");
-            //get assigned list from es
         }
-       // dummyDate();
-       // taskList = dummyTaskList;
-
-
         return taskList;
     }
 
     //activity will pass flag into this 1 = my bids, 0 = assigned
-    private String setProviderViewType() {
 
+    /**
+     *
+     * @return type - a string representing the type of lists the user wishes to see
+     * the types of lists are either: 1) Assigned -  the tasks assigned to the user,
+     * or 2) Bidded - tasks the user has bidded on.
+     */
+    private String setProviderViewType() {
         Bundle intent = getIntent().getExtras();
         String type = intent.getString("Status");
         return type;

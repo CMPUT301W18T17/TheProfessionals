@@ -19,40 +19,59 @@ import android.widget.TextView;
 import java.math.BigDecimal;
 
 /**
- * Created by ag on 2018-03-04.need to add listender to buttons, check string input, and send it back
+ *
+ * A dialog fragment that will will work with an taskprovideractivity
+ * This allows the user to edit their bid or add a bid.
+ * This implements an interface that is called within the activity to see if the user
+ * added/edited the bid, or cancelled the dialog
+ *
+ * @author Allison
  */
-
 public class PlaceBidDialog extends DialogFragment {
 
 
+    /**
+     * This is the interface used to talk to the activity.
+     * It holds the user intput in variable "confirmed"
+     */
     public interface PlaceBidDialogListener {
         void onFinishPlaceBidDialog(String inputText);
     }
 
     private PlaceBidDialogListener listener;
 
-
+    /*
+     * Implement the empty method from interface ConfirmDialogListener
+     */
     public PlaceBidDialog() {
-        // Empty constructor is required for DialogFragment
-        // Make sure not to add arguments to the constructor
-        // Use `newInstance` instead as shown below
     }
 
 
+    /**
+     *
+     * @param context - the activity context calling the dialog
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // Verify that the host activity implements the callback interface
         try {
-            // Instantiate the EditNameDialogListener so we can send events to the host
             listener = (PlaceBidDialogListener) context;
         } catch (ClassCastException e) {
-            // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(context.toString()
-                    + " must implement EditNameDialogListener");
+                    + "Activity must implement the PlaceBidDialogListener");
         }
     }
 
+
+    /**
+     * Override the onCreateView Builder
+     * @param inflater - the layout being inflated
+     * @param container - The view calling the fragment
+     * @param savedInstanceState - the string paremeters being passed, they are as follows
+     *                           title: the title to display in the fragment
+     *                           amount: the string representing the amount to be placed into the amount field
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -76,8 +95,6 @@ public class PlaceBidDialog extends DialogFragment {
         bidInput.setText(amount);
 
 
-
-
         //remove warning text if shown
         bidInput.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +104,6 @@ public class PlaceBidDialog extends DialogFragment {
                 }
             }
         });
-
 
         dismiss.setOnClickListener(new View.OnClickListener() {
 
@@ -112,8 +128,6 @@ public class PlaceBidDialog extends DialogFragment {
                 }
             }
         });
-
-
         return rootView;
     }
 

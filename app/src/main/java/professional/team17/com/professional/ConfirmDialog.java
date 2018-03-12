@@ -14,37 +14,62 @@ import android.widget.TextView;
 import java.math.BigDecimal;
 
 /**
- * Created by ag on 2018-03-04.need to add listender to buttons, check string input, and send it back
+ *
+ * A dialog fragment that will will work with an activity, user must bundle in the
+ * dialog title, message, and cancel/confirm button text.
+ * This implements an interface that is called within the activity to see if the user
+ * confirmed/cancelled the dialog interaction
+ *
+ * @author Allison
  */
-
 public class ConfirmDialog extends DialogFragment {
 
+
+    /**
+     * This is the interface used to talk to the activity.
+     * It holds the user intput in variable "confirmed"
+     */
     public interface ConfirmDialogListener {
         void onFinishConfirmDialog(Boolean confirmed);
     }
 
+
     private ConfirmDialogListener listener;
 
 
-    public ConfirmDialog() {
-    }
+    /*
+    * Implement the empty method from interface ConfirmDialogListener
+    */
+    public ConfirmDialog() {}
 
 
-
+    /**
+     *
+     * @param context - the activity context calling the dialog
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        // Verify that the host activity implements the callback interface
         try {
-            // Instantiate the EditNameDialogListener so we can send events to the host
             listener = (ConfirmDialogListener) context;
         } catch (ClassCastException e) {
-            // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(context.toString()
-                    + " must implement ConfirmDialogListener");
+                    + "Activity must implement the ConfirmDialogListener");
         }
     }
 
+    /**
+     * Override the onCreateView Builder
+     * @param inflater - the layout being inflated
+     * @param container - The view calling the fragment
+     * @param savedInstanceState - the string paremeters being passed, they are as follows
+     *                           title: the title to display in the fragment
+     *                           cancel: the text to display in the cancel button text
+     *                           confirm: the text to display in confirm button text
+     *                           message: the text to display as the question
+     *                              (what displays within the fragment)
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -87,13 +112,8 @@ public class ConfirmDialog extends DialogFragment {
                 }
         });
 
-
         return rootView;
     }
-
-
-
-
 
 }
 
