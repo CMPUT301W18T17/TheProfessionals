@@ -20,4 +20,10 @@
     <string name="cancel_bid">Are you sure you want to remove your bid? \n(This cannot be undone)</string>
     <string name="title_activity_requester_view_task">RequesterViewTaskActivity</string>
     <string name="title_activity_requester_add_task">RequesterAddTaskActivity</string>
+    <string name="task_title_field">Task Name (30 characters max.)</string>
+    <string name="task_description_field">Task Description (300 characters max.)</string>
+    <string name="date_format">yyyy-mm-dd</string>
+    <string name="add_photo">Add a photo (optional)</string>
+    <string name="address_field">Location/Address (optional)</string>
+    <string name="add_button">Add</string>
 </resources>
