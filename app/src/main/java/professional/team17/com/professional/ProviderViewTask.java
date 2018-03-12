@@ -11,11 +11,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+/**
+ *
+ * An activity where the provider can see the tasks - with different ui depending
+ * On the task status, and input
+ * @author Allison
+ * @see ElasticSearchController, Task, Profile
+ */
 public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
 
     private Profile user;
-    private Profile requester;
     private Task task;
+    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
+
+
+    //Everything below maybe able to be set into the controller. Do not reflect in uml
     private TextView statusTextField;
     private TextView userNameTextField;
     private TextView taskTitleTextField;
@@ -23,13 +33,11 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     private TextView taskDescriptionTextField;
     private TextView taskLowBidTextField;
     private TextView taskMyBidTextField;
-    private RatingBar requesterAvgTextField;
+
     private TextView taskLowBidDollar;
     private TextView taskMyBidDollar;
-    //  private TextView myBidTextView;
-   // private TextView lowBidTextView;
-    private TextView requesterAvgTextView;
-    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private TextView requesterAvgTextView; //project 5 implement
+    private RatingBar requesterAvgTextField; //project 5 implement
 
 
     //both buttons start as invisible by default
@@ -44,7 +52,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_view_task2);
 
-        //get textfields ids
+        //get textfields ids //TODO this can be moved to controller (project part 5)
         statusTextField = (TextView) findViewById(R.id.provider_view_task_statusType);
         userNameTextField = (TextView) findViewById(R.id.provider_view_task_userName);
         taskTitleTextField = (TextView) findViewById(R.id.provider_view_task_title);
@@ -54,6 +62,9 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         taskLowBidDollar = (TextView) findViewById(R.id.provider_view_task_lowBidDollar);
         taskMyBidTextField = (TextView) findViewById(R.id.provider_view_task_myBidInput);
         taskMyBidDollar = (TextView) findViewById(R.id.provider_view_task_myBidInputDollar);
+        bidButton = (ImageButton) findViewById(R.id.provider_view_task_AddBid);
+        deleteButton = (ImageButton) findViewById(R.id.provider_view_task_removeBid);
+        appendButton = (ImageButton) findViewById(R.id.provider_view_task_manageBid);
 
         this.setActivityTitle("View Task");
 
@@ -61,19 +72,22 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         task = getTask();
         //getRequester();
 
-        //Log.i("WEWE", "onCreate: "+user.getUserName());
         checkStatus();
         fillTask();
-        //  setRating();
+        //setRating();
     }
 
 
-    //method on return of place bid from interface
+    /***
+     * Interface method from PlaceBidDialog.PlaceBidDialogListener
+     * @param confirmed boolean value representing the user response in the dialog
+     * true means the user add/changed the bid
+     */
     public void onFinishPlaceBidDialog(String inputText){
         double bidAmount =  Double.valueOf(inputText);
         int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(this, "SEARCH ENTERED"+bidAmount, duration);
-        toast.show();
+
+
         task.addBid(new Bid(user.getUserName(), bidAmount));
 
         elasticSearchController.updateTasks(task);
@@ -81,11 +95,13 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         fillBidded();
     }
 
-
-    //method on return of cancel bid from interface CancelBidDialog.CancelBidDialogListener
+    /***
+     * Interface method from ConfirmDialog.ConfirmDialogListener
+     * @param confirmed boolean value representing the user response in the dialog
+     * true means the user confirmed.
+     */
     public void onFinishConfirmDialog(Boolean confirmed){
         if (confirmed==true){
-            Log.i("DELETE", "onFinishDeleteDialog: ");
             Bid bid = task.getBids().getBid(user.getUserName());
             task.removeBid(bid);
         }
@@ -103,10 +119,9 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 
 
 
-    //TODO clean up all filltask(), fillrequested(), fillBidded() and fillAssigned()
+    //TODO move all UI controls into controller (project part 5)
     /**
-     *
-     * @return Returns the subscription sent with the Intent
+     * This will fill the basic task info of status, requestername, taskname, date, and description
      */
     public void fillTask() {
         //plug items from task
@@ -118,7 +133,9 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 
     }
 
-    //If status is requested - place bid button will show, and lowest bid text fields hides
+    /**
+     * This will display the correct UI for tasks in 'Requested' status.
+     */
     public void fillRequested(){
         deleteButton.setVisibility(View.GONE);
         appendButton.setVisibility(View.GONE);
@@ -129,13 +146,18 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         taskMyBidDollar.setVisibility(View.INVISIBLE);
     }
 
-    //If status is assigned, hide lowbid fields and show user bid.
+
+    /**
+     * This will display the correct UI for tasks in "assigned status'
+     */
     public void fillAssigned(){
         if (task.getBids().userBidded(user.getUserName())) {
             BidList bids = task.getBids();
-            taskLowBidDollar.setVisibility(View.INVISIBLE);
-         //   lowBidTextView.setVisibility(View.INVISIBLE);
             taskMyBidTextField.setVisibility(View.VISIBLE);
+            taskMyBidDollar.setVisibility(View.VISIBLE);
+            deleteButton.setVisibility(View.INVISIBLE);
+            bidButton.setVisibility(View.INVISIBLE);
+            appendButton.setVisibility(View.INVISIBLE);
             taskMyBidTextField.setText(bids.getBid(user.getUserName()).getAmountAsString());
         }
         else {
@@ -143,8 +165,9 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         }
     }
 
-    //If bidded, check if user has bid, if they have show cancel bid button and show their bid info
-    // if user has not bid, then show place bid button
+    /**
+     * This will dispay the correct info for tasks in bidded status
+     */
     public void fillBidded() {
         //set lowest bid amount
         deleteButton.setVisibility(View.VISIBLE);
@@ -157,7 +180,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         taskMyBidDollar.setVisibility(View.VISIBLE);
     }
 
-/*
+/* //TODO implement in project part 5
     public void setRating(){
         if (requester.getReviewList().isEmpty()==false) {
             requesterAvgTextView = (TextView) findViewById(R.id.provider_view_rating);
@@ -173,22 +196,9 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 */
     /**
      *
-     * Sets the proper fields depending on status of task
-     * //TODO Delete explanatory
-     * Default state of this view is to hide the delete/place bid buttons and myBid textfields
-     * //If status is requested - place bid button will show, and lowest bid text fields hides
-     * //If status is bidded and user has placed bid, then cancel bid button shows, and my bid fields show
-     * //If status is bidded and user has not placed bid, than place bid buttons shows
-     * //If status is assigned or done and user has bid, then they will see their bid amount
+     * Controls and get teh correct UI to display
      */
     public void checkStatus() {
-
-
-        bidButton = (ImageButton) findViewById(R.id.provider_view_task_AddBid);
-        deleteButton = (ImageButton) findViewById(R.id.provider_view_task_removeBid);
-        appendButton = (ImageButton) findViewById(R.id.provider_view_task_manageBid);
-     //   myBidTextView = (TextView) findViewById(R.id.provider_view_task_myBid);
-     //   lowBidTextView = (TextView) findViewById(R.id.provider_view_task_lowBid);
 
         if (task.isRequested()){
             fillRequested();
@@ -203,17 +213,20 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         }
     }
 
-
+    /**
+     * Move to the profile view to see the requested info
+     * @param v the view the button is located on
+     */
     public void viewProfile(View v){
         Intent intention = new Intent(this, OtherProfileViewActivity.class);
         intention.putExtra("profile", task.getProfileName());
         startActivity(intention);
-
     }
 
-
-
-    // Method to call fragment to place bid
+    /**
+     * Build fragment to add a bid
+     * @param v the view the button is located on
+     */
     public void placeBid(View v){
         FragmentManager fm = getSupportFragmentManager();
         PlaceBidDialog dialogFragment = new PlaceBidDialog ();
@@ -227,23 +240,26 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     }
 
 
-
-    // Method to call fragment to edit existing bid
+    /**
+     * Build fragment to edit bid
+     * @param v the view the button is located on
+     */
     public void appendBid(View v){
         FragmentManager fm = getSupportFragmentManager();
         PlaceBidDialog dialogFragment = new PlaceBidDialog ();
         Bundle args = new Bundle();
         args.putString("title", "Change Bid");
         args.putString("amount", taskMyBidTextField.getText().toString());
-
         dialogFragment.setArguments(args);
-        dialogFragment.show(fm, "Sample Fragment");
+        dialogFragment.show(fm, "Append bid");
     }
 
-    // Method to call fragment to confirm cancel bid
+    /**
+     * Build fragment to delete a bid
+     * @param v the view the button is located on
+     */
     public void cancelBid(View v){
         FragmentManager fm = getSupportFragmentManager();
-        //CancelBidDialog dialogFragment = new CancelBidDialog ();
 
         ConfirmDialog confirmDialog = new ConfirmDialog();
         Bundle args = new Bundle();
@@ -252,10 +268,10 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         args.putString("confirm", "Yes");
         args.putString("message", "Are you sure you want to delete?");
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
         confirmDialog.setArguments(args);
         confirmDialog.show(fm, "Sample Fragment");
     }
+
     /**
      *
      * @return Returns the subscription sent with the Intent
@@ -276,29 +292,5 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         return elasticSearchController.getTask(task);
     }
 
-    /**
-     *
-     * @return Returns the subscription sent with the Intent
-     */
-  /*  private void getRequester() {
-        if (task.isBidded()){
-            DummyData();
-        }
-        else {
-            DummyData1();
-        }
-    }
-/*
-    public void DummyData(){
-        requester = new Profile("John Smith", task.getProfileName(), "email", "123123123");
-     //   ReviewList reviewList  = requester.getReviewList();
-        Review review1 = new Review(5.0, "reviewer","comment", "title");
-        Review review2 = new Review(2.1, "reviewer1","comment", "title");
-        reviewList.addReview(review1);
-        reviewList.addReview(review2);
-    }
-*/
-    public void DummyData1(){
-        requester = new Profile("John Smith", task.getProfileName(), "email", "123123123");
-    }
+
 }

@@ -51,7 +51,7 @@ public class BidListTest extends ActivityInstrumentationTestCase2 {
         bids.add(bid);
         Bid bid1 = new Bid("Bob&Mary1", 501.0);
         bids.add(bid1);
-        //TODO assertEquals(bids.getLowest(), bid);
+        assertEquals(bids.getLowest(), bid);
 
     }
 

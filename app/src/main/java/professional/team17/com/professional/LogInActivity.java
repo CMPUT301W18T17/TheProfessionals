@@ -45,6 +45,7 @@ public class LogInActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SearchActivity.class);
 
         startActivity(intent);
+        finish();
 
     }
 
@@ -56,5 +57,6 @@ public class LogInActivity extends AppCompatActivity {
 
         //not sure if I should be starting with result or not
         startActivity(intent);
+
     }
 }
