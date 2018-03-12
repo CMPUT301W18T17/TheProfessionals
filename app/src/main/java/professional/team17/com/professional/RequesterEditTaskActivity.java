@@ -10,7 +10,7 @@ import android.widget.EditText;
 import java.util.Calendar;
 import java.util.Random;
 
-public class RequesterEditTaskActivity extends AppCompatActivity {
+public class RequesterEditTaskActivity extends RequesterLayout {
     private EditText name;
     private EditText description;
     private EditText location;

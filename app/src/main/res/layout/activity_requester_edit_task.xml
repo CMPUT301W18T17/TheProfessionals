@@ -6,58 +6,70 @@
     android:layout_height="match_parent"
     tools:context="professional.team17.com.professional.RequesterAddTaskActivity">
 
-    <EditText
-        android:id="@+id/TaskNameField"
-        android:layout_width="355dp"
-        android:layout_height="63dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Task Name (30 character max.)"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include layout="@layout/requester_layout" />
 
-    <EditText
-        android:id="@+id/taskDescriptionField"
-        android:layout_width="354dp"
-        android:layout_height="96dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Task Description (300 character max.)"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="346dp"
-        android:layout_height="46dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:text="click here to set date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TaskNameField" />
-
-    <EditText
-        android:id="@+id/textualAddressField"
-        android:layout_width="354dp"
-        android:layout_height="89dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginLeft="32dp"
-        android:ems="10"
-        android:hint="Address/Location(optional)"
-        android:inputType="textPersonName"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp"
+        android:layout_marginTop="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.525" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="346dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:text="click here to set date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TaskNameField" />
+
+        <EditText
+            android:id="@+id/TaskNameField"
+            android:layout_width="355dp"
+            android:layout_height="63dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Task Name (30 character max.)"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/textualAddressField"
+            android:layout_width="354dp"
+            android:layout_height="89dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginLeft="32dp"
+            android:ems="10"
+            android:hint="Address/Location(optional)"
+            android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.525" />
+
+        <EditText
+            android:id="@+id/taskDescriptionField"
+            android:layout_width="354dp"
+            android:layout_height="96dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Task Description (300 character max.)"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button3" />
+    </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>

@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-public class RequesterViewTaskActivity extends AppCompatActivity {
+public class RequesterViewTaskActivity extends RequesterLayout {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
