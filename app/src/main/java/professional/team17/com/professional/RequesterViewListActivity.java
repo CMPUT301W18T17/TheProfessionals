@@ -26,7 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RequesterViewListActivity extends AppCompatActivity {
+public class RequesterViewListActivity extends RequesterLayout {
     /**
      * where can i get the profile name
      */
