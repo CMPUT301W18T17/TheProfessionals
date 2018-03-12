@@ -63,12 +63,16 @@
             android:id="@+id/bid_row_accept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/cardview_shadow_end_color"
+            android:tint="@color/colorProvider"
             app:srcCompat="@android:drawable/stat_sys_vp_phone_call" />
 
         <ImageButton
             android:id="@+id/bid_row_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/cardview_shadow_end_color"
+            android:tint="@android:color/holo_red_dark"
             app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
     </LinearLayout>
 
