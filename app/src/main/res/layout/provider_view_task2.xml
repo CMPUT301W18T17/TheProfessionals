@@ -42,7 +42,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/provider_view_task_lowBid" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/provider_view_task_myBidInputDollar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -59,7 +59,7 @@
                     android:text="Place a Bid!"
                     android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_myBid"
-                    app:layout_constraintStart_toEndOf="@+id/textView4" />
+                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_myBidInputDollar" />
 
                 <TextView
                     android:id="@+id/provider_view_task_lowBid"
@@ -75,7 +75,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/provider_view_task_title" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/provider_view_task_lowBidDollar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -91,20 +91,21 @@
                     android:layout_marginStart="2dp"
                     android:text="No bids yet!"
                     android:textSize="18sp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
-                    app:layout_constraintStart_toEndOf="@+id/textView5" />
+                    app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_lowBidDollar"
+                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_lowBidDollar" />
 
                 <ImageButton
                     android:id="@+id/provider_view_task_removeBid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
                     android:background="@color/cardview_shadow_end_color"
                     android:onClick="cancelBid"
                     android:tint="@android:color/holo_red_dark"
                     app:layout_constraintBottom_toBottomOf="@+id/provider_view_task_myBidInput"
                     app:layout_constraintStart_toEndOf="@+id/provider_view_task_manageBid"
                     app:layout_constraintTop_toTopOf="@+id/provider_view_task_myBidInput"
+                    app:layout_constraintVertical_bias="0.285"
                     app:srcCompat="@android:drawable/ic_menu_delete" />
 
                 <ImageButton
@@ -112,27 +113,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="8dp"
                     android:background="@color/cardview_shadow_end_color"
+                    android:onClick="appendBid"
                     android:tint="@color/colorProvider"
                     app:layout_constraintBottom_toBottomOf="@+id/provider_view_task_myBidInput"
                     app:layout_constraintStart_toEndOf="@+id/provider_view_task_myBidInput"
                     app:layout_constraintTop_toTopOf="@+id/provider_view_task_myBidInput"
-                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintVertical_bias="0.133"
                     app:srcCompat="@android:drawable/ic_menu_manage" />
 
                 <ImageButton
                     android:id="@+id/provider_view_task_AddBid"
                     android:layout_width="29dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="8dp"
                     android:background="@color/cardview_shadow_end_color"
                     android:onClick="placeBid"
-                    android:tint="@color/colorPrimaryDark"
+                    android:tint="@android:color/holo_blue_dark"
                     app:layout_constraintBottom_toBottomOf="@+id/provider_view_task_myBidInput"
                     app:layout_constraintStart_toEndOf="@+id/provider_view_task_myBidInput"
                     app:layout_constraintTop_toTopOf="@+id/provider_view_task_myBidInput"
-                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintVertical_bias="0.285"
                     app:srcCompat="@android:drawable/ic_menu_add" />
 
                 <android.support.constraint.ConstraintLayout

@@ -59,12 +59,21 @@ public class PlaceBidDialog extends DialogFragment {
         final View rootView = inflater.inflate(R.layout.place_bid_fragment, container, false);
         getDialog().setTitle("Place Bid");
 
+        Bundle args = getArguments();
+
+        //get args activity passed into dialog
+        String title = args.getString("title");
+        String amount = args.getString("amount");
+
+        final TextView fieldtitle = (TextView) rootView.findViewById(R.id.place_bid_fragment_title);
+        final EditText bidInput = (EditText) rootView.findViewById(R.id.place_bid_fragment_bid_input);
+        final TextView warning = (TextView) rootView.findViewById(R.id.place_bid_fragment_warning);
 
         Button dismiss = (Button) rootView.findViewById(R.id.place_bid_fragment_cancelButton);
         Button add = (Button) rootView.findViewById(R.id.place_bid_fragment_addButton);
 
-        final EditText bidInput = (EditText) rootView.findViewById(R.id.place_bid_fragment_bid_input);
-        final TextView warning = (TextView) rootView.findViewById(R.id.place_bid_fragment_warning);
+        fieldtitle.setText(title);
+        bidInput.setText(amount);
 
 
 
@@ -161,4 +170,3 @@ public class PlaceBidDialog extends DialogFragment {
     }
 
 }
-
