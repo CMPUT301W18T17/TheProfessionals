@@ -3,6 +3,7 @@ package professional.team17.com.professional;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,14 @@ public class Task implements Serializable{
     private BidList bids;
     private String status;
 
+    /**
+     *
+     * @param profileName - String username of requested
+     * @param name - String name of the task
+     * @param description  - String description of the task
+     * @param location - String location of the task
+     * @param date - Date object - the date for the task to be completed by
+     */
     public Task(String profileName, String name, String description, String location, Date date) {
         this.profileName = profileName;
         this.name = name;
@@ -30,7 +39,25 @@ public class Task implements Serializable{
         this.bids = new BidList();
     }
 
-
+    /**
+     *
+     * @param profileName - String username of requested
+     * @param name - String name of the task
+     * @param description  - String description of the task
+     * @param location - String location of the task
+     * @param date - String date for the task to be completed by
+     */
+    public Task(String profileName, String name, String description, String location, String date) {
+        this.profileName = profileName;
+        this.name = name;
+        this.description = description;
+        this.location = location;
+        this.date = parseDate(date);
+        this.uniqueID = null;
+        this.status = "Requested";
+        this.bids = new BidList();
+    }
+/*
     public Task(String profileName, String name, String description, String location, String uniqueID) {
         this.profileName = profileName;
         this.name = name;
@@ -41,8 +68,8 @@ public class Task implements Serializable{
         this.status = "Requested";
         this.bids = new BidList();
     }
-
-
+*/
+/*
     public Task(String profileName, String name, String description, String location) {
         this.profileName = profileName;
         this.name = name;
@@ -53,7 +80,7 @@ public class Task implements Serializable{
         this.status = "Requested";
         this.bids = new BidList();
     }
-
+*/
 
     public String getProfileName() {
         return profileName;
@@ -93,7 +120,7 @@ public class Task implements Serializable{
 
     /**
      *
-     * @return date represented as string
+     * @return String date representation
      */
     public String getDateAsString() {
         String myFormat = "dd/MM/yyyy";
@@ -110,26 +137,48 @@ public class Task implements Serializable{
         return uniqueID;
     }
 
+    /**
+     *
+     * @param ID - the unique id for the task
+     */
     public void setId(String ID) {
         this.uniqueID = ID;
     }
 
+    /**
+     *
+     * //TODO implement in project part 5
+     */
     public ArrayList<String> getPhotos() {
         return photos;
     }
 
+
+    /**
+     *
+     * //TODO implement in project part 5
+     */
     public void setPhotos(ArrayList<String> photos) {
         this.photos = photos;
     }
 
+    /**
+     *
+     * //TODO implement in project part 5
+     */
     public void addPhoto(String photo){
         this.photos.add(photo);
     }
 
+    /**
+     *
+     * //TODO implement in project part 5
+     */
     public void removePhoto(String photo){
         this.photos.remove(photo);
     }
 
+    
     public BidList getBids() {
         return bids;
     }
@@ -219,6 +268,18 @@ public class Task implements Serializable{
         return "Name: '" + this.name + "', Status: '" + this.status + "', profile: '" + this.profileName + "', id: '" + this.uniqueID;
     }
 
-
+    private java.util.Date parseDate(String sdate) {
+        String myFormat = "dd/MM/yyyy";
+        java.util.Date input = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
+        if (sdate != null) {
+            try {
+                input = dateFormat.parse(sdate);
+            } catch (ParseException e) {
+                //do nothing
+            }
+        }
+        return input;
+    }
 
 }

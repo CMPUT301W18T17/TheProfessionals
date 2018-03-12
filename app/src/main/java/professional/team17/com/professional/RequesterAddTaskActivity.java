@@ -20,7 +20,11 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.MapView;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -130,11 +134,26 @@ public class RequesterAddTaskActivity extends RequesterLayout {
     private void addToServer(String title, String description){
         //TODO delete this temp variable
         String username = "placeholder";
+        java.util.Date inputDate = parseDate(dateString);
         task = new Task(username, title, description, locationString, dateString);
         ElasticSearchController elasticSearchController = new ElasticSearchController();
         elasticSearchController.addTasks(task);
     }
 
+
+    public java.util.Date parseDate(String sdate) {
+        String myFormat = "dd/MM/yyyy";
+        java.util.Date input = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
+        if (sdate != null) {
+            try {
+                input = dateFormat.parse(sdate);
+            } catch (ParseException e) {
+                //do nothing
+            }
+        }
+        return input;
+    }
     /**
      * Saves the task locally for offline functionality.
      */
