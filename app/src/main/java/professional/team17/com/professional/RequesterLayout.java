@@ -92,35 +92,27 @@ public abstract class RequesterLayout extends AppCompatActivity implements Image
                 break;
             /* If user tapped the bidded button */
             case R.id.biddedTasksRequesterButton:
-                /* Commented out as the activity does not exist yet
-                Intent intent = new Intent(this, RequesterListActivity.class);
+                intent = new Intent(this, RequesterViewListActivity.class);
                 intent.putExtra("Status", "Bidded");
                 startActivity(intent);
-                */
                 break;
             /* If the user tapped the assigned button */
             case R.id.acceptedTasksRequesterButton:
-                /* Commented out as the activity does not exist yet
-                Intent intent = new Intent(this, RequesterListActivity.class);
+                intent = new Intent(this, RequesterViewListActivity.class);
                 intent.putExtra("Status", "Assigned");
                 startActivity(intent);
-                */
                 break;
             /* If the user tapped the requested button */
             case R.id.requestedTasksRequesterButton:
-                /* Commented out as the activity does not exist yet
-                Intent intent = new Intent(this, RequesterListActivity.class);
+                intent = new Intent(this, RequesterViewListActivity.class);
                 intent.putExtra("Status", "Requested");
                 startActivity(intent);
-                */
                 break;
             /* If the user taps the switch button */
             case R.id.switchViewRequesterButton:
-                /*Commented out as the activity does not exist yet
-                Intent intent = new Intent(this, ProviderListActivity.class);
+                intent = new Intent(this, ProviderTaskListActivity.class);
                 intent.putExtra("Status", "Bidded");
                 startActivity(intent);
-                */
                 break;
             /* If the user taps the user menu button */
             case R.id.userMenuButton:
