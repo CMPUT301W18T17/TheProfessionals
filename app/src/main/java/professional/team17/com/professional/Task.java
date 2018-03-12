@@ -9,8 +9,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+
+/**
+ *
+ * This is the entity class for a task object
+ * TODO potentially remove some setters/getters that are not being used
+ *
+ * @author Allison
+ * @see BidList
+ */
 public class Task implements Serializable{
-    private String profileName;     /* person who requested the task */
+    private String profileName;
     private String name;
     private String description;
     private String location;
@@ -57,63 +66,94 @@ public class Task implements Serializable{
         this.status = "Requested";
         this.bids = new BidList();
     }
-/*
-    public Task(String profileName, String name, String description, String location, String uniqueID) {
-        this.profileName = profileName;
-        this.name = name;
-        this.description = description;
-        this.location = location;
-        this.date = new Date();
-        this.uniqueID = null;
-        this.status = "Requested";
-        this.bids = new BidList();
-    }
-*/
-/*
+
+    /**
+     *
+     * @param profileName - String username of requested
+     * @param name - String name of the task
+     * @param description  - String description of the task
+     * @param location - String location of the task
+     */
     public Task(String profileName, String name, String description, String location) {
         this.profileName = profileName;
         this.name = name;
         this.description = description;
         this.location = location;
-        this.date = new Date();
+        this.date = null;
         this.uniqueID = null;
         this.status = "Requested";
         this.bids = new BidList();
     }
-*/
 
+
+    /**
+     *
+     * @return profilename - a string repr the user name of the task requester
+     */
     public String getProfileName() {
         return profileName;
     }
 
+    /**
+     *
+     * @param profileName - a string repr the user name of the task requester
+     */
     public void setProfileName(String profileName) {
         this.profileName = profileName;
     }
 
+    /**
+     *
+     * @return name - a string repre the name of the task
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name - a string repr the name of the task
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return description as string
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description - a string repr the task description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return location as string
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     *
+     * @param location - string repr the address location
+     */
     public void setLocation(String location) {
         this.location = location;
     }
 
+    /**
+     *
+     * @return date as Date object
+     */
     public Date getDate() {
         return date;
     }
@@ -178,7 +218,10 @@ public class Task implements Serializable{
         this.photos.remove(photo);
     }
 
-    
+    /**
+     *
+     * @return a bidlist of bids held in the task
+     */
     public BidList getBids() {
         return bids;
     }
@@ -186,7 +229,7 @@ public class Task implements Serializable{
 
     /**
      *
-     * @param bid
+     * @param bid - the bids to be added against the bid
      */
     public void addBid(Bid bid){
         //if requested, update to Bidded
@@ -196,6 +239,10 @@ public class Task implements Serializable{
        this.bids.addBids(bid);
     }
 
+    /**
+     *
+     * @param bid - the bid object to be removed from the tasklist
+     */
     public void removeBid(Bid bid){
         this.bids.delete(bid);
         if (bids.isEmpty()){
@@ -203,27 +250,56 @@ public class Task implements Serializable{
         }
     }
 
+    /**
+     * This will clear all bids against the task
+     */
     public void clearBids(){
         this.bids.clear();
     }
 
+    /**
+     *
+     * @return - this will return the status of the task
+     */
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    /**
+     *
+     * @param status - this will set the status of the task
+     */
+    private void setStatus(String status) {
         this.status = status;
     }
 
     /**
-     * Set status to bidded, with better control of words
+     * Will change the status to Requested
      */
     public void setRequested(){
         this.status = "Requested";
     }
 
     /**
-     * Set status to bidded, with better control of words
+     *
+     * @param bid - the bid selected for the task
+     */
+    public void setAssigned(Bid bid){
+        this.status = "Assigned";
+        this.clearBids();
+        this.addBid(bid);
+    }
+
+    /**
+     * Will change the status to Done
+     */
+    public void setDone(){
+        this.status = "Done";
+    }
+
+
+    /**
+     * Will change the status to Requested
      */
     public void setBidded(){
         this.status = "Bidded";
@@ -262,12 +338,22 @@ public class Task implements Serializable{
         return this.status.equals("Done");
     }
 
-    //to help with development
-
+    /**
+     *
+     * @return string representing task important part
+     */
     public String toString(){
-        return "Name: '" + this.name + "', Status: '" + this.status + "', profile: '" + this.profileName + "', id: '" + this.uniqueID;
+        return "Name: '" + this.name +
+                "', Status: '" + this.status +
+                "', profile: '" + this.profileName +
+                "', id: '" + this.uniqueID;
     }
 
+    /**
+     *
+     * @param sdate - the string representation of the date
+     * @return - the Date format of the string representation
+     */
     private java.util.Date parseDate(String sdate) {
         String myFormat = "dd/MM/yyyy";
         java.util.Date input = null;

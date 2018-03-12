@@ -6,20 +6,40 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
+/**
+ *
+ * This is the entity class for a bid object
+ *
+ *
+ * @author Allison
+ * @see Bid
+ */
 public class BidList extends ArrayList<Bid> implements Serializable{
     private Bid lowest;
 
+    /**
+     * instantiate bidList, set lowest to null
+     */
     public BidList(){
         lowest = null;
         // Nothing
     }
 
+    /**
+     *
+     * @param index - the index the bid is located at
+     * @return
+     */
     public Bid getBid(int index){
         return this.get(index);
     }
 
-    /*
-    * Will return the bid matching the username
+
+    /**
+     *
+     * @param userName - the string repre the username of the provider who placed the bid
+     * @return - the bid the user had placed, or null, if it does not exist.
      */
     public Bid getBid(String userName){
         for (int i = 0; i < this.size(); i++) {
@@ -30,11 +50,20 @@ public class BidList extends ArrayList<Bid> implements Serializable{
         return null;
     }
 
+    /**
+     *
+     * @param bid - a bit
+     * @return - boolean value of true if bids exists in bidlist, false if it does not exist
+     */
     public boolean hasBid(Bid bid){
         return this.contains(bid);
     }
 
-    //add bid and keep track of lowest
+
+    /**
+     *
+     * @param bid - the bid to be added to the bidlist
+     */
     public void addBids(Bid bid){
         lowest();
         if (userBidded(bid.getName())) {
@@ -50,12 +79,23 @@ public class BidList extends ArrayList<Bid> implements Serializable{
         this.add(bid);
     }
 
+    /**
+     *
+     * @param name - the string repre the provider whose bid is being updated
+     * @param amount - the amount to be changed on the bid
+     */
     private void updateBid(String name, double amount) {
         Bid bid = getBid(name);
-        bid.setAmount(amount);
-        lowest();
+        if (bid != null) {
+            bid.setAmount(amount);
+            lowest();
+        }
     }
 
+    /**
+     *
+     * @param bid  - the bid to be removed from the list
+     */
     public void delete(Bid bid){
         this.remove(bid);
         if (bid==lowest){
@@ -63,7 +103,9 @@ public class BidList extends ArrayList<Bid> implements Serializable{
         }
     }
 
-
+    /**
+     * Will set the lowest attribute of the bidlist
+     */
     public void lowest(){
         if (lowest ==null && !this.isEmpty()){
             this.lowest = getLowest();
@@ -71,11 +113,6 @@ public class BidList extends ArrayList<Bid> implements Serializable{
 
     }
 
-    //remove all bids bud the one plugged in
-    public void deleteAllExcept(Bid bid){
-
-
-    }
 
     /**
      *
@@ -95,10 +132,18 @@ public class BidList extends ArrayList<Bid> implements Serializable{
     }
 
 
-
+    /**
+     *
+     * @return the size of the bidlist
+     */
     public int getSize(){
         return this.size();
     }
+
+    /**
+     *
+     * @return - boolean value, true if bidlist is empty, false if not empty
+     */
     public boolean isEmpty(){
         return this.size()==0;
     }
