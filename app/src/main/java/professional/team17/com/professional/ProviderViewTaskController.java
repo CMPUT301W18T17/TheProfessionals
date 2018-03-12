@@ -23,8 +23,7 @@ public class ProviderViewTaskController {
     private String low;
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
-    public void ProviderViewTaskController(Context context, Activity activity, String taskid){
-        this.context = context;
+    public void ProviderViewTaskController(Activity activity, String taskid){
         this.status = "default";
         this.activity = activity;
         this.taskid = taskid;
