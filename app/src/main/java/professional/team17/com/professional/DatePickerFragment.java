@@ -61,7 +61,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         yearString = Integer.toString(year);
         monthString = Integer.toString(month);
         dayString = Integer.toString(day);
-        formattedDate = yearString + "-" + monthString + "-" + dayString;
+        formattedDate = dayString + "/" + monthString + "/" + yearString;
 
         TextView textualDateView = getActivity().findViewById(R.id.textualDateView);
         textualDateView.setText(formattedDate);

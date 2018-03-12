@@ -208,7 +208,7 @@ public class RequesterEditTaskActivity extends RequesterLayout {
         }
         return input;
     }
-    
+
     /**
      * Saves the task locally for offline functionality.
      */
