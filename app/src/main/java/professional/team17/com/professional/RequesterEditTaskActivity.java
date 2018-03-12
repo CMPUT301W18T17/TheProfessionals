@@ -1,88 +1,225 @@
+/*
+ * RequesterEditTaskActivity
+ *
+ * March 9, 2018
+ *
+ * Copyright
+ */
+
 package professional.team17.com.professional;
 
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
-import java.util.Calendar;
-import java.util.Random;
+import com.google.android.gms.maps.MapView;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+/**
+ *
+ * An activity where a user in Requester mode can edit a task with status "Requested".
+ *
+ * @author Lauren
+ * @see RequesterLayout
+ */
 public class RequesterEditTaskActivity extends RequesterLayout {
-    private EditText name;
-    private EditText description;
-    private EditText location;
-    private String date1;
-    private String location1;
-    Button chooseDate;
-    Calendar calendar = Calendar.getInstance();
-    int year, month, day, id;
-    String year1, month1, day1;
+    /* Layout objects */
+    private EditText nameField;
+    private EditText descriptionField;
+    private EditText locationField;
+    private TextView textualDateView;
+    private ImageButton addPhotoButton;
+    private ImageButton selectDateButton;
+    private MapView mapView;
+    private Button submitButton;
+    /* other variables */
+    private Task task;
+    ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private String dateString;
+    private String locationString;
+    private String ID;
 
+
+    /**
+     * On creation of the activity, set all view objects and onClickListeners.
+     * @param savedInstanceState The activity's previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requester_edit_task);
-        Button submitButton = (Button) findViewById(R.id.button2);
-        name = (EditText) findViewById(R.id.TaskNameField);
-        description = (EditText) findViewById(R.id.taskDescriptionField);
-        location = (EditText) findViewById(R.id.textualAddressField);
-        //final DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker2);
-        //button to choose date
-        chooseDate = (Button) findViewById(R.id.button3);
-        chooseDate.setOnClickListener(new View.OnClickListener() {
+
+        /* Set activity title */
+        this.setActivityTitle("Edit Task");
+
+        /* Set all view objects */
+        nameField = (EditText) findViewById(R.id.TaskNameField);
+        descriptionField = (EditText) findViewById(R.id.taskDescriptionField);
+        locationField = (EditText) findViewById(R.id.textualAddressField);
+        textualDateView = (TextView) findViewById(R.id.textualDateView);
+        addPhotoButton = (ImageButton) findViewById(R.id.addPhotoButton);
+        selectDateButton = (ImageButton) findViewById(R.id.calendarButton);
+        mapView = (MapView) findViewById(R.id.mapView);
+        submitButton = (Button) findViewById(R.id.submitButton);
+
+        /* Get task ID from previous activity, then get task from server */
+        try {
+            getBundle();
+        } catch (Exception e) {
+            Log.i("Bundle", "Bundle was empty (no task ID was passed to EditTask)");
+        }
+        try {
+            getFromServer(ID);
+        } catch (Exception e) {
+            Log.i("Server", "Server failed to return a task for that ID");
+        }
+
+
+        /* Set all onClickListeners */
+        addPhotoButton.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                showDialog(1);
+                //TODO implement photo selection
             }
         });
 
-
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                String name1 = name.getText().toString();
-                String description1 = description.getText().toString();
-                String location1 = location.getText().toString();
-                year = calendar.get(Calendar.YEAR);
-                month = calendar.get(Calendar.MONTH);
-                day = calendar.get(Calendar.DAY_OF_MONTH);
-                year1 = Integer.toString(year);
-                month1 = Integer.toString(month);
-                day1 = Integer.toString(day);
-                date1 = year1 + "-" + month1 + "-" + day1;
-                Random rand = new Random();
-                id = rand.nextInt(50) + 1;
-                //chooseDate.setText(year + "-" + (month + 1) + "-" + day);
-                //Toast.makeText(requesterAddTaskActivity.this, datePicker.getDayOfMonth()+""+datePicker.getMonth()+""+datePicker.getYear(),Toast.LENGTH_LONG).show();
-                if (name1.length() > 0 && name1.length() < 30 && description1.length() != 0 && description1.length() < 30) {
-                    Intent intent = new Intent();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("name", name1);
-                    bundle.putString("date", date1);
-                    bundle.putString("description", description1);
-                    bundle.putString("location", location1);
-                    intent.putExtras(bundle);
-                    setResult(RequesterViewTaskActivity.RESULT_OK, intent);
-                    finish();
-                }
-                //adapter.notifyDataSetChanged();
-                //saveInFile();
+        selectDateButton.setOnClickListener(new ImageButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /* Show the DatePickerDialog */
+                displayDatePicker();
+                /* Get the formatted date */
+                dateString = (String) textualDateView.getText();
             }
         });
+
+        submitButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /* Convert user entered values to strings */
+                String title = nameField.getText().toString();
+                String description = descriptionField.getText().toString();
+                locationString = locationField.getText().toString();
+
+
+                /* Create an intent and bundle and store all task info */
+                addToServer(title, description);
+
+
+                /* Activity finished, start RequesterViewListActivity */
+                finish();
+            }
+        });
+    }
+
+
+    /**
+     * Displays the DatePickerDialog fragment, allowing the user to select a date.
+     */
+    private void displayDatePicker(){
+        DialogFragment dateFragment = new DatePickerFragment();
+        dateFragment.show(getFragmentManager(), "datePicker");
     }
 
     /**
-     * here we still need to handle 2 things
-     * 1. google map
-     * 2. add photo(since it nevigate to another interface)
+     * Gets the task ID from the previous activity. Throws an exception if the ID is not found.
+     * @throws Exception If the bundle is empty (the task is not found).
      */
-    private String handleGoogleMap() {
-        //implement soon
-        return location1;
+    private void getBundle() throws Exception{
+        Intent startedIntent = getIntent();
+        Bundle extrasBundle = startedIntent.getExtras();
+        if (extrasBundle.isEmpty()){
+            throw new Exception();
+        }
+        else {
+            ID = extrasBundle.getString("ID");
+        }
     }
 
-    //private imageView UserAddImage() {
-        //get the idea from Uml.
-        //return imageView;
+    /**
+     * Get the task to edit's information. Also updates the EditText with the task's info.
+     */
+    private void getFromServer(String taskID) throws Exception{
+        task = elasticSearchController.getTask(taskID);
+        if (task == null){
+            throw new Exception();
+        }
+        /* Update EditTexts */
+        nameField.setHint(task.getName());
+        descriptionField.setHint(task.getDescription());
+        locationField.setHint(task.getLocation());
+        textualDateView.setText(task.getDateAsString());
+
     }
+
+    /**
+     * Add the task to the ElasticSearch server.
+     * @param title Task title
+     * @param description Task description
+     */
+    private void addToServer(String title, String description){
+        task.setName(title);
+        task.setDate(parseDate(dateString));
+        task.setDescription(description);
+        task.setLocation(locationString);
+
+        elasticSearchController.updateTasks(task);
+    }
+
+    /**
+     * Once the user presses the submit button, finish this activity and start the
+     * RequesterViewListActivity with the updated task displayed.
+     */
+    @Override
+    public void finish() {
+        Bundle bundle = new Bundle(1);
+        bundle.putString("ID", ID);
+        Intent intent = new Intent(RequesterEditTaskActivity.this, RequesterViewListActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    /**
+     * Converts a String date into a Date date.
+     * @param sdate String date
+     * @return Date date
+     */
+    public java.util.Date parseDate(String sdate) {
+        String myFormat = "dd/MM/yyyy";
+        java.util.Date input = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
+        if (sdate != null) {
+            try {
+                input = dateFormat.parse(sdate);
+            } catch (ParseException e) {
+                //do nothing
+            }
+        }
+        return input;
+    }
+    
+    /**
+     * Saves the task locally for offline functionality.
+     */
+    //private void saveInFile(){
+    //TODO offline functionality in project 5
+    //}
+
+
+
+    //TODO photo and location handling in project 5
+}
+
+
+
