@@ -13,7 +13,7 @@ import java.util.Locale;
 /**
  *
  * This is the entity class for a task object
- *
+ * TODO potentially remove some setters/getters that are not being used
  *
  * @author Allison
  * @see BidList

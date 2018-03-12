@@ -155,7 +155,7 @@ public class Profile implements Serializable {
      *
      * @param username - the username of the profile that had blacklisted the user
      */
-    public void removeFromGetBlackListesBy(String username){
+    public void removeFromBlackListed(String username){
         blackList.remove(username);
     }
 
