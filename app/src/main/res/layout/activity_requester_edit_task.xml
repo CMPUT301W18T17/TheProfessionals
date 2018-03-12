@@ -18,58 +18,127 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="346dp"
-            android:layout_height="46dp"
+        <EditText
+            android:id="@+id/taskDescriptionField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="28dp"
             android:layout_marginTop="8dp"
-            android:text="click here to set date"
+            android:ems="10"
+            android:hint="@string/task_description_field"
+            android:inputType="textPersonName"
+            android:maxLength="300"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TaskNameField" />
 
         <EditText
-            android:id="@+id/TaskNameField"
-            android:layout_width="355dp"
-            android:layout_height="63dp"
-            android:layout_marginEnd="5dp"
+            android:id="@+id/textualAddressField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
             android:ems="10"
-            android:hint="Task Name (30 character max.)"
+            android:hint="@string/address_field"
             android:inputType="textPersonName"
+            app:layout_constraintBottom_toTopOf="@+id/mapView"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photoTextView" />
+
+        <EditText
+            android:id="@+id/TaskNameField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="@string/task_title_field"
+            android:inputType="textPersonName"
+            android:maxLength="30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/textualAddressField"
-            android:layout_width="354dp"
-            android:layout_height="89dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginLeft="32dp"
-            android:ems="10"
-            android:hint="Address/Location(optional)"
-            android:inputType="textPersonName"
+        <TextView
+            android:id="@+id/textualDateView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/date_format"
+            app:layout_constraintEnd_toStartOf="@+id/calendarButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/taskDescriptionField" />
+
+        <ImageButton
+            android:id="@+id/addPhotoButton"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/photoTextView"
+            app:layout_constraintTop_toBottomOf="@+id/calendarButton"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <ImageButton
+            android:id="@+id/calendarButton"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textualDateView"
+            app:layout_constraintTop_toBottomOf="@+id/taskDescriptionField"
+            app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.525" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textualAddressField" />
 
-        <EditText
-            android:id="@+id/taskDescriptionField"
-            android:layout_width="354dp"
-            android:layout_height="96dp"
+        <TextView
+            android:id="@+id/photoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="28dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="45dp"
+            android:text="@string/add_photo"
+            app:layout_constraintEnd_toStartOf="@+id/addPhotoButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textualDateView" />
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Task Description (300 character max.)"
-            android:inputType="textPersonName"
+            android:text="@string/add_button"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button3" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mapView" />
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

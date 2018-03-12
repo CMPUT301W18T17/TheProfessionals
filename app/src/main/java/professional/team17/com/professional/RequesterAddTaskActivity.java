@@ -23,9 +23,7 @@ import com.google.android.gms.maps.MapView;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Locale;
-import java.util.Random;
 
 /**
  *
@@ -100,19 +98,11 @@ public class RequesterAddTaskActivity extends RequesterLayout {
                 String description = descriptionField.getText().toString();
                 locationString = locationField.getText().toString();
 
-
                 /* Create an intent and bundle and store all task info */
                addToServer(title, description);
 
-
                 /* Activity finished, start RequesterViewListActivity */
-                Bundle bundle = new Bundle(1);
-                bundle.putString("ID", task.getUniqueID());
-                Intent intent = new Intent(RequesterAddTaskActivity.this, RequesterViewListActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-
-
+                finish();
             }
         });
     }
@@ -140,6 +130,14 @@ public class RequesterAddTaskActivity extends RequesterLayout {
         elasticSearchController.addTasks(task);
     }
 
+    @Override
+    public void finish(){
+        Bundle bundle = new Bundle(1);
+        bundle.putString("ID", task.getUniqueID());
+        Intent intent = new Intent(RequesterAddTaskActivity.this, RequesterViewListActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 
     public java.util.Date parseDate(String sdate) {
         String myFormat = "dd/MM/yyyy";
