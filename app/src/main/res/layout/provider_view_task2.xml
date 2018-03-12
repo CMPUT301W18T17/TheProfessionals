@@ -235,7 +235,9 @@
                                             android:layout_height="wrap_content"
                                             android:clickable="true"
                                             android:onClick="viewProfile"
+                                            android:singleLine="false"
                                             android:text="username"
+                                            android:textColor="@color/colorRequester"
                                             android:textSize="17sp"
                                             app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_Requester"
                                             app:layout_constraintStart_toEndOf="@+id/provider_view_task_Requester" />

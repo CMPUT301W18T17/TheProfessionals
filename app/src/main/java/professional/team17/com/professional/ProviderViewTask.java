@@ -204,12 +204,9 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     }
 
 
-    //TODO
     public void viewProfile(View v){
-        //TODO - would have to search ES currently.
-        //Profile profile = null;
-        Intent intention = new Intent(this, LogInActivity.class);
-        //intention.putExtra("profile", user);
+        Intent intention = new Intent(this, OtherProfileViewActivity.class);
+        intention.putExtra("profile", task.getProfileName());
         startActivity(intention);
 
     }

@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/viewMyProfile"
-        android:title="@string/PV_myProfile" />
-    <item
         android:id="@+id/editMyProfile"
         android:title="@string/editProfile" />
+    <item
+        android:id="@+id/viewMyProfile"
+        android:title="@string/PV_myProfile" />
 </menu>

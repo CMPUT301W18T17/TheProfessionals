@@ -100,23 +100,27 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                 intent = new Intent(this, ProviderTaskListActivity.class);
                 intent.putExtra("Status", "Bidded");
                 startActivity(intent);
+                finish();
                 break;
         /* If user tapped the assigned button */
             case R.id.acceptedTasksProviderButton:
                 intent = new Intent(this, ProviderTaskListActivity.class);
                 intent.putExtra("Status", "Assigned");
                 startActivity(intent);
+                finish();
                 break;
         /* If the user tapped the search button */
             case R.id.searchTasksButton:
                 intent = new Intent(this, SearchActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         /* If the user tapped the map button */
             case R.id.taskMapButton:
                 /* Commented out as the activity does not exist yet
                 Intent intent = new Intent(this, MapActivity.class);
                 startActivity(intent);
+                      finish();
                 */
                 break;
         /* If the user taps the switch button */
@@ -124,6 +128,7 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                 intent = new Intent(this, RequesterViewListActivity.class);
                 intent.putExtra("Status", "Requested");
                 startActivity(intent);
+                finish();
                 break;
         /* If the user taps the user menu button */
             case R.id.userMenuButton:
@@ -138,6 +143,7 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
      */
     protected void createPopup(){
         /* Create Popup Menu */
+        int[] location = new int[2];
         popupMenu = new PopupMenu(this, userMenuButton);
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
