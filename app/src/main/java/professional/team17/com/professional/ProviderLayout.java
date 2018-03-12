@@ -121,11 +121,9 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                 break;
         /* If the user taps the switch button */
             case R.id.switchViewProviderButton:
-                /*Commented out as the activity does not exist yet
-                Intent intent = new Intent(this, RequesterListActivity.class);
+                intent = new Intent(this, RequesterViewListActivity.class);
                 intent.putExtra("Status", "Requested");
                 startActivity(intent);
-                */
                 break;
         /* If the user taps the user menu button */
             case R.id.userMenuButton:
