@@ -102,7 +102,8 @@ public class RequesterAddTaskActivity extends RequesterLayout {
                addToServer(title, description);
 
                 /* Activity finished, start RequesterViewListActivity */
-                finish();
+                completeTransition();
+
             }
         });
     }
@@ -130,13 +131,14 @@ public class RequesterAddTaskActivity extends RequesterLayout {
         elasticSearchController.addTasks(task);
     }
 
-    @Override
-    public void finish(){
+
+    public void  completeTransition(){
         Bundle bundle = new Bundle(1);
         bundle.putString("ID", task.getUniqueID());
         Intent intent = new Intent(RequesterAddTaskActivity.this, RequesterViewListActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
     }
 
     public java.util.Date parseDate(String sdate) {
