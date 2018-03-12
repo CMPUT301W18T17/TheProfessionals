@@ -3,10 +3,8 @@ package professional.team17.com.professional;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -26,8 +24,10 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     private TextView taskLowBidTextField;
     private TextView taskMyBidTextField;
     private RatingBar requesterAvgTextField;
-    private TextView myBidTextView;
-    private TextView lowBidTextView;
+    private TextView taskLowBidDollar;
+    private TextView taskMyBidDollar;
+    //  private TextView myBidTextView;
+   // private TextView lowBidTextView;
     private TextView requesterAvgTextView;
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
@@ -35,6 +35,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     //both buttons start as invisible by default
     private ImageButton bidButton;
     private ImageButton deleteButton;
+    private ImageButton appendButton;
 
 
 
@@ -50,7 +51,9 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         taskDateTextField = (TextView) findViewById(R.id.provider_view_task_date_input);
         taskDescriptionTextField = (TextView) findViewById(R.id.provider_view_task_paragraph);
         taskLowBidTextField = (TextView) findViewById(R.id.provider_view_task_lowBidInput);
+        taskLowBidDollar = (TextView) findViewById(R.id.provider_view_task_lowBidDollar);
         taskMyBidTextField = (TextView) findViewById(R.id.provider_view_task_myBidInput);
+        taskMyBidDollar = (TextView) findViewById(R.id.provider_view_task_myBidInputDollar);
 
         this.setActivityTitle("View Task");
 
@@ -61,7 +64,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         //Log.i("WEWE", "onCreate: "+user.getUserName());
         checkStatus();
         fillTask();
-      //  setRating();
+        //  setRating();
     }
 
 
@@ -89,6 +92,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         elasticSearchController.updateTasks(task);
         statusTextField.setText(task.getStatus());
         if (task.isBidded()) {
+
             fillBidded();
         }
         if (task.isRequested()) {
@@ -116,26 +120,22 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 
     //If status is requested - place bid button will show, and lowest bid text fields hides
     public void fillRequested(){
-        if (deleteButton.isShown()) {
-            deleteButton.setVisibility(View.GONE);
-        }
-        if (myBidTextView.isShown()){
-            taskMyBidTextField.setVisibility(View.INVISIBLE);
-            myBidTextView.setVisibility(View.INVISIBLE);
-        }
+        deleteButton.setVisibility(View.GONE);
+        appendButton.setVisibility(View.GONE);
         bidButton.setVisibility(View.VISIBLE);
-        taskLowBidTextField.setVisibility(View.INVISIBLE);
-        lowBidTextView.setVisibility(View.INVISIBLE);
+        taskLowBidTextField.setText("No bids yet!");
+        taskMyBidTextField.setText("Place a bid!");
+        taskLowBidDollar.setVisibility(View.INVISIBLE);
+        taskMyBidDollar.setVisibility(View.INVISIBLE);
     }
 
     //If status is assigned, hide lowbid fields and show user bid.
     public void fillAssigned(){
         if (task.getBids().userBidded(user.getUserName())) {
             BidList bids = task.getBids();
-            taskLowBidTextField.setVisibility(View.INVISIBLE);
-            lowBidTextView.setVisibility(View.INVISIBLE);
+            taskLowBidDollar.setVisibility(View.INVISIBLE);
+         //   lowBidTextView.setVisibility(View.INVISIBLE);
             taskMyBidTextField.setVisibility(View.VISIBLE);
-            myBidTextView.setVisibility(View.VISIBLE);
             taskMyBidTextField.setText(bids.getBid(user.getUserName()).getAmountAsString());
         }
         else {
@@ -147,46 +147,25 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     // if user has not bid, then show place bid button
     public void fillBidded() {
         //set lowest bid amount
+        deleteButton.setVisibility(View.VISIBLE);
+        bidButton.setVisibility(View.INVISIBLE);
+        appendButton.setVisibility(View.VISIBLE);
         BidList bids = task.getBids();
         taskLowBidTextField.setText(bids.getLowest().getAmountAsString());
-        if (task.getBids().userBidded(user.getUserName())) {
-            //find user bid amount and show cancel bid button
-            if (!bidButton.isShown()){
-                bidButton.setVisibility(View.GONE);
-            }
-            if (!lowBidTextView.isShown()){
-                lowBidTextView.setVisibility(View.VISIBLE);
-                taskLowBidTextField.setVisibility(View.VISIBLE);
-            }
-            taskMyBidTextField.setVisibility(View.VISIBLE);
-            myBidTextView.setVisibility(View.VISIBLE);
-            deleteButton.setVisibility(View.VISIBLE);
-            taskMyBidTextField.setText(bids.getBid(user.getUserName()).getAmountAsString());
-        }
-        else {
-            bidButton.setVisibility(View.VISIBLE);
-            if (deleteButton.isShown()) {
-                deleteButton.setVisibility(View.GONE);
-            }
-            if (myBidTextView.isShown()){
-                taskMyBidTextField.setVisibility(View.INVISIBLE);
-                myBidTextView.setVisibility(View.INVISIBLE);
-            }
-        }
+        taskMyBidTextField.setText(bids.getBid(user.getUserName()).getAmountAsString());
+        taskLowBidDollar.setVisibility(View.VISIBLE);
+        taskMyBidDollar.setVisibility(View.VISIBLE);
     }
 
 /*
     public void setRating(){
         if (requester.getReviewList().isEmpty()==false) {
-
             requesterAvgTextView = (TextView) findViewById(R.id.provider_view_rating);
             requesterAvgTextField = (RatingBar) findViewById(R.id.provider_view_rating_bar);
             requesterAvgTextView.setVisibility(View.VISIBLE);
             requesterAvgTextField.setVisibility(View.VISIBLE);
-
             String sAvg = requester.getReviewList().getAvgString();
             float fAvg = (float) requester.getReviewList().getAvg();
-
             requesterAvgTextField.setRating(fAvg / 5);
             requesterAvgTextView.setText(sAvg);
         }
@@ -207,8 +186,9 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 
         bidButton = (ImageButton) findViewById(R.id.provider_view_task_AddBid);
         deleteButton = (ImageButton) findViewById(R.id.provider_view_task_removeBid);
-        myBidTextView = (TextView) findViewById(R.id.provider_view_task_myBid);
-        lowBidTextView = (TextView) findViewById(R.id.provider_view_task_lowBid);
+        appendButton = (ImageButton) findViewById(R.id.provider_view_task_manageBid);
+     //   myBidTextView = (TextView) findViewById(R.id.provider_view_task_myBid);
+     //   lowBidTextView = (TextView) findViewById(R.id.provider_view_task_lowBid);
 
         if (task.isRequested()){
             fillRequested();
@@ -240,8 +220,27 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     public void placeBid(View v){
         FragmentManager fm = getSupportFragmentManager();
         PlaceBidDialog dialogFragment = new PlaceBidDialog ();
+        Bundle args = new Bundle();
+        args.putString("title", "Place Bid");
+        args.putString("amount","");
+
+        dialogFragment.setArguments(args);
         dialogFragment.show(fm, "Sample Fragment");
 
+    }
+
+
+
+    // Method to call fragment to edit existing bid
+    public void appendBid(View v){
+        FragmentManager fm = getSupportFragmentManager();
+        PlaceBidDialog dialogFragment = new PlaceBidDialog ();
+        Bundle args = new Bundle();
+        args.putString("title", "Change Bid");
+        args.putString("amount", taskMyBidTextField.getText().toString());
+
+        dialogFragment.setArguments(args);
+        dialogFragment.show(fm, "Sample Fragment");
     }
 
     // Method to call fragment to confirm cancel bid
