@@ -11,11 +11,10 @@ public class ProviderTaskListActivity extends ProviderLayout {
     private ArrayAdapterSearchResults adapterHelper;
     private ListView listView;
     private TaskList taskList;
-    private Profile user;
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
     //TODO DELETE
     private TaskList dummyTaskList;
-
+    private Profile user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
     //TODO DELETE METHOD
     public void dummyDate(){
         dummyTaskList = new TaskList();
@@ -29,14 +28,14 @@ public class ProviderTaskListActivity extends ProviderLayout {
         task1.addBid(new Bid("john123", 234.3));
         task1.addBid(new Bid("ProfileName4", 23.40));
         task2.addBid(new Bid("ProfileName4", 277.40));
-
+        user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
     }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
+
         setContentView(R.layout.provider_tasklist_view);
         taskList = new TaskList();
         adapterHelper = new ArrayAdapterSearchResults(this, taskList);
@@ -47,10 +46,16 @@ public class ProviderTaskListActivity extends ProviderLayout {
         createList(type);
         //taskList = elasticSearchController.getTasksBidded("john123", "Bidded");
         taskList.addAll(createList(type));
-        //adapterHelper.notifyDataSetChanged();
+        adapterHelper.notifyDataSetChanged();
 
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+
+    }
 
 
     /**

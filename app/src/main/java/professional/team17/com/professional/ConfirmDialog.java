@@ -61,7 +61,8 @@ public class ConfirmDialog extends DialogFragment {
         Button positive = (Button) rootView.findViewById(R.id.confirm_fragment_positiveButton);
         Button negative = (Button) rootView.findViewById(R.id.confirm_fragment_negButtom);
         TextView dmessage = (TextView) rootView.findViewById(R.id.confirm_fragment_text);
-        TextView dtitle = (TextView) rootView.findViewById(R.id.confirm_fragment_title);
+
+
 
         //set text for each customizable field
         positive.setText(confirmButton);

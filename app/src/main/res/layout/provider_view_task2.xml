@@ -114,6 +114,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginStart="12dp"
                     android:background="@color/cardview_shadow_end_color"
+                    android:onClick="appendBid"
                     android:tint="@color/colorProvider"
                     app:layout_constraintBottom_toBottomOf="@+id/provider_view_task_myBidInput"
                     app:layout_constraintStart_toEndOf="@+id/provider_view_task_myBidInput"

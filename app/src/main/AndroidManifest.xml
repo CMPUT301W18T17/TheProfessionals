@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!-- suppress ALL -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="professional.team17.com.professional">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +20,7 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".ProviderViewTask" />
         <activity android:name=".ProfileViewActivity" />
+        <activity android:name=".ProviderTaskListActivity" />
         <activity android:name=".OtherProfileViewActivity" />
         <activity android:name=".MyProfileViewActivity" />
         <activity

@@ -1,0 +1,213 @@
+package professional.team17.com.professional;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.searchly.jestdroid.DroidClientConfig;
+import com.searchly.jestdroid.JestClientFactory;
+import com.searchly.jestdroid.JestDroidClient;
+
+import io.searchbox.client.JestResult;
+import io.searchbox.core.DocumentResult;
+import io.searchbox.core.Get;
+import io.searchbox.core.Index;
+
+/**
+ * Created by ag on 2018-02-22.
+ */
+
+/**
+* TODO Below is build with assumption of two indexes (one for profile, one for tasks)
+ * We could also potentially combine profile and tasks into one completely denormalized index
+ * http://cmput301.softwareprocess.es:8080/cmput301w18t17
+ */
+
+
+public class ElasticSearchController2 {
+    private static JestDroidClient client;
+    private static String server = "http://cmput301.softwareprocess.es:8080";
+    private static String task = "http://cmput301.softwareprocess.es:8080/CMPUT301W18T17/task"; //TODO COMPLETE name
+
+
+    //TODO - for time being hold here, but can likely pull into its own helper class or implement interface to allow for desing pattern.
+    public boolean getUserTasks(String username, String id) {
+
+        ElasticSearchController2.GetProfile getUserName = new ElasticSearchController2.GetProfile();
+        getUserName.execute(username);
+        try {
+            Profile profile = getUserName.get();
+            if (profile == null) {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    //TODO - for time being hold here, but can likely pull into its own helper class or implement interface to allow for desing pattern.
+    public boolean checkUsername(String username) {
+        ElasticSearchController2.GetProfile getUserName = new ElasticSearchController2.GetProfile();
+        getUserName.execute(username);
+        try {
+            Profile profile = getUserName.get();
+            if (profile == null) {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public Profile getProfile(String username) {
+        ElasticSearchController2.GetProfile getUserName = new ElasticSearchController2.GetProfile();
+        getUserName.execute(username);
+        Profile profile;
+        try {
+            profile = getUserName.get();
+        } catch (Exception e) {
+            return null;
+        }
+        return profile;
+    }
+
+
+    public static class AddTask extends AsyncTask<Task, Void, Void> {
+        //TODO Complete
+        @Override
+        protected Void doInBackground(Task... Tasks) {
+            verifySettings();
+
+            return null;
+        }
+
+    }
+
+    public static class GetTasks extends AsyncTask<String, Void, TaskList> {
+        //TODO Complete
+        @Override
+        protected TaskList doInBackground(String... TaskList) {
+            verifySettings();
+            TaskList tasks = new TaskList();
+            return tasks;
+        }
+    }
+/*
+
+    public static class GetTask extends AsyncTask<String, Void, Task> {
+        //TODO Complete
+        @Override
+        protected Task doInBackground(String... search_parameters) {
+            verifySettings();
+            Search search = new Search.Builder(search_parameters[0]).addIndex("cmput301w18t17").addType("task").build();
+
+            try {
+                DocumentResult result = client.execute(index);
+                if (result.isSucceeded()) {
+                    Log.i("PREINLAKD", "doInBackground: ");
+
+                } else {
+                    Log.i("Error", "some error = (");
+
+                }
+            } catch (Exception e) {
+                Log.i("Error", "The application failed to build and send the tweets");
+
+                result.getValue("id");
+                //TODO currently null for stub
+                Task task = null;
+                return task;
+            }
+        }
+    }
+
+*/
+        public static class AddProfile extends AsyncTask<Profile, Void, Void> {
+            //TODO Complete
+            @Override
+            protected Void doInBackground(Profile... Profiles) {
+                verifySettings();
+                for (Profile profile : Profiles) {
+                    Index index = new Index.Builder(profile).index("cmput301w18t17").type("profile").id(profile.getUserName()).build();
+
+                    try {
+                        DocumentResult result = client.execute(index);
+                        if (result.isSucceeded()) {
+                            Log.i("PREINLAKD", "doInBackground: ");
+
+                        } else {
+                            Log.i("Error", "some error = (");
+
+                        }
+                    } catch (Exception e) {
+                        Log.i("Error", "The application failed to build and send the profile");
+
+                    }
+                }
+                return null;
+            }
+        }
+
+
+        public static class GetProfile extends AsyncTask<String, Void, Profile> {
+            //TODO Complete
+            @Override
+            protected Profile doInBackground(String... search_parameters) {
+                verifySettings();
+                Profile profile = null;
+                Log.i("werwer", search_parameters[0]);
+                String type = "wr3we";
+                Get get = new Get.Builder("cmput301w18t17", type).type("profile").build();
+
+
+                // Search search = new Search.Builder(search_parameters[0]).addIndex("cmput301w18t17").addType("profile").build()
+                try {
+                    JestResult result = client.execute(get);
+                    if (result.isSucceeded()) {
+
+                        profile = result.getSourceAsObject(Profile.class);
+                    } else {
+                        Log.i("error", "Search query failed to find any thing =/");
+                    }
+                } catch (Exception e) {
+                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                }
+
+                return profile;
+            }
+
+        }
+
+
+        //TODO Updates may be redundant and can be absorbed into adds
+        public static class UpdateProfile extends AsyncTask<Profile, Void, Void> {
+            //TODO Complete
+            @Override
+            protected Void doInBackground(Profile... Profiles) {
+                verifySettings();
+                return null;
+            }
+        }
+
+
+        public static class UpdateTask extends AsyncTask<Task, Void, Void> {
+            //TODO Complete
+            @Override
+            protected Void doInBackground(Task... Profiles) {
+                verifySettings();
+                return null;
+            }
+        }
+
+        public static void verifySettings() {
+            if (client == null) {
+                DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080").discoveryEnabled(true);
+                DroidClientConfig config = builder.build();
+
+                JestClientFactory factory = new JestClientFactory();
+                factory.setDroidClientConfig(config);
+                client = (JestDroidClient) factory.getObject();
+            }
+        }
+
+}

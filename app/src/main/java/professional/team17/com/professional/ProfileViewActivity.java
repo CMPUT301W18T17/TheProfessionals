@@ -1,9 +1,7 @@
 package professional.team17.com.professional;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,7 +20,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_view);
-        currentMode = (TextView) findViewById(R.id.currentModeTV);
+        currentMode = (TextView) findViewById(R.id.place_bid_fragment_title);
         doneButton = (Button) findViewById(R.id.doneButton);
         listView = (ListView) findViewById(R.id.listViewID);
 

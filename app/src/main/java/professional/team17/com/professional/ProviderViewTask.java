@@ -35,6 +35,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     //both buttons start as invisible by default
     private ImageButton bidButton;
     private ImageButton deleteButton;
+    private ImageButton appendButton;
 
 
 
@@ -89,6 +90,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         elasticSearchController.updateTasks(task);
         statusTextField.setText(task.getStatus());
         if (task.isBidded()) {
+
             fillBidded();
         }
         if (task.isRequested()) {
@@ -207,6 +209,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 
         bidButton = (ImageButton) findViewById(R.id.provider_view_task_AddBid);
         deleteButton = (ImageButton) findViewById(R.id.provider_view_task_removeBid);
+        appendButton = (ImageButton) findViewById(R.id.provider_view_task_manageBid);
         myBidTextView = (TextView) findViewById(R.id.provider_view_task_myBid);
         lowBidTextView = (TextView) findViewById(R.id.provider_view_task_lowBid);
 
@@ -240,8 +243,27 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     public void placeBid(View v){
         FragmentManager fm = getSupportFragmentManager();
         PlaceBidDialog dialogFragment = new PlaceBidDialog ();
+        Bundle args = new Bundle();
+        args.putString("title", "Place Bid");
+        args.putString("amount","");
+
+        dialogFragment.setArguments(args);
         dialogFragment.show(fm, "Sample Fragment");
 
+    }
+
+
+
+    // Method to call fragment to edit existing bid
+    public void appendBid(View v){
+        FragmentManager fm = getSupportFragmentManager();
+        PlaceBidDialog dialogFragment = new PlaceBidDialog ();
+        Bundle args = new Bundle();
+        args.putString("title", "Change Bid");
+        args.putString("amount", taskMyBidTextField.getText().toString());
+
+        dialogFragment.setArguments(args);
+        dialogFragment.show(fm, "Sample Fragment");
     }
 
     // Method to call fragment to confirm cancel bid
