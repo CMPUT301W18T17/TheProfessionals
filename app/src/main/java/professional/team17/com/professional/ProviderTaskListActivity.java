@@ -15,10 +15,10 @@ import android.widget.ListView;
  * An activity where the provider can see the tasks - with different ui depending
  * On the task status, and input
  * @author Allison
- * @see ElasticSearchController, ArrayAdapterSearchResults TaskLIst, Profile
+ * @see ElasticSearchController, ProviderCustomArrayAdapter TaskLIst, Profile
  */
 public class ProviderTaskListActivity extends ProviderLayout {
-    private ArrayAdapterSearchResults adapterHelper;
+    private ProviderCustomArrayAdapter adapterHelper;
     private ListView listView;
     private String username;
     private SharedPreferences sharedpreferences;
@@ -39,7 +39,7 @@ public class ProviderTaskListActivity extends ProviderLayout {
         //TODO Delete after project part 5 with persistenct
         setContentView(R.layout.provider_tasklist_view);
         taskList = new TaskList();
-        adapterHelper = new ArrayAdapterSearchResults(this, taskList);
+        adapterHelper = new ProviderCustomArrayAdapter(this, taskList);
         listView = findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(adapterHelper);
         listView.setOnItemClickListener(clickListener);

@@ -4,16 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
-
-import java.util.Collection;
-
-
 
 
 /**
@@ -23,10 +18,10 @@ import java.util.Collection;
  *
  *
  * @author Allison
- * @see ArrayAdapterSearchResults, TaskList, ElasticSearchController
+ * @see ProviderCustomArrayAdapter , TaskList, ElasticSearchController
  */
 public class SearchActivity extends ProviderLayout {
-    private ArrayAdapterSearchResults searchAdapterHelper;
+    private ProviderCustomArrayAdapter searchAdapterHelper;
     private ListView listView;
     private SearchView searchView;
     private TaskList taskList;
@@ -56,7 +51,7 @@ public class SearchActivity extends ProviderLayout {
         */
 
         taskList = new TaskList();
-        searchAdapterHelper = new ArrayAdapterSearchResults(this, taskList);
+        searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskList);
         listView =findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(searchAdapterHelper);
         listView.setOnItemClickListener(clickListener);
