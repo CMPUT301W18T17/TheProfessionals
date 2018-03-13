@@ -31,9 +31,8 @@ public class SearchActivity extends ProviderLayout {
     private SearchView searchView;
     private TaskList taskList;
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
-
-    //TODO DELETE
-    private Profile user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
+    private String username;
+    private SharedPreferences sharedpreferences;
 
 
     /**
@@ -69,7 +68,8 @@ public class SearchActivity extends ProviderLayout {
         searchView = (SearchView) findViewById(R.id.Search_Activity_Input);
         searchView.setQueryHint("Enter search");
 
-
+        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = sharedpreferences.getString("username", "error");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -129,7 +129,6 @@ public class SearchActivity extends ProviderLayout {
             Task task = taskList.get(position);
             Intent intention = new Intent(SearchActivity.this, ProviderViewTask.class);
             intention.putExtra("Task", task.getUniqueID());
-            intention.putExtra("profile", user);
             startActivity(intention);
         }
 

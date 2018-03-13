@@ -1,6 +1,8 @@
 package professional.team17.com.professional;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,13 +20,13 @@ import android.widget.ListView;
 public class ProviderTaskListActivity extends ProviderLayout {
     private ArrayAdapterSearchResults adapterHelper;
     private ListView listView;
-
+    private String username;
+    private SharedPreferences sharedpreferences;
     //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
-    //TODO below item is needed for protoype, part 5 persistence will remove this
-    private Profile user;
+
 
 
     /**
@@ -35,17 +37,21 @@ public class ProviderTaskListActivity extends ProviderLayout {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //TODO Delete after project part 5 with persistenct
-        user = new Profile("John Smith", "john123", "johnSmith@email.ca", "123-4567");
         setContentView(R.layout.provider_tasklist_view);
         taskList = new TaskList();
         adapterHelper = new ArrayAdapterSearchResults(this, taskList);
         listView = findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(adapterHelper);
         listView.setOnItemClickListener(clickListener);
+        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = sharedpreferences.getString("username", "error");
         String type = setProviderViewType();
         createList(type);
         taskList.addAll(createList(type));
         adapterHelper.notifyDataSetChanged();
+
+
+
 
     }
 
@@ -58,7 +64,6 @@ public class ProviderTaskListActivity extends ProviderLayout {
             Task task = taskList.get(position);
             Intent intention = new Intent(ProviderTaskListActivity.this, ProviderViewTask.class);
             intention.putExtra("Task", task.getUniqueID());
-            intention.putExtra("profile", user);
             startActivity(intention);
 
         }
@@ -75,10 +80,11 @@ public class ProviderTaskListActivity extends ProviderLayout {
     private TaskList createList(String type) {
         TaskList taskList =null;
         if (type.equals("Bidded")) {
-            taskList = elasticSearchController.getTasksBidded("john123", "Bidded");
+            taskList = elasticSearchController.getTasksBidded(username, "Bidded");
+            Log.i("boukll", "createList: "+taskList+username);
         }
         if (type.equals("Assigned")) {
-            taskList = elasticSearchController.getTasksBidded("john123", "Assigned");
+            taskList = elasticSearchController.getTasksBidded(username, "Assigned");
         }
         return taskList;
     }
