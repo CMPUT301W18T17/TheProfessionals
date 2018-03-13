@@ -1,6 +1,8 @@
 package professional.team17.com.professional;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -20,8 +22,10 @@ import android.widget.Toast;
  */
 public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
 
+    private String username;
     //TODO below item is needed for protoype, part 5 persistence will remove this
-    private Profile user;
+
+    private SharedPreferences sharedpreferences;
 
     //TODO both items below can be put in controller (project part 5)
     private Task task;
@@ -74,7 +78,12 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 
         this.setActivityTitle("View Task");
 
-        user = getUser();
+
+        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = sharedpreferences.getString("username", "error");
+
+
+        Log.i("UISERNAMRE", "USERNAME: "+username);
         task = getTask();
         //getRequester();
 
@@ -94,7 +103,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         int duration = Toast.LENGTH_SHORT;
 
 
-        task.addBid(new Bid(user.getUserName(), bidAmount));
+        task.addBid(new Bid(username, bidAmount));
 
         elasticSearchController.updateTasks(task);
         statusTextField.setText(task.getStatus());
@@ -108,7 +117,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
      */
     public void onFinishConfirmDialog(Boolean confirmed){
         if (confirmed==true){
-            Bid bid = task.getBids().getBid(user.getUserName());
+            Bid bid = task.getBids().getBid(username);
             task.removeBid(bid);
         }
         elasticSearchController.updateTasks(task);
@@ -157,14 +166,14 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
      * This will display the correct UI for tasks in "assigned status'
      */
     public void fillAssigned(){
-        if (task.getBids().userBidded(user.getUserName())) {
+        if (task.getBids().userBidded(username)) {
             BidList bids = task.getBids();
             taskMyBidTextField.setVisibility(View.VISIBLE);
             taskMyBidDollar.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.INVISIBLE);
             bidButton.setVisibility(View.INVISIBLE);
             appendButton.setVisibility(View.INVISIBLE);
-            taskMyBidTextField.setText(bids.getBid(user.getUserName()).getAmountAsString());
+            taskMyBidTextField.setText(bids.getBid(username).getAmountAsString());
         }
         else {
             //TODO what displays if user is not bidder?
@@ -181,7 +190,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         appendButton.setVisibility(View.VISIBLE);
         BidList bids = task.getBids();
         taskLowBidTextField.setText(bids.getLowest().getAmountAsString());
-        taskMyBidTextField.setText(bids.getBid(user.getUserName()).getAmountAsString());
+        taskMyBidTextField.setText(bids.getBid(username).getAmountAsString());
         taskLowBidDollar.setVisibility(View.VISIBLE);
         taskMyBidDollar.setVisibility(View.VISIBLE);
     }
@@ -276,16 +285,6 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 
         confirmDialog.setArguments(args);
         confirmDialog.show(fm, "Sample Fragment");
-    }
-
-    /**
-     *
-     * @return Returns the subscription sent with the Intent
-     */
-    private Profile getUser() {
-        Intent intent = getIntent();
-        Profile profile = (Profile) intent.getSerializableExtra("profile");
-        return profile;
     }
 
     /**
