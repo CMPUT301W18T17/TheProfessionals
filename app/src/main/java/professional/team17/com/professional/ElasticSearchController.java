@@ -205,7 +205,7 @@ public class ElasticSearchController {
         try {
             Profile profile = getProfile.get();
             // return false if no profile found
-            if (profile != null || username.isEmpty()) {
+            if (profile == null || username.isEmpty()) {
                 result = false;
             }
         } catch (Exception e) {

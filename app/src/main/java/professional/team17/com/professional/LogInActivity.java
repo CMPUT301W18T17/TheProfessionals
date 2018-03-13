@@ -5,11 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.searchly.jestdroid.DroidClientConfig;
 
 import javax.security.auth.login.LoginException;
 
+/**
+ * Allows the user to log in or move to a signup activity
+ *
+ * @see ElasticSearchController
+ * @see SignUpActivity
+ */
 public class LogInActivity extends AppCompatActivity {
     private Profile profile;
     private ElasticSearchController elasticSearchController;
@@ -22,41 +29,52 @@ public class LogInActivity extends AppCompatActivity {
 
     }
 
-    //TODO: Login in navigation
+    /**
+     * On selecting Sign In, checks username and signs the user in
+     *
+     * @param view
+     * @see SearchActivity
+     */
     public void logIn(View view){
 
         EditText usernameBox = (EditText) findViewById(R.id.usernameBox);
         String username = usernameBox.getText().toString();
-        Profile profile = elasticSearchController.getProfile(username);
-        if (!(profile==null)){
-            changeActivity();
-            //good to go
-            //set usernameas global variable?
-        }
-        else {
-            //error with users name
-        }
+        TextView error = (TextView) findViewById(R.id.ErrorText);
 
+        if (usernameBox.getText().length() == 0){
+            error.setText("Please Enter a Username");
+        } else {
+            profile = elasticSearchController.getProfile(username);
+            if (!(profile == null)) {
+                changeActivity(SearchActivity.class);
+                //good to go
+                //set username global variable?
+            } else {
+                error.setText("Invalid Username");
+            }
+        }
     }
 
 
-    private void changeActivity(){
+
+    /**
+     * On clicking the Sign Up button, user is moved to the Sign Up page
+     *
+     * @param view
+     * @see SignUpActivity
+     */
+    public void signUp(View view) {
+        changeActivity(SignUpActivity.class);
+    }
+
+    /**
+     * Moves the user to a new activity
+     */
+    private void changeActivity(Class activity){
         //can change navigation, this is just a stand in
-        Intent intent = new Intent(this, SearchActivity.class);
+        Intent intent = new Intent(this, activity);
 
         startActivity(intent);
         finish();
-
-    }
-
-
-
-    public void signUp(View view) {
-
-        Intent intent = new Intent(this, SignUpActivity.class);
-
-        //not sure if I should be starting with result or not
-        startActivity(intent);
-
     }
 }

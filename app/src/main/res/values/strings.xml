@@ -26,4 +26,5 @@
     <string name="add_photo">Add a photo (optional)</string>
     <string name="address_field">Location/Address (optional)</string>
     <string name="add_button">Add</string>
+    <string name="back">Back</string>
 </resources>
