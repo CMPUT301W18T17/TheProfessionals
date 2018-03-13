@@ -164,6 +164,9 @@ public class Task implements Serializable{
      * @return String date representation
      */
     public String getDateAsString() {
+        if (this.date == null) {
+            return "N/A";
+        }
         String myFormat = "dd/MM/yyyy";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat);
         return dateFormat.format(this.date);
