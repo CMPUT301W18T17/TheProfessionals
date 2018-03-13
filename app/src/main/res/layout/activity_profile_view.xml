@@ -99,7 +99,7 @@
         android:id="@+id/nameTV"
         android:layout_width="0dp"
         android:layout_height="18dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/emailTV"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/emailTV"
@@ -108,7 +108,7 @@
     <TextView
         android:id="@+id/userNameTV"
         android:layout_width="0dp"
-        android:layout_height="17dp"
+        android:layout_height="19dp"
         android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="@+id/nameTV"
         app:layout_constraintHorizontal_bias="0.0"

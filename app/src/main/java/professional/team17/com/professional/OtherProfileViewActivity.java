@@ -29,16 +29,5 @@ public class OtherProfileViewActivity extends ProfileViewActivity{
             }
         });
     }
-
-    /**
-     * Set information (relevant EditTexts are in ProfileViewActivity) acquired from ElasticSearch (by the other user's username)
-     * @param aUserName
-     * @param aName
-     * @param anEmail
-     * @param aPhoneNumber
-     */
-    protected void setInfo(String aUserName, String aName, String anEmail, String aPhoneNumber) {
-        super.setInfo(aUserName, aName, anEmail, aPhoneNumber);
-        // Make mock ratings and adapter for reviews; Initiate listViewOfRatings here.
-    }
+    
 }

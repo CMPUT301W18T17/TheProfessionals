@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 /**
@@ -25,6 +26,9 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
     protected Button doneButton;
     protected ReviewsAdaptor reviewsAdaptor;
     protected ListView listView;
+    protected RatingBar ratingBar;
+
+    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
     /**
      * On selecting a profile
@@ -43,38 +47,39 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
     /**
      * Set tags/hints of layout
      * @param aUserName
-     * @param aName
-     * @param anEmail
-     * @param aPhoneNumber
      */
     // don't call setInfo from here. Call it from MyProfileViewActivity or OtherProfileViewActivity
-    protected void setInfo(String aUserName, String aName, String anEmail, String aPhoneNumber) {
+    protected void setInfo(String aUserName) {
         username =findViewById(R.id.userNameTV);
         name =findViewById(R.id.nameTV);
         email = findViewById(R.id.emailTV);
         phoneNumber = findViewById(R.id.phoneTV);
+        ratingBar = findViewById(R.id.rating2);
 
+        Profile userProfile = elasticSearchController.getProfile(aUserName);
         username.setText(aUserName);
-        name.setText(aName);
-        email.setText(anEmail);
-        phoneNumber.setText(aPhoneNumber);
+        name.setText(userProfile.getName());
+        email.setText(userProfile.getEmail());
+        phoneNumber.setText(userProfile.getPhoneNumber());
+        ratingBar.setRating((float)(userProfile.getReviewList().getAvg()));
+        reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, userProfile.getReviewList());
     }
 
     @Override
     protected void onStart(){
         super.onStart();
 
-        //MockReviews
-        ReviewList aListOfReviews = new ReviewList();
-        Review review1 = new Review(3.5, "a1", "t1");
-        aListOfReviews.addReview(review1);
-        Review review2 = new Review(5.0, "a2", "t2");
-        aListOfReviews.addReview(review2);
-        Review review3 = new Review(5.0, "a3", "t3");
-        aListOfReviews.addReview(review3);
-
-        reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, aListOfReviews);
-        listView.setAdapter(reviewsAdaptor);
+//        //MockReviews
+//        ReviewList aListOfReviews = new ReviewList();
+//        Review review1 = new Review(3.5, "a1", "t1");
+//        aListOfReviews.addReview(review1);
+//        Review review2 = new Review(5.0, "a2", "t2");
+//        aListOfReviews.addReview(review2);
+//        Review review3 = new Review(5.0, "a3", "t3");
+//        aListOfReviews.addReview(review3);
+//
+//        reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, aListOfReviews);
+//        listView.setAdapter(reviewsAdaptor);
 
     }
 }

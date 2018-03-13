@@ -1,6 +1,8 @@
 package professional.team17.com.professional;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,17 +30,12 @@ public class MyProfileViewActivity extends ProfileViewActivity{
                 finish();
             }
         });
+
+        SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String theUserName = pref.getString("username", "error");
+
+        setInfo(theUserName);
     }
 
-    /**
-     * Set information (relevant EditTexts are in ProfileViewActivity) acquired from ElasticSearch (by username)
-     * @param aUserName
-     * @param aName
-     * @param anEmail
-     * @param aPhoneNumber
-     */
-    protected void setInfo(String aUserName, String aName, String anEmail, String aPhoneNumber) {
-        super.setInfo(aUserName, aName, anEmail, aPhoneNumber);
-    }
 }
 
