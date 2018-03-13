@@ -44,16 +44,7 @@ public class EditMyProfileActivity extends AppCompatActivity {
         Button saveButton = (Button) findViewById(R.id.saveButton);
         Button cancelButton = (Button) findViewById(R.id.cancelButton);
 
-        //setInfo();
-        showUserName = findViewById(R.id.showUserName);
-        editName = findViewById(R.id.editName);
-        editEmail = findViewById(R.id.editEmail);
-        editPhone = findViewById(R.id.editPhone);
-
-//        showUserName.setText(theUserName);
-//        editName.setText(userProfile.getName());
-//        editEmail.setText(userProfile.getEmail());
-//        editPhone.setText(userProfile.getPhoneNumber());
+        setInfo();
 
         /* OnClickListeners for save and cancel */
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +69,11 @@ public class EditMyProfileActivity extends AppCompatActivity {
      * Puts relevant info about user on EditTexts for ease of editing
      */
     protected void setInfo() {
+        showUserName = findViewById(R.id.showUserName);
+        editName = findViewById(R.id.editName);
+        editEmail = findViewById(R.id.editEmail);
+        editPhone = findViewById(R.id.editPhone);
+
         showUserName.setText(theUserName);
         editName.setText(userProfile.getName());
         editEmail.setText(userProfile.getEmail());
