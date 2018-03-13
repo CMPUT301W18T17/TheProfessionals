@@ -1,6 +1,8 @@
 package professional.team17.com.professional;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -46,9 +48,21 @@ public class LogInActivity extends AppCompatActivity {
         } else {
             profile = elasticSearchController.getProfile(username);
             if (!(profile == null)) {
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
+
+                editor.putString("username", username); // Storing string
+                editor.commit(); // commit changes
+
+                //To access sharedPreferences, copy and paste the following and adjust accordingly:
+                /*
+                SharedPreferences sharedpreferences = getSharedPreferences("MyPref",
+                        Context.MODE_PRIVATE);
+
+                String username = sharedpreferences.getString("username", "error");
+                */
                 changeActivity(SearchActivity.class);
-                //good to go
-                //set username global variable?
+
             } else {
                 error.setText("Invalid Username");
             }

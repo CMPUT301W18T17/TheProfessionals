@@ -2,6 +2,7 @@ package professional.team17.com.professional;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,6 +47,14 @@ public class SearchActivity extends ProviderLayout {
 
         /* Change activity title */
         this.setActivityTitle("Task Search");
+
+        /*testing sharedPreferences
+        SharedPreferences sharedpreferences = getSharedPreferences("MyPref",
+                Context.MODE_PRIVATE);
+
+        String test = sharedpreferences.getString("username", "not working");
+        this.setActivityTitle(test);
+        */
 
         taskList = new TaskList();
         searchAdapterHelper = new ArrayAdapterSearchResults(this, taskList);
