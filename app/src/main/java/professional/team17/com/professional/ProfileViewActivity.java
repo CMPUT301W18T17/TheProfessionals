@@ -8,6 +8,14 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/**
+ * Abstract class ProfileViewActivity generalizes MyProfileViewActivity and OtherProfileViewActivity
+ * @version 2.0 Last Updated: Mar 12, 2018
+ *
+ * @see MyProfileViewActivity
+ * @see OtherProfileViewActivity
+ * @see ReviewsAdaptor
+ */
 public abstract class ProfileViewActivity extends AppCompatActivity {
     protected TextView username;
     protected TextView name;
@@ -18,6 +26,10 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
     protected ReviewsAdaptor reviewsAdaptor;
     protected ListView listView;
 
+    /**
+     * On selecting a profile
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +40,13 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Set tags/hints of layout
+     * @param aUserName
+     * @param aName
+     * @param anEmail
+     * @param aPhoneNumber
+     */
     // don't call setInfo from here. Call it from MyProfileViewActivity or OtherProfileViewActivity
     protected void setInfo(String aUserName, String aName, String anEmail, String aPhoneNumber) {
         username =findViewById(R.id.userNameTV);

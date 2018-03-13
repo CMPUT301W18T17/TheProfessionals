@@ -7,30 +7,43 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import io.searchbox.core.Get;
+
+/**
+ * EditMyProfileActivity starts after user selects the UserMenuButton --> "Edit My Profile"
+ *
+ * @version 2.0 Last updated: Mar 12, 2018
+ * @see ElasticSearchController
+ * @see ProfileViewActivity
+ */
 public class EditMyProfileActivity extends AppCompatActivity {
     private TextView showUserName;
     private EditText editName;
     private EditText editEmail;
     private EditText editPhone;
+    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
-    private Button saveButton;
-    private Button cancelButton;
-
+    /**
+     * Upon creation, EditText will be set with relevant user info grabbed from ES
+     *
+     * Select 'save' to update info for user and go back to last activity
+     * Select 'cancel' to go back to last activity
+     *
+     * @param savedInstanceState default parameter
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Todo: change layout depending on requester or provider mode
         setContentView(R.layout.activity_edit_my_profile);
 
-//        showUserName = findViewById(R.id.showUserName);
-//        editName = findViewById(R.id.editName);
-//        editEmail = findViewById(R.id.editEmail);
-//        editPhone = findViewById(R.id.editPhone);
+        // Initialize variables relating to the layout
+        showUserName = findViewById(R.id.showUserName);
+        editName = findViewById(R.id.editName);
+        editEmail = findViewById(R.id.editEmail);
+        editPhone = findViewById(R.id.editPhone);
+        Button saveButton = (Button) findViewById(R.id.saveButton);
+        Button cancelButton = (Button) findViewById(R.id.cancelButton);
 
-        saveButton = (Button) findViewById(R.id.saveButton);
-        cancelButton = (Button) findViewById(R.id.cancelButton);
-
-        // Get values from intent!!! Or global?
         //showUserName.setText();
         //editName.setText();
         //editEmail.setText();

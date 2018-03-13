@@ -8,11 +8,22 @@ import android.widget.ArrayAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+/**
+ * ReviewsAdaptor is used when looking at the profiles of both current user and other users.
+ * @version 2.0 Last updated: Mar. 12, 2018
+ * @see ReviewList
+ */
 public class ReviewsAdaptor extends ArrayAdapter {
     private final int layoutResource;
     private final LayoutInflater layoutInflater;
     private ReviewList reviewList;
 
+    /**
+     * Initialize adaptor
+     * @param context
+     * @param resource
+     * @param reviewList
+     */
     public ReviewsAdaptor(Context context, int resource, ReviewList reviewList) {
         super(context, resource);
         this.layoutResource = resource;
@@ -20,10 +31,22 @@ public class ReviewsAdaptor extends ArrayAdapter {
         this.reviewList = reviewList;
     }
 
+    /**
+     * Mandatory getCount method
+     * @return number of reviews
+     */
     public int getCount() {
         return reviewList.getReviews().size();
     }
 
+    /**
+     * Place each review in corresponding (and currently viewable) boxes in listView
+     *
+     * @param position position of box
+     * @param convertView default
+     * @param parent default
+     * @return
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null){
             convertView = layoutInflater.inflate(layoutResource, parent, false);
