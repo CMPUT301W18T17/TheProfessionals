@@ -86,7 +86,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
 
     /***
      * Interface method from PlaceBidDialog.PlaceBidDialogListener
-     * @param confirmed boolean value representing the user response in the dialog
+     * @param inputText boolean value representing the user response in the dialog
      * true means the user add/changed the bid
      */
     public void onFinishPlaceBidDialog(String inputText){
