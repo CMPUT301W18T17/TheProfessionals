@@ -64,7 +64,7 @@ public class LogInActivity extends AppCompatActivity {
                 changeActivity(SearchActivity.class);
 
             } else {
-                error.setText("Invalid Username");
+                error.setText("Username does not exist");
             }
         }
     }
