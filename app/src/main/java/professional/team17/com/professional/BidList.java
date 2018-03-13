@@ -162,4 +162,13 @@ public class BidList extends ArrayList<Bid> implements Serializable{
         }
         return false;
     }
+
+    /**
+     * Deletes all bids besides the one supplied in the method call.
+     * @param bid The bid to be kept
+     */
+    public void acceptBid(Bid bid){
+        this.clear();
+        this.add(bid);
+    }
 }

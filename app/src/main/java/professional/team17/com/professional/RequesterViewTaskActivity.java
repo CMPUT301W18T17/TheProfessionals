@@ -81,7 +81,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
 
         /* Set adapters */
         bidList = new BidList();
-        bidAdapter = new BidListAdapter(this, bidList);
+        bidAdapter = new BidListAdapter(this, bidList, task);
         listView.setAdapter(bidAdapter);
 
 
