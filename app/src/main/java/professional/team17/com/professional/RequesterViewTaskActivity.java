@@ -15,9 +15,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 /**
  * The activity that is displayed when a user in the Requester role views one of their own tasks.
@@ -32,10 +36,20 @@ public class RequesterViewTaskActivity extends RequesterLayout {
     TextView statusView;
     TextView descriptionView;
     ListView listView;
+    TextView bidderName;
+    TextView bidderNameView;
+    TextView acceptedBid;
+    TextView acceptedBidView;
+    TextView setStatusTo;
+    Button requestedButton;
+    Button doneButton;
     /* Other variables */
     String ID;
     Task task;
     ElasticSearchController elasticSearchController = new ElasticSearchController();
+    BidListAdapter bidAdapter;
+    BidList bidList;
+    Bid winningBid;
 
     /**
      * On creation of the activity, set the layout elements, onClickListeners, and retrive
@@ -55,6 +69,20 @@ public class RequesterViewTaskActivity extends RequesterLayout {
         viewPhotos = (ImageButton) findViewById(R.id.ViewPhotosButton);
         viewLocation = (ImageButton) findViewById(R.id.viewLocationButton);
         listView = (ListView) findViewById(R.id.bidListView);
+        bidderName = (TextView) findViewById(R.id.bidder);
+        bidderNameView = (TextView) findViewById(R.id.bidderUsernameView);
+        acceptedBid = (TextView) findViewById(R.id.acceptedBid);
+        acceptedBidView = (TextView) findViewById(R.id.acceptbidAmount);
+        setStatusTo = (TextView) findViewById(R.id.setStatus);
+        requestedButton = (Button) findViewById(R.id.requestedButton);
+        doneButton = (Button) findViewById(R.id.doneButton);
+
+        /* Set adapters */
+        bidList = new BidList();
+        bidAdapter = new BidListAdapter(this, bidList);
+        listView.setAdapter(bidAdapter);
+
+
 
 
         /* Set OnClickListeners */
@@ -79,6 +107,20 @@ public class RequesterViewTaskActivity extends RequesterLayout {
             }
         });
 
+        requestedButton.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //TODO display dialog
+            }
+        });
+
+        doneButton.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view){
+               //TODO display dialog
+            }
+        });
+
         /* Get the task ID from the previous activity, then get the task from the server. */
         try {
             getBundle();
@@ -90,6 +132,8 @@ public class RequesterViewTaskActivity extends RequesterLayout {
         } catch (Exception e) {
             Log.i("Server", "Server failed to return a task for that ID");
         }
+
+        populateBidList();
 
     }
 
@@ -119,14 +163,14 @@ public class RequesterViewTaskActivity extends RequesterLayout {
         }
         else {
             /* Update TextViews */
-            setViews();
+            setTaskViews();
         }
     }
 
     /**
      * Updates the TextViews with the task information.
      */
-    private void setViews() {
+    private void setTaskViews() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -143,7 +187,75 @@ public class RequesterViewTaskActivity extends RequesterLayout {
     }
 
     private void populateBidList(){
+        String status = task.getStatus();
+        if (status.equals("Requested")){
+            /* does not display additional information */
+            setRequestedView();
+        }
+        else if (status.equals("Bidded")){
+            setBiddedView();
+            bidList = task.getBids();
+            bidAdapter.notifyDataSetChanged();
+        }
+        else if (status.equals("Requested")){
+            setAssignedView();
+            bidList = task.getBids();
+            winningBid = bidList.getBid(0);
+            setBidViews(winningBid.getName(), winningBid.getAmountAsString());
+        }
+        else if (status.equals("Done")){
+            setDoneView();
+            bidList = task.getBids();
+            winningBid = bidList.getBid(0);
+            setBidViews(winningBid.getName(), winningBid.getAmountAsString());
+        }
+    }
 
+    private void setRequestedView(){
+        listView.setVisibility(View.GONE);
+        bidderName.setVisibility(View.GONE);
+        bidderNameView.setVisibility(GONE);
+        acceptedBid.setVisibility(GONE);
+        acceptedBidView.setVisibility(GONE);
+        setStatusTo.setVisibility(GONE);
+        requestedButton.setVisibility(GONE);
+        doneButton.setVisibility(GONE);
+    }
+
+    private void setBiddedView(){
+        listView.setVisibility(GONE);
+        bidderName.setVisibility(VISIBLE);
+        bidderNameView.setVisibility(VISIBLE);
+        acceptedBid.setVisibility(VISIBLE);
+        acceptedBidView.setVisibility(VISIBLE);
+        setStatusTo.setVisibility(VISIBLE);
+        requestedButton.setVisibility(VISIBLE);
+        doneButton.setVisibility(VISIBLE);
+    }
+
+    private void setAssignedView(){
+        bidderName.setVisibility(VISIBLE);
+        bidderNameView.setVisibility(VISIBLE);
+        acceptedBid.setVisibility(VISIBLE);
+        acceptedBidView.setVisibility(VISIBLE);
+        //TODO leaving review button
+    }
+
+    private void setDoneView(){
+        bidderName.setVisibility(VISIBLE);
+        bidderNameView.setVisibility(VISIBLE);
+        acceptedBid.setVisibility(VISIBLE);
+        acceptedBidView.setVisibility(VISIBLE);
+    }
+
+    private void setBidViews(final String bidder, final String bidAmount){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                bidderNameView.setText(bidder);
+                acceptedBidView.setText(bidAmount);
+            }
+        });
     }
 
     /**

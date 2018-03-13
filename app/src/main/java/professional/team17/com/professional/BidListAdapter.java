@@ -37,7 +37,7 @@ public class BidListAdapter extends ArrayAdapter<Bid> {
             TextView userNameTextField = (TextView) v.findViewById(R.id.bid_row_userName);
             TextView taskBidTextField = (TextView) v.findViewById(R.id.bid_row_amount);
             ImageButton deleteButton = (ImageButton) v.findViewById(R.id.bid_row_delete);
-            ImageButton addButton = (ImageButton) v.findViewById(R.id.bid_row_accept);
+            ImageButton acceptButton = (ImageButton) v.findViewById(R.id.bid_row_accept);
 
             //plug in item to row
             userNameTextField.setText(bid.getName());
@@ -50,7 +50,7 @@ public class BidListAdapter extends ArrayAdapter<Bid> {
                     notifyDataSetChanged();
                 }
             });
-            addButton.setOnClickListener(new View.OnClickListener(){
+            acceptButton.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     //do your thang!!
