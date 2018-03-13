@@ -1,6 +1,9 @@
 package professional.team17.com.professional;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,19 +21,24 @@ import javax.security.auth.login.LoginException;
 
 public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
 
-
+        private SharedPreferences sharedPreferences;
+        private String username;
 
         public ProviderCustomArrayAdapter(Activity context, TaskList taskArrayList) {
 
             super(context, 0,  taskArrayList);
+            sharedPreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+            username = sharedPreferences.getString("username", "error");
 
         }
 
 
         // aided by https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
         public View getView(int position, View v, ViewGroup parent) {
+
             ProviderRequestedViewHolder providerRequestedViewHolder = null;
             ProviderBiddedViewHolder providerBiddedViewHolder = null;
+            ProviderAssignedViewHolder providerAssignedViewHolder = null;
 
             Task task= getItem(position);
 
@@ -44,6 +52,7 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
                     providerRequestedViewHolder = new ProviderRequestedViewHolder(statusTextField, userNameTextField, taskTitleTextField);
                     v.setTag(providerRequestedViewHolder);
                 }
+
                 else if (task.isBidded()) {
                     v = LayoutInflater.from(getContext()).inflate(R.layout.provider_bidded_row, parent, false);
                      //get view
@@ -55,31 +64,19 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
 
                     providerBiddedViewHolder = new ProviderBiddedViewHolder(statusTextField, userNameTextField, taskTitleTextField, taskLowBidAmountTextField, taskMyBidAmountTextField);
                     v.setTag(providerBiddedViewHolder);
-                    /**
-                     taskLowBidAmountTextField.setText(task.getBids().getLowest().getAmountAsString());
-                     taskLowBidTextField.setVisibility(View.VISIBLE);
-                     taskMyBidTextField.setVisibility(View.VISIBLE);
-                     taskLowBidAmountTextField.setVisibility(View.VISIBLE);
-                     taskMyBidAmountTextField.setVisibility(View.VISIBLE);
-                     */
-                    //todo, add in if condition for bidded, pull from global user value
-                    /**
-                     if task.getBids().userBidded(user.getUserName()){
+                }
 
-                     taskMyBidTextField.setVisibility(View.VISIBLE);
-                     taskMyBidAmountTextField.setVisibility(View.VISIBLE);
-                     taskMyBidAmountTextField.setText(bids.getBid(user.getUserName()).getAmountAsString());
-                     }
-                     */
-                }
-                /**
                 else if (task.isAssigned()) {
-                    taskLowBidTextField.setVisibility(View.INVISIBLE);
-                    taskLowBidAmountTextField.setVisibility(View.INVISIBLE);
-                    taskMyBidTextField.setVisibility(View.VISIBLE);
-                    taskMyBidAmountTextField.setVisibility(View.VISIBLE);
+                    v = LayoutInflater.from(getContext()).inflate(R.layout.provider_assigned_row, parent, false);
+                    //get view
+                    TextView statusTextField = (TextView) v.findViewById(R.id.provider_assigned_status);
+                    TextView userNameTextField = (TextView) v.findViewById(R.id.provider_assigned_userName);
+                    TextView taskTitleTextField = (TextView) v.findViewById(R.id.provider_assigned_title);
+                    TextView taskMyBidAmountTextField = (TextView) v.findViewById(R.id.provider_assigned_mybidAmount);
+
+                    providerAssignedViewHolder = new ProviderAssignedViewHolder(statusTextField, userNameTextField, taskTitleTextField, taskMyBidAmountTextField);
+                    v.setTag(providerAssignedViewHolder);
                 }
-                 */
             }
 
             else{
@@ -88,6 +85,9 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
                 }
                 else if (task.isBidded()){
                     providerBiddedViewHolder = (ProviderBiddedViewHolder) v.getTag();
+                }
+                else if (task.isAssigned()) {
+                    providerAssignedViewHolder = (ProviderAssignedViewHolder) v.getTag();
                 }
             }
 
@@ -102,6 +102,16 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
                 providerBiddedViewHolder.getUserNameTextField().setText(task.getProfileName());
                 providerBiddedViewHolder.getTaskTitleTextField().setText(task.getName());
                 providerBiddedViewHolder.getTaskLowBidAmount().setText(task.getBids().getLowest().getAmountAsString());
+                if (task.getBids().userBidded(username)){
+                    providerBiddedViewHolder.getTaskMyBidAmount().setText(task.getBids().getBid(username).getAmountAsString());
+                }
+            }
+
+            else if (task.isAssigned()) {
+                providerAssignedViewHolder.getStatusTextField().setText(task.getStatus());
+                providerAssignedViewHolder.getUserNameTextField().setText(task.getProfileName());
+                providerAssignedViewHolder.getTaskTitleTextField().setText(task.getName());
+                providerAssignedViewHolder.getTaskMyBidAmount().setText(task.getBids().getBid(username).getAmountAsString());
             }
 
             return v;
