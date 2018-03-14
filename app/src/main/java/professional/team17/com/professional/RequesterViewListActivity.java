@@ -51,7 +51,7 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
         adapterHelper = new RequesterCustomArrayAdapter(this, taskList);
         listView = findViewById(R.id.tasklistRequester);
         listView.setAdapter(adapterHelper);
-        listView.setOnItemClickListener(clickListener);
+        //listView.setOnItemClickListener(clickListener);
 
 
         //get username
@@ -76,12 +76,12 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
     }
 
 
-
+/*
 
     /**
      * This is an anonymous method to create a click listener for the listview rows. If the row
      * is selected, it packages up the task selected and the position to RequesterViewTask
-     */
+
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             Log.i("WEWE", "onItemClick: "+position);
@@ -93,7 +93,17 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
 
         }
 
-    };
+    }; */
+
+    public void titleClick(View v){
+        final int position = listView.getPositionForView((View) v.getParent());
+        Log.i("WEWE", "onItemClick: "+position);
+        Task task = taskList.get(position);
+        Intent intention = new Intent(RequesterViewListActivity.this, RequesterViewTaskActivity.class);
+        Log.i("WEWE", "onItemClick: "+task.getUniqueID());
+        intention.putExtra("task", task.getUniqueID());
+        startActivity(intention);
+    }
 
 
 

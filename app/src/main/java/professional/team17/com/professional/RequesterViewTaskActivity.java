@@ -88,14 +88,16 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
 
         try {
             getBundle();
+        } catch (Exception e) {
+            Log.i("Bundle", "Bundle was empty (no task ID was passed to EditTask)");
         }
-        catch (Exception e){
-            //do something here
+        try {
+            getFromServer();
+        } catch (Exception e) {
+            Log.i("Server", "Server failed to return a task for that ID");
         }
+        populateBidList();
 
-
-        getFromServer();
-       // populateBidList();
 
         /* Set OnClickListeners */
         backButton.setOnClickListener(new ImageButton.OnClickListener() {
@@ -134,19 +136,8 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         });
 
 
-        /* Get the task ID from the previous activity, then get the task from the server. */
-        /*
-        try {
-            getBundle();
-        } catch (Exception e) {
-            Log.i("Bundle", "Bundle was empty (no task ID was passed to EditTask)");
-        }
-        try {
-            getFromServer();
-        } catch (Exception e) {
-            Log.i("Server", "Server failed to return a task for that ID");
-        }
-*/
+
+
 
 
     }

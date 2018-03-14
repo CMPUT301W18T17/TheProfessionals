@@ -33,6 +33,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:fontFamily="sans-serif"
+                    android:onClick="titleClick"
                     android:text="TaskTitle - "
                     android:textSize="21sp"
                     app:layout_constraintStart_toStartOf="parent" />
