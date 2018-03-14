@@ -47,7 +47,7 @@ public class RequesterViewListActivity extends RequesterLayout {
         setContentView(R.layout.activity_requester_view_list);
         taskList = new TaskList();
         adapterHelper = new RequesterCustomArrayAdapter(this, taskList);
-        listView = findViewById(R.id.tasklist);
+        listView = findViewById(R.id.tasklistRequester);
         listView.setAdapter(adapterHelper);
         listView.setOnItemClickListener(clickListener);
 

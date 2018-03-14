@@ -220,7 +220,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
             bidList.addAll(temp);
             bidAdapter.notifyDataSetChanged();
         }
-        else if (status.equals("Requested")){
+        else if (status.equals("Assigned")){
             /* displays provider info and requested/done buttons */
             setAssignedView();
             bidList = task.getBids();
@@ -388,26 +388,23 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
                 task.chooseBid(chosenBid);
                 bidList.clear();
                 bidList.add(chosenBid);
-                bidAdapter.notifyDataSetChanged();
-                //Intent intent = new Intent(this, RequesterViewTaskActivity.class);
-                //Bundle bundle = new Bundle();
-                //bundle.putString("ID", task.getUniqueID());
-                //startActivity(intent);
+                task.setAssigned(chosenBid);
+                populateBidList();
             } else if (dialog.equals("Decline")) {
                 Log.i("DERER", "onFinishConfirmDialog: "+chosenBid.getName());
                 task.removeBid(chosenBid);
                 //temp = task.getBids();
-                bidList.clear();
-                bidList.addAll(task.getBids());
+                bidList.remove(chosenBid);
                 bidAdapter.notifyDataSetChanged();
             } else if (dialog.equals("Requested")) {
+                bidList.clear();
                 task.setRequested();
                 setTaskViews();
                 setRequestedView();
             } else if (dialog.equals("Done")) {
                 task.setDone();
                 setTaskViews();
-                // setDoneView();
+                setDoneView();
             }
             elasticSearchController.updateTasks(task);
         }
