@@ -41,22 +41,13 @@
                     android:id="@+id/requester_requested_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD
                     android:layout_marginStart="8dp"
-=======
-                    android:layout_marginStart="0dp"
->>>>>>> f24247b968fd0b83c30221d5cea4cc76f1c29307
                     android:layout_weight="1"
                     android:paddingRight="20dp"
                     android:text="Assigned"
                     android:textSize="15sp"
-<<<<<<< HEAD
                     app:layout_constraintBaseline_toBaselineOf="@+id/requester_requested_title"
                     app:layout_constraintStart_toEndOf="@+id/requester_requested_title" />
-=======
-                    app:layout_constraintTop_toBottomOf="@+id/requester_requested_title"
-                    app:layout_constraintStart_toStartOf="@+id/requester_requested_title" />
->>>>>>> f24247b968fd0b83c30221d5cea4cc76f1c29307
             </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>
