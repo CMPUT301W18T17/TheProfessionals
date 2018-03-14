@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ import android.widget.TextView;
  * @see OtherProfileViewActivity
  * @see ReviewsAdaptor
  */
-public abstract class ProfileViewActivity extends AppCompatActivity {
+public abstract class ProfileViewActivity extends AppCompatActivity{
     protected TextView username;
     protected TextView name;
     protected TextView email;
@@ -27,6 +28,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
     protected ReviewsAdaptor reviewsAdaptor;
     protected ListView listView;
     protected RatingBar ratingBar;
+    protected ImageButton profilePic;
 
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
@@ -65,21 +67,5 @@ public abstract class ProfileViewActivity extends AppCompatActivity {
         reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, userProfile.getReviewList());
     }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
 
-//        //MockReviews
-//        ReviewList aListOfReviews = new ReviewList();
-//        Review review1 = new Review(3.5, "a1", "t1");
-//        aListOfReviews.addReview(review1);
-//        Review review2 = new Review(5.0, "a2", "t2");
-//        aListOfReviews.addReview(review2);
-//        Review review3 = new Review(5.0, "a3", "t3");
-//        aListOfReviews.addReview(review3);
-//
-//        reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, aListOfReviews);
-//        listView.setAdapter(reviewsAdaptor);
-
-    }
 }
