@@ -29,10 +29,13 @@ public class ProviderTaskListActivityTest extends ActivityInstrumentationTestCas
     }
 
     public void testViewOtherProfile() throws Exception {
-        solo.assertCurrentActivity("WrongActivity", ProviderTaskListActivity.class);
-        solo.clickInList(1);
-
-
+        solo.assertCurrentActivity("Wrong Activity", ProviderTaskListActivity.class);
+        solo.clickInList(0);
+        solo.assertCurrentActivity("Wrong Activity", ProviderViewTask.class);
+        solo.clickOnView(solo.getView(R.id.provider_view_task_userName));
+        solo.assertCurrentActivity("Wrong Activity", OtherProfileViewActivity.class);
+        solo.clickOnButton("DONE");
+        solo.assertCurrentActivity("Wrong  Activity", ProviderViewTask.class);
     }
 
 }
