@@ -45,7 +45,6 @@ public class SearchActivity extends ProviderLayout {
         /*testing sharedPreferences
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref",
                 Context.MODE_PRIVATE);
-
         String test = sharedpreferences.getString("username", "not working");
         this.setActivityTitle(test);
         */
@@ -136,7 +135,7 @@ public class SearchActivity extends ProviderLayout {
      */
     private TaskList getOpenTasks() {
         TaskList tasklist = new TaskList();
-        tasklist = elasticSearchController.getTasksStatus("Requested");
+        tasklist = elasticSearchController.getTasksStatus("Bidded");
         return tasklist;
     }
 }
