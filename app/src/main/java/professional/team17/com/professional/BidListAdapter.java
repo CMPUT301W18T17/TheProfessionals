@@ -20,18 +20,11 @@ import android.widget.TextView;
  * @author Allison, Lauren
  * @see Bid BidList
  */
-public class BidListAdapter extends ArrayAdapter<Bid> /*implements ConfirmDialog.ConfirmDialogListener*/{
+public class BidListAdapter extends ArrayAdapter<Bid> {
 
-        //String dialogFlag;
-        private BidList bidList;
-        private Task parentTask;
-        private Context context;
-
-        public BidListAdapter(Activity context, BidList bids, Task task) {
+        public BidListAdapter(Activity context, BidList bids) {
 
             super(context, 0,  bids);
-            bidList = bids;
-            parentTask = task;
         }
 
 
@@ -49,79 +42,10 @@ public class BidListAdapter extends ArrayAdapter<Bid> /*implements ConfirmDialog
 
             //plug in item to row
             userNameTextField.setText(bid.getName());
-            taskBidTextField.setText(bid.getName());
+            taskBidTextField.setText(bid.getAmountAsString());
 
-            deleteButton.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    /* I would like to implement a dialog here, but for now it just removes the bid. */
-                    bidList.delete(bid);
-                    parentTask.removeBid(bid);
-                    notifyDataSetChanged();
-                }
-            });
-            acceptButton.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    /* I would like to implement a dialog here, but for now it just removes all other
-                     * bids besides this one.
-                     */
-                    bidList.acceptBid(bid);
-                    parentTask.chooseBid(bid);
-                    notifyDataSetChanged();
-                    Intent intent = new Intent(context, RequesterViewTaskActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("ID", parentTask.getUniqueID());
-                    context.startActivity(intent);
-
-                }
-            });
 
             return v;
         }
-
-
-        /*
-        I want to implement dialogs in the onClickListeners and I am not sure how to do that yet,
-        since this isn't an activity.
-
-        @Override
-        public void onFinishConfirmDialog(Boolean confirmed){
-            if (confirmed){
-
-            }
-        }
-
-
-        private void acceptBidDialog(){
-            dialogFlag = "Accept";
-
-            ConfirmDialog confirmDialog = new ConfirmDialog();
-            Bundle args = new Bundle();
-            args.putString("title", "Accept Bid");
-            args.putString("cancel", "Cancel");
-            args.putString("confirm", "Yes");
-            args.putString("message", "Are you sure you want to decline this bid? This will delete all other bids.");
-
-            confirmDialog.setArguments(args);
-            confirmDialog.show(fm, "To Done");
-        }
-
-}
-
-        private void declineBidDialog(){
-            dialogFlag = "Decline";
-
-            ConfirmDialog confirmDialog = new ConfirmDialog();
-            Bundle args = new Bundle();
-            args.putString("title", "Decline Bid");
-            args.putString("cancel", "Cancel");
-            args.putString("confirm", "Yes");
-            args.putString("message", "Are you sure you want to decline this bid? It will be deleted.");
-
-            confirmDialog.setArguments(args);
-            confirmDialog.show(fm, "To Done");
-    }
-*/
 
 }

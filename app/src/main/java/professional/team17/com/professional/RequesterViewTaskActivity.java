@@ -50,7 +50,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
     ElasticSearchController elasticSearchController = new ElasticSearchController();
     BidListAdapter bidAdapter;
     BidList bidList;
-    Bid winningBid;
+    Bid chosenBid;
     String dialogFlag;
 
     /**
@@ -67,23 +67,26 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         setActivityTitle("View Task");
 
         /*Set layout elements */
-        backButton = (ImageButton) findViewById(R.id.backButton);
-        viewPhotos = (ImageButton) findViewById(R.id.ViewPhotosButton);
-        viewLocation = (ImageButton) findViewById(R.id.viewLocationButton);
-        listView = (ListView) findViewById(R.id.bidListView);
-        bidderName = (TextView) findViewById(R.id.bidder);
-        bidderNameView = (TextView) findViewById(R.id.bidderUsernameView);
-        acceptedBid = (TextView) findViewById(R.id.acceptedBid);
-        acceptedBidView = (TextView) findViewById(R.id.acceptbidAmount);
-        setStatusTo = (TextView) findViewById(R.id.setStatus);
-        requestedButton = (Button) findViewById(R.id.requestedButton);
-        doneButton = (Button) findViewById(R.id.doneButton);
+        backButton = (ImageButton) findViewById(R.id.requester_view_taskbackButton);
+        viewPhotos = (ImageButton) findViewById(R.id.requester_view_taskViewPhotosButton);
+        viewLocation = (ImageButton) findViewById(R.id.requester_view_taskviewLocationButton);
+        listView = (ListView) findViewById(R.id.requester_task_view_listview);
+        bidderName = (TextView) findViewById(R.id.requester_view_taskbidder);
+        bidderNameView = (TextView) findViewById(R.id.requester_view_taskbidderUsernameView);
+        acceptedBid = (TextView) findViewById(R.id.requester_view_taskacceptedBid);
+        acceptedBidView = (TextView) findViewById(R.id.requester_view_taskbidAmountView);
+        setStatusTo = (TextView) findViewById(R.id.requester_view_tasksetStatus);
+        requestedButton = (Button) findViewById(R.id.requester_view_taskrequestedButton);
+        doneButton = (Button) findViewById(R.id.requester_view_taskdoneButton);
+
 
         /* Set adapters */
         bidList = new BidList();
-        bidAdapter = new BidListAdapter(this, bidList, task);
+        bidAdapter = new BidListAdapter(this, bidList);
         listView.setAdapter(bidAdapter);
 
+        getFromServer();
+        populateBidList();
 
         /* Set OnClickListeners */
         backButton.setOnClickListener(new ImageButton.OnClickListener() {
@@ -121,7 +124,9 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
             }
         });
 
+
         /* Get the task ID from the previous activity, then get the task from the server. */
+        /*
         try {
             getBundle();
         } catch (Exception e) {
@@ -132,8 +137,8 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         } catch (Exception e) {
             Log.i("Server", "Server failed to return a task for that ID");
         }
+*/
 
-        populateBidList();
 
     }
 
@@ -151,18 +156,33 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
             ID = extrasBundle.getString("ID");
         }
     }
-
     /**
      * Gets the task information from the server using the ID.
      * @throws Exception
      */
-    private void getFromServer() throws Exception{
+    private void getFromServeer() throws Exception{
         task = elasticSearchController.getTask(ID);
         if (task == null){
             throw new Exception();
         }
         else {
             /* Update TextViews */
+            Log.i("SDDSD", "getFromServeer: "+task.getBids().getBid(0).getName());
+            setTaskViews();
+        }
+    }
+    /**
+     * Gets the task information from the server using the ID.
+     * @throws Exception
+     */
+    private void getFromServer() {
+        task = elasticSearchController.getTask("AWIjFyoX4-hmkvYTCt4C");
+        if (task == null){
+
+        }
+        else {
+            /* Update TextViews */
+            Log.i("SDDSD", "getFromServeer: "+task.getBids().getBid(0).getName());
             setTaskViews();
         }
     }
@@ -174,19 +194,20 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                titleView = (TextView) findViewById(R.id.titleView);
+                titleView = (TextView) findViewById(R.id.requester_view_tasktitleView);
                 titleView.setText(task.getName());
-                dateView = (TextView) findViewById(R.id.dateView);
+                dateView = (TextView) findViewById(R.id.requester_view_taskdateView);
                 dateView.setText(task.getDateAsString());
-                descriptionView = (TextView) findViewById(R.id.descriptionView);
+                descriptionView = (TextView) findViewById(R.id.requester_view_taskdescriptionView);
                 descriptionView.setText(task.getDescription());
-                statusView = (TextView) findViewById(R.id.statusView);
+                statusView = (TextView) findViewById(R.id.requester_view_taskstatusView);
                 statusView.setText(task.getStatus());
             }
         });
     }
 
     private void populateBidList(){
+        BidList temp;
         String status = task.getStatus();
         if (status.equals("Requested")){
             /* does not display additional information */
@@ -195,25 +216,27 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         else if (status.equals("Bidded")){
             /* displays a list of bids */
             setBiddedView();
-            bidList = task.getBids();
+            temp = task.getBids();
+            bidList.addAll(temp);
             bidAdapter.notifyDataSetChanged();
         }
         else if (status.equals("Requested")){
             /* displays provider info and requested/done buttons */
             setAssignedView();
             bidList = task.getBids();
-            winningBid = bidList.getBid(0);
-            setBidViews(winningBid.getName(), winningBid.getAmountAsString());
+            chosenBid = bidList.getBid(0);
+            setBidViews(chosenBid.getName(), chosenBid.getAmountAsString());
         }
         else if (status.equals("Done")){
             /* displays provider info and allows a review to be left */
             setDoneView();
             bidList = task.getBids();
-            winningBid = bidList.getBid(0);
-            setBidViews(winningBid.getName(), winningBid.getAmountAsString());
+            chosenBid = bidList.getBid(0);
+            setBidViews(chosenBid.getName(), chosenBid.getAmountAsString());
             //TODO allow requester to leave a review for the provider
         }
     }
+
 
     /**
      * Shows certain layout elements when the task status is Requested
@@ -233,7 +256,6 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
      * Shows certain layout elements when the task status is Bidded
      */
     private void setBiddedView(){
-        listView.setVisibility(GONE);
         bidderName.setVisibility(VISIBLE);
         bidderNameView.setVisibility(VISIBLE);
         acceptedBid.setVisibility(VISIBLE);
@@ -270,7 +292,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         setStatusTo.setVisibility(GONE);
         requestedButton.setVisibility(GONE);
         doneButton.setVisibility(GONE);
-    }
+   }
 
     /**
      * Updates the TextViews that are conditionally displayed, depending on status.
@@ -287,42 +309,14 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         });
     }
 
-    /**
-     * Handles status change to "Requested" or "Done" after the user confirms the change in a dialog.
-     * @param confirmed True if the user chose "Yes" on the dialog
-     */
-    public void onFinishConfirmDialog(Boolean confirmed){
-        if (confirmed) {
-            if (dialogFlag.equals("Requested")) {
-                task.setRequested();
-                setTaskViews();
-                setRequestedView();
-                elasticSearchController.updateTasks(task);
-            } else if (dialogFlag.equals("Done")) {
-                task.setDone();
-                setTaskViews();
-                setDoneView();
-                elasticSearchController.updateTasks(task);
-            }
-        }
-    }
 
-    /***
-     * Interface method from ConfirmDialog.ConfirmDialogListener
-     * @param confirmed boolean value representing the user response in the dialog
-     * @param dialog - the type of dialog called
-     * true means the user confirmed.
-     */
-    public void onFinishConfirmDialog(Boolean confirmed, String dialog){}
-    /**
-     * The dialog that appears when the Set Status To: Requested button is pressed.
-     */
     public void setToRequested(){
         FragmentManager fm = getSupportFragmentManager();
-        dialogFlag = "Requested";
+
 
         ConfirmDialog confirmDialog = new ConfirmDialog();
         Bundle args = new Bundle();
+        args.putString("dialogFlag", "Requested");
         args.putString("title", "Set Status To Requested");
         args.putString("cancel", "Cancel");
         args.putString("confirm", "Yes");
@@ -333,15 +327,13 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         confirmDialog.show(fm, "To Requested");
     }
 
-    /**
-     * The dialog that appears when the Set Status To: Done button is pressed.
-     */
+
     public void setToDone(){
         FragmentManager fm = getSupportFragmentManager();
-        dialogFlag = "Done";
 
         ConfirmDialog confirmDialog = new ConfirmDialog();
         Bundle args = new Bundle();
+        args.putString("dialogFlag", "Done");
         args.putString("title", "Set Status to Done");
         args.putString("cancel", "Cancel");
         args.putString("confirm", "Yes");
@@ -351,14 +343,99 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         confirmDialog.show(fm, "To Done");
     }
 
-    /**
-     * When the user taps the back button, go back to the RequesterViewListActivity.
-     */
-    @Override
-    public void finish(){
-        Intent intent = new Intent(RequesterViewTaskActivity.this, RequesterViewListActivity.class);
-        startActivity(intent);
+
+    private void acceptBidDialog(){
+        FragmentManager fm = getSupportFragmentManager();
+        ConfirmDialog confirmDialog = new ConfirmDialog();
+        Bundle args = new Bundle();
+        args.putString("dialogFlag", "Accept");
+        args.putString("title", "Accept Bid");
+        args.putString("cancel", "Cancel");
+        args.putString("confirm", "Yes");
+        args.putString("message", "Are you sure you want to accept this bid? This will delete all other bids.");
+
+        confirmDialog.setArguments(args);
+        confirmDialog.show(fm, "To Done");
     }
+
+
+
+    private void declineBidDialog(){
+        FragmentManager fm = getSupportFragmentManager();
+        ConfirmDialog confirmDialog = new ConfirmDialog();
+        Bundle args = new Bundle();
+        args.putString("dialogFlag", "Decline");
+        args.putString("title", "Decline Bid");
+        args.putString("cancel", "Cancel");
+        args.putString("confirm", "Yes");
+        args.putString("message", "Are you sure you want to decline this bid? It will be deleted.");
+
+        confirmDialog.setArguments(args);
+        confirmDialog.show(fm, "To Done");
+    }
+
+    /***
+     * Interface method from ConfirmDialog.ConfirmDialogListener
+     * @param confirmed boolean value representing the user response in the dialog
+     * @param dialog - the type of dialog called
+     * true means the user confirmed.
+     */
+    public void onFinishConfirmDialog(Boolean confirmed, String dialog){
+        BidList temp;
+        Log.i("DERER", "onFinishConfirmDialog: "+dialog);
+        if (confirmed ==true) {
+            if (dialog.equals("Accept")) {
+                task.chooseBid(chosenBid);
+                bidList.clear();
+                bidList.add(chosenBid);
+                bidAdapter.notifyDataSetChanged();
+                //Intent intent = new Intent(this, RequesterViewTaskActivity.class);
+                //Bundle bundle = new Bundle();
+                //bundle.putString("ID", task.getUniqueID());
+                //startActivity(intent);
+            } else if (dialog.equals("Decline")) {
+                Log.i("DERER", "onFinishConfirmDialog: "+chosenBid.getName());
+                task.removeBid(chosenBid);
+                //temp = task.getBids();
+                bidList.clear();
+                bidList.addAll(task.getBids());
+                bidAdapter.notifyDataSetChanged();
+            } else if (dialog.equals("Requested")) {
+                task.setRequested();
+                setTaskViews();
+                setRequestedView();
+            } else if (dialog.equals("Done")) {
+                task.setDone();
+                setTaskViews();
+               // setDoneView();
+            }
+            elasticSearchController.updateTasks(task);
+        }
+    }
+
+
+
+    public void deleteBid(View v){
+
+        final int position = listView.getPositionForView((View) v.getParent());
+        chosenBid = bidList.getBid(position);
+        declineBidDialog();
+
+    }
+
+    public void acceptBid(View v){
+
+        final int position = listView.getPositionForView((View) v.getParent());
+        chosenBid = bidList.getBid(position);
+        acceptBidDialog();
+
+    }
+
+
+
+    public void onFinishConfirmDialog(Boolean confirmed){}
+
+
 }
 
 
