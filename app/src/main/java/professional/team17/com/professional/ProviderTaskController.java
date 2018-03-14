@@ -14,8 +14,6 @@ import android.util.Log;
  */
 
 public class ProviderTaskController {
-<<<<<<< Updated upstream
-=======
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
     public ProviderTaskController(){}
     // this parts is for TaskListActivity
@@ -41,8 +39,6 @@ public class ProviderTaskController {
 
 
         return taskList;}
-    // this parts is for ViewTaskActivity
-    //may implement this later
->>>>>>> Stashed changes
+
 
 }
