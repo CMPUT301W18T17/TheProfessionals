@@ -191,12 +191,20 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
      */
     public void fillBidded() {
         //set lowest bid amount
-        deleteButton.setVisibility(View.VISIBLE);
-        bidButton.setVisibility(View.INVISIBLE);
-        appendButton.setVisibility(View.VISIBLE);
         BidList bids = task.getBids();
+        Bid bid = bids.getBid(username);
+
+        deleteButton.setVisibility(View.INVISIBLE);
+        bidButton.setVisibility(View.VISIBLE);
+        appendButton.setVisibility(View.INVISIBLE);
+
         taskLowBidTextField.setText(bids.getLowest().getAmountAsString());
-        taskMyBidTextField.setText(bids.getBid(username).getAmountAsString());
+        if (bid!=null) {
+            taskMyBidTextField.setText(bids.getBid(username).getAmountAsString());
+            deleteButton.setVisibility(View.VISIBLE);
+            bidButton.setVisibility(View.INVISIBLE);
+            appendButton.setVisibility(View.VISIBLE);
+        }
         taskLowBidDollar.setVisibility(View.VISIBLE);
         taskMyBidDollar.setVisibility(View.VISIBLE);
     }
