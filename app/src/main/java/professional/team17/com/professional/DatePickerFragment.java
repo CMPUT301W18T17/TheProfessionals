@@ -14,7 +14,9 @@ import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * A dialog for picking dates. Used in the RequesterAddTask activity.
@@ -54,17 +56,13 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
      */
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        String yearString;
-        String monthString;
-        String dayString;
-
-        yearString = Integer.toString(year);
-        monthString = Integer.toString(month);
-        dayString = Integer.toString(day);
-        formattedDate = dayString + "/" + monthString + "/" + yearString;
-
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, day);
+        
+        String formattedDate = "dd/MM/yyyy";
         TextView textualDateView = getActivity().findViewById(R.id.textualDateView);
-        textualDateView.setText(formattedDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(formattedDate, Locale.US);
+        textualDateView.setText(dateFormat.format(c.getTime()));
 
     }
 
