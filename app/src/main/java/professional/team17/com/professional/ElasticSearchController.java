@@ -25,16 +25,22 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
+
+
 /**
- * Created by ag on 2018-02-22.
+ * This class will handle the connection and async tasks to the es server
  */
-
-
-
 public class ElasticSearchController {
     private static JestDroidClient client;
     private static String server = "http://cmput301.softwareprocess.es:8080";
+    private static String indexname = "cmput301w18t17";
+    private static String tasktype = "task";
+    private static String profiletype = "profile";
 
+
+    public void ElasticSearchController(){
+
+    }
 //TODO - all methods (not async should be placed in some other class at some point
 
 
@@ -225,8 +231,8 @@ public class ElasticSearchController {
                 Boolean success = true;
                 for (Profile profile : profiles) {
                     Index index = new Index.Builder(profile)
-                            .index("cmput301w18t17")
-                            .type("profile")
+                            .index(indexname)
+                            .type(profiletype)
                             .id(profile.getUserName())
                             .build();
                     try {
@@ -249,8 +255,8 @@ public class ElasticSearchController {
         protected Profile doInBackground(String... id) {
             verifySettings();
             Profile profile = null;
-            Get get = new Get.Builder("cmput301w18t17", id[0])
-                    .type("profile")
+            Get get = new Get.Builder(indexname, id[0])
+                    .type(profiletype)
                     .build();
             try {
                 JestResult result = client.execute(get);
@@ -284,8 +290,8 @@ public class ElasticSearchController {
 
             for (Task task : tasks) {
                 Index index = new Index.Builder(task)
-                        .index("cmput301w18t17")
-                        .type("task")
+                        .index(indexname)
+                        .type(tasktype)
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
@@ -316,8 +322,8 @@ public class ElasticSearchController {
 
             for (Task task : tasks) {
                 Index index = new Index.Builder(task)
-                        .index("cmput301w18t17")
-                        .type("task")
+                        .index(indexname)
+                        .type(tasktype)
                         .id(task.getUniqueID())
                         .build();
 
@@ -343,8 +349,8 @@ public class ElasticSearchController {
         protected Task doInBackground(String... id) {
             verifySettings();
             Task task = null;
-            Get get = new Get.Builder("cmput301w18t17", id[0])
-                    .type("task")
+            Get get = new Get.Builder(indexname, id[0])
+                    .type(tasktype)
                     .build();
             try {
                 JestResult result = client.execute(get);
@@ -374,8 +380,8 @@ public class ElasticSearchController {
             TaskList taskList = new TaskList();
             Search search = new Search.Builder(search_para[0])
                     // multiple index or types can be added.
-                    .addIndex("cmput301w18t17")
-                    .addType("task")
+                    .addIndex(indexname)
+                    .addType(tasktype)
                     .build();
             try {
                 SearchResult result = client.execute(search);
