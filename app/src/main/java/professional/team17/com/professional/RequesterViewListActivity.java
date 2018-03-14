@@ -84,9 +84,11 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
      */
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+            Log.i("WEWE", "onItemClick: "+position);
             Task task = taskList.get(position);
             Intent intention = new Intent(RequesterViewListActivity.this, RequesterViewTaskActivity.class);
-            intention.putExtra("Task", task.getUniqueID());
+            Log.i("WEWE", "onItemClick: "+task.getUniqueID());
+            intention.putExtra("task", task.getUniqueID());
             startActivity(intention);
 
         }
