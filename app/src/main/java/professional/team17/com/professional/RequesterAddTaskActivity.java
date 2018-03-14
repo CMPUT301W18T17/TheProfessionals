@@ -102,26 +102,26 @@ public class RequesterAddTaskActivity extends RequesterLayout {
 
                 if (title.length() > 30){
                     /* if the title is too long */
-                    message = "Title cannot be longer than 30 characters."
-                    Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+                    message = "Title cannot be longer than 30 characters.";
+                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
                     toast.show();
                 }
                 else if (description.length() > 30) {
                     /* if the description is too long */
-                    message = "Description cannot be longer than 300 characters."
-                    Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+                    message = "Description cannot be longer than 300 characters.";
+                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
                     toast.show();
                 }
                 else if (title.isEmpty()){
                     /* if the title is empty */
-                    message = "You must include a title."
-                    Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT) ;
+                    message = "You must include a title.";
+                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT) ;
                     toast.show();
                 }
                 else if (description.isEmpty()){
                     /* if the title is empty */
-                    message = "You must include a description."
-                    Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT) ;
+                    message = "You must include a description.";
+                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT) ;
                     toast.show();
                 }
                 else {
