@@ -45,7 +45,7 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO Delete after project part 5 with persistenct
+        //TODO Delete after project part 5 with persistence
         setContentView(R.layout.activity_requester_view_list);
         taskList = new TaskList();
         adapterHelper = new RequesterCustomArrayAdapter(this, taskList);

@@ -104,7 +104,7 @@ public class RequesterAddTaskActivity extends RequesterLayout {
                addToServer(title, description);
 
                 /* Activity finished, start RequesterViewListActivity */
-                finish();
+                endActivity();
 
             }
         });
@@ -135,14 +135,14 @@ public class RequesterAddTaskActivity extends RequesterLayout {
     }
 
 
-    @Override
-    public void  finish(){
+    public void  endActivity(){
         Bundle bundle = new Bundle(2);
         bundle.putString("ID", task.getUniqueID());
         bundle.putString("Status", "Requested");
         Intent intent = new Intent(RequesterAddTaskActivity.this, RequesterViewListActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
     }
 
     public java.util.Date parseDate(String sdate) {
