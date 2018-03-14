@@ -8,16 +8,17 @@
     <include layout="@layout/requester_layout" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/requester_view_task"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp"
         android:layout_marginTop="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/requester_view_tasktitleView"
+            android:id="@+id/titleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -29,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/requester_view_taskdate"
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -38,10 +39,10 @@
             android:textColor="@color/colorRequester"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_tasktitleView" />
+            app:layout_constraintTop_toBottomOf="@+id/titleView" />
 
         <TextView
-            android:id="@+id/requester_view_taskdescription"
+            android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -52,30 +53,30 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/requester_view_taskdate" />
+            app:layout_constraintTop_toBottomOf="@+id/date" />
 
         <TextView
-            android:id="@+id/requester_view_taskdateView"
+            android:id="@+id/dateView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/requester_view_taskdate"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_tasktitleView" />
+            app:layout_constraintStart_toEndOf="@+id/date"
+            app:layout_constraintTop_toBottomOf="@+id/titleView" />
 
         <TextView
-            android:id="@+id/requester_view_taskstatusView"
+            android:id="@+id/statusView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_tasktitleView" />
+            app:layout_constraintTop_toBottomOf="@+id/titleView" />
 
         <TextView
-            android:id="@+id/requester_view_taskstatus"
+            android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -83,11 +84,11 @@
             android:text="Status:"
             android:textColor="@color/colorRequester"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/requester_view_taskstatusView"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_tasktitleView" />
+            app:layout_constraintEnd_toStartOf="@+id/statusView"
+            app:layout_constraintTop_toBottomOf="@+id/titleView" />
 
         <TextView
-            android:id="@+id/requester_view_taskdescriptionView"
+            android:id="@+id/descriptionView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -97,10 +98,10 @@
             android:textAlignment="viewStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescription" />
+            app:layout_constraintTop_toBottomOf="@+id/description" />
 
         <ImageButton
-            android:id="@+id/requester_view_taskViewPhotosButton"
+            android:id="@+id/ViewPhotosButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
@@ -110,11 +111,11 @@
             app:layout_constraintEnd_toStartOf="@+id/viewLocationButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescriptionView"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionView"
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
         <ImageButton
-            android:id="@+id/requester_view_taskviewLocationButton"
+            android:id="@+id/viewLocationButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="8dp"
@@ -124,12 +125,12 @@
             android:tint="@color/colorRequester"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/requester_view_taskViewPhotosButton"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescriptionView"
+            app:layout_constraintStart_toEndOf="@+id/ViewPhotosButton"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionView"
             app:srcCompat="@android:drawable/ic_dialog_map" />
 
         <ListView
-            android:id="@+id/requester_view_taskbidListView"
+            android:id="@+id/bidListView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
@@ -137,10 +138,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
+            app:layout_constraintTop_toBottomOf="@+id/ViewPhotosButton" />
 
         <ImageButton
-            android:id="@+id/requester_view_taskbackButton"
+            android:id="@+id/backButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:backgroundTint="@color/cardview_light_background"
@@ -150,7 +151,7 @@
             app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
         <TextView
-            android:id="@+id/requester_view_taskbidder"
+            android:id="@+id/bidder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -159,21 +160,21 @@
             android:textColor="@color/colorRequester"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
+            app:layout_constraintTop_toBottomOf="@+id/ViewPhotosButton" />
 
         <TextView
-            android:id="@+id/requester_view_taskbidderUsernameView"
+            android:id="@+id/bidderUsernameView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:text="TextView"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/requester_view_taskbidder"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
+            app:layout_constraintStart_toEndOf="@+id/bidder"
+            app:layout_constraintTop_toBottomOf="@+id/ViewPhotosButton" />
 
         <TextView
-            android:id="@+id/requester_view_taskacceptedBid"
+            android:id="@+id/acceptedBid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -181,22 +182,22 @@
             android:text="Accepted Bid:"
             android:textColor="@color/colorRequester"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/requester_view_taskbidAmountView"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskviewLocationButton" />
+            app:layout_constraintEnd_toStartOf="@+id/bidAmountView"
+            app:layout_constraintTop_toBottomOf="@+id/viewLocationButton" />
 
         <TextView
-            android:id="@+id/requester_view_taskbidAmountView"
+            android:id="@+id/bidAmountView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="32dp"
-            android:text="v"
+            android:text="TextView"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskviewLocationButton" />
+            app:layout_constraintTop_toBottomOf="@+id/viewLocationButton" />
 
         <TextView
-            android:id="@+id/requester_view_tasksetStatus"
+            android:id="@+id/setStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -205,20 +206,20 @@
             android:textColor="@color/colorRequester"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskbidder" />
+            app:layout_constraintTop_toBottomOf="@+id/bidder" />
 
         <Button
-            android:id="@+id/requester_view_taskrequestedButton"
+            android:id="@+id/requestedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Requested"
-            app:layout_constraintStart_toEndOf="@+id/requester_view_tasksetStatus"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskacceptedBid" />
+            app:layout_constraintStart_toEndOf="@+id/setStatus"
+            app:layout_constraintTop_toBottomOf="@+id/acceptedBid" />
 
         <Button
-            android:id="@+id/requester_view_taskdoneButton"
+            android:id="@+id/doneButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -226,21 +227,8 @@
             android:layout_marginTop="8dp"
             android:text="Done"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/requester_view_taskrequestedButton"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskacceptedBid" />
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="70dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/requester_view_task">
-
-        <ListView
-            android:id="@+id/requester_task_view_listview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            app:layout_constraintStart_toEndOf="@+id/requestedButton"
+            app:layout_constraintTop_toBottomOf="@+id/acceptedBid" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

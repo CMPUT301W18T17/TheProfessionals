@@ -136,7 +136,7 @@ public class SearchActivity extends ProviderLayout {
      */
     private TaskList getOpenTasks() {
         TaskList tasklist = new TaskList();
-        tasklist = elasticSearchController.getTasksStatus("Bidded");
+        tasklist = elasticSearchController.getTasksStatus("Requested");
         return tasklist;
     }
 }

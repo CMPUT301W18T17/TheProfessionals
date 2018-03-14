@@ -78,7 +78,7 @@ public class ConfirmDialog extends DialogFragment {
         Bundle args = getArguments();
 
         //get args activity passed into dialog
-        final String type = args.getString("dialogFlag");
+        final String type = args.getString("type");
         String title = args.getString("title");
         String cancelButton = args.getString("cancel");
         String confirmButton = args.getString("confirm");
