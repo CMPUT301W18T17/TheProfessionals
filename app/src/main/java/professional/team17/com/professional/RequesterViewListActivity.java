@@ -2,6 +2,7 @@ package professional.team17.com.professional;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,27 +28,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RequesterViewListActivity extends RequesterLayout {
-    /**
-     * where can i get the profile name
-     */
-    private ListView taskL;
-    private static final String FILENAME = "tasks.sav";
-    /**
-     * what the real thing is here for our customArrayAdapter
-     *  MyCustomAdapter adapter = new MyCustomAdapter(list, this);
-     *  should be like this.
-     *  in order to handle our
-     *  for now we use the formal one to instead of it.
-     */
-    private RequesterCustomArrayAdapter adapter;
+    private RequesterCustomArrayAdapter adapterHelper;
+    private ListView listView;
+    private String username;
+    private SharedPreferences sharedpreferences;
+    //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
-    private Task task1;
-    private String name;
-    private String profileName = "123";
-    private String location;
-    private String description;
-    private Date date;
-    private String dateTime;
+    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
 
 
@@ -56,182 +43,75 @@ public class RequesterViewListActivity extends RequesterLayout {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requester_view_list);
-        taskL = (ListView) findViewById(R.id.tasklist);
-        /**
-         * this part is for edit or delete the existing task by clicking the items on the screem.
-         * however since we didnt use the usual arrayAdapter
-         * we need to fix this by create a new customed one.
-         */
-        taskL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // your arraylist ot array to remove item
+        //TODO Delete after project part 5 with persistenct
+        setContentView(R.layout.provider_tasklist_view);
+        taskList = new TaskList();
+        adapterHelper = new RequesterCustomArrayAdapter(this, taskList);
+        listView = findViewById(R.id.provider_taskList_view_list);
+        listView.setAdapter(adapterHelper);
+        listView.setOnItemClickListener(clickListener);
 
-                task1 = taskList.get(position);
-                name = task1.getName();
-                //String VS Date
-                date = task1.getDate();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                dateTime = dateFormat.format(date);
-                description = task1.getDescription();
-                location = task1.getLocation();
-                Intent intent = new Intent(getApplicationContext(), RequesterViewTaskActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("string1", name);
-                bundle.putString("string2", dateTime);
-                bundle.putString("string3", description);
-                bundle.putString("string4", location);
-                intent.putExtras(bundle);
+        //get username
+        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = sharedpreferences.getString("username", "error");
 
-                startActivityForResult(intent, 0);
 
-            }
+        String type = setRequesterViewType();
+        createList(type);
 
-        });
+        taskList.addAll(createList(type));
+        adapterHelper.notifyDataSetChanged();
+
 
     }
+
+    private String setRequesterViewType() {
+        Bundle intent = getIntent().getExtras();
+        String type = intent.getString("Status");
+        return type;
+    }
+
+
+
 
     /**
-     * get userinput by click the bottom-right button!
-     * will be called by the button!
-     * @param view
+     * This is an anonymous method to create a click listener for the listview rows. If the row
+     * is selected, it packages up the task selected and the position to RequesterViewTask
      */
-    public void toTheNext(View view) {
-        Intent intent = new Intent(this, RequesterAddTaskActivity.class);
-        startActivityForResult(intent, 0);
-    }
-    /**
-     * this part is for receiving information from other activities, use RESULT_OK(FROM lonelyTwitter to set up the gate)
-     * and assign these value properly and combine them into the Task-obj!
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RequesterAddTaskActivity.RESULT_OK){
-            super.onActivityResult(requestCode, resultCode, data);
-            Bundle bundle = data.getExtras();
-            String name = bundle.getString("name");
-            String year = bundle.getString("date");
-            String dtStart = year;
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            try {
-                date = format.parse(dtStart);
-                System.out.println(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            String description = bundle.getString("description");
-            String location = bundle.getString("location");
-            int id1 = bundle.getInt("id");
-            String ID = Integer.toString(id1);
-            // should i generate an id in the addTask?
-            //change year from String to Date? or just let the date be String.
-            Task task = new Task(profileName, name, description, location, date);
-            //System.out.println("------------------------------------------------------");
-            //System.out.println(task);
-            taskList.addTask(task);
-            adapter.notifyDataSetChanged();
-            //System.out.println(taskList);
-            //System.out.println("------------------------------------------------------");
-            saveInFile();
-        }
-        else if (resultCode == RequesterEditTaskActivity.RESULT_OK){
-            super.onActivityResult(requestCode, resultCode, data);
-            Bundle bundle = data.getExtras();
-            String name = bundle.getString("name");
-            String year = bundle.getString("date");
-            String dtStart = year;
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            try {
-                date = format.parse(dtStart);
-                System.out.println(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            String description = bundle.getString("description");
-            String location = bundle.getString("location");
-            int id1 = bundle.getInt("id");
-            String ID = Integer.toString(id1);
-            // should i generate an id in the addTask?
-            //change year from String to Date? or just let the date be String.
-            task1.setProfileName(profileName);
-            task1.setName(name);
-            task1.setDescription(description);
-            task1.setDate(date);
-            task1.setLocation(location);
-            task1.setId(ID);
-            adapter.notifyDataSetChanged();
-            //System.out.println(taskList);
-            //System.out.println("------------------------------------------------------");
-            saveInFile();
+    private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
+        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+            Task task = taskList.get(position);
+            Intent intention = new Intent(RequesterViewListActivity.this, RequesterViewTaskActivity.class);
+            intention.putExtra("Task", task.getUniqueID());
+            startActivity(intention);
+
         }
 
-    }
+    };
 
 
-
-
-    @Override
-    protected void onStart() {
-
-        // TODO Auto-generated method stub
-        super.onStart();
-        Log.i("LifeCycle --->", "onStart is called");
-        //System.out.println("------------------------------------------------------");
-        //System.out.println("lol");
-        //System.out.println("------------------------------------------------------");
-
-        loadFromFile();
-        adapter = new RequesterCustomArrayAdapter(this, taskList);
-        taskL.setAdapter(adapter);
-
-
-
-    }
 
     /**
-     * the following parts should be replaced later by gason helper!!!
+     *
+     * @param type - a string representing the status of the task being displayed
+     * @return tasklist - a list of tasks of either the tasks assigned to the user,
+     * of, tasks the user has bidded on.
      */
-    private void loadFromFile() {
-
-        try {
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-
-            Gson gson = new Gson();
-
-            // Taken https://stackoverflow.com/questions/12384064/gson-convert-from-json-to-a-typed-arraylistt
-            // 2018-01-23
-            Type listType = new TypeToken<TaskList>(){}.getType();
-            taskList = gson.fromJson(in, listType);
-
-        } catch (FileNotFoundException e) {
-            taskList = new TaskList();
+    private TaskList createList(String type) {
+        TaskList taskList =null;
+        if (type.equals("Assigned")) {
+            taskList = elasticSearchController.getTasksBidded(username, "Assigned");
+            Log.i("boukll", "createList: "+taskList+username);
         }
-
+        if (type.equals("Requested")) {
+            taskList = elasticSearchController.getTasksBidded(username, "Requested");
+        }
+        if (type.equals("Bidded")) {
+            taskList = elasticSearchController.getTasksBidded(username, "Requested");
+        }
+        return taskList;
     }
 
-    private void saveInFile() {
-        try {
 
-            FileOutputStream fos = openFileOutput(FILENAME,
-                    Context.MODE_PRIVATE);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
 
-            Gson gson = new Gson();
-            gson.toJson(taskList, out);
-            //System.out.println("------------------------------------------------------");
-            //System.out.println("dota");
-            // System.out.println("------------------------------------------------------");
-            out.flush();
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }
 }

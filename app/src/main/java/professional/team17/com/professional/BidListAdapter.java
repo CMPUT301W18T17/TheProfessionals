@@ -17,7 +17,8 @@ import android.widget.TextView;
  * To inflate the row selection for bids
  *
  * @author Allison, Lauren
- * @see Bid BidList
+ * @see Bid
+ * @see BidList
  */
 public class BidListAdapter extends ArrayAdapter<Bid> {
 
