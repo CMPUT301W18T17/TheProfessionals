@@ -31,6 +31,7 @@ public class ConfirmDialog extends DialogFragment {
      */
     public interface ConfirmDialogListener {
         void onFinishConfirmDialog(Boolean confirmed);
+        void onFinishConfirmDialog(Boolean confirmed, String dialog);
     }
 
 
@@ -77,6 +78,7 @@ public class ConfirmDialog extends DialogFragment {
         Bundle args = getArguments();
 
         //get args activity passed into dialog
+        final String type = args.getString("type");
         String title = args.getString("title");
         String cancelButton = args.getString("cancel");
         String confirmButton = args.getString("confirm");
@@ -103,11 +105,16 @@ public class ConfirmDialog extends DialogFragment {
             }
         });
 
-        //postive = confirm dialog question/check
+        //postive = confirm dialog question/check. If type of dialog it input, enter amount
         positive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (type.length()>0) {
+                    listener.onFinishConfirmDialog(true, type);
+                }
+                else {
                     listener.onFinishConfirmDialog(true);
+                }
                     dismiss();
                 }
         });
