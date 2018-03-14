@@ -24,8 +24,9 @@ public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<
     public void setUp() throws Exception{
         solo = new Solo(getInstrumentation(), getActivity());
         Context context = getInstrumentation().getTargetContext();
-        final SharedPreferences.Editor edit = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        edit.putString("username", "hailan333");
+        final SharedPreferences.Editor prefEdit = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        prefEdit.putString("username", "hailan333");
+        prefEdit.commit();
     }
 
     public void testStart() throws Exception {
