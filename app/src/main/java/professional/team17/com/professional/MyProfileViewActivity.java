@@ -30,6 +30,10 @@ public class MyProfileViewActivity extends ProfileViewActivity {
         setUp();
     }
 
+    /**
+     * setUp uses initiates everything identified in the layout
+     * Is used in onCreate and onResume
+     */
     private void setUp(){
         currentMode.setText("My Profile");
 
@@ -55,6 +59,9 @@ public class MyProfileViewActivity extends ProfileViewActivity {
         setInfo(theUserName);
     }
 
+    /**
+     * uses the setUp method (to possibly refresh and show edited profile information)
+     */
     protected void onResume(){
         super.onResume();
         setUp();
