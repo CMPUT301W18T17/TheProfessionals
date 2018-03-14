@@ -71,7 +71,7 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
     private String setRequesterViewType() {
         Bundle intent = getIntent().getExtras();
         String type = intent.getString("Status");
-        setActivityTitle("My"+type+"Tasks");
+        setActivityTitle("My " + type + " Tasks");
         return type;
     }
 
