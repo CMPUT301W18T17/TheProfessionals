@@ -307,6 +307,13 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         }
     }
 
+    /***
+     * Interface method from ConfirmDialog.ConfirmDialogListener
+     * @param confirmed boolean value representing the user response in the dialog
+     * @param dialog - the type of dialog called
+     * true means the user confirmed.
+     */
+    public void onFinishConfirmDialog(Boolean confirmed, String dialog){}
     /**
      * The dialog that appears when the Set Status To: Requested button is pressed.
      */

@@ -109,7 +109,7 @@ public class ConfirmDialog extends DialogFragment {
         positive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (type.length()>0) {
+                if (type != null) {
                     listener.onFinishConfirmDialog(true, type);
                 }
                 else {
