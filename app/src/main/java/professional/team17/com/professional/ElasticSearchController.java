@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.searchbox.client.JestResult;
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Get;
 import io.searchbox.core.Index;
@@ -164,6 +165,15 @@ public class ElasticSearchController {
 
     }
 
+    /**
+     *
+     * @param task - the task that will be added within the ES
+     */
+    public void deleteTasks(Task task) {
+        ElasticSearchController.DeleteTask deletetask = new ElasticSearchController.DeleteTask();
+        deletetask.execute(task);
+
+    }
 
     /**
      * @param username - the username to be searched for in the server
@@ -339,7 +349,31 @@ public class ElasticSearchController {
         }
     }
 
+    /**
+     *  This AsyncTask will update a task from the db based on a taskid
+     */
+    public static class DeleteTask extends AsyncTask<Task, Void, Void> {
 
+        @Override
+        protected Void doInBackground(Task... tasks) {
+            verifySettings();
+
+            for (Task task : tasks) {
+                Delete delete = new Delete.Builder(task.getUniqueID())
+                        .index(indexname)
+                        .type(tasktype)
+                        .build();
+                try {
+                    DocumentResult result = client.execute(delete);
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and update the task");
+
+                }
+            }
+            return null;
+        }
+    }
     /**
      *  This AsyncTask will retrieve a task from the db based on a taskid
      */

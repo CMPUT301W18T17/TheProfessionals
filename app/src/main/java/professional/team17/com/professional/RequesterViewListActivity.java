@@ -168,6 +168,7 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
         if (confirmed){
             taskList.deleteTask(task);
             adapterHelper.notifyDataSetChanged();
+            elasticSearchController.deleteTasks(task);
         }
     }
 
