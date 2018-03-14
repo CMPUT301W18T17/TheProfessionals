@@ -137,7 +137,7 @@ public class RequesterAddTaskActivity extends RequesterLayout {
 
     @Override
     public void  finish(){
-        Bundle bundle = new Bundle(1);
+        Bundle bundle = new Bundle(2);
         bundle.putString("ID", task.getUniqueID());
         bundle.putString("Status", "Requested");
         Intent intent = new Intent(RequesterAddTaskActivity.this, RequesterViewListActivity.class);
