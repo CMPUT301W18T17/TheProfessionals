@@ -44,12 +44,15 @@ public class RequesterViewListActivity extends RequesterLayout {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //TODO Delete after project part 5 with persistenct
-        setContentView(R.layout.provider_tasklist_view);
+        setContentView(R.layout.activity_requester_view_list);
         taskList = new TaskList();
         adapterHelper = new RequesterCustomArrayAdapter(this, taskList);
-        listView = findViewById(R.id.provider_taskList_view_list);
+        listView = findViewById(R.id.tasklist);
         listView.setAdapter(adapterHelper);
         listView.setOnItemClickListener(clickListener);
+
+        /* Set activity title */
+        setActivityTitle("My Tasks");
 
         //get username
         sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -98,7 +101,7 @@ public class RequesterViewListActivity extends RequesterLayout {
      * of, tasks the user has bidded on.
      */
     private TaskList createList(String type) {
-        TaskList taskList =null;
+        TaskList taskList = null;
         if (type.equals("Assigned")) {
             taskList = elasticSearchController.getTasksBidded(username, "Assigned");
             Log.i("boukll", "createList: "+taskList+username);

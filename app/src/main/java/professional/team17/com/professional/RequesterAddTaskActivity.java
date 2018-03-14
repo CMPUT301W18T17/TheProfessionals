@@ -104,7 +104,7 @@ public class RequesterAddTaskActivity extends RequesterLayout {
                addToServer(title, description);
 
                 /* Activity finished, start RequesterViewListActivity */
-                completeTransition();
+                finish();
 
             }
         });
@@ -125,23 +125,24 @@ public class RequesterAddTaskActivity extends RequesterLayout {
      * @param description Task description
      */
     private void addToServer(String title, String description){
-        //TODO delete this temp variable
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String username = pref.getString("username", "error");
         java.util.Date inputDate = parseDate(dateString);
         task = new Task(username, title, description, locationString, dateString);
+        task.setRequested();
         ElasticSearchController elasticSearchController = new ElasticSearchController();
         elasticSearchController.addTasks(task);
     }
 
 
-    public void  completeTransition(){
+    @Override
+    public void  finish(){
         Bundle bundle = new Bundle(1);
         bundle.putString("ID", task.getUniqueID());
+        bundle.putString("Status", "Requested");
         Intent intent = new Intent(RequesterAddTaskActivity.this, RequesterViewListActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
-        finish();
     }
 
     public java.util.Date parseDate(String sdate) {
