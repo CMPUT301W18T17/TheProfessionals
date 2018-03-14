@@ -385,23 +385,36 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         Log.i("DERER", "onFinishConfirmDialog: "+dialog);
         if (confirmed ==true) {
             if (dialog.equals("Accept")) {
+                /* Bid is accepted by the user. Delete all other bids, set the chosen bid as the
+                 * sole bid, update the task's status to Assigned, update the page's layout to show
+                 * the Assigned layout and fill the new layout with the chosen bid's info.
+                 */
                 task.chooseBid(chosenBid);
                 bidList.clear();
                 bidList.add(chosenBid);
                 task.setAssigned(chosenBid);
-                populateBidList();
+                setAssignedView();
+                setBidViews(chosenBid.getName(), chosenBid.getAmountAsString());
             } else if (dialog.equals("Decline")) {
+                /* Bid is declined by the user. Remove the bid from bidList and refresh the
+                 *listview.
+                 */
                 Log.i("DERER", "onFinishConfirmDialog: "+chosenBid.getName());
                 task.removeBid(chosenBid);
-                //temp = task.getBids();
                 bidList.remove(chosenBid);
                 bidAdapter.notifyDataSetChanged();
             } else if (dialog.equals("Requested")) {
+                /* User changes the task's status back to requested. Change the task status, update
+                 * the layout to show the Requested Layout and remove the chosen bid.
+                 */
                 bidList.clear();
                 task.setRequested();
                 setTaskViews();
                 setRequestedView();
             } else if (dialog.equals("Done")) {
+                /* User changes the task's status to done. Change the task status and update the
+                 * layout to show the Done layout.
+                 */
                 task.setDone();
                 setTaskViews();
                 setDoneView();
