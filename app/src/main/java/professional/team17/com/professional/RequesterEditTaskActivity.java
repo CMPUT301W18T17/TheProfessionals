@@ -184,7 +184,7 @@ public class RequesterEditTaskActivity extends RequesterLayout {
     @Override
     public void finish() {
         Bundle bundle = new Bundle(1);
-        bundle.putString("ID", ID);
+        bundle.putString("Status", "Requested");
         Intent intent = new Intent(RequesterEditTaskActivity.this, RequesterViewListActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);

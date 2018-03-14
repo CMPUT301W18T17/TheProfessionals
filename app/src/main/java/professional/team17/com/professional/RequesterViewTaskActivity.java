@@ -266,10 +266,11 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
      * Shows certain layout elements when the task status is Bidded
      */
     private void setBiddedView(){
-        bidderName.setVisibility(VISIBLE);
-        bidderNameView.setVisibility(VISIBLE);
-        acceptedBid.setVisibility(VISIBLE);
-        acceptedBidView.setVisibility(VISIBLE);
+        listView.setVisibility(View.VISIBLE);
+        bidderName.setVisibility(View.GONE);
+        bidderNameView.setVisibility(GONE);
+        acceptedBid.setVisibility(GONE);
+        acceptedBidView.setVisibility(GONE);
         setStatusTo.setVisibility(GONE);
         requestedButton.setVisibility(GONE);
         doneButton.setVisibility(GONE);
@@ -287,7 +288,6 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         setStatusTo.setVisibility(VISIBLE);
         requestedButton.setVisibility(VISIBLE);
         doneButton.setVisibility(VISIBLE);
-        //TODO leaving review button
     }
 
     /**
@@ -302,6 +302,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         setStatusTo.setVisibility(GONE);
         requestedButton.setVisibility(GONE);
         doneButton.setVisibility(GONE);
+        //TODO leaving review button
     }
 
     /**
