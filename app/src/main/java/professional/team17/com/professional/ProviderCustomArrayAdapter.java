@@ -116,7 +116,4 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
 
             return v;
         }
-
-
-
 }

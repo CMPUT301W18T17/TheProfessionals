@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_row_row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/requester_assigned_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif"
+                    android:text="TaskTitle - "
+                    android:textSize="21sp"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/requester_assigned_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:paddingRight="20dp"
+                    android:text="Assigned"
+                    android:textSize="15sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/requester_assigned_title"
+                    app:layout_constraintStart_toEndOf="@+id/requester_assigned_title" />
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"><![CDATA[
+
+
+
+                tools:layout_editor_absoluteX="70dp" />
+
+
+
+                ]]>
+
+                <TextView
+                    android:id="@+id/requester_assigned_acceptbid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="Accept bid: $"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <TextView
+                    android:id="@+id/requester_assigned_acceptbidAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="--/--"
+                    app:layout_constraintStart_toEndOf="@+id/requester_assigned_acceptbid" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/requester_assigned_userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="15dp"
+            android:text="@string/username"
+            android:textSize="19sp"
+            tools:layout_width="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
