@@ -1,5 +1,6 @@
 package professional.team17.com.professional;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,11 +28,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RequesterViewListActivity extends RequesterLayout {
+public class RequesterViewListActivity extends RequesterLayout implements ConfirmDialog.ConfirmDialogListener{
     private RequesterCustomArrayAdapter adapterHelper;
     private ListView listView;
     private String username;
     private SharedPreferences sharedpreferences;
+    private Task task;
     //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
@@ -116,5 +118,52 @@ public class RequesterViewListActivity extends RequesterLayout {
     }
 
 
+    public void deleteTask(View v){
 
+        final int position = listView.getPositionForView((View) v.getParent());
+        task = taskList.get(position);
+        deleteTaskDialog();
+
+    }
+
+    public void editTask(View v){
+
+        final int position = listView.getPositionForView((View) v.getParent());
+        Task editTask = taskList.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("ID", editTask.getUniqueID());
+        Intent intent = new Intent(RequesterViewListActivity.this, RequesterEditTaskActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+
+    }
+
+    public void deleteTaskDialog(){
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        ConfirmDialog confirmDialog = new ConfirmDialog();
+        Bundle args = new Bundle();
+        args.putString("title", "Delete Task");
+        args.putString("cancel", "Cancel");
+        args.putString("confirm", "Yes");
+        args.putString("message", "Are you sure you want to delete this task?");
+
+        confirmDialog.setArguments(args);
+        confirmDialog.show(fm, "To Done");
+    }
+
+    @Override
+    public void onFinishConfirmDialog(Boolean confirmed) {
+        if (confirmed){
+            taskList.deleteTask(task);
+            adapterHelper.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onFinishConfirmDialog(Boolean confirmed, String string) {
+        if (confirmed){
+            taskList.deleteTask(task);
+            adapterHelper.notifyDataSetChanged();
+        }
+    }
 }
