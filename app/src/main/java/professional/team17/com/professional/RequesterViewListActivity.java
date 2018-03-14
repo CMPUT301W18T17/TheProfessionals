@@ -103,15 +103,16 @@ public class RequesterViewListActivity extends RequesterLayout {
     private TaskList createList(String type) {
         TaskList taskList = null;
         if (type.equals("Assigned")) {
-            taskList = elasticSearchController.getTasksBidded(username, "Assigned");
+            taskList = elasticSearchController.getTasksRequester(username, "Assigned");
             Log.i("boukll", "createList: "+taskList+username);
         }
         if (type.equals("Requested")) {
-            taskList = elasticSearchController.getTasksBidded(username, "Requested");
+            taskList = elasticSearchController.getTasksRequester(username, "Requested");
         }
         if (type.equals("Bidded")) {
-            taskList = elasticSearchController.getTasksBidded(username, "Requested");
+            taskList = elasticSearchController.getTasksRequester(username, "Bidded");
         }
+        Log.i("WTWT", "createList: "+taskList);
         return taskList;
     }
 
