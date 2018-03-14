@@ -22,10 +22,9 @@ public class EditMyProfileActivity extends AppCompatActivity {
     private EditText editEmail;
     private EditText editPhone;
 
+    private Profile userProfile;
+
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
-    private SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-    private String theUserName = pref.getString("username", "error");
-    private Profile userProfile = elasticSearchController.getProfile(theUserName);
 
     /**
      * Upon creation, EditText will be set with relevant user info grabbed from ES
@@ -49,6 +48,10 @@ public class EditMyProfileActivity extends AppCompatActivity {
         editEmail = findViewById(R.id.editEmail);
         editPhone = findViewById(R.id.editPhone);
 
+        SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String theUserName = pref.getString("username", "error");
+        userProfile = elasticSearchController.getProfile(theUserName);
+
         showUserName.setText(theUserName);
         editName.setText(userProfile.getName());
         editEmail.setText(userProfile.getEmail());
@@ -60,7 +63,7 @@ public class EditMyProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 userProfile.setName(editName.getText().toString());
                 userProfile.setEmail(editEmail.getText().toString());
-                userProfile.setPhoneNumber(editEmail.getText().toString());
+                userProfile.setPhoneNumber(editPhone.getText().toString());
                 elasticSearchController.addProfile(userProfile);
                 finish();
             }
