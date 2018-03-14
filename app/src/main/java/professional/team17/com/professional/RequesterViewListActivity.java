@@ -51,8 +51,6 @@ public class RequesterViewListActivity extends RequesterLayout {
         listView.setAdapter(adapterHelper);
         listView.setOnItemClickListener(clickListener);
 
-        /* Set activity title */
-        setActivityTitle("My Tasks");
 
         //get username
         sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -71,6 +69,7 @@ public class RequesterViewListActivity extends RequesterLayout {
     private String setRequesterViewType() {
         Bundle intent = getIntent().getExtras();
         String type = intent.getString("Status");
+        setActivityTitle("My"+type+"Tasks");
         return type;
     }
 
