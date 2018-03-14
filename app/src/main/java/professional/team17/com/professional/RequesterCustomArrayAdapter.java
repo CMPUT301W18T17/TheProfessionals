@@ -3,6 +3,7 @@ package professional.team17.com.professional;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,72 +21,86 @@ import static android.os.Build.ID;
  */
 
 public class RequesterCustomArrayAdapter extends ArrayAdapter<Task> {
-        private Context mcon;
-        private TaskList taskList;
 
         public RequesterCustomArrayAdapter(Activity context, TaskList taskArrayList) {
+
                 super(context, 0,  taskArrayList);
+
         }
+
 
         // aided by https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
         public View getView(int position, View v, ViewGroup parent) {
-                final Task task= getItem(position);
-                Log.i("LOOOKINAT", "getView: "+position);
-                if (v == null) {
-                        v = LayoutInflater.from(getContext()).inflate(R.layout.requester_custom_array_row, parent, false);
-                }
-                //get view
-                TextView statusTextField = (TextView) v.findViewById(R.id.status);
-                TextView userNameTextField = (TextView) v.findViewById(R.id.userName);
-                TextView taskTitleTextField = (TextView) v.findViewById(R.id.title);
-                TextView taskLowBidTextField = (TextView) v.findViewById(R.id.acceptbid);
-                TextView taskLowBidAmountTextField = (TextView) v.findViewById(R.id.acceptbidAmount);
 
+                RequesterRequestedViewHolder requesterRequestedViewHolder = null;
+                RequesterBiddedViewHolder requesterBiddedViewHolder = null;
+                RequesterAssignedViewHolder requesterAssignedViewHolder = null;
+
+                Task task= getItem(position);
+
+                if (v == null) {
+                        if (task.isRequested()) {
+                                v = LayoutInflater.from(getContext()).inflate(R.layout.requester_requested_row, parent, false);
+                                TextView statusTextField = (TextView) v.findViewById(R.id.requester_requested_status);
+                                TextView taskTitleTextField = (TextView) v.findViewById(R.id.requester_requested_title);
+
+                                requesterRequestedViewHolder = new RequesterRequestedViewHolder(statusTextField, taskTitleTextField);
+                                v.setTag(requesterRequestedViewHolder);
+                        }
+
+                        else if (task.isBidded()) {
+                                v = LayoutInflater.from(getContext()).inflate(R.layout.requester_bidded_row, parent, false);
+                                //get view
+                                TextView statusTextField = (TextView) v.findViewById(R.id.requester_bidded_status);
+                                TextView taskTitleTextField = (TextView) v.findViewById(R.id.requester_bidded_title);
+
+                                requesterBiddedViewHolder = new RequesterBiddedViewHolder(statusTextField, taskTitleTextField);
+                                v.setTag(requesterBiddedViewHolder);
+                        }
+
+                        else if (task.isAssigned()) {
+                                v = LayoutInflater.from(getContext()).inflate(R.layout.requester_assigned_row, parent, false);
+                                //get view
+                                TextView statusTextField = (TextView) v.findViewById(R.id.requester_assigned_status);
+                                TextView userNameTextField = (TextView) v.findViewById(R.id.requester_assigned_userName);
+                                TextView taskTitleTextField = (TextView) v.findViewById(R.id.requester_assigned_title);
+                                TextView taskAcceptBidAmountTextField = (TextView) v.findViewById(R.id.requester_assigned_acceptbidAmount);
+
+                                requesterAssignedViewHolder = new RequesterAssignedViewHolder(statusTextField, userNameTextField, taskTitleTextField, taskAcceptBidAmountTextField);
+                                v.setTag(requesterAssignedViewHolder);
+                        }
+                }
+
+                else{
+                        if (task.isRequested()){
+                                requesterRequestedViewHolder = (RequesterRequestedViewHolder) v.getTag();
+                        }
+                        else if (task.isBidded()){
+                                requesterBiddedViewHolder = (RequesterBiddedViewHolder) v.getTag();
+                        }
+                        else if (task.isAssigned()) {
+                                requesterAssignedViewHolder = (RequesterAssignedViewHolder) v.getTag();
+                        }
+                }
 
                 //plug in item to row
-                statusTextField.setText(task.getStatus());
-                taskTitleTextField.setText(task.getName());
-                Log.i("Task", "getView: "+task.isAssigned()+task.getStatus()+task.getName());
-
-                if (task.isAssigned()) {
-                        userNameTextField.setText(task.getProfileName());
-                        taskLowBidAmountTextField.setText(task.getBids().getLowest().getAmountAsString());
-                        taskLowBidTextField.setVisibility(View.VISIBLE);
-                        taskLowBidAmountTextField.setVisibility(View.VISIBLE);
+                if (task.isRequested()){
+                        requesterRequestedViewHolder.getStatusTextField().setText(task.getStatus());
+                        requesterRequestedViewHolder.getTaskTitleTextField().setText(task.getName());
                 }
-                else if (task.isBidded() || task.isRequested()){
-                        taskLowBidTextField.setVisibility(View.INVISIBLE);
-                        taskLowBidAmountTextField.setVisibility(View.INVISIBLE);
-                        userNameTextField.setVisibility(View.INVISIBLE);
+                else if (task.isBidded()){
+                        requesterBiddedViewHolder.getStatusTextField().setText(task.getStatus());
+                        requesterBiddedViewHolder.getTaskTitleTextField().setText(task.getName());
                 }
-                Button delete = (Button)v.findViewById(R.id.delete);
-                Button edit = (Button)v.findViewById(R.id.edit);
-                delete.setOnClickListener(new View.OnClickListener(){
-                        @Override
-                        public void onClick(View v) {
-                                //do something
-                                taskList.deleteTask(task); //or some other task
-                                notifyDataSetChanged();
-                        }
-                });
-                edit.setOnClickListener(new View.OnClickListener(){
-                        @Override
-                        public void onClick(View v) {
-                                //do something
-                                Intent intent = new Intent(mcon, RequesterEditTaskActivity.class);
-                                mcon.startActivity(intent);
-                                notifyDataSetChanged();
-                        }
-                });
 
-
-
+                else if (task.isAssigned()) {
+                        requesterAssignedViewHolder.getStatusTextField().setText(task.getStatus());
+                        // Once assigned, all other bids are removed, only one left
+                        requesterAssignedViewHolder.getUserNameTextField().setText(task.getBids().getBid(0).getName());
+                        requesterAssignedViewHolder.getTaskTitleTextField().setText(task.getName());
+                        requesterAssignedViewHolder.getTaskAcceptBidAmount().setText(task.getBids().getBid(0).getAmountAsString());
+                }
 
                 return v;
-
         }
-
-
-
-
 }

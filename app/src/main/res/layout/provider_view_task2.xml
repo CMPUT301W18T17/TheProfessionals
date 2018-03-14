@@ -255,7 +255,7 @@
                                         <TextView
                                             android:id="@+id/provider_view_task_paragraph"
                                             android:layout_width="0dp"
-                                            android:layout_height="39dp"
+                                            android:layout_height="wrap_content"
                                             android:layout_marginEnd="64dp"
                                             android:layout_marginStart="32dp"
                                             android:paddingBottom="15dp"
