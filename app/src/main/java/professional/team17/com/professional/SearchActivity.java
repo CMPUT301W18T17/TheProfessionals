@@ -71,7 +71,7 @@ public class SearchActivity extends ProviderLayout {
 
                 Context context = getApplicationContext();
                 int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, "SEARCH ENTERED"+query, duration);
+                Toast toast = Toast.makeText(context, "SEARCH ENTERED "+query, duration);
                 toast.show();
                 search(query);
                 searchView.clearFocus(); //remove focus on submit

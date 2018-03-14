@@ -22,6 +22,8 @@
             android:id="@+id/tasklistRequester"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:headerDividersEnabled="false"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

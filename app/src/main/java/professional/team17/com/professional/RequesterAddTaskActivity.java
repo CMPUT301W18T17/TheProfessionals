@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.MapView;
 
@@ -48,8 +49,7 @@ public class RequesterAddTaskActivity extends RequesterLayout {
     private Task task;
     private String dateString;
     private String locationString;
-    private int year, month, day, id;
-    private String yearString,monthString,dayString;
+    private String message;
 
     /**
      * On creation of the activity, set all view objects and onClickListeners.
@@ -100,11 +100,37 @@ public class RequesterAddTaskActivity extends RequesterLayout {
                 String description = descriptionField.getText().toString();
                 locationString = locationField.getText().toString();
 
-                /* Create an intent and bundle and store all task info */
-               addToServer(title, description);
+                if (title.length() > 30){
+                    /* if the title is too long */
+                    message = "Title cannot be longer than 30 characters."
+                    Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else if (description.length() > 30) {
+                    /* if the description is too long */
+                    message = "Description cannot be longer than 300 characters."
+                    Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else if (title.isEmpty()){
+                    /* if the title is empty */
+                    message = "You must include a title."
+                    Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT) ;
+                    toast.show();
+                }
+                else if (description.isEmpty()){
+                    /* if the title is empty */
+                    message = "You must include a description."
+                    Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT) ;
+                    toast.show();
+                }
+                else {
+                    /* Create an intent and bundle and store all task info */
+                    addToServer(title, description);
 
-                /* Activity finished, start RequesterViewListActivity */
-                endActivity();
+                    /* Activity finished, start RequesterViewListActivity */
+                    endActivity();
+                }
 
             }
         });
