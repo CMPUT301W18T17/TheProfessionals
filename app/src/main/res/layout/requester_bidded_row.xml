@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -27,40 +28,54 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/requester_bidded_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="31dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif"
-                    android:text="TaskTitle - "
-                    android:textSize="21sp"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/requester_bidded_status"
+                    android:id="@+id/bid_row_userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-<<<<<<< HEAD
-                    android:layout_marginStart="8dp"
-=======
-                    android:layout_marginStart="0dp"
->>>>>>> f24247b968fd0b83c30221d5cea4cc76f1c29307
-                    android:layout_weight="1"
-                    android:paddingRight="20dp"
-                    android:text="Assigned"
-                    android:textSize="15sp"
-<<<<<<< HEAD
-                    app:layout_constraintBaseline_toBaselineOf="@+id/requester_bidded_title"
-                    app:layout_constraintStart_toEndOf="@+id/requester_bidded_title" />
-=======
-                    app:layout_constraintTop_toBottomOf="@+id/requester_bidded_title"
-                    app:layout_constraintStart_toStartOf="@+id/requester_bidded_title" />
->>>>>>> f24247b968fd0b83c30221d5cea4cc76f1c29307
+                    android:layout_gravity="bottom|right"
+                    android:text="@string/username"
+                    android:textSize="19sp"
+                    tools:layout_width="wrap_content" />
+
+
             </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/bid_row_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$ Amount" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/bid_row_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_shadow_end_color"
+            android:onClick="acceptBid"
+            android:tint="@color/colorProvider"
+            app:srcCompat="@android:drawable/stat_sys_vp_phone_call" />
+
+        <ImageButton
+            android:id="@+id/bid_row_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_shadow_end_color"
+            android:onClick="deleteBid"
+            android:tint="@android:color/holo_red_dark"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
     </LinearLayout>
 
 
