@@ -85,8 +85,17 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         bidAdapter = new BidListAdapter(this, bidList);
         listView.setAdapter(bidAdapter);
 
+
+        try {
+            getBundle();
+        }
+        catch (Exception e){
+            //do something here
+        }
+
+
         getFromServer();
-        populateBidList();
+       // populateBidList();
 
         /* Set OnClickListeners */
         backButton.setOnClickListener(new ImageButton.OnClickListener() {
@@ -153,7 +162,8 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
             throw new Exception();
         }
         else {
-            ID = extrasBundle.getString("ID");
+            ID = extrasBundle.getString("task");
+            Log.i("SDSF", "getBundle: "+ID);
         }
     }
     /**
@@ -176,13 +186,13 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
      * @throws Exception
      */
     private void getFromServer() {
-        task = elasticSearchController.getTask("AWIjFyoX4-hmkvYTCt4C");
+        Log.i("DIDDDD", "getFromServer: "+ID);
+        task = elasticSearchController.getTask(ID);
         if (task == null){
 
         }
         else {
             /* Update TextViews */
-            Log.i("SDDSD", "getFromServeer: "+task.getBids().getBid(0).getName());
             setTaskViews();
         }
     }
@@ -207,7 +217,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
     }
 
     private void populateBidList(){
-        BidList temp;
+        BidList temp = new BidList();
         String status = task.getStatus();
         if (status.equals("Requested")){
             /* does not display additional information */
