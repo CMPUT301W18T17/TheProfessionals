@@ -12,7 +12,7 @@ import android.widget.ImageView;
 
 /**
  * MyProfileViewActivity displays information of current user
- *
+ * @author Hailan
  * @version 2.0 Last updated: Mar.13, 2018
  * @see ProfileViewActivity
  * @see EditMyProfileActivity

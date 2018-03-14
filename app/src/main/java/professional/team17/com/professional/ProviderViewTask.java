@@ -296,6 +296,4 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         String task = intent.getString("Task");
         return elasticSearchController.getTask(task);
     }
-
-
 }

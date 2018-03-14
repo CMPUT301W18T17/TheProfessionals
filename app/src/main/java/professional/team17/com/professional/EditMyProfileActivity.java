@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 /**
  * EditMyProfileActivity starts after user selects the UserMenuButton --> "Edit My Profile"
- *
+ * @author Hailan
  * @version 3.0 Last updated: Mar 13, 2018
  * @see ElasticSearchController
  * @see ProfileViewActivity

@@ -13,7 +13,7 @@ import android.widget.TextView;
 /**
  * Abstract class ProfileViewActivity generalizes MyProfileViewActivity and OtherProfileViewActivity
  * @version 2.0 Last Updated: Mar 12, 2018
- *
+ * @author Hailan
  * @see MyProfileViewActivity
  * @see OtherProfileViewActivity
  * @see ReviewsAdaptor
