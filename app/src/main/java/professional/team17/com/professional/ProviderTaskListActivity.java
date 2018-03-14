@@ -79,6 +79,7 @@ public class ProviderTaskListActivity extends ProviderLayout {
      */
     private TaskList createList(String type) {
         TaskList taskList =null;
+        setActivityTitle(type + " Tasks");
         if (type.equals("Bidded")) {
             taskList = elasticSearchController.getTasksBidded(username, "Bidded");
             Log.i("boukll", "createList: "+taskList+username);
