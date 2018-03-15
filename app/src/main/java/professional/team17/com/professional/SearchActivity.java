@@ -50,7 +50,11 @@ public class SearchActivity extends ProviderLayout {
         this.setActivityTitle(test);
         */
 
+        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = sharedpreferences.getString("username", "error");
+
         taskList = new TaskList();
+        taskList.addAll(getOpenTasks());
         searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskList);
         listView =findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(searchAdapterHelper);
@@ -58,8 +62,7 @@ public class SearchActivity extends ProviderLayout {
 
 
 
-        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        username = sharedpreferences.getString("username", "error");
+
         Log.i("WRWR", "onCreate: "+username);
 
         //initialize search input
@@ -67,7 +70,7 @@ public class SearchActivity extends ProviderLayout {
         searchView.setQueryHint("Enter search");
 
         //initial list with open results (requested or bidded)
-        taskList.addAll(getOpenTasks());
+
 
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -97,17 +100,14 @@ public class SearchActivity extends ProviderLayout {
      * @param query - the string representing the task being searched for
      */
     private void search(String query) {
-        /*
-        //TODO implement query builder for search in elasticserch
         TaskList temp = new TaskList();
-        temp = elasticSearchController.getTasksStatus(query);
+        temp = elasticSearchController.getSearch(query);
         taskList.clear();
         taskList.addAll(temp);
         searchAdapterHelper.notifyDataSetChanged();
         if (temp == null || temp.isEmpty()){
             notifyEmptyResults();
         }
-        */
     }
 
     /**
@@ -141,7 +141,9 @@ public class SearchActivity extends ProviderLayout {
     private TaskList getOpenTasks() {
         Log.i("WEWE", "getOpenTasks: "+username);
         TaskList tasklist = new TaskList();
-        tasklist = elasticSearchController.getTasksSearch(username);
+        taskList = elasticSearchController.getTasksStatus("Requested");
+       // tasklist = elasticSearchController.getTasksSearch(username);
+        Log.i("WEWE", "getOpenTasks: "+taskList);
         return tasklist;
     }
 }

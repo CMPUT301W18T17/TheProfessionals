@@ -100,6 +100,22 @@ public class ElasticSearchController {
 
     /**
      *
+     * @param query - the list of words to be searched
+     * @return - TaskList of all tasks that match ANY word in query and are
+     * in either status bidded or requested
+     *
+     */
+    public TaskList getSearch(String query) {
+        String search =
+                "{\"query\":{\"bool\":{\"must\":"+
+                        "{\"match\":{\"description\":\"" + query+ "\"}}," +
+                        "\"should\":[{\"match\":{\"status\":\"Requested\"}},"+
+                        "{\"match\":{\"status\":\"Bidded\"}}]}}}";
+        return getTaskList(search);
+    }
+
+    /**
+     *
      * @param username - the username to be matched against the task bidder username
      * @return - TaskList of all tasks that match query, (in requested/bidded" and
      * NOT with the username
@@ -110,7 +126,6 @@ public class ElasticSearchController {
                 "{\"must_not\":{\"match\":{\"profileName\":\"" + username + "\"}}," +
                         "\"should\":[{\"match\":{\"status\":\"Requested\"}},"+
                         "{\"match\":{\"status\":\"Bidded\"}}]}}}";
-        Log.i("WRWR", "getTasksSearch: "+search);
         return getTaskList(search);
     }
 
