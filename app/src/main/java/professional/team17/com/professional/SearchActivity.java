@@ -108,6 +108,7 @@ public class SearchActivity extends ProviderLayout {
         if (temp == null || temp.isEmpty()){
             notifyEmptyResults();
         }
+        Log.i("SEARCH RESULTS", "getSEARCHEDTasks: "+taskList);
     }
 
     /**
@@ -139,11 +140,9 @@ public class SearchActivity extends ProviderLayout {
      * @return tasklist - all the tasks in either bidded or requested state
      */
     private TaskList getOpenTasks() {
-        Log.i("WEWE", "getOpenTasks: "+username);
         TaskList tasklist = new TaskList();
         //taskList = elasticSearchController.getTasksStatus("Requested");
         tasklist = elasticSearchController.getTasksSearch(username);
-        Log.i("WEWE", "getOpenTasks: "+taskList);
         return tasklist;
     }
 }
