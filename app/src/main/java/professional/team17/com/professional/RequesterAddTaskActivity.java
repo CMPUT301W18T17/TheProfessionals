@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -88,7 +89,7 @@ public class RequesterAddTaskActivity extends RequesterLayout {
                 /* Show the DatePickerDialog */
                 displayDatePicker();
                 /* Get the formatted date */
-                dateString = (String) textualDateView.getText();
+
             }
         });
 
@@ -99,6 +100,7 @@ public class RequesterAddTaskActivity extends RequesterLayout {
                 String title = nameField.getText().toString();
                 String description = descriptionField.getText().toString();
                 locationString = locationField.getText().toString();
+                dateString = (String) textualDateView.getText();
 
                 if (title.length() > 30){
                     /* if the title is too long */
@@ -153,7 +155,6 @@ public class RequesterAddTaskActivity extends RequesterLayout {
     private void addToServer(String title, String description){
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String username = pref.getString("username", "error");
-        java.util.Date inputDate = parseDate(dateString);
         task = new Task(username, title, description, locationString, dateString);
         task.setRequested();
         ElasticSearchController elasticSearchController = new ElasticSearchController();
