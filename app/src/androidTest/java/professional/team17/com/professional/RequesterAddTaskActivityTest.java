@@ -40,7 +40,6 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
 
         // Check
         solo.clickOnView(solo.getView(R.id.requester_requested_title));
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskActivity.class);
         assertTrue(solo.waitForText("Task Name 1"));
         assertTrue(solo.waitForText("Requested"));
         assertTrue(solo.waitForText("Task Description"));
