@@ -120,7 +120,7 @@ public class RequesterEditTaskActivity extends RequesterLayout {
 
 
                 /* Activity finished, start RequesterViewListActivity */
-                finish();
+                endActivity();
             }
         });
     }
@@ -183,13 +183,13 @@ public class RequesterEditTaskActivity extends RequesterLayout {
      * Once the user presses the submit button, finish this activity and start the
      * RequesterViewListActivity with the updated task displayed.
      */
-    @Override
-    public void finish() {
+    public void endActivity() {
         Bundle bundle = new Bundle(1);
         bundle.putString("Status", "Requested");
         Intent intent = new Intent(RequesterEditTaskActivity.this, RequesterViewListActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
     }
 
     /**

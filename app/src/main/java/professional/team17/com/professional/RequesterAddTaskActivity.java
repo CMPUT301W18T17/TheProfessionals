@@ -161,6 +161,9 @@ public class RequesterAddTaskActivity extends RequesterLayout {
     }
 
 
+    /**
+     * Called when the "add" button is pressed. Starts the RequesterViewListActivity.
+     */
     public void  endActivity(){
         Bundle bundle = new Bundle(2);
         bundle.putString("ID", task.getUniqueID());
@@ -171,6 +174,11 @@ public class RequesterAddTaskActivity extends RequesterLayout {
         finish();
     }
 
+    /**
+     * Reformats date from a string to Date format,
+     * @param sdate The date as a String
+     * @return The date as a Date
+     */
     public java.util.Date parseDate(String sdate) {
         String myFormat = "dd/MM/yyyy";
         java.util.Date input = null;

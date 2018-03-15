@@ -209,6 +209,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
     private void populateBidList(){
         BidList temp = new BidList();
         String status = task.getStatus();
+        setTaskViews();
         if (status.equals("Requested")){
             /* does not display additional information */
             setRequestedView();
