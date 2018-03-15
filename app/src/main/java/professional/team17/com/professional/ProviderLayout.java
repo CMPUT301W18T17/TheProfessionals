@@ -117,11 +117,9 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                 break;
         /* If the user tapped the map button */
             case R.id.taskMapButton:
-                /* Commented out as the activity does not exist yet
-                Intent intent = new Intent(this, MapActivity.class);
+                intent = new Intent(this, MapsActivity.class);
                 startActivity(intent);
-                      finish();
-                */
+                finish();
                 break;
         /* If the user taps the switch button */
             case R.id.switchViewProviderButton:
