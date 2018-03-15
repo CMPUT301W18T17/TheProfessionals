@@ -53,6 +53,7 @@ public class ElasticSearchController {
     private TaskList getTaskList (String search){
         TaskList tasklist = null;
         JsonParser jsonParser = new JsonParser();
+        Log.i("WRWR", "getTaskList: "+search);
         JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
         ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
         getTasks.execute(jsonObject.toString());
@@ -81,6 +82,7 @@ public class ElasticSearchController {
 
 
 
+
     /**
      *
      * @param username - the username to be matched against the task bidder username
@@ -98,6 +100,22 @@ public class ElasticSearchController {
 
     /**
      *
+     * @param username - the username to be matched against the task bidder username
+     * @return - TaskList of all tasks that match query, (in requested/bidded" and
+     * NOT with the username
+     */
+    public TaskList getTasksSearch(String username) {
+        String search =
+                "{\"query\":{\"bool\":"+
+                "{\"must_not\":{\"match\":{\"profileName\":\"" + username + "\"}}," +
+                        "\"should\":[{\"match\":{\"status\":\"Requested\"}},"+
+                        "{\"match\":{\"status\":\"Bidded\"}}]}}}";
+        Log.i("WRWR", "getTasksSearch: "+search);
+        return getTaskList(search);
+    }
+
+    /**
+     *
      * @param status - the task status to be matched against
      * @return - Tasklist - the results matched from elasticSearch
      */
@@ -105,6 +123,17 @@ public class ElasticSearchController {
         String search = "{ \"query\": {\"match\" : { \"status\": \""+status+"\"  }} }";
         return getTaskList(search);
     }
+
+    /**
+     *
+     * @param status - the task status to be matched against
+     * @return - Tasklist - the results matched from elasticSearch
+     */
+    public TaskList getTasksStatus(String status, String username) {
+        String search = "{ \"query\": {\"match\" : { \"status\": \""+status+"\"  }} }";
+        return getTaskList(search);
+    }
+
 
     /**
      *

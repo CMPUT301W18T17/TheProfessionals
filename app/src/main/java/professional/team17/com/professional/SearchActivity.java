@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -55,15 +56,19 @@ public class SearchActivity extends ProviderLayout {
         listView.setAdapter(searchAdapterHelper);
         listView.setOnItemClickListener(clickListener);
 
-        //initial list with open results (requested or bidded)
-        taskList.addAll(getOpenTasks());
+
+
+        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = sharedpreferences.getString("username", "error");
+        Log.i("WRWR", "onCreate: "+username);
 
         //initialize search input
         searchView = (SearchView) findViewById(R.id.Search_Activity_Input);
         searchView.setQueryHint("Enter search");
 
-        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        username = sharedpreferences.getString("username", "error");
+        //initial list with open results (requested or bidded)
+        taskList.addAll(getOpenTasks());
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -134,8 +139,9 @@ public class SearchActivity extends ProviderLayout {
      * @return tasklist - all the tasks in either bidded or requested state
      */
     private TaskList getOpenTasks() {
+        Log.i("WEWE", "getOpenTasks: "+username);
         TaskList tasklist = new TaskList();
-        tasklist = elasticSearchController.getTasksStatus("Bidded");
+        tasklist = elasticSearchController.getTasksSearch(username);
         return tasklist;
     }
 }
