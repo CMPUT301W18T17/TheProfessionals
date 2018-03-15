@@ -32,6 +32,8 @@ import java.util.Locale;
  *
  * @author Lauren
  * @see RequesterLayout
+ * @see RequesterViewListActivity
+ * @see RequesterAddTaskActivity
  */
 public class RequesterEditTaskActivity extends RequesterLayout {
     /* Layout objects */

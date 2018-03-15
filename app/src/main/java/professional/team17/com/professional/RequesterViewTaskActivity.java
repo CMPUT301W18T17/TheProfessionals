@@ -26,6 +26,14 @@ import static android.view.View.VISIBLE;
 
 /**
  * The activity that is displayed when a user in the Requester role views one of their own tasks.
+ * @author Lauren, Allison
+ * @see RequesterViewListActivity
+ * @see RequesterEditTaskActivity
+ * @see RequesterAddTaskActivity
+ * @see BidListAdapter
+ * @see Task
+ * @see Bid
+ * @see BidList
  */
 public class RequesterViewTaskActivity extends RequesterLayout implements ConfirmDialog.ConfirmDialogListener {
     /* Layout items */
@@ -54,7 +62,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
     String dialogFlag;
 
     /**
-     * On creation of the activity, set the layout elements, onClickListeners, and retrive
+     * On creation of the activity, set the layout elements, onClickListeners, and retrieve
      * the task from the server.
      * @param savedInstanceState The activity's previously saved state.
      */
@@ -157,11 +165,12 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
             Log.i("SDSF", "getBundle: "+ID);
         }
     }
+
     /**
      * Gets the task information from the server using the ID.
-     * @throws Exception
+     * @throws Exception If the server fails to return a task.
      */
-    private void getFromServeer() throws Exception{
+    private void getFromServer() throws Exception{
         task = elasticSearchController.getTask(ID);
         if (task == null){
             throw new Exception();
@@ -172,21 +181,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
             setTaskViews();
         }
     }
-    /**
-     * Gets the task information from the server using the ID.
-     * @throws Exception
-     */
-    private void getFromServer() {
-        Log.i("DIDDDD", "getFromServer: "+ID);
-        task = elasticSearchController.getTask(ID);
-        if (task == null){
 
-        }
-        else {
-            /* Update TextViews */
-            setTaskViews();
-        }
-    }
 
     /**
      * Updates the TextViews with the task information.
@@ -207,6 +202,10 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         });
     }
 
+    /*
+     * Sets the bottom half of the layout and displays different info depending on the task's
+     * status.
+     */
     private void populateBidList(){
         BidList temp = new BidList();
         String status = task.getStatus();
@@ -312,6 +311,9 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
     }
 
 
+    /**
+     * Handles the "Set task to requested" dialog fragment (populates it with text).
+     */
     public void setToRequested(){
         FragmentManager fm = getSupportFragmentManager();
 
@@ -330,6 +332,9 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
     }
 
 
+    /**
+     * Handles the "Set task to done" dialog fragment (populates it with text).
+     */
     public void setToDone(){
         FragmentManager fm = getSupportFragmentManager();
 
@@ -346,6 +351,9 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
     }
 
 
+    /**
+     * Handles the "accept bid" dialog fragment (populates it with text).
+     */
     private void acceptBidDialog(){
         FragmentManager fm = getSupportFragmentManager();
         ConfirmDialog confirmDialog = new ConfirmDialog();
@@ -361,7 +369,9 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
     }
 
 
-
+    /**
+     * Handles the "decline bid" dialog fragment (populates it with text).
+     */
     private void declineBidDialog(){
         FragmentManager fm = getSupportFragmentManager();
         ConfirmDialog confirmDialog = new ConfirmDialog();
@@ -426,7 +436,10 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
     }
 
 
-
+    /**
+     * The onClick method for the delete bid button.
+     * @param v The delete bid view object.
+     */
     public void deleteBid(View v){
 
         final int position = listView.getPositionForView((View) v.getParent());
@@ -435,6 +448,10 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
 
     }
 
+    /**
+     * The onClick method for thboolean value representing the user response in the dialoge accept bid button.
+     * @param v The accept bid view object.
+     */
     public void acceptBid(View v){
 
         final int position = listView.getPositionForView((View) v.getParent());
@@ -443,8 +460,10 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
 
     }
 
-
-
+    /**
+     * Interface method from ConfirmDialog.
+     * @param confirmed boolean value representing the user response in the dialog
+     */
     public void onFinishConfirmDialog(Boolean confirmed){}
 
 
