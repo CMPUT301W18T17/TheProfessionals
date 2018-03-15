@@ -6,7 +6,7 @@ import android.widget.TextView;
  * Created by Zhipeng Zhang on 2018/3/13.
  */
 
-public class ProviderBiddedViewHolder {
+public class ProviderViewHolder {
     TextView statusTextField;
     TextView userNameTextField;
     TextView taskTitleTextField;
@@ -14,11 +14,22 @@ public class ProviderBiddedViewHolder {
     TextView taskMyBidAmountTextField;
 
     // This is a class for provider bidded tasks
-    public ProviderBiddedViewHolder(TextView statusTextField, TextView userNameTextField, TextView taskTitleTextField, TextView taskLowBidAmountTextField, TextView taskMyBidAmountTextField){
+    public ProviderViewHolder(TextView statusTextField, TextView userNameTextField, TextView taskTitleTextField, TextView taskLowBidAmountTextField, TextView taskMyBidAmountTextField){
         this.statusTextField = statusTextField;
         this.userNameTextField = userNameTextField;
         this.taskTitleTextField = taskTitleTextField;
         this.taskLowBidAmountTextField = taskLowBidAmountTextField;
+        this.taskMyBidAmountTextField = taskMyBidAmountTextField;
+    }
+    public ProviderViewHolder(TextView statusTextField, TextView userNameTextField, TextView taskTitleTextField){
+        this.statusTextField = statusTextField;
+        this.userNameTextField = userNameTextField;
+        this.taskTitleTextField = taskTitleTextField;
+    }
+    public ProviderViewHolder(TextView statusTextField, TextView userNameTextField, TextView taskTitleTextField, TextView taskMyBidAmountTextField){
+        this.statusTextField = statusTextField;
+        this.userNameTextField = userNameTextField;
+        this.taskTitleTextField = taskTitleTextField;
         this.taskMyBidAmountTextField = taskMyBidAmountTextField;
     }
 
