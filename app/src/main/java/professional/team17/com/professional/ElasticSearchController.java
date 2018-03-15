@@ -211,11 +211,20 @@ public class ElasticSearchController {
 
     /**
      *
-     * @param task - the task that will be added within the ES
+     * @param task - the task that will be deleted within the ES
      */
     public void deleteTasks(Task task) {
         ElasticSearchController.DeleteTask deletetask = new ElasticSearchController.DeleteTask();
         deletetask.execute(task);
+    }
+
+    /**
+     *
+     * @param profile - the profile that will be deleted within the ES (for testing purposes)
+     */
+    public void deleteProfile(Profile profile) {
+        ElasticSearchController.DeleteProfile deleteprofile= new ElasticSearchController.DeleteProfile();
+        deleteprofile.execute(profile);
 
     }
 
@@ -392,7 +401,31 @@ public class ElasticSearchController {
             return null;
         }
     }
+    /**
+     *  This AsyncTask will update a task from the db based on a taskid
+     */
+    public static class DeleteProfile extends AsyncTask<Profile, Void, Void> {
 
+        @Override
+        protected Void doInBackground(Profile... profiles) {
+            verifySettings();
+
+            for (Profile profile : profiles) {
+                Delete delete = new Delete.Builder(profile.getUserName())
+                        .index(indexname)
+                        .type(profiletype)
+                        .build();
+                try {
+                    DocumentResult result = client.execute(delete);
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and delete the profile");
+
+                }
+            }
+            return null;
+        }
+    }
     /**
      *  This AsyncTask will update a task from the db based on a taskid
      */
@@ -411,7 +444,7 @@ public class ElasticSearchController {
                     DocumentResult result = client.execute(delete);
                 }
                 catch (Exception e) {
-                    Log.i("Error", "The application failed to build and update the task");
+                    Log.i("Error", "The application failed to build and delete the task");
 
                 }
             }
