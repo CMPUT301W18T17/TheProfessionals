@@ -2,9 +2,12 @@ package professional.team17.com.professional;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.view.View;
 import android.widget.EditText;
 
 import com.robotium.solo.Solo;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zhipeng Zhang on 2018/3/14.
@@ -31,8 +34,8 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
         solo.assertCurrentActivity("Wrong Activity", RequesterAddTaskActivity.class);
         solo.enterText((EditText) solo.getView(R.id.TaskNameField), "Task Name 1");
         solo.enterText((EditText) solo.getView(R.id.taskDescriptionField), "Task Description");
-        //solo.clickOnButton("calendarButton");
-        //solo.clickInList(1,4);
+        solo.clickOnView(solo.getView(R.id.calendarButton));
+        solo.clickOnText("OK");
         // For photo and map
         // Leave For now
         solo.enterText((EditText) solo.getView(R.id.textualAddressField), "My Location");
