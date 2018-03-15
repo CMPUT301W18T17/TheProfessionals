@@ -141,8 +141,8 @@ public class SearchActivity extends ProviderLayout {
     private TaskList getOpenTasks() {
         Log.i("WEWE", "getOpenTasks: "+username);
         TaskList tasklist = new TaskList();
-        taskList = elasticSearchController.getTasksStatus("Requested");
-       // tasklist = elasticSearchController.getTasksSearch(username);
+        //taskList = elasticSearchController.getTasksStatus("Requested");
+        tasklist = elasticSearchController.getTasksSearch(username);
         Log.i("WEWE", "getOpenTasks: "+taskList);
         return tasklist;
     }
