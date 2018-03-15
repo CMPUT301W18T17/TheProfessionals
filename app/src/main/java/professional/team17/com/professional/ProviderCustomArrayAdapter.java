@@ -43,6 +43,7 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
             Task task= getItem(position);
 
             if (v == null) {
+                // For requested tasks
                 if (task.isRequested()) {
                     v = LayoutInflater.from(getContext()).inflate(R.layout.provider_requested_row, parent, false);
                     TextView statusTextField = (TextView) v.findViewById(R.id.provider_requested_status);
@@ -53,6 +54,7 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
                     v.setTag(providerRequestedViewHolder);
                 }
 
+                // For bidded tasks
                 else if (task.isBidded()) {
                     v = LayoutInflater.from(getContext()).inflate(R.layout.provider_bidded_row, parent, false);
                      //get view
@@ -66,6 +68,7 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
                     v.setTag(providerBiddedViewHolder);
                 }
 
+                // For assigned tasks
                 else if (task.isAssigned()) {
                     v = LayoutInflater.from(getContext()).inflate(R.layout.provider_assigned_row, parent, false);
                     //get view
@@ -79,6 +82,7 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
                 }
             }
 
+            // If not null
             else{
                 if (task.isRequested()){
                     providerRequestedViewHolder = (ProviderRequestedViewHolder) v.getTag();

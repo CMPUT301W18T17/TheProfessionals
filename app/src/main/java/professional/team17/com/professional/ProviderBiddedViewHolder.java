@@ -13,6 +13,7 @@ public class ProviderBiddedViewHolder {
     TextView taskLowBidAmountTextField;
     TextView taskMyBidAmountTextField;
 
+    // This is a class for provider bidded tasks
     public ProviderBiddedViewHolder(TextView statusTextField, TextView userNameTextField, TextView taskTitleTextField, TextView taskLowBidAmountTextField, TextView taskMyBidAmountTextField){
         this.statusTextField = statusTextField;
         this.userNameTextField = userNameTextField;
@@ -21,19 +22,25 @@ public class ProviderBiddedViewHolder {
         this.taskMyBidAmountTextField = taskMyBidAmountTextField;
     }
 
+
+    // Return the text view of statusTextField
     public TextView getStatusTextField() {
         return statusTextField;
     }
 
+    // Return the text view of userNameTextField
     public TextView getUserNameTextField() {
         return userNameTextField;
     }
 
+    // Return the text view of taskTitleTextField
     public TextView getTaskTitleTextField() {
         return taskTitleTextField;
     }
 
+    // Return the text view of taskLowBidAmountTextField
     public TextView getTaskLowBidAmount() { return taskLowBidAmountTextField;}
 
+    // Return the text view of taskMyBidAmountTextField
     public TextView getTaskMyBidAmount() { return taskMyBidAmountTextField;}
 }
