@@ -48,6 +48,30 @@
                     android:textSize="15sp"
                     app:layout_constraintTop_toBottomOf="@+id/requester_requested_title"
                     app:layout_constraintStart_toStartOf="@+id/requester_requested_title" />
+
+                <ImageButton
+                    android:id="@+id/editTaskButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:onClick="editTask"
+                    app:layout_constraintEnd_toStartOf="@+id/deleteTaskButton"
+                    app:layout_constraintStart_toEndOf="@+id/requester_requested_title"
+                    app:srcCompat="@android:drawable/btn_star"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <ImageButton
+                    android:id="@+id/deleteTaskButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="38dp"
+                    android:layout_weight="1"
+                    android:onClick="deleteTask"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/editTaskButton"
+                    app:srcCompat="@android:drawable/btn_star"
+                    tools:layout_editor_absoluteY="0dp" />
             </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>
