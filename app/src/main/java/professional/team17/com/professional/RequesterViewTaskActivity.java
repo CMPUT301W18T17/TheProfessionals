@@ -311,6 +311,8 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
     }
 
 
+
+
     /**
      * Handles the "Set task to requested" dialog fragment (populates it with text).
      */
@@ -394,7 +396,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
      */
     public void onFinishConfirmDialog(Boolean confirmed, String dialog){
         BidList temp;
-        Log.i("DERER", "onFinishConfirmDialog: "+dialog);
+        Log.i("DERER", "onFinishConfirmDialog: "+confirmed+dialog);
         if (confirmed ==true) {
             if (dialog.equals("Accept")) {
                 /* Bid is accepted by the user. Delete all other bids, set the chosen bid as the
@@ -433,6 +435,20 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
             }
             elasticSearchController.updateTasks(task);
         }
+    }
+
+
+    /**
+     * The onClick method for the profile username of the bidder
+     * Move to the profile view to see the requested info
+     * @param v the view the button is located on
+     */
+    public void viewProfile(View v){
+        final int position = listView.getPositionForView((View) v.getParent());
+        String bidder = bidList.getBid(position).getName();
+        Intent intention = new Intent(this, OtherProfileViewActivity.class);
+        intention.putExtra("profile", bidder);
+        startActivity(intention);
     }
 
 
