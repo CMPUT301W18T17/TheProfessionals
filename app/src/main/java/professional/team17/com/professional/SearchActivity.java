@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -49,21 +50,28 @@ public class SearchActivity extends ProviderLayout {
         this.setActivityTitle(test);
         */
 
+        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = sharedpreferences.getString("username", "error");
+
         taskList = new TaskList();
+        taskList.addAll(getOpenTasks());
         searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskList);
         listView =findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(searchAdapterHelper);
         listView.setOnItemClickListener(clickListener);
 
-        //initial list with open results (requested or bidded)
-        taskList.addAll(getOpenTasks());
+
+
+
+        Log.i("WRWR", "onCreate: "+username);
 
         //initialize search input
         searchView = (SearchView) findViewById(R.id.Search_Activity_Input);
         searchView.setQueryHint("Enter search");
 
-        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        username = sharedpreferences.getString("username", "error");
+        //initial list with open results (requested or bidded)
+
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -92,17 +100,18 @@ public class SearchActivity extends ProviderLayout {
      * @param query - the string representing the task being searched for
      */
     private void search(String query) {
-        /*
-        //TODO implement query builder for search in elasticserch
         TaskList temp = new TaskList();
-        temp = elasticSearchController.getTasksStatus(query);
+        temp = elasticSearchController.getSearch(query);
         taskList.clear();
         taskList.addAll(temp);
-        searchAdapterHelper.notifyDataSetChanged();
+        searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskList);
+        listView =findViewById(R.id.provider_taskList_view_list);
+        listView.setAdapter(searchAdapterHelper);
+        listView.setOnItemClickListener(clickListener);
         if (temp == null || temp.isEmpty()){
             notifyEmptyResults();
         }
-        */
+        Log.i("SEARCH RESULTS", "getSEARCHEDTasks: "+taskList);
     }
 
     /**
@@ -135,7 +144,8 @@ public class SearchActivity extends ProviderLayout {
      */
     private TaskList getOpenTasks() {
         TaskList tasklist = new TaskList();
-        tasklist = elasticSearchController.getTasksStatus("Bidded");
+        //taskList = elasticSearchController.getTasksStatus("Requested");
+        tasklist = elasticSearchController.getTasksSearch(username);
         return tasklist;
     }
 }

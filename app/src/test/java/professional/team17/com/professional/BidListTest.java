@@ -33,7 +33,7 @@ public class BidListTest extends ActivityInstrumentationTestCase2 {
         bids.add(bid);
         Bid bid1 = new Bid("Bob&Mary1", 501.0);
         bids.add(bid1);
-        bids.deleteAllExcept(bid1);
+       // bids.deleteAllExcept(bid1);
         //TODO assertEquals(bids.getSize(), 1);
     }
 
@@ -45,7 +45,7 @@ public class BidListTest extends ActivityInstrumentationTestCase2 {
         assertFalse(bids.isEmpty());
     }
 
-    public void testGetLowest(){
+    public void testGetLowestAdd(){
         BidList bids = new BidList();
         Bid bid = new Bid("Bob&Mary", 50.0);
         bids.add(bid);
@@ -54,6 +54,20 @@ public class BidListTest extends ActivityInstrumentationTestCase2 {
         assertEquals(bids.getLowest(), bid);
 
     }
+
+    public void testGetLowestDelete(){
+        BidList bids = new BidList();
+        Bid bid = new Bid("Bob&Mary", 50.0);
+        bids.add(bid);
+        Bid bid1 = new Bid("Bob&Mary1", 501.0);
+        bids.add(bid1);
+        Bid bid2 = new Bid("Bob&Mary2", 25.0);
+        bids.add(bid2);
+        assertEquals(bids.getLowest(), bid);
+        bids.remove(bid);
+        assertEquals(bids.getLowest(), bid2);
+    }
+
 
 
 }

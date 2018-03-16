@@ -53,6 +53,7 @@ public class ElasticSearchController {
     private TaskList getTaskList (String search){
         TaskList tasklist = null;
         JsonParser jsonParser = new JsonParser();
+        Log.i("WRWR", "getTaskList: "+search);
         JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
         ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
         getTasks.execute(jsonObject.toString());
@@ -81,6 +82,7 @@ public class ElasticSearchController {
 
 
 
+
     /**
      *
      * @param username - the username to be matched against the task bidder username
@@ -98,6 +100,37 @@ public class ElasticSearchController {
 
     /**
      *
+     * @param query - the list of words to be searched
+     * @return - TaskList of all tasks that match ANY word in query and are
+     * in either status bidded or requested
+     *
+     */
+    public TaskList getSearch(String query) {
+        String search =
+                "{\"query\":{\"bool\":{\"must\":"+
+                        "{\"match\":{\"description\":\"" + query+ "\"}}," +
+                        "\"should\":[{\"match\":{\"status\":\"Requested\"}},"+
+                        "{\"match\":{\"status\":\"Bidded\"}}]}}}";
+        return getTaskList(search);
+    }
+
+    /**
+     *
+     * @param username - the username to be matched against the task bidder username
+     * @return - TaskList of all tasks that match query, (in requested/bidded" and
+     * NOT with the username
+     */
+    public TaskList getTasksSearch(String username) {
+        String search =
+                "{\"query\":{\"bool\":"+
+                "{\"must_not\":{\"match\":{\"profileName\":\"" + username + "\"}}," +
+                        "\"should\":[{\"match\":{\"status\":\"Requested\"}},"+
+                        "{\"match\":{\"status\":\"Bidded\"}}]}}}";
+        return getTaskList(search);
+    }
+
+    /**
+     *
      * @param status - the task status to be matched against
      * @return - Tasklist - the results matched from elasticSearch
      */
@@ -105,6 +138,17 @@ public class ElasticSearchController {
         String search = "{ \"query\": {\"match\" : { \"status\": \""+status+"\"  }} }";
         return getTaskList(search);
     }
+
+    /**
+     *
+     * @param status - the task status to be matched against
+     * @return - Tasklist - the results matched from elasticSearch
+     */
+    public TaskList getTasksStatus(String status, String username) {
+        String search = "{ \"query\": {\"match\" : { \"status\": \""+status+"\"  }} }";
+        return getTaskList(search);
+    }
+
 
     /**
      *
@@ -167,11 +211,20 @@ public class ElasticSearchController {
 
     /**
      *
-     * @param task - the task that will be added within the ES
+     * @param task - the task that will be deleted within the ES
      */
     public void deleteTasks(Task task) {
         ElasticSearchController.DeleteTask deletetask = new ElasticSearchController.DeleteTask();
         deletetask.execute(task);
+    }
+
+    /**
+     *
+     * @param profile - the profile that will be deleted within the ES (for testing purposes)
+     */
+    public void deleteProfile(Profile profile) {
+        ElasticSearchController.DeleteProfile deleteprofile= new ElasticSearchController.DeleteProfile();
+        deleteprofile.execute(profile);
 
     }
 
@@ -348,7 +401,31 @@ public class ElasticSearchController {
             return null;
         }
     }
+    /**
+     *  This AsyncTask will update a task from the db based on a taskid
+     */
+    public static class DeleteProfile extends AsyncTask<Profile, Void, Void> {
 
+        @Override
+        protected Void doInBackground(Profile... profiles) {
+            verifySettings();
+
+            for (Profile profile : profiles) {
+                Delete delete = new Delete.Builder(profile.getUserName())
+                        .index(indexname)
+                        .type(profiletype)
+                        .build();
+                try {
+                    DocumentResult result = client.execute(delete);
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and delete the profile");
+
+                }
+            }
+            return null;
+        }
+    }
     /**
      *  This AsyncTask will update a task from the db based on a taskid
      */
@@ -367,7 +444,7 @@ public class ElasticSearchController {
                     DocumentResult result = client.execute(delete);
                 }
                 catch (Exception e) {
-                    Log.i("Error", "The application failed to build and update the task");
+                    Log.i("Error", "The application failed to build and delete the task");
 
                 }
             }
