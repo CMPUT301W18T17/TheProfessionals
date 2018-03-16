@@ -29,27 +29,32 @@
                 <TextView
                     android:id="@+id/requester_requested_title"
                     android:layout_width="wrap_content"
-                    android:layout_height="31dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:fontFamily="sans-serif"
                     android:onClick="titleClick"
-                    android:text="TaskTitle - "
+                    android:text="TaskTitle"
                     android:textSize="21sp"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintBottom_toTopOf="@+id/requester_requested_status"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/requester_requested_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:paddingRight="20dp"
                     android:text="Assigned"
                     android:textSize="15sp"
-                    app:layout_constraintTop_toBottomOf="@+id/requester_requested_title"
-                    app:layout_constraintStart_toStartOf="@+id/requester_requested_title" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/editTaskButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/requester_requested_title" />
 
                 <ImageButton
                     android:id="@+id/editTaskButton"
@@ -65,8 +70,9 @@
 
                 <ImageButton
                     android:id="@+id/deleteTaskButton"
-                    android:layout_width="50dp"
+                    android:layout_width="52dp"
                     android:layout_height="50dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginStart="38dp"
                     android:layout_weight="1"
                     android:onClick="deleteTask"
