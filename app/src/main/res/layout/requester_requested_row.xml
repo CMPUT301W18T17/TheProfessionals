@@ -32,7 +32,9 @@
                     android:layout_height="31dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
+                    android:clickable="true"
                     android:fontFamily="sans-serif"
+                    android:onClick="titleClick"
                     android:text="TaskTitle - "
                     android:textSize="21sp"
                     app:layout_constraintStart_toStartOf="parent" />
