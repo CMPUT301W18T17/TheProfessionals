@@ -104,7 +104,10 @@ public class SearchActivity extends ProviderLayout {
         temp = elasticSearchController.getSearch(query);
         taskList.clear();
         taskList.addAll(temp);
-        searchAdapterHelper.notifyDataSetChanged();
+        searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskList);
+        listView =findViewById(R.id.provider_taskList_view_list);
+        listView.setAdapter(searchAdapterHelper);
+        listView.setOnItemClickListener(clickListener);
         if (temp == null || temp.isEmpty()){
             notifyEmptyResults();
         }
