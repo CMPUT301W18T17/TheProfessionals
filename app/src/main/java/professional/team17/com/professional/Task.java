@@ -14,6 +14,7 @@ import java.util.Locale;
  *
  * This is the entity class for a task object
  * TODO potentially remove some setters/getters that are not being used
+ * REVIEW AFTER Project part 5 full implementation
  *
  * @author Allison
  * @see BidList
@@ -259,6 +260,7 @@ public class Task implements Serializable{
      */
     public void clearBids(){
         this.bids.clear();
+        setRequested();
     }
 
     /**
@@ -289,23 +291,12 @@ public class Task implements Serializable{
      *
      * @param bid - the bid selected for the task
      */
-    public void chooseBid(Bid bid){
+    public void setAssigned(Bid bid){
         this.status ="Assigned";
         this.clearBids();
         this.addBid(bid);
 
     }
-
-    /**
-     *
-     * @param bid - the bid selected for the task
-     */
-    public void setAssigned(Bid bid){
-        this.status = "Assigned";
-        this.clearBids();
-        this.addBid(bid);
-    }
-
 
 
     /**

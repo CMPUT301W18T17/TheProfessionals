@@ -403,10 +403,10 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
                  * sole bid, update the task's status to Assigned, update the page's layout to show
                  * the Assigned layout and fill the new layout with the chosen bid's info.
                  */
-                task.chooseBid(chosenBid);
+                task.setAssigned(chosenBid);
                 bidList.clear();
                 bidList.add(chosenBid);
-                task.setAssigned(chosenBid);
+
                 setAssignedView();
                 setBidViews(chosenBid.getName(), chosenBid.getAmountAsString());
             } else if (dialog.equals("Decline")) {
