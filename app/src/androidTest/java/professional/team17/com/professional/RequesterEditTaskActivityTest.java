@@ -38,6 +38,14 @@ public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCa
      */
     public void setUp() throws Exception {
         Solo solo = new Solo(getInstrumentation(), getActivity());
+        MockTask mockTask = new MockTask("test", "Test Title", "Test Description", "Test Location", "01/01/2000");
+        ElasticSearchController mockES = new ElasticSearchController();
+        String ID = mockES.addTasks(mockTask);
+        mockTask.setId(ID);
+    }
+
+    public void testStart() {
+        Activity activity = getActivity();
     }
 
     /**
@@ -47,11 +55,27 @@ public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCa
         solo.finishOpenedActivities();
     }
 
-    public void testeditTaskActivity() {
+    /**
+     * Tests to see what happens if the edit fields are left blank
+     */
+    public void testLeaveEditFieldsBlank() {
         /* Check that this is the right activity */
         solo.assertCurrentActivity("Wrong Activity", RequesterEditTaskActivity.class);
+        /* Press the submit button without changing anything */
+        solo.clickOnButton(R.id.submitButton);
+        /* Check that the submit button leads to the right place */
+        solo.assertCurrentActivity("Wrong activity after pressing submit", RequesterViewListActivity.class);
+        solo.clickOnView(solo.getView(R.id.requester_requested_title));
+        /* Check that clicking on the task title leads to the right place */
+        solo.assertCurrentActivity("Wrong activity after clicking on task title", RequesterViewTaskActivity.class);
+        assertTrue(solo.waitForText("Test Title"));
+        assertTrue(solo.waitForText("Test Description"));
+        assertTrue(solo.waitForText("Test Location"));
+        assertTrue(solo.waitForText("01/01/2000"));
+    }
 
-
+    public void testFillEditFields() {
+        /* Check that this is the right activity */
     }
 
 }
