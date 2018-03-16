@@ -51,6 +51,8 @@ public class RequesterEditTaskActivity extends RequesterLayout {
     private String dateString;
     private String locationString;
     private String ID;
+    private String title;
+    private String description;
 
 
     /**
@@ -109,10 +111,28 @@ public class RequesterEditTaskActivity extends RequesterLayout {
         submitButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /* Convert user entered values to strings */
-                String title = nameField.getText().toString();
-                String description = descriptionField.getText().toString();
-                locationString = locationField.getText().toString();
+
+                if (nameField.getText().toString().isEmpty()) {
+                    /* If the user did not change the title, keep the old one */
+                    title = task.getName();
+                }
+                else {
+                    title = nameField.getText().toString();
+                }
+                if (descriptionField.getText().toString().isEmpty()){
+                    /* If the user did not change the description, keep the old one */
+                    description = task.getDescription();
+                }
+                else {
+                    description = descriptionField.getText().toString();
+                }
+                if (locationField.getText().toString().isEmpty()){
+                    locationString = task.getLocation();
+                }
+                else {
+                    locationString = locationField.getText().toString();
+                }
+                dateString = textualDateView.getText().toString();
 
 
                 /* Create an intent and bundle and store all task info */

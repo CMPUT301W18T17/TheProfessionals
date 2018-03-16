@@ -47,4 +47,11 @@ public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCa
         solo.finishOpenedActivities();
     }
 
+    public void testeditTaskActivity() {
+        /* Check that this is the right activity */
+        solo.assertCurrentActivity("Wrong Activity", RequesterEditTaskActivity.class);
+
+
+    }
+
 }
