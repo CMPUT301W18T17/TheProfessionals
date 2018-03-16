@@ -1,77 +1,59 @@
 package professional.team17.com.professional;
 
 import android.Manifest;
+
 import android.content.pm.PackageManager;
-import android.location.Location;
+
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
+
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private static final String TAG = "MapActivity";
+    //Permissions
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
 
+    private Boolean mLocatePermissionGranted = false;
     private GoogleMap mMap;
-    private GoogleApiClient mGoogleApiClient;
-    private LocationRequest mLocationRequest;
-    private FusedLocationProviderClient mFusedLocationClient;
-    private Location lastLocation;
-    private Marker currentLocationMark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_maps);
 
-        buildGoogleApiClient();
-
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-
-            mMap.setMyLocationEnabled(true);
-            return;
-        }
+        getLocationPermissions();
 
     }
 
-    protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        mGoogleApiClient.connect();
+    private void getLocationPermissions(){
+        Log.d(TAG, "getLocationPermissions");
+        String[] permissions = {FINE_LOCATION, COARSE_LOCATION};
+
+        if(ContextCompat.checkSelfPermission(this.getApplicationContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            //Permission granted
+            Toast.makeText(this, "FINE_LOCATION Permission Granted", Toast.LENGTH_SHORT).show();
+            if (ContextCompat.checkSelfPermission(this.getApplicationContext(), COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "COARSE_LOCATION Permission Granted", Toast.LENGTH_SHORT).show();
+                mLocatePermissionGranted = true;
+            } else {
+                ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
+            }
+        } else {
+            ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
+        }
     }
 
     /**
@@ -85,70 +67,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Log.d(TAG, "onMapReady");
         mMap = googleMap;
-
+        Toast.makeText(this, "Google Map", Toast.LENGTH_SHORT).show();
         // Add a marker in Sydney and move the camera
 //        LatLng sydney = new LatLng(-34, 151);
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
-    @Override
-    public void onLocationChanged(Location location) { // From LocationListener
-        lastLocation = location;
-
-        //Place currentLocation marker
-        if(currentLocationMark != null){
-            currentLocationMark.remove();
-        }
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("YOU ARE HERE");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-        currentLocationMark = mMap.addMarker((markerOptions));
-
-        //Move camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
-
-        if(mGoogleApiClient != null){
-            updateLocation();
-        }
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) { // From GoogleApiClient.ConnectionCallbacks
-        mLocationRequest = new LocationRequest();
-        // Set interval between location updates
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
-        // Set priority
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        updateLocation();
-
+    private void mapInitialization(){
+        Log.d(TAG, "mapInitialization");
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(MapsActivity.this);
 
     }
 
-    private void updateLocation(){
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_GRANTED){
-            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    if (location != null) {
-                        Log.i("onSuccess", "" + location.getLongitude() );
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Log.d(TAG, "onRequestPersmissionsResult - check permssions");
+        mLocatePermissionGranted = false;
+
+        //Check all map permissions
+        switch(requestCode){
+            case LOCATION_PERMISSION_REQUEST_CODE:{
+                if(grantResults.length > 0) {
+                    for(int i = 0; i < grantResults.length; i++){
+                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                            mLocatePermissionGranted = false;
+                            Log.d(TAG, "At least one permission failed");
+                            return;
+                        }
                     }
+                    Log.d(TAG, "Acquired all permissions");
+                    mLocatePermissionGranted = true;
+                    // map initialization
+                    mapInitialization();
                 }
-            });
+            }
         }
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) { // From GoogleApiClient.OnConnectionFailedListener
-
     }
 }

@@ -8,6 +8,7 @@
 
 package professional.team17.com.professional;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 /**
  * An abstract activity which implements the navigation for the Provider options.
@@ -117,9 +121,11 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                 break;
         /* If the user tapped the map button */
             case R.id.taskMapButton:
-                intent = new Intent(this, MapsActivity.class);
-                startActivity(intent);
-                finish();
+                if(checkServices()){
+                    intent = new Intent(this, MapsActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
                 break;
         /* If the user taps the switch button */
             case R.id.switchViewProviderButton:
@@ -158,6 +164,25 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                 return true;
             }
         });
+    }
+
+    private boolean checkServices(){
+        String TAG = "ProviderLayout";
+        Log.d(TAG, "checkServices - google services version");
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
+        if (available == ConnectionResult.SUCCESS){
+            Toast.makeText(this, "Google Services is OK", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "checkServices - google services is ok");
+            return true;
+        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            Toast.makeText(this, "Google Services is NOT Ok", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "checkServices - okay error");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(this, available, 9001);
+            dialog.show();
+        } else {
+            Toast.makeText(this, "Cannot make map request.", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 
     /**
