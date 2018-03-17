@@ -178,7 +178,11 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
             taskMyBidDollar.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.INVISIBLE);
             bidButton.setVisibility(View.INVISIBLE);
+            taskLowBidTextField.setVisibility(View.INVISIBLE);
+            taskLowBidDollar.setVisibility(View.INVISIBLE);
             appendButton.setVisibility(View.INVISIBLE);
+            TextView taskLowBidDesc = (TextView) findViewById(R.id.provider_view_task_lowBid);
+            taskLowBidDesc.setVisibility(View.INVISIBLE);
             taskMyBidTextField.setText(bids.getBid(username).getAmountAsString());
         }
         else {

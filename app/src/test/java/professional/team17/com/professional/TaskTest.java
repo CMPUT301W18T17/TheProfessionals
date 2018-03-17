@@ -180,7 +180,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
         Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date());
         Bid bid = new Bid("bid", 34.34);
         task.addBid(bid);
-        task.setAssigned(bid);
+        task.chooseBid(bid);
         assertEquals(task.getStatus(), "Assigned");
         assertFalse(task.isRequested());
         assertTrue(task.isAssigned());
@@ -207,7 +207,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
         Bid bid2 = new Bid("bid22", 34222.34);
         task.addBid(bid);
         task.addBid(bid2);
-        task.setAssigned(bid);
+        task.chooseBid(bid);
         //should only have one bid now and the chosen bid
         assertEquals(1, task.getBids().size());
         assertEquals(task.getBids().hasBid(bid), bid);

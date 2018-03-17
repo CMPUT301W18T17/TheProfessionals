@@ -28,7 +28,7 @@ public class Task implements Serializable{
     private String uniqueID;
     private ArrayList<String> photos;
     private BidList bids;
-    private String status;
+    public String status;
 
     /**
      *
@@ -275,7 +275,7 @@ public class Task implements Serializable{
      *
      * @param status - this will set the status of the task
      */
-    private void setStatus(String status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -291,11 +291,9 @@ public class Task implements Serializable{
      *
      * @param bid - the bid selected for the task
      */
-    public void setAssigned(Bid bid){
-        this.status ="Assigned";
+    public void chooseBid(Bid bid){
         this.clearBids();
         this.addBid(bid);
-
     }
 
 

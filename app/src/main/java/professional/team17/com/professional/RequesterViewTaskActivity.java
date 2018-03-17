@@ -9,11 +9,7 @@ package professional.team17.com.professional;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -54,7 +50,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
     Button doneButton;
     /* Other variables */
     String ID;
-    Task task;
+    private Task task;
     ElasticSearchController elasticSearchController = new ElasticSearchController();
     BidListAdapter bidAdapter;
     BidList bidList;
@@ -87,7 +83,6 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         requestedButton = (Button) findViewById(R.id.requester_view_taskrequestedButton);
         doneButton = (Button) findViewById(R.id.requester_view_taskdoneButton);
 
-
         /* Set adapters */
         bidList = new BidList();
         bidAdapter = new BidListAdapter(this, bidList);
@@ -105,6 +100,8 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
             Log.i("Server", "Server failed to return a task for that ID");
         }
         populateBidList();
+
+
 
 
         /* Set OnClickListeners */
@@ -404,9 +401,12 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
                  * sole bid, update the task's status to Assigned, update the page's layout to show
                  * the Assigned layout and fill the new layout with the chosen bid's info.
                  */
-                task.setAssigned(chosenBid);
+                task.chooseBid(chosenBid);
+                task.setStatus("Assigned");
+
                 bidList.clear();
                 bidList.add(chosenBid);
+
 
                 setAssignedView();
                 setBidViews(chosenBid.getName(), chosenBid.getAmountAsString());
@@ -434,6 +434,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
                 setTaskViews();
                 setDoneView();
             }
+            Log.i("TAD", "CHANGE TASK "+task);
             elasticSearchController.updateTasks(task);
         }
     }
@@ -444,11 +445,29 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
      * Move to the profile view to see the requested info
      * @param v the view the button is located on
      */
-    public void viewProfile(View v){
+    public void viewProfileRow(View v){
         final int position = listView.getPositionForView((View) v.getParent());
         String bidder = bidList.getBid(position).getName();
+        viewProfileActivity(bidder);
+    }
+
+    /**
+     * The onClick method for the profile username of the bidder
+     * Move to the profile view to see the requested info
+     * @param v the view the button is located on
+     */
+    public void viewProfileName(View v){
+        String bidder = bidderNameView.getText().toString();
+        viewProfileActivity(bidder);
+    }
+
+    /**
+     *
+     * @param name - user name to be added to intent
+     */
+    public void viewProfileActivity(String name){
         Intent intention = new Intent(this, OtherProfileViewActivity.class);
-        intention.putExtra("profile", bidder);
+        intention.putExtra("profile", name);
         startActivity(intention);
     }
 

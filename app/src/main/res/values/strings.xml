@@ -28,4 +28,9 @@
     <string name="add_button">Add</string>
     <string name="back">Back</string>
     <string name="title_activity_maps">Map</string>
+    <string name="NA">N/A</string>
+    <string name="Address">Address</string>
+    <string name="taskDate">Task Completed By</string>
+    <string name="Description">Description</string>
+    <string name="Task_Requester">Task Requested</string>
 </resources>

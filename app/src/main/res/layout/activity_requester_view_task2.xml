@@ -167,8 +167,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
+            android:clickable="true"
+            android:onClick="viewProfileName"
             android:text="TextView"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/requester_view_taskbidder"
             app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
 

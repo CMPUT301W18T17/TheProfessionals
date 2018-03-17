@@ -34,7 +34,9 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif"
                     android:text="TaskTitle - "
+                    android:textColor="@color/cardview_dark_background"
                     android:textSize="21sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
