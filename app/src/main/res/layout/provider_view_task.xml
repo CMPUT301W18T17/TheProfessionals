@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="16dp"
                     android:clickable="true"
-                    android:onClick="viewProfile"
+                    android:onClick="viewProfileRow"
                     android:text="username"
                     app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_Requester"
                     app:layout_constraintStart_toEndOf="@+id/provider_view_task_Requester" />
