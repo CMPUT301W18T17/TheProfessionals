@@ -46,6 +46,5 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
         assertTrue(solo.waitForText("Task Name 1"));
         assertTrue(solo.waitForText("Requested"));
         assertTrue(solo.waitForText("Task Description"));
-        assertTrue(solo.waitForText("My Location"));
     }
 }
