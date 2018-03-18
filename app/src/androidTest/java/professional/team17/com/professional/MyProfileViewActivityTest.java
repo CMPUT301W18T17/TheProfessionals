@@ -46,7 +46,7 @@ public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<
 
         EditText enterName = (EditText) solo.getView(R.id.editName);
         EditText enterEmail = (EditText) solo.getView(R.id.editEmail);
-        EditText enterPhone = (EditText) solo.getView(R.id.editEmail);
+        EditText enterPhone = (EditText) solo.getView(R.id.editPhone);
 
         solo.clearEditText(enterName);
         solo.clearEditText(enterEmail);
