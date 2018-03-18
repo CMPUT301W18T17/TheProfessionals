@@ -14,10 +14,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a28198c-dc5d-4b56-8f6e-72b201ca9492" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/__local_aars____Users_ag_Documents_GitHub_TheProfessionals_app_src_include_jest_droid_2_0_1_SNAPSHOT_jar_unspecified_jar.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/LogInActivityTest.java" afterPath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/LogInActivityTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java" afterPath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterAddTaskActivity.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterAddTaskActivity.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -51,7 +49,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SignUpActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SignUpActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/SignUpActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="861">
@@ -64,8 +62,30 @@
       <file leaf-file-name="ElasticSearchController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ElasticSearchController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3172">
+            <state relative-caret-position="3781">
               <caret line="207" column="25" lean-forward="false" selection-start-line="207" selection-start-column="25" selection-end-line="207" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyProfileViewActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/MyProfileViewActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProviderPlaceBidTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderPlaceBidTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-154">
+              <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -74,9 +94,31 @@
       <file leaf-file-name="LogInActivityTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/LogInActivityTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
+            <state relative-caret-position="798">
               <caret line="60" column="78" lean-forward="false" selection-start-line="60" selection-start-column="78" selection-end-line="60" selection-end-column="78" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyProfileViewActivityTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/MyProfileViewActivityTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequesterAddTaskActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterAddTaskActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="121" column="51" lean-forward="false" selection-start-line="121" selection-start-column="51" selection-end-line="121" selection-end-column="51" />
+              <folding>
+                <element signature="e#0#7656#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -84,7 +126,7 @@
       <file leaf-file-name="Profile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Profile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-167">
+            <state relative-caret-position="483">
               <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding />
             </state>
@@ -1867,6 +1909,7 @@
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/SignUpActivityTest.java" />
         <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/LogInActivityTest.java" />
         <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterAddTaskActivity.java" />
       </list>
     </option>
   </component>
@@ -1985,7 +2028,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android Instrumented Tests.SignUpActivityTest">
+  <component name="RunManager" selected="Android Instrumented Tests.ProviderViewRequeste...">
     <configuration default="false" name="SignUpActivityTest" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
       <module name="app" />
       <option name="TESTING_TYPE" value="2" />
@@ -2031,7 +2074,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521413949905" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521416563444" />
       </method>
     </configuration>
     <configuration default="false" name="LogInActivityTest" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
@@ -2079,7 +2122,55 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521413949905" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521416563444" />
+      </method>
+    </configuration>
+    <configuration default="false" name="ProviderViewRequeste..." type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <option name="TESTING_TYPE" value="2" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="professional.team17.com.professional.ProviderViewRequestedTaskTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+      </Profilers>
+      <method>
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521416563444" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -2152,7 +2243,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521413949905" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521416563445" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2200,7 +2291,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521413949905" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521416563445" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2383,18 +2474,20 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521413949906" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1521416563446" />
       </method>
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Android App.app" />
       <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.SignUpActivityTest" />
       <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.LogInActivityTest" />
+      <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.ProviderViewRequeste..." />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Android Instrumented Tests.SignUpActivityTest" />
-        <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.LogInActivityTest" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Android Instrumented Tests.ProviderViewRequeste..." />
+        <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.SignUpActivityTest" />
+        <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.LogInActivityTest" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
@@ -2436,14 +2529,11 @@
     <history-entry file="LogInActivityTest - 2018.03.18 at 16h 56m 51s.xml">
       <configuration name="LogInActivityTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="SignUpActivityTest - 2018.03.18 at 16h 43m 55s.xml">
-      <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="LogInActivityTest - 2018.03.18 at 17h 34m 37s.xml">
+      <configuration name="LogInActivityTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="SignUpActivityTest - 2018.03.18 at 16h 44m 45s.xml">
-      <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
-    </history-entry>
-    <history-entry file="SignUpActivityTest - 2018.03.18 at 16h 45m 19s.xml">
-      <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="ProviderViewRequeste___ - 2018.03.18 at 17h 36m 00s.xml">
+      <configuration name="ProviderViewRequeste..." configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
     <history-entry file="SignUpActivityTest - 2018.03.18 at 16h 48m 34s.xml">
       <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
@@ -2458,6 +2548,9 @@
       <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
     <history-entry file="SignUpActivityTest - 2018.03.18 at 16h 57m 50s.xml">
+      <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="SignUpActivityTest - 2018.03.18 at 17h 35m 10s.xml">
       <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
   </component>
@@ -2543,14 +2636,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ArrayAdapterSearchResults.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/PlaceBidDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ProviderBiddedListAdapter.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Review.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -2659,6 +2744,7 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="1806">
           <caret line="86" column="5" lean-forward="false" selection-start-line="86" selection-start-column="5" selection-end-line="86" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2">
@@ -2714,14 +2800,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterAddTaskActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-70">
-          <caret line="34" column="13" lean-forward="false" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ProviderTaskListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-721">
@@ -2743,13 +2821,6 @@
         <state relative-caret-position="525">
           <caret line="31" column="5" lean-forward="false" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/MyProfileViewActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="10" column="8" lean-forward="false" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -2838,30 +2909,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Profile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-167">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ElasticSearchController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3172">
-          <caret line="207" column="25" lean-forward="false" selection-start-line="207" selection-start-column="25" selection-end-line="207" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/LogInActivityTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="60" column="78" lean-forward="false" selection-start-line="60" selection-start-column="78" selection-end-line="60" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-63">
@@ -2875,6 +2922,66 @@
         <state relative-caret-position="861">
           <caret line="103" column="5" lean-forward="false" selection-start-line="103" selection-start-column="5" selection-end-line="103" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Profile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ElasticSearchController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3781">
+          <caret line="207" column="25" lean-forward="false" selection-start-line="207" selection-start-column="25" selection-end-line="207" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/MyProfileViewActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderPlaceBidTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-154">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/LogInActivityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="798">
+          <caret line="60" column="78" lean-forward="false" selection-start-line="60" selection-start-column="78" selection-end-line="60" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/MyProfileViewActivityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterAddTaskActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="121" column="51" lean-forward="false" selection-start-line="121" selection-start-column="51" selection-end-line="121" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#7656#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
