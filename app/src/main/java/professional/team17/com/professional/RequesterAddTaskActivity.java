@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -92,6 +93,16 @@ public class RequesterAddTaskActivity extends RequesterLayout {
 
             }
         });
+
+        locationField.setInputType(InputType.TYPE_NULL);
+        locationField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RequesterAddTaskActivity.this, MapsSearchLocationActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         submitButton.setOnClickListener(new Button.OnClickListener() {
             @Override

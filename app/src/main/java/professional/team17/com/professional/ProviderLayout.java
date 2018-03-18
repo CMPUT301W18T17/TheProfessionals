@@ -122,7 +122,7 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
         /* If the user tapped the map button */
             case R.id.taskMapButton:
                 if(checkServices()){
-                    intent = new Intent(this, MapsActivity.class);
+                    intent = new Intent(this, MapsSearchTasksActivity.class);
                     startActivity(intent);
                     finish();
                 }
