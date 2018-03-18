@@ -2,11 +2,28 @@ package professional.team17.com.professional;
 
 import java.util.ArrayList;
 
+/**
+ * @Author Allie
+ * @Version 1.0
+ * @see Task
+ * This function is working for creating an object named TaskList
+ * Which is used as an ArrayList<Task>
+ */
+
 public class TaskList extends ArrayList<Task>{
 
     public TaskList(){
         // Nothing
     }
+
+    /**
+     * Handling the Task Object
+     * 1. hasTask checks if there is a specific task in this taskList
+     * 2. addTask adds the parameter task into the taskList
+     * 3. deleteTask takes a task type parameter to delete this parameter from this.taskList
+     * @param task
+     * @return
+     */
 
     public boolean hasTask(Task task){
         return this.contains(task);
@@ -17,6 +34,11 @@ public class TaskList extends ArrayList<Task>{
     public void deleteTask(Task task){
         this.remove(task);
     }
+
+    /**
+     *getTask return the current TaskList.
+     * @return this.taskList
+     */
 
     public ArrayList<Task> getTasks() {
         return this;

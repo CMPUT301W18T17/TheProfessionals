@@ -2,6 +2,13 @@ package professional.team17.com.professional;
 
 import java.util.Date;
 
+/**
+ * @Author
+ * @version 1.0
+ * @See ReviewList
+ * this class is mainly created for describe a new review object
+ */
+
 public class Review {
 
     private double score;
@@ -26,6 +33,11 @@ public class Review {
     }
     /* GETTERS */
 
+    /**
+     * Set getters for getting all the attributes from the review object
+     * @return String or Double
+     */
+
     public Double getScore() {
         return this.score;
     }
@@ -42,6 +54,12 @@ public class Review {
         return this.reviewTitle;
     }
 
+    public Date getDate(){return this.date;}
+
+    /**
+     * Set setters for updating all the attributes of the review object
+     * @param score
+     */
 
     /*SETTERS*/
     public void setScore(Double score) {
@@ -62,10 +80,7 @@ public class Review {
         this.reviewTitle = title;
     }
 
-    public Date getDate(){
-        return this.date;
 
-    }
 
 
 
