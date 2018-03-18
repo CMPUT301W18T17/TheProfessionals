@@ -2,6 +2,7 @@ package professional.team17.com.professional;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
@@ -23,10 +24,16 @@ public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<
 
     public void setUp() throws Exception{
         solo = new Solo(getInstrumentation(), getActivity());
+//        Context context = getInstrumentation().getTargetContext();
+//        final SharedPreferences.Editor prefEdit = PreferenceManager.getDefaultSharedPreferences(context).edit();
+//        prefEdit.putString("username", "hailan333");
+//        prefEdit.commit();
         Context context = getInstrumentation().getTargetContext();
-        final SharedPreferences.Editor prefEdit = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        prefEdit.putString("username", "hailan333");
-        prefEdit.commit();
+        SharedPreferences pref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+
+        editor.putString("username", "hailan333"); // Storing string
+        editor.commit();
     }
 
     public void testStart() throws Exception {
@@ -46,7 +53,7 @@ public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<
 
         EditText enterName = (EditText) solo.getView(R.id.editName);
         EditText enterEmail = (EditText) solo.getView(R.id.editEmail);
-        EditText enterPhone = (EditText) solo.getView(R.id.editEmail);
+        EditText enterPhone = (EditText) solo.getView(R.id.editPhone);
 
         solo.clearEditText(enterName);
         solo.clearEditText(enterEmail);

@@ -22,6 +22,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,10 +31,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 /**
  * Based on: Mitch Tabian's Google Maps & Google Places Course - https://codingwithmitch.com/courses/ and https://www.youtube.com/watch?v=Vt6H9TOmsuo
  */
-public class MapsActivity extends AppCompatActivity implements
-        OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener{
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback{
     private static final String TAG = "MapActivity";
     //Permissions
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -93,11 +91,13 @@ public class MapsActivity extends AppCompatActivity implements
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         if (mLocatePermissionGranted) {
             getCurrentLocation();
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(MapsActivity.this, "Show Current Location", Toast.LENGTH_SHORT).show();
-                mMap.setMyLocationEnabled(true);
+                return;
             }
-
+            mMap.setMyLocationEnabled(true);
+            mMap.getUiSettings().setMyLocationButtonEnabled(false);
         }
     }
 
@@ -153,9 +153,10 @@ public class MapsActivity extends AppCompatActivity implements
                             } else{
                                 currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                                 moveCamera(currentLatLng);
+                                //mMap.addMarker(new MarkerOptions().position(currentLatLng).title("YOU"));
                             }
                         } else {
-                            Toast.makeText(MapsActivity.this, "Could not get current location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MapsActivity.this, "Current location is not found", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }));
@@ -166,24 +167,25 @@ public class MapsActivity extends AppCompatActivity implements
     }
 
     private void moveCamera(LatLng latLng){
+        Log.d(TAG,"moveCamera: lat -> " + latLng.latitude + ", lng" + latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,11));
     }
 
-    //implement method - 1
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-    }
-
-    //implement method - 2
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    //implement method - 3
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
+//    //implement method - 1
+//    @Override
+//    public void onConnected(@Nullable Bundle bundle) {
+//
+//    }
+//
+//    //implement method - 2
+//    @Override
+//    public void onConnectionSuspended(int i) {
+//
+//    }
+//
+//    //implement method - 3
+//    @Override
+//    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+//
+//    }
 }
