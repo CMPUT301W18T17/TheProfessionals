@@ -36,9 +36,11 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
         solo.clickOnButton("Sign In");
         assertTrue(solo.waitForText("Username does not exist"));
 
+        solo.clearEditText((EditText) solo.getView(R.id.usernameBox));
         //I have created the TestUser Profile for the purposes of testing
         solo.enterText((EditText) solo.getView(R.id.usernameBox), "TestUser");
-        solo.assertCurrentActivity("Wrong Activity", RequesterViewListActivity.class);
+        solo.clickOnButton("Sign In");
+        solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
     }
 
     public void testSignUp(){
