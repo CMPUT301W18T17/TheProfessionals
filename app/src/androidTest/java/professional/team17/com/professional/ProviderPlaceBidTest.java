@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.robotium.solo.Solo;
@@ -17,18 +18,18 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
     private Solo solo;
     private ElasticSearchController elasticSearchController = new ElasticSearchController();
     private MockTask mockTask;
-    private Profile testProfile;
+    private Profile testProfile ;
 
     public ProviderPlaceBidTest() {
         super(SearchActivity.class);
     }
 
     public void setUp() throws Exception {
-        MockTask mockTask = new MockTask("kaixiang", "kaixiang's task", "Test Description", "Test Location", "01/01/2000");
+        mockTask = new MockTask("kaixiang", "kaixiang's task", "Test Description", "Test Location", "01/01/2000");
         ElasticSearchController mockES = new ElasticSearchController();
         String ID = mockES.addTasks(mockTask);
         mockTask.setId(ID);
-        Profile testProfile = new Profile("kaixiang","TestUser1", "tester@ualberta.ca","123-456-7890");
+        testProfile = new Profile("kaixiang","TestUser1", "tester@ualberta.ca","123-456-7890");
         elasticSearchController.addProfile(testProfile);
         /*Intent i = new Intent();
         i.putExtra("Status", "Bidded");
@@ -76,22 +77,19 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
 
 
 
+
+
     }
 
-    //public void testDeleteButton() {
-        //solo.assertCurrentActivity("Wrong Activity", ProviderViewTask.class);
-        //solo.clickOnButton("provider_view_task_AddBid");
-        //solo.assertCurrentActivity("Wrong Activity", PlaceBidDialog.class);
-        //solo.clickOnButton("Dismiss");
-        //solo.assertCurrentActivity("Wrong Activity", ProviderViewTask.class);
-
-    //}
 
     @Override
     public void tearDown() throws Exception {
-        solo.finishOpenedActivities();
-        elasticSearchController.deleteProfile(testProfile);
         elasticSearchController.deleteTasks(mockTask);
+        elasticSearchController.deleteProfile(testProfile);
+
+        solo.finishOpenedActivities();
+
+
 
     }
 }
