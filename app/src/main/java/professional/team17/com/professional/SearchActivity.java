@@ -28,7 +28,7 @@ public class SearchActivity extends ProviderLayout {
     private TaskList taskList;
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
     private String username;
-    private SharedPreferences sharedpreferences;
+    private SharedPreferences sharedPreferences;
 
 
     /**
@@ -50,8 +50,8 @@ public class SearchActivity extends ProviderLayout {
         this.setActivityTitle(test);
         */
 
-        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        username = sharedpreferences.getString("username", "error");
+        sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = sharedPreferences.getString("username", "error");
 
         taskList = new TaskList();
         taskList.addAll(getOpenTasks());

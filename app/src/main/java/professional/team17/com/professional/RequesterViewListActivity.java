@@ -131,7 +131,6 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
 
 
     public void deleteTask(View v){
-
         final int position = listView.getPositionForView((View) v.getParent());
         task = taskList.get(position);
         deleteTaskDialog();
