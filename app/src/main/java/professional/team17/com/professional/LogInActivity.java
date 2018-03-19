@@ -20,7 +20,6 @@ import javax.security.auth.login.LoginException;
  * @see SignUpActivity
  */
 public class LogInActivity extends AppCompatActivity {
-    private Profile profile;
     private ElasticSearchController elasticSearchController;
 
     @Override
@@ -46,7 +45,7 @@ public class LogInActivity extends AppCompatActivity {
         if (usernameBox.getText().length() == 0){
             error.setText("Please Enter a Username");
         } else {
-            profile = elasticSearchController.getProfile(username);
+            Profile profile = elasticSearchController.getProfile(username);
             if (!(profile == null)) {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE); // 0 - for private mode
                 SharedPreferences.Editor editor = pref.edit();
