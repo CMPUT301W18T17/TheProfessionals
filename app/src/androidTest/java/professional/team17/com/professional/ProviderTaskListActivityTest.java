@@ -31,11 +31,12 @@ public class ProviderTaskListActivityTest extends ActivityInstrumentationTestCas
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("username", "testuser"); // Storing string
         editor.commit();
+        mockES = new ElasticSearchController();
+
         mockProfile = new Profile("kaixiang","TestUser1", "tester@ualberta.ca","123-456-7890");
         mockES.addProfile(mockProfile);
         mockTask = new MockTask("kaixiang", "kaixiang's task", "Test Description", "Test Location", "01/01/2000");
         mockTask.addBid(new Bid(username, 45.67));
-        mockES = new ElasticSearchController();
         String ID = mockES.addTasks(mockTask);
         mockTask.setId(ID);
 
