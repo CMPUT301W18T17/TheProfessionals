@@ -105,6 +105,7 @@ public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCa
     /**
      * Tear down the test.
      */
+    @Override
     public void tearDown(){
         solo.finishOpenedActivities();
     }
