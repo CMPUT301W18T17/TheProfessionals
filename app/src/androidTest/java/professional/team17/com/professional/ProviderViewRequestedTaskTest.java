@@ -1,6 +1,7 @@
 package professional.team17.com.professional;
 
 import android.app.Activity;
+import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.EditText;
@@ -45,12 +46,12 @@ public class ProviderViewRequestedTaskTest extends ActivityInstrumentationTestCa
         solo.clickOnText("OK");
         // For photo and map
         // Leave For now
-        solo.enterText((EditText) solo.getView(R.id.textualAddressField), "My Location");
         solo.clickOnButton("Add");
 
 
         // Check
         solo.finishOpenedActivities();
+        SystemClock.sleep(5000);
         this.launchActivity("professional.team17.com.professional", LogInActivity.class, null);
         solo = new Solo(getInstrumentation(), getActivity());
         solo.enterText((EditText) solo.getView(R.id.usernameBox), "hailan333");

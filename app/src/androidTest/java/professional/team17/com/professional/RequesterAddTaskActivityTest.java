@@ -38,10 +38,10 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
         solo.clickOnText("OK");
         // For photo and map
         // Leave For now
-        solo.enterText((EditText) solo.getView(R.id.textualAddressField), "My Location");
         solo.clickOnButton("Add");
 
         // Check
+        solo.clickOnView(solo.getView(R.id.requestedTasksRequesterButton));
         solo.clickOnView(solo.getView(R.id.requester_requested_title));
         assertTrue(solo.waitForText("Task Name 1"));
         assertTrue(solo.waitForText("Requested"));
