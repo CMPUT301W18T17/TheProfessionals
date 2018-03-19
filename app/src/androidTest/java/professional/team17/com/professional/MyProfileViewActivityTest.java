@@ -26,16 +26,18 @@ public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<
     }
 
     public void setUp() throws Exception{
-        solo = new Solo(getInstrumentation(), getActivity());
-
         elasticSearchController.addProfile(testProfile);
-
         Context context = getInstrumentation().getTargetContext();
         SharedPreferences pref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
-        editor.putString("username", "tester"); // Storing string
+        editor.putString("username", "TestUser"); // Storing string
         editor.commit();
+        solo = new Solo(getInstrumentation(), getActivity());
+
+
+
+
     }
 
     public void testStart() throws Exception {
