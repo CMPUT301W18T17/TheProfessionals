@@ -78,18 +78,20 @@ public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCa
      * Tests to see what happens if the edit fields are left blank
      */
     public void testLeaveEditFieldsBlank() {
+        mockES.updateTasks(mockTask);
         /* Check that this is the right activity */
         solo.assertCurrentActivity("Wrong Activity", RequesterEditTaskActivity.class);
         /* Press the submit button without changing anything */
         solo.clickOnView(solo.getView(R.id.submitButton));
         /* Check that the submit button leads to the right place */
         solo.assertCurrentActivity("Wrong activity after pressing submit", RequesterViewListActivity.class);
-        solo.clickOnText("Edit");
+        solo.clickOnView(solo.getView(R.id.requester_requested_title));
         /* Check that clicking on the task title leads to the right place */
         solo.assertCurrentActivity("Wrong activity after clicking on task title", RequesterViewTaskActivity.class);
         assertTrue(solo.waitForText("Test Title"));
         assertTrue(solo.waitForText("Test Description"));
-        assertTrue(solo.waitForText("Test Location"));
+        //don't display description
+        //assertTrue(solo.waitForText("Test Location"));
         assertTrue(solo.waitForText("01/01/2000"));
     }
 
