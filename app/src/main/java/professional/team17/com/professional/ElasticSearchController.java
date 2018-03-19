@@ -187,14 +187,16 @@ public class ElasticSearchController {
         addtask.execute(task);
         try {
             id = addtask.get();
+            task.setId(id);
+            ElasticSearchController.UpdateTask updateTask = new ElasticSearchController.UpdateTask();
+            updateTask.execute(task);
         }
         catch (Exception e){
             id = null;
         }
         //now that the id is set, we need to update it into the db
         //TODO RESEARCH BETTER WAY
-        ElasticSearchController.UpdateTask updateTask = new ElasticSearchController.UpdateTask();
-        updateTask.execute(task);
+
         return id;
     }
 
@@ -339,6 +341,8 @@ public class ElasticSearchController {
     }
 
 
+
+
     /**
      *  This AsyncTask will add a task to the db.
      *  It will then set the task.id equal to the db.id set at time of insertion.
@@ -359,7 +363,7 @@ public class ElasticSearchController {
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()){
-                        task.setId(result.getId());
+                        id = result.getId();
                     }
                     else {
                         Log.i ("Error", "some error = (");
