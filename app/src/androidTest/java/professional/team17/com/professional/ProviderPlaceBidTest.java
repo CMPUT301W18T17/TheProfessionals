@@ -16,6 +16,8 @@ import com.robotium.solo.Solo;
 public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<SearchActivity> {
     private Solo solo;
     private ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private MockTask mockTask;
+    private Profile testProfile;
 
     public ProviderPlaceBidTest() {
         super(SearchActivity.class);
@@ -39,6 +41,7 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
 
         editor.putString("username", "TestUser1"); // Storing string
         editor.commit();
+
     }
 
     public void testStart() throws Exception {
@@ -71,6 +74,8 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
 
 
 
+
+
     }
 
     //public void testDeleteButton() {
@@ -85,6 +90,9 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
     @Override
     public void tearDown() throws Exception {
         solo.finishOpenedActivities();
+        elasticSearchController.deleteProfile(testProfile);
+        elasticSearchController.deleteTasks(mockTask);
+
     }
 }
 
