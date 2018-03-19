@@ -67,7 +67,7 @@ public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCa
         solo.clickOnView(solo.getView(R.id.submitButton));
         /* Check that the submit button leads to the right place */
         solo.assertCurrentActivity("Wrong activity after pressing submit", RequesterViewListActivity.class);
-        solo.clickOnView(solo.getView(R.id.requester_requested_title));
+        solo.clickOnText("Edit");
         /* Check that clicking on the task title leads to the right place */
         solo.assertCurrentActivity("Wrong activity after clicking on task title", RequesterViewTaskActivity.class);
         assertTrue(solo.waitForText("Test Title"));
@@ -89,7 +89,7 @@ public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCa
         solo.setDatePicker(0, 2001, 02, 02);
         solo.clickOnText("OK");
         /* Check that the submit button leads to the right place */
-        solo.clickOnView(solo.getView(R.id.submitButton));
+        solo.clickOnText("Edit");
         solo.assertCurrentActivity("Wrong activity after pressing submit", RequesterViewListActivity.class);
         solo.clickOnView(solo.getView(R.id.requester_requested_title));
         /* Check that clicking on the task title leads to the right place */
