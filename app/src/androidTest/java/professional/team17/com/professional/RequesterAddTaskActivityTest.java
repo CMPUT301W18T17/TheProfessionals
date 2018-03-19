@@ -20,11 +20,9 @@ import java.util.ArrayList;
 
 public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCase2<RequesterAddTaskActivity> {
     private Solo solo;
-    private MockTask mockTask;
     private ElasticSearchController elasticSearchController;
     private Profile profile;
-    private Task task;
-    private TaskList taskList;
+
 
     public RequesterAddTaskActivityTest() {
         super(RequesterAddTaskActivity.class);
@@ -59,9 +57,6 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
         // For photo and map
         // Leave For now
         solo.clickOnButton("Add");
-
-        ElasticSearchController new_elasticSearchController = new ElasticSearchController();
-        taskList = new_elasticSearchController.getTasksUsername(profile.getUserName());
 
         // Check
         solo.clickOnView(solo.getView(R.id.requestedTasksRequesterButton));
