@@ -56,7 +56,7 @@ public class ProviderTaskListActivity extends ProviderLayout {
         sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedpreferences.getString("username", "error");
         String type = setProviderViewType();
-        createList(type);
+        //createList(type);
         taskList.addAll(createList(type));
         adapterHelper.notifyDataSetChanged();
 
@@ -92,7 +92,6 @@ public class ProviderTaskListActivity extends ProviderLayout {
         setActivityTitle(type + " Tasks");
         if (type.equals("Bidded")) {
             taskList = elasticSearchController.getTasksBidded(username, "Bidded");
-            Log.i("boukll", "createList: "+taskList+username);
         }
         if (type.equals("Assigned")) {
             taskList = elasticSearchController.getTasksBidded(username, "Assigned");
