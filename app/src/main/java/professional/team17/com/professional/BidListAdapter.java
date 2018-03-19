@@ -22,12 +22,24 @@ import android.widget.TextView;
  */
 public class BidListAdapter extends ArrayAdapter<Bid> {
 
+    /**
+     * Contructs a BidListAdapter.
+     * @param context The activity that the adapter is used in.
+     * @param bids A list of Bid objects.
+     */
     public BidListAdapter(Activity context, BidList bids) {
 
         super(context, 0,  bids);
     }
 
 
+    /**
+     * Gets and inflates the ListView associated with this adapter.
+     * @param position The position of the row
+     * @param v The view object
+     * @param parent The parent viewgroup
+     * @return the row's view.
+     */
     // aided by https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
     public View getView(int position, View v, ViewGroup parent) {
         final Bid bid= getItem(position);

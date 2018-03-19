@@ -3,7 +3,9 @@ package professional.team17.com.professional;
 import android.widget.TextView;
 
 /**
- * Created by Zhipeng Zhang on 2018/3/13.
+ * Holds the view objects for the ProviderCustomArrayAdapter.
+ * @author zhipeng
+ * @see RequesterCustomArrayAdapter
  */
 
 public class RequesterViewHolder {
@@ -12,7 +14,13 @@ public class RequesterViewHolder {
     TextView taskTitleTextField;
     TextView taskAcceptBidAmountTextField;
 
-    // This class is for requester assigned tasks
+    /**
+     * Constructs a holder for the assigned tasks view.
+     * @param statusTextField The TextView object displaying the task's status.
+     * @param userNameTextField The TextView object displaying the assigned provider's username.
+     * @param taskTitleTextField The TextView object displaying the task's title.
+     * @param taskAcceptBidAmountTextField The TextView object displaying the accepted bid.
+     */
     public RequesterViewHolder(TextView statusTextField, TextView userNameTextField, TextView taskTitleTextField, TextView taskAcceptBidAmountTextField){
         this.statusTextField = statusTextField;
         this.userNameTextField = userNameTextField;
@@ -20,24 +28,41 @@ public class RequesterViewHolder {
         this.taskAcceptBidAmountTextField = taskAcceptBidAmountTextField;
     }
 
+    /**
+    * Constructs a holder for the requested tasks view.
+    * @param statusTextField The TextView object displaying the task's status.
+    * @param taskTitleTextField The TextView object displaying the task's title.
+    */
     public RequesterViewHolder(TextView statusTextField, TextView taskTitleTextField){
         this.statusTextField = statusTextField;
         this.taskTitleTextField = taskTitleTextField;
     }
 
-    // This returns the text view of statusTextField
+    /**
+     * Getter method for statusTextField.
+     * @return statusTextField
+     */
     public TextView getStatusTextField() {
         return statusTextField;
     }
 
-    // This returns the text view of userNameTextField
+    /**
+     * Getter method for UserNameTextField
+     * @return UserNameTextField
+     */
     public TextView getUserNameTextField() {
         return userNameTextField;
     }
 
-    // This returns the text view of taskTitleTextField
+    /**
+     * Getter method for TaskTitleTextField
+     * @return taskTitleTextField
+     */
     public TextView getTaskTitleTextField() { return taskTitleTextField; }
 
-    // This returns the text view of taskAcceptBidAmountTextField
+    /**
+     * Getter method for taskAcceptBidAmount
+     * @return taskAcceptBidAmount
+     */
     public TextView getTaskAcceptBidAmount() { return taskAcceptBidAmountTextField;}
 }

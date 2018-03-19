@@ -3,7 +3,9 @@ package professional.team17.com.professional;
 import android.widget.TextView;
 
 /**
- * Created by Zhipeng Zhang on 2018/3/13.
+ * Holds the view objects for the ProviderCustomArrayAdapter.
+ * @author zhipeng
+ * @see ProviderCustomArrayAdapter
  */
 
 public class ProviderViewHolder {
@@ -13,7 +15,14 @@ public class ProviderViewHolder {
     TextView taskLowBidAmountTextField;
     TextView taskMyBidAmountTextField;
 
-    // This is a class for provider bidded tasks
+    /**
+     * Constructs a holder object for the bidded tasks view
+     * @param statusTextField The TextView that displays a task's status
+     * @param userNameTextField The TextView that displays the task requester's name
+     * @param taskTitleTextField The TextView that displays the task's name
+     * @param taskLowBidAmountTextField The TextView that displays the lowest bid
+     * @param taskMyBidAmountTextField The TextView that displays the user's bid
+     */
     public ProviderViewHolder(TextView statusTextField, TextView userNameTextField, TextView taskTitleTextField, TextView taskLowBidAmountTextField, TextView taskMyBidAmountTextField){
         this.statusTextField = statusTextField;
         this.userNameTextField = userNameTextField;
@@ -21,11 +30,26 @@ public class ProviderViewHolder {
         this.taskLowBidAmountTextField = taskLowBidAmountTextField;
         this.taskMyBidAmountTextField = taskMyBidAmountTextField;
     }
+
+    /**
+     * Constructs a holder object for the requested tasks view
+     * @param statusTextField The TextView that displays a task's status
+     * @param userNameTextField The TextView that displays the task requester's name
+     * @param taskTitleTextField The TextView that displays the task's name
+     */
     public ProviderViewHolder(TextView statusTextField, TextView userNameTextField, TextView taskTitleTextField){
         this.statusTextField = statusTextField;
         this.userNameTextField = userNameTextField;
         this.taskTitleTextField = taskTitleTextField;
     }
+
+    /**
+     * Constructs a holder object for the bidded tasks view
+     * @param statusTextField The TextView that displays a task's status
+     * @param userNameTextField The TextView that displays the task requester's name
+     * @param taskTitleTextField The TextView that displays the task's name
+     * @param taskMyBidAmountTextField The TextView that displays the user's bid
+     */
     public ProviderViewHolder(TextView statusTextField, TextView userNameTextField, TextView taskTitleTextField, TextView taskMyBidAmountTextField){
         this.statusTextField = statusTextField;
         this.userNameTextField = userNameTextField;
@@ -34,24 +58,39 @@ public class ProviderViewHolder {
     }
 
 
-    // Return the text view of statusTextField
+    /**
+     * Getter method for statusTextField
+     * @return statusTextField
+     */
     public TextView getStatusTextField() {
         return statusTextField;
     }
 
-    // Return the text view of userNameTextField
+    /**
+     * Getter method for usernameTextField
+     * @return userNameTextField
+     */
     public TextView getUserNameTextField() {
         return userNameTextField;
     }
 
-    // Return the text view of taskTitleTextField
+    /**
+     * Getter method for taskTitleTextField
+     * @return taskTitleTextField
+     */
     public TextView getTaskTitleTextField() {
         return taskTitleTextField;
     }
 
-    // Return the text view of taskLowBidAmountTextField
+    /**
+     * Getter method for taskLowBidAmountTextField
+     * @return taskLowBidAmountTextField
+     */
     public TextView getTaskLowBidAmount() { return taskLowBidAmountTextField;}
 
-    // Return the text view of taskMyBidAmountTextField
+    /**
+     * Getter method for taskMyBidAmountTextField
+     * @return taskMyBidAmountTextField
+     */
     public TextView getTaskMyBidAmount() { return taskMyBidAmountTextField;}
 }

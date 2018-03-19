@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+//TODO implement for project part 5
+
+/**
+ * A custom ArrayList class for handling Review objects.
+ */
 public class ReviewList {
     private ArrayList<Review> reviews = new ArrayList<Review>();
 

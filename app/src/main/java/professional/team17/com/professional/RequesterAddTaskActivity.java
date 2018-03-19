@@ -34,7 +34,7 @@ import java.util.Locale;
  *
  * An activity where a user in Requester mode can add a task with status "Requested".
  *
- * @author Kaixiang, Lauren
+ * @author Lauren
  * @see RequesterLayout
  */
 public class RequesterAddTaskActivity extends RequesterLayout {

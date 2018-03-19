@@ -8,7 +8,7 @@ import java.util.Date;
  * @See ReviewList
  * this class is mainly created for describe a new review object
  */
-
+//TODO implement for project part 5
 public class Review {
 
     private double score;

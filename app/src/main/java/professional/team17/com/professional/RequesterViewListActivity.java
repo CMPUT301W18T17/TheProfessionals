@@ -1,33 +1,20 @@
 package professional.team17.com.professional;
-
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+/**
+ * An activity where the requester can view all of their tasks with status requested, bidded or
+ * assigned.
+ * @author Allison, Lauren
+ * @see RequesterCustomArrayAdapter
+ * @see TaskList
+ * @see RequesterLayout
+ */
 public class RequesterViewListActivity extends RequesterLayout implements ConfirmDialog.ConfirmDialogListener{
     private RequesterCustomArrayAdapter adapterHelper;
     private ListView listView;
@@ -39,9 +26,10 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
 
-
-
-
+    /**
+     * On creation of the activity, set the layout and populate the task list.
+     * @param savedInstanceState The activity's previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +56,10 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
 
     }
 
+    /**
+     * Returns the task status which should be shown.
+     * @return The task status
+     */
     private String setRequesterViewType() {
         Bundle intent = getIntent().getExtras();
         String type = intent.getString("Status");
@@ -95,6 +87,10 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
 
     }; */
 
+    /**
+     * The onclick method for viewing a task's details. Triggered by clicking on a task's title.
+     * @param v The view object (the task's title)
+     */
     public void titleClick(View v){
         final int position = listView.getPositionForView((View) v.getParent());
         Log.i("WEWE", "onItemClick: "+position);
@@ -108,10 +104,9 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
 
 
     /**
-     *
+     * Populates the taskList depending on the desired status.
      * @param type - a string representing the status of the task being displayed
-     * @return tasklist - a list of tasks of either the tasks assigned to the user,
-     * of, tasks the user has bidded on.
+     * @return taskList - a list of tasks that the requester has created.
      */
     private TaskList createList(String type) {
         TaskList taskList = null;
@@ -130,6 +125,10 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
     }
 
 
+    /**
+     * Onclick method for the delete button; shows the deleteTaskDialog.
+     * @param v The view object (the delete button)
+     */
     public void deleteTask(View v){
         final int position = listView.getPositionForView((View) v.getParent());
         task = taskList.get(position);
@@ -137,6 +136,10 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
 
     }
 
+    /**
+     * The onclick method for the edit task button; starts RequesterEditTaskActivity,
+     * @param v The view object (the edit button).
+     */
     public void editTask(View v){
 
         final int position = listView.getPositionForView((View) v.getParent());
@@ -149,6 +152,9 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
 
     }
 
+    /**
+     * A ConfirmDialogFragment that is shown when the user clicks the delete task button.
+     */
     public void deleteTaskDialog(){
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         ConfirmDialog confirmDialog = new ConfirmDialog();
@@ -162,6 +168,11 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
         confirmDialog.show(fm, "To Done");
     }
 
+    /**
+     * If the user confirms the task deletion, this deletes the task from the taskList and also from
+     * the server.
+     * @param confirmed Whether the user confirmed the deletion or cancelled.
+     */
     @Override
     public void onFinishConfirmDialog(Boolean confirmed) {
         if (confirmed){
@@ -171,6 +182,11 @@ public class RequesterViewListActivity extends RequesterLayout implements Confir
         }
     }
 
+    /**
+     * If the user confirms the task deletion, this deletes the task from the taskList and also from
+     * the server.
+     * @param confirmed Whether the user confirmed the deletion or cancelled.
+     */
     @Override
     public void onFinishConfirmDialog(Boolean confirmed, String string) {
         if (confirmed){

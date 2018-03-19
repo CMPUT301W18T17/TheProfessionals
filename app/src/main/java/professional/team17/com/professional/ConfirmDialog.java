@@ -38,7 +38,7 @@ public class ConfirmDialog extends DialogFragment {
     private ConfirmDialogListener listener;
 
 
-    /*
+    /**
     * Implement the empty method from interface ConfirmDialogListener
     */
     public ConfirmDialog() {}

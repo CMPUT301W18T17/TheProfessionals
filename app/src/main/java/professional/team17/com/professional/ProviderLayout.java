@@ -30,6 +30,8 @@ import com.google.android.gms.common.GoogleApiAvailability;
  * @author: Lauren, Hailan, Allison
  * @see ProviderViewTask
  * @see ProviderTaskListActivity
+ * @see SearchActivity
+ * @see MapsSearchTasksActivity
  */
 public abstract class ProviderLayout extends AppCompatActivity implements ImageView.OnClickListener {
 
@@ -95,7 +97,6 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
      *
      * @param view The view object that has been clicked.
      */
-    //TODO uncomment as activities are created
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()){

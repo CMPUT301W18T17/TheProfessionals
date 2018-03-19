@@ -9,11 +9,16 @@ import android.widget.TextView;
 
 
 /**
- * Created by Zhipeng Zhang on 2018-03-05.
+ * An array adapter for RequesterViewListActivity.
  */
 
 public class RequesterCustomArrayAdapter extends ArrayAdapter<Task> {
 
+        /**
+         * Constructs a RequesterCustomArrayAdapter object.
+         * @param context The activity in which the adapter is used.
+         * @param taskArrayList A list of tasks.
+         */
         public RequesterCustomArrayAdapter(Activity context, TaskList taskArrayList) {
 
                 super(context, 0,  taskArrayList);
@@ -21,6 +26,13 @@ public class RequesterCustomArrayAdapter extends ArrayAdapter<Task> {
         }
 
 
+        /**
+         * Gets the list row view.
+         * @param position Row's position
+         * @param v The view object itself
+         * @param parent The viewgroup parent
+         * @return The row view.
+         */
         // aided by https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
         public View getView(int position, View v, ViewGroup parent) {
                 

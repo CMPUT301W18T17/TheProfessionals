@@ -10,10 +10,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsSearchLocationActivity extends FragmentActivity implements OnMapReadyCallback {
+/**
+ * An activity which lets the user select a location for their task. WIP
+ * @author Hailan
+ * @see MapsActivity
+ */
+public class
+MapsSearchLocationActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
+    /**
+     * On creation of the activity, set the layout and get the map fragment.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

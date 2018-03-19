@@ -10,7 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 /**
- * Created by ag on 2018-02-28.
+ * An array adapter for SearchActivity and ProviderTaskListActivity.
+ * @author zhipeng
+ * @see ProviderTaskListActivity
+ * @see SearchActivity
+ * @see TaskList
  */
 
 public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
@@ -18,7 +22,12 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
         private SharedPreferences sharedPreferences;
         private String username;
 
-        public ProviderCustomArrayAdapter(Activity context, TaskList taskArrayList) {
+    /**
+     * Constructs a ProviderCustomArrayAdapter object.
+     * @param context The activity where the adapter is used
+     * @param taskArrayList The list of tasks
+     */
+    public ProviderCustomArrayAdapter(Activity context, TaskList taskArrayList) {
 
             super(context, 0,  taskArrayList);
             sharedPreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -27,6 +36,13 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
         }
 
 
+    /**
+     * Gets the list's row view
+     * @param position The position of the row view
+     * @param v The view object
+     * @param parent The viewgroup parent
+     * @return The row view
+     */
         // aided by https://github.com/codepath/android_guides/wiki/Using-an-ArrayAdapter-with-ListView
         public View getView(int position, View v, ViewGroup parent) {
 

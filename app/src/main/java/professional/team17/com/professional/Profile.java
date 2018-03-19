@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * This is the entity class for a bid object
+ * This is the entity class for a profile object
  *
  *
  * @author Allison
