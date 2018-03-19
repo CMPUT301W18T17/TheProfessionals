@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class ReviewList implements Serializable {
+public class ReviewList {
     private ArrayList<Review> reviews = new ArrayList<Review>();
 
     public ReviewList(){
