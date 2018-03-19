@@ -1,12 +1,17 @@
 package professional.team17.com.professional;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -15,13 +20,28 @@ import java.util.ArrayList;
 
 public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCase2<RequesterAddTaskActivity> {
     private Solo solo;
+    private MockTask mockTask;
+    private ElasticSearchController elasticSearchController;
+    private Profile profile;
+    private Task task;
+    private TaskList taskList;
 
     public RequesterAddTaskActivityTest() {
         super(RequesterAddTaskActivity.class);
     }
 
     public void setUp() throws Exception{
+        profile = new Profile("zhipeng", "TestUser1", "abc@abc.com", "110");
+        elasticSearchController = new ElasticSearchController();
+        elasticSearchController.addProfile(profile);
+
         solo = new Solo(getInstrumentation(), getActivity());
+        Context context = getInstrumentation().getTargetContext();
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("username", profile.getUserName()); // Storing string
+        editor.commit();
     }
 
     public void testStart() throws Exception {
@@ -40,11 +60,24 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
         // Leave For now
         solo.clickOnButton("Add");
 
+        ElasticSearchController new_elasticSearchController = new ElasticSearchController();
+        taskList = new_elasticSearchController.getTasksUsername(profile.getUserName());
+
         // Check
         solo.clickOnView(solo.getView(R.id.requestedTasksRequesterButton));
         solo.clickOnView(solo.getView(R.id.requester_requested_title));
         assertTrue(solo.waitForText("Task Name 1"));
         assertTrue(solo.waitForText("Requested"));
         assertTrue(solo.waitForText("Task Description"));
+        solo.clickOnView(solo.getView(R.id.requestedTasksRequesterButton));
+        solo.clickOnView(solo.getView(R.id.deleteTaskButton));
+        solo.clickOnText("Yes");
     }
+
+    @Override
+    public void tearDown() throws Exception {
+        elasticSearchController.deleteProfile(profile);
+        solo.finishOpenedActivities();
+    }
+
 }
