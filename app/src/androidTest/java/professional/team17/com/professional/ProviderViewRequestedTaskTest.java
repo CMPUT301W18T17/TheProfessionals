@@ -29,11 +29,11 @@ public class ProviderViewRequestedTaskTest extends ActivityInstrumentationTestCa
     }
 
     public void setUp() throws Exception{
-        mockTask = new MockTask("zhipeng", "Test Name 1", "Task Description", "Task Location", "19/03/2018");
+        mockTask = new MockTask("TestUser", "Test Name 1", "Task Description", "Task Location", "19/03/2018");
         elasticSearchController_1 = new ElasticSearchController();
         String ID = elasticSearchController_1.addTasks(mockTask);
         mockTask.setId(ID);
-        profile = new Profile("zhipeng", "TestUser1", "abc@abc.com", "110");
+        profile = new Profile("Tester", "TestUser1", "abc@abc.com", "110");
         elasticSearchController_2 = new ElasticSearchController();
         elasticSearchController_2.addProfile(profile);
 
@@ -59,7 +59,7 @@ public class ProviderViewRequestedTaskTest extends ActivityInstrumentationTestCa
 
         assertTrue(solo.waitForText("Test Name 1"));
         assertTrue(solo.waitForText("Requested"));
-        assertTrue(solo.waitForText("zhipeng"));
+        assertTrue(solo.waitForText("TestUser"));
     }
 
 
