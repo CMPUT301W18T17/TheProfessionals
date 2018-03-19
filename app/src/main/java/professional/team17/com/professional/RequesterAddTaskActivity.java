@@ -119,7 +119,7 @@ public class RequesterAddTaskActivity extends RequesterLayout {
                     Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
                     toast.show();
                 }
-                else if (description.length() > 30) {
+                else if (description.length() > 300) {
                     /* if the description is too long */
                     message = "Description cannot be longer than 300 characters.";
                     Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);

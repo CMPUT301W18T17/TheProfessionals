@@ -17,6 +17,9 @@ import com.robotium.solo.Solo;
 
 public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<MyProfileViewActivity>{
     private Solo solo;
+    private ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private Profile testProfile = new Profile("tester","TestUser",
+            "tester@ualberta.ca","123-456-7890");
 
     public MyProfileViewActivityTest() {
         super(MyProfileViewActivity.class);
@@ -24,15 +27,14 @@ public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<
 
     public void setUp() throws Exception{
         solo = new Solo(getInstrumentation(), getActivity());
-//        Context context = getInstrumentation().getTargetContext();
-//        final SharedPreferences.Editor prefEdit = PreferenceManager.getDefaultSharedPreferences(context).edit();
-//        prefEdit.putString("username", "hailan333");
-//        prefEdit.commit();
+
+        elasticSearchController.addProfile(testProfile);
+
         Context context = getInstrumentation().getTargetContext();
         SharedPreferences pref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
-        editor.putString("username", "hailan333"); // Storing string
+        editor.putString("username", "tester"); // Storing string
         editor.commit();
     }
 
@@ -42,6 +44,7 @@ public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<
 
     @Override
     public void tearDown() throws Exception {
+        elasticSearchController.deleteProfile(testProfile);
         solo.finishOpenedActivities();
     }
 
