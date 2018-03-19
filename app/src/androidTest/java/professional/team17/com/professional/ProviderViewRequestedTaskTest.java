@@ -1,6 +1,8 @@
 package professional.team17.com.professional;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
@@ -14,51 +16,57 @@ import java.util.ArrayList;
  * Created by Zhipeng Zhang on 2018/3/16.
  */
 
-public class ProviderViewRequestedTaskTest extends ActivityInstrumentationTestCase2<LogInActivity> {
+public class ProviderViewRequestedTaskTest extends ActivityInstrumentationTestCase2<SearchActivity> {
     private Solo solo;
     private String taskDescription;
+    private MockTask mockTask;
+    private Profile profile;
+    private ElasticSearchController elasticSearchController_1, elasticSearchController_2;
+    private SharedPreferences sharedPreferences;
 
     public ProviderViewRequestedTaskTest() {
-        super(LogInActivity.class);
+        super(SearchActivity.class);
     }
 
     public void setUp() throws Exception{
+        mockTask = new MockTask("zhipeng", "Test Name 1", "Task Description", "Task Location", "19/03/2018");
+        elasticSearchController_1 = new ElasticSearchController();
+        String ID = elasticSearchController_1.addTasks(mockTask);
+        mockTask.setId(ID);
+        profile = new Profile("zhipeng", "TestUser1", "abc@abc.com", "110");
+        elasticSearchController_2 = new ElasticSearchController();
+        elasticSearchController_2.addProfile(profile);
+
         solo = new Solo(getInstrumentation(), getActivity());
+
+        Context context = getInstrumentation().getTargetContext();
+        sharedPreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("username", "TestUser1"); // Storing string
+        editor.commit();
+
     }
 
     public void testStart() throws Exception {
         Activity activity = getActivity();
     }
 
-    public void testRequesterAddTaskActivity(){
-
-        taskDescription = "asdzxc";
-
+    public void testProviderViewRequestedTaskActivity(){
         // Start
-        solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
-        solo.enterText((EditText) solo.getView(R.id.usernameBox), "zhipeng");
-        solo.clickOnButton("Sign In");
-        solo.clickOnView(solo.getView(R.id.switchViewProviderButton));
-        solo.clickOnView(solo.getView(R.id.addTaskRequesterButton));
-        solo.enterText((EditText) solo.getView(R.id.TaskNameField), "Task Name 1");
-        solo.enterText((EditText) solo.getView(R.id.taskDescriptionField), taskDescription);
-        solo.clickOnView(solo.getView(R.id.calendarButton));
-        solo.clickOnText("OK");
-        // For photo and map
-        // Leave For now
-        solo.clickOnButton("Add");
+        solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
+        solo.clickOnView(solo.getView(R.id.searchTasksButton));
 
-
-        // Check
-        solo.finishOpenedActivities();
-        SystemClock.sleep(5000);
-        this.launchActivity("professional.team17.com.professional", LogInActivity.class, null);
-        solo = new Solo(getInstrumentation(), getActivity());
-        solo.enterText((EditText) solo.getView(R.id.usernameBox), "hailan333");
-        solo.clickOnButton("Sign In");
-
-        assertTrue(solo.waitForText("Task Name 1"));
+        assertTrue(solo.waitForText("Test Name 1"));
         assertTrue(solo.waitForText("Requested"));
         assertTrue(solo.waitForText("zhipeng"));
+    }
+
+
+    @Override
+    public void tearDown() throws Exception {
+        elasticSearchController_2.deleteTasks(mockTask);
+        elasticSearchController_2.deleteProfile(profile);
+        solo.finishOpenedActivities();
     }
 }
