@@ -77,8 +77,8 @@
         </activity>
         <activity
             android:name=".MapsSearchLocationActivity"
-            android:label="@string/title_activity_maps_search_location"
-            android:theme="@android:style/Theme.Dialog"/>
+            android:label="@string/title_activity_maps2"
+            android:theme="@android:style/Theme.Dialog" ></activity>
     </application>
 
 </manifest>

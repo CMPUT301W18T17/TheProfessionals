@@ -25,5 +25,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyCallback {
 // Calculate tasks within 4km
+    public void setContentViewFunction(){
+        setContentView(R.layout.activity_maps); // we might not need activity_maps_search_tasks.xml
+    }
+    public void MapsSearchEvent(){
 
+    }
 }
