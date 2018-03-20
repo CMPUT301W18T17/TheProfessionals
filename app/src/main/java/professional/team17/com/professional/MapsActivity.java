@@ -15,23 +15,21 @@ import android.content.pm.PackageManager;
 
 import android.location.Location;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -61,10 +59,10 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
         setContentViewFunction();
         getLocationPermissions();
-
     }
 
     public abstract void setContentViewFunction();
+    public abstract void MapsSearchEvent();
 
     protected void getLocationPermissions() {
         Log.d(TAG, "getLocationPermissions");
@@ -110,6 +108,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
             }
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
+            MapsSearchEvent();
         }
     }
 
@@ -164,7 +163,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                                 Toast.makeText(MapsActivity.this, "Please turn on Location for your phone!", Toast.LENGTH_SHORT).show();
                             } else{
                                 currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                                moveCamera(currentLatLng);
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng,11));
                                 //mMap.addMarker(new MarkerOptions().position(currentLatLng).title("YOU"));
                             }
                         } else {
@@ -178,26 +177,18 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         }
     }
 
-    protected void moveCamera(LatLng latLng){
+    protected void moveCamera(LatLng latLng, String tag){
         Log.d(TAG,"moveCamera: lat -> " + latLng.latitude + ", lng" + latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,11));
+
+        markSpot(latLng, tag);
     }
 
-//    //implement method - 1
-//    @Override
-//    public void onConnected(@Nullable Bundle bundle) {
-//
-//    }
-//
-//    //implement method - 2
-//    @Override
-//    public void onConnectionSuspended(int i) {
-//
-//    }
-//
-//    //implement method - 3
-//    @Override
-//    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-//
-//    }
+    protected void markSpot(LatLng latLng, String tag){
+        MarkerOptions markerOptions = new MarkerOptions()
+                .position(latLng)
+                .title(tag)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+        mMap.addMarker(markerOptions);
+    }
 }
