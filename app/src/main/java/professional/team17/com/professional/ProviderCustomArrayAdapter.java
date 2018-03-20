@@ -66,7 +66,7 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
                 TextView statusTextField = (TextView) v.findViewById(R.id.provider_requested_status);
                 TextView userNameTextField = (TextView) v.findViewById(R.id.provider_requested_userName);
                 TextView taskTitleTextField = (TextView) v.findViewById(R.id.provider_requested_title);
-                Log.i("#################################################", "Requested");
+                Log.i("#######################", "Requested");
 
                 providerViewHolder = new ProviderViewHolder(statusTextField, userNameTextField, taskTitleTextField);
                 v.setTag(providerViewHolder);
