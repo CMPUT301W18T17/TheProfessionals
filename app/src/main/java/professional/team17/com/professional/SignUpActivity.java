@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
@@ -37,18 +38,42 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText emailBox;
     private EditText phoneNumberBox;
     private TextView errorBox;
+    private ImageButton addNewPhotoButton;
     private ElasticSearchController elasticSearchController;
+    private String infor;
+    private String userName;
+    private String name;
+    private String eMail;
+    private String phoneNumber;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        // Get the Intent that started this activity
+        Intent intent = getIntent();
+
+        // Get return information
+        userName = intent.getStringExtra("userName");
+        name = intent.getStringExtra("name");
+        eMail = intent.getStringExtra("eMail");
+        phoneNumber = intent.getStringExtra("phoneNumber");
+
         usernameBox = (EditText) findViewById(R.id.usernameBox);
         nameBox = (EditText) findViewById(R.id.fullNameBox);
         emailBox = (EditText) findViewById(R.id.emailBox);
         phoneNumberBox = (EditText) findViewById(R.id.phoneNumberBox);
         errorBox = (TextView) findViewById(R.id.errorText);
+        addNewPhotoButton = (ImageButton) findViewById(R.id.add_new_photo);
         elasticSearchController = new ElasticSearchController();
+
+        // Set text back
+        setter(usernameBox, userName);
+        setter(nameBox, name);
+        setter(emailBox, eMail);
+        setter(phoneNumberBox, phoneNumber);
     }
 
     /**
@@ -102,14 +127,44 @@ public class SignUpActivity extends AppCompatActivity {
         //set profile name as global variable?
 
     /**
+     * Moves the user to add photo activity
+     */
+    public void photoPicker(View view){
+        changeActivity(PhotoPicker.class);
+    }
+
+    /**
      * Moves the user to a new activity
      */
-    private void changeActivity(Class activity){
+    private void changeActivity(Class activity) {
         //can change navigation, this is just a stand in
         Intent intent = new Intent(this, activity);
+        // Put extra
+
+        // User Name
+        infor = usernameBox.getText().toString();
+        intent.putExtra("userName", infor);
+
+        // Name
+        infor = nameBox.getText().toString();
+        intent.putExtra("name", infor);
+
+        // E-mail
+        infor = emailBox.getText().toString();
+        intent.putExtra("eMail", infor);
+
+        // PhoneNumber
+        infor = phoneNumberBox.getText().toString();
+        intent.putExtra("phoneNumber", infor);
 
         startActivity(intent);
         finish();
+    }
+
+    private void setter(EditText name, String information){
+        if (information != null){
+            name.setText(information);
+        }
     }
 }
 

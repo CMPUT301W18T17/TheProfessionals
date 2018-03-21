@@ -109,4 +109,17 @@
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toStartOf="@+id/button6"
         app:layout_constraintTop_toBottomOf="@+id/phoneNumberBox" />
+
+    <ImageButton
+        android:id="@+id/add_new_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="20dp"
+        android:onClick="photoPicker"
+        app:layout_constraintEnd_toEndOf="@+id/errorText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumberBox"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
 </android.support.constraint.ConstraintLayout>
