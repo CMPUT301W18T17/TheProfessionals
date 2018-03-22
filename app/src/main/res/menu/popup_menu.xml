@@ -8,4 +8,7 @@
     <item
         android:id="@+id/viewMyProfile"
         android:title="@string/PV_myProfile" />
+    <item
+        android:id="@+id/myNotifications"
+        android:title="My Notifications" />
 </menu>

@@ -165,6 +165,9 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                 } else if (menuItem.getTitle().equals("Edit My Profile")){
                     Intent intent = new Intent(getApplicationContext(), EditMyProfileActivity.class);
                     startActivity(intent);
+                } else if (menuItem.getTitle().equals("My Notifications")){
+                    Intent intent = new Intent(getApplicationContext(), NotificationActivity.class);
+                    startActivity(intent);
                 }
                 return true;
             }
