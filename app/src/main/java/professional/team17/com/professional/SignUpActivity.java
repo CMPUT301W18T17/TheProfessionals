@@ -45,6 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
     private String name;
     private String eMail;
     private String phoneNumber;
+    private String path;
 
 
     @Override
@@ -60,6 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
         name = intent.getStringExtra("name");
         eMail = intent.getStringExtra("eMail");
         phoneNumber = intent.getStringExtra("phoneNumber");
+        path = intent.getStringExtra("photoPath");
 
         usernameBox = (EditText) findViewById(R.id.usernameBox);
         nameBox = (EditText) findViewById(R.id.fullNameBox);
@@ -153,9 +155,12 @@ public class SignUpActivity extends AppCompatActivity {
         infor = emailBox.getText().toString();
         intent.putExtra("eMail", infor);
 
-        // PhoneNumber
+        // Phone Number
         infor = phoneNumberBox.getText().toString();
         intent.putExtra("phoneNumber", infor);
+
+        // Photo path
+        intent.putExtra("photoPath", path);
 
         startActivity(intent);
         finish();

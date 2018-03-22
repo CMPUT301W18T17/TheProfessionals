@@ -66,7 +66,6 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
                 TextView statusTextField = (TextView) v.findViewById(R.id.provider_requested_status);
                 TextView userNameTextField = (TextView) v.findViewById(R.id.provider_requested_userName);
                 TextView taskTitleTextField = (TextView) v.findViewById(R.id.provider_requested_title);
-                Log.i("#######################", "Requested");
 
                 providerViewHolder = new ProviderViewHolder(statusTextField, userNameTextField, taskTitleTextField);
                 v.setTag(providerViewHolder);
@@ -87,7 +86,6 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
                 v.setTag(providerViewHolder);
 
                 providerViewHolder = (ProviderViewHolder) v.getTag();
-                Log.i("-----------------------", "Bidded");
             }
 
             // For assigned tasks
@@ -110,14 +108,12 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
                 providerViewHolder.getStatusTextField().setText(task.getStatus());
                 providerViewHolder.getUserNameTextField().setText(task.getProfileName());
                 providerViewHolder.getTaskTitleTextField().setText(task.getName());
-                Log.i("#######################", "++++++++Requested+++++++");
             }
             else if (task.isBidded()){
                 providerViewHolder.getStatusTextField().setText(task.getStatus());
                 providerViewHolder.getUserNameTextField().setText(task.getProfileName());
                 providerViewHolder.getTaskTitleTextField().setText(task.getName());
                 providerViewHolder.getTaskLowBidAmount().setText(task.getBids().getLowest().getAmountAsString());
-                Log.i("-----------------------", "**********Bidded**********");
                 if (task.getBids().userBidded(username)){
                     providerViewHolder.getTaskMyBidAmount().setText(task.getBids().getBid(username).getAmountAsString());
                 }
