@@ -81,7 +81,8 @@
             android:name=".MapsSearchLocationActivity"
             android:label="@string/title_activity_maps2"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".PhotoPicker"></activity>
+        <activity android:name=".PhotoPicker" />
+        <activity android:name=".NotificationActivity"></activity>
     </application>
 
 </manifest>
