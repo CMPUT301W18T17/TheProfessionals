@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class PhotoPicker extends AppCompatActivity {
     private String userName;
@@ -25,13 +26,16 @@ public class PhotoPicker extends AppCompatActivity {
     private String filePath;
     private String returnPath;
     private String oldPath;
+    private TextView viewError;
+    private int size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_picker);
 
-        viewPhoto = (ImageView) findViewById(R.id.photoView);
+        viewPhoto = findViewById(R.id.photoView);
+        viewError = findViewById(R.id.errorBox);
 
         // Get those information
         Intent intent = getIntent();
@@ -44,7 +48,7 @@ public class PhotoPicker extends AppCompatActivity {
             returnPath = filePath;
             oldPath = filePath;
             oldPhoto = new Photo(filePath);
-            viewPhoto.setImageDrawable(oldPhoto.photoToDrawable());
+            viewPhoto.setImageDrawable(oldPhoto.pathToDrawable());
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR)
@@ -97,7 +101,7 @@ public class PhotoPicker extends AppCompatActivity {
 
 
                     returnPath = photo.getPath();
-                    viewPhoto.setImageDrawable(photo.photoToDrawable());
+                    viewPhoto.setImageDrawable(photo.pathToDrawable());
                 }
                 break;
         }
@@ -106,17 +110,26 @@ public class PhotoPicker extends AppCompatActivity {
     public void seted(View view){
 
         if (returnPath != null) {
-            Intent intent = new Intent(this, SignUpActivity.class);
+            photo = new Photo(returnPath);
+            size = photo.pathGetSize();
+            if (size <= 65536) {
+                Intent intent = new Intent(this, SignUpActivity.class);
 
-            putExtra(intent);
+                putExtra(intent);
 
-            // Photo Path
-            adder(intent, "photoPath", returnPath);
+                // Photo Path
+                adder(intent, "photoPath", returnPath);
 
-            startActivity(intent);
-            finish();
+                startActivity(intent);
+                finish();
+            }
+            else{
+                viewError.setText("This photo is too big please pick a smaller one.");
+            }
         }
-        else{}
+        else{
+            viewError.setText("Please pick a photo first.");
+        }
     }
 
     private void adder(Intent intent, String name, String infor){

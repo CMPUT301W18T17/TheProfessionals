@@ -15,6 +15,7 @@ public class Photo {
     private String path;
     private Bitmap bitmap;
     private Drawable drawable;
+    private int size;
 
     public Photo(String path){
         this.path = path;
@@ -34,12 +35,21 @@ public class Photo {
         return drawable;
     }
 
-    public Drawable photoToDrawable(){
-        Log.i("***InPhotoPath***","############################################################################################################"+path);
+    public Drawable pathToDrawable(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        Log.i("***InPhotoPath***","############################################################################################################"+path);
         drawable = new BitmapDrawable(bitmap);
         return drawable;
+    }
+
+    public int pathGetSize(){
+        bitmap = BitmapFactory.decodeFile(this.path);
+        size = bitmap.getByteCount();
+        return size;
+    }
+
+    public int bitMapGetSize(){
+        size = bitmap.getByteCount();
+        return size;
     }
 
     public String getPath(){

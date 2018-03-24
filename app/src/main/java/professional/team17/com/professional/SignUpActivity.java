@@ -11,6 +11,7 @@ package professional.team17.com.professional;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,6 +47,8 @@ public class SignUpActivity extends AppCompatActivity {
     private String eMail;
     private String phoneNumber;
     private String path;
+    private Photo photo;
+    private Bitmap bitmap;
 
 
     @Override
@@ -68,7 +71,7 @@ public class SignUpActivity extends AppCompatActivity {
         emailBox = (EditText) findViewById(R.id.emailBox);
         phoneNumberBox = (EditText) findViewById(R.id.phoneNumberBox);
         errorBox = (TextView) findViewById(R.id.errorText);
-        addNewPhotoButton = (ImageButton) findViewById(R.id.add_new_photo);
+        addNewPhotoButton = findViewById(R.id.add_new_photo);
         elasticSearchController = new ElasticSearchController();
 
         // Set text back
@@ -109,8 +112,13 @@ public class SignUpActivity extends AppCompatActivity {
             errorBox.setText("Username must be at least 4 characters");
         } else if (elasticSearchController.profileExists(username) == true) {
             errorBox.setText("Username is already taken");
-        } else {
-            Profile profile = new Profile(name, username, email, phoneNumber);
+        } else if(path == null){
+            errorBox.setText("Please pick up a profile photo");
+        }else {
+            photo = new Photo(path);
+            bitmap = photo.toBitMap();
+
+            Profile profile = new Profile(name, username, email, phoneNumber, bitmap);
 
             if (!(elasticSearchController.addProfile(profile))) {
                 errorBox.setText("Something went wrong! We are unable to create profile");

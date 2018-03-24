@@ -9,6 +9,7 @@
  */
 package professional.team17.com.professional;
 
+import android.graphics.Bitmap;
 import android.provider.ContactsContract;
 
 import java.io.Serializable;
@@ -33,6 +34,7 @@ public class Profile implements Serializable {
     private ReviewList reviewList;
     private ArrayList<String> blackList;
      private ArrayList<String> blackListedBy;
+     private Bitmap photo;
 
     /**
      *
@@ -41,7 +43,7 @@ public class Profile implements Serializable {
      * @param email  - the string email of the user
      * @param phoneNumber - the string phone number of the user
      */
-    public Profile(String name, String userName, String email, String phoneNumber) {
+    public Profile(String name, String userName, String email, String phoneNumber, Bitmap photo) {
         this.name = name;
         this.userName = userName;
         this.email = email;
@@ -49,6 +51,7 @@ public class Profile implements Serializable {
        this.reviewList = new ReviewList();
        this.blackList = new ArrayList<String>();
        this.blackListedBy = new ArrayList<String>();
+       this.photo = photo;
     }
 
     /**
@@ -175,6 +178,14 @@ public class Profile implements Serializable {
      */
     public void removeFromBlackList(Profile profile){
         blackList.remove(profile);
+    }
+
+    public void addPhoto(Bitmap bitmap){
+        this.photo = photo;
+    }
+
+    public Bitmap getPhoto(){
+        return photo;
     }
 
 

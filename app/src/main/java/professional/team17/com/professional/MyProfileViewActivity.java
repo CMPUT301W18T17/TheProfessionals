@@ -27,7 +27,7 @@ import android.widget.ImageView;
  * @see EditMyProfileActivity
  */
 public class MyProfileViewActivity extends ProfileViewActivity {
-    private ImageButton profilePic;
+    private ImageView profilePic;
     /**
      * Upon selecting UserMenuButton --> "My Profile", info is displayed until doneButton is selected
      * User can edit their info by clicking on their profile picture (goes to EditMyProfileActivity)
@@ -47,7 +47,7 @@ public class MyProfileViewActivity extends ProfileViewActivity {
         currentMode.setText("My Profile");
 
         /* profilePic and doneButton selection treatments */
-        profilePic = (ImageButton) findViewById(R.id.profilePicButton);
+        profilePic = (ImageView) findViewById(R.id.profilePicButton);
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

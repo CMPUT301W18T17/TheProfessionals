@@ -10,11 +10,14 @@
 package professional.team17.com.professional;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -37,7 +40,9 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
     protected ReviewsAdaptor reviewsAdaptor;
     protected ListView listView;
     protected RatingBar ratingBar;
-    protected ImageButton profilePic;
+    protected ImageView profilePic;
+    protected Bitmap bitmap;
+    protected Photo photo;
 
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
@@ -52,7 +57,6 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
         currentMode = (TextView) findViewById(R.id.currentModeTV);
         doneButton = (Button) findViewById(R.id.doneButton);
         listView = (ListView) findViewById(R.id.listViewID);
-
     }
 
     /**
@@ -66,6 +70,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
         email = findViewById(R.id.emailTV);
         phoneNumber = findViewById(R.id.phoneTV);
         ratingBar = findViewById(R.id.rating2);
+        profilePic = findViewById(R.id.profilePicButton);
 
         Profile userProfile = elasticSearchController.getProfile(aUserName);
         username.setText(aUserName);
@@ -74,6 +79,10 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
         phoneNumber.setText(userProfile.getPhoneNumber());
         ratingBar.setRating((float)(userProfile.getReviewList().getAvg()));
         reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, userProfile.getReviewList());
+        // Photo Part
+        bitmap = userProfile.getPhoto();
+        photo = new Photo(bitmap);
+        profilePic.setImageDrawable(photo.bitMappToDrawable());
     }
 
 
