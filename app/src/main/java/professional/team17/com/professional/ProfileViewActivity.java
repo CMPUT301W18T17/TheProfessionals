@@ -80,9 +80,9 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
         ratingBar.setRating((float)(userProfile.getReviewList().getAvg()));
         reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, userProfile.getReviewList());
         // Photo Part
-        bitmap = userProfile.getPhoto();
-        photo = new Photo(bitmap);
-        profilePic.setImageDrawable(photo.bitMappToDrawable());
+        //bitmap = userProfile.getPhoto();
+        //photo = new Photo(bitmap);
+        //profilePic.setImageDrawable(photo.bitMappToDrawable());
     }
 
 
