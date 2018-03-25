@@ -10,20 +10,12 @@
 
 package professional.team17.com.professional;
 
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
-import com.google.android.gms.maps.MapView;
-
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -37,79 +29,17 @@ import java.util.Locale;
  * @see RequesterViewListActivity
  * @see RequesterAddTaskActivity
  */
-public class RequesterEditTaskActivity extends RequesterLayout {
-    /* Layout objects */
-    private EditText nameField;
-    private EditText descriptionField;
-    private EditText locationField;
-    private TextView textualDateView;
-    private ImageButton addPhotoButton;
-    private ImageButton selectDateButton;
-    private MapView mapView;
-    private Button submitButton;
-    /* other variables */
-    private Task task;
+public class RequesterEditTaskActivity extends RequesterTaskActivity {
     ElasticSearchController elasticSearchController = new ElasticSearchController();
-    private String dateString;
-    private String locationString;
     private String ID;
     private String title;
     private String description;
 
-
-    /**
-     * On creation of the activity, set all view objects and onClickListeners.
-     * @param savedInstanceState The activity's previously saved state.
-     */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requester_edit_task);
-
-        /* Set activity title */
+    public void setTitle(){
         this.setActivityTitle("Edit Task");
+    }
 
-        /* Set all view objects */
-        nameField = (EditText) findViewById(R.id.TaskNameField);
-        descriptionField = (EditText) findViewById(R.id.taskDescriptionField);
-        locationField = (EditText) findViewById(R.id.textualAddressField);
-        textualDateView = (TextView) findViewById(R.id.textualDateView);
-        addPhotoButton = (ImageButton) findViewById(R.id.addPhotoButton);
-        selectDateButton = (ImageButton) findViewById(R.id.calendarButton);
-        mapView = (MapView) findViewById(R.id.mapView);
-        submitButton = (Button) findViewById(R.id.submitButton);
-
-        /* Get task ID from previous activity, then get task from server */
-        try {
-            getBundle();
-        } catch (Exception e) {
-            Log.i("Bundle", "Bundle was empty (no task ID was passed to EditTask)");
-        }
-        try {
-            getFromServer(ID);
-        } catch (Exception e) {
-            Log.i("Server", "Server failed to return a task for that ID");
-        }
-
-
-        /* Set all onClickListeners */
-        addPhotoButton.setOnClickListener(new ImageButton.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO implement photo selection
-            }
-        });
-
-        selectDateButton.setOnClickListener(new ImageButton.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /* Show the DatePickerDialog */
-                displayDatePicker();
-                /* Get the formatted date */
-                dateString = (String) textualDateView.getText();
-            }
-        });
-
+    public void setSubmitButtonOnClickListener(){
         submitButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,16 +75,25 @@ public class RequesterEditTaskActivity extends RequesterLayout {
                 endActivity();
             }
         });
+
+        getTask();
     }
 
 
-    /**
-     * Displays the DatePickerDialog fragment, allowing the user to select a date.
-     */
-    private void displayDatePicker(){
-        DialogFragment dateFragment = new DatePickerFragment();
-        dateFragment.show(getFragmentManager(), "datePicker");
+    private void getTask(){
+        /* Get task ID from previous activity, then get task from server */
+        try {
+            getBundle();
+        } catch (Exception e) {
+            Log.i("Bundle", "Bundle was empty (no task ID was passed to EditTask)");
+        }
+        try {
+            getFromServer(ID);
+        } catch (Exception e) {
+            Log.i("Server", "Server failed to return a task for that ID");
+        }
     }
+
 
     /**
      * Gets the task ID from the previous activity. Throws an exception if the ID is not found.
@@ -192,11 +131,12 @@ public class RequesterEditTaskActivity extends RequesterLayout {
      * @param title Task title
      * @param description Task description
      */
-    private void addToServer(String title, String description){
+    public void addToServer(String title, String description){
         task.setName(title);
         task.setDate(parseDate(dateString));
         task.setDescription(description);
         task.setLocation(locationString);
+        task.setLatLng(latLng);
 
         elasticSearchController.updateTasks(task);
     }
