@@ -63,7 +63,6 @@ public class ElasticSearchController {
     private TaskList getTaskList (String search){
         TaskList tasklist = null;
         JsonParser jsonParser = new JsonParser();
-        Log.i("WRWR", "getTaskList: "+search);
         JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
         ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
         getTasks.execute(jsonObject.toString());
@@ -105,6 +104,32 @@ public class ElasticSearchController {
                 "\"must\": [ " +
                 "{\"match\": {\"bids.name\": \"" + username + "\"}}," +
                 "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
+        return getTaskList(search);
+    }
+
+    /**
+     *
+     * @param lat - the lat of the user
+     * @param lon - the lon of the user
+     * @return - the tasklist of all tasks within the #### range of the user
+     */
+    public TaskList getMapTasks(Float lat, Float lon) {
+        //TODO = calculate the range of lat/lon based on the 40 km distance using paramter belows
+        float latMin = 53;
+        float latMax =54;
+        float lonMin = -115;
+        float lonMax = -112;
+        String search =
+                "{\"query\":{\"bool\":{\"must\":"+
+                        "[{\"range\":{\"latitude\""+
+                        ":{\"gte\":"+latMin+
+                        ",\"lte\":" +latMax+
+                        "}}},{\"range\":{\"longitude\":"+
+                        "{\"gte\":"+lonMin+
+                        ",\"lte\":"+lonMax+
+                        "}}}],\"should\":[{\"match\":"+
+                        "{\"status\":\"Requested\"}},"+
+                        "{\"match\":{\"status\":\"Bidded\"}}]}}}";
         return getTaskList(search);
     }
 
