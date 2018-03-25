@@ -1,12 +1,17 @@
 package professional.team17.com.professional;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,11 +31,19 @@ import java.util.List;
 
 public class MapsSearchLocationActivity extends MapsActivity implements OnMapReadyCallback {
     private static final String TAG = "MapsSLocationActivity";
+    private Button addLocation;
     private EditText mSearchAddress;
-    private Marker taskLocationMarker;
+    private LatLng finalLatLng;
+    private String finalAddress;
+
+
+    public void setContentViewFunction(){
+        setContentView(R.layout.activity_maps_search_location);
+    }
 
     public void MapsSearchEvent(){
         mSearchAddress = (EditText) findViewById(R.id.addressInput);
+        addLocation = (Button) findViewById(R.id.addLocation);
 
         Log.d(TAG, "MapsSearchEvent()");
 
@@ -41,8 +54,22 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
                     mMap.clear();
                     geoLocate();
+                    hideKeyBoard();
                 }
                 return false;
+            }
+        });
+
+        addLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("taskLatLng", finalLatLng);
+                intent.putExtras(bundle);
+                intent.putExtra("taskAddress", finalAddress);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
@@ -62,13 +89,20 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
         if(listOfAddresses.size()>0){
             Address address = listOfAddresses.get(0);
             Log.d(TAG, "geoLocate: location found: " + address.toString());
-            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), address.getAddressLine(0));
-
+            finalLatLng= new LatLng(address.getLatitude(), address.getLongitude());
+            finalAddress = address.getAddressLine(0);
+            moveCamera(finalLatLng, finalAddress);
         }
     }
 
-    public void setContentViewFunction(){
-        setContentView(R.layout.activity_maps_search_location);
+    public void hideKeyBoard(){
+        InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(this.INPUT_METHOD_SERVICE);
+        View view = this.getCurrentFocus();
+        if (view == null){
+            view = new View(this);
+        }
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
     }
+
 
 }

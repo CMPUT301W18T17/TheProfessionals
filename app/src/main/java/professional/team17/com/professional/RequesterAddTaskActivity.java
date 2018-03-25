@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,6 +51,7 @@ public class RequesterAddTaskActivity extends RequesterLayout {
     private Task task;
     private String dateString;
     private String locationString;
+    private LatLng latLng;
     private String message;
 
     /**
@@ -98,7 +100,7 @@ public class RequesterAddTaskActivity extends RequesterLayout {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RequesterAddTaskActivity.this, MapsSearchLocationActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -165,7 +167,7 @@ public class RequesterAddTaskActivity extends RequesterLayout {
     private void addToServer(String title, String description){
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String username = pref.getString("username", "error");
-        task = new Task(username, title, description, locationString, dateString);
+        task = new Task(username, title, description, locationString, dateString, latLng);
         task.setRequested();
         ElasticSearchController elasticSearchController = new ElasticSearchController();
         elasticSearchController.addTasks(task);
@@ -203,6 +205,21 @@ public class RequesterAddTaskActivity extends RequesterLayout {
         }
         return input;
     }
+
+    /**
+     * Get data from MapsSearchLocationActivity.java
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                latLng = intent.getParcelableExtra("taskLatLng");
+                locationField.setText(intent.getStringExtra("taskAddress"));
+            }
+        }
+    }
+
     /**
      * Saves the task locally for offline functionality.
      */

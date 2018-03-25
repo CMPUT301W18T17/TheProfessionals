@@ -12,6 +12,9 @@ package professional.team17.com.professional;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,10 +28,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyCallback {
 // Calculate tasks within 4km
+    private ImageView currentLocationButton;
     public void setContentViewFunction(){
         setContentView(R.layout.activity_maps); // we might not need activity_maps_search_tasks.xml
     }
     public void MapsSearchEvent(){
-
+        currentLocationButton = (ImageView) findViewById(R.id.ic_currentlocation);
+        currentLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getCurrentLocation();
+            }
+        });
     }
+
+
 }

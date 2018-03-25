@@ -9,6 +9,8 @@
  */
 package professional.team17.com.professional;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.Date;
 //TODO implement for project part 5
 /**
@@ -33,7 +35,7 @@ import java.util.Date;
 
 public class RequesterAddTaskController {
     /* create a new task*/
-    private Task task = new Task("profileName","name","description", "location", "date");
+    private Task task = new Task("profileName","name","description", "location", "date", new LatLng(-34, 151));
     // call
     public RequesterAddTaskController(){}
     /**

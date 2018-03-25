@@ -9,7 +9,7 @@
  */
 package professional.team17.com.professional;
 
-import android.util.Log;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -33,6 +33,7 @@ public class Task implements Serializable{
     private String name;
     private String description;
     private String location;
+    private LatLng latLng;
     private Date date;
     private String uniqueID;
     private ArrayList<String> photos;
@@ -40,14 +41,14 @@ public class Task implements Serializable{
     public String status;
 
     /**
-     *
      * @param profileName - String username of requested
      * @param name - String name of the task
      * @param description  - String description of the task
      * @param location - String location of the task
      * @param date - Date object - the date for the task to be completed by
+     * @param latLng - lat and longitude of task
      */
-    public Task(String profileName, String name, String description, String location, Date date) {
+    public Task(String profileName, String name, String description, String location, Date date, LatLng latLng) {
         this.profileName = profileName;
         this.name = name;
         this.description = description;
@@ -56,18 +57,19 @@ public class Task implements Serializable{
         this.uniqueID = null;
         this.status = "Requested";
         this.bids = new BidList();
+        this.latLng = latLng;
     }
 
 
     /**
-     *
      * @param profileName - String username of requested
      * @param name - String name of the task
      * @param description  - String description of the task
      * @param location - String location of the task
      * @param date - String date for the task to be completed by
+     * @param latLng - lat and longitude of task
      */
-    public Task(String profileName, String name, String description, String location, String date) {
+    public Task(String profileName, String name, String description, String location, String date, LatLng latLng) {
         this.profileName = profileName;
         this.name = name;
         this.description = description;
@@ -76,16 +78,17 @@ public class Task implements Serializable{
         this.uniqueID = null;
         this.status = "Requested";
         this.bids = new BidList();
+        this.latLng = latLng;
     }
 
     /**
-     *
      * @param profileName - String username of requested
      * @param name - String name of the task
      * @param description  - String description of the task
      * @param location - String location of the task
+     * @param latLng -- lat and longitude of task
      */
-    public Task(String profileName, String name, String description, String location) {
+    public Task(String profileName, String name, String description, String location, LatLng latLng) {
         this.profileName = profileName;
         this.name = name;
         this.description = description;
@@ -94,6 +97,7 @@ public class Task implements Serializable{
         this.uniqueID = null;
         this.status = "Requested";
         this.bids = new BidList();
+        this.latLng = latLng;
     }
 
 
@@ -159,6 +163,22 @@ public class Task implements Serializable{
      */
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    /**
+     *
+     * @return latLng
+     */
+    public LatLng getLatLng() {
+        return latLng;
+    }
+
+    /**
+     *
+     * @param latLng
+     */
+    public void setLatLng(LatLng latLng) {
+        this.latLng = latLng;
     }
 
     /**

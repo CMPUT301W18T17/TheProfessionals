@@ -10,6 +10,8 @@
 
 package professional.team17.com.professional;
 
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * A mock task object for testing purposes.
  */
@@ -24,7 +26,7 @@ public class MockTask extends Task {
      * @param location Task location
      * @param date Task date
      */
-    public MockTask(String profileName, String name, String description, String location, String date){
-        super(profileName, name, description, location, date);
+    public MockTask(String profileName, String name, String description, String location, String date, LatLng latLng){
+        super(profileName, name, description, location, date, latLng);
     }
 }
