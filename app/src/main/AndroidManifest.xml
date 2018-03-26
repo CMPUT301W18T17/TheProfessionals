@@ -72,17 +72,17 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".MapsSearchTasksActivity"
-            android:label="@string/title_activity_maps_search_tasks">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="professional.team17.com.professional.MapsActivity" />
-        </activity>
+            android:label="@string/title_activity_maps_search_tasks"></activity>
         <activity
             android:name=".MapsSearchLocationActivity"
             android:label="@string/title_activity_maps2"
             android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".PhotoPicker" />
-        <activity android:name=".NotificationActivity"></activity>
+        <activity android:name=".NotificationActivity" />
+        <activity
+            android:name=".MapsShowALocationActivity"
+            android:label="@string/title_activity_maps_show_alocation"
+            android:theme="@android:style/Theme.Dialog" ></activity>
     </application>
 
 </manifest>

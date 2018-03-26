@@ -21,7 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-public abstract class RequesterTaskActivity extends RequesterLayout{
+public abstract class RequesterTaskActivity extends ProviderLayout{
     /* Layout objects */
     protected EditText nameField;
     protected EditText descriptionField;
@@ -45,9 +45,9 @@ public abstract class RequesterTaskActivity extends RequesterLayout{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle();
 
         setContentView(R.layout.activity_requester_task);
+        setTitle();
 
         /* Set all view objects */
         //Button submitButton = (Button) findViewById(R.id.button2);

@@ -28,7 +28,7 @@ import android.widget.Toast;
 public class RequesterAddTaskActivity extends RequesterTaskActivity {
 
     public void setTitle(){
-        this.setActivityTitle("Add a Task");
+        this.setActivityTitleRequester("Add a Task");
     }
 
     public void setSubmitButtonOnClickListener(){

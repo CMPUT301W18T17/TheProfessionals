@@ -50,7 +50,7 @@ public class SearchActivity extends ProviderLayout {
         setContentView(R.layout.activity_search);
 
         /* Change activity title */
-        this.setActivityTitle("Task Search");
+        this.setActivityTitleProvider("Task Search");
 
         /*testing sharedPreferences
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref",

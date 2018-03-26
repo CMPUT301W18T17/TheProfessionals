@@ -33,7 +33,7 @@ import static android.view.View.VISIBLE;
  * @see Bid
  * @see BidList
  */
-public class RequesterViewTaskActivity extends RequesterLayout implements ConfirmDialog.ConfirmDialogListener {
+public class RequesterViewTaskActivity extends ProviderLayout implements ConfirmDialog.ConfirmDialogListener {
     /* Layout items */
     ImageButton backButton;
     ImageButton viewPhotos;
@@ -70,7 +70,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         setContentView(R.layout.activity_requester_view_task2);
 
         /* Set activity title */
-        setActivityTitle("View Task");
+        setActivityTitleRequester("View Task");
 
         /*Set layout elements */
         backButton = (ImageButton) findViewById(R.id.requester_view_taskbackButton);
@@ -103,8 +103,10 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         }
         populateBidList();
 
-
-
+        /* Check Existence of Location */
+        if (task.getLatLng()== null){
+            viewLocation.setVisibility(View.INVISIBLE);
+        }
 
         /* Set OnClickListeners */
         backButton.setOnClickListener(new ImageButton.OnClickListener() {
@@ -118,13 +120,19 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
             @Override
             public void onClick(View view) {
                 //TODO implement viewing photos
+
             }
         });
 
         viewLocation.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO implement viewing location
+                Intent intent = new Intent(RequesterViewTaskActivity.this, MapsShowALocationActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("aTaskLatLng", task.getLatLng());
+                intent.putExtras(bundle);
+                intent.putExtra("aTaskAddress", task.getLocation());
+                startActivity(intent);
             }
         });
 

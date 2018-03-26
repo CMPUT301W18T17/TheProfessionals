@@ -36,7 +36,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
     private String description;
 
     public void setTitle(){
-        this.setActivityTitle("Edit Task");
+        this.setActivityTitleRequester("Edit Task");
     }
 
     public void setSubmitButtonOnClickListener(){

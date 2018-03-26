@@ -13,6 +13,7 @@ package professional.team17.com.professional;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -50,11 +51,13 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
     private TextView taskDescriptionTextField;
     private TextView taskLowBidTextField;
     private TextView taskMyBidTextField;
+    private TextView taskAddressTextField;
 
     private TextView taskLowBidDollar;
     private TextView taskMyBidDollar;
     private TextView requesterAvgTextView; //project 5 implement
     private RatingBar requesterAvgTextField; //project 5 implement
+    private ImageButton viewMapButton;
 
 
     //both buttons start as invisible by default
@@ -85,16 +88,33 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         bidButton = (ImageButton) findViewById(R.id.provider_view_task_AddBid);
         deleteButton = (ImageButton) findViewById(R.id.provider_view_task_removeBid);
         appendButton = (ImageButton) findViewById(R.id.provider_view_task_manageBid);
+        taskAddressTextField = (TextView) findViewById(R.id.provider_view_task_address);
+        viewMapButton = (ImageButton) findViewById(R.id.provider_view_map_button);
 
-        this.setActivityTitle("View Task");
+        this.setActivityTitleProvider("View Task");
 
 
         sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedpreferences.getString("username", "error");
 
+        viewMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProviderViewTask.this, MapsShowALocationActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("aTaskLatLng", task.getLatLng());
+                intent.putExtras(bundle);
+                intent.putExtra("aTaskAddress", task.getLocation());
+                startActivity(intent);
+            }
+        });
+
 
         Log.i("UISERNAMRE", "USERNAME: "+username);
         task = getTask();
+        if (task.getLatLng() == null){
+            viewMapButton.setVisibility(View.INVISIBLE);
+        }
         //getRequester();
 
         checkStatus();
@@ -161,6 +181,11 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         taskTitleTextField.setText(task.getName());
         taskDateTextField.setText(task.getDateAsString());
         taskDescriptionTextField.setText(task.getDescription());
+        if (task.getLatLng()!= null){
+            taskAddressTextField.setText(task.getLocation());
+        } else {
+            taskAddressTextField.setText("N/A");
+        }
 
     }
 
@@ -261,9 +286,10 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
      * @param v the view the button is located on
      */
     public void viewProfile(View v){
-        Intent intention = new Intent(this, OtherProfileViewActivity.class);
-        intention.putExtra("profile", task.getProfileName());
-        startActivity(intention);
+      ConnectedState.getInstance().setOffline();
+        //Intent intention = new Intent(this, OtherProfileViewActivity.class);
+        //intention.putExtra("profile", task.getProfileName());
+        //startActivity(intention);
     }
 
     /**
@@ -271,6 +297,8 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
      * @param v the view the button is located on
      */
     public void placeBid(View v){
+        //ConnectedState e = ConnectedState.getInstance();
+       // e.setOnline();
         FragmentManager fm = getSupportFragmentManager();
         PlaceBidDialog dialogFragment = new PlaceBidDialog ();
         Bundle args = new Bundle();
