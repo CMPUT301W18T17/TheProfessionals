@@ -18,7 +18,6 @@ import java.util.List;
 
 public class TaskDAO extends SQLiteOpenHelper {
     private static String TASKTABLE = "task";
-    private static String ACTIONTABLE = "action";
 
 
     public TaskDAO(Context context) {
@@ -35,14 +34,9 @@ public class TaskDAO extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         delete(db);
         String query = "CREATE TABLE"+ TASKTABLE+
-                "(id Integer Primary Key, profileName Text, name Text not Null, location text,"+
-                "description text, Status text,Date text, lon text, lat text)";
-        String query2 = "CREATE TABLE"+ACTIONTABLE+
-        "(id Integer primary Key, actionType int"+
-        "FOREIGN KEY(id) REFERENCES " +TASKTABLE+
-                "(id) ON DELETE CASCADE)";
+                "(id Integer Primary Key, profileName Text, name Text not Null, location Text,"+
+                "description Text, Status Text,Date Text, lon Text, lat Text, actionType Integer, online Boolean)";
         db.execSQL(query);
-        db.execSQL(query2);
     }
 
     /**
@@ -51,9 +45,7 @@ public class TaskDAO extends SQLiteOpenHelper {
      */
     private void delete(SQLiteDatabase db){
         String query = "Drop TABLE if exists" +TASKTABLE;
-        String query2 = "Drop TABLE if exists "+ACTIONTABLE;
         db.execSQL(query);
-        db.execSQL(query2);
     }
 
     /**
@@ -74,10 +66,8 @@ public class TaskDAO extends SQLiteOpenHelper {
         ContentValues taskdata = task.toContent();
         SQLiteDatabase db = getWritableDatabase();
         String[] id = {task.getUniqueID()+""};
-
+        taskdata.put("online", 1);
         db.insert(TASKTABLE, null, taskdata);
-        ContentValues actiondata = getType(id[0], ActionType.MATCH_SERVER);
-        db.insert(ACTIONTABLE, null, actiondata);
     }
 
     /**
@@ -88,9 +78,8 @@ public class TaskDAO extends SQLiteOpenHelper {
         ContentValues taskdata = task.toContent();
         SQLiteDatabase db = getWritableDatabase();
         String[] id = {getId()+""};
+        getType(taskdata, ActionType.ADD_NO_CONNECTION);
         db.insert(TASKTABLE, null, taskdata);
-        ContentValues actiondata = getType(id[0], ActionType.ADD_NO_CONNECTION);
-        db.insert(ACTIONTABLE, null, actiondata);
     }
 
     /**
@@ -118,11 +107,17 @@ public class TaskDAO extends SQLiteOpenHelper {
      * @param task  - this removes the task offline - via  a marker in the action table
      */
     public void removeOffline(Task task){
-        //see if added offline - if so, remove
         SQLiteDatabase db = getWritableDatabase();
         String[] id = {task.getUniqueID()+""};
-        ContentValues data = getType(id[0], ActionType.DELETE_NO_CONNECTION);
-        db.update(ACTIONTABLE,data,  "id=?", id);
+        //see if added offline - if so, remove
+        if (isOffline(task.getUniqueID())){
+            db.delete(TASKTABLE, "id=?", id);
+        }
+        else {
+            ContentValues taskdata = new ContentValues();
+            getType(taskdata, ActionType.DELETE_NO_CONNECTION);
+            db.update(TASKTABLE, taskdata, "id=?", id);
+        }
     }
 
     /**
@@ -142,11 +137,10 @@ public class TaskDAO extends SQLiteOpenHelper {
      */
     public void updateTaskOffline(Task task){
         SQLiteDatabase db = getWritableDatabase();
-        ContentValues taskdata = task.toContent();
+        ContentValues taskdata = new ContentValues();
         String[] id = {task.getUniqueID()+""};
-        ContentValues actiondata = getType(id[0], ActionType.EDIT_NO_CONNECTION);
+        getType(taskdata, ActionType.EDIT_NO_CONNECTION);
         db.update(TASKTABLE, taskdata, "id=?", id);
-        db.update(ACTIONTABLE,actiondata,  "id=?", id);
     }
 
 
@@ -154,11 +148,9 @@ public class TaskDAO extends SQLiteOpenHelper {
      *
      * @return data set that works with local storage
      */
-    private ContentValues getType(String id,  ActionType type){
-        ContentValues data = new ContentValues();
-        data.put("id", id);
-        data.put("actionType", type.getValue());
-        return data;
+    private ContentValues getType(ContentValues c,  ActionType type){
+        c.put("actionType", type.getValue());
+        return c;
     }
 
     public TaskList getTasks() {
@@ -214,7 +206,7 @@ public class TaskDAO extends SQLiteOpenHelper {
     private ArrayList<String> getList(ActionType actiontype) {
         ArrayList<String>  list = new ArrayList<String>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * from " + ACTIONTABLE + " where actionType =" + actiontype.getValue(), null);
+        Cursor c = db.rawQuery("SELECT * from " + TASKTABLE + " where actionType =" + actiontype.getValue(), null);
         while (c.moveToNext()) {
             String id = c.getString(c.getColumnIndex("id"));
             list.add(id);
@@ -222,10 +214,17 @@ public class TaskDAO extends SQLiteOpenHelper {
         return list;
     }
 
+    public boolean isOffline(String id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where id = " +id, null);
+        int online = c.getInt(c.getColumnIndex("online"));
+        return (online ==0);
+    }
+
 
     //https://stackoverflow.com/questions/8157755/how-to-convert-enum-value-to-int
     public enum ActionType {
-        DELETE_NO_CONNECTION(-1), ADD_NO_CONNECTION(1), EDIT_NO_CONNECTION(2), MATCH_SERVER(0);
+        DELETE_NO_CONNECTION(-1), ADD_NO_CONNECTION(0), EDIT_NO_CONNECTION(2);
 
         private final int value;
         private ActionType(int value) {
