@@ -30,8 +30,7 @@ public class TaskDAO extends SQLiteOpenHelper {
 
     }
 
-    //as offline activity is restricted to add or edit tasks, and these tasks must be in status
-    //requested then
+
     @Override
     public void onCreate(SQLiteDatabase db){
         delete(db);
@@ -44,19 +43,31 @@ public class TaskDAO extends SQLiteOpenHelper {
         db.execSQL(query2);
     }
 
-    public void delete(SQLiteDatabase db){
+    /**
+     *
+     * @param db the db where tables are being dropped - to clear every time connectivity is set up
+     */
+    private void delete(SQLiteDatabase db){
         String query = "Drop TABLE if exists" +TASKTABLE;
         String query2 = "Drop TABLE if exists "+ACTIONTABLE;
         db.execSQL(query);
         db.execSQL(query2);
     }
 
+    /**
+     *
+     * @param taskList - the tasklist to be inserted into the DB
+     */
     public void insertAll(TaskList taskList){
         for (Task task : taskList) {
             insert(task);
         }
     }
 
+    /**
+     *
+     * @param task the task to be inserted into the DB while in online status
+     */
     public void insert(Task task) {
         ContentValues taskdata = task.toContent();
         SQLiteDatabase db = getWritableDatabase();
@@ -67,6 +78,10 @@ public class TaskDAO extends SQLiteOpenHelper {
         db.insert(ACTIONTABLE, null, actiondata);
     }
 
+    /**
+     * |
+     * @param task - the task being added while in offline status
+     */
     public void insertOffline(Task task) {
         ContentValues taskdata = task.toContent();
         SQLiteDatabase db = getWritableDatabase();
@@ -76,26 +91,42 @@ public class TaskDAO extends SQLiteOpenHelper {
         db.insert(ACTIONTABLE, null, actiondata);
     }
 
-    //return unique id for offline connections
+    /**
+     *
+     * @return this returns an id that can be used while in offline status
+     */
     private int getId(){
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * from"+TASKTABLE, null);
         return c.getCount();
     }
 
+    /**
+     *
+     * @param task this removes the task from the offline
+     */
     public void removeOnline(Task task){
         SQLiteDatabase db = getWritableDatabase();
         String[] id = {task.getUniqueID()+""};
         db.delete(TASKTABLE, "id=?", id);
     }
 
+    /**
+     *
+     * @param task  - this removes the task offline - via  a marker in the action table
+     */
     public void removeOffline(Task task){
+        //see if added offline - if so, remove
         SQLiteDatabase db = getWritableDatabase();
         String[] id = {task.getUniqueID()+""};
         ContentValues data = getType(id[0], ActionType.DELETE_NO_CONNECTION);
         db.update(ACTIONTABLE,data,  "id=?", id);
     }
 
+    /**
+     *
+     * @param task - this is the task that is being updated
+     */
     public void updateTaskOnline(Task task){
         ContentValues data = task.toContent();
         SQLiteDatabase db = getWritableDatabase();
@@ -103,6 +134,10 @@ public class TaskDAO extends SQLiteOpenHelper {
         db.update(TASKTABLE, data, "id=?", id);
     }
 
+    /**
+     *
+     * @param task the task being updated while offline (requiring a marker be set)
+     */
     public void updateTaskOffline(Task task){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues taskdata = task.toContent();
@@ -159,17 +194,17 @@ public class TaskDAO extends SQLiteOpenHelper {
         return temp;
     }
 
-    public List<String> newTasks() {
+    public ArrayList<String> newTasks() {
         ArrayList<String> list = new ArrayList<String>();
         return getList(ActionType.ADD_NO_CONNECTION);
     }
 
-    public List<String> deletedTasks() {
+    public ArrayList<String> deletedTasks() {
         ArrayList<String> list = new ArrayList<String>();
         return getList(ActionType.DELETE_NO_CONNECTION);
     }
 
-    public List<String> updateTasks() {
+    public ArrayList<String> updatedTasks() {
         ArrayList<String> list = new ArrayList<String>();
         return getList(ActionType.EDIT_NO_CONNECTION);
     }
