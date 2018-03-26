@@ -33,7 +33,7 @@ import static android.view.View.VISIBLE;
  * @see Bid
  * @see BidList
  */
-public class RequesterViewTaskActivity extends RequesterLayout implements ConfirmDialog.ConfirmDialogListener {
+public class RequesterViewTaskActivity extends Navigation implements ConfirmDialog.ConfirmDialogListener {
     /* Layout items */
     ImageButton backButton;
     ImageButton viewPhotos;
@@ -70,7 +70,7 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         setContentView(R.layout.activity_requester_view_task2);
 
         /* Set activity title */
-        setActivityTitle("View Task");
+        setActivityTitleRequester("View Task");
 
         /*Set layout elements */
         backButton = (ImageButton) findViewById(R.id.requester_view_taskbackButton);

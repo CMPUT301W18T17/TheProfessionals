@@ -31,7 +31,7 @@ import android.widget.Toast;
  * @author Allison
  * @see ElasticSearchController, Task, Profile
  */
-public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
+public class ProviderViewTask extends Navigation implements PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
 
     private String username;
     //TODO below item is needed for protoype, part 5 persistence will remove this
@@ -91,7 +91,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         taskAddressTextField = (TextView) findViewById(R.id.provider_view_task_address);
         viewMapButton = (ImageButton) findViewById(R.id.provider_view_map_button);
 
-        this.setActivityTitle("View Task");
+        this.setActivityTitleProvider("View Task");
 
 
         sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);

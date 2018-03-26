@@ -43,8 +43,6 @@
                 android:value=".LogInActivity" />
         </activity>
         <activity android:name=".EditMyProfileActivity" />
-        <activity android:name=".ProviderLayout" />
-        <activity android:name=".RequesterLayout" />
         <activity
             android:name=".RequesterAddTaskActivity"
             android:label="@string/title_activity_requester_add_task"

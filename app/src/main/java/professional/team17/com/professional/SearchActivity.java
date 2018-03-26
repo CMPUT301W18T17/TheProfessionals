@@ -30,7 +30,7 @@ import android.widget.Toast;
  * @author Allison
  * @see ProviderCustomArrayAdapter , TaskList, ElasticSearchController
  */
-public class SearchActivity extends ProviderLayout {
+public class SearchActivity extends Navigation {
     private ProviderCustomArrayAdapter searchAdapterHelper;
     private ListView listView;
     private SearchView searchView;
@@ -50,7 +50,7 @@ public class SearchActivity extends ProviderLayout {
         setContentView(R.layout.activity_search);
 
         /* Change activity title */
-        this.setActivityTitle("Task Search");
+        this.setActivityTitleProvider("Task Search");
 
         /*testing sharedPreferences
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref",

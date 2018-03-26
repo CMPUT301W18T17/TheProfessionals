@@ -23,12 +23,12 @@ import android.widget.Toast;
  * An activity where a user in Requester mode can add a task with status "Requested".
  *
  * @author Lauren
- * @see RequesterLayout
+ * @see Navigation
  */
 public class RequesterAddTaskActivity extends RequesterTaskActivity {
 
     public void setTitle(){
-        this.setActivityTitle("Add a Task");
+        this.setActivityTitleRequester("Add a Task");
     }
 
     public void setSubmitButtonOnClickListener(){

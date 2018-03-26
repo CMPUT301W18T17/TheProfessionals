@@ -27,7 +27,7 @@ import android.widget.ListView;
  * @author Allison
  * @see ElasticSearchController, ProviderCustomArrayAdapter TaskLIst, Profile
  */
-public class ProviderTaskListActivity extends ProviderLayout {
+public class ProviderTaskListActivity extends Navigation {
     private ProviderCustomArrayAdapter adapterHelper;
     private ListView listView;
     private String username;
@@ -89,7 +89,7 @@ public class ProviderTaskListActivity extends ProviderLayout {
      */
     private TaskList createList(String type) {
         TaskList taskList =null;
-        setActivityTitle(type + " Tasks");
+        setActivityTitleProvider(type + " Tasks");
         if (type.equals("Bidded")) {
             taskList = elasticSearchController.getTasksBidded(username, "Bidded");
         }

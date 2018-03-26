@@ -1,23 +1,11 @@
-/*
- * ProviderLayout
- *
- * March 7, 2018
- *
- *
- * Copyright @ 2018 Team 17, CMPUT 301, University of Alberta - All Rights Reserved.
- * You may use, distribute, or modify this code under terms and conditions of the Code of Student Behaviour at the University of Alberta.
- * You can find a copy of the license in the github wiki for this project.
- * */
-
-
 package professional.team17.com.professional;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,25 +17,25 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
 /**
- * An abstract activity which implements the navigation for the Provider options.
- *
- * @author: Lauren, Hailan, Allison
- * @see ProviderViewTask
- * @see ProviderTaskListActivity
- * @see SearchActivity
- * @see MapsSearchTasksActivity
+ * Created by ag on 2018-03-26.
  */
-public abstract class ProviderLayout extends AppCompatActivity implements ImageView.OnClickListener {
 
-    private String layout;
-    private TextView activityTitleView;
+public abstract  class Navigation extends AppCompatActivity implements ImageView.OnClickListener {
+    private TextView requesteractivityTitleView;
+    private TextView provideractivityTitleView;
     private ImageView providerBiddedButton;
     private ImageView providerAssignedButton;
     private ImageView providerSearchButton;
     private ImageView providerMapButton;
-    private ImageView switchLayoutButton;
+    private ImageView switchLayoutButtonRequester;
+    private ImageView switchLayoutButtonProvider;
     private ImageView userMenuButton;
     private PopupMenu popupMenu;
+    private ImageView requesterAddTaskButton;
+    private ImageView requesterBiddedButton;
+    private ImageView requesterAssignedButton;
+    private ImageView requesterRequestedButton;
+
 
     /**
      * On creation of the activity, assign values to all variables.
@@ -57,19 +45,22 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.provider_layout);
 
-        /* This is the ProviderLayout, so setting layout to Provider */
-        layout = "Provider";
 
         /* Setting all View variables */
         providerBiddedButton = (ImageView) findViewById(R.id.biddedTasksProviderButton);
         providerAssignedButton = (ImageView) findViewById(R.id.acceptedTasksProviderButton);
         providerSearchButton = (ImageView) findViewById(R.id.searchTasksButton);
         providerMapButton = (ImageView) findViewById(R.id.taskMapButton);
-        switchLayoutButton = (ImageView) findViewById(R.id.switchViewProviderButton);
+        switchLayoutButtonProvider = (ImageView) findViewById(R.id.switchViewProviderButton);
         userMenuButton = (ImageView) findViewById(R.id.userMenuButton);
 
+
+        requesterAddTaskButton = (ImageView) findViewById(R.id.addTaskRequesterButton);
+        requesterBiddedButton = (ImageView) findViewById(R.id.biddedTasksRequesterButton);
+        requesterAssignedButton = (ImageView) findViewById(R.id.acceptedTasksRequesterButton);
+        requesterRequestedButton = (ImageView) findViewById(R.id.requestedTasksRequesterButton);
+        switchLayoutButtonRequester = (ImageView) findViewById(R.id.switchViewRequesterButton);
     }
 
     /**
@@ -77,22 +68,30 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
      *
      * @param title The title of the activity being displayed.
      */
-    public void setActivityTitle(final String title) {
+    public void setActivityTitleRequester(final String title) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                activityTitleView = (TextView) findViewById(R.id.activityTitleView);
-                activityTitleView.setText(title);
+                requesteractivityTitleView = (TextView) findViewById(R.id.requesteractivityTitleView);
+                requesteractivityTitleView.setText(title);
             }
         });
     }
 
     /**
-     * Returns "Provider" or "Requester" depending on which layout the user is in.
-     * @return The layout that the user is in.
+     * Changes the title at the top of the layout.
+     *
+     * @param title The title of the activity being displayed.
      */
-    public String getLayout(){
-        return layout;
+    public void setActivityTitleProvider(final String title) {
+        Log.i("WEWE", "setActivityTitleProvider: ");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                provideractivityTitleView = (TextView) findViewById(R.id.provideractivityTitleView);
+                provideractivityTitleView.setText(title);
+            }
+        });
     }
 
     /**
@@ -130,6 +129,7 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                     intent = new Intent(this, MapsSearchTasksActivity.class);
                     startActivity(intent);
                     finish();
+
                 }
                 break;
         /* If the user taps the switch button */
@@ -139,23 +139,59 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                 startActivity(intent);
                 finish();
                 break;
+            case R.id.addTaskRequesterButton:
+                intent = new Intent(this, RequesterAddTaskActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            /* If user tapped the bidded button */
+            case R.id.biddedTasksRequesterButton:
+                intent = new Intent(this, RequesterViewListActivity.class);
+                intent.putExtra("Status", "Bidded");
+                startActivity(intent);
+                finish();
+                break;
+            /* If the user tapped the assigned button */
+            case R.id.acceptedTasksRequesterButton:
+                intent = new Intent(this, RequesterViewListActivity.class);
+                intent.putExtra("Status", "Assigned");
+                startActivity(intent);
+                finish();
+                break;
+            /* If the user tapped the requested button */
+            case R.id.requestedTasksRequesterButton:
+                intent = new Intent(this, RequesterViewListActivity.class);
+                intent.putExtra("Status", "Requested");
+                startActivity(intent);
+                finish();
+                break;
+            /* If the user taps the switch button */
+            case R.id.switchViewRequesterButton:
+                intent = new Intent(this, ProviderTaskListActivity.class);
+                intent.putExtra("Status", "Bidded");
+                startActivity(intent);
+                finish();
+                break;
         /* If the user taps the user menu button */
             case R.id.userMenuButton:
                 //TODO implement dropdown menu
-                popupMenu.show();
+                showPopup();
+                //popupMenu.show();
                 break;
         }
     }
 
+
+
     /**
      * Creates the popup menu displayed when the user clicks on the userMenuButton.
      */
-    protected void createPopup(){
+    protected void showPopup(){
         /* Create Popup Menu */
-        int[] location = new int[2];
-        popupMenu = new PopupMenu(this, userMenuButton);
-        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        PopupMenu popup = new PopupMenu(this, findViewById(R.id.userMenuButton));
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.popup_menu, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 //Toast.makeText(ProviderLayout.this, "" + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
@@ -172,6 +208,7 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                 return true;
             }
         });
+        popup.show();
     }
 
     private boolean checkServices(){
@@ -199,9 +236,11 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
     @Override
     protected void onStart() {
         super.onStart();
-        createPopup();
+
 
     }
+
+
 
 
 }

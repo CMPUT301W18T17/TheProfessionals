@@ -25,7 +25,7 @@ import java.util.Locale;
  * An activity where a user in Requester mode can edit a task with status "Requested".
  *
  * @author Lauren
- * @see RequesterLayout
+ * @see Navigation
  * @see RequesterViewListActivity
  * @see RequesterAddTaskActivity
  */
@@ -36,7 +36,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
     private String description;
 
     public void setTitle(){
-        this.setActivityTitle("Edit Task");
+        this.setActivityTitleRequester("Edit Task");
     }
 
     public void setSubmitButtonOnClickListener(){
