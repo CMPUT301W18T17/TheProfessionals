@@ -38,7 +38,9 @@ public class TaskDAO extends SQLiteOpenHelper {
                 "(id Integer Primary Key, profileName Text, name Text not Null, location text,"+
                 "description text, Status text,Date text, lon text, lat text)";
         String query2 = "CREATE TABLE"+ACTIONTABLE+
-        "(id Integer primary Key, actionType int)";
+        "(id Integer primary Key, actionType int"+
+        "FOREIGN KEY(id) REFERENCES " +TASKTABLE+
+                "(id) ON DELETE CASCADE)";
         db.execSQL(query);
         db.execSQL(query2);
     }

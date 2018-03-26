@@ -1,5 +1,6 @@
 package professional.team17.com.professional;
 
+import android.app.Activity;
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class SyncController {
             }
             else {
                 newtask = db.getTask(id);
-                es.updateTasks(task);
+                es.updateTasks(newtask);
             }
         }
         db.close();
@@ -52,7 +53,7 @@ public class SyncController {
             }
             else {
                 newtask = db.getTask(id);
-                es.deleteTasks(task);
+                es.deleteTasks(newtask);
             }
         }
         db.close();
