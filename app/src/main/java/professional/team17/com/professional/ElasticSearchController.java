@@ -115,6 +115,7 @@ public class ElasticSearchController {
      */
     public TaskList getMapTasks(Float lat, Float lon) {
         //TODO = calculate the range of lat/lon based on the 40 km distance using paramter belows
+        //just dummy values for now
         float latMin = 53;
         float latMax =54;
         float lonMin = -115;

@@ -9,6 +9,8 @@
  */
 package professional.team17.com.professional;
 
+import android.content.ContentValues;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
@@ -42,13 +44,9 @@ public class Task implements Serializable{
 
     /**
      * @param profileName - String username of requested
-     * @param name - String name of the task
-     * @param description  - String description of the task
-     * @param location - String location of the task
-     * @param date - Date object - the date for the task to be completed by
-     * @param latLng - lat and longitude of task
+     *
      */
-    public Task(String profileName, String name, String description, String location, Date date, LatLng latLng) {
+    public Task(String profileName) {
         this.profileName = profileName;
         this.name = name;
         this.description = description;
@@ -402,6 +400,24 @@ public class Task implements Serializable{
             }
         }
         return input;
+    }
+
+    /**
+     *
+     * @return data set that works with local storage
+     */
+    public ContentValues toContent(){
+        ContentValues data = new ContentValues();
+        data.put("id", this.uniqueID);
+        data.put("profileName", this.profileName);
+        data.put("name", this.name);
+        data.put("location", this.location);
+        data.put("description", this.description);
+        data.put("status", this.status);
+        data.put("date", getDateAsString());
+        data.put("lon", this.latLng.longitude);
+        data.put("lat", this.latLng.latitude);
+        return data;
     }
 
 }
