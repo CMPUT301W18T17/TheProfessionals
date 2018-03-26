@@ -103,8 +103,10 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         }
         populateBidList();
 
-
-
+        /* Check Existence of Location */
+        if (task.getLatLng()== null){
+            viewLocation.setVisibility(View.INVISIBLE);
+        }
 
         /* Set OnClickListeners */
         backButton.setOnClickListener(new ImageButton.OnClickListener() {
