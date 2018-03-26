@@ -27,7 +27,7 @@ public class PhotoPicker extends AppCompatActivity {
     private String returnPath;
     private String oldPath;
     private TextView viewError;
-    private int size;
+    private int size, isEditProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +38,14 @@ public class PhotoPicker extends AppCompatActivity {
         viewError = findViewById(R.id.errorBox);
 
         // Get those information
+        isEditProfile = 0;
         Intent intent = getIntent();
         userName = intent.getStringExtra("userName");
         name = intent.getStringExtra("name");
         eMail = intent.getStringExtra("eMail");
         phoneNumber = intent.getStringExtra("phoneNumber");
         filePath = intent.getStringExtra("photoPath");
+        isEditProfile = intent.getIntExtra("FromEditProfile", 0);
         if (filePath != null){
             returnPath = filePath;
             oldPath = filePath;
@@ -64,15 +66,28 @@ public class PhotoPicker extends AppCompatActivity {
     }
 
     public void back(View view) {
-        Intent intent = new Intent(this, SignUpActivity.class);
+        if (isEditProfile == 0) {
+            Intent intent = new Intent(this, SignUpActivity.class);
 
-        putExtra(intent);
+            putExtra(intent);
 
-        // Previous Photo Path
-        adder(intent, "photoPath", oldPath);
+            // Previous Photo Path
+            adder(intent, "photoPath", oldPath);
 
-        startActivity(intent);
-        finish();
+            startActivity(intent);
+            finish();
+        }
+        else{
+            Intent intent = new Intent(this, EditMyProfileActivity.class);
+
+            putExtra(intent);
+
+            // Previous Photo Path
+            adder(intent, "photoPath", oldPath);
+
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void toGallery(View view){
@@ -113,15 +128,28 @@ public class PhotoPicker extends AppCompatActivity {
             photo = new Photo(returnPath);
             size = photo.pathGetSize();
             if (size <= 65536) {
-                Intent intent = new Intent(this, SignUpActivity.class);
+                if (isEditProfile == 0) {
+                    Intent intent = new Intent(this, SignUpActivity.class);
 
-                putExtra(intent);
+                    putExtra(intent);
 
-                // Photo Path
-                adder(intent, "photoPath", returnPath);
+                    // Photo Path
+                    adder(intent, "photoPath", returnPath);
 
-                startActivity(intent);
-                finish();
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    Intent intent = new Intent(this, EditMyProfileActivity.class);
+
+                    putExtra(intent);
+
+                    // Photo Path
+                    adder(intent, "photoPath", returnPath);
+
+                    startActivity(intent);
+                    finish();
+                }
             }
             else{
                 viewError.setText("This photo is too big please pick a smaller one.");
@@ -142,7 +170,14 @@ public class PhotoPicker extends AppCompatActivity {
         // Put Extra
 
         // User Name
-        adder(intent, "userName", userName);
+        if (isEditProfile == 0) {
+            adder(intent, "userName", userName);
+        }
+
+        // Not first time start
+        if (isEditProfile == 1){
+            intent.putExtra("startTime", 1);
+        }
 
         // Name
         adder(intent, "name", name);

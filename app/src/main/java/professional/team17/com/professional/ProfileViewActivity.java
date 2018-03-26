@@ -42,7 +42,6 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
     protected ListView listView;
     protected RatingBar ratingBar;
     protected ImageView profilePic;
-    protected Bitmap bitmap;
     protected byte[] photoArray;
     protected Photo photo;
     protected Bitmap.Config photoConfig;

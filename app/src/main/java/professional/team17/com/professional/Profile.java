@@ -186,7 +186,7 @@ public class Profile implements Serializable {
         blackList.remove(profile);
     }
 
-    public void addPhoto(byte[] byteArray){
+    public void setPhoto(byte[] byteArray){
         this.photoArray = byteArray;
     }
 
@@ -194,9 +194,18 @@ public class Profile implements Serializable {
         return photoArray;
     }
 
+    public void setConfig(Bitmap.Config config){
+        this.config = config;
+    }
+
     public Bitmap.Config getConfig(){return config;}
 
+    public void setWidth(int width){this.width = width;}
+
     public int getWidth() {return width;}
+
+    public void setHeight(int height){this.height = height;}
+
     public int getHeight() {return  height;}
 
 
