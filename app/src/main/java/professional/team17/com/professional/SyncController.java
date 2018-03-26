@@ -32,7 +32,7 @@ public class SyncController {
             }
             else {
                 newtask = db.getTask(id);
-                es.updateTasks(task);
+                es.updateTasks(newtask);
             }
         }
         db.close();
@@ -53,7 +53,7 @@ public class SyncController {
             }
             else {
                 newtask = db.getTask(id);
-                es.deleteTasks(task);
+                es.deleteTasks(newtask);
             }
         }
         db.close();
