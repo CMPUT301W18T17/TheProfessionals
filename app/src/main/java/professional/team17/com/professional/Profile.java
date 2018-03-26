@@ -34,7 +34,10 @@ public class Profile implements Serializable {
     private ReviewList reviewList;
     private ArrayList<String> blackList;
      private ArrayList<String> blackListedBy;
-     private Bitmap photo;
+     private byte[] photoArray;
+     private Bitmap.Config config;
+     private  int width;
+     private  int height;
 
     /**
      *
@@ -43,7 +46,7 @@ public class Profile implements Serializable {
      * @param email  - the string email of the user
      * @param phoneNumber - the string phone number of the user
      */
-    public Profile(String name, String userName, String email, String phoneNumber, Bitmap photo) {
+    public Profile(String name, String userName, String email, String phoneNumber, byte[] photoArray, Bitmap.Config config, int width, int height) {
         this.name = name;
         this.userName = userName;
         this.email = email;
@@ -51,7 +54,10 @@ public class Profile implements Serializable {
        this.reviewList = new ReviewList();
        this.blackList = new ArrayList<String>();
        this.blackListedBy = new ArrayList<String>();
-       this.photo = photo;
+       this.photoArray = photoArray;
+       this.config = config;
+       this.width = width;
+       this.height = height;
     }
 
     /**
@@ -180,13 +186,18 @@ public class Profile implements Serializable {
         blackList.remove(profile);
     }
 
-    public void addPhoto(Bitmap bitmap){
-        this.photo = photo;
+    public void addPhoto(byte[] byteArray){
+        this.photoArray = byteArray;
     }
 
-    public Bitmap getPhoto(){
-        return photo;
+    public byte[] getPhoto(){
+        return photoArray;
     }
+
+    public Bitmap.Config getConfig(){return config;}
+
+    public int getWidth() {return width;}
+    public int getHeight() {return  height;}
 
 
 }

@@ -49,6 +49,10 @@ public class SignUpActivity extends AppCompatActivity {
     private String path;
     private Photo photo;
     private Bitmap bitmap;
+    private byte[] photoArray;
+    private Bitmap.Config photoConfig;
+    private int photoWidth;
+    private int photoHeight;
 
 
     @Override
@@ -116,9 +120,13 @@ public class SignUpActivity extends AppCompatActivity {
             errorBox.setText("Please pick up a profile photo");
         }else {
             photo = new Photo(path);
-            bitmap = photo.toBitMap();
+            photoArray = photo.pathToByteArray();
+            photoConfig = photo.pathGetConfig();
+            photoHeight = photo.pathGetHeight();
+            photoWidth = photo.pathGetWidth();
 
-            Profile profile = new Profile(name, username, email, phoneNumber, bitmap);
+
+            Profile profile = new Profile(name, username, email, phoneNumber, photoArray, photoConfig, photoWidth, photoHeight);
 
             if (!(elasticSearchController.addProfile(profile))) {
                 errorBox.setText("Something went wrong! We are unable to create profile");

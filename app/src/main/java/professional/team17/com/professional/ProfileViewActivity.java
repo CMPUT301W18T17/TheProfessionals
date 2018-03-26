@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -42,7 +43,11 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
     protected RatingBar ratingBar;
     protected ImageView profilePic;
     protected Bitmap bitmap;
+    protected byte[] photoArray;
     protected Photo photo;
+    protected Bitmap.Config photoConfig;
+    protected int photoWidth;
+    protected int photoHeight;
 
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
 
@@ -80,9 +85,12 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
         ratingBar.setRating((float)(userProfile.getReviewList().getAvg()));
         reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, userProfile.getReviewList());
         // Photo Part
-        //bitmap = userProfile.getPhoto();
-        //photo = new Photo(bitmap);
-        //profilePic.setImageDrawable(photo.bitMappToDrawable());
+        photoArray = userProfile.getPhoto();
+        photoConfig = userProfile.getConfig();
+        photoHeight = userProfile.getHeight();
+        photoWidth = userProfile.getWidth();
+        photo = new Photo(photoArray, photoConfig, photoWidth, photoHeight);
+        profilePic.setImageDrawable(photo.toDrawable(photo.byteArrayToBitMap()));
     }
 
 
