@@ -186,12 +186,16 @@ public class Profile implements Serializable {
         blackList.remove(profile);
     }
 
-    public void addPhoto(byte[] byteArray){
+    public void setPhoto(byte[] byteArray){
         this.photoArray = byteArray;
     }
 
     public byte[] getPhoto(){
         return photoArray;
+    }
+
+    public void setConfig(Bitmap.Config config){
+        this.config = config;
     }
 
     public Bitmap.Config getConfig(){return config;}
