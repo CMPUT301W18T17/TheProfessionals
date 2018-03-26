@@ -5,9 +5,13 @@ package professional.team17.com.professional;
  */
 
 public class ConnectedState {
-    public static status customVar = null;
+    public static status state = null;
     private static ConnectedState connectedState = null;
 
+    /**
+     *
+     * @return the instance of the singleton
+     */
     public static ConnectedState getInstance() {
         if (connectedState==null) {
             connectedState = new ConnectedState();
@@ -15,16 +19,31 @@ public class ConnectedState {
         return connectedState;
     }
 
+    /**
+     * Will change to online
+     */
     public void setOnline(){
-        if (this.customVar ==null || this.customVar==status.OFFLINE) {
-            this.customVar = status.ONLINE;
+        if (this.state ==null || this.state==status.OFFLINE) {
+            this.state = status.ONLINE;
         }
 
     }
+
+    /**
+     * will change state to offline
+     */
     public void setOffline(){
-        if (this.customVar ==null || this.customVar==status.ONLINE) {
-            this.customVar = status.OFFLINE;
+        if (this.state ==null || this.state==status.ONLINE) {
+            this.state = status.OFFLINE;
         }
+    }
+
+    /**
+     *
+     * @return false if state is online, true if offline
+     */
+    public boolean isOffline(){
+        return (this.state == status.OFFLINE);
     }
 
     public enum status {
