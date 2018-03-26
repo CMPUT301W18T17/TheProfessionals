@@ -91,7 +91,7 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
         taskAddressTextField = (TextView) findViewById(R.id.provider_view_task_address);
         viewMapButton = (ImageButton) findViewById(R.id.provider_view_map_button);
 
-        this.setActivityTitleProvider("View Task");
+        this.setActivityTitle("View Task");
 
 
         sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -286,10 +286,9 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
      * @param v the view the button is located on
      */
     public void viewProfile(View v){
-      ConnectedState.getInstance().setOffline();
-        //Intent intention = new Intent(this, OtherProfileViewActivity.class);
-        //intention.putExtra("profile", task.getProfileName());
-        //startActivity(intention);
+        Intent intention = new Intent(this, OtherProfileViewActivity.class);
+        intention.putExtra("profile", task.getProfileName());
+        startActivity(intention);
     }
 
     /**
@@ -297,8 +296,6 @@ public class ProviderViewTask extends ProviderLayout implements PlaceBidDialog.P
      * @param v the view the button is located on
      */
     public void placeBid(View v){
-        //ConnectedState e = ConnectedState.getInstance();
-       // e.setOnline();
         FragmentManager fm = getSupportFragmentManager();
         PlaceBidDialog dialogFragment = new PlaceBidDialog ();
         Bundle args = new Bundle();

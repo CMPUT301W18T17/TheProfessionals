@@ -40,21 +40,14 @@ import com.google.android.gms.common.GoogleApiAvailability;
 public abstract class ProviderLayout extends AppCompatActivity implements ImageView.OnClickListener {
 
     private String layout;
-    private TextView requesteractivityTitleView;
-    private TextView provideractivityTitleView;
+    private TextView activityTitleView;
     private ImageView providerBiddedButton;
     private ImageView providerAssignedButton;
     private ImageView providerSearchButton;
     private ImageView providerMapButton;
-    private ImageView switchLayoutButtonRequester;
-    private ImageView switchLayoutButtonProvider;
+    private ImageView switchLayoutButton;
     private ImageView userMenuButton;
     private PopupMenu popupMenu;
-    private ImageView requesterAddTaskButton;
-    private ImageView requesterBiddedButton;
-    private ImageView requesterAssignedButton;
-    private ImageView requesterRequestedButton;
-
 
     /**
      * On creation of the activity, assign values to all variables.
@@ -64,23 +57,19 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.provider_layout);
 
+        /* This is the ProviderLayout, so setting layout to Provider */
+        layout = "Provider";
 
         /* Setting all View variables */
         providerBiddedButton = (ImageView) findViewById(R.id.biddedTasksProviderButton);
         providerAssignedButton = (ImageView) findViewById(R.id.acceptedTasksProviderButton);
         providerSearchButton = (ImageView) findViewById(R.id.searchTasksButton);
         providerMapButton = (ImageView) findViewById(R.id.taskMapButton);
-        switchLayoutButtonProvider = (ImageView) findViewById(R.id.switchViewProviderButton);
+        switchLayoutButton = (ImageView) findViewById(R.id.switchViewProviderButton);
         userMenuButton = (ImageView) findViewById(R.id.userMenuButton);
 
-
-        requesterAddTaskButton = (ImageView) findViewById(R.id.addTaskRequesterButton);
-        requesterBiddedButton = (ImageView) findViewById(R.id.biddedTasksRequesterButton);
-        requesterAssignedButton = (ImageView) findViewById(R.id.acceptedTasksRequesterButton);
-        requesterRequestedButton = (ImageView) findViewById(R.id.requestedTasksRequesterButton);
-        switchLayoutButtonRequester = (ImageView) findViewById(R.id.switchViewRequesterButton);
-
     }
 
     /**
@@ -88,30 +77,22 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
      *
      * @param title The title of the activity being displayed.
      */
-    public void setActivityTitleRequester(final String title) {
+    public void setActivityTitle(final String title) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                requesteractivityTitleView = (TextView) findViewById(R.id.requesteractivityTitleView);
-                requesteractivityTitleView.setText(title);
+                activityTitleView = (TextView) findViewById(R.id.activityTitleView);
+                activityTitleView.setText(title);
             }
         });
     }
 
     /**
-     * Changes the title at the top of the layout.
-     *
-     * @param title The title of the activity being displayed.
+     * Returns "Provider" or "Requester" depending on which layout the user is in.
+     * @return The layout that the user is in.
      */
-    public void setActivityTitleProvider(final String title) {
-        Log.i("WEWE", "setActivityTitleProvider: ");
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                provideractivityTitleView = (TextView) findViewById(R.id.provideractivityTitleView);
-                provideractivityTitleView.setText(title);
-            }
-        });
+    public String getLayout(){
+        return layout;
     }
 
     /**
@@ -149,46 +130,12 @@ public abstract class ProviderLayout extends AppCompatActivity implements ImageV
                     intent = new Intent(this, MapsSearchTasksActivity.class);
                     startActivity(intent);
                     finish();
-
                 }
                 break;
         /* If the user taps the switch button */
             case R.id.switchViewProviderButton:
                 intent = new Intent(this, RequesterViewListActivity.class);
                 intent.putExtra("Status", "Requested");
-                startActivity(intent);
-                finish();
-                break;
-            case R.id.addTaskRequesterButton:
-                intent = new Intent(this, RequesterAddTaskActivity.class);
-                startActivity(intent);
-                finish();
-                break;
-            /* If user tapped the bidded button */
-            case R.id.biddedTasksRequesterButton:
-                intent = new Intent(this, RequesterViewListActivity.class);
-                intent.putExtra("Status", "Bidded");
-                startActivity(intent);
-                finish();
-                break;
-            /* If the user tapped the assigned button */
-            case R.id.acceptedTasksRequesterButton:
-                intent = new Intent(this, RequesterViewListActivity.class);
-                intent.putExtra("Status", "Assigned");
-                startActivity(intent);
-                finish();
-                break;
-            /* If the user tapped the requested button */
-            case R.id.requestedTasksRequesterButton:
-                intent = new Intent(this, RequesterViewListActivity.class);
-                intent.putExtra("Status", "Requested");
-                startActivity(intent);
-                finish();
-                break;
-            /* If the user taps the switch button */
-            case R.id.switchViewRequesterButton:
-                intent = new Intent(this, ProviderTaskListActivity.class);
-                intent.putExtra("Status", "Bidded");
                 startActivity(intent);
                 finish();
                 break;

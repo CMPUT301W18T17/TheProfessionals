@@ -25,7 +25,7 @@ import android.widget.ListView;
  * @see TaskList
  * @see RequesterLayout
  */
-public class RequesterViewListActivity extends ProviderLayout implements ConfirmDialog.ConfirmDialogListener{
+public class RequesterViewListActivity extends RequesterLayout implements ConfirmDialog.ConfirmDialogListener{
     private RequesterCustomArrayAdapter adapterHelper;
     private ListView listView;
     private String username;
@@ -73,7 +73,7 @@ public class RequesterViewListActivity extends ProviderLayout implements Confirm
     private String setRequesterViewType() {
         Bundle intent = getIntent().getExtras();
         String type = intent.getString("Status");
-        setActivityTitleRequester("My " + type + " Tasks");
+        setActivityTitle("My " + type + " Tasks");
         return type;
     }
 

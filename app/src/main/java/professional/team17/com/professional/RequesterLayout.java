@@ -47,6 +47,7 @@ public abstract class RequesterLayout extends AppCompatActivity implements Image
         layout = "Requester";
 
         /* Setting all View variables */
+        activityTitleView = (TextView) findViewById(R.id.activityTitleView);
         requesterAddTaskButton = (ImageView) findViewById(R.id.addTaskRequesterButton);
         requesterBiddedButton = (ImageView) findViewById(R.id.biddedTasksRequesterButton);
         requesterAssignedButton = (ImageView) findViewById(R.id.acceptedTasksRequesterButton);
@@ -55,6 +56,19 @@ public abstract class RequesterLayout extends AppCompatActivity implements Image
         userMenuButton = (ImageView) findViewById(R.id.userMenuButton);
     }
 
+    /**
+     * Sets the title at the top of the layout.
+     * @param title The title of the activity being displayed.
+     */
+    public void setActivityTitle(final String title) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activityTitleView = (TextView) findViewById(R.id.activityTitleView);
+                activityTitleView.setText(title);
+            }
+        });
+    }
 
     /**
      * Returns "Provider" or "Requester" depending on which layout the user is in.
