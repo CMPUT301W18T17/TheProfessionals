@@ -158,7 +158,9 @@
 
                                 <android.support.constraint.ConstraintLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:scrollIndicators="top|bottom"
+                                    android:scrollbars="vertical">
 
                                         <TextView
                                             android:id="@+id/provider_view_task_Requester"
@@ -177,12 +179,12 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_marginStart="32dp"
-                                            android:layout_marginTop="10dp"
+                                            android:layout_marginTop="8dp"
                                             android:text="@string/Description"
                                             android:textSize="17sp"
                                             android:textStyle="bold"
                                             app:layout_constraintStart_toStartOf="parent"
-                                            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_location" />
+                                            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_address" />
 
                                         <TextView
                                             android:id="@+id/provider_view_task_Date"
@@ -233,6 +235,7 @@
                                             android:id="@+id/provider_view_task_userName"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
+                                            android:layout_marginStart="16dp"
                                             android:clickable="true"
                                             android:onClick="viewProfile"
                                             android:singleLine="false"
@@ -244,13 +247,16 @@
 
                                         <TextView
                                             android:id="@+id/provider_view_task_address"
-                                            android:layout_width="wrap_content"
+                                            android:layout_width="0dp"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginStart="8dp"
+                                            android:layout_marginEnd="32dp"
+                                            android:layout_marginStart="32dp"
+                                            android:layout_marginTop="10dp"
                                             android:text="@string/NA"
                                             android:textSize="17sp"
-                                            app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_location"
-                                            app:layout_constraintStart_toEndOf="@+id/provider_view_task_location" />
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_location" />
 
                                         <TextView
                                             android:id="@+id/provider_view_task_paragraph"
@@ -311,15 +317,13 @@
                                             android:id="@+id/provider_view_map_button"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginBottom="8dp"
-                                            android:layout_marginStart="12dp"
+                                            android:layout_marginStart="32dp"
                                             android:layout_marginTop="8dp"
                                             android:background="@color/cardview_shadow_end_color"
                                             android:tint="@color/colorProvider"
-                                            app:layout_constraintBottom_toBottomOf="@+id/provider_view_task_address"
-                                            app:layout_constraintStart_toEndOf="@+id/provider_view_task_address"
-                                            app:layout_constraintTop_toTopOf="@+id/provider_view_task_address"
-                                            app:layout_constraintVertical_bias="0.571"
+                                            app:layout_constraintBottom_toBottomOf="@+id/provider_view_task_location"
+                                            app:layout_constraintStart_toEndOf="@+id/provider_view_task_location"
+                                            app:layout_constraintTop_toTopOf="@+id/provider_view_task_location"
                                             app:srcCompat="@android:drawable/ic_dialog_map" />
                                 </android.support.constraint.ConstraintLayout>
 
@@ -332,7 +336,9 @@
         <include
             layout="@layout/provider_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="0dp" />
 
 
 </android.support.constraint.ConstraintLayout>

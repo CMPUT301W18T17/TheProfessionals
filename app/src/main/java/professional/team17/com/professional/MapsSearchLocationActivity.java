@@ -41,11 +41,14 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
         setContentView(R.layout.activity_maps_search_location);
     }
 
+
     public void MapsSearchEvent(){
         mSearchAddress = (EditText) findViewById(R.id.addressInput);
         addLocation = (Button) findViewById(R.id.addLocation);
 
         Log.d(TAG, "MapsSearchEvent()");
+
+        Intent intent = getIntent();
 
         mSearchAddress.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -72,6 +75,7 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
                 finish();
             }
         });
+
     }
 
     private void geoLocate(){

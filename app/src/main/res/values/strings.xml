@@ -39,4 +39,5 @@
     <string name="title_activity_maps_search_location">Map</string>
     <string name="title_activity_maps2">Map</string>
     <string name="plus_location">+ Task Location</string>
+    <string name="title_activity_maps_show_alocation">Map</string>
 </resources>

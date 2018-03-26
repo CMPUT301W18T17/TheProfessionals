@@ -103,8 +103,10 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
         }
         populateBidList();
 
-
-
+        /* Check Existence of Location */
+        if (task.getLatLng()== null){
+            viewLocation.setVisibility(View.INVISIBLE);
+        }
 
         /* Set OnClickListeners */
         backButton.setOnClickListener(new ImageButton.OnClickListener() {
@@ -118,13 +120,19 @@ public class RequesterViewTaskActivity extends RequesterLayout implements Confir
             @Override
             public void onClick(View view) {
                 //TODO implement viewing photos
+
             }
         });
 
         viewLocation.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO implement viewing location
+                Intent intent = new Intent(RequesterViewTaskActivity.this, MapsShowALocationActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("aTaskLatLng", task.getLatLng());
+                intent.putExtras(bundle);
+                intent.putExtra("aTaskAddress", task.getLocation());
+                startActivity(intent);
             }
         });
 
