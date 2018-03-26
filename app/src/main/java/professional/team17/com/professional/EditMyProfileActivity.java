@@ -118,6 +118,16 @@ public class EditMyProfileActivity extends AppCompatActivity {
                 userProfile.setName(editName.getText().toString());
                 userProfile.setEmail(editEmail.getText().toString());
                 userProfile.setPhoneNumber(editPhone.getText().toString());
+                if (startTime == 1 && path != null){
+                    photoArray = photo.pathToByteArray();
+                    photoConfig = photo.pathGetConfig();
+                    photoHeight = photo.pathGetHeight();
+                    photoWidth = photo.pathGetWidth();
+                    userProfile.setPhoto(photoArray);
+                    userProfile.setConfig(photoConfig);
+                    userProfile.setHeight(photoHeight);
+                    userProfile.setWidth(photoWidth);
+                }
                 elasticSearchController.addProfile(userProfile);
                 finish();
             }

@@ -200,7 +200,12 @@ public class Profile implements Serializable {
 
     public Bitmap.Config getConfig(){return config;}
 
+    public void setWidth(int width){this.width = width;}
+
     public int getWidth() {return width;}
+
+    public void setHeight(int height){this.height = height;}
+
     public int getHeight() {return  height;}
 
 
