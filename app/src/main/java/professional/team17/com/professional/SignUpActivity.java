@@ -122,38 +122,41 @@ public class SignUpActivity extends AppCompatActivity {
             errorBox.setText("Username is already taken");
         } else if (!(validateEmail(email))) {
             errorBox.setText("Must enter a valid email");
+        } else if (!(validatePhoneNumber(phoneNumber))) {
+            errorBox.setText("must enter a valid phone number");
         } else {
-            if (path != null) {
-                photo = new Photo(path);
-                photoArray = photo.pathToByteArray();
-                photoConfig = photo.pathGetConfig();
-                photoHeight = photo.pathGetHeight();
-                photoWidth = photo.pathGetWidth();
-            }
+                if (path != null) {
+                    photo = new Photo(path);
+                    photoArray = photo.pathToByteArray();
+                    photoConfig = photo.pathGetConfig();
+                    photoHeight = photo.pathGetHeight();
+                    photoWidth = photo.pathGetWidth();
+                }
 
-            else{
-                photoArray = new byte[] {-1};
-                photoConfig = null;
-                photoHeight = 0;
-                photoWidth = 0;
-            }
+                else{
+                    photoArray = new byte[] {-1};
+                    photoConfig = null;
+                    photoHeight = 0;
+                    photoWidth = 0;
+                }
 
-            Profile profile = new Profile(name, username, email, phoneNumber, photoArray, photoConfig, photoWidth, photoHeight);
+                Profile profile = new Profile(name, username, email, phoneNumber, photoArray, photoConfig, photoWidth, photoHeight);
 
-            if (!(elasticSearchController.addProfile(profile))) {
-                errorBox.setText("Something went wrong! We are unable to create profile");
-            } else {
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                SharedPreferences.Editor editor = pref.edit();
+                if (!(elasticSearchController.addProfile(profile))) {
+                    errorBox.setText("Something went wrong! We are unable to create profile");
+                } else {
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                    SharedPreferences.Editor editor = pref.edit();
 
-                editor.putString("username", username); // Storing string
-                editor.commit(); // commit changes
+                    editor.putString("username", username); // Storing string
+                    editor.commit(); // commit changes
 
-                //String test = pref.getString(username, "not working");
-                changeActivity(SearchActivity.class);
+                    //String test = pref.getString(username, "not working");
+                    changeActivity(SearchActivity.class);
+                }
             }
         }
-    }
+
         //set profile name as global variable?
 
     /**
@@ -210,6 +213,14 @@ public class SignUpActivity extends AppCompatActivity {
     public boolean validateEmail(String email){
         emailValidator = emailValidator.getInstance();
         return emailValidator.isValid(email);
+    }
+
+    public boolean validatePhoneNumber(String phoneNumber){
+        if (phoneNumber.length() > 10) {
+            return android.util.Patterns.PHONE.matcher(phoneNumber).matches();
+        } else {
+            return false;
+        }
     }
 }
 
