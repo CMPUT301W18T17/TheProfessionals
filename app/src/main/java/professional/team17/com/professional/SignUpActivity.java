@@ -116,15 +116,21 @@ public class SignUpActivity extends AppCompatActivity {
             errorBox.setText("Username must be at least 4 characters");
         } else if (elasticSearchController.profileExists(username) == true) {
             errorBox.setText("Username is already taken");
-        } else if(path == null){
-            errorBox.setText("Please pick up a profile photo");
-        }else {
-            photo = new Photo(path);
-            photoArray = photo.pathToByteArray();
-            photoConfig = photo.pathGetConfig();
-            photoHeight = photo.pathGetHeight();
-            photoWidth = photo.pathGetWidth();
+        } else {
+            if (path != null) {
+                photo = new Photo(path);
+                photoArray = photo.pathToByteArray();
+                photoConfig = photo.pathGetConfig();
+                photoHeight = photo.pathGetHeight();
+                photoWidth = photo.pathGetWidth();
+            }
 
+            else{
+                photoArray = new byte[] {-1};
+                photoConfig = null;
+                photoHeight = 0;
+                photoWidth = 0;
+            }
 
             Profile profile = new Profile(name, username, email, phoneNumber, photoArray, photoConfig, photoWidth, photoHeight);
 

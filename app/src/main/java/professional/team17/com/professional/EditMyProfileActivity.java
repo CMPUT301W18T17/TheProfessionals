@@ -83,12 +83,14 @@ public class EditMyProfileActivity extends AppCompatActivity {
         editPhone.setText(userProfile.getPhoneNumber());
 
         // Display photo Part
-        photoArray = userProfile.getPhoto();
         photoConfig = userProfile.getConfig();
-        photoHeight = userProfile.getHeight();
-        photoWidth = userProfile.getWidth();
-        photo = new Photo(photoArray, photoConfig, photoWidth, photoHeight);
-        photoButton.setImageDrawable(photo.toDrawable(photo.byteArrayToBitMap()));
+        if (photoConfig != null) {
+            photoArray = userProfile.getPhoto();
+            photoHeight = userProfile.getHeight();
+            photoWidth = userProfile.getWidth();
+            photo = new Photo(photoArray, photoConfig, photoWidth, photoHeight);
+            photoButton.setImageDrawable(photo.toDrawable(photo.byteArrayToBitMap()));
+        }
 
         // Get the Intent that started this activity
         Intent intent = getIntent();
