@@ -53,7 +53,10 @@ public class NotificationActivity extends AppCompatActivity {
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO implement clearing notifications
+            notificationList.clearList();
+            profile.setNotificationList(notificationList);
+            elasticSearchController.addProfile(profile);
+            notificationAdapter.notifyDataSetChanged();
             }
         });
 
