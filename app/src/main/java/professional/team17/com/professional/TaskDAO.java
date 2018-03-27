@@ -32,27 +32,36 @@ public class TaskDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        delete(db);
-        String query = "CREATE TABLE"+ TASKTABLE+
-                "(id Integer Primary Key, profileName Text, name Text not Null, location Text,"+
-                "description Text, Status Text,Date Text, lon Text, lat Text, actionType Integer, online Boolean)";
-        db.execSQL(query);
+        create();
+
     }
 
     /**
      *
      * @param db the db where tables are being dropped - to clear every time connectivity is set up
      */
-    private void delete(SQLiteDatabase db){
-        String query = "Drop TABLE if exists" +TASKTABLE;
+    private void delete(){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "Drop TABLE if exists " +TASKTABLE;
         db.execSQL(query);
     }
+
+    private void create(){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "CREATE TABLE "+ TASKTABLE+
+                " (id Integer Primary Key, profileName Text, name Text not Null, location Text,"+
+                "description Text, Status Text,Date Text, lon Text, lat Text, actionType Integer, online Boolean)";
+        db.execSQL(query);
+    }
+
 
     /**
      *
      * @param taskList - the tasklist to be inserted into the DB
      */
     public void insertAll(TaskList taskList){
+        delete();
+        create();
         for (Task task : taskList) {
             insert(task);
         }
