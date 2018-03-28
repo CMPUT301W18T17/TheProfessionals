@@ -103,6 +103,16 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             Log.i("Server", "Server failed to return a task for that ID");
         }
         checkOffline();
+
+        populateBidList();
+
+        /* Check Existence of Location */
+        if (task.getLatLng()== null){
+            viewLocation.setVisibility(View.INVISIBLE);
+        } else {
+            viewLocation.setVisibility(View.VISIBLE);
+        }
+
         /* Set OnClickListeners */
         backButton.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
