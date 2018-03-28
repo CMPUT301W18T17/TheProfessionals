@@ -73,7 +73,9 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
         getCircleLatLngBounds(circle);
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(new LatLngBounds(bottomLeft, topRight), 0));
         TaskList tasks = serverHelper.getMapTasks(bottomLeft, topRight);
-
+        for(Task task: tasks) {
+            markSpot(task.getLatLng(), task.getLocation());
+        }
     }
 
     /**
