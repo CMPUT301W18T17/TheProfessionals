@@ -30,14 +30,15 @@ public class ValidationController {
     public boolean validatePhoneNumber(String phoneNumber){
 
         matcher = pattern.matcher(phoneNumber);
-
-        if (android.util.Patterns.PHONE.matcher(phoneNumber).matches()) {
-            return true;
-        }
-        else if (matcher.matches()){
-            return true;
-        }
-        else {
+        if (phoneNumber.length() >= 10) {
+            if (android.util.Patterns.PHONE.matcher(phoneNumber).matches()) {
+                return true;
+            } else if (matcher.matches()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
             return false;
         }
     }
