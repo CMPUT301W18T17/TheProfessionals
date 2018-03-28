@@ -12,6 +12,7 @@ package professional.team17.com.professional;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -101,25 +102,19 @@ public class ServerHelper {
 
     /**
      *
-     * @param lat - the lat of the user
-     * @param lon - the lon of the user
+     * @param bottomLeft- the bottomLeft corner of the Circle enclosing 5km
+     * @param topRight - the topRight corner of the Circle enclosing 5km
      * @return - the tasklist of all tasks within the #### range of the user
      */
-    public TaskList getMapTasks(Float lat, Float lon) {
-        //TODO = calculate the range of lat/lon based on the 40 km distance using paramter belows
-        //just dummy values for now
-        float latMin = 53;
-        float latMax =54;
-        float lonMin = -115;
-        float lonMax = -112;
+    public TaskList getMapTasks(LatLng bottomLeft, LatLng topRight) {
         String search =
                 "{\"query\":{\"bool\":{\"must\":"+
                         "[{\"range\":{\"latitude\""+
-                        ":{\"gte\":"+latMin+
-                        ",\"lte\":" +latMax+
+                        ":{\"gte\":"+bottomLeft.latitude+
+                        ",\"lte\":" +topRight.latitude+
                         "}}},{\"range\":{\"longitude\":"+
-                        "{\"gte\":"+lonMin+
-                        ",\"lte\":"+lonMax+
+                        "{\"gte\":"+bottomLeft.longitude+
+                        ",\"lte\":"+topRight.longitude+
                         "}}}],\"should\":[{\"match\":"+
                         "{\"status\":\"Requested\"}},"+
                         "{\"match\":{\"status\":\"Bidded\"}}]}}}";

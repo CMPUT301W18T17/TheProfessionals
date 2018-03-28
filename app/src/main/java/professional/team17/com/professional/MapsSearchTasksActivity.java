@@ -25,6 +25,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.maps.android.SphericalUtil;
 
+import java.util.ArrayList;
+
 /**
  * An activity which shows all tasks with status Requested and Bidded within 5km.
  */
@@ -35,6 +37,8 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
     private Circle circle;
     private LatLng topRight;
     private LatLng bottomLeft;
+    private ServerHelper serverHelper;
+    private TaskList tasks;
 
     public void setContentViewFunction(){
         setContentView(R.layout.activity_maps_search_tasks);
@@ -68,6 +72,8 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
         }
         getCircleLatLngBounds(circle);
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(new LatLngBounds(bottomLeft, topRight), 0));
+        TaskList tasks = serverHelper.getMapTasks(bottomLeft, topRight);
+
     }
 
     /**
