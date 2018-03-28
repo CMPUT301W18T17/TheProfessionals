@@ -105,19 +105,19 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
     @Override
     void checkOffline() {}
 
-        /**
-         * Get data from MapsSearchLocationActivity.java
-         */
-        @Override
-        protected void onActivityResult (int requestCode, int resultCode, Intent intent){
-            super.onActivityResult(requestCode, resultCode, intent);
-            if (requestCode == 1) {
-                if (resultCode == RESULT_OK) {
-                    latLng = intent.getParcelableExtra("taskLatLng");
-                    locationField.setText(intent.getStringExtra("taskAddress"));
-                }
+    /**
+     * Get data from MapsSearchLocationActivity.java
+     */
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode, Intent intent){
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                latLng = intent.getParcelableExtra("taskLatLng");
+                locationField.setText(intent.getStringExtra("taskAddress"));
             }
         }
+    }
 
 
         /**
