@@ -36,4 +36,5 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     compile 'com.jayway.android.robotium:robotium-solo:5.6.3'
     implementation files('commons-validator-1.6/commons-validator-1.6.jar')
+    compile 'com.google.maps.android:android-maps-utils:0.4+'
 }

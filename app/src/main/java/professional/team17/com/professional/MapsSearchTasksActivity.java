@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.maps.android.SphericalUtil;
 
 /**
  * An activity which shows all tasks with status Requested and Bidded within 5km.
@@ -29,6 +30,7 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
 // Calculate tasks within 5km
     private ImageView currentLocationButton;
     private ImageView closeButton;
+    private Circle circle;
 
     public void setContentViewFunction(){
         setContentView(R.layout.activity_maps_search_tasks);
@@ -53,14 +55,15 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
 
     public void afterLocationFoundEvent(){
         if (currentLatLng != null){
-            mMap.addCircle(new CircleOptions()
+            circle = mMap.addCircle(new CircleOptions()
                     .center(currentLatLng)
                     .radius(5000)
                     .fillColor(0x40ff0000)
                     .strokeColor(Color.TRANSPARENT)
                     .strokeWidth(2));
         }
-        getScreenBoundary();
+        //getScreenBoundary();
+        getCircleLatLngBounds(circle);
 
     }
 
@@ -77,6 +80,20 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
         Toast.makeText(this, "TOPLEFT: " + topLeft.toString() +
                 "BOTTOMRIGHT: " + bottomRight.toString()  , Toast.LENGTH_LONG).show();
     }
+
+    /**
+     * Method getCircleLatLngBounds is referenced from: https://stackoverflow.com/a/37304415
+     * @param circle
+     * @return
+     */
+    private void getCircleLatLngBounds(Circle circle){
+        LatLng topRight = SphericalUtil.computeOffset(circle.getCenter(), circle.getRadius() * Math.sqrt(2), 45);
+        LatLng bottomLeft = SphericalUtil.computeOffset(circle.getCenter(), circle.getRadius() * Math.sqrt(2), 225);
+
+        Toast.makeText(this, "TOPLEFT: " + topRight.toString() +
+                "BOTTOMRIGHT: " + bottomLeft.toString()  , Toast.LENGTH_LONG).show();
+    }
+
     /**
      * Goes to SeachActivity.class
      */
