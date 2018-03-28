@@ -125,7 +125,7 @@ public class AddReviewFragment extends Fragment {
 
         profile = serverHelper.getProfile(profileName);
 
-        Review review = new Review(score, profileName, comment, reviewer);
+        Review review = new Review(score, reviewer, comment);
 
         reviewList = profile.getReviewList();
         reviewList.addReview(review);
