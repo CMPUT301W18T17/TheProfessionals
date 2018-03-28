@@ -8,10 +8,13 @@
     <include layout="@layout/provider_layout"/>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayoutsearch"
         android:layout_width="398dp"
         android:layout_height="match_parent"
+        android:layout_marginBottom="78dp"
         android:layout_marginTop="70dp"
-        android:layout_marginBottom="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="-12dp">
 
         <SearchView

@@ -17,7 +17,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/cardview_shadow_end_color"
-        android:text="@string/hello_blank_fragment"
+        android:text="@string/offline"
         android:textColor="@color/colorProvider"
         android:textSize="20dp"
         android:textStyle="bold"

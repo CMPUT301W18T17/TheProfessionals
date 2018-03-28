@@ -13,6 +13,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -64,6 +66,12 @@ public class SearchActivity extends Navigation {
 
         taskList = new TaskList();
         taskList.addAll(getOpenTasks());
+
+        ConnectedState c = ConnectedState.getInstance();
+        if(c.isOffline()) {
+            Offline fragment = new Offline();
+            getSupportFragmentManager().beginTransaction().replace(R.id.constraintLayoutsearch, fragment).commit();
+        }
         searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskList);
         listView =findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(searchAdapterHelper);
@@ -72,7 +80,6 @@ public class SearchActivity extends Navigation {
 
 
 
-        Log.i("WRWR", "onCreate: "+username);
 
         //initialize search input
         searchView = (SearchView) findViewById(R.id.Search_Activity_Input);
