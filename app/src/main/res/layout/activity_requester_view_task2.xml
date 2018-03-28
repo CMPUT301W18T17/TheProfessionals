@@ -8,246 +8,255 @@
     <include layout="@layout/requester_layout" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/requester_view_task"
+        android:id="@+id/requester_view_task_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="72dp"
         android:layout_marginTop="70dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/requester_view_tasktitleView"
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/requester_view_task"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/NA"
-            android:textSize="24sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/requester_view_taskdate"
-            style="@style/task_providerStyle"
+            <TextView
+                android:id="@+id/requester_view_tasktitleView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/NA"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/requester_view_taskdate"
+                style="@style/task_providerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/taskDate"
+                android:textColor="@color/colorRequester"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_tasktitleView" />
+
+            <TextView
+                android:id="@+id/requester_view_taskdescription"
+                style="@style/task_providerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/Description"
+                android:textColor="@color/colorRequester"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/requester_view_taskdate" />
+
+            <TextView
+                android:id="@+id/requester_view_taskdateView"
+                style="@style/TaskProviderFields"
+                android:text="@string/NA"
+                app:layout_constraintBaseline_toBaselineOf="@+id/requester_view_taskdate"
+                app:layout_constraintStart_toEndOf="@+id/requester_view_taskdate" />
+
+            <TextView
+                android:id="@+id/requester_view_taskstatusView"
+                style="@style/TaskProviderFields"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/NA"
+                app:layout_constraintBaseline_toBaselineOf="@+id/requester_view_taskstatus"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/requester_view_taskstatus"
+                style="@style/task_providerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/status"
+                android:textColor="@color/colorRequester"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/requester_view_taskstatusView"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_tasktitleView" />
+
+            <TextView
+                android:id="@+id/requester_view_taskdescriptionView"
+                style="@style/TaskProviderFields"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/NA"
+                android:textAlignment="viewStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescription" />
+
+            <ImageButton
+                android:id="@+id/requester_view_taskViewPhotosButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/cardview_shadow_end_color"
+                android:tint="@color/colorRequester"
+                app:layout_constraintEnd_toStartOf="@+id/viewLocationButton"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescriptionView"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
+
+            <ImageButton
+                android:id="@+id/requester_view_taskviewLocationButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/cardview_shadow_end_color"
+                android:tint="@color/colorRequester"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/requester_view_taskViewPhotosButton"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescriptionView"
+                app:srcCompat="@android:drawable/ic_dialog_map" />
+
+            <ListView
+                android:id="@+id/requester_view_taskbidListView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
+
+            <ImageButton
+                android:id="@+id/requester_view_taskbackButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/cardview_shadow_end_color"
+                android:tint="@android:color/darker_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+            <TextView
+                android:id="@+id/requester_view_taskbidder"
+                style="@style/task_providerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/Task_Provider"
+                android:textColor="@color/colorRequester"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
+
+            <TextView
+                android:id="@+id/requester_view_taskbidderUsernameView"
+                style="@style/task_providerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:clickable="true"
+                android:onClick="viewProfileName"
+                android:text="@string/NA"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/requester_view_taskbidder"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
+
+            <TextView
+                android:id="@+id/requester_view_taskacceptedBid"
+                style="@style/task_providerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/Accepted_bid"
+                android:textColor="@color/colorRequester"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/requester_view_taskbidAmountView"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_taskviewLocationButton" />
+
+            <TextView
+                android:id="@+id/requester_view_taskbidAmountView"
+                style="@style/task_providerStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/NA"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_taskviewLocationButton" />
+
+            <TextView
+                android:id="@+id/requester_view_tasksetStatus"
+                style="@style/task_providerStyle"
+                android:text="Set Status To:"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_taskbidder" />
+
+            <Button
+                android:id="@+id/requester_view_taskrequestedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Requested"
+                app:layout_constraintStart_toEndOf="@+id/requester_view_tasksetStatus"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_taskacceptedBid" />
+
+            <Button
+                android:id="@+id/requester_view_taskdoneButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Done"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/requester_view_taskrequestedButton"
+                app:layout_constraintTop_toBottomOf="@+id/requester_view_taskacceptedBid" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/taskDate"
-            android:textColor="@color/colorRequester"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_tasktitleView" />
-
-        <TextView
-            android:id="@+id/requester_view_taskdescription"
-            style="@style/task_providerStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/Description"
-            android:textColor="@color/colorRequester"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/requester_view_taskdate" />
-
-        <TextView
-            android:id="@+id/requester_view_taskdateView"
-            style="@style/TaskProviderFields"
-            android:text="@string/NA"
-            app:layout_constraintBaseline_toBaselineOf="@+id/requester_view_taskdate"
-            app:layout_constraintStart_toEndOf="@+id/requester_view_taskdate" />
-
-        <TextView
-            android:id="@+id/requester_view_taskstatusView"
-            style="@style/TaskProviderFields"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="@string/NA"
-            app:layout_constraintBaseline_toBaselineOf="@+id/requester_view_taskstatus"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/requester_view_taskstatus"
-            style="@style/task_providerStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/status"
-            android:textColor="@color/colorRequester"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/requester_view_taskstatusView"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_tasktitleView" />
-
-        <TextView
-            android:id="@+id/requester_view_taskdescriptionView"
-            style="@style/TaskProviderFields"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/NA"
-            android:textAlignment="viewStart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescription" />
-
-        <ImageButton
-            android:id="@+id/requester_view_taskViewPhotosButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/cardview_shadow_end_color"
-            android:tint="@color/colorRequester"
-            app:layout_constraintEnd_toStartOf="@+id/viewLocationButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescriptionView"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
-
-        <ImageButton
-            android:id="@+id/requester_view_taskviewLocationButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/cardview_shadow_end_color"
-            android:tint="@color/colorRequester"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/requester_view_taskViewPhotosButton"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescriptionView"
-            app:srcCompat="@android:drawable/ic_dialog_map" />
-
-        <ListView
-            android:id="@+id/requester_view_taskbidListView"
-            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
+            app:layout_constraintTop_toBottomOf="@+id/requester_view_task">
 
-        <ImageButton
-            android:id="@+id/requester_view_taskbackButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:backgroundTint="@color/cardview_shadow_end_color"
-            android:tint="@android:color/darker_gray"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
-
-        <TextView
-            android:id="@+id/requester_view_taskbidder"
-            style="@style/task_providerStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/Task_Provider"
-            android:textColor="@color/colorRequester"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
-
-        <TextView
-            android:id="@+id/requester_view_taskbidderUsernameView"
-            style="@style/task_providerStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:clickable="true"
-            android:onClick="viewProfileName"
-            android:text="@string/NA"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/requester_view_taskbidder"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
-
-        <TextView
-            android:id="@+id/requester_view_taskacceptedBid"
-            style="@style/task_providerStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/Accepted_bid"
-            android:textColor="@color/colorRequester"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/requester_view_taskbidAmountView"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskviewLocationButton" />
-
-        <TextView
-            android:id="@+id/requester_view_taskbidAmountView"
-            style="@style/task_providerStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/NA"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskviewLocationButton" />
-
-        <TextView
-            android:id="@+id/requester_view_tasksetStatus"
-            style="@style/task_providerStyle"
-            android:text="Set Status To:"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskbidder" />
-
-        <Button
-            android:id="@+id/requester_view_taskrequestedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Requested"
-            app:layout_constraintStart_toEndOf="@+id/requester_view_tasksetStatus"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskacceptedBid" />
-
-        <Button
-            android:id="@+id/requester_view_taskdoneButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Done"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/requester_view_taskrequestedButton"
-            app:layout_constraintTop_toBottomOf="@+id/requester_view_taskacceptedBid" />
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="75dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/requester_view_task">
-
-        <ListView
-            android:id="@+id/requester_task_view_listview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            <ListView
+                android:id="@+id/requester_task_view_listview"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:scrollbars="vertical"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

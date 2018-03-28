@@ -13,7 +13,6 @@ package professional.team17.com.professional;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -73,7 +72,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.provider_view_task2);
+        setContentView(R.layout.provider_view_task);
 
         //get textfields ids //TODO this can be moved to controller (project part 5)
         statusTextField = (TextView) findViewById(R.id.provider_view_task_statusType);
@@ -110,16 +109,30 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
         });
 
 
-        Log.i("UISERNAMRE", "USERNAME: "+username);
         task = getTask();
-        if (task.getLatLng() == null){
-            viewMapButton.setVisibility(View.INVISIBLE);
-        }
-        //getRequester();
+        checkOffline();
 
-        checkStatus();
-        fillTask();
+
         //setRating();
+    }
+
+    @Override
+    void checkOffline() {
+        ConnectedState c = ConnectedState.getInstance();
+        if(c.isOffline()) {
+            Offline fragment = new Offline();
+            getSupportFragmentManager().beginTransaction().replace(R.id.provider_view_task_frame, fragment).commit();
+        }
+        else{
+            if (task.getLatLng() == null){
+                viewMapButton.setVisibility(View.INVISIBLE);
+            }
+            //getRequester();
+
+            checkStatus();
+            fillTask();
+        }
+
     }
 
 

@@ -21,20 +21,6 @@ import com.google.android.gms.common.GoogleApiAvailability;
  */
 
 public abstract  class Navigation extends AppCompatActivity implements ImageView.OnClickListener {
-    private TextView requesteractivityTitleView;
-    private TextView provideractivityTitleView;
-    private ImageView providerBiddedButton;
-    private ImageView providerAssignedButton;
-    private ImageView providerSearchButton;
-    private ImageView providerMapButton;
-    private ImageView switchLayoutButtonRequester;
-    private ImageView switchLayoutButtonProvider;
-    private ImageView userMenuButton;
-    private PopupMenu popupMenu;
-    private ImageView requesterAddTaskButton;
-    private ImageView requesterBiddedButton;
-    private ImageView requesterAssignedButton;
-    private ImageView requesterRequestedButton;
 
 
     /**
@@ -47,22 +33,9 @@ public abstract  class Navigation extends AppCompatActivity implements ImageView
         super.onCreate(savedInstanceState);
 
 
-        /* Setting all View variables */
-        providerBiddedButton = (ImageView) findViewById(R.id.biddedTasksProviderButton);
-        providerAssignedButton = (ImageView) findViewById(R.id.acceptedTasksProviderButton);
-        providerSearchButton = (ImageView) findViewById(R.id.searchTasksButton);
-        providerMapButton = (ImageView) findViewById(R.id.taskMapButton);
-        switchLayoutButtonProvider = (ImageView) findViewById(R.id.switchViewProviderButton);
-        userMenuButton = (ImageView) findViewById(R.id.userMenuButton);
-
-
-        requesterAddTaskButton = (ImageView) findViewById(R.id.addTaskRequesterButton);
-        requesterBiddedButton = (ImageView) findViewById(R.id.biddedTasksRequesterButton);
-        requesterAssignedButton = (ImageView) findViewById(R.id.acceptedTasksRequesterButton);
-        requesterRequestedButton = (ImageView) findViewById(R.id.requestedTasksRequesterButton);
-        switchLayoutButtonRequester = (ImageView) findViewById(R.id.switchViewRequesterButton);
     }
 
+    abstract void checkOffline();
     /**
      * Changes the title at the top of the layout.
      *
@@ -72,7 +45,7 @@ public abstract  class Navigation extends AppCompatActivity implements ImageView
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                requesteractivityTitleView = (TextView) findViewById(R.id.requesteractivityTitleView);
+                TextView requesteractivityTitleView = (TextView) findViewById(R.id.requesteractivityTitleView);
                 requesteractivityTitleView.setText(title);
             }
         });
@@ -84,11 +57,10 @@ public abstract  class Navigation extends AppCompatActivity implements ImageView
      * @param title The title of the activity being displayed.
      */
     public void setActivityTitleProvider(final String title) {
-        Log.i("WEWE", "setActivityTitleProvider: ");
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                provideractivityTitleView = (TextView) findViewById(R.id.provideractivityTitleView);
+                TextView provideractivityTitleView = (TextView) findViewById(R.id.provideractivityTitleView);
                 provideractivityTitleView.setText(title);
             }
         });

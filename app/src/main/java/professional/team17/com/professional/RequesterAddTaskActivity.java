@@ -105,6 +105,11 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
         finish();
     }
 
+    @Override
+    void checkOffline() {
+
+    }
+
 
     /**
      * Saves the task locally for offline functionality.

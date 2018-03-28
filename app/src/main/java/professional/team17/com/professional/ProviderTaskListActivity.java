@@ -31,7 +31,6 @@ public class ProviderTaskListActivity extends Navigation {
     private ProviderCustomArrayAdapter adapterHelper;
     private ListView listView;
     private String username;
-    private SharedPreferences sharedpreferences;
     //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
@@ -53,16 +52,27 @@ public class ProviderTaskListActivity extends Navigation {
         listView = findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(adapterHelper);
         listView.setOnItemClickListener(clickListener);
-        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+
+        SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedpreferences.getString("username", "error");
         String type = setProviderViewType();
         //createList(type);
         taskList.addAll(createList(type));
+        checkOffline();
         adapterHelper.notifyDataSetChanged();
 
 
 
 
+    }
+
+    @Override
+    void checkOffline() {
+        ConnectedState c = ConnectedState.getInstance();
+        if(c.isOffline()) {
+            Offline fragment = new Offline();
+            getSupportFragmentManager().beginTransaction().replace(R.id.provider_task_list_frame, fragment).commit();
+        }
     }
 
     /**

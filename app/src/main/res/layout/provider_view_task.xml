@@ -6,107 +6,13 @@
     android:layout_height="match_parent">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/provider_view_task_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="70dp"
+            android:layout_marginTop="68dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/provider_view_task_myBid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="18dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="My Bid: $"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/provider_view_task_lowBid" />
-
-                <Button
-                    android:id="@+id/provider_view_task_bidButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="49dp"
-                    android:layout_marginBottom="24dp"
-                    android:layout_marginStart="8dp"
-                    android:onClick="placeBid"
-                    android:text="Place Bid"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/provider_view_task_date_input"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Date"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_Date"
-                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_Date" />
-
-                <TextView
-                    android:id="@+id/provider_view_task_Date"
-                    android:layout_width="66dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="Task Date:"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_description"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_description" />
-
-                <TextView
-                    android:id="@+id/provider_view_task_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/status"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/map_task" />
-
-                <RatingBar
-                    android:id="@+id/provider_view_rating_bar"
-                    android:layout_width="54dp"
-                    android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:isIndicator="true"
-                    android:numStars="1"
-                    android:scaleX=".5"
-                    android:scaleY=".5"
-                    android:stepSize=".1"
-                    android:transformPivotX="0dp"
-                    android:transformPivotY="0dp"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_userName"
-                    app:layout_constraintTop_toTopOf="@+id/provider_view_rating" />
-
-                <TextView
-                    android:id="@+id/provider_view_task_Requester"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Task Requester: "
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/provider_view_task_status" />
-
-                <TextView
-                    android:id="@+id/provider_view_task_userName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="16dp"
-                    android:clickable="true"
-                    android:onClick="viewProfileRow"
-                    android:text="username"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_Requester"
-                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_Requester" />
 
                 <TextView
                     android:id="@+id/provider_view_task_title"
@@ -114,104 +20,326 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="32dp"
                     android:text="Title"
+                    android:textColor="@color/colorProvider"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/provider_view_task_lowBidInput"
+                    android:id="@+id/provider_view_task_myBid"
                     android:layout_width="wrap_content"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="2dp"
-                    android:text="LowBidAmount"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_lowBid"
-                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_lowBid" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="28dp"
+                    android:text="My Bid:"
+                    android:textColor="@color/colorProvider"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/provider_view_task_lowBid" />
+
+                <TextView
+                    android:id="@+id/provider_view_task_myBidInputDollar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="$"
+                    android:textSize="18sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_myBidInput"
+                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_myBid" />
 
                 <TextView
                     android:id="@+id/provider_view_task_myBidInput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:text="MyBidAmount"
-                    android:visibility="gone"
+                    android:text="Place a Bid!"
+                    android:textSize="18sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_myBid"
-                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_myBid" />
-
-                <TextView
-                    android:id="@+id/provider_view_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:layout_weight="1"
-                    android:paddingTop="2dp"
-                    android:text="0.00"
-                    android:textSize="11dp"
-                    android:translationZ="34dp"
-                    android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_userName"
-                    app:layout_constraintEnd_toEndOf="@+id/provider_view_rating_bar" />
-
-                <TextView
-                    android:id="@+id/provider_view_task_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:text="Description"
-                    app:layout_constraintEnd_toStartOf="@+id/provider_view_task_Date"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/provider_view_task_title" />
+                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_myBidInputDollar" />
 
                 <TextView
                     android:id="@+id/provider_view_task_lowBid"
                     android:layout_width="wrap_content"
-                    android:layout_height="18dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Lowest Bid: $"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Lowest Bid:"
+                    android:textColor="@color/colorProvider"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/provider_view_task_Requester" />
-
-                <Button
-                    android:id="@+id/provider_view_task_deleteButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="49dp"
-                    android:layout_marginBottom="24dp"
-                    android:layout_marginStart="8dp"
-                    android:text="Cancel Bid"
-                    android:onClick="cancelBid"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <com.google.android.gms.maps.MapView
-                    android:id="@+id/map_task"
-                    android:layout_width="200dp"
-                    android:layout_height="100dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/provider_view_task_description" />
+                    app:layout_constraintTop_toBottomOf="@+id/provider_view_task_title" />
 
                 <TextView
-                    android:id="@+id/provider_view_task_statusType"
+                    android:id="@+id/provider_view_task_lowBidDollar"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="StatusType"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_status"
-                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_status" />
+                    android:text="$"
+                    android:textSize="18sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_lowBid"
+                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_lowBid" />
+
+                <TextView
+                    android:id="@+id/provider_view_task_lowBidInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="No bids yet!"
+                    android:textSize="18sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_lowBidDollar"
+                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_lowBidDollar" />
+
+                <ImageButton
+                    android:id="@+id/provider_view_task_removeBid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/cardview_shadow_end_color"
+                    android:onClick="cancelBid"
+                    android:tint="@android:color/holo_red_dark"
+                    app:layout_constraintBottom_toBottomOf="@+id/provider_view_task_myBidInput"
+                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_manageBid"
+                    app:layout_constraintTop_toTopOf="@+id/provider_view_task_myBidInput"
+                    app:layout_constraintVertical_bias="0.285"
+                    app:srcCompat="@android:drawable/ic_menu_delete" />
+
+                <ImageButton
+                    android:id="@+id/provider_view_task_manageBid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/cardview_shadow_end_color"
+                    android:onClick="appendBid"
+                    android:tint="@color/colorProvider"
+                    app:layout_constraintBottom_toBottomOf="@+id/provider_view_task_myBidInput"
+                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_myBidInput"
+                    app:layout_constraintTop_toTopOf="@+id/provider_view_task_myBidInput"
+                    app:layout_constraintVertical_bias="0.133"
+                    app:srcCompat="@android:drawable/ic_menu_manage" />
+
+                <ImageButton
+                    android:id="@+id/provider_view_task_AddBid"
+                    android:layout_width="29dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/cardview_shadow_end_color"
+                    android:onClick="placeBid"
+                    android:tint="@android:color/holo_blue_dark"
+                    app:layout_constraintBottom_toBottomOf="@+id/provider_view_task_myBidInput"
+                    app:layout_constraintStart_toEndOf="@+id/provider_view_task_myBidInput"
+                    app:layout_constraintTop_toTopOf="@+id/provider_view_task_myBidInput"
+                    app:layout_constraintVertical_bias="0.285"
+                    app:srcCompat="@android:drawable/ic_menu_add" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="80dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@color/colorPrimary"
+                    android:backgroundTint="@color/cardview_light_background"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/provider_view_task_myBid"
+                    app:layout_constraintVertical_bias="0.0">
+
+                        <android.support.v4.widget.NestedScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fillViewport="true">
+
+                                <android.support.constraint.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:scrollIndicators="top|bottom"
+                                    android:scrollbars="vertical">
+
+                                        <TextView
+                                            android:id="@+id/provider_view_task_Requester"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="32dp"
+                                            android:layout_marginTop="10dp"
+                                            android:text="@string/Task_Requester"
+                                            android:textSize="17sp"
+                                            android:textStyle="bold"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_status" />
+
+                                        <TextView
+                                            android:id="@+id/provider_view_task_description"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="32dp"
+                                            android:layout_marginTop="8dp"
+                                            android:text="@string/Description"
+                                            android:textSize="17sp"
+                                            android:textStyle="bold"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_address" />
+
+                                        <TextView
+                                            android:id="@+id/provider_view_task_Date"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="32dp"
+                                            android:layout_marginTop="12dp"
+                                            android:text="@string/taskDate"
+                                            android:textSize="17sp"
+                                            android:textStyle="bold"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_Requester" />
+
+                                        <TextView
+                                            android:id="@+id/provider_view_task_location"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="32dp"
+                                            android:layout_marginTop="10dp"
+                                            android:text="@string/Address"
+                                            android:textSize="17sp"
+                                            android:textStyle="bold"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_Date" />
+
+                                        <TextView
+                                            android:id="@+id/provider_view_task_statusType"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="0dp"
+                                            android:layout_marginStart="8dp"
+                                            android:layout_marginTop="24dp"
+                                            android:text="@string/NA"
+                                            android:textSize="17sp"
+                                            app:layout_constraintStart_toEndOf="@+id/provider_view_task_status"
+                                            app:layout_constraintTop_toTopOf="parent" />
+
+                                        <TextView
+                                            android:id="@+id/provider_view_task_date_input"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="8dp"
+                                            android:text="@string/NA"
+                                            android:textSize="17sp"
+                                            app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_Date"
+                                            app:layout_constraintStart_toEndOf="@+id/provider_view_task_Date" />
+
+                                        <TextView
+                                            android:id="@+id/provider_view_task_userName"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="16dp"
+                                            android:clickable="true"
+                                            android:onClick="viewProfile"
+                                            android:singleLine="false"
+                                            android:text="@string/NA"
+                                            android:textColor="@color/colorRequester"
+                                            android:textSize="17sp"
+                                            app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_Requester"
+                                            app:layout_constraintStart_toEndOf="@+id/provider_view_task_Requester" />
+
+                                        <TextView
+                                            android:id="@+id/provider_view_task_address"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginEnd="32dp"
+                                            android:layout_marginStart="32dp"
+                                            android:layout_marginTop="10dp"
+                                            android:text="@string/NA"
+                                            android:textSize="17sp"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_location" />
+
+                                        <TextView
+                                            android:id="@+id/provider_view_task_paragraph"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginEnd="64dp"
+                                            android:layout_marginStart="32dp"
+                                            android:paddingBottom="15dp"
+                                            android:text="@string/NA"
+                                            android:textSize="17sp"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintHorizontal_bias="0.0"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/provider_view_task_description" />
+
+                                        <TextView
+                                            android:id="@+id/provider_view_task_status"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="32dp"
+                                            android:text="@string/status"
+                                            android:textSize="17sp"
+                                            android:textStyle="bold"
+                                            app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_statusType"
+                                            app:layout_constraintStart_toStartOf="parent" />
+
+                                        <RatingBar
+                                            android:id="@+id/provider_view_rating_bar"
+                                            android:layout_width="54dp"
+                                            android:layout_height="40dp"
+                                            android:layout_weight="1"
+                                            android:isIndicator="true"
+                                            android:numStars="1"
+                                            android:scaleX=".5"
+                                            android:scaleY=".5"
+                                            android:stepSize=".1"
+                                            android:transformPivotX="0dp"
+                                            android:transformPivotY="0dp"
+                                            android:visibility="invisible"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintStart_toEndOf="@+id/provider_view_task_userName"
+                                            app:layout_constraintTop_toTopOf="@+id/provider_view_rating" />
+
+                                        <TextView
+                                            android:id="@+id/provider_view_rating"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="15dp"
+                                            android:layout_weight="1"
+                                            android:paddingTop="2dp"
+                                            android:text="0.00"
+                                            android:textSize="11dp"
+                                            android:translationZ="34dp"
+                                            android:visibility="invisible"
+                                            app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_userName"
+                                            app:layout_constraintEnd_toEndOf="@+id/provider_view_rating_bar" />
+
+                                        <ImageButton
+                                            android:id="@+id/provider_view_map_button"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="32dp"
+                                            android:layout_marginTop="8dp"
+                                            android:background="@color/cardview_shadow_end_color"
+                                            android:tint="@color/colorProvider"
+                                            app:layout_constraintBottom_toBottomOf="@+id/provider_view_task_location"
+                                            app:layout_constraintStart_toEndOf="@+id/provider_view_task_location"
+                                            app:layout_constraintTop_toTopOf="@+id/provider_view_task_location"
+                                            app:srcCompat="@android:drawable/ic_dialog_map" />
+                                </android.support.constraint.ConstraintLayout>
+
+                        </android.support.v4.widget.NestedScrollView>
+
+                </android.support.constraint.ConstraintLayout>
 
         </android.support.constraint.ConstraintLayout>
 
-        <include layout="@layout/provider_layout" />
+        <include
+            layout="@layout/provider_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="0dp" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -173,6 +173,15 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
         return input;
     }
 
+    @Override
+    void checkOffline() {        ConnectedState c = ConnectedState.getInstance();
+        if(c.isOffline()) {
+            Offline fragment = new Offline();
+            getSupportFragmentManager().beginTransaction().replace(R.id.requester_task_list_frame, fragment).commit();
+        }
+
+    }
+
     /**
      * Saves the task locally for offline functionality.
      */
