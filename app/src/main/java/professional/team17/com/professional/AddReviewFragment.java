@@ -32,6 +32,7 @@ public class AddReviewFragment extends Fragment {
     private String mParam2;
 
     private ConstraintLayout reviewLayout;
+    private ConstraintLayout promptLayout;
     private RatingBar rating;
     private EditText commentBox;
 
@@ -104,7 +105,10 @@ public class AddReviewFragment extends Fragment {
 
     public void seeReviewBox(View v){
         reviewLayout = v.findViewById(R.id.reviewBox);
+        promptLayout = v.findViewById(R.id.buttonLayout);
+
         reviewLayout.setVisibility(v.VISIBLE);
+        promptLayout.setVisibility(v.GONE);
 
     }
 
