@@ -154,9 +154,15 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             public void onClick(View view){
                 setToDone();
 
+                String profile = task.getProfileName();
+                Bundle bundle = new Bundle();
+                bundle.putString("Name", profile);
+
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 AddReviewFragment fragment = new AddReviewFragment();
+                fragment.setArguments(bundle);
+
                 fragmentTransaction.add(R.id.requester_view_task, fragment);
                 fragmentTransaction.commit();
             }

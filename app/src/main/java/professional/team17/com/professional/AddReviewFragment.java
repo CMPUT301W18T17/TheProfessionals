@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RatingBar;
 
 
@@ -28,8 +29,14 @@ public class AddReviewFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private RatingBar rating;
+
     private  ConstraintLayout reviewLayout;
+    private RatingBar rating;
+    private EditText commentBox;
+
+    private int score;
+    private String comment;
+
     private OnFragmentInteractionListener mListener;
 
     public AddReviewFragment() {
@@ -81,10 +88,26 @@ public class AddReviewFragment extends Fragment {
     public void seeReviewBox(View v){
         reviewLayout = v.findViewById(R.id.reviewBox);
         reviewLayout.setVisibility(v.VISIBLE);
+
     }
 
+    //TODO: Set method to close fragment
     public void closePrompt(View v){
-        
+
+    }
+
+    public void onSubmit(View v){
+        rating = v.findViewById(R.id.rating);
+        commentBox =v.findViewById(R.id.commentBox);
+
+        score = rating.getNumStars();
+
+        if ( commentBox.getText().length() != 0) {
+            comment = commentBox.getText().toString();
+        }
+
+        //TODO: create a title for the review?
+//        Review review = new Review(score, name, comment, title?)
     }
 
     @Override
