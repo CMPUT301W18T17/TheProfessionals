@@ -138,6 +138,14 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
         elasticSearchController.updateTasks(task);
         statusTextField.setText(task.getStatus());
         fillBidded();
+
+        /* Send notification */
+        String requester = task.getProfileName();
+        Profile requesterProfile = elasticSearchController.getProfile(requester);
+        NotificationList notificationList = requesterProfile.getNotificationList();
+        notificationList.newBidNotification(task, bidAmount, username);
+        requesterProfile.setNotificationList(notificationList);
+        elasticSearchController.addProfile(requesterProfile);
     }
 
     /***

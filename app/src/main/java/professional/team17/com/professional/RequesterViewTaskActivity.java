@@ -420,6 +420,15 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
 
                 setAssignedView();
                 setBidViews(chosenBid.getName(), chosenBid.getAmountAsString());
+
+                /* send notification to bidder */
+                String bidder = chosenBid.getName();
+                Profile bidderProfile = elasticSearchController.getProfile(bidder);
+                NotificationList notificationList = bidderProfile.getNotificationList();
+                notificationList.newAssignedNotification(task, task.getProfileName());
+                bidderProfile.setNotificationList(notificationList);
+                elasticSearchController.addProfile(bidderProfile);
+
             } else if (dialog.equals("Decline")) {
                 /* Bid is declined by the user. Remove the bid from bidList and refresh the
                  *listview.

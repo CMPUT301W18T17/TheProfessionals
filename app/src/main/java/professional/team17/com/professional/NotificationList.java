@@ -14,19 +14,46 @@ public class NotificationList {
 
     private ArrayList<Notification> notificationList;
 
+    /**
+     * When the object is created, it makes an ArrayList of Notification objects
+     */
    public NotificationList(){
        notificationList = new ArrayList<>();
    }
 
+    /**
+     * Empties the list
+     */
    public void clearList(){
        notificationList.clear();
    }
 
-   public void newBidNotification(Task task, int amount, String user){
+    /**
+     * Returns the ArrayList
+     * @return notificationList
+     */
+   public ArrayList<Notification> getList() { return notificationList; }
+
+    /**
+     * Adds a bid notification to the list
+     * @param task The task associated with the notification
+     * @param amount The amount of the bid
+     * @param user The user who bidded on the task
+     */
+   public void newBidNotification(Task task, double amount, String user){
        Notification notification = new Notification(task, amount, user);
        notificationList.add(notification);
    }
 
+   public Notification get(int position){
+       return notificationList.get(position);
+   }
+
+    /**
+     * Adds an assignment notification to the list
+     * @param task The task associated with the notification
+     * @param user The task creator
+     */
    public void newAssignedNotification(Task task, String user){
        Notification notification = new Notification(task, user);
        notificationList.add(notification);

@@ -32,6 +32,7 @@ public class Profile implements Serializable {
     private String email;
     private String phoneNumber;
     private ReviewList reviewList;
+    private NotificationList notificationList;
     private ArrayList<String> blackList;
      private ArrayList<String> blackListedBy;
      private byte[] photoArray;
@@ -58,6 +59,7 @@ public class Profile implements Serializable {
        this.config = config;
        this.width = width;
        this.height = height;
+        notificationList = new NotificationList();
     }
 
     /**
@@ -207,6 +209,14 @@ public class Profile implements Serializable {
     public void setHeight(int height){this.height = height;}
 
     public int getHeight() {return  height;}
+
+    public void setNotificationList(NotificationList notificationList){
+        this.notificationList = notificationList;
+    }
+
+    public NotificationList getNotificationList(){
+        return notificationList;
+    }
 
 
 }

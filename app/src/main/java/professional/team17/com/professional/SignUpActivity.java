@@ -23,7 +23,11 @@ import android.widget.TextView;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import org.apache.commons.validator.routines.EmailValidator;
+
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Allows the user to create a new profile
@@ -53,6 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Bitmap.Config photoConfig;
     private int photoWidth;
     private int photoHeight;
+    private EmailValidator emailValidator;
 
 
     @Override
@@ -108,7 +113,6 @@ public class SignUpActivity extends AppCompatActivity {
         String phoneNumber = phoneNumberBox.getText().toString();
 
 
-        //TODO exception handling for real email/phone number?
         if ((usernameBox.getText().length() == 0) || (nameBox.getText().length() == 0) ||
                 (emailBox.getText().length() == 0) || (phoneNumberBox.getText().length() == 0)){
             errorBox.setText("Please make sure all fields are filled");
@@ -116,38 +120,43 @@ public class SignUpActivity extends AppCompatActivity {
             errorBox.setText("Username must be at least 4 characters");
         } else if (elasticSearchController.profileExists(username) == true) {
             errorBox.setText("Username is already taken");
+        } else if (!(validateEmail(email))) {
+            errorBox.setText("Must enter a valid email");
+        } else if (!(validatePhoneNumber(phoneNumber))) {
+            errorBox.setText("must enter a valid phone number");
         } else {
-            if (path != null) {
-                photo = new Photo(path);
-                photoArray = photo.pathToByteArray();
-                photoConfig = photo.pathGetConfig();
-                photoHeight = photo.pathGetHeight();
-                photoWidth = photo.pathGetWidth();
-            }
+                if (path != null) {
+                    photo = new Photo(path);
+                    photoArray = photo.pathToByteArray();
+                    photoConfig = photo.pathGetConfig();
+                    photoHeight = photo.pathGetHeight();
+                    photoWidth = photo.pathGetWidth();
+                }
 
-            else{
-                photoArray = new byte[] {-1};
-                photoConfig = null;
-                photoHeight = 0;
-                photoWidth = 0;
-            }
+                else{
+                    photoArray = new byte[] {-1};
+                    photoConfig = null;
+                    photoHeight = 0;
+                    photoWidth = 0;
+                }
 
-            Profile profile = new Profile(name, username, email, phoneNumber, photoArray, photoConfig, photoWidth, photoHeight);
+                Profile profile = new Profile(name, username, email, phoneNumber, photoArray, photoConfig, photoWidth, photoHeight);
 
-            if (!(elasticSearchController.addProfile(profile))) {
-                errorBox.setText("Something went wrong! We are unable to create profile");
-            } else {
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                SharedPreferences.Editor editor = pref.edit();
+                if (!(elasticSearchController.addProfile(profile))) {
+                    errorBox.setText("Something went wrong! We are unable to create profile");
+                } else {
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                    SharedPreferences.Editor editor = pref.edit();
 
-                editor.putString("username", username); // Storing string
-                editor.commit(); // commit changes
+                    editor.putString("username", username); // Storing string
+                    editor.commit(); // commit changes
 
-                //String test = pref.getString(username, "not working");
-                changeActivity(SearchActivity.class);
+                    //String test = pref.getString(username, "not working");
+                    changeActivity(SearchActivity.class);
+                }
             }
         }
-    }
+
         //set profile name as global variable?
 
     /**
@@ -191,6 +200,26 @@ public class SignUpActivity extends AppCompatActivity {
     private void setter(EditText name, String information){
         if (information != null){
             name.setText(information);
+        }
+    }
+
+    /**
+     * Uses Apache's EmailValidator
+     * https://commons.apache.org/proper/commons-validator/apidocs/org/apache/commons/validator/routines/EmailValidator.html
+     * Compares the string email to the regular expression
+     * @param email string email the user entered
+     * @return true or false if it is valid or not
+     */
+    public boolean validateEmail(String email){
+        emailValidator = emailValidator.getInstance();
+        return emailValidator.isValid(email);
+    }
+
+    public boolean validatePhoneNumber(String phoneNumber){
+        if (phoneNumber.length() > 10) {
+            return android.util.Patterns.PHONE.matcher(phoneNumber).matches();
+        } else {
+            return false;
         }
     }
 }
