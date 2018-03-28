@@ -37,8 +37,14 @@ public class AddReviewFragment extends Fragment {
 
     private int score;
     private String comment;
-    private String profile;
+    private String profileName;
     private String reviewer;
+    private ReviewList reviewList;
+
+    private Profile profile;
+
+//    private ElasticSearchController elasticSearchController;
+    private final ServerHelper serverHelper = new ServerHelper();
 
     private OnFragmentInteractionListener mListener;
 
@@ -72,11 +78,12 @@ public class AddReviewFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        profile = getArguments().getString("name");
+        profileName = getArguments().getString("name");
 
         SharedPreferences sharedpreferences = getContext().getSharedPreferences("MyPref",
                 Context.MODE_PRIVATE);
         reviewer = sharedpreferences.getString("username", "error");
+
 
     }
 
@@ -84,7 +91,7 @@ public class AddReviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        profile = getArguments().getString("name");
+        profileName = getArguments().getString("name");
         return inflater.inflate(R.layout.fragment_add_review, container, false);
     }
 
@@ -115,8 +122,20 @@ public class AddReviewFragment extends Fragment {
         if ( commentBox.getText().length() != 0) {
             comment = commentBox.getText().toString();
         }
-        
-        Review review = new Review(score, profile, comment, reviewer);
+
+        profile = serverHelper.getProfile(profileName);
+
+        Review review = new Review(score, profileName, comment, reviewer);
+
+        reviewList = profile.getReviewList();
+        reviewList.addReview(review);
+
+        profile.setReviewList(reviewList);
+
+        serverHelper.addProfile(profile);
+
+
+
     }
 
     @Override

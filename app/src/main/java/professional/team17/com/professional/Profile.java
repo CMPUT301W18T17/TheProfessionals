@@ -34,11 +34,11 @@ public class Profile implements Serializable {
     private ReviewList reviewList;
     private NotificationList notificationList;
     private ArrayList<String> blackList;
-     private ArrayList<String> blackListedBy;
-     private byte[] photoArray;
-     private Bitmap.Config config;
-     private  int width;
-     private  int height;
+    private ArrayList<String> blackListedBy;
+    private byte[] photoArray;
+    private Bitmap.Config config;
+    private  int width;
+    private  int height;
 
     /**
      *
@@ -137,6 +137,8 @@ public class Profile implements Serializable {
     public ReviewList getReviewList(){
         return reviewList;
     }
+
+    public void setReviewList(ReviewList reviewList) { this.reviewList = reviewList; }
 
     /**
      *
