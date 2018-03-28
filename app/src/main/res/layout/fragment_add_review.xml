@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout2"
+    android:id="@+id/Fragment Popup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddReviewFragment">
@@ -10,24 +10,26 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:id="@+id/Prompt"
+        android:id="@+id/prompt"
         android:layout_width="0dp"
         android:layout_height="37dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="244dp"
         android:background="@color/colorProvider"
         android:paddingBottom="5dp"
+        android:paddingLeft="@dimen/list_item_spacing_half"
+        android:paddingRight="@dimen/list_item_spacing_half"
         android:paddingTop="5dp"
         android:text="@string/add_review"
         android:textColor="@color/cardview_light_background"
         android:textSize="19sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/buttonLayout"
         android:layout_width="381dp"
         android:layout_height="56dp"
         android:layout_marginEnd="8dp"
@@ -35,10 +37,10 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Prompt">
+        app:layout_constraintTop_toBottomOf="@+id/prompt">
 
         <Button
-            android:id="@+id/Yes"
+            android:id="@+id/yesButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="104dp"
@@ -48,7 +50,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/No"
+            android:id="@+id/noButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="100dp"
@@ -59,14 +61,16 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/ReviewBox"
+        android:id="@+id/reviewBox"
         android:layout_width="368dp"
-        android:layout_height="169dp"
+        android:layout_height="195dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+        app:layout_constraintTop_toBottomOf="@+id/buttonLayout">
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -79,19 +83,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="360dp"
-            android:layout_height="96dp"
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/commentBox"
+            android:layout_width="340dp"
+            android:layout_height="49dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:ems="10"
+            android:hint="@string/comment"
+            android:inputType="text|textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar"
-            tools:text="@string/comment" />
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
     </android.support.constraint.ConstraintLayout>
 
