@@ -52,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
     private Bitmap.Config photoConfig;
     private int photoWidth;
     private int photoHeight;
-    private EmailValidator emailValidator;
+    private ValidationController validationController;
 
 
     @Override
@@ -83,6 +83,8 @@ public class SignUpActivity extends AppCompatActivity {
         setter(nameBox, name);
         setter(emailBox, eMail);
         setter(phoneNumberBox, phoneNumber);
+
+        validationController = new ValidationController();
     }
 
     /**
@@ -115,9 +117,9 @@ public class SignUpActivity extends AppCompatActivity {
             errorBox.setText("Username must be at least 4 characters");
         } else if (serverHelper.profileExists(username) == true) {
             errorBox.setText("Username is already taken");
-        } else if (!(validateEmail(email))) {
+        } else if (!(validationController.validateEmail(email))) {
             errorBox.setText("Must enter a valid email");
-        } else if (!(validatePhoneNumber(phoneNumber))) {
+        } else if (!(validationController.validatePhoneNumber(phoneNumber))) {
             errorBox.setText("must enter a valid phone number");
         } else {
                 if (path != null) {
@@ -198,24 +200,5 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Uses Apache's EmailValidator
-     * https://commons.apache.org/proper/commons-validator/apidocs/org/apache/commons/validator/routines/EmailValidator.html
-     * Compares the string email to the regular expression
-     * @param email string email the user entered
-     * @return true or false if it is valid or not
-     */
-    public boolean validateEmail(String email){
-        emailValidator = emailValidator.getInstance();
-        return emailValidator.isValid(email);
-    }
-
-    public boolean validatePhoneNumber(String phoneNumber){
-        if (phoneNumber.length() > 10) {
-            return android.util.Patterns.PHONE.matcher(phoneNumber).matches();
-        } else {
-            return false;
-        }
-    }
 }
 
