@@ -341,7 +341,7 @@ public class ElasticSearchController {
                         notifyStateonline();
                     }
                     catch (Exception e) {
-                        notifyStateOffline();
+                        new OfflineException();
                         Log.i("Error", "The application failed to build and send the profile");
                         success = false;
                     }
@@ -362,6 +362,7 @@ public class ElasticSearchController {
                     .type(profiletype)
                     .build();
             try {
+
                 JestResult result = client.execute(get);
                 notifyStateonline();
                 if (result.isSucceeded()) {
@@ -369,10 +370,12 @@ public class ElasticSearchController {
                 }
                 else{
                 Log.i("error", "Search query failed to find any thing =/");
+
             }
+
         }
             catch (Exception e) {
-                notifyStateOffline();
+                new OfflineException();
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
             return profile;
@@ -411,7 +414,7 @@ public class ElasticSearchController {
                     }
                 }
                 catch (Exception e) {
-                    notifyStateOffline();
+                    new OfflineException();
                     Log.i("Error", "The application failed to build and add the task");
                 }
             }
@@ -437,11 +440,12 @@ public class ElasticSearchController {
                         .build();
 
                 try {
+
                     DocumentResult result = client.execute(index);
                     notifyStateonline();
                 }
                 catch (Exception e) {
-                    notifyStateOffline();
+                    new OfflineException();
                     Log.i("Error", "The application failed to build and update the task");
 
                 }
@@ -468,7 +472,7 @@ public class ElasticSearchController {
                     notifyStateonline();
                 }
                 catch (Exception e) {
-                    notifyStateOffline();
+                    new OfflineException();
                     Log.i("Error", "The application failed to build and delete the profile");
 
                 }
@@ -495,9 +499,8 @@ public class ElasticSearchController {
                     notifyStateonline();
                 }
                 catch (Exception e) {
-                    notifyStateOffline();
+                    new OfflineException();
                     Log.i("Error", "The application failed to build and delete the task");
-
                 }
             }
             return null;
@@ -527,7 +530,7 @@ public class ElasticSearchController {
                 }
             }
             catch (Exception e) {
-                notifyStateOffline();
+                new OfflineException();
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
             return task;
@@ -560,7 +563,7 @@ public class ElasticSearchController {
                 }
             }
             catch (Exception e) {
-                notifyStateOffline();
+                new OfflineException();
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
             return taskList;
@@ -568,10 +571,6 @@ public class ElasticSearchController {
     }
 
 
-    public static void notifyStateOffline() {
-        ConnectedState c = ConnectedState.getInstance();
-        c.setOffline();
-    }
 
     public static void notifyStateonline() {
         ConnectedState c = ConnectedState.getInstance();
