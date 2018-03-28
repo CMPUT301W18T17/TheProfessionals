@@ -45,4 +45,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="offline">You are currently offline.</string>
     <string name="add_review">Do you want to review your task provider?</string>
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
+    <string name="comment">Comment</string>
 </resources>
