@@ -12,6 +12,7 @@ package professional.team17.com.professional;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -152,6 +153,12 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             @Override
             public void onClick(View view){
                 setToDone();
+
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                AddReviewFragment fragment = new AddReviewFragment();
+                fragmentTransaction.add(R.id.requester_view_task, fragment);
+                fragmentTransaction.commit();
             }
         });
 
