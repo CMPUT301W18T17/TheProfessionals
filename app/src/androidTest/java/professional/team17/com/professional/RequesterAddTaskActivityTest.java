@@ -3,16 +3,10 @@ package professional.team17.com.professional;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 
 import com.robotium.solo.Solo;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 /**
  * Created by Zhipeng Zhang on 2018/3/14.
@@ -20,7 +14,7 @@ import java.util.ArrayList;
 
 public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCase2<RequesterAddTaskActivity> {
     private Solo solo;
-    private ElasticSearchController elasticSearchController;
+    private ServerHelper serverHelper;
     private Profile profile;
 
 
@@ -30,8 +24,8 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
 
     public void setUp() throws Exception{
         profile = new Profile("zhipeng", "TestUser1", "abc@abc.com", "110");
-        elasticSearchController = new ElasticSearchController();
-        elasticSearchController.addProfile(profile);
+        serverHelper = new ServerHelper();
+        serverHelper.addProfile(profile);
 
         solo = new Solo(getInstrumentation(), getActivity());
         Context context = getInstrumentation().getTargetContext();
@@ -71,7 +65,7 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
 
     @Override
     public void tearDown() throws Exception {
-        elasticSearchController.deleteProfile(profile);
+        serverHelper.deleteProfile(profile);
         solo.finishOpenedActivities();
     }
 

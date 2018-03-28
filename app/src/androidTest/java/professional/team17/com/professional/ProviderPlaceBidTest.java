@@ -2,10 +2,8 @@ package professional.team17.com.professional;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
 import android.widget.EditText;
 
 import com.robotium.solo.Solo;
@@ -16,7 +14,7 @@ import com.robotium.solo.Solo;
 
 public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<SearchActivity> {
     private Solo solo;
-    private ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private ServerHelper serverHelper = new ServerHelper();
     private MockTask mockTask;
     private Profile testProfile ;
 
@@ -26,11 +24,11 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
 
     public void setUp() throws Exception {
         mockTask = new MockTask("kaixiang", "kaixiang's task", "Test Description", "Test Location", "01/01/2000");
-        ElasticSearchController mockES = new ElasticSearchController();
+        ServerHelper mockES = new ServerHelper();
         String ID = mockES.addTasks(mockTask);
         mockTask.setId(ID);
         testProfile = new Profile("kaixiang","TestUser1", "tester@ualberta.ca","123-456-7890");
-        elasticSearchController.addProfile(testProfile);
+        serverHelper.addProfile(testProfile);
         /*Intent i = new Intent();
         i.putExtra("Status", "Bidded");
         setActivityIntent(i);
@@ -84,8 +82,8 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
 
     @Override
     public void tearDown() throws Exception {
-        elasticSearchController.deleteTasks(mockTask);
-        elasticSearchController.deleteProfile(testProfile);
+        serverHelper.deleteTasks(mockTask);
+        serverHelper.deleteProfile(testProfile);
 
         solo.finishOpenedActivities();
 

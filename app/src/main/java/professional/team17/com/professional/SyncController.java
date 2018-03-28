@@ -1,6 +1,5 @@
 package professional.team17.com.professional;
 
-import android.app.Activity;
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -10,11 +9,11 @@ import java.util.ArrayList;
  */
 
 public class SyncController {
-    ElasticSearchController es;
+    ServerHelper es;
     Context context;
 
     public SyncController(Context context){
-        es = new ElasticSearchController();
+        es = new ServerHelper();
         this.context = context;
     }
 

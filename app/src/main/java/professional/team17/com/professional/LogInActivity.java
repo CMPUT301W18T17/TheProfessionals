@@ -21,22 +21,20 @@ import android.widget.TextView;
 
 import com.searchly.jestdroid.DroidClientConfig;
 
-import javax.security.auth.login.LoginException;
-
 /**
  * Allows the user to log in or move to a signup activity
  *
- * @see ElasticSearchController
+ * @see ServerHelper
  * @see SignUpActivity
  */
 public class LogInActivity extends AppCompatActivity {
-    private ElasticSearchController elasticSearchController;
+    private ServerHelper serverHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        elasticSearchController = new ElasticSearchController();
+        serverHelper = new ServerHelper();
 
     }
 
@@ -55,7 +53,7 @@ public class LogInActivity extends AppCompatActivity {
         if (usernameBox.getText().length() == 0){
             error.setText("Please Enter a Username");
         } else {
-            Profile profile = elasticSearchController.getProfile(username);
+            Profile profile = serverHelper.getProfile(username);
             if (!(profile == null)) {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE); // 0 - for private mode
                 SharedPreferences.Editor editor = pref.edit();

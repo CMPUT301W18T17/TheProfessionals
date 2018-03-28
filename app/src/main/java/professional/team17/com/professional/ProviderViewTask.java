@@ -15,7 +15,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
@@ -28,7 +27,7 @@ import android.widget.Toast;
  * An activity where the provider can see the tasks - with different ui depending
  * On the task status, and input
  * @author Allison
- * @see ElasticSearchController, Task, Profile
+ * @see ServerHelper , Task, Profile
  */
 public class ProviderViewTask extends Navigation implements PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
 
@@ -39,7 +38,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
 
     //TODO both items below can be put in controller (project part 5)
     private Task task;
-    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private final ServerHelper serverHelper = new ServerHelper();
 
 
     //Everything below maybe able to be set into the controller. Do not reflect in uml
@@ -148,17 +147,17 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
 
         task.addBid(new Bid(username, bidAmount));
 
-        elasticSearchController.updateTasks(task);
+        serverHelper.updateTasks(task);
         statusTextField.setText(task.getStatus());
         fillBidded();
 
         /* Send notification */
         String requester = task.getProfileName();
-        Profile requesterProfile = elasticSearchController.getProfile(requester);
+        Profile requesterProfile = serverHelper.getProfile(requester);
         NotificationList notificationList = requesterProfile.getNotificationList();
         notificationList.newBidNotification(task, bidAmount, username);
         requesterProfile.setNotificationList(notificationList);
-        elasticSearchController.addProfile(requesterProfile);
+        serverHelper.addProfile(requesterProfile);
     }
 
     /***
@@ -171,7 +170,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
             Bid bid = task.getBids().getBid(username);
             task.removeBid(bid);
         }
-        elasticSearchController.updateTasks(task);
+        serverHelper.updateTasks(task);
         statusTextField.setText(task.getStatus());
         if (task.isBidded()) {
 
@@ -368,6 +367,6 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
     private Task getTask() {
         Bundle intent = getIntent().getExtras();
         String task = intent.getString("Task");
-        return elasticSearchController.getTask(task);
+        return serverHelper.getTask(task);
     }
 }

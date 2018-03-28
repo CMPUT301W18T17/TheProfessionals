@@ -30,7 +30,7 @@ import java.util.Locale;
  * @see RequesterAddTaskActivity
  */
 public class RequesterEditTaskActivity extends RequesterTaskActivity {
-    ElasticSearchController elasticSearchController = new ElasticSearchController();
+    ServerHelper serverHelper = new ServerHelper();
     private String ID;
     private String title;
     private String description;
@@ -114,7 +114,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
      * Get the task to edit's information. Also updates the EditText with the task's info.
      */
     private void getFromServer(String taskID) throws Exception{
-        task = elasticSearchController.getTask(taskID);
+        task = serverHelper.getTask(taskID);
         if (task == null){
             throw new Exception();
         }
@@ -138,7 +138,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
         task.setLocation(locationString);
         task.setLatLng(latLng);
 
-        elasticSearchController.updateTasks(task);
+        serverHelper.updateTasks(task);
     }
 
     /**

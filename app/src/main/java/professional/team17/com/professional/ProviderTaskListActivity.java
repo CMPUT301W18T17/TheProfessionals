@@ -14,7 +14,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -25,7 +24,7 @@ import android.widget.ListView;
  * An activity where the provider can see the tasks - with different ui depending
  * On the task status, and input
  * @author Allison
- * @see ElasticSearchController, ProviderCustomArrayAdapter TaskLIst, Profile
+ * @see ServerHelper , ProviderCustomArrayAdapter TaskLIst, Profile
  */
 public class ProviderTaskListActivity extends Navigation {
     private ProviderCustomArrayAdapter adapterHelper;
@@ -33,7 +32,7 @@ public class ProviderTaskListActivity extends Navigation {
     private String username;
     //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
-    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private final ServerHelper serverHelper = new ServerHelper();
 
 
 
@@ -101,10 +100,10 @@ public class ProviderTaskListActivity extends Navigation {
         TaskList taskList =null;
         setActivityTitleProvider(type + " Tasks");
         if (type.equals("Bidded")) {
-            taskList = elasticSearchController.getTasksBidded(username, "Bidded");
+            taskList = serverHelper.getTasksBidded(username, "Bidded");
         }
         if (type.equals("Assigned")) {
-            taskList = elasticSearchController.getTasksBidded(username, "Assigned");
+            taskList = serverHelper.getTasksBidded(username, "Assigned");
         }
         return taskList;
     }

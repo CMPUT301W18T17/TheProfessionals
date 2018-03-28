@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -34,7 +33,7 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
     String type;
     //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
-    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private final ServerHelper serverHelper = new ServerHelper();
 
 
     /**
@@ -129,13 +128,13 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
     private TaskList createList(String type) {
         TaskList taskList = null;
         if (type.equals("Assigned")) {
-            taskList = elasticSearchController.getTasksRequester(username, "Assigned");
+            taskList = serverHelper.getTasksRequester(username, "Assigned");
         }
         if (type.equals("Requested")) {
-            taskList = elasticSearchController.getTasksRequester(username, "Requested");
+            taskList = serverHelper.getTasksRequester(username, "Requested");
         }
         if (type.equals("Bidded")) {
-            taskList = elasticSearchController.getTasksRequester(username, "Bidded");
+            taskList = serverHelper.getTasksRequester(username, "Bidded");
         }
         return taskList;
     }
@@ -194,7 +193,7 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
         if (confirmed){
             taskList.deleteTask(task);
             adapterHelper.notifyDataSetChanged();
-            elasticSearchController.deleteTasks(task);
+            serverHelper.deleteTasks(task);
         }
     }
 

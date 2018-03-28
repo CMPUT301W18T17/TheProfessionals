@@ -67,8 +67,8 @@ public class RequesterAddTaskController {
      */
     private void addToServer(){
         //TODO delete this temp variable
-        ElasticSearchController elasticSearchController = new ElasticSearchController();
-        elasticSearchController.addTasks(task);
+        ServerHelper serverHelper = new ServerHelper();
+        serverHelper.addTasks(task);
     }
 
 

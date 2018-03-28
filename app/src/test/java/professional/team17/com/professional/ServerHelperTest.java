@@ -9,10 +9,10 @@ import java.util.Date;
  * Created by Zhipeng Zhang on 2018/2/22.
  */
 
-public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase2 {
+public class ServerHelperTest extends ActivityInstrumentationTestCase2 {
 
 
-    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private final ServerHelper serverHelper = new ServerHelper();
     private Date date = new Date();
     Task task1 = new Task("TaskRequester1", "Title1", "Description1", "Location1", date, );
     Task task2 = new Task("TaskRequester2", "Title2", "Description2", "Location2", date, );
@@ -24,13 +24,13 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
     Profile profile3 = new Profile("Mary3", "mair3", "mair@email3.ca", "111-1111");
 
 
-    public ElasticSearchControllerTest() {
-        super(ElasticSearchController.class);
+    public ServerHelperTest() {
+        super(ServerHelper.class);
     }
 
     public void testAddTaskTest() {
-        String id = elasticSearchController.addTasks(task1);
-        Task temp = elasticSearchController.getTask(id);
+        String id = serverHelper.addTasks(task1);
+        Task temp = serverHelper.getTask(id);
         try {
             assertEquals(temp.getUniqueID(), id);
             assertEquals(temp.getDateAsString(), task1.getDateAsString());
@@ -42,24 +42,24 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         catch (Exception e) {
             assertEquals(0,1);
         }
-        elasticSearchController.deleteTasks(task1);
+        serverHelper.deleteTasks(task1);
     }
 
 
     public void testGetTaskListTest() {
-        elasticSearchController.addTasks(task2);
-        elasticSearchController.addTasks(task3);
-        TaskList temp = elasticSearchController.getTasksStatus("Requested");
+        serverHelper.addTasks(task2);
+        serverHelper.addTasks(task3);
+        TaskList temp = serverHelper.getTasksStatus("Requested");
         assertEquals(temp.size(), 2);
-        elasticSearchController.deleteTasks(task2);
-        elasticSearchController.deleteTasks(task3);
+        serverHelper.deleteTasks(task2);
+        serverHelper.deleteTasks(task3);
     }
 
 
     public void testAddProfileTest() {
-        elasticSearchController.addProfile(profile1);
+        serverHelper.addProfile(profile1);
 
-        Profile temp = elasticSearchController.getProfile(profile1.userName);
+        Profile temp = serverHelper.getProfile(profile1.userName);
         try {
             assertEquals(temp.getName(), profile1.getName());
             assertEquals(temp.getEmail(), profile1.getEmail());
@@ -71,19 +71,19 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         {
             assertEquals(0,1);
         }
-        elasticSearchController.deleteProfile(profile1);
+        serverHelper.deleteProfile(profile1);
     }
 
 
     public void testUpdateProfileTest() {
         String phone = "123";
-        elasticSearchController.addProfile(profile1);
+        serverHelper.addProfile(profile1);
 
         profile1.setPhoneNumber(phone);
-        elasticSearchController.addProfile(profile1);
+        serverHelper.addProfile(profile1);
 
 
-        Profile temp = elasticSearchController.getProfile(profile1.userName);
+        Profile temp = serverHelper.getProfile(profile1.userName);
         try {
 
             assertEquals(temp.getPhoneNumber(), profile1.getPhoneNumber());
@@ -92,15 +92,15 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         catch (Exception e) {
             assertEquals(0, 1);
         }
-        elasticSearchController.deleteProfile(profile1);
+        serverHelper.deleteProfile(profile1);
     }
 
     public void testUpdateTaskTest() {
         String name = "newname";
-        String id = elasticSearchController.addTasks(task1);
+        String id = serverHelper.addTasks(task1);
         task1.setName(name);
-        elasticSearchController.updateTasks(task1);
-        Task temp = elasticSearchController.getTask(id);
+        serverHelper.updateTasks(task1);
+        Task temp = serverHelper.getTask(id);
         try {
             assertEquals(temp.getName(), task1.getName());
         }
@@ -108,6 +108,6 @@ public class ElasticSearchControllerTest extends ActivityInstrumentationTestCase
         catch (Exception e) {
             assertEquals(0, 1);
         }
-        elasticSearchController.deleteTasks(task1);
+        serverHelper.deleteTasks(task1);
     }
 }

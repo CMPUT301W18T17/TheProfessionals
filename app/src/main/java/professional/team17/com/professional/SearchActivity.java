@@ -37,7 +37,7 @@ public class SearchActivity extends Navigation {
     private ListView listView;
     private SearchView searchView;
     private TaskList taskList;
-    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private final ServerHelper serverHelper = new ServerHelper();
     private String username;
     private SharedPreferences sharedPreferences;
 
@@ -110,7 +110,7 @@ public class SearchActivity extends Navigation {
      */
     private void search(String query) {
         TaskList temp = new TaskList();
-        temp = elasticSearchController.getSearch(query);
+        temp = serverHelper.getSearch(query);
         taskList.clear();
         taskList.addAll(temp);
         searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskList);
@@ -154,7 +154,7 @@ public class SearchActivity extends Navigation {
     private TaskList getOpenTasks() {
         TaskList tasklist = new TaskList();
         //taskList = elasticSearchController.getTasksStatus("Requested");
-        tasklist = elasticSearchController.getTasksSearch(username);
+        tasklist = serverHelper.getTasksSearch(username);
         return tasklist;
     }
 }

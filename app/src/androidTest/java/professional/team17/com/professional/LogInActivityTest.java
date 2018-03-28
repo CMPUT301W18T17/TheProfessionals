@@ -1,7 +1,6 @@
 package professional.team17.com.professional;
 
 import android.app.Activity;
-import android.graphics.LightingColorFilter;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
@@ -16,7 +15,7 @@ import com.robotium.solo.Solo;
 public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInActivity> {
 
     private Solo solo;
-    private ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private ServerHelper serverHelper = new ServerHelper();
 
     /**
      * test constructor
@@ -57,11 +56,11 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
 
         Profile testProfile = new Profile("tester","TestUser",
                 "tester@ualberta.ca","123-456-7890");
-        elasticSearchController.addProfile(testProfile);
+        serverHelper.addProfile(testProfile);
         solo.enterText((EditText) solo.getView(R.id.usernameBox), "TestUser");
         solo.clickOnButton("Sign In");
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-        elasticSearchController.deleteProfile(testProfile);
+        serverHelper.deleteProfile(testProfile);
     }
 
     /**

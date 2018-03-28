@@ -1,32 +1,13 @@
-/*
- * ElasticSearchController
- *
- * March 5, 2018
- *
- * Copyright @ 2018 Team 17, CMPUT 301, University of Alberta - All Rights Reserved.
- * You may use, distribute, or modify this code under terms and conditions of the Code of Student Behaviour at the University of Alberta.
- * You can find a copy of the license in the github wiki for this project.
- */
-
 package professional.team17.com.professional;
+
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
-
-import org.apache.commons.lang3.ObjectUtils;
-
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
@@ -36,11 +17,10 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
-
-
 /**
- * This class will handle the connection and async tasks to the es server
+ * Created by ag on 2018-03-28.
  */
+
 public class ElasticSearchController {
     private static JestDroidClient client;
     private static String server = "http://cmput301.softwareprocess.es:8080";
@@ -49,306 +29,35 @@ public class ElasticSearchController {
     private static String profiletype = "profile";
 
 
-    public void ElasticSearchController(){
-
-    }
-//TODO - all methods (not async should be placed in some other class at some point
-
-
-    /**
-     *
-     * @param search - the jsons  query
-     * @return
-     */
-    private TaskList getTaskList (String search){
-        TaskList tasklist = null;
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jsonObject = (JsonObject) jsonParser.parse(search);
-        ElasticSearchController.GetTasks getTasks = new ElasticSearchController.GetTasks();
-        getTasks.execute(jsonObject.toString());
-        try {
-            tasklist = getTasks.get();
-        } catch (Exception e) {
-        }
-        return tasklist;
-
-    }
-
-    /**
-     *
-     * @param username - the username to be matched against the task requester for each task
-     * @param status - the status of the task
-     * @return - TaskList of all tasks that match query
-     */
-    public TaskList getTasksRequester(String username, String status) {
-        String search = "{ \"query\": {" +
-                " \"bool\": {" +
-                "\"must\": [ " +
-                "{\"match\": {\"profileName\": \"" + username + "\"}}," +
-                "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
-        return getTaskList(search);
-    }
-
-
-
-
-    /**
-     *
-     * @param username - the username to be matched against the task bidder username
-     * @param status - the status of the task
-     * @return - TaskList of all tasks that match query
-     */
-    public TaskList getTasksBidded(String username, String status) {;
-        String search = "{ \"query\": {" +
-                " \"bool\": {" +
-                "\"must\": [ " +
-                "{\"match\": {\"bids.name\": \"" + username + "\"}}," +
-                "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
-        return getTaskList(search);
-    }
-
-    /**
-     *
-     * @param lat - the lat of the user
-     * @param lon - the lon of the user
-     * @return - the tasklist of all tasks within the #### range of the user
-     */
-    public TaskList getMapTasks(Float lat, Float lon) {
-        //TODO = calculate the range of lat/lon based on the 40 km distance using paramter belows
-        //just dummy values for now
-        float latMin = 53;
-        float latMax =54;
-        float lonMin = -115;
-        float lonMax = -112;
-        String search =
-                "{\"query\":{\"bool\":{\"must\":"+
-                        "[{\"range\":{\"latitude\""+
-                        ":{\"gte\":"+latMin+
-                        ",\"lte\":" +latMax+
-                        "}}},{\"range\":{\"longitude\":"+
-                        "{\"gte\":"+lonMin+
-                        ",\"lte\":"+lonMax+
-                        "}}}],\"should\":[{\"match\":"+
-                        "{\"status\":\"Requested\"}},"+
-                        "{\"match\":{\"status\":\"Bidded\"}}]}}}";
-        return getTaskList(search);
-    }
-
-    /**
-     *
-     * @param query - the list of words to be searched
-     * @return - TaskList of all tasks that match ANY word in query and are
-     * in either status bidded or requested
-     *
-     */
-    public TaskList getSearch(String query) {
-        String search =
-                "{\"query\":{\"bool\":{\"must\":"+
-                        "{\"match\":{\"description\":\"" + query+ "\"}}," +
-                        "\"should\":[{\"match\":{\"status\":\"Requested\"}},"+
-                        "{\"match\":{\"status\":\"Bidded\"}}]}}}";
-        return getTaskList(search);
-    }
-
-    /**
-     *
-     * @param username - the username to be matched against the task bidder username
-     * @return - TaskList of all tasks that match query, (in requested/bidded" and
-     * NOT with the username
-     */
-    public TaskList getTasksSearch(String username) {
-        String search =
-                "{\"query\":{\"bool\":"+
-                "{\"must_not\":{\"match\":{\"profileName\":\"" + username + "\"}}," +
-                        "\"should\":[{\"match\":{\"status\":\"Requested\"}},"+
-                        "{\"match\":{\"status\":\"Bidded\"}}]}}}";
-        return getTaskList(search);
-    }
-
-    /**
-     *
-     * @param status - the task status to be matched against
-     * @return - Tasklist - the results matched from elasticSearch
-     */
-    public TaskList getTasksStatus(String status) {
-        String search = "{ \"query\": {\"match\" : { \"status\": \""+status+"\"  }} }";
-        return getTaskList(search);
-    }
-
-    /**
-     *
-     * @param status - the task status to be matched against
-     * @return - Tasklist - the results matched from elasticSearch
-     */
-    public TaskList getTasksStatus(String status, String username) {
-        String search = "{ \"query\": {\"match\" : { \"status\": \""+status+"\"  }} }";
-        return getTaskList(search);
-    }
-
-
-    /**
-     *
-     * @param profile - the name that will be matched against the task requester
-     * @return   Tasklist - the results matched from elasticSearch
-     */
-    public TaskList getTasksUsername(String profile) {
-        String search = "{ \"query\": {\"match\" : { \"profile\": \""+profile+"\"  }} }";
-        return getTaskList(search);
-    }
-
-
-    /**
-     * @param taskid - the unique id being matched against by task
-     * @return Task task - the task returned from the server that matches, null otherwise
-     */
-    public Task getTask(String taskid) {
-        Task task= null;
-        ElasticSearchController.GetTask gettask = new ElasticSearchController.GetTask();
-        gettask.execute(taskid);
-        try {
-            task = gettask.get();
-        } catch (Exception e) {
-            return null;
-        }
-        return task;
-    }
-
-
-    /**
-     *
-     */
-    public String addTasks(Task task) {
-        String id;
-        ElasticSearchController.AddTask addtask = new ElasticSearchController.AddTask();
-        addtask.execute(task);
-        try {
-            id = addtask.get();
-            task.setId(id);
-            ElasticSearchController.UpdateTask updateTask = new ElasticSearchController.UpdateTask();
-            updateTask.execute(task);
-        }
-        catch (Exception e){
-            id = null;
-        }
-        //now that the id is set, we need to update it into the db
-        //TODO RESEARCH BETTER WAY
-
-        return id;
-    }
-
-
-    /**
-     *
-     * @param task - the task that will be added within the ES
-     */
-    public void updateTasks(Task task) {
-        ElasticSearchController.UpdateTask updatetask = new ElasticSearchController.UpdateTask();
-        updatetask.execute(task);
-
-    }
-
-    /**
-     *
-     * @param task - the task that will be deleted within the ES
-     */
-    public void deleteTasks(Task task) {
-        ElasticSearchController.DeleteTask deletetask = new ElasticSearchController.DeleteTask();
-        deletetask.execute(task);
-    }
-
-    /**
-     *
-     * @param profile - the profile that will be deleted within the ES (for testing purposes)
-     */
-    public void deleteProfile(Profile profile) {
-        ElasticSearchController.DeleteProfile deleteprofile= new ElasticSearchController.DeleteProfile();
-        deleteprofile.execute(profile);
-
-    }
-
-    /**
-     * @param username - the username to be searched for in the server
-     * @return Profile profile  - the profile matching the user name, or null if no match
-     */
-    public Profile getProfile(String username) {
-        Profile profile = null;
-        ElasticSearchController.GetProfile getprofile = new ElasticSearchController.GetProfile();
-        getprofile.execute(username);
-        try {
-            profile = getprofile.get();
-        } catch (Exception e) {
-            return null;
-        }
-        return profile;
-    }
-
-
-    /**
-     * @param profile - the profile to be added
-     * @return Boolean value - true means profile was added successfully, false means unsuccessful
-     */
-    public Boolean addProfile(Profile profile) {
-
-        boolean result;
-        ElasticSearchController.AddProfile addProfile = new ElasticSearchController.AddProfile();
-        addProfile.execute(profile);
-        try {
-            result = addProfile.get();
-        } catch (Exception e) {
-            return false;
-        }
-        return result;
-    }
-
-
-    /**
-     * @param username - the username that is being looked for in the db
-     * @return boolean value, true meaning the username does exist, false otherwise
-     */
-    public Boolean profileExists(String username) {
-        boolean result = true;
-        ElasticSearchController.GetProfile getProfile = new ElasticSearchController.GetProfile();
-        getProfile.execute(username);
-        try {
-            Profile profile = getProfile.get();
-            // return false if no profile found
-            if (profile == null || username.isEmpty()) {
-                result = false;
-            }
-        } catch (Exception e) {
-            result = false;
-        }
-        return result;
-    }
 
     /**
      * This AsyncTask will add a profile to the db (can also be used to update profile)
      */
-        public static class AddProfile extends AsyncTask<Profile, Void, Boolean> {
+    public static class AddProfile extends AsyncTask<Profile, Void, Boolean> {
 
-            @Override
-            protected Boolean doInBackground(Profile... profiles) {
-                verifySettings();
-                Boolean success = true;
-                for (Profile profile : profiles) {
-                    Index index = new Index.Builder(profile)
-                            .index(indexname)
-                            .type(profiletype)
-                            .id(profile.getUserName())
-                            .build();
-                    try {
-                        DocumentResult result = client.execute(index);
-                        notifyStateonline();
-                    }
-                    catch (Exception e) {
-                        new OfflineException();
-                        Log.i("Error", "The application failed to build and send the profile");
-                        success = false;
-                    }
+        @Override
+        protected Boolean doInBackground(Profile... profiles) {
+            verifySettings();
+            Boolean success = true;
+            for (Profile profile : profiles) {
+                Index index = new Index.Builder(profile)
+                        .index(indexname)
+                        .type(profiletype)
+                        .id(profile.getUserName())
+                        .build();
+                try {
+                    DocumentResult result = client.execute(index);
+                    notifyStateonline();
                 }
-                return success;
+                catch (Exception e) {
+                    new OfflineException();
+                    Log.i("Error", "The application failed to build and send the profile");
+                    success = false;
+                }
             }
+            return success;
         }
+    }
 
     /**
      * This AsyncTask will retrieve profile from the db matching a username.
@@ -369,11 +78,11 @@ public class ElasticSearchController {
                     profile = result.getSourceAsObject(Profile.class);
                 }
                 else{
-                Log.i("error", "Search query failed to find any thing =/");
+                    Log.i("error", "Search query failed to find any thing =/");
+
+                }
 
             }
-
-        }
             catch (Exception e) {
                 new OfflineException();
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
@@ -577,15 +286,16 @@ public class ElasticSearchController {
         c.setOnline();
     }
 
-        public static void verifySettings() {
-            if (client == null) {
-                DroidClientConfig.Builder builder = new DroidClientConfig.Builder(server);
-                DroidClientConfig config = builder.build();
+    public static void verifySettings() {
+        if (client == null) {
+            DroidClientConfig.Builder builder = new DroidClientConfig.Builder(server);
+            DroidClientConfig config = builder.build();
 
-                JestClientFactory factory = new JestClientFactory();
-                factory.setDroidClientConfig(config);
-                client = (JestDroidClient) factory.getObject();
-            }
+            JestClientFactory factory = new JestClientFactory();
+            factory.setDroidClientConfig(config);
+            client = (JestDroidClient) factory.getObject();
         }
+    }
 
 }
+

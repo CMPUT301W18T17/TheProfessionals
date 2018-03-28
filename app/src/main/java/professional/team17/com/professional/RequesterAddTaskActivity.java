@@ -85,8 +85,8 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
         String username = pref.getString("username", "error");
         task = new Task(username, title, description, locationString, dateString, latLng);
         task.setRequested();
-        ElasticSearchController elasticSearchController = new ElasticSearchController();
-        elasticSearchController.addTasks(task);
+        ServerHelper serverHelper = new ServerHelper();
+        serverHelper.addTasks(task);
     }
 
     /**

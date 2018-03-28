@@ -19,7 +19,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,7 +26,7 @@ import android.widget.TextView;
  * EditMyProfileActivity starts after user selects the UserMenuButton --> "Edit My Profile"
  * @author Hailan
  * @version 3.0 Last updated: Mar 13, 2018
- * @see ElasticSearchController
+ * @see ServerHelper
  * @see ProfileViewActivity
  */
 public class EditMyProfileActivity extends AppCompatActivity {
@@ -48,7 +47,7 @@ public class EditMyProfileActivity extends AppCompatActivity {
     private String path, name, eMail, phoneNumber;
     private  int startTime;
 
-    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private final ServerHelper serverHelper = new ServerHelper();
 
     /**
      * Upon creation, EditText will be set with relevant user info grabbed from ES
@@ -75,7 +74,7 @@ public class EditMyProfileActivity extends AppCompatActivity {
 
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String theUserName = pref.getString("username", "error");
-        userProfile = elasticSearchController.getProfile(theUserName);
+        userProfile = serverHelper.getProfile(theUserName);
 
         showUserName.setText(theUserName);
         editName.setText(userProfile.getName());
@@ -130,7 +129,7 @@ public class EditMyProfileActivity extends AppCompatActivity {
                     userProfile.setHeight(photoHeight);
                     userProfile.setWidth(photoWidth);
                 }
-                elasticSearchController.addProfile(userProfile);
+                serverHelper.addProfile(userProfile);
                 finish();
             }
         });

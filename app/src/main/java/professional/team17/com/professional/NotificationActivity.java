@@ -20,7 +20,7 @@ public class NotificationActivity extends AppCompatActivity {
     private String username;
     private Profile profile;
     private NotificationListAdapter notificationAdapter;
-    private ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private ServerHelper serverHelper = new ServerHelper();
 
 
     @Override
@@ -55,7 +55,7 @@ public class NotificationActivity extends AppCompatActivity {
             public void onClick(View view) {
             notificationList.clearList();
             profile.setNotificationList(notificationList);
-            elasticSearchController.addProfile(profile);
+            serverHelper.addProfile(profile);
             notificationAdapter.notifyDataSetChanged();
             }
         });
@@ -64,7 +64,7 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     private void getFromServer(){
-        profile = elasticSearchController.getProfile(username);
+        profile = serverHelper.getProfile(username);
         notificationList = profile.getNotificationList();
     }
 

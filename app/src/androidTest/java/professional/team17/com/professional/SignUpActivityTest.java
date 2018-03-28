@@ -15,7 +15,7 @@ import com.robotium.solo.Solo;
 public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpActivity> {
 
     private Solo solo;
-    private ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private ServerHelper serverHelper = new ServerHelper();
 
     /**
      * Test Constructor
@@ -53,7 +53,7 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
 
         Profile testProfile = new Profile("tester","TestUser",
                 "tester@ualberta.ca","123-456-7890");
-        elasticSearchController.addProfile(testProfile);
+        serverHelper.addProfile(testProfile);
 
 
         solo.enterText((EditText) solo.getView(R.id.usernameBox), "TestUser");
@@ -68,15 +68,15 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
 
         assertTrue(solo.waitForText("Username is already taken"));
 
-        Profile testUser = elasticSearchController.getProfile("TestUser");
-        elasticSearchController.deleteProfile(testUser);
+        Profile testUser = serverHelper.getProfile("TestUser");
+        serverHelper.deleteProfile(testUser);
 
         solo.clickOnButton("Sign Up");
 
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
 
-        testUser = elasticSearchController.getProfile("TestUser");
-        elasticSearchController.deleteProfile(testUser);
+        testUser = serverHelper.getProfile("TestUser");
+        serverHelper.deleteProfile(testUser);
 
     }
 

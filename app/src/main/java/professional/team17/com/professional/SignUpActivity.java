@@ -14,7 +14,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,10 +23,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import org.apache.commons.validator.routines.EmailValidator;
-
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Allows the user to create a new profile
@@ -44,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText phoneNumberBox;
     private TextView errorBox;
     private ImageButton addNewPhotoButton;
-    private ElasticSearchController elasticSearchController;
+    private ServerHelper serverHelper;
     private String infor;
     private String userName;
     private String name;
@@ -81,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
         phoneNumberBox = (EditText) findViewById(R.id.phoneNumberBox);
         errorBox = (TextView) findViewById(R.id.errorText);
         addNewPhotoButton = findViewById(R.id.add_new_photo);
-        elasticSearchController = new ElasticSearchController();
+        serverHelper = new ServerHelper();
 
         // Set text back
         setter(usernameBox, userName);
@@ -103,7 +98,7 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * Creates the user's profile and moves them
      *
-     * @see ElasticSearchController
+     * @see ServerHelper
      * @param view
      */
     public void saveProfile(View view) {
@@ -118,7 +113,7 @@ public class SignUpActivity extends AppCompatActivity {
             errorBox.setText("Please make sure all fields are filled");
         } else if (usernameBox.getText().length() < 4) {
             errorBox.setText("Username must be at least 4 characters");
-        } else if (elasticSearchController.profileExists(username) == true) {
+        } else if (serverHelper.profileExists(username) == true) {
             errorBox.setText("Username is already taken");
         } else if (!(validateEmail(email))) {
             errorBox.setText("Must enter a valid email");
@@ -142,7 +137,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 Profile profile = new Profile(name, username, email, phoneNumber, photoArray, photoConfig, photoWidth, photoHeight);
 
-                if (!(elasticSearchController.addProfile(profile))) {
+                if (!(serverHelper.addProfile(profile))) {
                     errorBox.setText("Something went wrong! We are unable to create profile");
                 } else {
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode

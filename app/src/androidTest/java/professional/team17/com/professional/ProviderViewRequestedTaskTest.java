@@ -3,14 +3,9 @@ package professional.team17.com.professional;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
-import android.widget.EditText;
 
 import com.robotium.solo.Solo;
-
-import java.util.ArrayList;
 
 /**
  * Created by Zhipeng Zhang on 2018/3/16.
@@ -21,7 +16,7 @@ public class ProviderViewRequestedTaskTest extends ActivityInstrumentationTestCa
     private String taskDescription;
     private MockTask mockTask;
     private Profile profile;
-    private ElasticSearchController elasticSearchController_1, elasticSearchController_2;
+    private ServerHelper serverHelper_1, serverHelper_2;
     private SharedPreferences sharedPreferences;
 
     public ProviderViewRequestedTaskTest() {
@@ -30,12 +25,12 @@ public class ProviderViewRequestedTaskTest extends ActivityInstrumentationTestCa
 
     public void setUp() throws Exception{
         mockTask = new MockTask("TestUser", "Test Name 1", "Task Description", "Task Location", "19/03/2018");
-        elasticSearchController_1 = new ElasticSearchController();
-        String ID = elasticSearchController_1.addTasks(mockTask);
+        serverHelper_1 = new ServerHelper();
+        String ID = serverHelper_1.addTasks(mockTask);
         mockTask.setId(ID);
         profile = new Profile("Tester", "TestUser1", "abc@abc.com", "110");
-        elasticSearchController_2 = new ElasticSearchController();
-        elasticSearchController_2.addProfile(profile);
+        serverHelper_2 = new ServerHelper();
+        serverHelper_2.addProfile(profile);
 
         solo = new Solo(getInstrumentation(), getActivity());
 
@@ -65,8 +60,8 @@ public class ProviderViewRequestedTaskTest extends ActivityInstrumentationTestCa
 
     @Override
     public void tearDown() throws Exception {
-        elasticSearchController_2.deleteTasks(mockTask);
-        elasticSearchController_2.deleteProfile(profile);
+        serverHelper_2.deleteTasks(mockTask);
+        serverHelper_2.deleteProfile(profile);
         solo.finishOpenedActivities();
     }
 }

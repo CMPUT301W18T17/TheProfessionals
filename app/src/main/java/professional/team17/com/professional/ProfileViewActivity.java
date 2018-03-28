@@ -9,15 +9,10 @@
  */
 package professional.team17.com.professional;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -48,7 +43,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
     protected int photoWidth;
     protected int photoHeight;
 
-    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private final ServerHelper serverHelper = new ServerHelper();
 
     /**
      * On selecting a profile
@@ -69,7 +64,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
      */
     // don't call setInfo from here. Call it from MyProfileViewActivity or OtherProfileViewActivity
     protected void setInfo(String aUserName) {
-        Profile userProfile = elasticSearchController.getProfile(aUserName);
+        Profile userProfile = serverHelper.getProfile(aUserName);
         ConnectedState c = ConnectedState.getInstance();
         if (c.isOffline()) {
             offline();

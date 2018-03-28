@@ -53,7 +53,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
     /* Other variables */
     String ID;
     private Task task;
-    ElasticSearchController elasticSearchController = new ElasticSearchController();
+    ServerHelper serverHelper = new ServerHelper();
     BidListAdapter bidAdapter;
     BidList bidList;
     Bid chosenBid;
@@ -89,6 +89,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         bidList = new BidList();
         bidAdapter = new BidListAdapter(this, bidList);
         listView.setAdapter(bidAdapter);
+        Log.i("BIDLIST", "onCreate: "+bidList);
 
 
         try {
@@ -103,8 +104,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             Log.i("Server", "Server failed to return a task for that ID");
         }
         checkOffline();
-
-        populateBidList();
+        
 
         /* Check Existence of Location */
         if (task.getLatLng()== null){
@@ -165,7 +165,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
     @Override
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
-        Log.i("WEWE", "checkOffline: ");
         if (c.isOffline()) {
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.requester_view_task_frame, fragment).commit();
@@ -199,7 +198,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
      * @throws Exception If the server fails to return a task.
      */
     private void getFromServer() throws Exception{
-        task = elasticSearchController.getTask(ID);
+        task = serverHelper.getTask(ID);
         if (task == null){
             throw new Exception();
         }
@@ -442,11 +441,11 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
 
                 /* send notification to bidder */
                 String bidder = chosenBid.getName();
-                Profile bidderProfile = elasticSearchController.getProfile(bidder);
+                Profile bidderProfile = serverHelper.getProfile(bidder);
                 NotificationList notificationList = bidderProfile.getNotificationList();
                 notificationList.newAssignedNotification(task, task.getProfileName());
                 bidderProfile.setNotificationList(notificationList);
-                elasticSearchController.addProfile(bidderProfile);
+                serverHelper.addProfile(bidderProfile);
 
             } else if (dialog.equals("Decline")) {
                 /* Bid is declined by the user. Remove the bid from bidList and refresh the
@@ -472,7 +471,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                 setDoneView();
             }
             Log.i("TAD", "CHANGE TASK "+task);
-            elasticSearchController.updateTasks(task);
+            serverHelper.updateTasks(task);
         }
     }
 

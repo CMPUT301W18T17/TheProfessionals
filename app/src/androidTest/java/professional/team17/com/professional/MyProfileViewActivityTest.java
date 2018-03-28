@@ -2,9 +2,7 @@ package professional.team17.com.professional;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
@@ -17,7 +15,7 @@ import com.robotium.solo.Solo;
 
 public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<MyProfileViewActivity>{
     private Solo solo;
-    private ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private ServerHelper serverHelper = new ServerHelper();
     private Profile testProfile = new Profile("tester","TestUser",
             "tester@ualberta.ca","123-456-7890");
 
@@ -26,7 +24,7 @@ public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<
     }
 
     public void setUp() throws Exception{
-        elasticSearchController.addProfile(testProfile);
+        serverHelper.addProfile(testProfile);
         Context context = getInstrumentation().getTargetContext();
         SharedPreferences pref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -46,7 +44,7 @@ public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<
 
     @Override
     public void tearDown() throws Exception {
-        elasticSearchController.deleteProfile(testProfile);
+        serverHelper.deleteProfile(testProfile);
         solo.finishOpenedActivities();
     }
 

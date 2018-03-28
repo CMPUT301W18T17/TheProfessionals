@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * OtherProfileViewActivity displays information of another user
@@ -23,7 +22,7 @@ import android.widget.Toast;
  */
 public class OtherProfileViewActivity extends ProfileViewActivity{
     private ListView listViewOfRatings;
-    private final ElasticSearchController elasticSearchController = new ElasticSearchController();
+    private final ServerHelper serverHelper = new ServerHelper();
 
     /**
      * Upon selecting another user's profile, info is displayed until doneButton is selected

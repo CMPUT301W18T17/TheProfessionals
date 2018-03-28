@@ -28,7 +28,7 @@ import com.robotium.solo.Solo;
 public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCase2<RequesterEditTaskActivity> {
     private Solo solo;
     private MockTask mockTask;
-    private ElasticSearchController mockES;
+    private ServerHelper mockES;
     private Profile testProfile;
 
     /**
@@ -45,7 +45,7 @@ public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCa
     public void setUp() throws Exception {
         /* Create mock task and push to server */
         mockTask = new MockTask("TestUser", "Test Title", "Test Description", "Test Location", "01/01/2000");
-        mockES = new ElasticSearchController();
+        mockES = new ServerHelper();
         String ID = mockES.addTasks(mockTask);
         testProfile = new Profile("tester","TestUser",
                 "tester@ualberta.ca","123-456-7890");
