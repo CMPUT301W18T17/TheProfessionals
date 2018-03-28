@@ -69,20 +69,29 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
      */
     // don't call setInfo from here. Call it from MyProfileViewActivity or OtherProfileViewActivity
     protected void setInfo(String aUserName) {
-        username =findViewById(R.id.userNameTV);
-        name =findViewById(R.id.nameTV);
-        email = findViewById(R.id.emailTV);
-        phoneNumber = findViewById(R.id.phoneTV);
-        ratingBar = findViewById(R.id.rating2);
-        profilePic = findViewById(R.id.profilePicButton);
-
         Profile userProfile = elasticSearchController.getProfile(aUserName);
-        username.setText(aUserName);
-        name.setText(userProfile.getName());
-        email.setText(userProfile.getEmail());
-        phoneNumber.setText(userProfile.getPhoneNumber());
-        ratingBar.setRating((float)(userProfile.getReviewList().getAvg()));
-        reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, userProfile.getReviewList());
+        ConnectedState c = ConnectedState.getInstance();
+        if (c.isOffline()) {
+            offline();
+        }
+        else {
+            username = findViewById(R.id.userNameTV);
+            name = findViewById(R.id.nameTV);
+            email = findViewById(R.id.emailTV);
+            phoneNumber = findViewById(R.id.phoneTV);
+            ratingBar = findViewById(R.id.rating2);
+            profilePic = findViewById(R.id.profilePicButton);
+            username.setText(aUserName);
+            name.setText(userProfile.getName());
+            email.setText(userProfile.getEmail());
+            phoneNumber.setText(userProfile.getPhoneNumber());
+            ratingBar.setRating((float) (userProfile.getReviewList().getAvg()));
+            reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, userProfile.getReviewList());
+            addPhoto(userProfile);
+        }
+    }
+
+    void addPhoto(Profile userProfile){
         // Photo Part
         photoConfig = userProfile.getConfig();
         if (photoConfig != null) {
@@ -94,5 +103,10 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
         }
     }
 
+    void offline() {
 
-}
+            Offline fragment = new Offline();
+            getSupportFragmentManager().beginTransaction().replace(R.id.profile_view_layout, fragment).commit();
+        }
+    }
+
