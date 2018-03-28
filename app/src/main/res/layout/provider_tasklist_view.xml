@@ -10,6 +10,7 @@
         layout="@layout/provider_layout" />
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/provider_task_list_frame"
         android:layout_width="398dp"
         android:layout_height="match_parent"
         android:layout_marginBottom="72dp"

@@ -54,39 +54,22 @@ public class SearchActivity extends Navigation {
         /* Change activity title */
         this.setActivityTitleProvider("Task Search");
 
-        /*testing sharedPreferences
-        SharedPreferences sharedpreferences = getSharedPreferences("MyPref",
-                Context.MODE_PRIVATE);
-        String test = sharedpreferences.getString("username", "not working");
-        this.setActivityTitle(test);
-        */
-
         sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedPreferences.getString("username", "error");
 
         taskList = new TaskList();
         taskList.addAll(getOpenTasks());
+        checkOffline();
 
-        ConnectedState c = ConnectedState.getInstance();
-        if(c.isOffline()) {
-            Offline fragment = new Offline();
-            getSupportFragmentManager().beginTransaction().replace(R.id.constraintLayoutsearch, fragment).commit();
-        }
+
         searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskList);
         listView =findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(searchAdapterHelper);
         listView.setOnItemClickListener(clickListener);
 
-
-
-
-
         //initialize search input
         searchView = (SearchView) findViewById(R.id.Search_Activity_Input);
         searchView.setQueryHint("Enter search");
-
-        //initial list with open results (requested or bidded)
-
 
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -106,6 +89,16 @@ public class SearchActivity extends Navigation {
                 return false;
             }
         });
+    }
+
+    @Override
+    void checkOffline() {
+        ConnectedState c = ConnectedState.getInstance();
+        if(c.isOffline()) {
+            Offline fragment = new Offline();
+            getSupportFragmentManager().beginTransaction().replace(R.id.constraintLayoutsearch, fragment).commit();
+        }
+
     }
 
 

@@ -98,9 +98,12 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         }
         try {
             getFromServer();
+
         } catch (Exception e) {
             Log.i("Server", "Server failed to return a task for that ID");
         }
+        checkOffline();
+
         populateBidList();
 
         /* Check Existence of Location */
@@ -159,6 +162,23 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
 
     }
 
+    @Override
+    void checkOffline() {
+        ConnectedState c = ConnectedState.getInstance();
+        Log.i("WEWE", "checkOffline: ");
+        if (c.isOffline()) {
+            Offline fragment = new Offline();
+            getSupportFragmentManager().beginTransaction().replace(R.id.requester_view_task_frame, fragment).commit();
+        } else {
+            populateBidList();
+
+        /* Check Existence of Location */
+            if (task.getLatLng() == null) {
+                viewLocation.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
     /**
      * Gets the task ID from the previous activity. Throws an exception if the ID is not found.
      * @throws Exception If the bundle is empty (the task is not found).
@@ -171,7 +191,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         }
         else {
             ID = extrasBundle.getString("task");
-            Log.i("SDSF", "getBundle: "+ID);
         }
     }
 
@@ -186,7 +205,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         }
         else {
             /* Update TextViews */
-            Log.i("SDDSD", "getFromServeer: "+task.getBids().getBid(0).getName());
             setTaskViews();
         }
     }
@@ -406,7 +424,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
      */
     public void onFinishConfirmDialog(Boolean confirmed, String dialog){
         BidList temp;
-        Log.i("DERER", "onFinishConfirmDialog: "+confirmed+dialog);
         if (confirmed ==true) {
             if (dialog.equals("Accept")) {
                 /* Bid is accepted by the user. Delete all other bids, set the chosen bid as the
@@ -435,7 +452,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                 /* Bid is declined by the user. Remove the bid from bidList and refresh the
                  *listview.
                  */
-                Log.i("DERER", "onFinishConfirmDialog: "+chosenBid.getName());
                 task.removeBid(chosenBid);
                 bidList.remove(chosenBid);
                 bidAdapter.notifyDataSetChanged();

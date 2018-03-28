@@ -31,6 +31,7 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
     private String username;
     private SharedPreferences sharedpreferences;
     private Task task;
+    String type;
     //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
     private final ElasticSearchController elasticSearchController = new ElasticSearchController();
@@ -57,13 +58,22 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
         username = sharedpreferences.getString("username", "error");
 
 
-        String type = setRequesterViewType();
+        type = setRequesterViewType();
         createList(type);
 
         taskList.addAll(createList(type));
+        checkOffline();
         adapterHelper.notifyDataSetChanged();
 
 
+    }
+
+    void checkOffline() {
+        ConnectedState c = ConnectedState.getInstance();
+        if(c.isOffline() && !(type.equals("Requested"))) {
+            Offline fragment = new Offline();
+            getSupportFragmentManager().beginTransaction().replace(R.id.requester_task_list_frame, fragment).commit();
+        }
     }
 
     /**
@@ -103,10 +113,8 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
      */
     public void titleClick(View v){
         final int position = listView.getPositionForView((View) v.getParent());
-        Log.i("WEWE", "onItemClick: "+position);
         Task task = taskList.get(position);
         Intent intention = new Intent(RequesterViewListActivity.this, RequesterViewTaskActivity.class);
-        Log.i("WEWE", "onItemClick: "+task.getUniqueID());
         intention.putExtra("task", task.getUniqueID());
         startActivity(intention);
     }
@@ -122,7 +130,6 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
         TaskList taskList = null;
         if (type.equals("Assigned")) {
             taskList = elasticSearchController.getTasksRequester(username, "Assigned");
-            Log.i("boukll", "createList: "+taskList+username);
         }
         if (type.equals("Requested")) {
             taskList = elasticSearchController.getTasksRequester(username, "Requested");
@@ -130,7 +137,6 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
         if (type.equals("Bidded")) {
             taskList = elasticSearchController.getTasksRequester(username, "Bidded");
         }
-        Log.i("WTWT", "createList: "+taskList);
         return taskList;
     }
 

@@ -27,11 +27,11 @@ import android.widget.Toast;
  */
 public class RequesterAddTaskActivity extends RequesterTaskActivity {
 
-    public void setTitle(){
+    public void setTitle() {
         this.setActivityTitleRequester("Add a Task");
     }
 
-    public void setSubmitButtonOnClickListener(){
+    public void setSubmitButtonOnClickListener() {
         submitButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,31 +41,27 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
                 locationString = locationField.getText().toString();
                 dateString = (String) textualDateView.getText();
 
-                if (title.length() > 30){
+                if (title.length() > 30) {
                     /* if the title is too long */
                     message = "Title cannot be longer than 30 characters.";
                     Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
                     toast.show();
-                }
-                else if (description.length() > 300) {
+                } else if (description.length() > 300) {
                     /* if the description is too long */
                     message = "Description cannot be longer than 300 characters.";
                     Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
                     toast.show();
-                }
-                else if (title.isEmpty()){
+                } else if (title.isEmpty()) {
                     /* if the title is empty */
                     message = "You must include a title.";
-                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT) ;
+                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
                     toast.show();
-                }
-                else if (description.isEmpty()){
+                } else if (description.isEmpty()) {
                     /* if the title is empty */
                     message = "You must include a description.";
-                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT) ;
+                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
                     toast.show();
-                }
-                else {
+                } else {
                     /* Create an intent and bundle and store all task info */
                     addToServer(title, description);
 
@@ -79,11 +75,12 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
 
     /**
      * Add the task to the ElasticSearch server.
-     * @param title Task title
+     *
+     * @param title       Task title
      * @param description Task description
      */
 
-    public void addToServer(String title, String description){
+    public void addToServer(String title, String description) {
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String username = pref.getString("username", "error");
         task = new Task(username, title, description, locationString, dateString, latLng);
@@ -95,7 +92,7 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
     /**
      * Called when the "add" button is pressed. Starts the RequesterViewListActivity.
      */
-    public void  endActivity(){
+    public void endActivity() {
         Bundle bundle = new Bundle(2);
         bundle.putString("ID", task.getUniqueID());
         bundle.putString("Status", "Requested");
@@ -105,32 +102,35 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
         finish();
     }
 
-    /**
-    * Get data from MapsSearchLocationActivity.java
-     */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
-        super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                latLng = intent.getParcelableExtra("taskLatLng");
-                locationField.setText(intent.getStringExtra("taskAddress"));
+    void checkOffline() {}
+
+        /**
+         * Get data from MapsSearchLocationActivity.java
+         */
+        @Override
+        protected void onActivityResult (int requestCode, int resultCode, Intent intent){
+            super.onActivityResult(requestCode, resultCode, intent);
+            if (requestCode == 1) {
+                if (resultCode == RESULT_OK) {
+                    latLng = intent.getParcelableExtra("taskLatLng");
+                    locationField.setText(intent.getStringExtra("taskAddress"));
+                }
             }
         }
+
+
+        /**
+         * Saves the task locally for offline functionality.
+         */
+        //private void saveInFile(){
+        //TODO offline functionality in project 5
+        //}
+
+
+        //TODO photo and location handling in project 5
     }
 
-
-    /**
-     * Saves the task locally for offline functionality.
-     */
-    //private void saveInFile(){
-    //TODO offline functionality in project 5
-    //}
-
-
-
-    //TODO photo and location handling in project 5
-    }
 
 
 
