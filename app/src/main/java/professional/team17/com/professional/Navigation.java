@@ -1,7 +1,9 @@
 package professional.team17.com.professional;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -178,6 +180,12 @@ public abstract  class Navigation extends AppCompatActivity implements ImageView
                     startActivity(intent);
                 } else if (menuItem.getTitle().equals("Log Out")){
                     Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.clear();
+                    editor.apply();
+                    SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                    String username = sharedpreferences.getString("username", "error");
                     startActivity(intent);
                 }
                 return true;

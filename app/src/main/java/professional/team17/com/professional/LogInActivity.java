@@ -30,11 +30,21 @@ import com.searchly.jestdroid.DroidClientConfig;
 public class LogInActivity extends AppCompatActivity {
     private ServerHelper serverHelper;
 
+    //To access sharedPreferences, copy and paste the following and adjust accordingly:
+    /*
+    SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+    String username = sharedpreferences.getString("username", "error");
+    */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         serverHelper = new ServerHelper();
+        SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        if (sharedpreferences.contains("username")){
+            changeActivity(SearchActivity.class);
+        }
 
     }
 
@@ -57,17 +67,8 @@ public class LogInActivity extends AppCompatActivity {
             if (!(profile == null)) {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE); // 0 - for private mode
                 SharedPreferences.Editor editor = pref.edit();
-
                 editor.putString("username", username); // Storing string
                 editor.commit(); // commit changes
-
-                //To access sharedPreferences, copy and paste the following and adjust accordingly:
-                /*
-                SharedPreferences sharedpreferences = getSharedPreferences("MyPref",
-                        Context.MODE_PRIVATE);
-
-                String username = sharedpreferences.getString("username", "error");
-                */
                 changeActivity(SearchActivity.class);
 
             } else {
@@ -104,6 +105,6 @@ public class LogInActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //Nothing
+        //Nothing should happen!!!
     }
 }
