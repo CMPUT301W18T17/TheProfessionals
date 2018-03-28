@@ -106,6 +106,8 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         /* Check Existence of Location */
         if (task.getLatLng()== null){
             viewLocation.setVisibility(View.INVISIBLE);
+        } else {
+            viewLocation.setVisibility(View.VISIBLE);
         }
 
         /* Set OnClickListeners */
