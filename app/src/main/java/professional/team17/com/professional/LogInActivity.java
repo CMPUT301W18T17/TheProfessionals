@@ -98,4 +98,12 @@ public class LogInActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    /**
+     * Overides the back button (in case they log out and don't want to accidentally log in again)
+     */
+
+    @Override
+    public void onBackPressed() {
+        //Nothing
+    }
 }

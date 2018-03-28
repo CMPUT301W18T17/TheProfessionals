@@ -11,4 +11,7 @@
     <item
         android:id="@+id/myNotifications"
         android:title="My Notifications" />
+    <item
+        android:id="@+id/logOut"
+        android:title="Log Out" />
 </menu>

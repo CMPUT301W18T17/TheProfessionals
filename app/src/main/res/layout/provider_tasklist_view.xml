@@ -24,7 +24,7 @@
         <ListView
             android:id="@+id/provider_taskList_view_list"
             android:layout_width="382dp"
-            android:layout_height="0dp"
+            android:layout_height="407dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"

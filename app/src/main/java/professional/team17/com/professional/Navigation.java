@@ -176,6 +176,9 @@ public abstract  class Navigation extends AppCompatActivity implements ImageView
                 } else if (menuItem.getTitle().equals("My Notifications")){
                     Intent intent = new Intent(getApplicationContext(), NotificationActivity.class);
                     startActivity(intent);
+                } else if (menuItem.getTitle().equals("Log Out")){
+                    Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+                    startActivity(intent);
                 }
                 return true;
             }
