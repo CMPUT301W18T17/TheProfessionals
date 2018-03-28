@@ -3,10 +3,12 @@ package professional.team17.com.professional;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 
 
 /**
@@ -26,7 +28,8 @@ public class AddReviewFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private RatingBar rating;
+    private  ConstraintLayout reviewLayout;
     private OnFragmentInteractionListener mListener;
 
     public AddReviewFragment() {
@@ -58,6 +61,7 @@ public class AddReviewFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -73,6 +77,15 @@ public class AddReviewFragment extends Fragment {
 //            mListener.onFragmentInteraction(uri);
 //        }
 //    }
+
+    public void seeReviewBox(View v){
+        reviewLayout = v.findViewById(R.id.reviewBox);
+        reviewLayout.setVisibility(v.VISIBLE);
+    }
+
+    public void closePrompt(View v){
+        
+    }
 
     @Override
     public void onAttach(Context context) {
