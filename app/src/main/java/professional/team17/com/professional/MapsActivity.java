@@ -63,6 +63,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
     public abstract void setContentViewFunction();
     public abstract void MapsSearchEvent();
+    public abstract void afterLocationFoundEvent();
 
     protected void getLocationPermissions() {
         Log.d(TAG, "getLocationPermissions");
@@ -164,6 +165,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                             } else{
                                 currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng,11));
+                                afterLocationFoundEvent();
                                 //mMap.addMarker(new MarkerOptions().position(currentLatLng).title("YOU"));
                             }
                         } else {

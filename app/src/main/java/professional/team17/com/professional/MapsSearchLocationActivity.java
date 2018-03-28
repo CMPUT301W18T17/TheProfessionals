@@ -41,6 +41,7 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
         setContentView(R.layout.activity_maps_search_location);
     }
 
+    public void afterLocationFoundEvent(){return;}
 
     public void MapsSearchEvent(){
         mSearchAddress = (EditText) findViewById(R.id.addressInput);
