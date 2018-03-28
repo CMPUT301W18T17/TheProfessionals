@@ -1,6 +1,7 @@
 package professional.team17.com.professional;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -30,12 +31,14 @@ public class AddReviewFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private  ConstraintLayout reviewLayout;
+    private ConstraintLayout reviewLayout;
     private RatingBar rating;
     private EditText commentBox;
 
     private int score;
     private String comment;
+    private String profile;
+    private String reviewer;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,12 +72,19 @@ public class AddReviewFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        profile = getArguments().getString("name");
+
+        SharedPreferences sharedpreferences = getContext().getSharedPreferences("MyPref",
+                Context.MODE_PRIVATE);
+        reviewer = sharedpreferences.getString("username", "error");
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
+        profile = getArguments().getString("name");
         return inflater.inflate(R.layout.fragment_add_review, container, false);
     }
 
@@ -105,9 +115,8 @@ public class AddReviewFragment extends Fragment {
         if ( commentBox.getText().length() != 0) {
             comment = commentBox.getText().toString();
         }
-
-        //TODO: create a title for the review?
-//        Review review = new Review(score, name, comment, title?)
+        
+        Review review = new Review(score, profile, comment, reviewer);
     }
 
     @Override

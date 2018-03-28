@@ -156,7 +156,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
 
                 String profile = task.getProfileName();
                 Bundle bundle = new Bundle();
-                bundle.putString("Name", profile);
+                bundle.putString("name", profile);
 
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
