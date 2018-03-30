@@ -32,8 +32,10 @@ public abstract  class Navigation extends AppCompatActivity implements ImageView
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
+        ConnectivityCheck.isOnline c = new ConnectivityCheck.isOnline();
+        c.execute();
 
     }
 
