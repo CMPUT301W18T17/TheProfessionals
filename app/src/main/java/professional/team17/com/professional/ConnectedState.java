@@ -7,6 +7,7 @@ package professional.team17.com.professional;
 public class ConnectedState {
     public static status state = null;
     private static ConnectedState connectedState = null;
+    private static OnlineListener OnlineListener;
 
     /**
      *
@@ -15,6 +16,7 @@ public class ConnectedState {
     public static ConnectedState getInstance() {
         if (connectedState==null) {
             connectedState = new ConnectedState();
+
         }
         return connectedState;
     }
@@ -25,6 +27,10 @@ public class ConnectedState {
     public void setOnline(){
         if (this.state ==null || this.state==status.OFFLINE) {
             this.state = status.ONLINE;
+            if (OnlineListener != null){
+                OnlineListener.notifyOnline();
+            }
+
         }
 
     }
@@ -44,6 +50,10 @@ public class ConnectedState {
      */
     public boolean isOffline(){
         return (this.state == status.OFFLINE);
+    }
+
+    public void bind(OnlineListener object) {
+        OnlineListener = object;
     }
 
     public enum status {

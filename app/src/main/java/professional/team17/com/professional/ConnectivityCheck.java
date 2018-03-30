@@ -34,12 +34,4 @@ public class ConnectivityCheck {
             return null;
         }
     }
-
-
-
-
-        public void isOnline() {
-
-
-    }
 }
