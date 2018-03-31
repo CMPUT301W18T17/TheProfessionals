@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -192,7 +193,8 @@ public class TaskDAO extends SQLiteOpenHelper {
         Double lon = c.getDouble(c.getColumnIndex("lon"));
         Double lat = c.getDouble(c.getColumnIndex("lat"));
         LatLng latLon = new LatLng(lat, lon);
-        temp =  new Task(profileName, name, location, description, Date, latLon);
+        ArrayList<Bitmap> photos = new ArrayList<Bitmap>();
+        temp =  new Task(profileName, name, location, description, Date, latLon , photos);
         temp.setId(id);
         return temp;
     }

@@ -13,10 +13,15 @@ package professional.team17.com.professional;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -31,6 +36,7 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
         this.setActivityTitleRequester("Add a Task");
     }
 
+
     public void setSubmitButtonOnClickListener() {
         submitButton.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -40,6 +46,7 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
                 String description = descriptionField.getText().toString();
                 locationString = locationField.getText().toString();
                 dateString = (String) textualDateView.getText();
+
 
                 if (title.length() > 30) {
                     /* if the title is too long */
@@ -63,7 +70,7 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
                     toast.show();
                 } else {
                     /* Create an intent and bundle and store all task info */
-                    addToServer(title, description);
+                    addToServer(title, description , photos);
 
                     /* Activity finished, start RequesterViewListActivity */
                     endActivity();
@@ -73,6 +80,8 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
         });
     }
 
+
+
     /**
      * Add the task to the ElasticSearch server.
      *
@@ -80,10 +89,11 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
      * @param description Task description
      */
 
-    public void addToServer(String title, String description) {
+    public void addToServer(String title, String description,ArrayList<Bitmap> photos) {
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String username = pref.getString("username", "error");
-        task = new Task(username, title, description, locationString, dateString, latLng);
+        task = new Task(username, title, description, locationString, dateString, latLng, photos);
+        Log.i("DUDE", "addToServer: "+task.getPhotos());
         task.setRequested();
         ServerHelper serverHelper = new ServerHelper();
         serverHelper.addTasks(task);
@@ -129,7 +139,11 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
 
 
         //TODO photo and location handling in project 5
-    }
+        //for photos
+
+
+
+}
 
 
 

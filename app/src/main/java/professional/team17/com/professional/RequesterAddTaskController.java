@@ -9,8 +9,11 @@
  */
 package professional.team17.com.professional;
 
+import android.graphics.Bitmap;
+
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
 import java.util.Date;
 //TODO implement for project part 5
 /**
@@ -35,7 +38,8 @@ import java.util.Date;
 
 public class RequesterAddTaskController {
     /* create a new task*/
-    private Task task = new Task("profileName","name","description", "location", "date", new LatLng(-34, 151));
+    ArrayList<Bitmap> photos = new ArrayList<Bitmap>();
+    private Task task = new Task("profileName","name","description", "location", "date", new LatLng(-34, 151), photos);
     // call
     public RequesterAddTaskController(){}
     /**
@@ -56,9 +60,7 @@ public class RequesterAddTaskController {
     public void setDate(Date date){
         task.setDate(date);
     }
-    public void addPhotos(String photo){
-        task.addPhoto(photo);
-    }
+    //public void addPhotos(String photo){task.addPhoto(photo);}
     public Task returnTask(){
         return this.task;
     }
