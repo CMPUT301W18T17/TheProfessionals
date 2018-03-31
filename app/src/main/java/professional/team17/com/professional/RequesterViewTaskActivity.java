@@ -67,8 +67,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("CHANGE", "onCreate:" );
         setContentView(R.layout.activity_requester_view_task2);
-
+        Log.i("CHANGE", "onCreate:" );
         /* Set activity title */
         setActivityTitleRequester("View Task");
 
@@ -103,7 +104,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         } catch (Exception e) {
             Log.i("Server", "Server failed to return a task for that ID");
         }
-        checkOffline();
+        //checkOffline();
         
 
         /* Check Existence of Location */

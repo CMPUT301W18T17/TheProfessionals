@@ -1,14 +1,15 @@
 package professional.team17.com.professional;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +21,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
  * Created by ag on 2018-03-26.
  */
 
-public abstract  class Navigation extends AppCompatActivity implements ImageView.OnClickListener {
+public abstract  class Navigation extends AppCompatActivity {
 
 
     /**
@@ -30,9 +31,28 @@ public abstract  class Navigation extends AppCompatActivity implements ImageView
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
+        // Create the custom object
+        OnlineListener object = new OnlineListener();
 
+        ConnectedState c2 = ConnectedState.getInstance();
+        c2.bind(object);
+
+        ConnectivityCheck.isOnline c = new ConnectivityCheck.isOnline();
+        c.execute();
+/**
+        // TODO FULLY IMPLEMENT LISTENER
+        object.setCustomObjectListener(new OnlineListener.MyCustomObjectListener() {
+            @Override
+            public void onObjectReady() {
+                Log.i("HEURHHREHhaHHR", "onObjectReady: ");
+
+            }
+
+        });
+*/
     }
 
     abstract void checkOffline();
@@ -178,6 +198,12 @@ public abstract  class Navigation extends AppCompatActivity implements ImageView
                     startActivity(intent);
                 } else if (menuItem.getTitle().equals("Log Out")){
                     Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.clear();
+                    editor.apply();
+                    SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+                    String username = sharedpreferences.getString("username", "error");
                     startActivity(intent);
                 }
                 return true;

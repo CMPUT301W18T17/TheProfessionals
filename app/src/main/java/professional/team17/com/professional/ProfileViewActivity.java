@@ -37,7 +37,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
     protected ListView listView;
     protected RatingBar ratingBar;
     protected ImageView profilePic;
-    protected byte[] photoArray;
+    protected String photoString;
     protected Photo photo;
     protected Bitmap.Config photoConfig;
     protected int photoWidth;
@@ -90,11 +90,11 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
         // Photo Part
         photoConfig = userProfile.getConfig();
         if (photoConfig != null) {
-            photoArray = userProfile.getPhoto();
+            photoString = userProfile.getPhoto();
             photoHeight = userProfile.getHeight();
             photoWidth = userProfile.getWidth();
-            photo = new Photo(photoArray, photoConfig, photoWidth, photoHeight);
-            profilePic.setImageDrawable(photo.toDrawable(photo.byteArrayToBitMap()));
+            photo = new Photo(photoString, photoConfig, photoWidth, photoHeight);
+            profilePic.setImageDrawable(photo.toDrawable(photo.byteStringToBitMap()));
         }
     }
 

@@ -38,7 +38,7 @@ public class EditMyProfileActivity extends AppCompatActivity {
 
     private Profile userProfile;
 
-    private byte[] photoArray;
+    private String photoString;
     private Photo photo;
     private Bitmap.Config photoConfig;
     private int photoWidth;
@@ -84,11 +84,11 @@ public class EditMyProfileActivity extends AppCompatActivity {
         // Display photo Part
         photoConfig = userProfile.getConfig();
         if (photoConfig != null) {
-            photoArray = userProfile.getPhoto();
+            photoString = userProfile.getPhoto();
             photoHeight = userProfile.getHeight();
             photoWidth = userProfile.getWidth();
-            photo = new Photo(photoArray, photoConfig, photoWidth, photoHeight);
-            photoButton.setImageDrawable(photo.toDrawable(photo.byteArrayToBitMap()));
+            photo = new Photo(photoString, photoConfig, photoWidth, photoHeight);
+            photoButton.setImageDrawable(photo.toDrawable(photo.byteStringToBitMap()));
         }
 
         // Get the Intent that started this activity
@@ -120,11 +120,11 @@ public class EditMyProfileActivity extends AppCompatActivity {
                 userProfile.setEmail(editEmail.getText().toString());
                 userProfile.setPhoneNumber(editPhone.getText().toString());
                 if (startTime == 1 && path != null){
-                    photoArray = photo.pathToByteArray();
+                    photoString = photo.pathToString();
                     photoConfig = photo.pathGetConfig();
                     photoHeight = photo.pathGetHeight();
                     photoWidth = photo.pathGetWidth();
-                    userProfile.setPhoto(photoArray);
+                    userProfile.setPhoto(photoString);
                     userProfile.setConfig(photoConfig);
                     userProfile.setHeight(photoHeight);
                     userProfile.setWidth(photoWidth);

@@ -47,7 +47,6 @@ public class ElasticSearchController {
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
-                    notifyStateonline();
                 }
                 catch (Exception e) {
                     new OfflineException();
@@ -73,7 +72,6 @@ public class ElasticSearchController {
             try {
 
                 JestResult result = client.execute(get);
-                notifyStateonline();
                 if (result.isSucceeded()) {
                     profile = result.getSourceAsObject(Profile.class);
                 }
@@ -114,7 +112,6 @@ public class ElasticSearchController {
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
-                    notifyStateonline();
                     if (result.isSucceeded()){
                         id = result.getId();
                     }
@@ -151,7 +148,6 @@ public class ElasticSearchController {
                 try {
 
                     DocumentResult result = client.execute(index);
-                    notifyStateonline();
                 }
                 catch (Exception e) {
                     new OfflineException();
@@ -178,7 +174,6 @@ public class ElasticSearchController {
                         .build();
                 try {
                     DocumentResult result = client.execute(delete);
-                    notifyStateonline();
                 }
                 catch (Exception e) {
                     new OfflineException();
@@ -205,7 +200,6 @@ public class ElasticSearchController {
                         .build();
                 try {
                     DocumentResult result = client.execute(delete);
-                    notifyStateonline();
                 }
                 catch (Exception e) {
                     new OfflineException();
@@ -229,7 +223,6 @@ public class ElasticSearchController {
                     .build();
             try {
                 JestResult result = client.execute(get);
-                notifyStateonline();
                 if (result.isSucceeded()) {
                     task = result.getSourceAsObject(Task.class);
                     task.setId(result.getValue("_id").toString());
@@ -262,7 +255,6 @@ public class ElasticSearchController {
                     .build();
             try {
                 SearchResult result = client.execute(search);
-                notifyStateonline();
                 if (result.isSucceeded()){
                     List<Task> foundTask= result.getSourceAsObjectList(Task.class);
                     taskList.addAll(foundTask);
