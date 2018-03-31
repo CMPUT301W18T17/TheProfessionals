@@ -42,7 +42,7 @@ public abstract  class Navigation extends AppCompatActivity {
 
         ConnectivityCheck.isOnline c = new ConnectivityCheck.isOnline();
         c.execute();
-
+/**
         // TODO FULLY IMPLEMENT LISTENER
         object.setCustomObjectListener(new OnlineListener.MyCustomObjectListener() {
             @Override
@@ -52,7 +52,7 @@ public abstract  class Navigation extends AppCompatActivity {
             }
 
         });
-
+*/
     }
 
     abstract void checkOffline();

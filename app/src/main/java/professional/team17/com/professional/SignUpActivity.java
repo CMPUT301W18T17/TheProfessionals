@@ -48,7 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
     private String path;
     private Photo photo;
     private Bitmap bitmap;
-    private byte[] photoArray;
+    private String photoString;
     private Bitmap.Config photoConfig;
     private int photoWidth;
     private int photoHeight;
@@ -124,20 +124,20 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
                 if (path != null) {
                     photo = new Photo(path);
-                    photoArray = photo.pathToByteArray();
+                    photoString = photo.pathToString();
                     photoConfig = photo.pathGetConfig();
                     photoHeight = photo.pathGetHeight();
                     photoWidth = photo.pathGetWidth();
                 }
 
                 else{
-                    photoArray = new byte[] {-1};
+                    photoString = "-1";
                     photoConfig = null;
                     photoHeight = 0;
                     photoWidth = 0;
                 }
 
-                Profile profile = new Profile(name, username, email, phoneNumber, photoArray, photoConfig, photoWidth, photoHeight);
+                Profile profile = new Profile(name, username, email, phoneNumber, photoString, photoConfig, photoWidth, photoHeight);
 
                 if (!(serverHelper.addProfile(profile))) {
                     errorBox.setText("Something went wrong! We are unable to create profile");
