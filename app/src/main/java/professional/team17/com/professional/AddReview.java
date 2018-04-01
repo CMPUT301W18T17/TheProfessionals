@@ -9,13 +9,8 @@ import android.widget.RatingBar;
 
 public class AddReview extends AppCompatActivity {
 
-    private EditText commentBox;
-    private RatingBar ratingBar;
     private String reviewer;
-    private String comment;
-    private int rating;
     private String profile;
-    private AddReviewController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +25,11 @@ public class AddReview extends AppCompatActivity {
     }
 
     private void onSubmit(){
-        controller = new AddReviewController();
-        commentBox = findViewById(R.id.commentBox);
-        ratingBar = findViewById(R.id.ratingBar);
+        AddReviewController controller = new AddReviewController();
+        EditText commentBox = findViewById(R.id.commentBox);
+        RatingBar ratingBar = findViewById(R.id.ratingBar);
+        int rating = ratingBar.getNumStars();
+        String comment = commentBox.getText().toString();
 
         controller.setReview(profile, rating, comment, reviewer);
 
