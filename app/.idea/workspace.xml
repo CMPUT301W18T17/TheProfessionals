@@ -16,7 +16,7 @@
     <list default="true" id="4a28198c-dc5d-4b56-8f6e-72b201ca9492" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReview.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReview.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewsAdaptor.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewsAdaptor.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_add_review.xml" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_add_review.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,7 +39,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="activity_add_review.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activity_add_review.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_add_review.xml">
           <provider editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -52,14 +52,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddReview.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AddReview.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReview.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+            <state relative-caret-position="803">
+              <caret line="55" column="4" lean-forward="false" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
               <folding>
-                <element signature="e#1253#1254#0" expanded="true" />
-                <element signature="e#1277#1278#0" expanded="true" />
+                <element signature="e#923#1074#0" expanded="true" />
+                <element signature="e#1073#1074#0" expanded="true" />
+                <element signature="e#1169#1314#0" expanded="true" />
+                <element signature="e#1313#1314#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,7 +70,7 @@
       <file leaf-file-name="ReviewsAdaptor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewsAdaptor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1092">
+            <state relative-caret-position="488">
               <caret line="68" column="69" lean-forward="false" selection-start-line="68" selection-start-column="69" selection-end-line="68" selection-end-column="69" />
               <folding />
             </state>
@@ -78,8 +80,8 @@
       <file leaf-file-name="AddReviewController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReviewController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="45" lean-forward="false" selection-start-line="0" selection-start-column="45" selection-end-line="0" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -88,7 +90,7 @@
       <file leaf-file-name="Profile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Profile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2716">
+            <state relative-caret-position="3570">
               <caret line="216" column="54" lean-forward="false" selection-start-line="216" selection-start-column="54" selection-end-line="216" selection-end-column="54" />
               <folding>
                 <element signature="e#5260#5261#0" expanded="true" />
@@ -100,7 +102,7 @@
       <file leaf-file-name="Review.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Review.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="784">
+            <state relative-caret-position="1323">
               <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
               <folding />
             </state>
@@ -2024,14 +2026,14 @@
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterAddTaskActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/LogInActivity.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/activity_add_review.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_requester_view_task2.xml" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterViewTaskActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Review.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Profile.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReviewController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReview.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewsAdaptor.java" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/activity_add_review.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReview.java" />
       </list>
     </option>
   </component>
@@ -2100,7 +2102,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522619290019" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522620039566" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.0.1" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
@@ -2748,6 +2750,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2008593" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
@@ -2981,7 +2984,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-436">
           <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3026,7 +3028,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3046,9 +3047,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
           <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#2864#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3056,7 +3054,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3064,7 +3061,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1641">
           <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3078,7 +3074,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterViewTaskActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7476">
+        <state relative-caret-position="0">
           <caret line="381" column="30" lean-forward="false" selection-start-line="381" selection-start-column="30" selection-end-line="381" selection-end-column="30" />
           <folding />
         </state>
@@ -3107,29 +3103,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
           <caret line="33" column="41" lean-forward="true" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/LogInActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="35" selection-end-column="71" />
+        <state relative-caret-position="462">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Review.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReviewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="784">
-          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="45" lean-forward="false" selection-start-line="0" selection-start-column="45" selection-end-line="0" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Profile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2716">
+        <state relative-caret-position="3570">
           <caret line="216" column="54" lean-forward="false" selection-start-line="216" selection-start-column="54" selection-end-line="216" selection-end-column="54" />
           <folding>
             <element signature="e#5260#5261#0" expanded="true" />
@@ -3137,30 +3132,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReviewController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Review.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="1323">
+          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewsAdaptor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1092">
+        <state relative-caret-position="488">
           <caret line="68" column="69" lean-forward="false" selection-start-line="68" selection-start-column="69" selection-end-line="68" selection-end-column="69" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReview.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="40" column="17" lean-forward="false" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
-          <folding>
-            <element signature="e#1253#1254#0" expanded="true" />
-            <element signature="e#1277#1278#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3173,6 +3157,19 @@
       </provider>
       <provider selected="true" editor-type-id="android-designer2">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReview.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="803">
+          <caret line="55" column="4" lean-forward="false" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
+          <folding>
+            <element signature="e#923#1074#0" expanded="true" />
+            <element signature="e#1073#1074#0" expanded="true" />
+            <element signature="e#1169#1314#0" expanded="true" />
+            <element signature="e#1313#1314#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
