@@ -23,23 +23,22 @@ public class Review {
     private double score;
     private String comment;
     private String profileName; //person who gave review
-    private String reviewTitle;
+
     private Date date;
 
-    public Review(double score, String reviewer, String comment, String title) {
+    public Review(double score, String reviewer, String comment) {
         this.score = score;
         this.profileName = reviewer;
         this.comment = comment;
-        this.reviewTitle = title;
         this.date = new Date();
     }
 
-    public Review(double score, String reviewer, String title) {
-        this.score = score;
-        this.profileName = reviewer;
-        this.reviewTitle = title;
-        this.date = new Date();
-    }
+//    public Review(double score, String reviewer, String title) {
+//        this.score = score;
+//        this.profileName = reviewer;
+//        this.reviewTitle = title;
+//        this.date = new Date();
+//    }
     /* GETTERS */
 
     /**
@@ -57,10 +56,6 @@ public class Review {
 
     public String getProfileName() {
         return this.profileName;
-    }
-
-    public String getReviewTitle() {
-        return this.reviewTitle;
     }
 
     public Date getDate(){return this.date;}
@@ -84,13 +79,6 @@ public class Review {
     private void setProfileName(String name) {
         this.profileName = name;
     }
-
-    public void setReviewTitle(String title) {
-        this.reviewTitle = title;
-    }
-
-
-
 
 
 }
