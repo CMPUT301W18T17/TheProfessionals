@@ -1,17 +1,19 @@
 package professional.team17.com.professional;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 
 public class AddReviewController {
 
-    private Review review;
-    private Profile profile;
+    private final ServerHelper serverHelper = new ServerHelper();
 
-    public AddReviewController(){}
+    private AddReviewController(){}
 
-    public void setReview(String reviewee, int rating, String comment, String reviewer) {
-        review = new Review(rating, reviewer, comment);
+    public void setReview(String profileName, int rating, String comment, String reviewer) {
+        Review review = new Review(rating, reviewer, comment);
+        Profile profile = serverHelper.getProfile(profileName);
+        ReviewList list = profile.getReviewList();
+        list.addReview(review);
+        profile.setReviewList(list);
 
+        serverHelper.addProfile(profile);
     }
 }

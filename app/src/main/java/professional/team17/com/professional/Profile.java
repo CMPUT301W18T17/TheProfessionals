@@ -214,6 +214,10 @@ public class Profile implements Serializable {
         this.notificationList = notificationList;
     }
 
+    public void setReviewList(ReviewList reviewList) {
+        this.reviewList = reviewList;
+    }
+
     public NotificationList getNotificationList(){
         return notificationList;
     }
