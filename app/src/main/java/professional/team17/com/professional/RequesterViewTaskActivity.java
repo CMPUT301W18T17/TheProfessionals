@@ -261,7 +261,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             bidList = task.getBids();
             chosenBid = bidList.getBid(0);
             setBidViews(chosenBid.getName(), chosenBid.getAmountAsString());
-            //TODO allow requester to leave a review for the provider
+
         }
     }
 
@@ -378,6 +378,8 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
 
         confirmDialog.setArguments(args);
         confirmDialog.show(fm, "To Done");
+        Intent intent = new Intent(this, AddReview.class);
+        startActivity(intent);
     }
 
 
