@@ -175,7 +175,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
         return input;
     }
 
-    @Override
+
     void checkOffline() {        ConnectedState c = ConnectedState.getInstance();
         if(c.isOffline()) {
             Offline fragment = new Offline();

@@ -23,7 +23,7 @@ public class TaskDAO extends SQLiteOpenHelper {
 
 
     public TaskDAO(Context context) {
-        super(context, "Task", null, 1);
+        super(context, "task", null, 1);
     }
 
 
@@ -34,12 +34,9 @@ public class TaskDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
+        Log.i("WRR", "CREWSAT  DB: ");
         delete(db);
-        String query = "CREATE TABLE "+ TASKTABLE+
-                " (id Integer Primary Key, profileName Text, name Text not Null, location Text,"+
-                "description Text, status Text, date Text, lon Text, lat Text, actionType Integer, online Boolean)";
-        db.execSQL(query);
-
+        createnew(db);
     }
 
     /**
@@ -47,17 +44,21 @@ public class TaskDAO extends SQLiteOpenHelper {
      * @param db the db where tables are being dropped - to clear every time connectivity is set up
      */
     private void delete(SQLiteDatabase db){
+        Log.i("DROPOPEDZ", "delete: ");
         String query = "Drop TABLE if exists " +TASKTABLE;
         db.execSQL(query);
     }
 
-    private void create(){
-        SQLiteDatabase db = getWritableDatabase();
+    private void createnew(SQLiteDatabase db){
         String query = "CREATE TABLE "+ TASKTABLE+
-                " (id Integer Primary Key, profileName Text, name Text not Null, location Text,"+
-                "description Text, Status Text,Date Text, lon Text, lat Text, actionType Integer, online Boolean)";
+                " (id Text Primary Key, profileName Text, name Text not Null, location Text,"+
+                " description Text, status Text, date Text, lon Text, lat Text, actionType Integer, online Boolean)";
         Log.i("TAG", "create: "+query);
         db.execSQL(query);
+    }
+    private void create(){
+        SQLiteDatabase db = getWritableDatabase();
+        createnew(db);
     }
 
 
@@ -66,7 +67,9 @@ public class TaskDAO extends SQLiteOpenHelper {
      * @param taskList - the tasklist to be inserted into the DB
      */
     public void insertAll(TaskList taskList){
-        create();
+        SQLiteDatabase db = getWritableDatabase();
+        delete(db);
+        createnew(db);
         for (Task task : taskList) {
             insert(task);
         }
@@ -88,12 +91,14 @@ public class TaskDAO extends SQLiteOpenHelper {
      * |
      * @param task - the task being added while in offline status
      */
-    public void insertOffline(Task task) {
+    public String insertOffline(Task task) {
+        int id = getId();
+        task.setId(String.valueOf(id));
         ContentValues taskdata = task.toContent();
         SQLiteDatabase db = getWritableDatabase();
-        String[] id = {getId()+""};
-        getType(taskdata, ActionType.ADD_NO_CONNECTION);
+        taskdata.put("actionType", ActionType.ADD_NO_CONNECTION.getValue());
         db.insert(TASKTABLE, null, taskdata);
+        return String.valueOf(id);
     }
 
     /**
@@ -102,8 +107,8 @@ public class TaskDAO extends SQLiteOpenHelper {
      */
     private int getId(){
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * from"+TASKTABLE, null);
-        return c.getCount();
+        Cursor c = db.rawQuery("SELECT * from "+TASKTABLE, null);
+        return c.getCount()+1;
     }
 
     /**
@@ -129,7 +134,7 @@ public class TaskDAO extends SQLiteOpenHelper {
         }
         else {
             ContentValues taskdata = new ContentValues();
-            getType(taskdata, ActionType.DELETE_NO_CONNECTION);
+            taskdata.put("actionType", ActionType.EDIT_NO_CONNECTION.getValue());
             db.update(TASKTABLE, taskdata, "id=?", id);
         }
     }
@@ -151,9 +156,11 @@ public class TaskDAO extends SQLiteOpenHelper {
      */
     public void updateTaskOffline(Task task){
         SQLiteDatabase db = getWritableDatabase();
-        ContentValues taskdata = new ContentValues();
+        ContentValues taskdata = task.toContent();
         String[] id = {task.getUniqueID()+""};
-        getType(taskdata, ActionType.EDIT_NO_CONNECTION);
+        if (!isOffline(task.getUniqueID())){
+            taskdata.put("actionType", ActionType.EDIT_NO_CONNECTION.getValue());
+        }
         db.update(TASKTABLE, taskdata, "id=?", id);
     }
 
@@ -178,12 +185,17 @@ public class TaskDAO extends SQLiteOpenHelper {
         return tasklist;
     }
 
+
     public Task getTask(String id) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where id = " +id, null);
-        Task task = createTask(c);
-        return task;
+        Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where id = ?", new String[] {id});
+       while (c.moveToNext()) {
+            Task task = createTask(c);
+            return task;
+        }
+        return null;
     }
+
 
     private Task createTask(Cursor c){
         Task temp;
@@ -192,13 +204,15 @@ public class TaskDAO extends SQLiteOpenHelper {
         String name = c.getString(c.getColumnIndex("name"));
         String location = c.getString(c.getColumnIndex("location"));
         String description = c.getString(c.getColumnIndex("description"));
-        String Status = c.getString(c.getColumnIndex("status"));
-        String Date = c.getString(c.getColumnIndex("date"));
+        String status = c.getString(c.getColumnIndex("status"));
+        String date = c.getString(c.getColumnIndex("date"));
         Double lon = c.getDouble(c.getColumnIndex("lon"));
         Double lat = c.getDouble(c.getColumnIndex("lat"));
         LatLng latLon = new LatLng(lat, lon);
+        int offlien = c.getInt(c.getColumnIndex("actionType"));
+        Log.i("offlien", "createTask: "+offlien+name);
         ArrayList<Bitmap> photos = new ArrayList<Bitmap>();
-        temp =  new Task(profileName, name, location, description, Date, latLon , photos);
+        temp =  new Task(profileName, name, description, location, date, latLon , photos);
         temp.setId(id);
         return temp;
     }
@@ -221,18 +235,23 @@ public class TaskDAO extends SQLiteOpenHelper {
     private ArrayList<String> getList(ActionType actiontype) {
         ArrayList<String>  list = new ArrayList<String>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * from " + TASKTABLE + " where actionType =" + actiontype.getValue(), null);
+        String value = String.valueOf(actiontype.getValue());
+        Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where actionType = ?",  new String[] {value});
         while (c.moveToNext()) {
             String id = c.getString(c.getColumnIndex("id"));
             list.add(id);
         }
+        Log.i("SSD", "getList: "+list);
         return list;
     }
 
     public boolean isOffline(String id) {
+        int online=1;
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where id = " +id, null);
-        int online = c.getInt(c.getColumnIndex("online"));
+        Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where id = ?", new String[] {id});
+        while (c.moveToNext()) {
+            online = c.getInt(c.getColumnIndex("online"));
+        }
         return (online ==0);
     }
 
@@ -240,7 +259,7 @@ public class TaskDAO extends SQLiteOpenHelper {
 
     //https://stackoverflow.com/questions/8157755/how-to-convert-enum-value-to-int
     public enum ActionType {
-        DELETE_NO_CONNECTION(-1), ADD_NO_CONNECTION(0), EDIT_NO_CONNECTION(2);
+        DELETE_NO_CONNECTION(-1), ADD_NO_CONNECTION(1), EDIT_NO_CONNECTION(2);
 
         private final int value;
         private ActionType(int value) {

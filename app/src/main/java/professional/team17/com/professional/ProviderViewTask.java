@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -39,10 +40,8 @@ import java.io.ByteArrayOutputStream;
  */
 public class ProviderViewTask extends Navigation implements ImageView.OnClickListener, PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
 
-    private String username;
     //TODO below item is needed for protoype, part 5 persistence will remove this
 
-    private SharedPreferences sharedpreferences;
 
     //TODO both items below can be put in controller (project part 5)
     private Task task;
@@ -101,9 +100,6 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
         this.setActivityTitleProvider("View Task");
 
 
-        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        username = sharedpreferences.getString("username", "error");
-
         viewMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,11 +112,6 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
             }
         });
         task = getTask();
-        System.out.println("------------------------------------------------------");
-        System.out.println(task.getPhotos().get(0));
-        System.out.println("------------------------------------------------------");
-        if (task.getPhotos() != null)
-            button5.setOnClickListener(this);
 
 
 
@@ -131,7 +122,6 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
     }
 
 
-    @Override
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
         if(c.isOffline()) {
@@ -146,6 +136,11 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
 
             checkStatus();
             fillTask();
+            System.out.println("------------------------------------------------------");
+            System.out.println("------------------------------------------------------");
+            if (task.getPhotos() != null)
+                button5.setOnClickListener(this);
+
         }
 
     }
@@ -174,7 +169,7 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
         double bidAmount =  Double.valueOf(inputText);
         int duration = Toast.LENGTH_SHORT;
 
-
+        Log.i("PLACEBID", "onFinishPlaceBidDialog: "+username);
         task.addBid(new Bid(username, bidAmount));
 
         serverHelper.updateTasks(task);
@@ -212,13 +207,7 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
 
     }
 
-    /***
-     * Interface method from ConfirmDialog.ConfirmDialogListener
-     * @param confirmed boolean value representing the user response in the dialog
-     * @param dialog - the type of dialog called
-     * true means the user confirmed.
-     */
-    public void onFinishConfirmDialog(Boolean confirmed, String dialog){}
+
 
     //TODO move all UI controls into controller (project part 5)
     /**

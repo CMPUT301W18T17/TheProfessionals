@@ -86,7 +86,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         bidList = new BidList();
         bidAdapter = new BidListAdapter(this, bidList);
         listView.setAdapter(bidAdapter);
-        Log.i("BIDLIST", "onCreate: "+bidList);
 
 
         try {
@@ -159,7 +158,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
 
     }
 
-    @Override
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
         if (c.isOffline()) {

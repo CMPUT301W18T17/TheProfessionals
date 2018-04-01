@@ -36,13 +36,15 @@ public class NotificationActivity extends AppCompatActivity {
         username = preferences.getString("username", "error");
 
         /* populate notificationList */
+        /*
         getFromServer();
         notificationAdapter = new NotificationListAdapter(this, notificationList.getList());
         notificationListView.setAdapter(notificationAdapter);
         notificationListView.setOnItemClickListener(clickListener);
         notificationAdapter.notifyDataSetChanged();
-
+*/
         /* onclicklisteners */
+        /*
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +62,7 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
 
-
+*/
     }
 
     private void getFromServer(){

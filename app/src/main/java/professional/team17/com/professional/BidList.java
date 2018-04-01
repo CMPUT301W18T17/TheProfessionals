@@ -146,6 +146,7 @@ public class BidList extends ArrayList<Bid> implements Serializable{
      * @return boolean true if user name was found in bidlist, false otherwise
      */
     public boolean userBidded(String userName) {
+        Log.i("ADAD", "userBidded: "+userName);
         for (int i = 0; i < this.size(); i++) {
             if (this.get(i).getName().equals(userName)) {
                 return true;

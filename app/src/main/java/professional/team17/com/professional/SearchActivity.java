@@ -54,9 +54,6 @@ public class SearchActivity extends Navigation {
         /* Change activity title */
         this.setActivityTitleProvider("Task Search");
 
-        sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        username = sharedPreferences.getString("username", "error");
-
         taskList = new TaskList();
         taskList.addAll(getOpenTasks());
         checkOffline();
@@ -91,7 +88,7 @@ public class SearchActivity extends Navigation {
         });
     }
 
-    @Override
+
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
         if(c.isOffline()) {

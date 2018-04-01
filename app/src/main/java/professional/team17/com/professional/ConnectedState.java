@@ -1,5 +1,7 @@
 package professional.team17.com.professional;
 
+import android.util.Log;
+
 /**
  * Created by ag on 2018-03-25.
  */
@@ -25,15 +27,20 @@ public class ConnectedState {
      * Will change to online
      */
     public void setOnline(){
-        if (this.state ==null || this.state==status.OFFLINE) {
+        Log.i("VIEWLISR", "setOnline: ");
+        if (this.state==status.OFFLINE) {
             this.state = status.ONLINE;
             if (OnlineListener != null){
                 OnlineListener.notifyOnlineChange();
             }
 
         }
+        if (this.state ==null) {
+            this.state = status.ONLINE;
+
+        }
         else {
-            OnlineListener.notifyOnline();
+            //OnlineListener.notifyOnline();
         }
 
     }

@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -29,7 +30,6 @@ import android.widget.ListView;
 public class ProviderTaskListActivity extends Navigation {
     private ProviderCustomArrayAdapter adapterHelper;
     private ListView listView;
-    private String username;
     //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
 
@@ -50,21 +50,19 @@ public class ProviderTaskListActivity extends Navigation {
         listView = findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(adapterHelper);
         listView.setOnItemClickListener(clickListener);
-
-        SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        username = sharedpreferences.getString("username", "error");
         String type = setProviderViewType();
         //createList(type);
         taskList.addAll(createList(type));
         checkOffline();
         adapterHelper.notifyDataSetChanged();
+        SyncController controller = new SyncController(getApplicationContext());
+        controller.resetRequested(username);
 
 
 
 
     }
 
-    @Override
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
         if(c.isOffline()) {

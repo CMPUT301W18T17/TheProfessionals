@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -24,11 +25,9 @@ import android.widget.ListView;
  * @see TaskList
  * @see Navigation
  */
-public class RequesterViewListActivity extends Navigation implements ConfirmDialog.ConfirmDialogListener{
+public class RequesterViewListActivity extends Navigation {
     private RequesterCustomArrayAdapter adapterHelper;
     private ListView listView;
-    private String username;
-    private SharedPreferences sharedpreferences;
     private Task task;
     String type;
     //TODO both items below can be put in controller (project part 5)
@@ -49,16 +48,17 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
         listView = findViewById(R.id.tasklistRequester);
         listView.setAdapter(adapterHelper);
         //listView.setOnItemClickListener(clickListener);
-
+        SyncController controller = new SyncController(getApplicationContext());
+        ConnectedState c = ConnectedState.getInstance();
+        Log.i("VIEWLISR", "onCreate: "+c.isOffline());
+      //  if (!c.isOffline()){
+    //        controller.resetRequested(username);
+   //     }
 
         //get username
-        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        username = sharedpreferences.getString("username", "error");
 
-
+        //controller.resetRequested(username);
         type = setRequesterViewType();
-        createList(type);
-
         taskList.addAll(createList(type));
         checkOffline();
         adapterHelper.notifyDataSetChanged();
@@ -115,6 +115,19 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
         Intent intention = new Intent(RequesterViewListActivity.this, RequesterViewTaskActivity.class);
         intention.putExtra("task", task.getUniqueID());
         startActivity(intention);
+
+        /*
+        boolean success;
+        ConnectedState c2 = ConnectedState.getInstance();
+        c2.setOnline();
+        SyncController controller = new SyncController(this);
+
+        success = controller.sync();
+        Log.i("R#R#", "changetoOnline: "+success);
+        if (!success) {
+            createSync();
+        }
+        */
     }
 
 
@@ -176,25 +189,14 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
         args.putString("title", "Delete Task");
         args.putString("cancel", "Cancel");
         args.putString("confirm", "Yes");
+        args.putString("dialogFlag", "sync");
         args.putString("message", "Are you sure you want to delete this task?");
 
         confirmDialog.setArguments(args);
         confirmDialog.show(fm, "To Done");
     }
 
-    /**
-     * If the user confirms the task deletion, this deletes the task from the taskList and also from
-     * the server.
-     * @param confirmed Whether the user confirmed the deletion or cancelled.
-     */
-    @Override
-    public void onFinishConfirmDialog(Boolean confirmed) {
-        if (confirmed){
-            taskList.deleteTask(task);
-            adapterHelper.notifyDataSetChanged();
-            serverHelper.deleteTasks(task);
-        }
-    }
+
 
     /**
      * If the user confirms the task deletion, this deletes the task from the taskList and also from

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuInflater;
@@ -21,9 +22,11 @@ import com.google.android.gms.common.GoogleApiAvailability;
  * Created by ag on 2018-03-26.
  */
 
-public abstract  class Navigation extends AppCompatActivity {
+public  class Navigation extends AppCompatActivity implements ConfirmDialog.ConfirmDialogListener{
 
     protected ServerHelper serverHelper;
+    protected SharedPreferences sharedpreferences;
+    protected String username;
     /**
      * On creation of the activity, assign values to all variables.
      *
@@ -35,6 +38,13 @@ public abstract  class Navigation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         serverHelper = new ServerHelper(this);
         // Create the custom object
+        final Context cont = this;
+        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = sharedpreferences.getString("username", "error");
+        Log.i("ANVATIONA", "onCreate: "+username);
+
+
+
         OnlineListener object = new OnlineListener();
 
         ConnectedState c2 = ConnectedState.getInstance();
@@ -42,29 +52,33 @@ public abstract  class Navigation extends AppCompatActivity {
 
         ConnectivityCheck.isOnline c = new ConnectivityCheck.isOnline();
         c.execute();
-/*
+
+
         // TODO FULLY IMPLEMENT LISTENER
         object.setCustomObjectListener(new OnlineListener.MyCustomObjectListener() {
             @Override
             public void changetoOnline() {
-                SyncController controller = new SyncController(getApplicationContext());
-                controller.sync();
+               /*Log.i("R#R#", "changetoOnline: ");
+               SyncController controller = new SyncController(cont);
+               Task task  = controller.sync();
+               Log.i("R#R#", "changetoOnline: "+task);
+               serverHelper.addTasks(task);
+               */
             }
 
             @Override
             public void stayOnline() {
-                SyncController controller = new SyncController(getApplicationContext());
-                controller.resetRequested();
-
+              //  SyncController controller = new SyncController(getApplicationContext());
+              //  Log.i("CALEED", "stayOnline: ");
+              //  controller.resetRequested(username);
 
             }
 
-
         });
-*/
+
     }
 
-    abstract void checkOffline();
+
     /**
      * Changes the title at the top of the layout.
      *
@@ -250,7 +264,32 @@ public abstract  class Navigation extends AppCompatActivity {
 
     }
 
+    protected void createSync() {
+        FragmentManager fm = getSupportFragmentManager();
 
+        ConfirmDialog confirmDialog = new ConfirmDialog();
+        Bundle args = new Bundle();
+        args.putString("title", "Unable to Sync");
+        args.putString("cancel", "Cancel");
+        args.putString("confirm", "Yes");
+        args.putString("message", "We were unable to sync all the edits offline as users have placed bids on your tasks. Would you like to see the bids");
 
+        confirmDialog.setArguments(args);
+        confirmDialog.show(fm, "Sample Fragment");
 
+    }
+
+    @Override
+    public void onFinishConfirmDialog(Boolean confirmed) {
+        if (confirmed==true){
+            Intent intent = new Intent(getApplicationContext(), NotificationActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    public void onFinishConfirmDialog(Boolean confirmed, String dialog) {
+
+    }
 }
