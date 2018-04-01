@@ -19,7 +19,7 @@ public class AddReview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_review);
 
-        profile = getIntent().getStringExtra("Profile");
+        profile = getIntent().getStringExtra("profile");
 
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         reviewer = sharedpreferences.getString("username", "error");
