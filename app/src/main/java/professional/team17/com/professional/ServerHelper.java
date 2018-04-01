@@ -9,6 +9,7 @@
  */
 
 package professional.team17.com.professional;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -43,10 +44,13 @@ import io.searchbox.core.SearchResult;
 public class ServerHelper {
     private static String tasktype = "task";
     private static String profiletype = "profile";
+    private static Context context;
 
 
-//TODO - all methods (not async should be placed in some other class at some point
 
+    public ServerHelper(Context c){
+        this.context = c;
+    }
 
     /**
      *
@@ -79,7 +83,16 @@ public class ServerHelper {
                 "\"must\": [ " +
                 "{\"match\": {\"profileName\": \"" + username + "\"}}," +
                 "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
-        return getTaskList(search);
+        ConnectedState c = ConnectedState.getInstance();
+        if (c.isOffline()){
+            TaskDAO db = new TaskDAO(context);
+            return db.getTasks();
+
+        }
+        else {
+            return getTaskList(search);
+        }
+
     }
 
 

@@ -47,7 +47,7 @@ public class EditMyProfileActivity extends AppCompatActivity {
     private String path, name, eMail, phoneNumber;
     private  int startTime;
 
-    private final ServerHelper serverHelper = new ServerHelper();
+    private ServerHelper serverHelper;
 
     /**
      * Upon creation, EditText will be set with relevant user info grabbed from ES
@@ -60,7 +60,7 @@ public class EditMyProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        serverHelper = new ServerHelper(this);
         /* initialization of objects on layout and user's info*/
         setContentView(R.layout.activity_edit_my_profile);
         Button saveButton = (Button) findViewById(R.id.saveButton);

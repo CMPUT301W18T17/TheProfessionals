@@ -32,7 +32,7 @@ import java.util.Locale;
  * @see RequesterAddTaskActivity
  */
 public class RequesterEditTaskActivity extends RequesterTaskActivity {
-    ServerHelper serverHelper = new ServerHelper();
+
     private String ID;
     private String title;
     private String description;

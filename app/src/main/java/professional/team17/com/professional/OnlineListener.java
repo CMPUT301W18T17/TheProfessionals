@@ -9,10 +9,15 @@ import android.util.Log;
 
 public class OnlineListener {
 
-    public void notifyOnline() {
-        Log.i("WEWE", "send: "+listener);
+    public void notifyOnlineChange() {
         if (listener != null)
             listener.changetoOnline();
+    }
+
+    public void notifyOnline() {
+        if (listener != null)
+            listener.stayOnline();
+
     }
 
     // Step 1 - This interface defines the type of messages I want to communicate to my owner
@@ -21,6 +26,8 @@ public class OnlineListener {
         // need to pass relevant arguments related to the event triggered
         public void changetoOnline();
         // or when data has been loaded
+
+        public void stayOnline();
     }
 
     private MyCustomObjectListener listener;

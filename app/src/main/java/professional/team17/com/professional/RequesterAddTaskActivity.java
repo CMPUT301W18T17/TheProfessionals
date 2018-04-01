@@ -95,7 +95,6 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
         task = new Task(username, title, description, locationString, dateString, latLng, photos);
         Log.i("DUDE", "addToServer: "+task.getPhotos());
         task.setRequested();
-        ServerHelper serverHelper = new ServerHelper();
         serverHelper.addTasks(task);
     }
 

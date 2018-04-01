@@ -23,7 +23,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 public abstract  class Navigation extends AppCompatActivity {
 
-
+    protected ServerHelper serverHelper;
     /**
      * On creation of the activity, assign values to all variables.
      *
@@ -33,7 +33,7 @@ public abstract  class Navigation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        serverHelper = new ServerHelper(this);
         // Create the custom object
         OnlineListener object = new OnlineListener();
 
@@ -42,14 +42,23 @@ public abstract  class Navigation extends AppCompatActivity {
 
         ConnectivityCheck.isOnline c = new ConnectivityCheck.isOnline();
         c.execute();
-/**
+/*
         // TODO FULLY IMPLEMENT LISTENER
         object.setCustomObjectListener(new OnlineListener.MyCustomObjectListener() {
             @Override
-            public void onObjectReady() {
-                Log.i("HEURHHREHhaHHR", "onObjectReady: ");
+            public void changetoOnline() {
+                SyncController controller = new SyncController(getApplicationContext());
+                controller.sync();
+            }
+
+            @Override
+            public void stayOnline() {
+                SyncController controller = new SyncController(getApplicationContext());
+                controller.resetRequested();
+
 
             }
+
 
         });
 */
