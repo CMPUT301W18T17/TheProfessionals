@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -33,7 +34,11 @@ public class TaskDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        create();
+        delete(db);
+        String query = "CREATE TABLE "+ TASKTABLE+
+                " (id Integer Primary Key, profileName Text, name Text not Null, location Text,"+
+                "description Text, status Text, date Text, lon Text, lat Text, actionType Integer, online Boolean)";
+        db.execSQL(query);
 
     }
 
@@ -41,8 +46,7 @@ public class TaskDAO extends SQLiteOpenHelper {
      *
      * @param db the db where tables are being dropped - to clear every time connectivity is set up
      */
-    private void delete(){
-        SQLiteDatabase db = getWritableDatabase();
+    private void delete(SQLiteDatabase db){
         String query = "Drop TABLE if exists " +TASKTABLE;
         db.execSQL(query);
     }
@@ -52,6 +56,7 @@ public class TaskDAO extends SQLiteOpenHelper {
         String query = "CREATE TABLE "+ TASKTABLE+
                 " (id Integer Primary Key, profileName Text, name Text not Null, location Text,"+
                 "description Text, Status Text,Date Text, lon Text, lat Text, actionType Integer, online Boolean)";
+        Log.i("TAG", "create: "+query);
         db.execSQL(query);
     }
 
@@ -61,7 +66,6 @@ public class TaskDAO extends SQLiteOpenHelper {
      * @param taskList - the tasklist to be inserted into the DB
      */
     public void insertAll(TaskList taskList){
-        delete();
         create();
         for (Task task : taskList) {
             insert(task);
@@ -166,7 +170,7 @@ public class TaskDAO extends SQLiteOpenHelper {
     public TaskList getTasks() {
         TaskList tasklist = new TaskList();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where status = Requested;", null);
+        Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where status = \"Requested\";", null);
         while (c.moveToNext()) {
             Task task = createTask(c);
             tasklist.add(task);
@@ -231,6 +235,7 @@ public class TaskDAO extends SQLiteOpenHelper {
         int online = c.getInt(c.getColumnIndex("online"));
         return (online ==0);
     }
+
 
 
     //https://stackoverflow.com/questions/8157755/how-to-convert-enum-value-to-int

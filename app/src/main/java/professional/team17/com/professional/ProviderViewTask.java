@@ -46,7 +46,6 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
 
     //TODO both items below can be put in controller (project part 5)
     private Task task;
-    private final ServerHelper serverHelper = new ServerHelper();
 
 
     //Everything below maybe able to be set into the controller. Do not reflect in uml

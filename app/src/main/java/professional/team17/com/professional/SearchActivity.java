@@ -37,7 +37,7 @@ public class SearchActivity extends Navigation {
     private ListView listView;
     private SearchView searchView;
     private TaskList taskList;
-    private final ServerHelper serverHelper = new ServerHelper();
+    private ServerHelper serverHelper;
     private String username;
     private SharedPreferences sharedPreferences;
 
@@ -50,7 +50,7 @@ public class SearchActivity extends Navigation {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
+        serverHelper = new ServerHelper(this);
         /* Change activity title */
         this.setActivityTitleProvider("Task Search");
 

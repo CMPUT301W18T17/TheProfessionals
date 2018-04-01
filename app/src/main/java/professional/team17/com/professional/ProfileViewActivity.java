@@ -43,7 +43,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
     protected int photoWidth;
     protected int photoHeight;
 
-    private final ServerHelper serverHelper = new ServerHelper();
+    protected ServerHelper serverHelper;
 
     /**
      * On selecting a profile
@@ -56,6 +56,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
         currentMode = (TextView) findViewById(R.id.currentModeTV);
         doneButton = (Button) findViewById(R.id.doneButton);
         listView = (ListView) findViewById(R.id.listViewID);
+        serverHelper = new ServerHelper(this);
     }
 
     /**

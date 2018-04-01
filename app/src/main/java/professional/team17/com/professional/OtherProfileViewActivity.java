@@ -22,7 +22,6 @@ import android.widget.ListView;
  */
 public class OtherProfileViewActivity extends ProfileViewActivity{
     private ListView listViewOfRatings;
-    private final ServerHelper serverHelper = new ServerHelper();
 
     /**
      * Upon selecting another user's profile, info is displayed until doneButton is selected

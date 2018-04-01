@@ -28,9 +28,12 @@ public class ConnectedState {
         if (this.state ==null || this.state==status.OFFLINE) {
             this.state = status.ONLINE;
             if (OnlineListener != null){
-                OnlineListener.notifyOnline();
+                OnlineListener.notifyOnlineChange();
             }
 
+        }
+        else {
+            OnlineListener.notifyOnline();
         }
 
     }

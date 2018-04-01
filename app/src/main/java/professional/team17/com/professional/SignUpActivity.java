@@ -76,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
         phoneNumberBox = (EditText) findViewById(R.id.phoneNumberBox);
         errorBox = (TextView) findViewById(R.id.errorText);
         addNewPhotoButton = findViewById(R.id.add_new_photo);
-        serverHelper = new ServerHelper();
+        serverHelper = new ServerHelper(this);
 
         // Set text back
         setter(usernameBox, userName);

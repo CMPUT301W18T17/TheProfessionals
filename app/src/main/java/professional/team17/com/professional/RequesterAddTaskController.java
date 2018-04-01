@@ -69,8 +69,7 @@ public class RequesterAddTaskController {
      */
     private void addToServer(){
         //TODO delete this temp variable
-        ServerHelper serverHelper = new ServerHelper();
-        serverHelper.addTasks(task);
+;
     }
 
 

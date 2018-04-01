@@ -40,7 +40,7 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        serverHelper = new ServerHelper();
+        serverHelper = new ServerHelper(this);
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         if (sharedpreferences.contains("username")){
             changeActivity(SearchActivity.class);

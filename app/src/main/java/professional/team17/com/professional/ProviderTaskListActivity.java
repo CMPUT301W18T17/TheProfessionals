@@ -32,7 +32,6 @@ public class ProviderTaskListActivity extends Navigation {
     private String username;
     //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
-    private final ServerHelper serverHelper = new ServerHelper();
 
 
 

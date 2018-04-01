@@ -22,7 +22,7 @@ import android.util.Log;
  */
 
 public class ProviderTaskController {
-    private final ServerHelper serverHelper = new ServerHelper();
+   // private final ServerHelper serverHelper = new ServerHelper();
     public ProviderTaskController(){}
     // this parts is for TaskListActivity
 
@@ -33,13 +33,13 @@ public class ProviderTaskController {
         Log.i("DOUR", "createList: "+type);
 
         if (type.equals("Bidded")) {
-            taskList = serverHelper.getTasksBidded("john123", "Bidded");
+           // taskList = serverHelper.getTasksBidded("john123", "Bidded");
             Log.i("DOUR", "createList: "+taskList);
 
         }
 
         if (type.equals("Assigned")) {
-            taskList = serverHelper.getTasksBidded("john123", "Assigned");
+            //taskList = serverHelper.getTasksBidded("john123", "Assigned");
             //get assigned list from es
         }
         // dummyDate();

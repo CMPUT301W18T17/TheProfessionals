@@ -43,7 +43,6 @@ public abstract class RequesterTaskActivity extends Navigation{
     protected LatLng latLng;
     protected String message;
     protected ArrayList<Bitmap> photos;
-
     /**
      * On creation of the activity, set all view objects and onClickListeners.
      * @param savedInstanceState The activity's previously saved state.
@@ -52,7 +51,6 @@ public abstract class RequesterTaskActivity extends Navigation{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         setContentView(R.layout.activity_requester_task);
         setTitle();

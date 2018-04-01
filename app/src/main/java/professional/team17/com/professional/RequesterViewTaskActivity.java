@@ -53,7 +53,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
     /* Other variables */
     String ID;
     private Task task;
-    ServerHelper serverHelper = new ServerHelper();
     BidListAdapter bidAdapter;
     BidList bidList;
     Bid chosenBid;
@@ -67,12 +66,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("CHANGE", "onCreate:" );
         setContentView(R.layout.activity_requester_view_task2);
-        Log.i("CHANGE", "onCreate:" );
         /* Set activity title */
         setActivityTitleRequester("View Task");
-
         /*Set layout elements */
         backButton = (ImageButton) findViewById(R.id.requester_view_taskbackButton);
         viewPhotos = (ImageButton) findViewById(R.id.requester_view_taskViewPhotosButton);

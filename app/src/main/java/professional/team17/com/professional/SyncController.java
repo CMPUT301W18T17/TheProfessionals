@@ -1,6 +1,7 @@
 package professional.team17.com.professional;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -12,9 +13,10 @@ public class SyncController {
     ServerHelper es;
     Context context;
 
+
     public SyncController(Context context){
-        es = new ServerHelper();
         this.context = context;
+        es = new ServerHelper(context);
     }
 
 
@@ -70,4 +72,18 @@ public class SyncController {
     }
 
 
+    public void sync() {
+        TaskDAO db = new TaskDAO(context);
+
+        Log.i("TAG", "sync: ");
+        getAdded();
+        getUpdated();
+        getDeleted();
+        db.close();
+    }
+
+    public void resetRequested() {
+
+
+    }
 }

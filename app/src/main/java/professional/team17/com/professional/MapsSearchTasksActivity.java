@@ -37,7 +37,7 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
     private Circle circle;
     private LatLng topRight;
     private LatLng bottomLeft;
-    private ServerHelper serverHelper = new ServerHelper();
+    private ServerHelper serverHelper = new ServerHelper(getApplicationContext());
     private TaskList tasks;
 
     public void setContentViewFunction(){
