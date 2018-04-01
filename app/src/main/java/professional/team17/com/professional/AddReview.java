@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
 
@@ -24,7 +25,7 @@ public class AddReview extends AppCompatActivity {
 
     }
 
-    private void onSubmit(){
+    private void onSubmit(View v){
         AddReviewController controller = new AddReviewController();
         EditText commentBox = findViewById(R.id.commentBox);
         RatingBar ratingBar = findViewById(R.id.ratingBar);
@@ -33,6 +34,10 @@ public class AddReview extends AppCompatActivity {
 
         controller.setReview(profile, rating, comment, reviewer);
 
+        finish();
+    }
 
+    private void back(View v){
+        finish();
     }
 }

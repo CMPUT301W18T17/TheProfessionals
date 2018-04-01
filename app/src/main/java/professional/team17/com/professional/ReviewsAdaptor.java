@@ -61,14 +61,14 @@ public class ReviewsAdaptor extends ArrayAdapter {
             convertView = layoutInflater.inflate(layoutResource, parent, false);
         }
 
-        TextView subTitle = (TextView) convertView.findViewById(R.id.subTitle);
+//        TextView subTitle = (TextView) convertView.findViewById(R.id.subTitle);
         TextView subProfile = (TextView) convertView.findViewById(R.id.subProfile);
         RatingBar subRatingBar = (RatingBar) convertView.findViewById(R.id.subRatingBar);
         TextView subComment = (TextView) convertView.findViewById(R.id.subComment);
 
         Review currentReview = reviewList.getReviews().get(position);
 
-        subTitle.setText(currentReview.getReviewTitle());
+//        subTitle.setText(currentReview.getReviewTitle());
         subProfile.setText(currentReview.getProfileName());
         double score = currentReview.getScore();
         float scoreInFloat = (float)score;
