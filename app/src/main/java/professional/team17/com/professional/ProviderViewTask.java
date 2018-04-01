@@ -13,13 +13,21 @@ package professional.team17.com.professional;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 
 
 /**
@@ -29,7 +37,7 @@ import android.widget.Toast;
  * @author Allison
  * @see ServerHelper , Task, Profile
  */
-public class ProviderViewTask extends Navigation implements PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
+public class ProviderViewTask extends Navigation implements ImageView.OnClickListener, PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
 
     private String username;
     //TODO below item is needed for protoype, part 5 persistence will remove this
@@ -55,6 +63,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
     private TextView requesterAvgTextView; //project 5 implement
     private RatingBar requesterAvgTextField; //project 5 implement
     private ImageButton viewMapButton;
+    private Button button5;
 
 
     //both buttons start as invisible by default
@@ -87,6 +96,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
         appendButton = (ImageButton) findViewById(R.id.provider_view_task_manageBid);
         taskAddressTextField = (TextView) findViewById(R.id.provider_view_task_address);
         viewMapButton = (ImageButton) findViewById(R.id.provider_view_map_button);
+        button5 = (Button) findViewById(R.id.button5);
 
         this.setActivityTitleProvider("View Task");
 
@@ -105,14 +115,21 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
                 startActivity(intent);
             }
         });
-
-
         task = getTask();
+        System.out.println("------------------------------------------------------");
+        System.out.println(task.getPhotos().get(0));
+        System.out.println("------------------------------------------------------");
+        if (task.getPhotos() != null)
+            button5.setOnClickListener(this);
+
+
+
         checkOffline();
 
 
         //setRating();
     }
+
 
     @Override
     void checkOffline() {
@@ -129,6 +146,20 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
 
             checkStatus();
             fillTask();
+        }
+
+    }
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.button5:
+                Intent yourIntent = new Intent(this, providerCheckImage.class);
+                Bitmap bmp = task.getPhotos().get(0); // store the image in your bitmap
+                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
+                yourIntent.putExtra("yourImage", bao.toByteArray());
+                startActivity(yourIntent);
+
         }
 
     }
