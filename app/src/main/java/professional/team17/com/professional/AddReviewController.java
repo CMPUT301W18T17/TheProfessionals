@@ -10,9 +10,6 @@ public class AddReviewController {
     public AddReviewController(){}
 
     public void setReview(String profile, int rating, String comment, String reviewer) {
-
-        SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String username = sharedpreferences.getString("username", "error");
         review = new Review(rating, reviewer, comment);
     }
 }
