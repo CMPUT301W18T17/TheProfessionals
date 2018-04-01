@@ -71,6 +71,7 @@ public class TaskDAO extends SQLiteOpenHelper {
         delete(db);
         createnew(db);
         for (Task task : taskList) {
+            Log.i("INSERT", "insertAll: "+task);
             insert(task);
         }
     }
@@ -108,7 +109,9 @@ public class TaskDAO extends SQLiteOpenHelper {
     private int getId(){
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * from "+TASKTABLE, null);
-        return c.getCount()+1;
+        int count = c.getCount()+1;
+        c.close();
+        return count;
     }
 
     /**
@@ -126,10 +129,12 @@ public class TaskDAO extends SQLiteOpenHelper {
      * @param task  - this removes the task offline - via  a marker in the action table
      */
     public void removeOffline(Task task){
+        Log.i("WRWR", "removeOffline: ");
         SQLiteDatabase db = getWritableDatabase();
         String[] id = {task.getUniqueID()+""};
         //see if added offline - if so, remove
         if (isOffline(task.getUniqueID())){
+            Log.i("WRWR", "removeOffline: ");
             db.delete(TASKTABLE, "id=?", id);
         }
         else {
@@ -182,7 +187,9 @@ public class TaskDAO extends SQLiteOpenHelper {
             Task task = createTask(c);
             tasklist.add(task);
         }
+        c.close();
         return tasklist;
+
     }
 
 
@@ -191,8 +198,10 @@ public class TaskDAO extends SQLiteOpenHelper {
         Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where id = ?", new String[] {id});
        while (c.moveToNext()) {
             Task task = createTask(c);
+            c.close();
             return task;
         }
+        c.close();
         return null;
     }
 
@@ -242,6 +251,7 @@ public class TaskDAO extends SQLiteOpenHelper {
             list.add(id);
         }
         Log.i("SSD", "getList: "+list);
+        c.close();
         return list;
     }
 
@@ -252,6 +262,7 @@ public class TaskDAO extends SQLiteOpenHelper {
         while (c.moveToNext()) {
             online = c.getInt(c.getColumnIndex("online"));
         }
+        c.close();
         return (online ==0);
     }
 

@@ -293,8 +293,9 @@ public class ServerHelper {
      * @param task - the task that will be deleted within the ES
      */
     public void deleteTasks(Task task) {
-
+        Log.i("WWE", "deleteTasks: ");
         ConnectedState c = ConnectedState.getInstance();
+        Log.i("WWE", "deleteTasks: "+c.isOffline());
         if (c.isOffline()){
             TaskDAO db = new TaskDAO(context);
             db.removeOffline(task);

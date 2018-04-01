@@ -110,13 +110,14 @@ public class RequesterViewListActivity extends Navigation {
      * @param v The view object (the task's title)
      */
     public void titleClick(View v){
+          /*
         final int position = listView.getPositionForView((View) v.getParent());
         Task task = taskList.get(position);
         Intent intention = new Intent(RequesterViewListActivity.this, RequesterViewTaskActivity.class);
         intention.putExtra("task", task.getUniqueID());
         startActivity(intention);
+*/
 
-        /*
         boolean success;
         ConnectedState c2 = ConnectedState.getInstance();
         c2.setOnline();
@@ -127,7 +128,7 @@ public class RequesterViewListActivity extends Navigation {
         if (!success) {
             createSync();
         }
-        */
+
     }
 
 
@@ -208,6 +209,7 @@ public class RequesterViewListActivity extends Navigation {
         if (confirmed){
             taskList.deleteTask(task);
             adapterHelper.notifyDataSetChanged();
+            serverHelper.deleteTasks(task);
         }
     }
 }
