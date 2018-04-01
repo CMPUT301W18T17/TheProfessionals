@@ -12,6 +12,6 @@ public class AddReviewController {
 
     public void setReview(String reviewee, int rating, String comment, String reviewer) {
         review = new Review(rating, reviewer, comment);
-        
+
     }
 }
