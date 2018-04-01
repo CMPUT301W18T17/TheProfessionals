@@ -1,13 +1,20 @@
 package professional.team17.com.professional;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,12 +22,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class PhotoPicker extends AppCompatActivity {
     private String userName;
     private String name;
     private String eMail;
     private String phoneNumber;
     private static final int SELECTED_PICTURE = 1;
+    private static final int CAMERA_REQUEST = 2;
     private ImageView viewPhoto;
     private Photo photo, oldPhoto;
     private String filePath;
@@ -28,6 +41,8 @@ public class PhotoPicker extends AppCompatActivity {
     private String oldPath;
     private TextView viewError;
     private int size, isEditProfile;
+    private String mCurrentPhotoPath;
+;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,9 +105,31 @@ public class PhotoPicker extends AppCompatActivity {
         }
     }
 
-    public void toGallery(View view){
+    private void toGallery(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, SELECTED_PICTURE);
+    }
+
+    private void toCamera(){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.example.android.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, CAMERA_REQUEST);
+            }
+        }
     }
 
     @Override
@@ -115,6 +152,14 @@ public class PhotoPicker extends AppCompatActivity {
                     photo = new Photo(filePath);
 
 
+                    returnPath = photo.getPath();
+                    viewPhoto.setImageDrawable(photo.pathToDrawable());
+                }
+                break;
+            case CAMERA_REQUEST:
+                if (requestCode == RESULT_OK){
+                    Log.i("message","----------------------------------------------------"+mCurrentPhotoPath);
+                    photo = new Photo(mCurrentPhotoPath);
                     returnPath = photo.getPath();
                     viewPhoto.setImageDrawable(photo.pathToDrawable());
                 }
@@ -166,6 +211,22 @@ public class PhotoPicker extends AppCompatActivity {
         }
     }
 
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
     private void putExtra(Intent intent){
         // Put Extra
 
@@ -188,4 +249,24 @@ public class PhotoPicker extends AppCompatActivity {
         // Phone Number
         adder(intent, "phoneNumber", phoneNumber);
     }
+
+    public void photoDialog(View view){
+        new AlertDialog.Builder(this)
+                .setTitle("Attention")
+                .setMessage("Please choose your way to pick photo.")
+                .setCancelable(true)
+                .setPositiveButton("From File", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        toGallery();
+                    }
+                })
+                .setNegativeButton("Using Camera", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        toCamera();
+                    }
+                })
+                .create()
+                .show();
+    }
+
 }

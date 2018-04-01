@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.AutocompletePrediction;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,6 +41,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The following is a spinoff of Mitch Tablian's code in Google Maps & Google Places Course
+ */
 public class MapsSearchLocationActivity extends MapsActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "MapsSLocationActivity";
     private static final LatLngBounds latLngBounds = new LatLngBounds(new LatLng(-85, -180), new LatLng(85, 180));
@@ -70,6 +79,7 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
 
         pAutoCompleteAdapter = new PlaceAutoCompleteAdapter(this, mGoogleApiClient, latLngBounds, null);
 
+        mSearchAddress.setOnItemClickListener(autoCompleteClickListener);
         mSearchAddress.setAdapter(pAutoCompleteAdapter);
         mSearchAddress.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -120,10 +130,51 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
         }
     }
 
+    /**
+     * Hides keyboard after clicking enter or clicking on address in suggestions
+     */
     public void hideKeyBoard(){
         InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(this.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(mSearchAddress.getWindowToken(),0);
     }
+
+    /**
+     *  Treatments for when user click on an address in suggestion list
+     */
+    private AdapterView.OnItemClickListener autoCompleteClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            hideKeyBoard();
+            final AutocompletePrediction place = pAutoCompleteAdapter.getItem(i);
+            final String placeId = place.getPlaceId();
+
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi.getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceResultCallback);
+        }
+    };
+
+    /**
+     *  Get place address and latLng
+     */
+    private ResultCallback<PlaceBuffer> mUpdatePlaceResultCallback = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(@NonNull PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()){
+                Log.d(TAG, "mUpdatePlaceResultCallback: Place query was unsuccessful: " + places.getStatus().toString());
+            } else {
+                final Place place = places.get(0);
+                try {
+                    Log.d(TAG,"mUpdatePlaceResultCallback: Place Address " + place.getAddress() );
+                    Log.d(TAG,"mUpdatePlaceResultCallback: Place Address " + place.getLatLng() );
+
+                    moveCamera(place.getLatLng(), place.getAddress().toString());
+                } catch (NullPointerException e){
+                    Log.e(TAG, "mUpdatePlaceResultCallback: No associated address or LatLng" + e.getMessage());
+                }
+            }
+            places.release(); // From Google Places API: To prevent a memory leak! Must release PlaceBuffer object when app doesn't need it
+        }
+    };
 
 
 }
