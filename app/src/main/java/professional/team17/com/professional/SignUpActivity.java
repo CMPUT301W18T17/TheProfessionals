@@ -70,11 +70,11 @@ public class SignUpActivity extends AppCompatActivity {
         phoneNumber = intent.getStringExtra("phoneNumber");
         path = intent.getStringExtra("photoPath");
 
-        usernameBox = (EditText) findViewById(R.id.usernameBox);
-        nameBox = (EditText) findViewById(R.id.fullNameBox);
-        emailBox = (EditText) findViewById(R.id.emailBox);
-        phoneNumberBox = (EditText) findViewById(R.id.phoneNumberBox);
-        errorBox = (TextView) findViewById(R.id.errorText);
+        usernameBox = findViewById(R.id.usernameBox);
+        nameBox = findViewById(R.id.fullNameBox);
+        emailBox = findViewById(R.id.emailBox);
+        phoneNumberBox = findViewById(R.id.phoneNumberBox);
+        errorBox = findViewById(R.id.errorText);
         addNewPhotoButton = findViewById(R.id.add_new_photo);
         serverHelper = new ServerHelper();
 
@@ -91,7 +91,6 @@ public class SignUpActivity extends AppCompatActivity {
      * returns the user to the Login Activity
      *
      * @see LogInActivity
-     * @param view
      */
     public void back(View view) {
         changeActivity(LogInActivity.class);
@@ -101,7 +100,6 @@ public class SignUpActivity extends AppCompatActivity {
      * Creates the user's profile and moves them
      *
      * @see ServerHelper
-     * @param view
      */
     public void saveProfile(View view) {
         String username = usernameBox.getText().toString();
@@ -112,15 +110,15 @@ public class SignUpActivity extends AppCompatActivity {
 
         if ((usernameBox.getText().length() == 0) || (nameBox.getText().length() == 0) ||
                 (emailBox.getText().length() == 0) || (phoneNumberBox.getText().length() == 0)){
-            errorBox.setText("Please make sure all fields are filled");
+            errorBox.setText(R.string.fieldsNotFilled);
         } else if (usernameBox.getText().length() < 4) {
-            errorBox.setText("Username must be at least 4 characters");
-        } else if (serverHelper.profileExists(username) == true) {
-            errorBox.setText("Username is already taken");
+            errorBox.setText(R.string.underMinCharacters);
+        } else if (serverHelper.profileExists(username)) {
+            errorBox.setText(R.string.userExists);
         } else if (!(validationController.validateEmail(email))) {
-            errorBox.setText("Must enter a valid email");
+            errorBox.setText(R.string.invalidEmail);
         } else if (!(validationController.validatePhoneNumber(phoneNumber))) {
-            errorBox.setText("must enter a valid phone number");
+            errorBox.setText(R.string.invalidPhoneNumber);
         } else {
                 if (path != null) {
                     photo = new Photo(path);
@@ -140,13 +138,13 @@ public class SignUpActivity extends AppCompatActivity {
                 Profile profile = new Profile(name, username, email, phoneNumber, photoArray, photoConfig, photoWidth, photoHeight);
 
                 if (!(serverHelper.addProfile(profile))) {
-                    errorBox.setText("Something went wrong! We are unable to create profile");
+                    errorBox.setText(R.string.cannotCreateProfile);
                 } else {
                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                     SharedPreferences.Editor editor = pref.edit();
 
                     editor.putString("username", username); // Storing string
-                    editor.commit(); // commit changes
+                    editor.apply(); // commit changes
 
                     //String test = pref.getString(username, "not working");
                     changeActivity(SearchActivity.class);
