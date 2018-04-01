@@ -117,7 +117,6 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
         });
         task = getTask();
         System.out.println("------------------------------------------------------");
-        System.out.println(task.getPhotos().get(0));
         System.out.println("------------------------------------------------------");
         if (task.getPhotos() != null)
             button5.setOnClickListener(this);
