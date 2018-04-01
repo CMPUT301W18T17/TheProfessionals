@@ -169,7 +169,6 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
         double bidAmount =  Double.valueOf(inputText);
         int duration = Toast.LENGTH_SHORT;
 
-        Log.i("PLACEBID", "onFinishPlaceBidDialog: "+username);
         task.addBid(new Bid(username, bidAmount));
 
         serverHelper.updateTasks(task);
@@ -190,7 +189,7 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
      * @param confirmed boolean value representing the user response in the dialog
      * true means the user confirmed.
      */
-    public void onFinishConfirmDialog(Boolean confirmed){
+    public void onFinishConfirmDialog(Boolean confirmed, String text){
         if (confirmed==true){
             Bid bid = task.getBids().getBid(username);
             task.removeBid(bid);
@@ -373,6 +372,7 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
         args.putString("title", "Cancel Bid");
         args.putString("cancel", "Cancel");
         args.putString("confirm", "Yes");
+        args.putString("dialogFlag", "Delete");
         args.putString("message", "Are you sure you want to delete?");
 
         confirmDialog.setArguments(args);

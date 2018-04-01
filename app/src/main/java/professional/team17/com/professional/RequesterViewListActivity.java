@@ -124,7 +124,6 @@ public class RequesterViewListActivity extends Navigation {
         SyncController controller = new SyncController(this);
 
         success = controller.sync();
-        Log.i("R#R#", "changetoOnline: "+success);
         if (!success) {
             createSync();
         }
@@ -190,7 +189,7 @@ public class RequesterViewListActivity extends Navigation {
         args.putString("title", "Delete Task");
         args.putString("cancel", "Cancel");
         args.putString("confirm", "Yes");
-        args.putString("dialogFlag", "sync");
+        args.putString("dialogFlag", "Delete");
         args.putString("message", "Are you sure you want to delete this task?");
 
         confirmDialog.setArguments(args);

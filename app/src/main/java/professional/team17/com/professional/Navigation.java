@@ -272,7 +272,9 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
         args.putString("title", "Unable to Sync");
         args.putString("cancel", "Cancel");
         args.putString("confirm", "Yes");
-        args.putString("message", "We were unable to sync all the edits offline as users have placed bids on your tasks. Would you like to see the bids");
+        args.putString("message", "We were unable to sync all your edits as "+
+                        "users have placed bids on your tasks."+
+                        "Click yes to see these bids");
 
         confirmDialog.setArguments(args);
         confirmDialog.show(fm, "Sample Fragment");

@@ -116,25 +116,13 @@ public class TaskDAO extends SQLiteOpenHelper {
 
     /**
      *
-     * @param task this removes the task from the offline
-     */
-    public void removeOnline(Task task){
-        SQLiteDatabase db = getWritableDatabase();
-        String[] id = {task.getUniqueID()+""};
-        db.delete(TASKTABLE, "id=?", id);
-    }
-
-    /**
-     *
      * @param task  - this removes the task offline - via  a marker in the action table
      */
     public void removeOffline(Task task){
-        Log.i("WRWR", "removeOffline: ");
         SQLiteDatabase db = getWritableDatabase();
         String[] id = {task.getUniqueID()+""};
         //see if added offline - if so, remove
         if (isOffline(task.getUniqueID())){
-            Log.i("WRWR", "removeOffline: ");
             db.delete(TASKTABLE, "id=?", id);
         }
         else {
