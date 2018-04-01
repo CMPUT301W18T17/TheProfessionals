@@ -378,9 +378,22 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
 
         confirmDialog.setArguments(args);
         confirmDialog.show(fm, "To Done");
-        Intent intent = new Intent(this, AddReview.class);
-        startActivity(intent);
     }
+
+//    public void addReview(){
+//        FragmentManager fm = getSupportFragmentManager();
+//
+//        ConfirmDialog confirmDialog = new ConfirmDialog();
+//        Bundle args = new Bundle();
+//        args.putString("dialogFlag", "Review");
+//        args.putString("title", "Would you like to review your provider?");
+//        args.putString("cancel", "No");
+//        args.putString("confirm", "Yes");
+//        args.putString("message", "Would you like to review your provider?");
+//
+//        confirmDialog.setArguments(args);
+//        confirmDialog.show(fm, "To Done");
+//    }
 
 
     /**
@@ -472,6 +485,10 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                 task.setDone();
                 setTaskViews();
                 setDoneView();
+                Intent intent = new Intent(this, AddReview.class);
+                Intent intent = new Intent(this, AddReview.class);
+                intent.putExtra("profile", )
+                startActivity(intent);
             }
             Log.i("TAD", "CHANGE TASK "+task);
             serverHelper.updateTasks(task);
