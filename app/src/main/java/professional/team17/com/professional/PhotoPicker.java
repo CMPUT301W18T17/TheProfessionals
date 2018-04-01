@@ -1,9 +1,14 @@
 package professional.team17.com.professional;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -21,6 +26,7 @@ public class PhotoPicker extends AppCompatActivity {
     private String eMail;
     private String phoneNumber;
     private static final int SELECTED_PICTURE = 1;
+    private static final int CAMERA_REQUEST = 2;
     private ImageView viewPhoto;
     private Photo photo, oldPhoto;
     private String filePath;
@@ -90,9 +96,14 @@ public class PhotoPicker extends AppCompatActivity {
         }
     }
 
-    public void toGallery(View view){
+    private void toGallery(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, SELECTED_PICTURE);
+    }
+
+    private void toCamera(){
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, CAMERA_REQUEST);
     }
 
     @Override
@@ -117,6 +128,13 @@ public class PhotoPicker extends AppCompatActivity {
 
                     returnPath = photo.getPath();
                     viewPhoto.setImageDrawable(photo.pathToDrawable());
+                }
+                break;
+            case CAMERA_REQUEST:
+                if (requestCode == RESULT_OK){
+                    Bundle extras = data.getExtras();
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+                    viewPhoto.setImageBitmap(imageBitmap);
                 }
                 break;
         }
@@ -188,4 +206,24 @@ public class PhotoPicker extends AppCompatActivity {
         // Phone Number
         adder(intent, "phoneNumber", phoneNumber);
     }
+
+    public void photoDialog(View view){
+        new AlertDialog.Builder(this)
+                .setTitle("Attention")
+                .setMessage("Please choose your way to pick photo.")
+                .setCancelable(true)
+                .setPositiveButton("From File", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        toGallery();
+                    }
+                })
+                .setNegativeButton("Using Camera", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        toCamera();
+                    }
+                })
+                .create()
+                .show();
+    }
+
 }
