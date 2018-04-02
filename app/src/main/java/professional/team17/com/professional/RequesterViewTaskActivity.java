@@ -186,6 +186,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
      */
     private void getFromServer() throws Exception{
         task = serverHelper.getTask(ID);
+        Log.d("RequesterViewTask", "getFromServer: "+ task.getUniqueID());
         if (task == null){
             throw new Exception();
         }

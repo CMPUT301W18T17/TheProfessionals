@@ -61,7 +61,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
                     description = descriptionField.getText().toString();
                 }
                 if (locationField.getText().toString().isEmpty()){
-                    locationString = task.getLocation();
+                    locationString = "";
                 }
                 else {
                     locationString = locationField.getText().toString();
@@ -123,8 +123,9 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
         /* Update EditTexts */
         nameField.setHint(task.getName());
         descriptionField.setHint(task.getDescription());
-        locationField.setHint(task.getLocation());
+        locationField.setText(task.getLocation());
         textualDateView.setText(task.getDateAsString());
+        latLng = task.getLatLng();
 
     }
 

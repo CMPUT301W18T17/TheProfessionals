@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public abstract class RequesterTaskActivity extends Navigation{
+    private static final String TAG = "RequesterTaskActivity";
     /* Layout objects */
     protected EditText nameField;
     protected EditText descriptionField;
@@ -104,6 +106,13 @@ public abstract class RequesterTaskActivity extends Navigation{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MapsSearchLocationActivity.class);
+                if (locationField.getText() != null){
+                    intent.putExtra("addressTyped", locationField.getText().toString());
+                    Log.d(TAG, "Num1 onClick: " + locationField.getText());
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("latLonGot", latLng);
+                    intent.putExtras(bundle);
+                }
                 startActivityForResult(intent, 1);
             }
         });
