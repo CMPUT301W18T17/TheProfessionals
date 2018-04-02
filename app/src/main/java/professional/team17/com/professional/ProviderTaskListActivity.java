@@ -30,7 +30,6 @@ import android.widget.ListView;
 public class ProviderTaskListActivity extends Navigation {
     private ProviderCustomArrayAdapter adapterHelper;
     private ListView listView;
-    //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
 
 
@@ -43,23 +42,18 @@ public class ProviderTaskListActivity extends Navigation {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO Delete after project part 5 with persistenct
         setContentView(R.layout.provider_tasklist_view);
         taskList = new TaskList();
         adapterHelper = new ProviderCustomArrayAdapter(this, taskList);
         listView = findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(adapterHelper);
         listView.setOnItemClickListener(clickListener);
+
+
         String type = setProviderViewType();
-        //createList(type);
         taskList.addAll(createList(type));
         checkOffline();
         adapterHelper.notifyDataSetChanged();
-        SyncController controller = new SyncController(getApplicationContext());
-        controller.resetRequested(username);
-
-
-
 
     }
 

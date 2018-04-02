@@ -72,11 +72,6 @@ public class SearchActivity extends Navigation {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-                Context context = getApplicationContext();
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, "SEARCH ENTERED "+query, duration);
-                toast.show();
                 search(query);
                 searchView.clearFocus(); //remove focus on submit
                 return false;
@@ -91,6 +86,7 @@ public class SearchActivity extends Navigation {
 
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
+        Log.i("REYEEED", "checkOffline: SEARCH ");
         if(c.isOffline()) {
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.constraintLayoutsearch, fragment).commit();

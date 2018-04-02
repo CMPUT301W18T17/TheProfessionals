@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * Created by ag on 2018-03-26.
  */
@@ -38,45 +40,42 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
         super.onCreate(savedInstanceState);
         serverHelper = new ServerHelper(this);
         // Create the custom object
-        final Context cont = this;
         sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedpreferences.getString("username", "error");
-        Log.i("ANVATIONA", "onCreate: "+username);
-
-
-
-        OnlineListener object = new OnlineListener();
-
-        ConnectedState c2 = ConnectedState.getInstance();
-        c2.bind(object);
-
-        ConnectivityCheck.isOnline c = new ConnectivityCheck.isOnline();
-        c.execute();
-
-
-        // TODO FULLY IMPLEMENT LISTENER
-        object.setCustomObjectListener(new OnlineListener.MyCustomObjectListener() {
-            @Override
-            public void changetoOnline() {
-               /*Log.i("R#R#", "changetoOnline: ");
-               SyncController controller = new SyncController(cont);
-               Task task  = controller.sync();
-               Log.i("R#R#", "changetoOnline: "+task);
-               serverHelper.addTasks(task);
-               */
-            }
-
-            @Override
-            public void stayOnline() {
-              //  SyncController controller = new SyncController(getApplicationContext());
-              //  Log.i("CALEED", "stayOnline: ");
-              //  controller.resetRequested(username);
-
-            }
-
-        });
+        connectivityCheck();
+        syncCheck();
 
     }
+
+    private void syncCheck() {
+        SyncController controller = new SyncController(getApplicationContext());
+        ConnectedState c2 = ConnectedState.getInstance();
+        if (c2.isOnline()){
+            Log.i("REYEEED", "syncCheckREYEEED: ");
+            controller.resetRequested(username);
+        }
+
+        if (c2.isNewONline()){
+            Log.i("CONNECTETED", "onCreate: ");
+            managesync();
+        }
+
+    }
+
+    private void managesync() {
+        boolean success;
+
+        SyncController controller = new SyncController(this);
+
+        success = controller.sync();
+        if (!success) {
+            createSync();
+        }
+    }
+    // TODO FULLY IMPLEMENT LISTENER
+
+
+
 
 
     /**
@@ -191,11 +190,20 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
             case R.id.userMenuButton:
                 //TODO implement dropdown menu
                 showPopup();
-                //popupMenu.show();
                 break;
         }
     }
 
+    public void connectivityCheck(){
+        ConnectivityCheck.isOnline c = new ConnectivityCheck.isOnline();
+        try {
+            Object result=c.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     /**

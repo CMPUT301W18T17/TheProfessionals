@@ -113,8 +113,6 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
         });
         task = getTask();
 
-
-
         checkOffline();
 
 
@@ -124,7 +122,7 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
 
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
-        if(c.isOffline()) {
+        if(c.isOffline()  && !task.isRequested()) {
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.provider_view_task_frame, fragment).commit();
         }
@@ -167,10 +165,7 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
      */
     public void onFinishPlaceBidDialog(String inputText){
         double bidAmount =  Double.valueOf(inputText);
-        int duration = Toast.LENGTH_SHORT;
-
         task.addBid(new Bid(username, bidAmount));
-
         serverHelper.updateTasks(task);
         statusTextField.setText(task.getStatus());
         fillBidded();
@@ -178,6 +173,7 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
         /* Send notification */
         String requester = task.getProfileName();
         Profile requesterProfile = serverHelper.getProfile(requester);
+        Log.i("BID", "onFinishPlaceBidDialog: "+requesterProfile);
         NotificationList notificationList = requesterProfile.getNotificationList();
         notificationList.newBidNotification(task, bidAmount, username);
         requesterProfile.setNotificationList(notificationList);

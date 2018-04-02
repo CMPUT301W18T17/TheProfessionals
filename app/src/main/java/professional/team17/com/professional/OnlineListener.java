@@ -9,8 +9,10 @@ import android.util.Log;
 
 public class OnlineListener {
 
+
     public void notifyOnlineChange() {
         if (listener != null)
+            Log.i("KKKKKKKKKKK", "notifyOnlineChange: ");
             listener.changetoOnline();
     }
 
@@ -34,7 +36,6 @@ public class OnlineListener {
 
     public OnlineListener() {
         // set null or default listener or accept as argument to constructor
-        this.listener = null;
     }
 
 

@@ -30,7 +30,6 @@ public class RequesterViewListActivity extends Navigation {
     private ListView listView;
     private Task task;
     String type;
-    //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
 
 
@@ -41,29 +40,15 @@ public class RequesterViewListActivity extends Navigation {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO Delete after project part 5 with persistence
         setContentView(R.layout.activity_requester_view_list);
         taskList = new TaskList();
         adapterHelper = new RequesterCustomArrayAdapter(this, taskList);
         listView = findViewById(R.id.tasklistRequester);
         listView.setAdapter(adapterHelper);
-        //listView.setOnItemClickListener(clickListener);
-        SyncController controller = new SyncController(getApplicationContext());
-        ConnectedState c = ConnectedState.getInstance();
-        Log.i("VIEWLISR", "onCreate: "+c.isOffline());
-      //  if (!c.isOffline()){
-    //        controller.resetRequested(username);
-   //     }
-
-        //get username
-
-        //controller.resetRequested(username);
         type = setRequesterViewType();
         taskList.addAll(createList(type));
         checkOffline();
         adapterHelper.notifyDataSetChanged();
-
-
     }
 
     void checkOffline() {
@@ -110,24 +95,11 @@ public class RequesterViewListActivity extends Navigation {
      * @param v The view object (the task's title)
      */
     public void titleClick(View v){
-          /*
         final int position = listView.getPositionForView((View) v.getParent());
         Task task = taskList.get(position);
         Intent intention = new Intent(RequesterViewListActivity.this, RequesterViewTaskActivity.class);
         intention.putExtra("task", task.getUniqueID());
         startActivity(intention);
-*/
-
-        boolean success;
-        ConnectedState c2 = ConnectedState.getInstance();
-        c2.setOnline();
-        SyncController controller = new SyncController(this);
-
-        success = controller.sync();
-        if (!success) {
-            createSync();
-        }
-
     }
 
 
@@ -191,11 +163,9 @@ public class RequesterViewListActivity extends Navigation {
         args.putString("confirm", "Yes");
         args.putString("dialogFlag", "Delete");
         args.putString("message", "Are you sure you want to delete this task?");
-
         confirmDialog.setArguments(args);
         confirmDialog.show(fm, "To Done");
     }
-
 
 
     /**

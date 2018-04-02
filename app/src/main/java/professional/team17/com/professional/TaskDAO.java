@@ -18,7 +18,7 @@ import java.util.List;
  * Created by ag on 2018-03-25.
  */
 
-public class TaskDAO extends SQLiteOpenHelper {
+public class  TaskDAO extends SQLiteOpenHelper {
     private static String TASKTABLE = "task";
 
 
@@ -44,7 +44,6 @@ public class TaskDAO extends SQLiteOpenHelper {
      * @param db the db where tables are being dropped - to clear every time connectivity is set up
      */
     private void delete(SQLiteDatabase db){
-        Log.i("DROPOPEDZ", "delete: ");
         String query = "Drop TABLE if exists " +TASKTABLE;
         db.execSQL(query);
     }

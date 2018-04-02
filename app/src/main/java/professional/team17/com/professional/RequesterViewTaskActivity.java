@@ -99,15 +99,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         } catch (Exception e) {
             Log.i("Server", "Server failed to return a task for that ID");
         }
-        //checkOffline();
+        checkOffline();
         
 
-        /* Check Existence of Location */
-        if (task.getLatLng()== null){
-            viewLocation.setVisibility(View.INVISIBLE);
-        } else {
-            viewLocation.setVisibility(View.VISIBLE);
-        }
 
         /* Set OnClickListeners */
         backButton.setOnClickListener(new ImageButton.OnClickListener() {
@@ -151,11 +145,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             }
         });
 
-
-
-
-
-
     }
 
     void checkOffline() {
@@ -170,6 +159,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             if (task.getLatLng() == null) {
                 viewLocation.setVisibility(View.INVISIBLE);
             }
+         else {
+            viewLocation.setVisibility(View.VISIBLE);
+        }
         }
     }
 

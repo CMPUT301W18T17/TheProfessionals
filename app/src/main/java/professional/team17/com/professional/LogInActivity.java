@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.searchly.jestdroid.DroidClientConfig;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * Allows the user to log in or move to a signup activity
  *
@@ -41,6 +43,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         serverHelper = new ServerHelper(this);
+        connectivityCheck();
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         if (sharedpreferences.contains("username")){
             changeActivity(SearchActivity.class);
@@ -78,6 +81,16 @@ public class LogInActivity extends AppCompatActivity {
     }
 
 
+    public void connectivityCheck(){
+        ConnectivityCheck.isOnline c = new ConnectivityCheck.isOnline();
+        try {
+            Object result=c.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * On clicking the Sign Up button, user is moved to the Sign Up page
