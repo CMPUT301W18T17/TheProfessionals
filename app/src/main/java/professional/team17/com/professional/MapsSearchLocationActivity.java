@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
     private static final String TAG = "MapsSLocationActivity";
     private static final LatLngBounds latLngBounds = new LatLngBounds(new LatLng(-85, -180), new LatLng(85, 180));
     private Button addLocation;
+    private ImageView deleteAllText;
     private AutoCompleteTextView mSearchAddress;
     private LatLng finalLatLng;
     private String finalAddress;
@@ -82,6 +84,7 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
         Log.d(TAG, "MapsSearchEvent()");
         mSearchAddress = (AutoCompleteTextView) findViewById(R.id.addressInput);
         addLocation = (Button) findViewById(R.id.addLocation);
+        deleteAllText = (ImageView) findViewById(R.id.deleteButton);
 
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
@@ -117,6 +120,15 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
                 intent.putExtra("taskAddress", finalAddress);
                 setResult(RESULT_OK, intent);
                 finish();
+            }
+        });
+
+        deleteAllText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSearchAddress.setText("");
+                finalLatLng = null;
+                finalAddress = "";
             }
         });
 
@@ -186,6 +198,7 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
                     Log.d(TAG,"mUpdatePlaceResultCallback: Place Address " + finalAddress );
                     Log.d(TAG,"mUpdatePlaceResultCallback: Place Address " + finalLatLng );
 
+                    mMap.clear();
                     moveCamera(finalLatLng, finalAddress);
 
                 } catch (NullPointerException e){

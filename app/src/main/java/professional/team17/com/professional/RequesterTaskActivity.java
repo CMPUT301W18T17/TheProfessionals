@@ -139,8 +139,4 @@ public abstract class RequesterTaskActivity extends Navigation{
             }
         }
     }
-
-
-
-
 }
