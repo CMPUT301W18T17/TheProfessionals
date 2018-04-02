@@ -14,27 +14,44 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by ag on 2018-03-25.
- */
 
+/**
+ *
+ *The local db used to ensure the requesters requested tasks match
+ * with the server. As well it function to take over in offline state so
+ * the user can add/edit tasks in requested state.
+ * @author Allison
+ * @see TaskList (associated)
+ * @see Task  (associated)
+ */
 public class  TaskDAO extends SQLiteOpenHelper {
     private static String TASKTABLE = "task";
 
-
+    /**
+     *
+     * @param context - the context opening the db
+     */
     public TaskDAO(Context context) {
         super(context, "task", null, 1);
     }
 
-
+    /**
+     *
+     * @param db - the db object
+     * @param i - the version
+     * @param i1 - the new version
+     */
     public void onUpgrade(SQLiteDatabase db, int i, int i1){
-
     }
 
-
+    /**
+     *
+     * @param db - the db being created
+     *           Since we need the local to reflect the most
+     *           current state of the server, we delete and createnew
+     */
     @Override
     public void onCreate(SQLiteDatabase db){
-        Log.i("WRR", "CREWSAT  DB: ");
         delete(db);
         createnew(db);
     }
@@ -48,6 +65,10 @@ public class  TaskDAO extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+    /**
+     *
+     * @param db - the db where we are creating the new table
+     */
     private void createnew(SQLiteDatabase db){
         String query = "CREATE TABLE "+ TASKTABLE+
                 " (id Text Primary Key, profileName Text, name Text not Null, location Text,"+
@@ -55,10 +76,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
         Log.i("TAG", "create: "+query);
         db.execSQL(query);
     }
-    private void create(){
-        SQLiteDatabase db = getWritableDatabase();
-        createnew(db);
-    }
+
 
 
     /**
@@ -67,10 +85,10 @@ public class  TaskDAO extends SQLiteOpenHelper {
      */
     public void insertAll(TaskList taskList){
         SQLiteDatabase db = getWritableDatabase();
+        //delete/create because we are essentially updating the entire table
         delete(db);
         createnew(db);
         for (Task task : taskList) {
-            Log.i("INSERT", "insertAll: "+task);
             insert(task);
         }
     }
@@ -90,6 +108,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
     /**
      * |
      * @param task - the task being added while in offline status
+     *             The state of insert is tracked with 'actionType' column
      */
     public String insertOffline(Task task) {
         int id = getId();
@@ -104,6 +123,8 @@ public class  TaskDAO extends SQLiteOpenHelper {
     /**
      *
      * @return this returns an id that can be used while in offline status
+     * It uses the size of the table to ensure a unique id, once synced online
+     * the id will be overwritten.
      */
     private int getId(){
         SQLiteDatabase db = getReadableDatabase();
@@ -115,7 +136,11 @@ public class  TaskDAO extends SQLiteOpenHelper {
 
     /**
      *
-     * @param task  - this removes the task offline - via  a marker in the action table
+     * @param task  - this removes the task offline
+     *              This uses isOffline() to see if it was added offline,
+     *              If added offline, simply remove,
+     *              If added originally online, tombstone it, to be
+     *              synced later.
      */
     public void removeOffline(Task task){
         SQLiteDatabase db = getWritableDatabase();
@@ -125,21 +150,11 @@ public class  TaskDAO extends SQLiteOpenHelper {
             db.delete(TASKTABLE, "id=?", id);
         }
         else {
+            //tombstone
             ContentValues taskdata = new ContentValues();
             taskdata.put("actionType", ActionType.EDIT_NO_CONNECTION.getValue());
             db.update(TASKTABLE, taskdata, "id=?", id);
         }
-    }
-
-    /**
-     *
-     * @param task - this is the task that is being updated
-     */
-    public void updateTaskOnline(Task task){
-        ContentValues data = task.toContent();
-        SQLiteDatabase db = getWritableDatabase();
-        String[] id = {task.getUniqueID()+""};
-        db.update(TASKTABLE, data, "id=?", id);
     }
 
     /**
@@ -151,21 +166,15 @@ public class  TaskDAO extends SQLiteOpenHelper {
         ContentValues taskdata = task.toContent();
         String[] id = {task.getUniqueID()+""};
         if (!isOffline(task.getUniqueID())){
-            taskdata.put("actionType", ActionType.EDIT_NO_CONNECTION.getValue());
+            taskdata.put("actionType", ActionType.DELETE_NO_CONNECTION.getValue());
         }
         db.update(TASKTABLE, taskdata, "id=?", id);
     }
 
-
     /**
      *
-     * @return data set that works with local storage
+     * @return tasklist  of all tasks in requested state
      */
-    private ContentValues getType(ContentValues c,  ActionType type){
-        c.put("actionType", type.getValue());
-        return c;
-    }
-
     public TaskList getTasks() {
         TaskList tasklist = new TaskList();
         SQLiteDatabase db = getReadableDatabase();
@@ -179,7 +188,11 @@ public class  TaskDAO extends SQLiteOpenHelper {
 
     }
 
-
+    /**
+     *
+     * @param id - the unique id of the task to be searched for
+     * @return task - the task matching the id
+     */
     public Task getTask(String id) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where id = ?", new String[] {id});
@@ -192,7 +205,11 @@ public class  TaskDAO extends SQLiteOpenHelper {
         return null;
     }
 
-
+    /**
+     *
+     * @param c the cursor object
+     * @return Task - the task created from the db
+     */
     private Task createTask(Cursor c){
         Task temp;
         String id = c.getString(c.getColumnIndex("id"));
@@ -200,34 +217,48 @@ public class  TaskDAO extends SQLiteOpenHelper {
         String name = c.getString(c.getColumnIndex("name"));
         String location = c.getString(c.getColumnIndex("location"));
         String description = c.getString(c.getColumnIndex("description"));
-        String status = c.getString(c.getColumnIndex("status"));
         String date = c.getString(c.getColumnIndex("date"));
         Double lon = c.getDouble(c.getColumnIndex("lon"));
         Double lat = c.getDouble(c.getColumnIndex("lat"));
         LatLng latLon = new LatLng(lat, lon);
-        int offlien = c.getInt(c.getColumnIndex("actionType"));
-        Log.i("offlien", "createTask: "+offlien+name);
         ArrayList<Bitmap> photos = new ArrayList<Bitmap>();
         temp =  new Task(profileName, name, description, location, date, latLon , photos);
         temp.setId(id);
         return temp;
     }
 
+    /**
+     *
+     * @return a list of ids that were added offline
+     */
     public ArrayList<String> newTasks() {
         ArrayList<String> list = new ArrayList<String>();
         return getList(ActionType.ADD_NO_CONNECTION);
     }
 
+    /**
+     *
+     * @return a list of ids that were deleted offline
+     */
     public ArrayList<String> deletedTasks() {
         ArrayList<String> list = new ArrayList<String>();
         return getList(ActionType.DELETE_NO_CONNECTION);
     }
 
+    /**
+     *
+     * @return  a list of ids that were edited offline
+     */
     public ArrayList<String> updatedTasks() {
         ArrayList<String> list = new ArrayList<String>();
         return getList(ActionType.EDIT_NO_CONNECTION);
     }
 
+    /**
+     *
+     * @param actiontype - the enum type of offline edit/update/delete of task
+     * @return - a list of ids that match the actionType
+     */
     private ArrayList<String> getList(ActionType actiontype) {
         ArrayList<String>  list = new ArrayList<String>();
         SQLiteDatabase db = getReadableDatabase();
@@ -237,12 +268,16 @@ public class  TaskDAO extends SQLiteOpenHelper {
             String id = c.getString(c.getColumnIndex("id"));
             list.add(id);
         }
-        Log.i("SSD", "getList: "+list);
         c.close();
         return list;
     }
 
-    public boolean isOffline(String id) {
+    /**
+     * \
+     * @param id - the task being search for
+     * @return
+     */
+    private boolean isOffline(String id) {
         int online=1;
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where id = ?", new String[] {id});
@@ -253,10 +288,12 @@ public class  TaskDAO extends SQLiteOpenHelper {
         return (online ==0);
     }
 
-
-
-    //https://stackoverflow.com/questions/8157755/how-to-convert-enum-value-to-int
-    public enum ActionType {
+    /**
+     * The type of add, absolutely necessary for syncing offline/online
+     * Learning how to return int was learned from
+     * https://stackoverflow.com/questions/8157755/how-to-convert-enum-value-to-int
+     */
+    private enum ActionType {
         DELETE_NO_CONNECTION(-1), ADD_NO_CONNECTION(1), EDIT_NO_CONNECTION(2);
 
         private final int value;

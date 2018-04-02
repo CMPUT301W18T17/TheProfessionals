@@ -1,28 +1,48 @@
 package professional.team17.com.professional;
 
 import android.content.Context;
-import android.text.BoringLayout;
 import android.util.Log;
 
 import java.util.ArrayList;
 
 /**
- * To be called whenever a
+ *
+ * This controller is used to sync offline changes with online
+ * The business logic driving this sync is that only a task in
+ * "Requested" status can be edited/deleted. So if offline, as user
+ * edited a requested task, while at the same time someone placed the bid,
+ * this sync controller would not allow that edit to override the task once
+ * the user goes online. The user will be notified of any of these situations.
+ * @author Allison
+ * @see ServerHelper
+ * @see Context
+ * @see Task (associated)
+ * @see TaskList (associated)
+ * @see TaskDAO (associated)
  */
-
 public class SyncController {
-    ServerHelper es;
-    Context context;
+    private final ServerHelper serverHelper;
+    private final Context context;
 
-
+    /**
+     *
+     * @param context - the activity calling the sync
+     *                Any activity can be used to sync
+     */
     public SyncController(Context context){
         this.context = context;
-        es = new ServerHelper(context);
+        serverHelper = new ServerHelper(context);
     }
 
 
-
-    public boolean getUpdated(){
+    /**
+     *
+     * @return Boolean -
+     * True signifies all offline updates could be pushed to server
+     * False signifies not all offline updated could be pushed to server
+     * This also updates the server with those that can be updated
+     */
+    private boolean getUpdated(){
         Task task;
         Task newtask;
         Boolean flag = true;
@@ -30,16 +50,14 @@ public class SyncController {
         ArrayList<String> ids = db.updatedTasks();
         db.close();
         for (String id : ids) {
-            Log.i("loop", "getEDDITEDS: "+id);
-            task = es.getTask(id);
-            Log.i("loop", "getEDDITEDS: "+id+task.isRequested());
+            task = serverHelper.getTask(id);
+            //if the task on the server is no longer requested
             if (!task.isRequested()){
-
                 flag = false;
             }
             else {
                 newtask = db.getTask(id);
-                es.updateTasks(newtask);
+                serverHelper.updateTasks(newtask);
             }
         }
         return flag;
@@ -47,7 +65,13 @@ public class SyncController {
 
 
 
-
+    /**
+     *
+     * @return Boolean -
+     * True signifies all offline deleted could be pushed to server
+     * False signifies not all offline deletes could be pushed to server
+     * This also updates the server with those that can be deleted
+     */
     public boolean getDeleted() {
         Task task;
         Task newtask;
@@ -56,45 +80,53 @@ public class SyncController {
         ArrayList<String> ids = db.deletedTasks();
         db.close();
         for (String id : ids) {
-            task = es.getTask(id);
+            task = serverHelper.getTask(id);
             if (!task.isRequested()) {
                 flag = false;
             } else {
                 newtask = db.getTask(id);
-                es.deleteTasks(newtask);
+                serverHelper.deleteTasks(newtask);
             }
         }
         return flag;
     }
 
-
-    public void getAdded(){
+    /**
+     * This updates the server with all offline added tasks
+     */
+    private void getAdded(){
         Task newtask;
         TaskDAO db = new TaskDAO(context);
         ArrayList<String> ids = db.newTasks();
         db.close();
         for (String id : ids) {
-            Log.i("loop", "getAdded: ");
             newtask = db.getTask(id);
-            Log.i("loop", "getAdded: "+newtask);
-            es.onlineAddTask(newtask);
+            serverHelper.onlineAddTask(newtask);
         }
 
     }
 
-
+    /**
+     * @return Boolean
+     * True signifies all offline actions could be synced to server
+     * False signifies not all offline actions could be pushed to server
+     */
     public boolean sync() {
         Boolean flag;
-        Log.i("TAG", "sync: ");
         getAdded();
         flag = getUpdated();
-        //getDeleted();
+        flag = getDeleted();
         return flag;
     }
 
+    /**
+     *
+     * @param username - the username of the task requester
+     *                 This will push to the server all
+     *                 those tasks from online for that requester
+     */
     public void resetRequested(String username) {
-        TaskList tasklist = es.getTasksRequester(username, "Requested");
-        Log.i("REYEEED", "resetRequested: "+tasklist);
+        TaskList tasklist = serverHelper.getTasksRequester(username, "Requested");
         TaskDAO db = new TaskDAO(context);
         db.insertAll(tasklist);
     }
