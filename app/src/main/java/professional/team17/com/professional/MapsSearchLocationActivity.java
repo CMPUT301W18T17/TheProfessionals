@@ -73,9 +73,21 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
     }
 
     /**
-     * Does not need to do anything after location is found
+     * After location found, mark previous address (in TextView of TaskActivity) if exists
      */
-    public void afterLocationFoundEvent(){return;}
+    public void afterLocationFoundEvent(){
+        Bundle extras = getIntent().getExtras();
+        if (extras!= null){
+            finalAddress = extras.getString("addressTyped");
+            Log.d(TAG, "Num1: MapsSearchEvent: " + finalAddress);
+            mSearchAddress.setText(finalAddress);
+            finalLatLng = extras.getParcelable("latLonGot");
+            if (finalLatLng != null){
+                Log.d(TAG, "Num2: MapsSearchEvent: " + finalLatLng);
+                moveCamera(finalLatLng, finalAddress);
+            }
+        }
+    }
 
     /**
      * Initialize listeners prior relating to search
@@ -126,12 +138,12 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
         deleteAllText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mMap.clear();
                 mSearchAddress.setText("");
                 finalLatLng = null;
                 finalAddress = "";
             }
         });
-
     }
 
     /**
@@ -208,6 +220,4 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
             places.release(); // From Google Places API: To prevent a memory leak! Must release PlaceBuffer object when app doesn't need it
         }
     };
-
-
 }
