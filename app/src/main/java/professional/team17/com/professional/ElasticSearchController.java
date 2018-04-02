@@ -90,6 +90,33 @@ public class ElasticSearchController {
 
     }
 
+    /**
+     *  This AsyncTask will add a task to the db.
+     *  It will then set the task.id equal to the db.id set at time of insertion.
+     *
+     */
+    public String AddTask1(Task task) {
+                String id = "r";
+        verifySettings();
+                Index index = new Index.Builder(task)
+                        .index(indexname)
+                        .type(tasktype)
+                        .build();
+                try {
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()){
+                        id = result.getId();
+                    }
+                    else {
+                        Log.i ("Error", "some error = (");
+                    }
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and add the task");
+                }
+            Log.i("ERR", "doInBackground: ADDED ATASK");
+            return id;
+        }
 
 
 
@@ -102,6 +129,7 @@ public class ElasticSearchController {
 
         @Override
         protected String doInBackground(Task... tasks) {
+            Log.i("SDDFF", "addTasksONLINE: ");
             verifySettings();
             String id = null;
 
@@ -124,6 +152,7 @@ public class ElasticSearchController {
                     Log.i("Error", "The application failed to build and add the task");
                 }
             }
+            Log.i("ERR", "doInBackground: ADDED ATASK");
             return id;
         }
     }

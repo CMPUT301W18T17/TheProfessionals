@@ -93,7 +93,6 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String username = pref.getString("username", "error");
         task = new Task(username, title, description, locationString, dateString, latLng, photos);
-        Log.i("DUDE", "addToServer: "+task.getPhotos());
         task.setRequested();
         serverHelper.addTasks(task);
     }
@@ -111,8 +110,7 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
         finish();
     }
 
-    @Override
-    void checkOffline() {}
+
 
     /**
      * Get data from MapsSearchLocationActivity.java

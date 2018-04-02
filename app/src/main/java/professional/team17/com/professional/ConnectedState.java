@@ -1,5 +1,7 @@
 package professional.team17.com.professional;
 
+import android.util.Log;
+
 /**
  * Created by ag on 2018-03-25.
  */
@@ -25,17 +27,13 @@ public class ConnectedState {
      * Will change to online
      */
     public void setOnline(){
-        if (this.state ==null || this.state==status.OFFLINE) {
+        if (this.state==status.OFFLINE) {
+            Log.i("INCLASS", "setOnline: ");
+            this.state = status.NEWONLINE;
+        }
+         else {
             this.state = status.ONLINE;
-            if (OnlineListener != null){
-                OnlineListener.notifyOnlineChange();
-            }
-
         }
-        else {
-            OnlineListener.notifyOnline();
-        }
-
     }
 
     /**
@@ -51,6 +49,14 @@ public class ConnectedState {
      *
      * @return false if state is online, true if offline
      */
+    public boolean isNewONline(){
+        return (this.state == status.NEWONLINE);
+    }
+
+    /**
+     *
+     * @return false if state is online, true if offline
+     */
     public boolean isOffline(){
         return (this.state == status.OFFLINE);
     }
@@ -59,8 +65,12 @@ public class ConnectedState {
         OnlineListener = object;
     }
 
+    public boolean isOnline() {
+        return (this.state == status.ONLINE);
+    }
+
     public enum status {
-        ONLINE, OFFLINE
+        ONLINE, OFFLINE, NEWONLINE
 
     }
 

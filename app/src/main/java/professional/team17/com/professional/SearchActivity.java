@@ -54,9 +54,6 @@ public class SearchActivity extends Navigation {
         /* Change activity title */
         this.setActivityTitleProvider("Task Search");
 
-        sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        username = sharedPreferences.getString("username", "error");
-
         taskList = new TaskList();
         taskList.addAll(getOpenTasks());
         checkOffline();
@@ -75,11 +72,6 @@ public class SearchActivity extends Navigation {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-                Context context = getApplicationContext();
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, "SEARCH ENTERED "+query, duration);
-                toast.show();
                 search(query);
                 searchView.clearFocus(); //remove focus on submit
                 return false;
@@ -91,9 +83,10 @@ public class SearchActivity extends Navigation {
         });
     }
 
-    @Override
+
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
+        Log.i("REYEEED", "checkOffline: SEARCH ");
         if(c.isOffline()) {
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.constraintLayoutsearch, fragment).commit();

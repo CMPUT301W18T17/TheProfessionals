@@ -86,7 +86,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         bidList = new BidList();
         bidAdapter = new BidListAdapter(this, bidList);
         listView.setAdapter(bidAdapter);
-        Log.i("BIDLIST", "onCreate: "+bidList);
 
 
         try {
@@ -100,15 +99,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         } catch (Exception e) {
             Log.i("Server", "Server failed to return a task for that ID");
         }
-        //checkOffline();
+        checkOffline();
         
 
-        /* Check Existence of Location */
-        if (task.getLatLng()== null){
-            viewLocation.setVisibility(View.INVISIBLE);
-        } else {
-            viewLocation.setVisibility(View.VISIBLE);
-        }
 
         /* Set OnClickListeners */
         backButton.setOnClickListener(new ImageButton.OnClickListener() {
@@ -152,14 +145,8 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             }
         });
 
-
-
-
-
-
     }
 
-    @Override
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
         if (c.isOffline()) {
@@ -172,6 +159,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             if (task.getLatLng() == null) {
                 viewLocation.setVisibility(View.INVISIBLE);
             }
+         else {
+            viewLocation.setVisibility(View.VISIBLE);
+        }
         }
     }
 
