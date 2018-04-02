@@ -486,6 +486,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                 setTaskViews();
                 setDoneView();
                 Intent intent = new Intent(this, AddReview.class);
+                // String profile = task.getBids().getBid(0).getName();
                 String profile = task.getProfileName();
                 intent.putExtra("profile", profile);
                 startActivity(intent);
