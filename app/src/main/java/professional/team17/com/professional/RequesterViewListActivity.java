@@ -49,6 +49,7 @@ public class RequesterViewListActivity extends Navigation {
         taskList.addAll(createList(type));
         checkOffline();
         adapterHelper.notifyDataSetChanged();
+
     }
 
     void checkOffline() {
