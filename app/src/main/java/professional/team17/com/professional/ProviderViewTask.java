@@ -112,10 +112,7 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
             }
         });
         task = getTask();
-        System.out.println("------------------------------------------------------");
-        System.out.println("------------------------------------------------------");
-        if (task.getPhotos() != null)
-            button5.setOnClickListener(this);
+
 
 
 
@@ -133,7 +130,9 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.provider_view_task_frame, fragment).commit();
         }
-        else{
+
+        else {
+            Log.i("ER", "checkOffline: "+task);
             if (task.getLatLng() == null){
                 viewMapButton.setVisibility(View.INVISIBLE);
             }
@@ -145,7 +144,10 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
             System.out.println("------------------------------------------------------");
             if (task.getPhotos() != null)
                 button5.setOnClickListener(this);
-
+            System.out.println("------------------------------------------------------");
+            System.out.println("------------------------------------------------------");
+            if (task.getPhotos() != null)
+                button5.setOnClickListener(this);
         }
 
     }
