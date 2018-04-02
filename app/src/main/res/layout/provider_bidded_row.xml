@@ -6,9 +6,7 @@
     android:id="@+id/list_row_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp">
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -43,7 +41,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_weight="1"
-                    android:paddingRight="20dp"
                     android:text="Assigned"
                     android:textSize="15sp"
                     app:layout_constraintTop_toBottomOf="@+id/provider_bidded_title"

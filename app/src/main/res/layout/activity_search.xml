@@ -11,7 +11,7 @@
         android:id="@+id/constraintLayoutsearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="85dp"
         android:layout_marginTop="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
