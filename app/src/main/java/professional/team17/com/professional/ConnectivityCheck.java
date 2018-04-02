@@ -2,6 +2,7 @@ package professional.team17.com.professional;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.util.Log;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class ConnectivityCheck {
     private Context _context;
 
     public static class isOnline extends AsyncTask<Void, Void, Void> {
-        ConnectedState instance = ConnectedState.getInstance();
+        ConnectedState c = ConnectedState.getInstance();
         protected Void doInBackground(Void... voids){
             try {
                 int timeoutMs = 400;
@@ -26,9 +27,9 @@ public class ConnectivityCheck {
                 SocketAddress sockaddr = new InetSocketAddress("8.8.8.8", 53);
                 sock.connect(sockaddr, timeoutMs);
                 sock.close();
-                instance.setOnline();
+                c.setOnline();
             } catch (IOException e) {
-                instance.setOffline();
+                c.setOffline();
             }
 
             return null;

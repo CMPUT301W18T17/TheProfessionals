@@ -381,7 +381,10 @@ public class Task implements Serializable{
         return "Name: '" + this.name +
                 "', Status: '" + this.status +
                 "', profile: '" + this.profileName +
+                "', description'"+ this.description +
+                "', location'"+ this.location +
                 "', id: '" + this.uniqueID;
+
     }
 
     /**
@@ -416,8 +419,11 @@ public class Task implements Serializable{
         data.put("description", this.description);
         data.put("status", this.status);
         data.put("date", getDateAsString());
-        data.put("lon", this.latLng.longitude);
-        data.put("lat", this.latLng.latitude);
+        Log.i("WEWE", "toContent: "+this.latLng);
+        data.put("lon", "");
+        data.put("lat", "");
+      //  data.put("lon", this.latLng.longitude);
+       // data.put("lat", this.latLng.latitude);
         return data;
     }
 

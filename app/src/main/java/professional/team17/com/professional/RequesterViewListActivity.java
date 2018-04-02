@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -24,14 +25,11 @@ import android.widget.ListView;
  * @see TaskList
  * @see Navigation
  */
-public class RequesterViewListActivity extends Navigation implements ConfirmDialog.ConfirmDialogListener{
+public class RequesterViewListActivity extends Navigation {
     private RequesterCustomArrayAdapter adapterHelper;
     private ListView listView;
-    private String username;
-    private SharedPreferences sharedpreferences;
     private Task task;
     String type;
-    //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
 
 
@@ -42,28 +40,15 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO Delete after project part 5 with persistence
         setContentView(R.layout.activity_requester_view_list);
         taskList = new TaskList();
         adapterHelper = new RequesterCustomArrayAdapter(this, taskList);
         listView = findViewById(R.id.tasklistRequester);
         listView.setAdapter(adapterHelper);
-        //listView.setOnItemClickListener(clickListener);
-
-
-        //get username
-        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        username = sharedpreferences.getString("username", "error");
-
-
         type = setRequesterViewType();
-        createList(type);
-
         taskList.addAll(createList(type));
         checkOffline();
         adapterHelper.notifyDataSetChanged();
-
-
     }
 
     void checkOffline() {
@@ -176,25 +161,12 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
         args.putString("title", "Delete Task");
         args.putString("cancel", "Cancel");
         args.putString("confirm", "Yes");
+        args.putString("dialogFlag", "Delete");
         args.putString("message", "Are you sure you want to delete this task?");
-
         confirmDialog.setArguments(args);
         confirmDialog.show(fm, "To Done");
     }
 
-    /**
-     * If the user confirms the task deletion, this deletes the task from the taskList and also from
-     * the server.
-     * @param confirmed Whether the user confirmed the deletion or cancelled.
-     */
-    @Override
-    public void onFinishConfirmDialog(Boolean confirmed) {
-        if (confirmed){
-            taskList.deleteTask(task);
-            adapterHelper.notifyDataSetChanged();
-            serverHelper.deleteTasks(task);
-        }
-    }
 
     /**
      * If the user confirms the task deletion, this deletes the task from the taskList and also from
@@ -206,6 +178,7 @@ public class RequesterViewListActivity extends Navigation implements ConfirmDial
         if (confirmed){
             taskList.deleteTask(task);
             adapterHelper.notifyDataSetChanged();
+            serverHelper.deleteTasks(task);
         }
     }
 }

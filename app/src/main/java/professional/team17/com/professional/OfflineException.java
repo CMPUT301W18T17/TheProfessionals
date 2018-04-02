@@ -1,5 +1,7 @@
 package professional.team17.com.professional;
 
+import android.util.Log;
+
 /**
  * Created by ag on 2018-03-28.
  */

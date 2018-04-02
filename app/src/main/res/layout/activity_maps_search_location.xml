@@ -29,20 +29,31 @@
             android:layout_height="15dp"
             android:id="@+id/ic_search"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:src="@drawable/ic_search"/>
 
         <AutoCompleteTextView
+            android:id="@+id/addressInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@+id/ic_search"
-            android:layout_centerVertical="true"
-            android:textSize="15sp"
-            android:textColor="#000"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@+id/ic_search"
+            android:layout_toStartOf="@+id/deleteButton"
             android:background="@null"
             android:hint=" Enter Task Location (Address, Zip Code)"
-            android:id="@+id/addressInput"
-            android:imeOptions="actionSearch"/>
+            android:imeOptions="actionSearch"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/deleteButton"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/ic_search"
+            android:layout_marginEnd="13dp"
+            android:src="@drawable/ic_close"/>
 
     </RelativeLayout>
 

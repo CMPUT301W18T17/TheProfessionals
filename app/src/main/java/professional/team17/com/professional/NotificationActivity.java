@@ -36,6 +36,7 @@ public class NotificationActivity extends AppCompatActivity {
         username = preferences.getString("username", "error");
 
         /* populate notificationList */
+
         getFromServer();
         notificationAdapter = new NotificationListAdapter(this, notificationList.getList());
         notificationListView.setAdapter(notificationAdapter);
