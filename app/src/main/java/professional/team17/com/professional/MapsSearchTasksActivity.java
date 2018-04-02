@@ -13,6 +13,7 @@ package professional.team17.com.professional;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Camera;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -55,6 +56,7 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
     private LatLng bottomLeft;
     private ServerHelper serverHelper = new ServerHelper(this);
     private TaskList tasks;
+    private String username;
 
     public void setContentViewFunction(){
         setContentView(R.layout.activity_maps_search_tasks);
@@ -65,6 +67,8 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
      * @see MapsActivity's method: OnMapReady
      */
     public void MapsSearchEvent(){
+        SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = pref.getString("username", "error");
         currentLocationButton = (ImageView) findViewById(R.id.ic_currentlocation);
         closeButton = (ImageView) findViewById(R.id.ic_close);
 
@@ -113,13 +117,18 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                String breakTaskTitle[] = marker.getTitle().split("\n");
-                String taskID = breakTaskTitle[1];
-                Log.d(TAG, "onInfoWindowClick: "+ taskID);
+                try{
+                    String breakTaskTitle[] = marker.getTitle().split("\n");
+                    String taskID = breakTaskTitle[1];
+                    Log.d(TAG, "onInfoWindowClick: "+ taskID);
 
-                Intent intent = new Intent(getBaseContext(), ProviderViewTask.class);
-                intent.putExtra("Task", taskID);
-                startActivity(intent);
+                    Intent intent = new Intent(getBaseContext(), ProviderViewTask.class);
+                    intent.putExtra("Task", taskID);
+                    startActivity(intent);
+                } catch (NullPointerException e) {
+                    Log.e(TAG, "OnInfoWindowClickListener:" + e.getMessage());
+                }
+
             }
         });
     }
@@ -141,9 +150,10 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
         tasks = serverHelper.getMapTasks(bottomLeft, topRight);
         //Toast.makeText()
         for(Task task: tasks) {
-            markSpot(task);
+            if (!task.getProfileName().equals(username)) {
+                markSpot(task);
+            }
         }
-
     }
 
     /**
