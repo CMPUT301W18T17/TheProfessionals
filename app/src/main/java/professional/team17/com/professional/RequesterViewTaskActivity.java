@@ -53,7 +53,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
     /* Other variables */
     String ID;
     private Task task;
-    ServerHelper serverHelper = new ServerHelper();
     BidListAdapter bidAdapter;
     BidList bidList;
     Bid chosenBid;
@@ -67,12 +66,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("CHANGE", "onCreate:" );
         setContentView(R.layout.activity_requester_view_task2);
-        Log.i("CHANGE", "onCreate:" );
         /* Set activity title */
         setActivityTitleRequester("View Task");
-
         /*Set layout elements */
         backButton = (ImageButton) findViewById(R.id.requester_view_taskbackButton);
         viewPhotos = (ImageButton) findViewById(R.id.requester_view_taskViewPhotosButton);
@@ -90,7 +86,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         bidList = new BidList();
         bidAdapter = new BidListAdapter(this, bidList);
         listView.setAdapter(bidAdapter);
-        Log.i("BIDLIST", "onCreate: "+bidList);
 
 
         try {
@@ -104,15 +99,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         } catch (Exception e) {
             Log.i("Server", "Server failed to return a task for that ID");
         }
-        //checkOffline();
+        checkOffline();
         
 
-        /* Check Existence of Location */
-        if (task.getLatLng()== null){
-            viewLocation.setVisibility(View.INVISIBLE);
-        } else {
-            viewLocation.setVisibility(View.VISIBLE);
-        }
 
         /* Set OnClickListeners */
         backButton.setOnClickListener(new ImageButton.OnClickListener() {
@@ -156,14 +145,8 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             }
         });
 
-
-
-
-
-
     }
 
-    @Override
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
         if (c.isOffline()) {
@@ -176,6 +159,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             if (task.getLatLng() == null) {
                 viewLocation.setVisibility(View.INVISIBLE);
             }
+         else {
+            viewLocation.setVisibility(View.VISIBLE);
+        }
         }
     }
 

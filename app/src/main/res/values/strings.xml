@@ -54,4 +54,5 @@
     <string name="invalidEmail">Must enter a valid email</string>
     <string name="invalidPhoneNumber">must enter a valid phone number</string>
     <string name="cannotCreateProfile">Something went wrong! We are unable to create profile</string>
+    <string name="title_activity_provider_check_image">providerCheckImage</string>
 </resources>

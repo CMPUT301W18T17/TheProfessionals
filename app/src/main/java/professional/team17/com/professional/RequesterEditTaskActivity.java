@@ -11,6 +11,7 @@
 package professional.team17.com.professional;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Button;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -30,7 +32,7 @@ import java.util.Locale;
  * @see RequesterAddTaskActivity
  */
 public class RequesterEditTaskActivity extends RequesterTaskActivity {
-    ServerHelper serverHelper = new ServerHelper();
+
     private String ID;
     private String title;
     private String description;
@@ -68,7 +70,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
 
 
                 /* Create an intent and bundle and store all task info */
-                addToServer(title, description);
+                addToServer(title, description,photos);
 
 
                 /* Activity finished, start RequesterViewListActivity */
@@ -131,7 +133,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
      * @param title Task title
      * @param description Task description
      */
-    public void addToServer(String title, String description){
+    public void addToServer(String title, String description,ArrayList<Bitmap> photos){
         task.setName(title);
         task.setDate(parseDate(dateString));
         task.setDescription(description);
@@ -173,7 +175,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
         return input;
     }
 
-    @Override
+
     void checkOffline() {        ConnectedState c = ConnectedState.getInstance();
         if(c.isOffline()) {
             Offline fragment = new Offline();

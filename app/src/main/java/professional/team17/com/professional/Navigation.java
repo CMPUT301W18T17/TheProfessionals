@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,13 +18,17 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * Created by ag on 2018-03-26.
  */
 
-public abstract  class Navigation extends AppCompatActivity implements ImageView.OnClickListener {
+public  class Navigation extends AppCompatActivity implements ConfirmDialog.ConfirmDialogListener{
 
-
+    protected ServerHelper serverHelper;
+    protected SharedPreferences sharedpreferences;
+    protected String username;
     /**
      * On creation of the activity, assign values to all variables.
      *
@@ -32,12 +36,46 @@ public abstract  class Navigation extends AppCompatActivity implements ImageView
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
+        serverHelper = new ServerHelper(this);
+        // Create the custom object
+        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = sharedpreferences.getString("username", "error");
+
+        syncCheck();
+        connectivityCheck();
+    }
+
+    private void syncCheck() {
+        SyncController controller = new SyncController(getApplicationContext());
+        ConnectedState c = ConnectedState.getInstance();
+        if (c.isOnline()){
+            controller.resetRequested(username);
+        }
+
+        if (c.isNewONline()){
+            managesync();
+        }
 
     }
 
-    abstract void checkOffline();
+    private void managesync() {
+        boolean success;
+
+        SyncController controller = new SyncController(this);
+
+        success = controller.sync();
+        if (!success) {
+            createSync();
+        }
+    }
+    // TODO FULLY IMPLEMENT LISTENER
+
+
+
+
+
     /**
      * Changes the title at the top of the layout.
      *
@@ -150,11 +188,20 @@ public abstract  class Navigation extends AppCompatActivity implements ImageView
             case R.id.userMenuButton:
                 //TODO implement dropdown menu
                 showPopup();
-                //popupMenu.show();
                 break;
         }
     }
 
+    public void connectivityCheck(){
+        ConnectivityCheck.isOnline c = new ConnectivityCheck.isOnline();
+        try {
+            Object result=c.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     /**
@@ -223,7 +270,34 @@ public abstract  class Navigation extends AppCompatActivity implements ImageView
 
     }
 
+    protected void createSync() {
+        FragmentManager fm = getSupportFragmentManager();
 
+        ConfirmDialog confirmDialog = new ConfirmDialog();
+        Bundle args = new Bundle();
+        args.putString("title", "Unable to Sync");
+        args.putString("cancel", "Cancel");
+        args.putString("confirm", "Yes");
+        args.putString("message", "We were unable to sync all your edits as "+
+                        "users have placed bids on your tasks."+
+                        "Click yes to see these bids");
 
+        confirmDialog.setArguments(args);
+        confirmDialog.show(fm, "Sample Fragment");
 
+    }
+
+    @Override
+    public void onFinishConfirmDialog(Boolean confirmed) {
+        if (confirmed==true){
+            Intent intent = new Intent(getApplicationContext(), NotificationActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    public void onFinishConfirmDialog(Boolean confirmed, String dialog) {
+
+    }
 }

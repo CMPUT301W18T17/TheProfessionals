@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="__local_aars__:/Users/Hailan/Desktop/TheProfessionals/app/commons-validator-1.6/commons-validator-1.6.jar:unspecified@jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/commons-validator-1.6/commons-validator-1.6.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/commons-validator-1.6/commons-validator-1.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/commons-validator-1.6/commons-validator-1.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -29,10 +30,7 @@ import android.widget.ListView;
 public class ProviderTaskListActivity extends Navigation {
     private ProviderCustomArrayAdapter adapterHelper;
     private ListView listView;
-    private String username;
-    //TODO both items below can be put in controller (project part 5)
     private TaskList taskList;
-    private final ServerHelper serverHelper = new ServerHelper();
 
 
 
@@ -44,7 +42,6 @@ public class ProviderTaskListActivity extends Navigation {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO Delete after project part 5 with persistenct
         setContentView(R.layout.provider_tasklist_view);
         taskList = new TaskList();
         adapterHelper = new ProviderCustomArrayAdapter(this, taskList);
@@ -52,23 +49,18 @@ public class ProviderTaskListActivity extends Navigation {
         listView.setAdapter(adapterHelper);
         listView.setOnItemClickListener(clickListener);
 
-        SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        username = sharedpreferences.getString("username", "error");
+
         String type = setProviderViewType();
-        //createList(type);
         taskList.addAll(createList(type));
         checkOffline();
         adapterHelper.notifyDataSetChanged();
 
-
-
-
     }
 
-    @Override
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
         if(c.isOffline()) {
+  ;
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.provider_task_list_frame, fragment).commit();
         }
