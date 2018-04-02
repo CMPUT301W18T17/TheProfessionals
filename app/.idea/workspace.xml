@@ -14,13 +14,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a28198c-dc5d-4b56-8f6e-72b201ca9492" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReview.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReview.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReviewController.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReviewController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ProfileViewActivity.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ProfileViewActivity.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Review.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Review.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewList.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewList.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewsAdaptor.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewsAdaptor.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -131,8 +125,8 @@
       <file leaf-file-name="ReviewList.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+            <state relative-caret-position="147">
+              <caret line="18" column="3" lean-forward="true" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -2074,8 +2068,8 @@
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReview.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/AddReviewController.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Review.java" />
-        <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewList.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ProfileViewActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewList.java" />
       </list>
     </option>
   </component>
@@ -2144,7 +2138,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522690284128" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522690741628" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.0.1" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="android.profiler.active" value="true" />
@@ -2748,6 +2742,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2769,7 +2764,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3990878" sideWeight="0.49144384" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.015963512" sideWeight="0.49144384" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -3220,8 +3215,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ReviewList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+        <state relative-caret-position="147">
+          <caret line="18" column="3" lean-forward="true" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
           <folding />
         </state>
       </provider>
