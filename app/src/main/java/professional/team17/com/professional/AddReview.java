@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 public class AddReview extends AppCompatActivity {
 
@@ -44,6 +45,10 @@ public class AddReview extends AppCompatActivity {
         RatingBar ratingBar = findViewById(R.id.ratingBar);
         float rating = ratingBar.getRating();
         String comment = commentBox.getText().toString();
+
+        if (comment.length() > 300){
+            TextView errorMessage = findViewById(R.id.errorBox);
+        }
 
         controller.setReview(profile, rating, comment);
 
