@@ -61,10 +61,16 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         getLocationPermissions();
     }
 
+    /**
+     * Abstract methods
+     */
     public abstract void setContentViewFunction();
     public abstract void MapsSearchEvent();
     public abstract void afterLocationFoundEvent();
 
+    /**
+     * Get location permissions
+     */
     protected void getLocationPermissions() {
         Log.d(TAG, "getLocationPermissions");
         String[] permissions = {FINE_LOCATION, COARSE_LOCATION};
@@ -113,6 +119,9 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         }
     }
 
+    /**
+     * Initialize map
+     */
     protected void mapInitialization(){
         Log.d(TAG, "mapInitialization");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -122,6 +131,12 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
 
     }
 
+    /**
+     * Check if all permissions are granted
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Log.d(TAG, "onRequestPersmissionsResult - check permssions");
@@ -147,6 +162,9 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         }
     }
 
+    /**
+     * Get position of the device
+     */
     protected void getCurrentLocation(){
         Log.d(TAG, "getCurrentLocation");
 
@@ -179,6 +197,11 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         }
     }
 
+    /**
+     * Move camera
+     * @param latLng the focus/centre of the view
+     * @param tag address of task
+     */
     protected void moveCamera(LatLng latLng, String tag){
         Log.d(TAG,"moveCamera: lat -> " + latLng.latitude + ", lng" + latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,11));
@@ -186,6 +209,11 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
         markSpot(latLng, tag);
     }
 
+    /**
+     * Mark a spot on the map
+     * @param latLng position of task
+     * @param tag address of task
+     */
     protected void markSpot(LatLng latLng, String tag){
         MarkerOptions markerOptions = new MarkerOptions()
                 .position(latLng)

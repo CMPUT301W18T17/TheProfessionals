@@ -54,17 +54,30 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
     private GoogleApiClient mGoogleApiClient;
     private PlaceAutoCompleteAdapter pAutoCompleteAdapter;
 
+    /**
+     * From GoogleApiClient.OnConnectionFailedListener
+     * @param connectionResult gives error message in log if connection fails
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        Log.e(TAG, "onConnectionFailed:" + connectionResult.getErrorCode()+","+connectionResult.getErrorMessage());
     }
 
+    /**
+     * Show specific map layout
+     */
     public void setContentViewFunction(){
         setContentView(R.layout.activity_maps_search_location);
     }
 
+    /**
+     * Does not need to do anything after location is found
+     */
     public void afterLocationFoundEvent(){return;}
 
+    /**
+     * Initialize listeners prior relating to search
+     */
     public void MapsSearchEvent(){
         Log.d(TAG, "MapsSearchEvent()");
         mSearchAddress = (AutoCompleteTextView) findViewById(R.id.addressInput);
@@ -109,8 +122,11 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
 
     }
 
+    /**
+     * Find address searched in search bar
+     */
     private void geoLocate(){
-        Log.d(TAG, "geoLocate: geolocating");
+        Log.d(TAG, "geoLocate");
 
         String searchString = mSearchAddress.getText().toString();
         Geocoder geocoder = new Geocoder(MapsSearchLocationActivity.this);
