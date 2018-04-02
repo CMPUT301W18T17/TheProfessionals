@@ -46,12 +46,12 @@ public class ReviewList {
     *
     *    @returns the avg of all the reviews in list as double
     */
-    public double getAvg(){
-        double sum = 0.0;
+    public float getAvg(){
+        float sum = 0;
         for (int i=0; i<reviews.size(); i++){
             sum = reviews.get(i).getScore() + sum;
         }
-    return sum/reviews.size();
+    return sum/reviews.size()/2;
 }
 
 

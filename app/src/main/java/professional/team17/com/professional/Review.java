@@ -20,13 +20,13 @@ import java.util.Date;
 //TODO implement for project part 5
 public class Review {
 
-    private double score;
+    private float score;
     private String comment;
     private String profileName; //person who gave review
 
     private Date date;
 
-    public Review(double score, String reviewer, String comment) {
+    public Review(float score, String reviewer, String comment) {
         this.score = score;
         this.profileName = reviewer;
         this.comment = comment;
@@ -46,7 +46,7 @@ public class Review {
      * @return String or Double
      */
 
-    public Double getScore() {
+    public float getScore() {
         return this.score;
     }
 
@@ -66,7 +66,7 @@ public class Review {
      */
 
     /*SETTERS*/
-    public void setScore(Double score) {
+    public void setScore(float score) {
         this.score = score;
     }
 
