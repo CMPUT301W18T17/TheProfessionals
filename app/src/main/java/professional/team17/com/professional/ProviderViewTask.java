@@ -13,13 +13,22 @@ package professional.team17.com.professional;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 
 
 /**
@@ -29,16 +38,13 @@ import android.widget.Toast;
  * @author Allison
  * @see ServerHelper , Task, Profile
  */
-public class ProviderViewTask extends Navigation implements PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
+public class ProviderViewTask extends Navigation implements ImageView.OnClickListener, PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
 
-    private String username;
     //TODO below item is needed for protoype, part 5 persistence will remove this
 
-    private SharedPreferences sharedpreferences;
 
     //TODO both items below can be put in controller (project part 5)
     private Task task;
-    private final ServerHelper serverHelper = new ServerHelper();
 
 
     //Everything below maybe able to be set into the controller. Do not reflect in uml
@@ -56,6 +62,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
     private TextView requesterAvgTextView; //project 5 implement
     private RatingBar requesterAvgTextField; //project 5 implement
     private ImageButton viewMapButton;
+    private Button button5;
 
 
     //both buttons start as invisible by default
@@ -88,12 +95,10 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
         appendButton = (ImageButton) findViewById(R.id.provider_view_task_manageBid);
         taskAddressTextField = (TextView) findViewById(R.id.provider_view_task_address);
         viewMapButton = (ImageButton) findViewById(R.id.provider_view_map_button);
+        button5 = (Button) findViewById(R.id.button5);
 
         this.setActivityTitleProvider("View Task");
 
-
-        sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        username = sharedpreferences.getString("username", "error");
 
         viewMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,23 +111,28 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
                 startActivity(intent);
             }
         });
-
-
         task = getTask();
+
+
+
+
+
         checkOffline();
 
 
         //setRating();
     }
 
-    @Override
+
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
-        if(c.isOffline()) {
+        if(c.isOffline()  && !task.isRequested()) {
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.provider_view_task_frame, fragment).commit();
         }
-        else{
+
+        else {
+            Log.i("ER", "checkOffline: "+task);
             if (task.getLatLng() == null){
                 viewMapButton.setVisibility(View.INVISIBLE);
             }
@@ -130,6 +140,28 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
 
             checkStatus();
             fillTask();
+            System.out.println("------------------------------------------------------");
+            System.out.println("------------------------------------------------------");
+            if (task.getPhotos() != null)
+                button5.setOnClickListener(this);
+            System.out.println("------------------------------------------------------");
+            System.out.println("------------------------------------------------------");
+            if (task.getPhotos() != null)
+                button5.setOnClickListener(this);
+        }
+
+    }
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.button5:
+                Intent yourIntent = new Intent(this, providerCheckImage.class);
+                Bitmap bmp = task.getPhotos().get(0); // store the image in your bitmap
+                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
+                yourIntent.putExtra("yourImage", bao.toByteArray());
+                startActivity(yourIntent);
+
         }
 
     }
@@ -142,11 +174,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
      */
     public void onFinishPlaceBidDialog(String inputText){
         double bidAmount =  Double.valueOf(inputText);
-        int duration = Toast.LENGTH_SHORT;
-
-
         task.addBid(new Bid(username, bidAmount));
-
         serverHelper.updateTasks(task);
         statusTextField.setText(task.getStatus());
         fillBidded();
@@ -154,6 +182,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
         /* Send notification */
         String requester = task.getProfileName();
         Profile requesterProfile = serverHelper.getProfile(requester);
+        Log.i("BID", "onFinishPlaceBidDialog: "+requesterProfile);
         NotificationList notificationList = requesterProfile.getNotificationList();
         notificationList.newBidNotification(task, bidAmount, username);
         requesterProfile.setNotificationList(notificationList);
@@ -165,7 +194,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
      * @param confirmed boolean value representing the user response in the dialog
      * true means the user confirmed.
      */
-    public void onFinishConfirmDialog(Boolean confirmed){
+    public void onFinishConfirmDialog(Boolean confirmed, String text){
         if (confirmed==true){
             Bid bid = task.getBids().getBid(username);
             task.removeBid(bid);
@@ -182,13 +211,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
 
     }
 
-    /***
-     * Interface method from ConfirmDialog.ConfirmDialogListener
-     * @param confirmed boolean value representing the user response in the dialog
-     * @param dialog - the type of dialog called
-     * true means the user confirmed.
-     */
-    public void onFinishConfirmDialog(Boolean confirmed, String dialog){}
+
 
     //TODO move all UI controls into controller (project part 5)
     /**
@@ -354,6 +377,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
         args.putString("title", "Cancel Bid");
         args.putString("cancel", "Cancel");
         args.putString("confirm", "Yes");
+        args.putString("dialogFlag", "Delete");
         args.putString("message", "Are you sure you want to delete?");
 
         confirmDialog.setArguments(args);

@@ -9,6 +9,7 @@
  */
 
 package professional.team17.com.professional;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -43,10 +44,13 @@ import io.searchbox.core.SearchResult;
 public class ServerHelper {
     private static String tasktype = "task";
     private static String profiletype = "profile";
+    private static Context context;
 
 
-//TODO - all methods (not async should be placed in some other class at some point
 
+    public ServerHelper(Context c){
+        this.context = c;
+    }
 
     /**
      *
@@ -79,7 +83,15 @@ public class ServerHelper {
                 "\"must\": [ " +
                 "{\"match\": {\"profileName\": \"" + username + "\"}}," +
                 "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
-        return getTaskList(search);
+        ConnectedState c = ConnectedState.getInstance();
+        if (c.isOffline()){
+            TaskDAO db = new TaskDAO(context);
+            return db.getTasks();
+
+        }
+        else {
+            return getTaskList(search);
+        }
     }
 
 
@@ -192,10 +204,14 @@ public class ServerHelper {
         Task task= null;
         ConnectedState c = ConnectedState.getInstance();
         if (c.isOffline()){
-            //get from database
-            return null;
+            Log.i("LOOP", "getTask: OFFLINE ");
+            TaskDAO db = new TaskDAO(context);
+            task = db.getTask(taskid);
+            db.close();
+            return task;
         }
         else {
+            Log.i("LOOP", "getTask: ONLINE ");
             return onlineGetTask(taskid);
         }
     }
@@ -220,28 +236,36 @@ public class ServerHelper {
         String id;
         ConnectedState c = ConnectedState.getInstance();
         if (c.isOffline()){
-            //get from database
-            return null;
+            Log.i("SDD", "addTasksOFFLINE: "+task);
+            TaskDAO db = new TaskDAO(context);
+            id = db.insertOffline(task);
+            db.close();
+            return id;
         }
         else {
-            return onlineAddTask(task);
+            Log.i("SDD", "addTasksONLINE: "+task);
+            onlineAddTask(task);
+            return "wer";
         }
     }
 
-    private String onlineAddTask(Task task){
+    public String onlineAddTask(Task task){
         String id;
         ElasticSearchController.AddTask addtask = new ElasticSearchController.AddTask();
         addtask.execute(task);
+        Log.i("EHREr", "onlineAddTask: ");
+
         try {
             id = addtask.get();
             task.setId(id);
+            Log.i("UDPATE", "onlineAddTask: ");
             ElasticSearchController.UpdateTask updateTask = new ElasticSearchController.UpdateTask();
             updateTask.execute(task);
         }
         catch (Exception e) {
+            Log.i("ER", "onlineAddTask: ");
             id = null;
         }
-
         return id;
     }
 
@@ -250,8 +274,17 @@ public class ServerHelper {
      * @param task - the task that will be added within the ES
      */
     public void updateTasks(Task task) {
-        ElasticSearchController.UpdateTask updatetask = new ElasticSearchController.UpdateTask();
-        updatetask.execute(task);
+        ConnectedState c = ConnectedState.getInstance();
+        if (c.isOffline()){
+            TaskDAO db = new TaskDAO(context);
+            db.updateTaskOffline(task);
+            db.close();
+        }
+        else {
+            ElasticSearchController.UpdateTask updatetask = new ElasticSearchController.UpdateTask();
+            updatetask.execute(task);
+        }
+
 
     }
 
@@ -260,8 +293,19 @@ public class ServerHelper {
      * @param task - the task that will be deleted within the ES
      */
     public void deleteTasks(Task task) {
-        ElasticSearchController.DeleteTask deletetask = new ElasticSearchController.DeleteTask();
-        deletetask.execute(task);
+        Log.i("WWE", "deleteTasks: ");
+        ConnectedState c = ConnectedState.getInstance();
+        Log.i("WWE", "deleteTasks: "+c.isOffline());
+        if (c.isOffline()){
+            TaskDAO db = new TaskDAO(context);
+            db.removeOffline(task);
+            db.close();
+        }
+        else {
+            ElasticSearchController.DeleteTask deletetask = new ElasticSearchController.DeleteTask();
+            deletetask.execute(task);
+        }
+
     }
 
     /**

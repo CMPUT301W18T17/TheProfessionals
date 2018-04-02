@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Base64;
 import android.util.Log;
 
 import java.lang.reflect.Array;
@@ -16,12 +17,15 @@ import java.nio.ByteBuffer;
 public class Photo {
 
     private String path;
-    private Bitmap bitmap;
+    private Bitmap bitmap, uploadBitmap;
     private Drawable drawable;
     private int size, width, height;
     private ByteBuffer byteBuffer;
-    private byte[] byteArray, uploadArray;
+    private byte[] byteArray;
+    private String byteArrayStr, uploadString;
     private Bitmap.Config config;
+    private int newWidth = 64;
+    private int newHeight = 64;
 
     public Photo(String path){
         this.path = path;
@@ -31,8 +35,8 @@ public class Photo {
         this.bitmap = bitmap;
     }
 
-    public Photo(byte[] byteArray, Bitmap.Config config, int width, int height){
-        this.byteArray = byteArray;
+    public Photo(String byteArrayStr, Bitmap.Config config, int width, int height){
+        this.byteArrayStr = byteArrayStr;
         this.config = config;
         this.width = width;
         this.height = height;
@@ -40,7 +44,8 @@ public class Photo {
 
     public Bitmap toBitMap(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        return bitmap;
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        return uploadBitmap;
     }
 
     public Drawable toDrawable(Bitmap bitmap){
@@ -50,7 +55,8 @@ public class Photo {
 
     public Drawable pathToDrawable(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        drawable = new BitmapDrawable(bitmap);
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        drawable = new BitmapDrawable(uploadBitmap);
         return drawable;
     }
 
@@ -60,12 +66,7 @@ public class Photo {
         return size;
     }
 
-    public int bitMapGetSize(){
-        size = bitmap.getByteCount();
-        return size;
-    }
-
-    private byte[] toByteArray(Bitmap bitmap){
+    private String toString(Bitmap bitmap){
         width = bitmap.getWidth();
         height = bitmap.getHeight();
 
@@ -73,39 +74,40 @@ public class Photo {
         byteBuffer = ByteBuffer.allocate(size);
         bitmap.copyPixelsToBuffer(byteBuffer);
         byteArray = byteBuffer.array();
-        return byteArray;
+        byteArrayStr = new String(Base64.encode(byteArray, Base64.DEFAULT));
+        return byteArrayStr;
     }
 
-    public byte[] pathToByteArray(){
+    public String pathToString(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        uploadArray = toByteArray(bitmap);
-        return uploadArray;
-    }
-
-    public byte[] bitMapToByteArray(){
-        uploadArray = toByteArray(bitmap);
-        return uploadArray;
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        uploadString = toString(uploadBitmap);
+        return uploadString;
     }
 
     public Bitmap.Config pathGetConfig(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        config = Bitmap.Config.valueOf(bitmap.getConfig().name());
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        config = Bitmap.Config.valueOf(uploadBitmap.getConfig().name());
         return config;
     }
 
     public int pathGetWidth(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        width = bitmap.getWidth();
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        width = uploadBitmap.getWidth();
         return width;
     }
 
     public int pathGetHeight(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        height = bitmap.getHeight();
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        height = uploadBitmap.getHeight();
         return height;
     }
 
-    public Bitmap byteArrayToBitMap(){
+    public Bitmap byteStringToBitMap(){
+        byteArray = Base64.decode(byteArrayStr, Base64.DEFAULT);
         Bitmap bitmap_tmp = Bitmap.createBitmap(width, height, config);
         ByteBuffer buffer = ByteBuffer.wrap(byteArray);
         bitmap_tmp.copyPixelsFromBuffer(buffer);

@@ -20,14 +20,14 @@ public class NotificationActivity extends AppCompatActivity {
     private String username;
     private Profile profile;
     private NotificationListAdapter notificationAdapter;
-    private ServerHelper serverHelper = new ServerHelper();
+    private ServerHelper serverHelper;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
-
+        serverHelper = new ServerHelper(this);
         /* Set layout variables and obtain username from SharedPreferences */
         clearButton = findViewById(R.id.notificationClearButton);
         backButton = findViewById(R.id.notificationBackButton);
@@ -36,6 +36,7 @@ public class NotificationActivity extends AppCompatActivity {
         username = preferences.getString("username", "error");
 
         /* populate notificationList */
+
         getFromServer();
         notificationAdapter = new NotificationListAdapter(this, notificationList.getList());
         notificationListView.setAdapter(notificationAdapter);

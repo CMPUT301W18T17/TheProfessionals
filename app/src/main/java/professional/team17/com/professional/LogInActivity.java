@@ -19,7 +19,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.searchly.jestdroid.DroidClientConfig;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Allows the user to log in or move to a signup activity
@@ -40,7 +41,8 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        serverHelper = new ServerHelper();
+        connectivityCheck();
+        serverHelper = new ServerHelper(this);
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         if (sharedpreferences.contains("username")){
             changeActivity(SearchActivity.class);
@@ -51,38 +53,46 @@ public class LogInActivity extends AppCompatActivity {
     /**
      * On selecting Sign In, checks username and signs the user in
      *
-     * @param view
      * @see SearchActivity
      */
     public void logIn(View view){
 
-        EditText usernameBox = (EditText) findViewById(R.id.usernameBox);
+        EditText usernameBox = findViewById(R.id.usernameBox);
         String username = usernameBox.getText().toString();
-        TextView error = (TextView) findViewById(R.id.ErrorText);
+        TextView error = findViewById(R.id.ErrorText);
 
         if (usernameBox.getText().length() == 0){
-            error.setText("Please Enter a Username");
+            error.setText(R.string.enterUserPrompt);
         } else {
             Profile profile = serverHelper.getProfile(username);
             if (!(profile == null)) {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE); // 0 - for private mode
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString("username", username); // Storing string
-                editor.commit(); // commit changes
+                editor.apply(); // commit changes
                 changeActivity(SearchActivity.class);
 
             } else {
-                error.setText("Username does not exist");
+                error.setText(R.string.nonExistentUser);
             }
         }
     }
 
 
+    public void connectivityCheck(){
+        ConnectivityCheck.isOnline c = new ConnectivityCheck.isOnline();
+        try {
+            Object result=c.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * On clicking the Sign Up button, user is moved to the Sign Up page
      *
-     * @param view
      * @see SignUpActivity
      */
     public void signUp(View view) {

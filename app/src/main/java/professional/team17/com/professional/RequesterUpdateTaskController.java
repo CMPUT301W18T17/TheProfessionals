@@ -60,12 +60,8 @@ public class RequesterUpdateTaskController{
     public void setDate(Date date){
         task.setDate(date);
     }
-    public void addPhotos(String photo){
-        task.addPhoto(photo);
-    }
-    public void delPhotos(String photo){
-        task.removePhoto(photo);
-    }
+    //public void addPhotos(String photo){task.addPhoto(photo);}
+    //public void delPhotos(String photo){task.removePhoto(photo);}
     /**
      * this part is for viewTask
      */
@@ -84,9 +80,7 @@ public class RequesterUpdateTaskController{
     public String viewLocation(){
         return task.getLocation();
     }
-    public ArrayList<String> viewImage(){
-        return task.getPhotos();
-    }
+    //public ArrayList<String> viewImage(){return task.getPhotos();}
     //finially
     public Task returnTask(){
         return this.task;

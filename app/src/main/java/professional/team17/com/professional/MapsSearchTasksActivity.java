@@ -10,20 +10,36 @@
 
 package professional.team17.com.professional;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Camera;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.location.Address;
+import android.text.Html;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.SphericalUtil;
+
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.ArrayList;
 
@@ -31,26 +47,35 @@ import java.util.ArrayList;
  * An activity which shows all tasks with status Requested and Bidded within 5km.
  */
 public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyCallback {
-// Calculate tasks within 5km
+    // Init variables
+    private static final String TAG = "MapsSearchTasksActivity";
     private ImageView currentLocationButton;
     private ImageView closeButton;
     private Circle circle;
     private LatLng topRight;
     private LatLng bottomLeft;
-    private ServerHelper serverHelper = new ServerHelper();
+    private ServerHelper serverHelper = new ServerHelper(this);
     private TaskList tasks;
+    private String username;
 
     public void setContentViewFunction(){
         setContentView(R.layout.activity_maps_search_tasks);
     }
+
+    /**
+     * All initialization of OnClickListeners to prepare for tasks
+     * @see MapsActivity's method: OnMapReady
+     */
     public void MapsSearchEvent(){
+        SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = pref.getString("username", "error");
         currentLocationButton = (ImageView) findViewById(R.id.ic_currentlocation);
         closeButton = (ImageView) findViewById(R.id.ic_close);
 
         currentLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getCurrentLocation();
+                afterLocationFoundEvent();
             }
         });
         closeButton.setOnClickListener(new View.OnClickListener() {
@@ -59,8 +84,58 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
                 startActivity(new Intent(MapsSearchTasksActivity.this, SearchActivity.class));
             }
         });
+
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                Context context = MapsSearchTasksActivity.this;
+
+                LinearLayout info = new LinearLayout(context);
+                info.setOrientation(LinearLayout.VERTICAL);
+
+                TextView title = new TextView(context);
+                title.setTextColor(Color.BLACK);
+                title.setGravity(Gravity.CENTER);
+                //title.setText(marker.getTitle());
+                title.setText(Html.fromHtml(marker.getTitle()));
+
+                TextView snippet = new TextView(context);
+                snippet.setTextColor(Color.BLACK);
+                snippet.setText(Html.fromHtml(marker.getSnippet()));
+
+                info.addView(title);
+                info.addView(snippet);
+
+                return info;
+            }
+        });
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                try{
+                    String breakTaskTitle[] = marker.getTitle().split("\n");
+                    String taskID = breakTaskTitle[1];
+                    Log.d(TAG, "onInfoWindowClick: "+ taskID);
+
+                    Intent intent = new Intent(getBaseContext(), ProviderViewTask.class);
+                    intent.putExtra("Task", taskID);
+                    startActivity(intent);
+                } catch (NullPointerException e) {
+                    Log.e(TAG, "OnInfoWindowClickListener:" + e.getMessage());
+                }
+
+            }
+        });
     }
 
+    /**
+     * Draw/Color 5km radius with user's current position as the centre
+     */
     public void afterLocationFoundEvent(){
         if (currentLatLng != null){
             circle = mMap.addCircle(new CircleOptions()
@@ -75,14 +150,36 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
         tasks = serverHelper.getMapTasks(bottomLeft, topRight);
         //Toast.makeText()
         for(Task task: tasks) {
-            markSpot(task.getLatLng(), task.getLocation());
+            if (!task.getProfileName().equals(username)) {
+                markSpot(task);
+            }
+        }
+    }
+
+    /**
+     * Mark the spot of a task
+     * @param task a task that is within provider's 5km radius/box
+     */
+    protected void markSpot(Task task) {
+        try{
+            String taskInfo = "<b>" + "Task Description: " + "</b>" + task.getDescription() + "<br/>" +
+                    "<b>" + "Task Due By: " + "</b>" + task.getDateAsString() + "<br/>" +
+                    "<b>" + "Task Location: " + "</b>"+ task.getLocation() + "<br/>";
+
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(task.getLatLng())
+                    .title("<big><b>" + task.getName() + "</b></big>"+ "<br/>" +"<small>TaskID: \n" + task.getUniqueID() + "\n<br/></small>")
+                    .snippet(taskInfo)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+            mMap.addMarker(markerOptions);
+        } catch (NullPointerException e){
+            Log.e(TAG, "markSpot: NullPointer: " + e.getMessage());
         }
     }
 
     /**
      * Method getCircleLatLngBounds is referenced from: https://stackoverflow.com/a/37304415
-     * @param circle
-     * @return
+     * @param circle circle that has a 5km radius with provider's current location as centre
      */
     private void getCircleLatLngBounds(Circle circle){
         topRight = SphericalUtil.computeOffset(circle.getCenter(), circle.getRadius() * Math.sqrt(2), 45);

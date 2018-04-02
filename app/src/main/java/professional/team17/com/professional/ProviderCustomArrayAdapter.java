@@ -101,6 +101,10 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
                 v.setTag(providerViewHolder);
 
                 providerViewHolder = (ProviderViewHolder) v.getTag();
+                providerViewHolder.getStatusTextField().setText(task.getStatus());
+                providerViewHolder.getUserNameTextField().setText(task.getProfileName());
+                providerViewHolder.getTaskTitleTextField().setText(task.getName());
+                providerViewHolder.getTaskMyBidAmount().setText(task.getBids().getBid(username).getAmountAsString());
             }
 
             //plug in item to row
@@ -120,10 +124,7 @@ public class ProviderCustomArrayAdapter extends ArrayAdapter<Task> {
             }
 
             else if (task.isAssigned()) {
-                providerViewHolder.getStatusTextField().setText(task.getStatus());
-                providerViewHolder.getUserNameTextField().setText(task.getProfileName());
-                providerViewHolder.getTaskTitleTextField().setText(task.getName());
-                providerViewHolder.getTaskMyBidAmount().setText(task.getBids().getBid(username).getAmountAsString());
+
             }
 
             return v;

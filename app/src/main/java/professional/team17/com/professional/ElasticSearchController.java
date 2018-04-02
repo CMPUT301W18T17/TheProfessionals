@@ -47,7 +47,6 @@ public class ElasticSearchController {
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
-                    notifyStateonline();
                 }
                 catch (Exception e) {
                     new OfflineException();
@@ -73,7 +72,6 @@ public class ElasticSearchController {
             try {
 
                 JestResult result = client.execute(get);
-                notifyStateonline();
                 if (result.isSucceeded()) {
                     profile = result.getSourceAsObject(Profile.class);
                 }
@@ -92,6 +90,33 @@ public class ElasticSearchController {
 
     }
 
+    /**
+     *  This AsyncTask will add a task to the db.
+     *  It will then set the task.id equal to the db.id set at time of insertion.
+     *
+     */
+    public String AddTask1(Task task) {
+                String id = "r";
+        verifySettings();
+                Index index = new Index.Builder(task)
+                        .index(indexname)
+                        .type(tasktype)
+                        .build();
+                try {
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()){
+                        id = result.getId();
+                    }
+                    else {
+                        Log.i ("Error", "some error = (");
+                    }
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and add the task");
+                }
+            Log.i("ERR", "doInBackground: ADDED ATASK");
+            return id;
+        }
 
 
 
@@ -114,7 +139,6 @@ public class ElasticSearchController {
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
-                    notifyStateonline();
                     if (result.isSucceeded()){
                         id = result.getId();
                     }
@@ -151,7 +175,6 @@ public class ElasticSearchController {
                 try {
 
                     DocumentResult result = client.execute(index);
-                    notifyStateonline();
                 }
                 catch (Exception e) {
                     new OfflineException();
@@ -178,7 +201,6 @@ public class ElasticSearchController {
                         .build();
                 try {
                     DocumentResult result = client.execute(delete);
-                    notifyStateonline();
                 }
                 catch (Exception e) {
                     new OfflineException();
@@ -205,7 +227,6 @@ public class ElasticSearchController {
                         .build();
                 try {
                     DocumentResult result = client.execute(delete);
-                    notifyStateonline();
                 }
                 catch (Exception e) {
                     new OfflineException();
@@ -229,7 +250,6 @@ public class ElasticSearchController {
                     .build();
             try {
                 JestResult result = client.execute(get);
-                notifyStateonline();
                 if (result.isSucceeded()) {
                     task = result.getSourceAsObject(Task.class);
                     task.setId(result.getValue("_id").toString());
@@ -262,7 +282,6 @@ public class ElasticSearchController {
                     .build();
             try {
                 SearchResult result = client.execute(search);
-                notifyStateonline();
                 if (result.isSucceeded()){
                     List<Task> foundTask= result.getSourceAsObjectList(Task.class);
                     taskList.addAll(foundTask);

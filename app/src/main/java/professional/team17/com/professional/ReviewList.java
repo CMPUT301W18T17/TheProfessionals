@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-//TODO implement for project part 5
-
 /**
  * A custom ArrayList class for handling Review objects.
  */
@@ -32,7 +30,7 @@ public class ReviewList {
 
 
     public void addReview(Review review){
-        if (this.hasReview(review) == true){
+        if (this.hasReview(review)){
             throw new  IllegalArgumentException("Duplicate Review - cannot be added");
         }
         reviews.add(review);
@@ -46,8 +44,8 @@ public class ReviewList {
     *
     *    @returns the avg of all the reviews in list as double
     */
-    public double getAvg(){
-        double sum = 0.0;
+    public float getAvg(){
+        float sum = 0;
         for (int i=0; i<reviews.size(); i++){
             sum = reviews.get(i).getScore() + sum;
         }
@@ -60,9 +58,8 @@ public class ReviewList {
     * @returns the avg of all the reviews in list as string
     */
     public String getAvgString(){
-       double sum = getAvg();
-       String sumText = String.format("%.2f", sum); //format to two decimals
-       return sumText;
+       float sum = getAvg();
+        return String.format("%.2f", sum);
  }
 
 
