@@ -3,6 +3,7 @@ package professional.team17.com.professional;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,17 +12,28 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.AutocompletePrediction;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -29,13 +41,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsSearchLocationActivity extends MapsActivity implements OnMapReadyCallback {
+/**
+ * The following is a spinoff of Mitch Tablian's code in Google Maps & Google Places Course
+ */
+public class MapsSearchLocationActivity extends MapsActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "MapsSLocationActivity";
+    private static final LatLngBounds latLngBounds = new LatLngBounds(new LatLng(-85, -180), new LatLng(85, 180));
     private Button addLocation;
-    private EditText mSearchAddress;
+    private AutoCompleteTextView mSearchAddress;
     private LatLng finalLatLng;
     private String finalAddress;
+    private GoogleApiClient mGoogleApiClient;
+    private PlaceAutoCompleteAdapter pAutoCompleteAdapter;
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 
     public void setContentViewFunction(){
         setContentView(R.layout.activity_maps_search_location);
@@ -44,13 +66,21 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
     public void afterLocationFoundEvent(){return;}
 
     public void MapsSearchEvent(){
-        mSearchAddress = (EditText) findViewById(R.id.addressInput);
+        Log.d(TAG, "MapsSearchEvent()");
+        mSearchAddress = (AutoCompleteTextView) findViewById(R.id.addressInput);
         addLocation = (Button) findViewById(R.id.addLocation);
 
-        Log.d(TAG, "MapsSearchEvent()");
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .enableAutoManage(this, this)
+                .build();
 
-        Intent intent = getIntent();
+        pAutoCompleteAdapter = new PlaceAutoCompleteAdapter(this, mGoogleApiClient, latLngBounds, null);
 
+        mSearchAddress.setOnItemClickListener(autoCompleteClickListener);
+        mSearchAddress.setAdapter(pAutoCompleteAdapter);
         mSearchAddress.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -100,14 +130,55 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
         }
     }
 
+    /**
+     * Hides keyboard after clicking enter or clicking on address in suggestions
+     */
     public void hideKeyBoard(){
         InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(this.INPUT_METHOD_SERVICE);
-        View view = this.getCurrentFocus();
-        if (view == null){
-            view = new View(this);
-        }
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        inputMethodManager.hideSoftInputFromWindow(mSearchAddress.getWindowToken(),0);
     }
+
+    /**
+     *  Treatments for when user click on an address in suggestion list
+     */
+    private AdapterView.OnItemClickListener autoCompleteClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            hideKeyBoard();
+            final AutocompletePrediction place = pAutoCompleteAdapter.getItem(i);
+            final String placeId = place.getPlaceId();
+
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi.getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceResultCallback);
+        }
+    };
+
+    /**
+     *  Get place address and latLng
+     */
+    private ResultCallback<PlaceBuffer> mUpdatePlaceResultCallback = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(@NonNull PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()){
+                Log.d(TAG, "mUpdatePlaceResultCallback: Place query was unsuccessful: " + places.getStatus().toString());
+            } else {
+                final Place place = places.get(0);
+                try {
+                    finalAddress = place.getAddress().toString();
+                    finalLatLng = place.getLatLng();
+
+                    Log.d(TAG,"mUpdatePlaceResultCallback: Place Address " + finalAddress );
+                    Log.d(TAG,"mUpdatePlaceResultCallback: Place Address " + finalLatLng );
+
+                    moveCamera(finalLatLng, finalAddress);
+
+                } catch (NullPointerException e){
+                    Log.e(TAG, "mUpdatePlaceResultCallback: No associated address or LatLng" + e.getMessage());
+                }
+            }
+            places.release(); // From Google Places API: To prevent a memory leak! Must release PlaceBuffer object when app doesn't need it
+        }
+    };
 
 
 }
