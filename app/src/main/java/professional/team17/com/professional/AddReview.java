@@ -48,11 +48,11 @@ public class AddReview extends AppCompatActivity {
 
         if (comment.length() > 300){
             TextView errorMessage = findViewById(R.id.errorBox);
+            errorMessage.setText(R.string.charLimit);
+        } else {
+            controller.setReview(profile, rating, comment);
+
+            finish();
         }
-
-        controller.setReview(profile, rating, comment);
-
-        finish();
     }
-
 }
