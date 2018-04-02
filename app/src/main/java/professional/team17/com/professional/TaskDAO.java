@@ -103,6 +103,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
         String[] id = {task.getUniqueID()+""};
         taskdata.put("online", 1);
         db.insert(TASKTABLE, null, taskdata);
+        db.close();
     }
 
     /**
@@ -117,6 +118,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         taskdata.put("actionType", ActionType.ADD_NO_CONNECTION.getValue());
         db.insert(TASKTABLE, null, taskdata);
+        db.close();
         return String.valueOf(id);
     }
 
@@ -131,6 +133,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
         Cursor c = db.rawQuery("SELECT * from "+TASKTABLE, null);
         int count = c.getCount()+1;
         c.close();
+        db.close();
         return count;
     }
 
@@ -152,9 +155,10 @@ public class  TaskDAO extends SQLiteOpenHelper {
         else {
             //tombstone
             ContentValues taskdata = new ContentValues();
-            taskdata.put("actionType", ActionType.EDIT_NO_CONNECTION.getValue());
+            taskdata.put("actionType", ActionType.DELETE_NO_CONNECTION.getValue());
             db.update(TASKTABLE, taskdata, "id=?", id);
         }
+        db.close();
     }
 
     /**
@@ -169,6 +173,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
             taskdata.put("actionType", ActionType.DELETE_NO_CONNECTION.getValue());
         }
         db.update(TASKTABLE, taskdata, "id=?", id);
+        db.close();
     }
 
     /**
@@ -178,12 +183,14 @@ public class  TaskDAO extends SQLiteOpenHelper {
     public TaskList getTasks() {
         TaskList tasklist = new TaskList();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where status = \"Requested\";", null);
+        String value = String.valueOf(ActionType.DELETE_NO_CONNECTION.getValue());
+        Cursor c = db.rawQuery("SELECT * from " +TASKTABLE + " where actionType <> ?",new String[] {value});
         while (c.moveToNext()) {
             Task task = createTask(c);
             tasklist.add(task);
         }
         c.close();
+        db.close();
         return tasklist;
 
     }
@@ -202,6 +209,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
             return task;
         }
         c.close();
+        db.close();
         return null;
     }
 
