@@ -372,7 +372,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         ConfirmDialog confirmDialog = new ConfirmDialog();
         Bundle args = new Bundle();
         args.putString("dialogFlag", "Review");
-        args.putString("title", "Add review to provider");
+        args.putString("title", "Review Provider");
         args.putString("cancel", "No");
         args.putString("confirm", "Yes");
         args.putString("message", "Would you like to review your provider?");
