@@ -1,7 +1,6 @@
 package professional.team17.com.professional;
 
 import android.content.Context;
-import android.text.BoringLayout;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -22,76 +21,69 @@ public class SyncController {
 
 
 
-    public boolean getUpdated(){
+    public void getUpdated(){
         Task task;
         Task newtask;
-        Boolean flag = true;
         TaskDAO db = new TaskDAO(context);
         ArrayList<String> ids = db.updatedTasks();
-        db.close();
         for (String id : ids) {
-            Log.i("loop", "getEDDITEDS: "+id);
             task = es.getTask(id);
-            Log.i("loop", "getEDDITEDS: "+id+task.isRequested());
             if (!task.isRequested()){
-
-                flag = false;
+                //flag error
             }
             else {
                 newtask = db.getTask(id);
                 es.updateTasks(newtask);
             }
         }
-        return flag;
+        db.close();
     }
 
 
 
 
-    public boolean getDeleted() {
+    public void getDeleted(){
         Task task;
         Task newtask;
-        Boolean flag = true;
         TaskDAO db = new TaskDAO(context);
         ArrayList<String> ids = db.deletedTasks();
-        db.close();
         for (String id : ids) {
             task = es.getTask(id);
-            if (!task.isRequested()) {
-                flag = false;
-            } else {
+            if (!task.isRequested()){
+                //flag error
+            }
+            else {
                 newtask = db.getTask(id);
                 es.deleteTasks(newtask);
             }
         }
-        return flag;
+        db.close();
     }
-
 
     public void getAdded(){
         Task newtask;
         TaskDAO db = new TaskDAO(context);
         ArrayList<String> ids = db.newTasks();
-        db.close();
         for (String id : ids) {
             newtask = db.getTask(id);
             es.addTasks(newtask);
         }
-
+        db.close();
     }
 
 
-    public boolean sync() {
-        Boolean flag;
-        getAdded();
-        flag = getUpdated();
-        //getDeleted();
-        return flag;
-    }
-
-    public void resetRequested(String username) {
-        TaskList tasklist = es.getTasksRequester(username, "Requested");
+    public void sync() {
         TaskDAO db = new TaskDAO(context);
-        db.insertAll(tasklist);
+
+        Log.i("TAG", "sync: ");
+        getAdded();
+        getUpdated();
+        getDeleted();
+        db.close();
+    }
+
+    public void resetRequested() {
+
+
     }
 }
