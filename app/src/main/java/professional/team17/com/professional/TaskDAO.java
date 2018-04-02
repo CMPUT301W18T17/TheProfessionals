@@ -73,7 +73,6 @@ public class  TaskDAO extends SQLiteOpenHelper {
         String query = "CREATE TABLE "+ TASKTABLE+
                 " (id Text Primary Key, profileName Text, name Text not Null, location Text,"+
                 " description Text, status Text, date Text, lon Text, lat Text, actionType Integer, online Boolean)";
-        Log.i("TAG", "create: "+query);
         db.execSQL(query);
     }
 
@@ -102,6 +101,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         String[] id = {task.getUniqueID()+""};
         taskdata.put("online", 1);
+        taskdata.put("actionType", ActionType.ADD_ONLINE.getValue());
         db.insert(TASKTABLE, null, taskdata);
         db.close();
     }
@@ -229,6 +229,8 @@ public class  TaskDAO extends SQLiteOpenHelper {
         Double lon = c.getDouble(c.getColumnIndex("lon"));
         Double lat = c.getDouble(c.getColumnIndex("lat"));
         LatLng latLon = new LatLng(lat, lon);
+        //String ACTION = c.getString(c.getColumnIndex("actionType"));
+        //Log.i("OFFLINE","TASK ACTIOn"+ACTION );
         ArrayList<Bitmap> photos = new ArrayList<Bitmap>();
         temp =  new Task(profileName, name, description, location, date, latLon , photos);
         temp.setId(id);
@@ -302,7 +304,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
      * https://stackoverflow.com/questions/8157755/how-to-convert-enum-value-to-int
      */
     private enum ActionType {
-        DELETE_NO_CONNECTION(-1), ADD_NO_CONNECTION(1), EDIT_NO_CONNECTION(2);
+        DELETE_NO_CONNECTION(-1), ADD_NO_CONNECTION(1), EDIT_NO_CONNECTION(2), ADD_ONLINE(-2);
 
         private final int value;
         private ActionType(int value) {

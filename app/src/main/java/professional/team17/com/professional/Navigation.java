@@ -43,13 +43,15 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
         sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedpreferences.getString("username", "error");
 
-        syncCheck();
         connectivityCheck();
+
+        syncCheck();
+
     }
 
     private void syncCheck() {
         SyncController controller = new SyncController(getApplicationContext());
-        ConnectedState c = ConnectedState.getInstance();
+       ConnectedState c = ConnectedState.getInstance();
         if (c.isOnline()){
             controller.resetRequested(username);
         }
