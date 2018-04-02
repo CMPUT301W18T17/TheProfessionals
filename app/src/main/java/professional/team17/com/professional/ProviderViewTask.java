@@ -38,7 +38,7 @@ import java.io.ByteArrayOutputStream;
  * @author Allison
  * @see ServerHelper , Task, Profile
  */
-public class ProviderViewTask extends Navigation implements ImageView.OnClickListener, PlaceBidDialog.PlaceBidDialogListener, ConfirmDialog.ConfirmDialogListener {
+public class ProviderViewTask extends Navigation implements PlaceBidDialog.PlaceBidDialogListener {
 
     //TODO below item is needed for protoype, part 5 persistence will remove this
 
@@ -95,31 +95,12 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
         appendButton = (ImageButton) findViewById(R.id.provider_view_task_manageBid);
         taskAddressTextField = (TextView) findViewById(R.id.provider_view_task_address);
         viewMapButton = (ImageButton) findViewById(R.id.provider_view_map_button);
-        button5 = (Button) findViewById(R.id.button5);
+        button5 = (Button) findViewById(R.id.provider_view_task_photo);
 
         this.setActivityTitleProvider("View Task");
 
-
-        viewMapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProviderViewTask.this, MapsShowALocationActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("aTaskLatLng", task.getLatLng());
-                intent.putExtras(bundle);
-                intent.putExtra("aTaskAddress", task.getLocation());
-                startActivity(intent);
-            }
-        });
         task = getTask();
-
-
-
-
-
         checkOffline();
-
-
         //setRating();
     }
 
@@ -143,29 +124,30 @@ public class ProviderViewTask extends Navigation implements ImageView.OnClickLis
             System.out.println("------------------------------------------------------");
             System.out.println("------------------------------------------------------");
             if (task.getPhotos() != null)
-                button5.setOnClickListener(this);
+                button5.setVisibility(View.GONE);
             System.out.println("------------------------------------------------------");
             System.out.println("------------------------------------------------------");
-            if (task.getPhotos() != null)
-                button5.setOnClickListener(this);
-        }
-
     }
-    @Override
-    public void onClick(View view) {
-        switch(view.getId()){
-            case R.id.button5:
-                Intent yourIntent = new Intent(this, providerCheckImage.class);
-                Bitmap bmp = task.getPhotos().get(0); // store the image in your bitmap
-                ByteArrayOutputStream bao = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
-                yourIntent.putExtra("yourImage", bao.toByteArray());
-                startActivity(yourIntent);
-
-        }
 
     }
 
+    public void photoClick(View view) {
+        Intent yourIntent = new Intent(this, providerCheckImage.class);
+        Bitmap bmp = task.getPhotos().get(0); // store the image in your bitmap
+        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
+        yourIntent.putExtra("yourImage", bao.toByteArray());
+        startActivity(yourIntent);
+    }
+
+    public void mapClick(View view){
+        Intent intent = new Intent(ProviderViewTask.this, MapsShowALocationActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("aTaskLatLng", task.getLatLng());
+        intent.putExtras(bundle);
+        intent.putExtra("aTaskAddress", task.getLocation());
+        startActivity(intent);
+    }
 
     /***
      * Interface method from PlaceBidDialog.PlaceBidDialogListener

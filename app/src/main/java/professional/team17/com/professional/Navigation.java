@@ -54,7 +54,7 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
             controller.resetRequested(username);
         }
 
-        if (c.isNewONline()){
+        if (c.isNewOnline()){
             managesync();
         }
 
@@ -70,7 +70,7 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
             createSync();
         }
     }
-    // TODO FULLY IMPLEMENT LISTENER
+
 
 
 
