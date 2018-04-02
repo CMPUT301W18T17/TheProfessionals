@@ -28,7 +28,7 @@ public class AddReview extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSubmit(view);
+                onSubmit();
             }
         });
 
@@ -42,10 +42,10 @@ public class AddReview extends AppCompatActivity {
 
     }
 
-    private void onSubmit(View v){
+    private void onSubmit(){
         AddReviewController controller = new AddReviewController();
-        EditText commentBox = v.findViewById(R.id.commentBox);
-        RatingBar ratingBar = v.findViewById(R.id.ratingBar);
+        EditText commentBox = findViewById(R.id.commentBox);
+        RatingBar ratingBar = findViewById(R.id.ratingBar);
         int rating = ratingBar.getNumStars();
         String comment = commentBox.getText().toString();
 
