@@ -164,10 +164,14 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
             } else {
                 final Place place = places.get(0);
                 try {
-                    Log.d(TAG,"mUpdatePlaceResultCallback: Place Address " + place.getAddress() );
-                    Log.d(TAG,"mUpdatePlaceResultCallback: Place Address " + place.getLatLng() );
+                    finalAddress = place.getAddress().toString();
+                    finalLatLng = place.getLatLng();
 
-                    moveCamera(place.getLatLng(), place.getAddress().toString());
+                    Log.d(TAG,"mUpdatePlaceResultCallback: Place Address " + finalAddress );
+                    Log.d(TAG,"mUpdatePlaceResultCallback: Place Address " + finalLatLng );
+
+                    moveCamera(finalLatLng, finalAddress);
+
                 } catch (NullPointerException e){
                     Log.e(TAG, "mUpdatePlaceResultCallback: No associated address or LatLng" + e.getMessage());
                 }
