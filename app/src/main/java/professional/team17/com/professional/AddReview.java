@@ -11,7 +11,6 @@ import android.widget.RatingBar;
 
 public class AddReview extends AppCompatActivity {
 
-    private String reviewer;
     private String profile;
 
     @Override
@@ -20,9 +19,6 @@ public class AddReview extends AppCompatActivity {
         setContentView(R.layout.activity_add_review);
 
         profile = getIntent().getStringExtra("profile");
-
-        SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        reviewer = sharedpreferences.getString("username", "error");
 
         final Button submit = findViewById(R.id.submitButton);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -43,13 +39,13 @@ public class AddReview extends AppCompatActivity {
     }
 
     private void onSubmit(){
-        AddReviewController controller = new AddReviewController();
+        AddReviewController controller = new AddReviewController(this);
         EditText commentBox = findViewById(R.id.commentBox);
         RatingBar ratingBar = findViewById(R.id.ratingBar);
         float rating = ratingBar.getRating();
         String comment = commentBox.getText().toString();
 
-        controller.setReview(profile, rating, comment, reviewer);
+        controller.setReview(profile, rating, comment);
 
         finish();
     }
