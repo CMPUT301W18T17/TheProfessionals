@@ -70,9 +70,9 @@ public class ReviewsAdaptor extends ArrayAdapter {
 
 //        subTitle.setText(currentReview.getReviewTitle());
         subProfile.setText(currentReview.getProfileName());
-        double score = currentReview.getScore();
-        float scoreInFloat = (float)score;
-        subRatingBar.setRating(scoreInFloat);
+        float score = currentReview.getScore();
+//        float scoreInFloat = (float)score;
+        subRatingBar.setRating(score);
         subComment.setText(currentReview.getComment());
 
         return convertView;

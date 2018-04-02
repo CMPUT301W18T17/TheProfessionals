@@ -7,7 +7,7 @@ public class AddReviewController {
 
     AddReviewController(){}
 
-    public void setReview(String profileName, int rating, String comment, String reviewer) {
+    public void setReview(String profileName, float rating, String comment, String reviewer) {
         Review review = new Review(rating, reviewer, comment);
         Profile profile = serverHelper.getProfile(profileName);
         ReviewList list = profile.getReviewList();

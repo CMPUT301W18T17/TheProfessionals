@@ -51,7 +51,7 @@ public class ReviewList {
         for (int i=0; i<reviews.size(); i++){
             sum = reviews.get(i).getScore() + sum;
         }
-    return sum/reviews.size()/2;
+    return sum/reviews.size();
 }
 
 
@@ -60,7 +60,7 @@ public class ReviewList {
     * @returns the avg of all the reviews in list as string
     */
     public String getAvgString(){
-       double sum = getAvg();
+       float sum = getAvg();
        String sumText = String.format("%.2f", sum); //format to two decimals
        return sumText;
  }

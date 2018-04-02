@@ -46,7 +46,7 @@ public class AddReview extends AppCompatActivity {
         AddReviewController controller = new AddReviewController();
         EditText commentBox = findViewById(R.id.commentBox);
         RatingBar ratingBar = findViewById(R.id.ratingBar);
-        int rating = ratingBar.getNumStars();
+        float rating = ratingBar.getRating();
         String comment = commentBox.getText().toString();
 
         controller.setReview(profile, rating, comment, reviewer);
