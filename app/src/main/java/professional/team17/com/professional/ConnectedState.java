@@ -9,7 +9,6 @@ import android.util.Log;
 public class ConnectedState {
     public static status state = null;
     private static ConnectedState connectedState = null;
-    private static OnlineListener OnlineListener;
 
     /**
      *
@@ -61,9 +60,6 @@ public class ConnectedState {
         return (this.state == status.OFFLINE);
     }
 
-    public void bind(OnlineListener object) {
-        OnlineListener = object;
-    }
 
     public boolean isOnline() {
         return (this.state == status.ONLINE);
