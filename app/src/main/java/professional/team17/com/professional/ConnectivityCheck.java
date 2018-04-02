@@ -1,8 +1,8 @@
 package professional.team17.com.professional;
 
-import android.content.Context;
+
 import android.os.AsyncTask;
-import android.support.v4.view.animation.LinearOutSlowInInterpolator;
+
 import android.util.Log;
 
 import java.io.IOException;
@@ -10,13 +10,19 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
+
 /**
- * Created by ag on 2018-03-29.
+ *
+ * A utility class that checks for a connection via opening a socket
+ * If it find a connection, the ConnectedState singleton is set to Online,
+ * If no connection, the  ConnectedState singleton is set to offline
+ * This method was sourced from
+ * https://stackoverflow.com/questions/44918248/android-internet-connectivity-check-better-method
+ * by Rohith Krishnan on Jul 7 '17 at 10:06
+ * @author Allison
+ * @see ConnectedState
  */
-
 public class ConnectivityCheck {
-
-    private Context _context;
 
     public static class isOnline extends AsyncTask<Void, Void, Void> {
         ConnectedState c = ConnectedState.getInstance();
@@ -31,7 +37,6 @@ public class ConnectivityCheck {
             } catch (IOException e) {
                 c.setOffline();
             }
-
             return null;
         }
     }

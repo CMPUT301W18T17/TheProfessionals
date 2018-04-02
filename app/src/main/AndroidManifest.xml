@@ -81,6 +81,8 @@
             android:name=".MapsShowALocationActivity"
             android:label="@string/title_activity_maps_show_alocation"
             android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".AddReview"></activity>
+            android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".TaskPhotoActivity">
             android:parentActivityName=".RequesterAddTaskActivity">
             <!-- The meta-data tag is required if you support API level 15 and lower -->

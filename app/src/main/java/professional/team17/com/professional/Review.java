@@ -17,29 +17,27 @@ import java.util.Date;
  * @See ReviewList
  * this class is mainly created for describe a new review object
  */
-//TODO implement for project part 5
 public class Review {
 
-    private double score;
+    private float score;
     private String comment;
     private String profileName; //person who gave review
-    private String reviewTitle;
+
     private Date date;
 
-    public Review(double score, String reviewer, String comment, String title) {
+    public Review(float score, String reviewer, String comment) {
         this.score = score;
         this.profileName = reviewer;
         this.comment = comment;
-        this.reviewTitle = title;
         this.date = new Date();
     }
 
-    public Review(double score, String reviewer, String title) {
-        this.score = score;
-        this.profileName = reviewer;
-        this.reviewTitle = title;
-        this.date = new Date();
-    }
+//    public Review(double score, String reviewer, String title) {
+//        this.score = score;
+//        this.profileName = reviewer;
+//        this.reviewTitle = title;
+//        this.date = new Date();
+//    }
     /* GETTERS */
 
     /**
@@ -47,7 +45,7 @@ public class Review {
      * @return String or Double
      */
 
-    public Double getScore() {
+    public float getScore() {
         return this.score;
     }
 
@@ -59,10 +57,6 @@ public class Review {
         return this.profileName;
     }
 
-    public String getReviewTitle() {
-        return this.reviewTitle;
-    }
-
     public Date getDate(){return this.date;}
 
     /**
@@ -71,7 +65,7 @@ public class Review {
      */
 
     /*SETTERS*/
-    public void setScore(Double score) {
+    public void setScore(float score) {
         this.score = score;
     }
 
@@ -84,13 +78,6 @@ public class Review {
     private void setProfileName(String name) {
         this.profileName = name;
     }
-
-    public void setReviewTitle(String title) {
-        this.reviewTitle = title;
-    }
-
-
-
 
 
 }
