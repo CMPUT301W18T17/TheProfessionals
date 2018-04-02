@@ -28,7 +28,7 @@ public class ConnectedState {
      */
     public void setOnline(){
         if (this.state==status.OFFLINE) {
-            Log.i("INCLASS", "setOnline: ");
+            Log.i("werwer", "setOnline: ");
             this.state = status.NEWONLINE;
         }
          else {

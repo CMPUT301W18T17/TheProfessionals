@@ -42,21 +42,19 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
         // Create the custom object
         sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedpreferences.getString("username", "error");
-        connectivityCheck();
-        syncCheck();
 
+        syncCheck();
+        connectivityCheck();
     }
 
     private void syncCheck() {
         SyncController controller = new SyncController(getApplicationContext());
-        ConnectedState c2 = ConnectedState.getInstance();
-        if (c2.isOnline()){
-            Log.i("REYEEED", "syncCheckREYEEED: ");
+        ConnectedState c = ConnectedState.getInstance();
+        if (c.isOnline()){
             controller.resetRequested(username);
         }
 
-        if (c2.isNewONline()){
-            Log.i("CONNECTETED", "onCreate: ");
+        if (c.isNewONline()){
             managesync();
         }
 

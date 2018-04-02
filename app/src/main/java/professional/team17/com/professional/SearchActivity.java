@@ -53,10 +53,10 @@ public class SearchActivity extends Navigation {
         serverHelper = new ServerHelper(this);
         /* Change activity title */
         this.setActivityTitleProvider("Task Search");
-
+        checkOffline();
         taskList = new TaskList();
         taskList.addAll(getOpenTasks());
-        checkOffline();
+
 
 
         searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskList);
@@ -86,7 +86,6 @@ public class SearchActivity extends Navigation {
 
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
-        Log.i("REYEEED", "checkOffline: SEARCH ");
         if(c.isOffline()) {
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.constraintLayoutsearch, fragment).commit();

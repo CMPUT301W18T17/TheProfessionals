@@ -60,6 +60,7 @@ public class ProviderTaskListActivity extends Navigation {
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
         if(c.isOffline()) {
+  ;
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.provider_task_list_frame, fragment).commit();
         }

@@ -129,7 +129,6 @@ public class ElasticSearchController {
 
         @Override
         protected String doInBackground(Task... tasks) {
-            Log.i("SDDFF", "addTasksONLINE: ");
             verifySettings();
             String id = null;
 
@@ -152,7 +151,6 @@ public class ElasticSearchController {
                     Log.i("Error", "The application failed to build and add the task");
                 }
             }
-            Log.i("ERR", "doInBackground: ADDED ATASK");
             return id;
         }
     }
