@@ -145,32 +145,27 @@ public class PhotoPicker extends AppCompatActivity {
         if (returnPath != null) {
             photo = new Photo(returnPath);
             size = photo.pathGetSize();
-            if (size <= 65536) {
-                if (isEditProfile == 0) {
-                    Intent intent = new Intent(this, SignUpActivity.class);
+            if (isEditProfile == 0) {
+                Intent intent = new Intent(this, SignUpActivity.class);
 
-                    putExtra(intent);
+                putExtra(intent);
 
-                    // Photo Path
-                    adder(intent, "photoPath", returnPath);
+                // Photo Path
+                adder(intent, "photoPath", returnPath);
 
-                    startActivity(intent);
-                    finish();
-                }
-                else{
-                    Intent intent = new Intent(this, EditMyProfileActivity.class);
-
-                    putExtra(intent);
-
-                    // Photo Path
-                    adder(intent, "photoPath", returnPath);
-
-                    startActivity(intent);
-                    finish();
-                }
+                startActivity(intent);
+                finish();
             }
             else{
-                viewError.setText("This photo is too big please pick a smaller one.");
+                Intent intent = new Intent(this, EditMyProfileActivity.class);
+
+                putExtra(intent);
+
+                // Photo Path
+                adder(intent, "photoPath", returnPath);
+
+                startActivity(intent);
+                finish();
             }
         }
         else{
