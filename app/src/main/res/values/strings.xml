@@ -44,5 +44,15 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="offline">You are currently offline.</string>
+    <string name="comment">Comment</string>
+    <string name="submit">Submit</string>
+    <string name="enterUserPrompt">Please Enter a Username</string>
+    <string name="nonExistentUser">Username does not exist</string>
+    <string name="fieldsNotFilled">Please make sure all fields are filled</string>
+    <string name="underMinCharacters">Username must be at least 4 characters</string>
+    <string name="userExists">Username is already taken</string>
+    <string name="invalidEmail">Must enter a valid email</string>
+    <string name="invalidPhoneNumber">must enter a valid phone number</string>
+    <string name="cannotCreateProfile">Something went wrong! We are unable to create profile</string>
     <string name="title_activity_provider_check_image">providerCheckImage</string>
 </resources>

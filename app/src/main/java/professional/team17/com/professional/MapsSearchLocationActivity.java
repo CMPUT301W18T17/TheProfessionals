@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,27 +49,42 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
     private static final String TAG = "MapsSLocationActivity";
     private static final LatLngBounds latLngBounds = new LatLngBounds(new LatLng(-85, -180), new LatLng(85, 180));
     private Button addLocation;
+    private ImageView deleteAllText;
     private AutoCompleteTextView mSearchAddress;
     private LatLng finalLatLng;
     private String finalAddress;
     private GoogleApiClient mGoogleApiClient;
     private PlaceAutoCompleteAdapter pAutoCompleteAdapter;
 
+    /**
+     * From GoogleApiClient.OnConnectionFailedListener
+     * @param connectionResult gives error message in log if connection fails
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        Log.e(TAG, "onConnectionFailed:" + connectionResult.getErrorCode()+","+connectionResult.getErrorMessage());
     }
 
+    /**
+     * Show specific map layout
+     */
     public void setContentViewFunction(){
         setContentView(R.layout.activity_maps_search_location);
     }
 
+    /**
+     * Does not need to do anything after location is found
+     */
     public void afterLocationFoundEvent(){return;}
 
+    /**
+     * Initialize listeners prior relating to search
+     */
     public void MapsSearchEvent(){
         Log.d(TAG, "MapsSearchEvent()");
         mSearchAddress = (AutoCompleteTextView) findViewById(R.id.addressInput);
         addLocation = (Button) findViewById(R.id.addLocation);
+        deleteAllText = (ImageView) findViewById(R.id.deleteButton);
 
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
@@ -107,10 +123,22 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
             }
         });
 
+        deleteAllText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSearchAddress.setText("");
+                finalLatLng = null;
+                finalAddress = "";
+            }
+        });
+
     }
 
+    /**
+     * Find address searched in search bar
+     */
     private void geoLocate(){
-        Log.d(TAG, "geoLocate: geolocating");
+        Log.d(TAG, "geoLocate");
 
         String searchString = mSearchAddress.getText().toString();
         Geocoder geocoder = new Geocoder(MapsSearchLocationActivity.this);
@@ -170,6 +198,7 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
                     Log.d(TAG,"mUpdatePlaceResultCallback: Place Address " + finalAddress );
                     Log.d(TAG,"mUpdatePlaceResultCallback: Place Address " + finalLatLng );
 
+                    mMap.clear();
                     moveCamera(finalLatLng, finalAddress);
 
                 } catch (NullPointerException e){

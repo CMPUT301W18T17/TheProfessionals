@@ -17,13 +17,15 @@ import java.nio.ByteBuffer;
 public class Photo {
 
     private String path;
-    private Bitmap bitmap;
+    private Bitmap bitmap, uploadBitmap;
     private Drawable drawable;
     private int size, width, height;
     private ByteBuffer byteBuffer;
     private byte[] byteArray;
     private String byteArrayStr, uploadString;
     private Bitmap.Config config;
+    private int newWidth = 64;
+    private int newHeight = 64;
 
     public Photo(String path){
         this.path = path;
@@ -42,7 +44,8 @@ public class Photo {
 
     public Bitmap toBitMap(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        return bitmap;
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        return uploadBitmap;
     }
 
     public Drawable toDrawable(Bitmap bitmap){
@@ -52,17 +55,13 @@ public class Photo {
 
     public Drawable pathToDrawable(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        drawable = new BitmapDrawable(bitmap);
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        drawable = new BitmapDrawable(uploadBitmap);
         return drawable;
     }
 
     public int pathGetSize(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        size = bitmap.getByteCount();
-        return size;
-    }
-
-    public int bitMapGetSize(){
         size = bitmap.getByteCount();
         return size;
     }
@@ -81,30 +80,29 @@ public class Photo {
 
     public String pathToString(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        uploadString = toString(bitmap);
-        return uploadString;
-    }
-
-    public String bitMapToByteArray(){
-        uploadString = toString(bitmap);
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        uploadString = toString(uploadBitmap);
         return uploadString;
     }
 
     public Bitmap.Config pathGetConfig(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        config = Bitmap.Config.valueOf(bitmap.getConfig().name());
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        config = Bitmap.Config.valueOf(uploadBitmap.getConfig().name());
         return config;
     }
 
     public int pathGetWidth(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        width = bitmap.getWidth();
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        width = uploadBitmap.getWidth();
         return width;
     }
 
     public int pathGetHeight(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        height = bitmap.getHeight();
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        height = uploadBitmap.getHeight();
         return height;
     }
 

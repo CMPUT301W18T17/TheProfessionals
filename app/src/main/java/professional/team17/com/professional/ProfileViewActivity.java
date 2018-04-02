@@ -83,6 +83,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
             phoneNumber.setText(userProfile.getPhoneNumber());
             ratingBar.setRating((float) (userProfile.getReviewList().getAvg()));
             reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, userProfile.getReviewList());
+            listView.setAdapter(reviewsAdaptor);
             addPhoto(userProfile);
         }
     }

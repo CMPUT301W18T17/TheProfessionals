@@ -247,7 +247,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             bidList = task.getBids();
             chosenBid = bidList.getBid(0);
             setBidViews(chosenBid.getName(), chosenBid.getAmountAsString());
-            //TODO allow requester to leave a review for the provider
+
         }
     }
 
@@ -366,6 +366,21 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         confirmDialog.show(fm, "To Done");
     }
 
+//    public void addReview(){
+//        FragmentManager fm = getSupportFragmentManager();
+//
+//        ConfirmDialog confirmDialog = new ConfirmDialog();
+//        Bundle args = new Bundle();
+//        args.putString("dialogFlag", "Review");
+//        args.putString("title", "Would you like to review your provider?");
+//        args.putString("cancel", "No");
+//        args.putString("confirm", "Yes");
+//        args.putString("message", "Would you like to review your provider?");
+//
+//        confirmDialog.setArguments(args);
+//        confirmDialog.show(fm, "To Done");
+//    }
+
 
     /**
      * Handles the "accept bid" dialog fragment (populates it with text).
@@ -456,6 +471,10 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                 task.setDone();
                 setTaskViews();
                 setDoneView();
+                Intent intent = new Intent(this, AddReview.class);
+                String profile = task.getBids().getBid(0).getName();
+                intent.putExtra("profile", profile);
+                startActivity(intent);
             }
             Log.i("TAD", "CHANGE TASK "+task);
             serverHelper.updateTasks(task);
