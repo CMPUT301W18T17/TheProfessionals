@@ -366,20 +366,20 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         confirmDialog.show(fm, "To Done");
     }
 
-//    public void addReview(){
-//        FragmentManager fm = getSupportFragmentManager();
-//
-//        ConfirmDialog confirmDialog = new ConfirmDialog();
-//        Bundle args = new Bundle();
-//        args.putString("dialogFlag", "Review");
-//        args.putString("title", "Would you like to review your provider?");
-//        args.putString("cancel", "No");
-//        args.putString("confirm", "Yes");
-//        args.putString("message", "Would you like to review your provider?");
-//
-//        confirmDialog.setArguments(args);
-//        confirmDialog.show(fm, "To Done");
-//    }
+    public void addReview(){
+        FragmentManager fm = getSupportFragmentManager();
+
+        ConfirmDialog confirmDialog = new ConfirmDialog();
+        Bundle args = new Bundle();
+        args.putString("dialogFlag", "Review");
+        args.putString("title", "Add review to provider");
+        args.putString("cancel", "No");
+        args.putString("confirm", "Yes");
+        args.putString("message", "Would you like to review your provider?");
+
+        confirmDialog.setArguments(args);
+        confirmDialog.show(fm, "To Review");
+    }
 
 
     /**
@@ -471,6 +471,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                 task.setDone();
                 setTaskViews();
                 setDoneView();
+                addReview();
+
+            } else if (dialog.equals("Review")) {
                 Intent intent = new Intent(this, AddReview.class);
                 String profile = task.getBids().getBid(0).getName();
                 intent.putExtra("profile", profile);
