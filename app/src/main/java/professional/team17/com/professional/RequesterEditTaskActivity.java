@@ -70,7 +70,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
 
 
                 /* Create an intent and bundle and store all task info */
-                addToServer(title, description,photos);
+                addToServer(title, description,photos,configs);
 
 
                 /* Activity finished, start RequesterViewListActivity */
@@ -126,6 +126,8 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
         locationField.setText(task.getLocation());
         textualDateView.setText(task.getDateAsString());
         latLng = task.getLatLng();
+        photos = task.getPhotos();
+        configs = task.getConfigs();
 
     }
 
@@ -134,12 +136,15 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
      * @param title Task title
      * @param description Task description
      */
-    public void addToServer(String title, String description,ArrayList<Bitmap> photos){
+
+    public void addToServer(String title, String description,ArrayList<String> photos ,ArrayList<Bitmap.Config> configs){
         task.setName(title);
         task.setDate(parseDate(dateString));
         task.setDescription(description);
         task.setLocation(locationString);
         task.setLatLng(latLng);
+        task.setConfigs(configs);
+        task.setPhotos(photos);
 
         serverHelper.updateTasks(task);
     }

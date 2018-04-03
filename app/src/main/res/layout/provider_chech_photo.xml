@@ -13,7 +13,7 @@
             android:id="@+id/imageUpload"
             android:layout_gravity="center_horizontal"
             android:layout_width="250dp"
-            android:layout_height="500dp" />
+            android:layout_height="450dp" />
 
         <Button
             android:id="@+id/back"
@@ -21,6 +21,13 @@
             android:layout_height="wrap_content"
             android:onClick="toTheBack"
             android:text="back" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="next"
+            android:text="next" />
     </LinearLayout>
 
 </ScrollView>

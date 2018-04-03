@@ -70,7 +70,7 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
                     toast.show();
                 } else {
                     /* Create an intent and bundle and store all task info */
-                    addToServer(title, description , photos);
+                    addToServer(title, description , photos, config);
 
                     /* Activity finished, start RequesterViewListActivity */
                     endActivity();
@@ -89,10 +89,10 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
      * @param description Task description
      */
 
-    public void addToServer(String title, String description,ArrayList<Bitmap> photos) {
+    public void addToServer(String title, String description,ArrayList<String> photos,Bitmap.Config config) {
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String username = pref.getString("username", "error");
-        task = new Task(username, title, description, locationString, dateString, latLng, photos);
+        task = new Task(username, title, description, locationString, dateString, latLng, photos, configs);
         task.setRequested();
         serverHelper.addTasks(task);
     }
