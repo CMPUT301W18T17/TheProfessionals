@@ -84,13 +84,7 @@
             android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".AddReview"></activity>
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".TaskPhotoActivity">
-            android:parentActivityName=".RequesterAddTaskActivity">
-            <!-- The meta-data tag is required if you support API level 15 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".RequesterAddTaskActivity" />
-        </activity>
+        <activity android:name=".TaskPhotoActivity"></activity>
         <activity
             android:name=".providerCheckImage"
             android:label="@string/title_activity_provider_check_image"

@@ -87,7 +87,7 @@ public class Photo {
 
     public Bitmap.Config pathGetConfig(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);//
         config = Bitmap.Config.valueOf(uploadBitmap.getConfig().name());
         return config;
     }

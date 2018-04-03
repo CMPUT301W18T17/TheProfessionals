@@ -92,6 +92,12 @@ public abstract class RequesterTaskActivity extends Navigation{
         if(getIntent().hasExtra("yourImage")) {
             Bitmap bmp = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("yourImage"), 0, getIntent().getByteArrayExtra("yourImage").length);
             bmp = compressFunction(bmp);
+            config = bmp.getConfig();
+            configs.add(config);
+            //if (bmp!=null){
+            //System.out.println("------------------------------------------------------");
+            //System.out.println(bmp);
+            //System.out.println("------------------------------------------------------");}
             photo = toBase64(bmp);
             System.out.println("------------------------------------------------------");
             System.out.println(photos);
@@ -105,7 +111,7 @@ public abstract class RequesterTaskActivity extends Navigation{
 
         }
         if(photos != null){
-            addPhotoButton.setOnClickListener(new ImageButton.OnClickListener() {
+            deleteButton.setOnClickListener(new ImageButton.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     photos.remove(photos.size()-1);
@@ -149,7 +155,7 @@ public abstract class RequesterTaskActivity extends Navigation{
     public abstract void setSubmitButtonOnClickListener();
     public abstract void endActivity();
     public abstract void setTitle();
-    public abstract void addToServer(String title, String description ,ArrayList<String> photos,Bitmap.Config config );
+    public abstract void addToServer(String title, String description ,ArrayList<String> photos,ArrayList<Bitmap.Config> config );
     /**
      * Displays the DatePickerDialog fragment, allowing the user to select a date.
      */
@@ -180,8 +186,7 @@ public abstract class RequesterTaskActivity extends Navigation{
     }
 
     public String toBase64(Bitmap bitmap) {
-        config = Bitmap.Config.valueOf(bitmap.getConfig().name());
-        configs.add(config);
+
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream .toByteArray();
