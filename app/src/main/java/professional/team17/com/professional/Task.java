@@ -60,7 +60,7 @@ public class Task implements Serializable{
         this.bids = new BidList();
         this.latLng = latLng;
         this.photos = photos;
-        this.configs = configs;
+        //this.configs = configs;
     }
 
 
@@ -72,7 +72,7 @@ public class Task implements Serializable{
      * @param date - String date for the task to be completed by
      * @param latLng - lat and longitude of task
      */
-    public Task(String profileName, String name, String description, String location, String date, LatLng latLng ,ArrayList<String> photos ,ArrayList<Bitmap.Config> configs) {
+    public Task(String profileName, String name, String description, String location, String date, LatLng latLng ,ArrayList<String> photos) {
         this.profileName = profileName;
         this.name = name;
         this.description = description;
@@ -83,9 +83,8 @@ public class Task implements Serializable{
         this.bids = new BidList();
         this.latLng = latLng;
         Log.i("tet", "Task: "+photos);
-
         this.photos = photos;
-        this.configs = configs;
+        //this.configs = configs;
     }
 
     /**
@@ -95,7 +94,7 @@ public class Task implements Serializable{
      * @param location - String location of the task
      * @param latLng -- lat and longitude of task
      */
-    public Task(String profileName, String name, String description, String location, LatLng latLng ,ArrayList<String> photos,ArrayList<Bitmap.Config> configs) {
+    public Task(String profileName, String name, String description, String location, LatLng latLng ,ArrayList<String> photos) {
         this.profileName = profileName;
         this.name = name;
         this.description = description;
@@ -106,15 +105,13 @@ public class Task implements Serializable{
         this.bids = new BidList();
         this.latLng = latLng;
         this.photos = photos;
-        this.configs = configs;
+        //this.configs = configs;
     }
-    public ArrayList<Bitmap.Config> getConfigs(){
-        return this.configs ;
-    }
+    //public ArrayList<Bitmap.Config> getConfigs(){return this.configs ;}
 
-    public void setConfigs(ArrayList<Bitmap.Config> configs){this.configs = configs;}
+    //public void setConfigs(ArrayList<Bitmap.Config> configs){this.configs = configs;}
 
-    public void setPhotos(ArrayList<String> photos){this.photos = photos;}
+    //public void setPhotos(ArrayList<String> photos){this.photos = photos;}
 
     /**
      *

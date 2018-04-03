@@ -92,8 +92,8 @@ public abstract class RequesterTaskActivity extends Navigation{
         if(getIntent().hasExtra("yourImage")) {
             Bitmap bmp = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("yourImage"), 0, getIntent().getByteArrayExtra("yourImage").length);
             bmp = compressFunction(bmp);
-            config = bmp.getConfig();
-            configs.add(config);
+            //config = bmp.getConfig();
+            //configs.add(config);
             //if (bmp!=null){
             //System.out.println("------------------------------------------------------");
             //System.out.println(bmp);
@@ -155,7 +155,7 @@ public abstract class RequesterTaskActivity extends Navigation{
     public abstract void setSubmitButtonOnClickListener();
     public abstract void endActivity();
     public abstract void setTitle();
-    public abstract void addToServer(String title, String description ,ArrayList<String> photos,ArrayList<Bitmap.Config> config );
+    public abstract void addToServer(String title, String description ,ArrayList<String> photos);
     /**
      * Displays the DatePickerDialog fragment, allowing the user to select a date.
      */

@@ -139,8 +139,9 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
 
     public void photoClick(View view) {
                 Intent yourIntent = new Intent(this, providerCheckImage.class);
-                id = task.getUniqueID(); // store the image in your bitmap
-                yourIntent.putExtra("yourId", id);
+                //id = task.getUniqueID(); // store the image in your bitmap
+                photos = task.getPhotos();
+                yourIntent.putExtra("yourId", photos);
                 startActivity(yourIntent);
     }
     //public void photoClick(View view) {

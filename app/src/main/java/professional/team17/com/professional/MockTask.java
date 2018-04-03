@@ -30,7 +30,7 @@ public class MockTask extends Task {
      * @param location Task location
      * @param date Task date
      */
-    public MockTask(String profileName, String name, String description, String location, String date, LatLng latLng, ArrayList<String> photos, ArrayList<Bitmap.Config> configs){
-        super(profileName, name, description, location, date, latLng ,photos,configs);
+    public MockTask(String profileName, String name, String description, String location, String date, LatLng latLng, ArrayList<String> photos){
+        super(profileName, name, description, location, date, latLng ,photos);
     }
 }
