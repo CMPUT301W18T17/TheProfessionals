@@ -11,8 +11,6 @@ import android.view.View;
 public class DeleteTaskDialog extends DialogContent {
     public DeleteTaskDialog(View view) {
         super(view);
-        positive.setText("Yes");
-        negative.setText("Cancel");
         dmessage.setText("Are you sure you want to delete this task?");
         dtitle.setText("Delete Task");
     }

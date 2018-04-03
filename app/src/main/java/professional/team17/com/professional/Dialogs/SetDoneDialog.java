@@ -9,8 +9,6 @@ import android.view.View;
 public class SetDoneDialog extends DialogContent {
     public SetDoneDialog(View view) {
         super(view);
-        positive.setText("Yes");
-        negative.setText("Cancel");
         dmessage.setText("Are you sure you want to set status to Done?");
         dtitle.setText("Set Status to Done");
     }

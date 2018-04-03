@@ -9,8 +9,6 @@ import android.view.View;
 public class CancelBidDialog extends DialogContent {
     public CancelBidDialog(View view) {
         super(view);
-        positive.setText("Yes");
-        negative.setText("Cancel");
         dmessage.setText("Are you sure you want to delete?");
         dtitle.setText("Cancel Bid");
     }

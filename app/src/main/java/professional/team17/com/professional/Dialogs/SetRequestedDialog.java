@@ -9,8 +9,6 @@ import android.view.View;
 public class SetRequestedDialog extends DialogContent {
     public SetRequestedDialog(View view) {
         super(view);
-        positive.setText("Yes");
-        negative.setText("Cancel");
         dmessage.setText("Are you sure you want to set the status to Requested? This will" +
                 "reopen bidding.");
         dtitle.setText("Set Status To Requested");

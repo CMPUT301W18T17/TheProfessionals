@@ -9,8 +9,6 @@ import android.view.View;
 public class AcceptBidDialog extends DialogContent {
     public AcceptBidDialog(View view) {
         super(view);
-        positive.setText("Yes");
-        negative.setText( "Cancel");
         dmessage.setText("Are you sure you want to accept this bid? This will delete all other bids.");
         dtitle.setText("Accept Bid");
     }
