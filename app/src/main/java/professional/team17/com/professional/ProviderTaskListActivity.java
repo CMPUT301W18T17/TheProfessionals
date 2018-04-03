@@ -48,6 +48,12 @@ public class ProviderTaskListActivity extends Navigation {
         listView.setOnItemClickListener(clickListener);
         adapterHelper.notifyDataSetChanged();
 
+        if (TaskStatus.getInstance().isBidded()) {
+            setActivityTitleProvider("Bidded Tasks");
+        } else if (TaskStatus.getInstance().isAssigned()) {
+            setActivityTitleProvider("Assigned Tasks");
+        }
+
         if (taskListController.checkOffline()){
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.provider_task_list_frame, fragment).commit();

@@ -47,6 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick"
             app:srcCompat="@drawable/settings_icon" />
 
     </LinearLayout>
@@ -77,6 +79,8 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick"
             app:srcCompat="@drawable/add_task_icon_white" />
 
         <ImageView
@@ -84,6 +88,8 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick"
             app:srcCompat="@drawable/requested_list_icon" />
 
         <ImageView
@@ -91,6 +97,8 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick"
             app:srcCompat="@drawable/bidded_list_icon" />
 
         <ImageView
@@ -98,6 +106,8 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick"
             app:srcCompat="@drawable/assigned_list_icon" />
 
         <ImageView
@@ -105,6 +115,8 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick"
             app:srcCompat="@drawable/done_list_icon" />
 
         <ImageView
@@ -112,6 +124,8 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick"
             app:srcCompat="@drawable/switch_icon" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
