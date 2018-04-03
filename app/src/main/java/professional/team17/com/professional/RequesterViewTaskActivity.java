@@ -332,19 +332,8 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
      */
     public void setToRequested(){
         FragmentManager fm = getSupportFragmentManager();
-
-
         ConfirmDialog confirmDialog = new ConfirmDialog();
-        Bundle args = new Bundle();
-        args.putString("dialogFlag", "Requested");
-        args.putString("title", "Set Status To Requested");
-        args.putString("cancel", "Cancel");
-        args.putString("confirm", "Yes");
-        args.putString("message", "Are you sure you want to set the status to Requested? This will" +
-                "reopen bidding.");
-
-        confirmDialog.setArguments(args);
-        confirmDialog.show(fm, "To Requested");
+        confirmDialog.show(fm, "Set Requested");
     }
 
 
@@ -353,32 +342,14 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
      */
     public void setToDone(){
         FragmentManager fm = getSupportFragmentManager();
-
         ConfirmDialog confirmDialog = new ConfirmDialog();
-        Bundle args = new Bundle();
-        args.putString("dialogFlag", "Done");
-        args.putString("title", "Set Status to Done");
-        args.putString("cancel", "Cancel");
-        args.putString("confirm", "Yes");
-        args.putString("message", "Are you sure you want to set status to Done?");
-
-        confirmDialog.setArguments(args);
-        confirmDialog.show(fm, "To Done");
+        confirmDialog.show(fm, "Set Done");
     }
 
     public void addReview(){
         FragmentManager fm = getSupportFragmentManager();
-
         ConfirmDialog confirmDialog = new ConfirmDialog();
-        Bundle args = new Bundle();
-        args.putString("dialogFlag", "Review");
-        args.putString("title", "Review Provider");
-        args.putString("cancel", "No");
-        args.putString("confirm", "Yes");
-        args.putString("message", "Would you like to review your provider?");
-
-        confirmDialog.setArguments(args);
-        confirmDialog.show(fm, "To Review");
+        confirmDialog.show(fm, "Set Review");
     }
 
 
@@ -388,15 +359,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
     private void acceptBidDialog(){
         FragmentManager fm = getSupportFragmentManager();
         ConfirmDialog confirmDialog = new ConfirmDialog();
-        Bundle args = new Bundle();
-        args.putString("dialogFlag", "Accept");
-        args.putString("title", "Accept Bid");
-        args.putString("cancel", "Cancel");
-        args.putString("confirm", "Yes");
-        args.putString("message", "Are you sure you want to accept this bid? This will delete all other bids.");
-
-        confirmDialog.setArguments(args);
-        confirmDialog.show(fm, "To Done");
+        confirmDialog.show(fm, "Accept Bid");
     }
 
 
@@ -406,15 +369,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
     private void declineBidDialog(){
         FragmentManager fm = getSupportFragmentManager();
         ConfirmDialog confirmDialog = new ConfirmDialog();
-        Bundle args = new Bundle();
-        args.putString("dialogFlag", "Decline");
-        args.putString("title", "Decline Bid");
-        args.putString("cancel", "Cancel");
-        args.putString("confirm", "Yes");
-        args.putString("message", "Are you sure you want to decline this bid? It will be deleted.");
-
-        confirmDialog.setArguments(args);
-        confirmDialog.show(fm, "To Done");
+        confirmDialog.show(fm, "Decline Bid");
     }
 
     /***
@@ -426,13 +381,13 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
     public void onFinishConfirmDialog(Boolean confirmed, String dialog){
         BidList temp;
         if (confirmed ==true) {
-            if (dialog.equals("Accept")) {
+            if (dialog.equals("Accept Bid")) {
                 /* Bid is accepted by the user. Delete all other bids, set the chosen bid as the
                  * sole bid, update the task's status to Assigned, update the page's layout to show
                  * the Assigned layout and fill the new layout with the chosen bid's info.
                  */
                 task.chooseBid(chosenBid);
-                task.setStatus("Assigned");
+                task.setStatus("Set Assigned");
 
                 bidList.clear();
                 bidList.add(chosenBid);
@@ -449,14 +404,14 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                 bidderProfile.setNotificationList(notificationList);
                 serverHelper.addProfile(bidderProfile);
 
-            } else if (dialog.equals("Decline")) {
+            } else if (dialog.equals("Decline Bid")) {
                 /* Bid is declined by the user. Remove the bid from bidList and refresh the
                  *listview.
                  */
                 task.removeBid(chosenBid);
                 bidList.remove(chosenBid);
                 bidAdapter.notifyDataSetChanged();
-            } else if (dialog.equals("Requested")) {
+            } else if (dialog.equals("Set Requested")) {
                 /* User changes the task's status back to requested. Change the task status, update
                  * the layout to show the Requested Layout and remove the chosen bid.
                  */
@@ -464,7 +419,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                 task.setRequested();
                 setTaskViews();
                 setRequestedView();
-            } else if (dialog.equals("Done")) {
+            } else if (dialog.equals("Set Done")) {
                 /* User changes the task's status to done. Change the task status and update the
                  * layout to show the Done layout.
                  */
@@ -473,13 +428,12 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                 setDoneView();
                 addReview();
 
-            } else if (dialog.equals("Review")) {
+            } else if (dialog.equals("Set Review")) {
                 Intent intent = new Intent(this, AddReview.class);
                 String profile = task.getBids().getBid(0).getName();
                 intent.putExtra("profile", profile);
                 startActivity(intent);
             }
-            Log.i("TAD", "CHANGE TASK "+task);
             serverHelper.updateTasks(task);
         }
     }

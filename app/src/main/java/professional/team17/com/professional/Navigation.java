@@ -215,18 +215,8 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
 
     protected void createSync() {
         FragmentManager fm = getSupportFragmentManager();
-
         ConfirmDialog confirmDialog = new ConfirmDialog();
-        Bundle args = new Bundle();
-        args.putString("title", "Unable to Sync");
-        args.putString("cancel", "Cancel");
-        args.putString("confirm", "Yes");
-        args.putString("message", "We were unable to sync all your edits as "+
-                        "users have placed bids on your tasks."+
-                        "Click yes to see these bids");
-
-        confirmDialog.setArguments(args);
-        confirmDialog.show(fm, "Sample Fragment");
+        confirmDialog.show(fm, "Sync");
 
     }
 

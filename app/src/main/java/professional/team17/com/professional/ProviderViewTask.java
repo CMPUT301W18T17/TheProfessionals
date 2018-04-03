@@ -250,13 +250,6 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
     public void cancelBid(View v){
         FragmentManager fm = getSupportFragmentManager();
         ConfirmDialog confirmDialog = new ConfirmDialog();
-        Bundle args = new Bundle();
-        args.putString("title", "Cancel Bid");
-        args.putString("cancel", "Cancel");
-        args.putString("confirm", "Yes");
-        args.putString("dialogFlag", "Delete");
-        args.putString("message", "Are you sure you want to delete?");
-        confirmDialog.setArguments(args);
-        confirmDialog.show(fm, "Sample Fragment");
+        confirmDialog.show(fm, "Cancel Bid");
     }
 }

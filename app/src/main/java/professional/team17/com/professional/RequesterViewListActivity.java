@@ -94,14 +94,7 @@ public class RequesterViewListActivity extends Navigation {
     public void deleteTaskDialog(){
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         ConfirmDialog confirmDialog = new ConfirmDialog();
-        Bundle args = new Bundle();
-        args.putString("title", "Delete Task");
-        args.putString("cancel", "Cancel");
-        args.putString("confirm", "Yes");
-        args.putString("dialogFlag", "Delete");
-        args.putString("message", "Are you sure you want to delete this task?");
-        confirmDialog.setArguments(args);
-        confirmDialog.show(fm, "To Done");
+        confirmDialog.show(fm, "Delete Task");
     }
 
     /**
