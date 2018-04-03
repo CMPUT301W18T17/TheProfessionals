@@ -156,6 +156,7 @@ public class ServerHelper {
                 "{\"must_not\":{\"match\":{\"profileName\":\"" + username + "\"}}," +
                         "\"should\":[{\"match\":{\"status\":\"Requested\"}},"+
                         "{\"match\":{\"status\":\"Bidded\"}}]}}}";
+        //String search = "{\"query\":{\"bool\":{\"must_not\":{\"match\":{\"profileName\":\"Hailan\"}},\"should\":[{\"match\":{\"status\":\"Requested\"}},{\"match\":{\"status\":\"Bidded\"}}]}}}";
         return getTaskList(search);
     }
 

@@ -37,9 +37,7 @@ public class SearchActivity extends Navigation {
     private ListView listView;
     private SearchView searchView;
     private TaskList taskList;
-    private ServerHelper serverHelper;
-    private String username;
-    private SharedPreferences sharedPreferences;
+
 
 
     /**
@@ -50,11 +48,11 @@ public class SearchActivity extends Navigation {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        serverHelper = new ServerHelper(this);
         /* Change activity title */
         this.setActivityTitleProvider("Task Search");
         checkOffline();
         taskList = new TaskList();
+
         taskList.addAll(getOpenTasks());
 
 
@@ -112,7 +110,6 @@ public class SearchActivity extends Navigation {
         if (temp == null || temp.isEmpty()){
             notifyEmptyResults();
         }
-        Log.i("SEARCH RESULTS", "getSEARCHEDTasks: "+taskList);
     }
 
     /**
@@ -144,9 +141,11 @@ public class SearchActivity extends Navigation {
      * @return tasklist - all the tasks in either bidded or requested state
      */
     private TaskList getOpenTasks() {
-        TaskList tasklist = new TaskList();
-        //taskList = elasticSearchController.getTasksStatus("Requested");
+        TaskList tasklist;
         tasklist = serverHelper.getTasksSearch(username);
+        for (Task task: tasklist) {
+            Log.i("TASK", "onCreate: "+task);
+        }
         return tasklist;
     }
 }

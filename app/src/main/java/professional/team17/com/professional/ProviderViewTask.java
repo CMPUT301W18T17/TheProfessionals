@@ -10,9 +10,7 @@
 
 package professional.team17.com.professional;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -29,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -44,8 +44,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
 
 
     //TODO both items below can be put in controller (project part 5)
-    private Task task;
-
+    private ProviderTaskController providerTaskController;
 
     //Everything below maybe able to be set into the controller. Do not reflect in uml
     private TextView statusTextField;
@@ -59,10 +58,9 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
 
     private TextView taskLowBidDollar;
     private TextView taskMyBidDollar;
-    private TextView requesterAvgTextView; //project 5 implement
-    private RatingBar requesterAvgTextField; //project 5 implement
     private ImageButton viewMapButton;
     private Button button5;
+    TextView taskLowBidDesc;
 
 
     //both buttons start as invisible by default
@@ -79,8 +77,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_view_task);
-
-        //get textfields ids //TODO this can be moved to controller (project part 5)
+        taskLowBidDesc = (TextView) findViewById(R.id.provider_view_task_lowBid);
         statusTextField = (TextView) findViewById(R.id.provider_view_task_statusType);
         userNameTextField = (TextView) findViewById(R.id.provider_view_task_userName);
         taskTitleTextField = (TextView) findViewById(R.id.provider_view_task_title);
@@ -99,76 +96,45 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
 
         this.setActivityTitleProvider("View Task");
 
-        task = getTask();
-        checkOffline();
-        //setRating();
-    }
-
-
-    void checkOffline() {
-        ConnectedState c = ConnectedState.getInstance();
-        if(c.isOffline()  && !task.isRequested()) {
-            Offline fragment = new Offline();
-            getSupportFragmentManager().beginTransaction().replace(R.id.provider_view_task_frame, fragment).commit();
+        providerTaskController = new ProviderTaskController(this);
+        providerTaskController.setTask(getIntent().getExtras());
+        if (providerTaskController.checkOffline()){
+           Offline fragment = new Offline();
+           getSupportFragmentManager().beginTransaction().replace(R.id.provider_view_task_frame, fragment).commit();
         }
 
-        else {
-            Log.i("ER", "checkOffline: "+task);
-            if (task.getLatLng() == null){
-                viewMapButton.setVisibility(View.INVISIBLE);
-            }
-            //getRequester();
-
-            checkStatus();
-            fillTask();
-            System.out.println("------------------------------------------------------");
-            System.out.println("------------------------------------------------------");
-            if (task.getPhotos() != null)
-                button5.setVisibility(View.GONE);
-            System.out.println("------------------------------------------------------");
-            System.out.println("------------------------------------------------------");
+        providerTaskController.fillTask(statusTextField,userNameTextField,taskTitleTextField,taskDateTextField,taskDescriptionTextField,taskAddressTextField);
+        providerTaskController.location(viewMapButton);
+        checkStatus();
     }
 
-    }
 
-    public void photoClick(View view) {
+
+/*    public void photoClick(View view) {
         Intent yourIntent = new Intent(this, providerCheckImage.class);
         Bitmap bmp = task.getPhotos().get(0); // store the image in your bitmap
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
         yourIntent.putExtra("yourImage", bao.toByteArray());
         startActivity(yourIntent);
-    }
-
+    }*/
+//
     public void mapClick(View view){
         Intent intent = new Intent(ProviderViewTask.this, MapsShowALocationActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("aTaskLatLng", task.getLatLng());
-        intent.putExtras(bundle);
-        intent.putExtra("aTaskAddress", task.getLocation());
+        Bundle bundle = providerTaskController.getLocation(intent);
         startActivity(intent);
     }
 
     /***
+     *
      * Interface method from PlaceBidDialog.PlaceBidDialogListener
      * @param inputText boolean value representing the user response in the dialog
      * true means the user add/changed the bid
      */
     public void onFinishPlaceBidDialog(String inputText){
         double bidAmount =  Double.valueOf(inputText);
-        task.addBid(new Bid(username, bidAmount));
-        serverHelper.updateTasks(task);
-        statusTextField.setText(task.getStatus());
+        providerTaskController.placeBid(bidAmount);
         fillBidded();
-
-        /* Send notification */
-        String requester = task.getProfileName();
-        Profile requesterProfile = serverHelper.getProfile(requester);
-        Log.i("BID", "onFinishPlaceBidDialog: "+requesterProfile);
-        NotificationList notificationList = requesterProfile.getNotificationList();
-        notificationList.newBidNotification(task, bidAmount, username);
-        requesterProfile.setNotificationList(notificationList);
-        serverHelper.addProfile(requesterProfile);
     }
 
     /***
@@ -178,130 +144,64 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
      */
     public void onFinishConfirmDialog(Boolean confirmed, String text){
         if (confirmed==true){
-            Bid bid = task.getBids().getBid(username);
-            task.removeBid(bid);
+            providerTaskController.onDelete(statusTextField);
         }
-        serverHelper.updateTasks(task);
-        statusTextField.setText(task.getStatus());
-        if (task.isBidded()) {
-
-            fillBidded();
-        }
-        if (task.isRequested()) {
-            fillRequested();
-        }
-
+        checkStatus();
     }
 
-
-
-    //TODO move all UI controls into controller (project part 5)
-    /**
-     * This will fill the basic task info of status, requestername, taskname, date, and description
-     */
-    public void fillTask() {
-        //plug items from task
-        statusTextField.setText(task.getStatus());
-        userNameTextField.setText(task.getProfileName());
-        taskTitleTextField.setText(task.getName());
-        taskDateTextField.setText(task.getDateAsString());
-        taskDescriptionTextField.setText(task.getDescription());
-        if (task.getLatLng()!= null){
-            taskAddressTextField.setText(task.getLocation());
-        } else {
-            taskAddressTextField.setText("N/A");
-        }
-
-    }
 
     /**
      * This will display the correct UI for tasks in 'Requested' status.
      */
     public void fillRequested(){
-        deleteButton.setVisibility(View.GONE);
-        appendButton.setVisibility(View.GONE);
-        bidButton.setVisibility(View.VISIBLE);
         taskLowBidTextField.setText("No bids yet!");
         taskMyBidTextField.setText("Place a bid!");
-        taskLowBidDollar.setVisibility(View.INVISIBLE);
-        taskMyBidDollar.setVisibility(View.INVISIBLE);
+        providerTaskController.hide(deleteButton, appendButton, taskLowBidDollar, taskMyBidDollar);
+        providerTaskController.show(bidButton);
     }
-
 
     /**
      * This will display the correct UI for tasks in "assigned status'
      */
     public void fillAssigned(){
-        if (task.getBids().userBidded(username)) {
-            BidList bids = task.getBids();
-            taskMyBidTextField.setVisibility(View.VISIBLE);
-            taskMyBidDollar.setVisibility(View.VISIBLE);
-            deleteButton.setVisibility(View.INVISIBLE);
-            bidButton.setVisibility(View.INVISIBLE);
-            taskLowBidTextField.setVisibility(View.INVISIBLE);
-            taskLowBidDollar.setVisibility(View.INVISIBLE);
-            appendButton.setVisibility(View.INVISIBLE);
-            TextView taskLowBidDesc = (TextView) findViewById(R.id.provider_view_task_lowBid);
-            taskLowBidDesc.setVisibility(View.INVISIBLE);
-            taskMyBidTextField.setText(bids.getBid(username).getAmountAsString());
-        }
-        else {
-            //TODO what displays if user is not bidder?
-        }
+        providerTaskController.hide(deleteButton, bidButton, taskLowBidTextField,  taskLowBidDollar, appendButton, taskLowBidDesc);
+        providerTaskController.show(taskMyBidTextField,taskMyBidDollar);
+        providerTaskController.setUserBid(taskMyBidTextField);
     }
 
     /**
      * This will dispay the correct info for tasks in bidded status
      */
     public void fillBidded() {
-        //set lowest bid amount
-        BidList bids = task.getBids();
-        Bid bid = bids.getBid(username);
+        providerTaskController.hide(deleteButton, appendButton);
+        providerTaskController.show(taskLowBidDollar, taskMyBidDollar,  bidButton);
+        providerTaskController.setLowestBid(taskLowBidTextField);
+        userBid();
 
-        deleteButton.setVisibility(View.INVISIBLE);
-        bidButton.setVisibility(View.VISIBLE);
-        appendButton.setVisibility(View.INVISIBLE);
-
-        taskLowBidTextField.setText(bids.getLowest().getAmountAsString());
-        if (bid!=null) {
-            taskMyBidTextField.setText(bids.getBid(username).getAmountAsString());
-            deleteButton.setVisibility(View.VISIBLE);
-            bidButton.setVisibility(View.INVISIBLE);
-            appendButton.setVisibility(View.VISIBLE);
-        }
-        taskLowBidDollar.setVisibility(View.VISIBLE);
-        taskMyBidDollar.setVisibility(View.VISIBLE);
     }
 
-/* //TODO implement in project part 5
-    public void setRating(){
-        if (requester.getReviewList().isEmpty()==false) {
-            requesterAvgTextView = (TextView) findViewById(R.id.provider_view_rating);
-            requesterAvgTextField = (RatingBar) findViewById(R.id.provider_view_rating_bar);
-            requesterAvgTextView.setVisibility(View.VISIBLE);
-            requesterAvgTextField.setVisibility(View.VISIBLE);
-            String sAvg = requester.getReviewList().getAvgString();
-            float fAvg = (float) requester.getReviewList().getAvg();
-            requesterAvgTextField.setRating(fAvg / 5);
-            requesterAvgTextView.setText(sAvg);
+    public void userBid(){
+        if (providerTaskController.hasBid()) {
+            providerTaskController.show(deleteButton, appendButton);
+            providerTaskController.hide(bidButton);
+            providerTaskController.setUserBid(taskMyBidTextField);
         }
     }
-*/
+
     /**
      *
      * Controls and get teh correct UI to display
      */
     public void checkStatus() {
-
+        providerTaskController.check();
+        TaskStatus task = TaskStatus.getInstance();
         if (task.isRequested()){
             fillRequested();
         }
-
         else if (task.isBidded()){
             fillBidded();
         }
-
-        else if (task.isAssigned() || task.isDone()){
+        else {
             fillAssigned();
         }
     }
@@ -311,9 +211,8 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
      * @param v the view the button is located on
      */
     public void viewProfile(View v){
-        Intent intention = new Intent(this, OtherProfileViewActivity.class);
-        intention.putExtra("profile", task.getProfileName());
-        startActivity(intention);
+        Intent intent= providerTaskController.viewProfile();
+        startActivity(intent);
     }
 
     /**
@@ -326,12 +225,9 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
         Bundle args = new Bundle();
         args.putString("title", "Place Bid");
         args.putString("amount","");
-
         dialogFragment.setArguments(args);
         dialogFragment.show(fm, "Sample Fragment");
-
     }
-
 
     /**
      * Build fragment to edit bid
@@ -353,7 +249,6 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
      */
     public void cancelBid(View v){
         FragmentManager fm = getSupportFragmentManager();
-
         ConfirmDialog confirmDialog = new ConfirmDialog();
         Bundle args = new Bundle();
         args.putString("title", "Cancel Bid");
@@ -361,18 +256,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
         args.putString("confirm", "Yes");
         args.putString("dialogFlag", "Delete");
         args.putString("message", "Are you sure you want to delete?");
-
         confirmDialog.setArguments(args);
         confirmDialog.show(fm, "Sample Fragment");
-    }
-
-    /**
-     *
-     * @return Returns the subscription sent with the Intent
-     */
-    private Task getTask() {
-        Bundle intent = getIntent().getExtras();
-        String task = intent.getString("Task");
-        return serverHelper.getTask(task);
     }
 }

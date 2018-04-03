@@ -9,7 +9,18 @@
  */
 package professional.team17.com.professional;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import java.util.HashMap;
+import java.util.Map;
 //TODO implement this for project part 5
 /**
  * Created by kaixiangzhang on 2018-03-11.
@@ -22,31 +33,132 @@ import android.util.Log;
  */
 
 public class ProviderTaskController {
-   // private final ServerHelper serverHelper = new ServerHelper();
-    public ProviderTaskController(){}
-    // this parts is for TaskListActivity
+    private Context context;
+    private ServerHelper serverHelper;
+    private Task task;
+    private String username;
 
-    //This updates the adapter with the results
+    ProviderTaskController(Context context) {
+        this.context = context;
+        serverHelper = new ServerHelper(context);
+        setUsername();
+    }
 
-    private TaskList createList(String type) {
-        TaskList taskList =null;
-        Log.i("DOUR", "createList: "+type);
+    private void setUsername() {
+        SharedPreferences sharedpreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        username = sharedpreferences.getString("username", "error");
+    }
 
-        if (type.equals("Bidded")) {
-           // taskList = serverHelper.getTasksBidded("john123", "Bidded");
-            Log.i("DOUR", "createList: "+taskList);
+    public void setTask(Bundle intent) {
+        String id = intent.getString("Task");
+        task = serverHelper.getTask(id);
+        check();
+    }
 
+    public Boolean checkOffline() {
+        ConnectedState c = ConnectedState.getInstance();
+        if (c.isOffline() && !task.isRequested()) {
+            return true;
+        } else return false;
+    }
+
+    /**
+     * Move to the profile view to see the requested info
+     *
+     * @param v the view the button is located on
+     */
+    public Intent viewProfile() {
+        Intent intention = new Intent(context, OtherProfileViewActivity.class);
+        intention.putExtra("profile", task.getProfileName());
+        return intention;
+    }
+
+    /***
+     * Interface method from PlaceBidDialog.PlaceBidDialogListener
+     * @param inputText boolean value representing the user response in the dialog
+     * true means the user add/changed the bid
+     */
+    public void placeBid(double bidAmount) {
+        task.addBid(new Bid(username, bidAmount));
+        serverHelper.updateTasks(task);
+        setNotification(bidAmount);
+    }
+
+    private void setNotification(Double bidAmount) {
+        String requester = task.getProfileName();
+        Profile requesterProfile = serverHelper.getProfile(requester);
+        NotificationList notificationList = requesterProfile.getNotificationList();
+        notificationList.newBidNotification(task, bidAmount, username);
+        requesterProfile.setNotificationList(notificationList);
+        serverHelper.addProfile(requesterProfile);
+    }
+
+
+    public void onDelete(TextView statusTextField) {
+        Bid bid = task.getBids().getBid(username);
+        task.removeBid(bid);
+        serverHelper.updateTasks(task);
+        statusTextField.setText(task.getStatus());
+        TaskStatus.getInstance().setStatus(task.getStatus());
+    }
+
+    public void hide(View... values) {
+        for (View value : values) {
+            value.setVisibility(View.GONE);
         }
+    }
 
-        if (type.equals("Assigned")) {
-            //taskList = serverHelper.getTasksBidded("john123", "Assigned");
-            //get assigned list from es
+    public void show(View... values) {
+        for (View value : values) {
+            value.setVisibility(View.VISIBLE);
         }
-        // dummyDate();
-        // taskList = dummyTaskList;
+    }
 
+    public void setUserBid(TextView bid) {
+        BidList bids = task.getBids();
+        bid.setText(bids.getBid(username).getAmountAsString());
+    }
+    
+    public void setLowestBid(TextView bid) {
+        BidList bids = task.getBids();
+        bid.setText(bids.getLowest().getAmountAsString());
+    }
 
-        return taskList;}
+    public void location(ImageButton viewMapButton) {
+        if (task.getLatLng() == null) {
+            viewMapButton.setVisibility(View.INVISIBLE);
+        }
+    }
 
+    public Bundle getLocation(Intent intent) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("aTaskLatLng", task.getLatLng());
+        intent.putExtras(bundle);
+        intent.putExtra("aTaskAddress", task.getLocation());
+        return bundle;
+    }
 
+    public void check() {
+        TaskStatus taskstatus = TaskStatus.getInstance();
+        taskstatus.setStatus(task.getStatus());
+    }
+
+    public void fillTask(TextView status, TextView name, TextView title, TextView date, TextView descri, TextView address) {
+        status.setText(task.getStatus());
+        name.setText(task.getProfileName());
+        title.setText(task.getName());
+        date.setText(task.getDateAsString());
+        descri.setText(task.getDescription());
+        if (task.getLatLng()!= null){
+            address.setText(task.getLocation());
+        } else {
+            address.setText("N/A");
+        }
+    }
+
+    public boolean hasBid() {
+        BidList bids = task.getBids();
+        Bid bid = bids.getBid(username);
+        return (bid!=null);
+    }
 }
