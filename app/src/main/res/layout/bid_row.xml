@@ -67,8 +67,7 @@
             android:layout_height="wrap_content"
             android:background="@color/cardview_shadow_end_color"
             android:onClick="acceptBid"
-            android:tint="@color/colorProvider"
-            app:srcCompat="@android:drawable/stat_sys_vp_phone_call" />
+            app:srcCompat="@drawable/add_task_icon_grey" />
 
         <ImageButton
             android:id="@+id/bid_row_delete"

@@ -116,12 +116,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/cardview_shadow_end_color"
-                android:tint="@color/colorRequester"
                 app:layout_constraintEnd_toStartOf="@+id/viewLocationButton"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescriptionView"
-                app:srcCompat="@android:drawable/ic_menu_camera" />
+                app:srcCompat="@drawable/view_photo_icon" />
 
             <ImageButton
                 android:id="@+id/requester_view_taskviewLocationButton"
@@ -131,12 +130,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/cardview_shadow_end_color"
-                android:tint="@color/colorRequester"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/requester_view_taskViewPhotosButton"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescriptionView"
-                app:srcCompat="@android:drawable/ic_dialog_map" />
+                app:srcCompat="@drawable/location_icon" />
 
             <ListView
                 android:id="@+id/requester_view_taskbidListView"

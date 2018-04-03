@@ -19,9 +19,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$PROJECT_DIR$/../settings.png" />
-                                      <entry key="outputName" value="settings_icon" />
-                                      <entry key="theme" value="HOLO_DARK" />
+                                      <entry key="imageAsset" value="$PROJECT_DIR$/../view-image-icon.png" />
+                                      <entry key="outputName" value="view_photo_icon" />
                                     </map>
                                   </option>
                                 </PersistentState>
