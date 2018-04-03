@@ -55,7 +55,7 @@ public class Photo {
 
     public Drawable pathToDrawable(){
         bitmap = BitmapFactory.decodeFile(this.path);
-        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);//
         drawable = new BitmapDrawable(uploadBitmap);
         return drawable;
     }
