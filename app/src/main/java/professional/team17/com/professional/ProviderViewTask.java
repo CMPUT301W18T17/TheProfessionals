@@ -66,9 +66,6 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
     private ImageButton viewMapButton;
     private Button button5;
     private ArrayList<String> photos;
-    private Bitmap.Config config;
-    private String id;
-
 
 
     //both buttons start as invisible by default
@@ -129,20 +126,22 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
             fillTask();
             System.out.println("------------------------------------------------------");
             System.out.println("------------------------------------------------------");
-            if (task.getPhotos() == null)
+            if (task.getPhotos() != null)
                 button5.setVisibility(View.GONE);
             System.out.println("------------------------------------------------------");
             System.out.println("------------------------------------------------------");
     }
 
     }
-
-    public void photoClick(View view) {
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.provider_view_task_photo:
                 Intent yourIntent = new Intent(this, providerCheckImage.class);
-                //id = task.getUniqueID(); // store the image in your bitmap
-                photos = task.getPhotos();
-                yourIntent.putExtra("yourId", photos);
+                photos = task.getPhotos(); // store the image in your bitmap
+                yourIntent.putExtra("yourImage", photos);
                 startActivity(yourIntent);
+        }
     }
     //public void photoClick(View view) {
         //Intent yourIntent = new Intent(this, providerCheckImage.class);

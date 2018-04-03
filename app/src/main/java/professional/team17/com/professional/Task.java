@@ -43,7 +43,6 @@ public class Task implements Serializable{
     private ArrayList<String> photos;
     private BidList bids;
     public String status;
-    public ArrayList<Bitmap.Config> configs;
 
     /**
      * @param profileName - String username of requested
@@ -60,7 +59,6 @@ public class Task implements Serializable{
         this.bids = new BidList();
         this.latLng = latLng;
         this.photos = photos;
-        //this.configs = configs;
     }
 
 
@@ -83,8 +81,8 @@ public class Task implements Serializable{
         this.bids = new BidList();
         this.latLng = latLng;
         Log.i("tet", "Task: "+photos);
+
         this.photos = photos;
-        //this.configs = configs;
     }
 
     /**
@@ -105,13 +103,8 @@ public class Task implements Serializable{
         this.bids = new BidList();
         this.latLng = latLng;
         this.photos = photos;
-        //this.configs = configs;
     }
-    //public ArrayList<Bitmap.Config> getConfigs(){return this.configs ;}
 
-    //public void setConfigs(ArrayList<Bitmap.Config> configs){this.configs = configs;}
-
-    //public void setPhotos(ArrayList<String> photos){this.photos = photos;}
 
     /**
      *

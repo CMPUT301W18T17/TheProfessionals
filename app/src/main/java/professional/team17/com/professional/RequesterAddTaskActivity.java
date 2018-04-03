@@ -89,7 +89,7 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
      * @param description Task description
      */
 
-    public void addToServer(String title, String description,ArrayList<String> photos ) {
+    public void addToServer(String title, String description,ArrayList<String> photos) {
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String username = pref.getString("username", "error");
         task = new Task(username, title, description, locationString, dateString, latLng, photos);

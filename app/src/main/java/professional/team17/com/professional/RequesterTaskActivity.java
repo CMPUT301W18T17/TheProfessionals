@@ -40,7 +40,6 @@ public abstract class RequesterTaskActivity extends Navigation{
     protected ImageButton selectDateButton;
     protected MapView mapView;
     protected Button submitButton;
-    protected Button deleteButton;
     /* other variables */
     protected Task task;
     protected String dateString;
@@ -49,9 +48,6 @@ public abstract class RequesterTaskActivity extends Navigation{
     protected String message;
     protected ArrayList<String> photos;
     protected String photo;
-    protected ArrayList<Bitmap.Config> configs;
-    protected Bitmap.Config config;
-    protected Integer a;
 
     /**
      * On creation of the activity, set all view objects and onClickListeners.
@@ -76,8 +72,6 @@ public abstract class RequesterTaskActivity extends Navigation{
         submitButton = (Button) findViewById(R.id.submitButton);
         photoTextView = (TextView) findViewById(R.id.photoTextView);
         photos = new ArrayList<String>();
-        deleteButton = (Button) findViewById(R.id.deleteButton);
-        a = 1;
 
 
         /* Set all onClickListeners */
@@ -91,34 +85,17 @@ public abstract class RequesterTaskActivity extends Navigation{
              });}
         if(getIntent().hasExtra("yourImage")) {
             Bitmap bmp = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("yourImage"), 0, getIntent().getByteArrayExtra("yourImage").length);
-            bmp = compressFunction(bmp);
-            //config = bmp.getConfig();
-            //configs.add(config);
-            //if (bmp!=null){
-            //System.out.println("------------------------------------------------------");
-            //System.out.println(bmp);
-            //System.out.println("------------------------------------------------------");}
             photo = toBase64(bmp);
             System.out.println("------------------------------------------------------");
             System.out.println(photos);
             System.out.println("------------------------------------------------------");
             photos.add(photo);
-            photoTextView.setText("image" + a);
+            photoTextView.setText("image1");
             System.out.println("------------------------------------------------------");
             System.out.print(photos);
             System.out.println("------------------------------------------------------");
-            a = a + 1;
 
         }
-        if(photos != null){
-            deleteButton.setOnClickListener(new ImageButton.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    photos.remove(photos.size()-1);
-                    a = a - 1;
-                    photoTextView.setText("image" + a);
-                }
-            });}
 
         selectDateButton.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
@@ -186,7 +163,6 @@ public abstract class RequesterTaskActivity extends Navigation{
     }
 
     public String toBase64(Bitmap bitmap) {
-
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream .toByteArray();
