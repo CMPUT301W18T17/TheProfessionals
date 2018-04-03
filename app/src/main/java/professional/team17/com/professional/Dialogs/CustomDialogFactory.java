@@ -31,6 +31,8 @@ public class CustomDialogFactory {
                     return new DeleteTaskDialog(view);
                 case "Decline Bid":
                     return new DeclineBidDialog(view);
+                case "Set Requested":
+                    return new SetRequestedDialog(view);
             }
             return null;
         }
