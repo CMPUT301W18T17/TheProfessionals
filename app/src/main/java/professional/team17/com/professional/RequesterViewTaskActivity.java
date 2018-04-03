@@ -176,7 +176,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             throw new Exception();
         }
         else {
-            ID = extrasBundle.getString("task");
+            ID = extrasBundle.getString("ID");
         }
     }
 

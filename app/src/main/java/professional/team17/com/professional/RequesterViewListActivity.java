@@ -28,10 +28,7 @@ import android.widget.ListView;
 public class RequesterViewListActivity extends Navigation {
     private RequesterCustomArrayAdapter adapterHelper;
     private ListView listView;
-    private Task task;
-    String type;
-    private TaskList taskList;
-
+    private TaskListController taskListController;
 
     /**
      * On creation of the activity, set the layout and populate the task list.
@@ -41,89 +38,34 @@ public class RequesterViewListActivity extends Navigation {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requester_view_list);
-        taskList = new TaskList();
-        adapterHelper = new RequesterCustomArrayAdapter(this, taskList);
-        listView = findViewById(R.id.tasklistRequester);
-        listView.setAdapter(adapterHelper);
-        type = setRequesterViewType();
-        taskList.addAll(createList(type));
-        checkOffline();
-        adapterHelper.notifyDataSetChanged();
 
-    }
+        taskListController = new TaskListController(this);
+        taskListController.setType(getIntent().getExtras());
+        taskListController.createListRequester();
 
-    void checkOffline() {
-        ConnectedState c = ConnectedState.getInstance();
-        if(c.isOffline() && !(type.equals("Requested"))) {
+        if (taskListController.checkOffline() && !TaskStatus.getInstance().isRequested()){
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.requester_task_list_frame, fragment).commit();
         }
+
+        adapterHelper = new RequesterCustomArrayAdapter(this, taskListController.tasklist);
+        listView = findViewById(R.id.tasklistRequester);
+        listView.setAdapter(adapterHelper);
+
+        adapterHelper.notifyDataSetChanged();
+
     }
-
-    /**
-     * Returns the task status which should be shown.
-     * @return The task status
-     */
-    private String setRequesterViewType() {
-        Bundle intent = getIntent().getExtras();
-        String type = intent.getString("Status");
-        setActivityTitleRequester("My " + type + " Tasks");
-        return type;
-    }
-
-
-/*
-
-    /**
-     * This is an anonymous method to create a click listener for the listview rows. If the row
-     * is selected, it packages up the task selected and the position to RequesterViewTask
-
-    private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
-        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            Log.i("WEWE", "onItemClick: "+position);
-            Task task = taskList.get(position);
-            Intent intention = new Intent(RequesterViewListActivity.this, RequesterViewTaskActivity.class);
-            Log.i("WEWE", "onItemClick: "+task.getUniqueID());
-            intention.putExtra("task", task.getUniqueID());
-            startActivity(intention);
-
-        }
-
-    }; */
 
     /**
      * The onclick method for viewing a task's details. Triggered by clicking on a task's title.
      * @param v The view object (the task's title)
      */
     public void titleClick(View v){
-        final int position = listView.getPositionForView((View) v.getParent());
-        Task task = taskList.get(position);
         Intent intention = new Intent(RequesterViewListActivity.this, RequesterViewTaskActivity.class);
-        intention.putExtra("task", task.getUniqueID());
+        final int position = listView.getPositionForView((View) v.getParent());
+        intention = taskListController.findTask(position, intention);
         startActivity(intention);
     }
-
-
-
-    /**
-     * Populates the taskList depending on the desired status.
-     * @param type - a string representing the status of the task being displayed
-     * @return taskList - a list of tasks that the requester has created.
-     */
-    private TaskList createList(String type) {
-        TaskList taskList = null;
-        if (type.equals("Assigned")) {
-            taskList = serverHelper.getTasksRequester(username, "Assigned");
-        }
-        if (type.equals("Requested")) {
-            taskList = serverHelper.getTasksRequester(username, "Requested");
-        }
-        if (type.equals("Bidded")) {
-            taskList = serverHelper.getTasksRequester(username, "Bidded");
-        }
-        return taskList;
-    }
-
 
     /**
      * Onclick method for the delete button; shows the deleteTaskDialog.
@@ -131,9 +73,8 @@ public class RequesterViewListActivity extends Navigation {
      */
     public void deleteTask(View v){
         final int position = listView.getPositionForView((View) v.getParent());
-        task = taskList.get(position);
+        taskListController.setTask(position);
         deleteTaskDialog();
-
     }
 
     /**
@@ -141,15 +82,10 @@ public class RequesterViewListActivity extends Navigation {
      * @param v The view object (the edit button).
      */
     public void editTask(View v){
-
         final int position = listView.getPositionForView((View) v.getParent());
-        Task editTask = taskList.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putString("ID", editTask.getUniqueID());
-        Intent intent = new Intent(RequesterViewListActivity.this, RequesterEditTaskActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-
+        Intent intention = new Intent(RequesterViewListActivity.this, RequesterEditTaskActivity.class);
+        intention = taskListController.findTask(position, intention);
+        startActivity(intention);
     }
 
     /**
@@ -168,7 +104,6 @@ public class RequesterViewListActivity extends Navigation {
         confirmDialog.show(fm, "To Done");
     }
 
-
     /**
      * If the user confirms the task deletion, this deletes the task from the taskList and also from
      * the server.
@@ -177,9 +112,8 @@ public class RequesterViewListActivity extends Navigation {
     @Override
     public void onFinishConfirmDialog(Boolean confirmed, String string) {
         if (confirmed){
-            taskList.deleteTask(task);
+            taskListController.delete();
             adapterHelper.notifyDataSetChanged();
-            serverHelper.deleteTasks(task);
         }
     }
 }

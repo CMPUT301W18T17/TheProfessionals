@@ -50,7 +50,7 @@ public class ProviderTaskController {
     }
 
     public void setTask(Bundle intent) {
-        String id = intent.getString("Task");
+        String id = intent.getString("ID");
         task = serverHelper.getTask(id);
         check();
     }

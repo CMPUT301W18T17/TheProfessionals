@@ -102,13 +102,12 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
      * @throws Exception If the bundle is empty (the task is not found).
      */
     private void getBundle() throws Exception{
-        Intent startedIntent = getIntent();
-        Bundle extrasBundle = startedIntent.getExtras();
-        if (extrasBundle.isEmpty()){
+        Bundle startedIntent = getIntent().getExtras();
+        if (startedIntent.isEmpty()){
             throw new Exception();
         }
         else {
-            ID = extrasBundle.getString("ID");
+            ID = startedIntent.getString("ID");
         }
     }
 

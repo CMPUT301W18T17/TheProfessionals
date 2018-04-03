@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *
  * This controller is used to sync offline changes with online
  * The business logic driving this sync is that only a task in
- * "Requested" status can be edited/deleted. So if offline, as user
+ * "Requested" status can be edited/deleted. So if offline a user
  * edited a requested task, while at the same time someone placed the bid,
  * this sync controller would not allow that edit to override the task once
  * the user goes online. The user will be notified of any of these situations.
@@ -33,7 +33,6 @@ public class SyncController {
         this.context = context;
         serverHelper = new ServerHelper(context);
     }
-
 
     /**
      *
@@ -62,7 +61,6 @@ public class SyncController {
         }
         return flag;
     }
-
 
 
     /**
@@ -103,7 +101,6 @@ public class SyncController {
             newtask = db.getTask(id);
             serverHelper.onlineAddTask(newtask);
         }
-
     }
 
     /**
