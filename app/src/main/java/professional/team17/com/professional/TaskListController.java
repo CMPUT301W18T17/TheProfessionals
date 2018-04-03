@@ -78,4 +78,15 @@ public class TaskListController {
                 tasklist = serverHelper.getTasksRequester(username, "Bidded");
             }
         }
+
+    public void addAllOpen() {
+        tasklist = serverHelper.getTasksSearch(username);
+        }
+
+    public void search(String query) {
+        TaskList temp = new TaskList();
+        temp = serverHelper.getSearch(query);
+        tasklist.clear();
+        tasklist.addAll(temp);
     }
+}

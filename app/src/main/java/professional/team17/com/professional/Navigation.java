@@ -20,6 +20,9 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.util.concurrent.ExecutionException;
 
+import professional.team17.com.professional.navigation.NavFactory;
+import professional.team17.com.professional.navigation.navButton;
+
 /**
  * Created by ag on 2018-03-26.
  */
@@ -115,82 +118,20 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
      * @param view The view object that has been clicked.
      */
     public void onClick(View view) {
-        Intent intent;
-        switch (view.getId()){
-            /* If user tapped the Bids button */
-            case R.id.biddedTasksProviderButton:
-                intent = new Intent(this, ProviderTaskListActivity.class);
-                intent.putExtra("Status", "Bidded");
+        if (view.getId() == R.id.userMenuButton){
+            showPopup();
+        }
+        else if (view.getId()==R.id.taskMapButton){
+            if(checkServices()){
+                Intent intent = new Intent(this, MapsSearchTasksActivity.class);
                 startActivity(intent);
                 finish();
-                break;
-        /* If user tapped the assigned button */
-            case R.id.acceptedTasksProviderButton:
-                intent = new Intent(this, ProviderTaskListActivity.class);
-                intent.putExtra("Status", "Assigned");
-                startActivity(intent);
-                finish();
-                break;
-        /* If the user tapped the search button */
-            case R.id.searchTasksButton:
-                intent = new Intent(this, SearchActivity.class);
-                startActivity(intent);
-                finish();
-                break;
-        /* If the user tapped the map button */
-            case R.id.taskMapButton:
-                if(checkServices()){
-                    intent = new Intent(this, MapsSearchTasksActivity.class);
-                    startActivity(intent);
-                    finish();
-
-                }
-                break;
-        /* If the user taps the switch button */
-            case R.id.switchViewProviderButton:
-                intent = new Intent(this, RequesterViewListActivity.class);
-                intent.putExtra("Status", "Requested");
-                startActivity(intent);
-                finish();
-                break;
-            case R.id.addTaskRequesterButton:
-                intent = new Intent(this, RequesterAddTaskActivity.class);
-                startActivity(intent);
-                finish();
-                break;
-            /* If user tapped the bidded button */
-            case R.id.biddedTasksRequesterButton:
-                intent = new Intent(this, RequesterViewListActivity.class);
-                intent.putExtra("Status", "Bidded");
-                startActivity(intent);
-                finish();
-                break;
-            /* If the user tapped the assigned button */
-            case R.id.acceptedTasksRequesterButton:
-                intent = new Intent(this, RequesterViewListActivity.class);
-                intent.putExtra("Status", "Assigned");
-                startActivity(intent);
-                finish();
-                break;
-            /* If the user tapped the requested button */
-            case R.id.requestedTasksRequesterButton:
-                intent = new Intent(this, RequesterViewListActivity.class);
-                intent.putExtra("Status", "Requested");
-                startActivity(intent);
-                finish();
-                break;
-            /* If the user taps the switch button */
-            case R.id.switchViewRequesterButton:
-                intent = new Intent(this, ProviderTaskListActivity.class);
-                intent.putExtra("Status", "Bidded");
-                startActivity(intent);
-                finish();
-                break;
-        /* If the user taps the user menu button */
-            case R.id.userMenuButton:
-                //TODO implement dropdown menu
-                showPopup();
-                break;
+            }
+        }
+        else {
+            navButton navButton = NavFactory.makeFor(view.getId(), this);
+            startActivity(navButton.getIntent());
+            finish();
         }
     }
 
