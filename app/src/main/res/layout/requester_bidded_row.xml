@@ -36,7 +36,7 @@
                     android:fontFamily="sans-serif"
                     android:onClick="titleClick"
                     android:text="TaskTitle - "
-                    android:textColor="@color/colorProvider"
+                    android:textColor="@color/requester"
                     android:textSize="21sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent" />

@@ -36,6 +36,7 @@
                     android:fontFamily="sans-serif"
                     android:onClick="titleClick"
                     android:text="TaskTitle"
+                    android:textColor="@color/requester"
                     android:textSize="21sp"
                     app:layout_constraintBottom_toTopOf="@+id/requester_requested_status"
                     app:layout_constraintStart_toStartOf="parent"

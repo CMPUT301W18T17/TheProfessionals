@@ -34,6 +34,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif"
                     android:text="TaskTitle - "
+                    android:textColor="@color/provider"
                     android:textSize="21sp"
                     app:layout_constraintStart_toStartOf="parent" />
 

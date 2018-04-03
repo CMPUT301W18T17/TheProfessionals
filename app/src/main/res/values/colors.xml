@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorProvider">#5fb76e</color>
     <color name="colorRequester">#8ad5d1</color>
+    <color name="requester">#619f9e</color>
+    <color name="provider">#68a569</color>
 </resources>

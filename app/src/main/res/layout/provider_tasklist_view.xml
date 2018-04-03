@@ -7,14 +7,14 @@
 
     <include
         android:id="@+id/parent"
-        layout="@layout/provider_layout" />
+        layout="@layout/provider_layout_2" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/provider_task_list_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="85dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/parent"

@@ -11,7 +11,7 @@
         android:id="@+id/place_bid_fragment_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorProvider"
+        android:background="@color/provider"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"

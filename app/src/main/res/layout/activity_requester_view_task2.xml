@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/requester_layout" />
+    <include layout="@layout/requester_layout_2" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/requester_view_task_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="72dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="60dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
