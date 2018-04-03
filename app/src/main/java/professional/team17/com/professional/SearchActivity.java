@@ -36,9 +36,7 @@ public class SearchActivity extends Navigation {
     private ProviderCustomArrayAdapter searchAdapterHelper;
     private ListView listView;
     private SearchView searchView;
-    private TaskList taskList;
-
-
+    private TaskListController taskListController;
 
     /**
      * On creation of the activity, set all view objects and onClickListeners.
@@ -50,14 +48,15 @@ public class SearchActivity extends Navigation {
         setContentView(R.layout.activity_search);
         /* Change activity title */
         this.setActivityTitleProvider("Task Search");
-        checkOffline();
-        taskList = new TaskList();
+        taskListController = new TaskListController(this);
+        taskListController.addAllOpen();
 
-        taskList.addAll(getOpenTasks());
+        if (taskListController.checkOffline()){
+            Offline fragment = new Offline();
+            getSupportFragmentManager().beginTransaction().replace(R.id.constraintLayoutsearch, fragment).commit();
+        }
 
-
-
-        searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskList);
+        searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskListController.tasklist);
         listView =findViewById(R.id.provider_taskList_view_list);
         listView.setAdapter(searchAdapterHelper);
         listView.setOnItemClickListener(clickListener);
@@ -81,17 +80,6 @@ public class SearchActivity extends Navigation {
         });
     }
 
-
-    void checkOffline() {
-        ConnectedState c = ConnectedState.getInstance();
-        if(c.isOffline()) {
-            Offline fragment = new Offline();
-            getSupportFragmentManager().beginTransaction().replace(R.id.constraintLayoutsearch, fragment).commit();
-        }
-
-    }
-
-
     /**
      * This will search the server for a match against the search input,
      * and update the tasklist with the results. If there are no results, it
@@ -99,26 +87,8 @@ public class SearchActivity extends Navigation {
      * @param query - the string representing the task being searched for
      */
     private void search(String query) {
-        TaskList temp = new TaskList();
-        temp = serverHelper.getSearch(query);
-        taskList.clear();
-        taskList.addAll(temp);
-        searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskList);
-        listView =findViewById(R.id.provider_taskList_view_list);
-        listView.setAdapter(searchAdapterHelper);
-        listView.setOnItemClickListener(clickListener);
-        if (temp == null || temp.isEmpty()){
-            notifyEmptyResults();
-        }
-    }
-
-    /**
-     * This will display a message that no results were found.
-     */
-    private void notifyEmptyResults(){
-        /*
-        display no results message
-         */
+        taskListController.search(query);
+        searchAdapterHelper.notifyDataSetChanged();
     }
 
     /**
@@ -127,25 +97,11 @@ public class SearchActivity extends Navigation {
      */
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            Task task = taskList.get(position);
             Intent intention = new Intent(SearchActivity.this, ProviderViewTask.class);
-            intention.putExtra("Task", task.getUniqueID());
+            intention = taskListController.findTask(position, intention);
             startActivity(intention);
         }
 
     };
 
-
-    /**
-     *
-     * @return tasklist - all the tasks in either bidded or requested state
-     */
-    private TaskList getOpenTasks() {
-        TaskList tasklist;
-        tasklist = serverHelper.getTasksSearch(username);
-        for (Task task: tasklist) {
-            Log.i("TASK", "onCreate: "+task);
-        }
-        return tasklist;
-    }
 }
