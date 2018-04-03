@@ -46,9 +46,9 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
             case R.id.bImageUpload:
                 Intent yourIntent = new Intent(this, RequesterAddTaskActivity.class);
                 Bitmap bmp = ((BitmapDrawable)imageUpload.getDrawable()).getBitmap(); // store the image in your bitmap
-                System.out.println("------------------------------------------------------");
-                System.out.println(((BitmapDrawable)imageUpload.getDrawable()).getBitmap());
-                System.out.println("------------------------------------------------------");
+                //System.out.println("------------------------------------------------------");
+                //System.out.println(((BitmapDrawable)imageUpload.getDrawable()).getBitmap());
+                //System.out.println("------------------------------------------------------");
                 ByteArrayOutputStream bao = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
                 yourIntent.putExtra("yourImage", bao.toByteArray());

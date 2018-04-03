@@ -39,7 +39,7 @@ import java.util.ArrayList;
  * @author Allison
  * @see ServerHelper , Task, Profile
  */
-public class ProviderViewTask extends Navigation implements PlaceBidDialog.PlaceBidDialogListener {
+public class ProviderViewTask extends Navigation implements PlaceBidDialog.PlaceBidDialogListener{
 
     //TODO below item is needed for protoype, part 5 persistence will remove this
 
@@ -124,25 +124,31 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
 
             checkStatus();
             fillTask();
-            System.out.println("------------------------------------------------------");
-            System.out.println("------------------------------------------------------");
-            if (task.getPhotos() != null)
+            //System.out.println("------------------------------------------------------");
+            //System.out.println("------------------------------------------------------");
+            //System.out.println(task.getPhotos());
+            //System.out.println("------------------------------------------------------");
+            //System.out.println("------------------------------------------------------");
+            if (task.getPhotos() == null)
                 button5.setVisibility(View.GONE);
-            System.out.println("------------------------------------------------------");
-            System.out.println("------------------------------------------------------");
+
     }
 
     }
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.provider_view_task_photo:
-                Intent yourIntent = new Intent(this, providerCheckImage.class);
+   public void photoClick(View view){
+                Intent yourIntent = new Intent(ProviderViewTask.this, providerCheckImage.class);
                 photos = task.getPhotos(); // store the image in your bitmap
-                yourIntent.putExtra("yourImage", photos);
+                yourIntent.putStringArrayListExtra("yourImage", photos);
+                //if(view != null){
+                //System.out.println("------------------------------------------------------");
+                //System.out.println("------------------------------------------------------");
+                //System.out.println(view);
+                //System.out.println("------------------------------------------------------");
+                //ystem.out.println("------------------------------------------------------");}
                 startActivity(yourIntent);
+
         }
-    }
+
     //public void photoClick(View view) {
         //Intent yourIntent = new Intent(this, providerCheckImage.class);
         //Bitmap bmp = task.getPhotos().get(0); // store the image in your bitmap

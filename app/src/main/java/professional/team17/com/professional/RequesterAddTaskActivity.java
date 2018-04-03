@@ -31,6 +31,7 @@ import java.util.ArrayList;
  * @see Navigation
  */
 public class RequesterAddTaskActivity extends RequesterTaskActivity {
+    private static final String TAG = "RequesterADTaskActivity";
 
     public void setTitle() {
         this.setActivityTitleRequester("Add a Task");
@@ -95,6 +96,7 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
         task = new Task(username, title, description, locationString, dateString, latLng, photos);
         task.setRequested();
         serverHelper.addTasks(task);
+        Log.d(TAG, "Num1 onClick: " + task);
     }
 
     /**

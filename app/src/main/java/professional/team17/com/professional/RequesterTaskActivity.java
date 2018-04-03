@@ -48,6 +48,7 @@ public abstract class RequesterTaskActivity extends Navigation{
     protected String message;
     protected ArrayList<String> photos;
     protected String photo;
+    protected Integer a = 1;
 
     /**
      * On creation of the activity, set all view objects and onClickListeners.
@@ -85,15 +86,16 @@ public abstract class RequesterTaskActivity extends Navigation{
              });}
         if(getIntent().hasExtra("yourImage")) {
             Bitmap bmp = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("yourImage"), 0, getIntent().getByteArrayExtra("yourImage").length);
+            bmp = compressFunction(bmp);
             photo = toBase64(bmp);
-            System.out.println("------------------------------------------------------");
-            System.out.println(photos);
-            System.out.println("------------------------------------------------------");
+            //System.out.println("------------------------------------------------------");
+            //System.out.println(photos);
+            //System.out.println("------------------------------------------------------");
             photos.add(photo);
-            photoTextView.setText("image1");
-            System.out.println("------------------------------------------------------");
-            System.out.print(photos);
-            System.out.println("------------------------------------------------------");
+            photoTextView.setText("image" + a);
+            //System.out.println("------------------------------------------------------");
+            //System.out.print(photos);
+            //System.out.println("------------------------------------------------------");
 
         }
 

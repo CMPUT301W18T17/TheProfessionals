@@ -14,8 +14,8 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 public class providerCheckImage extends AppCompatActivity {
-    ImageView imageUpload;
-    Button back;
+    private ImageView imageUpload;
+    private Button back;
     Integer k = 0;
     Integer j = 0;
     String a;
@@ -25,6 +25,9 @@ public class providerCheckImage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.provider_chech_photo);
+        imageUpload = (ImageView) findViewById(R.id.imageUpload);
+        back = (Button) findViewById(R.id.back);
+
         Intent i = getIntent();
         photos = i.getStringArrayListExtra("yourImage");
         j = photos.size();
