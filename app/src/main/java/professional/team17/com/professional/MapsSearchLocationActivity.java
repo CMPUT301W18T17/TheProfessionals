@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
@@ -28,6 +30,7 @@ import com.google.android.gms.location.places.AutocompletePrediction;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -48,8 +51,10 @@ import java.util.List;
 public class MapsSearchLocationActivity extends MapsActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "MapsSLocationActivity";
     private static final LatLngBounds latLngBounds = new LatLngBounds(new LatLng(-85, -180), new LatLng(85, 180));
+    private static final int PLACE_PICKER_REQUEST = 1;
     private Button addLocation;
     private ImageView deleteAllText;
+    private ImageView mPlacePicker;
     private AutoCompleteTextView mSearchAddress;
     private LatLng finalLatLng;
     private String finalAddress;
@@ -97,6 +102,7 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
         mSearchAddress = (AutoCompleteTextView) findViewById(R.id.addressInput);
         addLocation = (Button) findViewById(R.id.addLocation);
         deleteAllText = (ImageView) findViewById(R.id.deleteButton);
+        mPlacePicker = (ImageView) findViewById(R.id.placePicker);
 
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
@@ -122,6 +128,21 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
             }
         });
 
+        mPlacePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+                try {
+                    startActivityForResult(builder.build(MapsSearchLocationActivity.this), PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException e) {
+                    Log.e(TAG, "onClick: GooglePlayServicesRepairableException" + e.getMessage() );
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    Log.e(TAG, "onClick: GooglePlayServicesNotAvailableException" + e.getMessage() );
+                }
+            }
+        });
+
         addLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,6 +165,26 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
                 finalAddress = "";
             }
         });
+    }
+
+    /**
+     * Google's PLACE PICKER
+     * From Google Places API Dev Guide: https://developers.google.com/places/android-api/placepicker
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(this, data);
+                String toastMsg = String.format("Place: %s", place.getName());
+                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+
+                PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi.getPlaceById(mGoogleApiClient, place.getId());
+                placeResult.setResultCallback(mUpdatePlaceResultCallback);
+            }
+        }
     }
 
     /**
@@ -195,6 +236,7 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
 
     /**
      *  Get place address and latLng
+     *  Used in autoCompleteClickListener & onActivityResult
      */
     private ResultCallback<PlaceBuffer> mUpdatePlaceResultCallback = new ResultCallback<PlaceBuffer>() {
         @Override
@@ -212,6 +254,7 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
 
                     mMap.clear();
                     moveCamera(finalLatLng, finalAddress);
+                    mSearchAddress.setText(finalAddress);
 
                 } catch (NullPointerException e){
                     Log.e(TAG, "mUpdatePlaceResultCallback: No associated address or LatLng" + e.getMessage());

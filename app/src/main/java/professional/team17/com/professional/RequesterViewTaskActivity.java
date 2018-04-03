@@ -307,7 +307,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         setStatusTo.setVisibility(GONE);
         requestedButton.setVisibility(GONE);
         doneButton.setVisibility(GONE);
-        //TODO leaving review button
     }
 
     /**
