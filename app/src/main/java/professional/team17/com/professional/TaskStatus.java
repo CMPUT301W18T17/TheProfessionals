@@ -17,7 +17,6 @@ public class TaskStatus {
         return taskStatus;
     }
 
-
     /**
      * Will change the state to either
      * Online - if Online state already
@@ -49,8 +48,6 @@ public class TaskStatus {
     public Boolean isRequested(){
         return (this.state == status.REQUESTED);
     }
-
-
 
 
     /**

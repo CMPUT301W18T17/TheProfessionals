@@ -3,16 +3,14 @@ package professional.team17.com.professional.navigation;
 import android.content.Context;
 import android.content.Intent;
 
-import professional.team17.com.professional.navigation.navButton;
-
 import professional.team17.com.professional.ProviderTaskListActivity;
 
 /**
  * Created by ag on 2018-03-27.
  */
 
-public  class biddedTaskP extends navButton {
-        public biddedTaskP(Context con) {
+public  class BiddedTaskProviderNav extends NavButton {
+        public BiddedTaskProviderNav(Context con) {
             super(con);
         }
 

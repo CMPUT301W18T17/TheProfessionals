@@ -4,14 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 
 import professional.team17.com.professional.ProviderTaskListActivity;
-import professional.team17.com.professional.navigation.navButton;
 
 /**
  * Created by ag on 2018-03-26.
  */
 
-public class switchViewR extends navButton {
-    public switchViewR(Context con) {
+public class SwitchViewReqNav extends NavButton {
+    public SwitchViewReqNav(Context con) {
         super(con);
     }
 

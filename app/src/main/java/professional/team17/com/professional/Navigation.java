@@ -21,7 +21,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import java.util.concurrent.ExecutionException;
 
 import professional.team17.com.professional.navigation.NavFactory;
-import professional.team17.com.professional.navigation.navButton;
+import professional.team17.com.professional.navigation.NavButton;
 
 /**
  * Created by ag on 2018-03-26.
@@ -129,8 +129,8 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
             }
         }
         else {
-            navButton navButton = NavFactory.makeFor(view.getId(), this);
-            startActivity(navButton.getIntent());
+            NavButton NavButton = NavFactory.makeFor(view.getId(), this);
+            startActivity(NavButton.getIntent());
             finish();
         }
     }
