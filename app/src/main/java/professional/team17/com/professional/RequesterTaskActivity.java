@@ -40,6 +40,8 @@ public abstract class RequesterTaskActivity extends Navigation{
     protected ImageButton selectDateButton;
     protected MapView mapView;
     protected Button submitButton;
+    protected SharedPreferences sharedPreferences;
+    protected SharedPreferences.Editor editor;
     /* other variables */
     protected Task task;
     protected String dateString;
@@ -73,6 +75,11 @@ public abstract class RequesterTaskActivity extends Navigation{
         submitButton = (Button) findViewById(R.id.submitButton);
         photoTextView = (TextView) findViewById(R.id.photoTextView);
         photos = new ArrayList<String>();
+        sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.putString("name", "Elena");
+        editor.putInt("idName", 12);
+        editor.apply();
 
 
         /* Set all onClickListeners */
@@ -80,7 +87,27 @@ public abstract class RequesterTaskActivity extends Navigation{
             addPhotoButton.setOnClickListener(new ImageButton.OnClickListener() {
              @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent( RequesterTaskActivity.this, TaskPhotoActivity.class);
+                 String title = nameField.getText().toString();
+                 String description = descriptionField.getText().toString();
+                 locationString = locationField.getText().toString();
+                 dateString = (String) textualDateView.getText();
+                 //use the sharepreference to keep the data;
+                 if (title != null){
+                     editor.putString("title", title);
+                 }
+                 if (description != null) {
+                     editor.putString("description", description);
+                 }
+                 if (locationString != null){
+                     editor.putString("location", locationString);
+                 }
+                 if (dateString != null){
+                     editor.putString("dateString", dateString);
+                 }
+                 if (photos != null){
+                     editor.putString("dateString", dateString);
+                 }
+                 Intent intent = new Intent( RequesterTaskActivity.this, TaskPhotoActivity.class);
                     startActivityForResult(intent, 0);
                 }
              });}
