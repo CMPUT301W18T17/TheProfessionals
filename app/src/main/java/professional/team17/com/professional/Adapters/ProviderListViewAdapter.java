@@ -124,6 +124,8 @@ public class ProviderListViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 return 1;
             case "Assigned":
                 return 2;
+            case "Done":
+                return 2;
             default:
                return -1;
         }

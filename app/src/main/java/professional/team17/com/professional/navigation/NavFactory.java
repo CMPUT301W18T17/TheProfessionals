@@ -29,6 +29,10 @@ public class NavFactory {
                 return new BiddedTasksReqNav(cont);
             case R.id.acceptedTasksRequesterButton:
                 return new AcceptedTasksReqNav(cont);
+            case R.id.doneTasksProviderButton:
+                return new DoneTaskProviderNav(cont);
+            case R.id.doneTasksRequesterButton:
+                return new DoneTaskRequesterNav(cont);
         }
         return null;
     }

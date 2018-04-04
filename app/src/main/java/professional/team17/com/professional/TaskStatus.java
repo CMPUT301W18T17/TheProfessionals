@@ -52,6 +52,10 @@ public class TaskStatus {
         return (this.state == status.REQUESTED);
     }
 
+    public boolean isDone() {
+        return (this.state == status.DONE);
+    }
+
 
     /**
      * enum values for 3 states

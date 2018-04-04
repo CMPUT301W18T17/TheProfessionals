@@ -7,67 +7,78 @@
 
     <ImageView
         android:id="@+id/addTaskRequesterButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:scaleType="fitEnd"
+        android:layout_width="50dp"
+        android:layout_height="54dp"
         android:clickable="true"
         android:onClick="onClick"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/biddedTasksRequesterButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/add_task_requester" />
+        android:scaleType="fitEnd"
+        app:srcCompat="@drawable/add_task_requester"
+        tools:layout_editor_absoluteY="513dp" />
 
     <ImageView
         android:id="@+id/biddedTasksRequesterButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:scaleType="fitEnd"
+        android:layout_width="57dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:clickable="true"
         android:onClick="onClick"
+        android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/acceptedTasksRequesterButton"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/addTaskRequesterButton"
         app:srcCompat="@drawable/bidded_tasks_requester" />
 
     <ImageView
         android:id="@+id/acceptedTasksRequesterButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:scaleType="fitEnd"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="20dp"
         android:clickable="true"
         android:onClick="onClick"
+        android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/requestedTasksRequesterButton"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/biddedTasksRequesterButton"
         app:srcCompat="@drawable/accepted_tasks_requester" />
 
     <ImageView
         android:id="@+id/requestedTasksRequesterButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:scaleType="fitEnd"
+        android:layout_width="83dp"
+        android:layout_height="73dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:clickable="true"
         android:onClick="onClick"
+        android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/switchViewRequesterButton"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/acceptedTasksRequesterButton"
         app:srcCompat="@drawable/requested_tasks_requester" />
 
     <ImageView
-        android:id="@+id/switchViewRequesterButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:scaleType="fitEnd"
+        android:id="@+id/doneTasksRequesterButton"
+        android:layout_width="70dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:clickable="true"
         android:onClick="onClick"
+        android:scaleType="fitEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/switchViewRequesterButton"
+        app:layout_constraintStart_toEndOf="@+id/requestedTasksRequesterButton"
+        app:srcCompat="@drawable/requested_tasks_requester" />
+
+    <ImageView
+        android:id="@+id/switchViewRequesterButton"
+        android:layout_width="59dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/requestedTasksRequesterButton"
         app:srcCompat="@drawable/switch_view_requester" />
 
     <ImageView
@@ -118,7 +129,8 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/addTaskRequesterButton"
         app:layout_constraintTop_toBottomOf="@+id/titleBarBGRequester"
-        tools:layout_editor_absoluteX="-12dp">
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
     </android.support.constraint.ConstraintLayout>
 
