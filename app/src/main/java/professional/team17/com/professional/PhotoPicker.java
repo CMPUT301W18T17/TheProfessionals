@@ -161,7 +161,7 @@ public class PhotoPicker extends AppCompatActivity {
                 }
                 break;
             case CAMERA_REQUEST:
-                if (requestCode == RESULT_OK){
+                //if (requestCode == RESULT_OK){
                     functionCode = 2;
                     Bundle extras = data.getExtras();
                     photoBitmap = (Bitmap) extras.get("data");
@@ -169,7 +169,7 @@ public class PhotoPicker extends AppCompatActivity {
                     viewPhoto.setImageDrawable(photo.bitmapToDrawable());
 
                     returnBitmap = photoBitmap;
-               }
+               //}
                 break;
         }
     }
