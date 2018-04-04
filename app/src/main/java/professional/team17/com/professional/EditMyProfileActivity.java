@@ -41,6 +41,7 @@ public class EditMyProfileActivity extends AppCompatActivity {
     private String photoString;
     private Photo photo;
     private Bitmap.Config photoConfig;
+    private Bitmap bitmap;
     private int photoWidth;
     private int photoHeight;
     private String information;
@@ -99,11 +100,18 @@ public class EditMyProfileActivity extends AppCompatActivity {
         eMail = intent.getStringExtra("eMail");
         phoneNumber = intent.getStringExtra("phoneNumber");
         path = intent.getStringExtra("photoPath");
+        bitmap = (Bitmap) intent.getParcelableExtra("photoBitmap");
         startTime = intent.getIntExtra("startTime", 0);
 
         if (startTime == 1 && path != null) {
             photo = new Photo(path);
             photoButton.setImageDrawable(photo.pathToDrawable());
+        }
+        else {
+            if (startTime == 1 && bitmap != null) {
+                photo = new Photo(bitmap);
+                photoButton.setImageDrawable(photo.bitmapToDrawable());
+            }
         }
 
         if (startTime == 1) {
@@ -128,6 +136,18 @@ public class EditMyProfileActivity extends AppCompatActivity {
                     userProfile.setConfig(photoConfig);
                     userProfile.setHeight(photoHeight);
                     userProfile.setWidth(photoWidth);
+                }
+                else{
+                    if (startTime == 1 && bitmap != null){
+                        photoString = photo.bitmapToString();
+                        photoConfig = photo.bitmapGetConfig();
+                        photoHeight = photo.bitmapGetHeight();
+                        photoWidth = photo.bitmapGetWidth();
+                        userProfile.setPhoto(photoString);
+                        userProfile.setConfig(photoConfig);
+                        userProfile.setHeight(photoHeight);
+                        userProfile.setWidth(photoWidth);
+                    }
                 }
                 serverHelper.addProfile(userProfile);
                 finish();
@@ -161,8 +181,12 @@ public class EditMyProfileActivity extends AppCompatActivity {
         intent.putExtra("phoneNumber", information);
 
         // Photo path
-        intent.putExtra("photoPath", path);
-
+        if (path != null) {
+            intent.putExtra("photoPath", path);
+        }
+        else{
+            intent.putExtra("photoBitmap", bitmap);
+        }
         startActivity(intent);
         finish();
     }

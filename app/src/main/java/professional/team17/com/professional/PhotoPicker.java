@@ -34,7 +34,8 @@ public class PhotoPicker extends AppCompatActivity {
     private String oldPath;
     private TextView viewError;
     private int size, isEditProfile;
-    private Bitmap photoBitmap, returnBitmap;
+    private Bitmap photoBitmap, returnBitmap, oldBitmap;
+    private int functionCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +54,25 @@ public class PhotoPicker extends AppCompatActivity {
         phoneNumber = intent.getStringExtra("phoneNumber");
         filePath = intent.getStringExtra("photoPath");
         isEditProfile = intent.getIntExtra("FromEditProfile", 0);
+        oldBitmap = (Bitmap) intent.getParcelableExtra("photoBitmap");
+
+        Log.i("","*******************************************************"+filePath);
+
         if (filePath != null){
             returnPath = filePath;
             oldPath = filePath;
             oldPhoto = new Photo(filePath);
             viewPhoto.setImageDrawable(oldPhoto.pathToDrawable());
+        }
+
+        else{
+            Log.i("mesage","---------------------------------------------------------------");
+            if (oldBitmap != null){
+                Log.i("mesage","#################################################################");
+                returnBitmap = oldBitmap;
+                oldPhoto = new Photo(oldBitmap);
+                viewPhoto.setImageDrawable(oldPhoto.bitmapToDrawable());
+            }
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR)
@@ -79,8 +94,12 @@ public class PhotoPicker extends AppCompatActivity {
             putExtra(intent);
 
             // Previous Photo Path
-            adder(intent, "photoPath", oldPath);
-
+            if (oldPath != null) {
+                adder(intent, "photoPath", oldPath);
+            }
+            else{
+                intent.putExtra("photoBitmap", oldBitmap);
+            }
             startActivity(intent);
             finish();
         }
@@ -90,7 +109,12 @@ public class PhotoPicker extends AppCompatActivity {
             putExtra(intent);
 
             // Previous Photo Path
-            adder(intent, "photoPath", oldPath);
+            if (oldPath != null) {
+                adder(intent, "photoPath", oldPath);
+            }
+            else{
+                intent.putExtra("photoBitmap", oldBitmap);
+            }
 
             startActivity(intent);
             finish();
@@ -111,9 +135,13 @@ public class PhotoPicker extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        functionCode = 0;
+
         switch (requestCode) {
             case SELECTED_PICTURE:
                 if (resultCode == RESULT_OK){
+                    functionCode = 1;
+
                     Uri uri = data.getData();
                     String[]projection = {MediaStore.Images.Media.DATA};
 
@@ -128,25 +156,27 @@ public class PhotoPicker extends AppCompatActivity {
 
 
                     returnPath = photo.getPath();
+
                     viewPhoto.setImageDrawable(photo.pathToDrawable());
                 }
                 break;
             case CAMERA_REQUEST:
-                //if (requestCode == RESULT_OK){
+                if (requestCode == RESULT_OK){
+                    functionCode = 2;
                     Bundle extras = data.getExtras();
                     photoBitmap = (Bitmap) extras.get("data");
                     photo = new Photo(photoBitmap);
                     viewPhoto.setImageDrawable(photo.bitmapToDrawable());
 
                     returnBitmap = photoBitmap;
-               //}
+               }
                 break;
         }
     }
 
     public void seted(View view){
 
-        if (returnPath != null && returnBitmap == null) {
+        if (functionCode == 1) {
             photo = new Photo(returnPath);
             size = photo.pathGetSize();
             if (isEditProfile == 0) {
@@ -173,7 +203,7 @@ public class PhotoPicker extends AppCompatActivity {
             }
         }
 
-        else if (returnBitmap != null && returnPath == null){
+        else if (functionCode == 2){
             if (isEditProfile == 0) {
                 Intent intent = new Intent(this, SignUpActivity.class);
 

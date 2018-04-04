@@ -195,7 +195,13 @@ public class SignUpActivity extends AppCompatActivity {
         intent.putExtra("phoneNumber", infor);
 
         // Photo path
-        intent.putExtra("photoPath", path);
+        if (path != null) {
+            intent.putExtra("photoPath", path);
+        }
+        // Bitmap
+        else{
+            intent.putExtra("photoBitmap", bitmap);
+        }
 
         startActivity(intent);
         finish();
