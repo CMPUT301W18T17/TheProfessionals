@@ -9,22 +9,16 @@
  */
 package professional.team17.com.professional;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
+import professional.team17.com.professional.Adapters.ItemClickSupport;
 import professional.team17.com.professional.Adapters.ProviderListViewAdapter;
 
 
@@ -37,15 +31,10 @@ import professional.team17.com.professional.Adapters.ProviderListViewAdapter;
  * @author Allison
  * @see ProviderCustomArrayAdapter , TaskList, ElasticSearchController
  */
-public class SearchActivity extends Navigation {
-    private ProviderCustomArrayAdapter searchAdapterHelper;
-    private ListView listView;
+public class SearchActivity extends Navigation  {
     private SearchView searchView;
     private TaskListController taskListController;
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private RecyclerView rvContacts;
+    private RecyclerView recyclerView;
 
 
     /**
@@ -66,26 +55,19 @@ public class SearchActivity extends Navigation {
             getSupportFragmentManager().beginTransaction().replace(R.id.constraintLayoutsearch, fragment).commit();
         }
 
- /*       searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskListController.tasklist);
-        listView =findViewById(R.id.provider_taskList_view_list);
-        listView.setAdapter(searchAdapterHelper);
-        listView.setOnItemClickListener(clickListener);*/
-        rvContacts = (RecyclerView) findViewById(R.id.provider_taskList_view_list);
-        //ProviderListViewAdapter adapter  = new ProviderListViewAdapter(taskListController.tasklist);
-        rvContacts.setAdapter(new ProviderListViewAdapter(taskListController.tasklist));
-        // Attach the adapter to the recyclerview to populate items
-        // Set layout manager to position the items
-        rvContacts.setLayoutManager(new LinearLayoutManager(this));
-/*        mRecyclerView.setHasFixedSize(true);
+        recyclerView = (RecyclerView) findViewById(R.id.provider_taskList_view_list);
+        recyclerView.setAdapter(new ProviderListViewAdapter(taskListController.tasklist));
 
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(myDataset);
-        mRecyclerView.setAdapter(mAdapter);*/
-
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent intention = new Intent(SearchActivity.this, ProviderViewTask.class);
+                intention = taskListController.findTask(position, intention);
+                startActivity(intention);
+            }
+        });
 
         //initialize search input
         searchView = (SearchView) findViewById(R.id.Search_Activity_Input);
@@ -106,22 +88,6 @@ public class SearchActivity extends Navigation {
             }
         });
 
-       .OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View view = v;
-                View parent = (View) v.getParent();
-                while (!(parent instanceof RecyclerView)) {
-                    view = parent;
-                    parent = (View) parent.getParent();
-                }
-                int position = rvContacts.getChildAdapterPosition(view);
-                Intent intention = new Intent(SearchActivity.this, ProviderViewTask.class);
-                intention = taskListController.findTask(position, intention);
-                startActivity(intention);
-            }
-        };
-
     }
 
             /**
@@ -133,21 +99,6 @@ public class SearchActivity extends Navigation {
              */
             private void search(String query) {
                 taskListController.search(query);
-                searchAdapterHelper.notifyDataSetChanged();
             }
 
-            /**
-             * This is an anonymous method to create a click listener for the listview rows. If the row
-             * is selected, it packages up the task selected and the position to ViewTaskBidded
-             */
-            private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                    Intent intention = new Intent(SearchActivity.this, ProviderViewTask.class);
-                    intention = taskListController.findTask(position, intention);
-                    startActivity(intention);
-                }
-
-            };
-
-
-        }
+}

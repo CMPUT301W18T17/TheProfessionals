@@ -387,7 +387,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                  * the Assigned layout and fill the new layout with the chosen bid's info.
                  */
                 task.chooseBid(chosenBid);
-                task.setStatus("Set Assigned");
+                task.setStatus("Assigned");
 
                 bidList.clear();
                 bidList.add(chosenBid);

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import professional.team17.com.professional.ConfirmDialog;
 import professional.team17.com.professional.R;
 import professional.team17.com.professional.Task;
 import professional.team17.com.professional.TaskList;
@@ -25,7 +26,6 @@ public class ProviderListViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public Task task;
     String username;
 
-    // Provide a suitable constructor (depends on the kind of dataset)
     public ProviderListViewAdapter(TaskList items) {
         taskStatus = new TaskStatus();
         this.items = items;
@@ -56,11 +56,14 @@ public class ProviderListViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             default:
                 viewHolder = null;
         }
+
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        final int p = position;
+
         switch (holder.getItemViewType()) {
             case 0:
                 RequesterListProviderView vh1 = (RequesterListProviderView) holder;
@@ -77,6 +80,9 @@ public class ProviderListViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             default:
                 break;
         }
+
+
+
     }
 
     private void configureBidded(BiddedListProviderView vh2, int position) {
@@ -128,15 +134,5 @@ public class ProviderListViewAdapter extends RecyclerView.Adapter<RecyclerView.V
     public int getItemCount() {
         return this.items.size();
     }
-
-/*
-    private void bindDataToAdapter() {
-        // Bind adapter to recycler view object
-        RecyclerView recyclerView;
-        recyclerView.setAdapter(new ProviderListViewAdapter(getSampleArrayList()));
-    }
-*/
-
-
 
 }

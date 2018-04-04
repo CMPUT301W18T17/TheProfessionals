@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
@@ -29,6 +30,7 @@ public class RequesterViewListActivity extends Navigation {
     private RequesterCustomArrayAdapter adapterHelper;
     private ListView listView;
     private TaskListController taskListController;
+    private RecyclerView recyclerView;
 
     /**
      * On creation of the activity, set the layout and populate the task list.
