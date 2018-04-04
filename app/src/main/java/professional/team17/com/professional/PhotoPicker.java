@@ -34,6 +34,7 @@ public class PhotoPicker extends AppCompatActivity {
     private String oldPath;
     private TextView viewError;
     private int size, isEditProfile;
+    private Bitmap photoBitmap, returnBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,18 +132,21 @@ public class PhotoPicker extends AppCompatActivity {
                 }
                 break;
             case CAMERA_REQUEST:
-                if (requestCode == RESULT_OK){
+                //if (requestCode == RESULT_OK){
                     Bundle extras = data.getExtras();
-                    Bitmap imageBitmap = (Bitmap) extras.get("data");
-                    viewPhoto.setImageBitmap(imageBitmap);
-                }
+                    photoBitmap = (Bitmap) extras.get("data");
+                    photo = new Photo(photoBitmap);
+                    viewPhoto.setImageDrawable(photo.bitmapToDrawable());
+
+                    returnBitmap = photoBitmap;
+               //}
                 break;
         }
     }
 
     public void seted(View view){
 
-        if (returnPath != null) {
+        if (returnPath != null && returnBitmap == null) {
             photo = new Photo(returnPath);
             size = photo.pathGetSize();
             if (isEditProfile == 0) {
@@ -168,6 +172,32 @@ public class PhotoPicker extends AppCompatActivity {
                 finish();
             }
         }
+
+        else if (returnBitmap != null && returnPath == null){
+            if (isEditProfile == 0) {
+                Intent intent = new Intent(this, SignUpActivity.class);
+
+                putExtra(intent);
+
+                // Photo Path
+                intent.putExtra("photoBitmap", returnBitmap);
+
+                startActivity(intent);
+                finish();
+            }
+            else{
+                Intent intent = new Intent(this, EditMyProfileActivity.class);
+
+                putExtra(intent);
+
+                // Photo Path
+                intent.putExtra("photoBitmap", returnBitmap);
+
+                startActivity(intent);
+                finish();
+            }
+        }
+
         else{
             viewError.setText("Please pick a photo first.");
         }

@@ -69,6 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
         eMail = intent.getStringExtra("eMail");
         phoneNumber = intent.getStringExtra("phoneNumber");
         path = intent.getStringExtra("photoPath");
+        bitmap = (Bitmap) intent.getParcelableExtra("photoBitmap");
 
         usernameBox = findViewById(R.id.usernameBox);
         nameBox = findViewById(R.id.fullNameBox);
@@ -126,6 +127,14 @@ public class SignUpActivity extends AppCompatActivity {
                     photoConfig = photo.pathGetConfig();
                     photoHeight = photo.pathGetHeight();
                     photoWidth = photo.pathGetWidth();
+                }
+
+                else if (bitmap != null){
+                    photo = new Photo(bitmap);
+                    photoString = photo.bitmapToString();
+                    photoConfig = photo.bitmapGetConfig();
+                    photoHeight = photo.bitmapGetHeight();
+                    photoWidth = photo.bitmapGetWidth();
                 }
 
                 else{

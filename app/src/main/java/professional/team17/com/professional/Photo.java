@@ -48,6 +48,12 @@ public class Photo {
         return uploadBitmap;
     }
 
+    public Drawable bitmapToDrawable() {
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        drawable = new BitmapDrawable(uploadBitmap);
+        return drawable;
+    }
+
     public Drawable toDrawable(Bitmap bitmap){
         drawable = new BitmapDrawable(bitmap);
         return drawable;
@@ -85,8 +91,20 @@ public class Photo {
         return uploadString;
     }
 
+    public String bitmapToString(){
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        uploadString = toString(uploadBitmap);
+        return uploadString;
+    }
+
     public Bitmap.Config pathGetConfig(){
         bitmap = BitmapFactory.decodeFile(this.path);
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        config = Bitmap.Config.valueOf(uploadBitmap.getConfig().name());
+        return config;
+    }
+
+    public Bitmap.Config bitmapGetConfig(){
         uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         config = Bitmap.Config.valueOf(uploadBitmap.getConfig().name());
         return config;
@@ -99,8 +117,20 @@ public class Photo {
         return width;
     }
 
+    public int bitmapGetWidth(){
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        width = uploadBitmap.getWidth();
+        return width;
+    }
+
     public int pathGetHeight(){
         bitmap = BitmapFactory.decodeFile(this.path);
+        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        height = uploadBitmap.getHeight();
+        return height;
+    }
+
+    public int bitmapGetHeight(){
         uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         height = uploadBitmap.getHeight();
         return height;
