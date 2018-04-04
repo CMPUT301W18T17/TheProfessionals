@@ -68,8 +68,7 @@ public class Bid implements Serializable{
      */
     public String getAmountAsString(){
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
-        String amount = decimalFormat.format(this.amount);
-        return amount;
+        return decimalFormat.format(this.amount);
     }
 
     /**

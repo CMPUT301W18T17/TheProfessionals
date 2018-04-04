@@ -14,7 +14,6 @@ import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 /**
@@ -31,7 +30,7 @@ public class BidList extends ArrayList<Bid> implements Serializable{
     /**
      * instantiate bidList, set lowest to null
      */
-    public BidList(){
+    BidList(){
         lowest = null;
         // Nothing
     }
@@ -39,7 +38,7 @@ public class BidList extends ArrayList<Bid> implements Serializable{
     /**
      *
      * @param index - the index the bid is located at
-     * @return
+
      */
     public Bid getBid(int index){
         return this.get(index);
