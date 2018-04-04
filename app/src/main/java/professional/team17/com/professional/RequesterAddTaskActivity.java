@@ -31,6 +31,7 @@ import java.util.ArrayList;
  * @see Navigation
  */
 public class RequesterAddTaskActivity extends RequesterTaskActivity {
+    private static final String TAG = "RequesterADTaskActivity";
 
     public void setTitle() {
         this.setActivityTitleRequester("Add a Task");
@@ -89,12 +90,13 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
      * @param description Task description
      */
 
-    public void addToServer(String title, String description,ArrayList<Bitmap> photos) {
+    public void addToServer(String title, String description,ArrayList<String> photos) {
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         String username = pref.getString("username", "error");
         task = new Task(username, title, description, locationString, dateString, latLng, photos);
         task.setRequested();
         serverHelper.addTasks(task);
+        Log.d(TAG, "Num1 onClick: " + task);
     }
 
     /**

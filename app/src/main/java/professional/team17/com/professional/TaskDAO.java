@@ -231,7 +231,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
         LatLng latLon = new LatLng(lat, lon);
         //String ACTION = c.getString(c.getColumnIndex("actionType"));
         //Log.i("OFFLINE","TASK ACTIOn"+ACTION );
-        ArrayList<Bitmap> photos = new ArrayList<Bitmap>();
+        ArrayList<String> photos = new ArrayList<String>();
         temp =  new Task(profileName, name, description, location, date, latLon , photos);
         temp.setId(id);
         return temp;

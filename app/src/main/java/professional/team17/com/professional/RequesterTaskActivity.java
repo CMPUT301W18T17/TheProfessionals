@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,13 +40,18 @@ public abstract class RequesterTaskActivity extends Navigation{
     protected ImageButton selectDateButton;
     protected MapView mapView;
     protected Button submitButton;
+    protected SharedPreferences sharedPreferences;
+    protected SharedPreferences.Editor editor;
     /* other variables */
     protected Task task;
     protected String dateString;
     protected String locationString;
     protected LatLng latLng;
     protected String message;
-    protected ArrayList<Bitmap> photos;
+    protected ArrayList<String> photos;
+    protected String photo;
+    protected Integer a = 1;
+
     /**
      * On creation of the activity, set all view objects and onClickListeners.
      * @param savedInstanceState The activity's previously saved state.
@@ -67,27 +74,55 @@ public abstract class RequesterTaskActivity extends Navigation{
         mapView = (MapView) findViewById(R.id.map_task);
         submitButton = (Button) findViewById(R.id.submitButton);
         photoTextView = (TextView) findViewById(R.id.photoTextView);
-        photos = new ArrayList<Bitmap>();
+        photos = new ArrayList<String>();
+        sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.putString("name", "Elena");
+        editor.putInt("idName", 12);
+        editor.apply();
 
 
         /* Set all onClickListeners */
-        addPhotoButton.setOnClickListener(new ImageButton.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent( RequesterTaskActivity.this, TaskPhotoActivity.class);
-                startActivityForResult(intent, 0);
-            }
-        });
+        if(photos.size() <= 5){
+            addPhotoButton.setOnClickListener(new ImageButton.OnClickListener() {
+             @Override
+                public void onClick(View v) {
+                 String title = nameField.getText().toString();
+                 String description = descriptionField.getText().toString();
+                 locationString = locationField.getText().toString();
+                 dateString = (String) textualDateView.getText();
+                 //use the sharepreference to keep the data;
+                 if (title != null){
+                     editor.putString("title", title);
+                 }
+                 if (description != null) {
+                     editor.putString("description", description);
+                 }
+                 if (locationString != null){
+                     editor.putString("location", locationString);
+                 }
+                 if (dateString != null){
+                     editor.putString("dateString", dateString);
+                 }
+                 if (photos != null){
+                     editor.putString("dateString", dateString);
+                 }
+                 Intent intent = new Intent( RequesterTaskActivity.this, TaskPhotoActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+             });}
         if(getIntent().hasExtra("yourImage")) {
             Bitmap bmp = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("yourImage"), 0, getIntent().getByteArrayExtra("yourImage").length);
-            System.out.println("------------------------------------------------------");
-            System.out.println(photos);
-            System.out.println("------------------------------------------------------");
-            photos.add(bmp);
-            photoTextView.setText("image1");
-            System.out.println("------------------------------------------------------");
-            System.out.print(photos);
-            System.out.println("------------------------------------------------------");
+            bmp = compressFunction(bmp);
+            photo = toBase64(bmp);
+            //System.out.println("------------------------------------------------------");
+            //System.out.println(photos);
+            //System.out.println("------------------------------------------------------");
+            photos.add(photo);
+            photoTextView.setText("image" + a);
+            //System.out.println("------------------------------------------------------");
+            //System.out.print(photos);
+            //System.out.println("------------------------------------------------------");
 
         }
 
@@ -126,7 +161,7 @@ public abstract class RequesterTaskActivity extends Navigation{
     public abstract void setSubmitButtonOnClickListener();
     public abstract void endActivity();
     public abstract void setTitle();
-    public abstract void addToServer(String title, String description ,ArrayList<Bitmap> photos);
+    public abstract void addToServer(String title, String description ,ArrayList<String> photos);
     /**
      * Displays the DatePickerDialog fragment, allowing the user to select a date.
      */
@@ -148,4 +183,20 @@ public abstract class RequesterTaskActivity extends Navigation{
             }
         }
     }
+
+    public Bitmap compressFunction(Bitmap bitmap){
+        int newWidth = 64;
+        int newHeight = 64;
+        Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+        return newBitmap;
+    }
+
+    public String toBase64(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream .toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
+
 }

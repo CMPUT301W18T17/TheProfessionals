@@ -133,7 +133,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
      * @param title Task title
      * @param description Task description
      */
-    public void addToServer(String title, String description,ArrayList<Bitmap> photos){
+    public void addToServer(String title, String description,ArrayList<String> photos){
         task.setName(title);
         task.setDate(parseDate(dateString));
         task.setDescription(description);

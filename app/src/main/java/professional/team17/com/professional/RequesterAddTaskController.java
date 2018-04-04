@@ -38,7 +38,7 @@ import java.util.Date;
 
 public class RequesterAddTaskController {
     /* create a new task*/
-    ArrayList<Bitmap> photos = new ArrayList<Bitmap>();
+    ArrayList<String> photos = new ArrayList<String>();
     private Task task = new Task("profileName","name","description", "location", "date", new LatLng(-34, 151), photos);
     // call
     public RequesterAddTaskController(){}

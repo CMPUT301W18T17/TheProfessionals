@@ -15,10 +15,15 @@
             android:id="@+id/imageUpload"
             android:layout_gravity="center_horizontal"
             android:layout_width="280dp"
-            android:layout_height="500dp" />
+            android:layout_height="450dp" />
         <Button
             android:id="@+id/bImageUpload"
             android:text = "Upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bTakePhoto"
+            android:text = "TakePhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

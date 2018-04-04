@@ -27,8 +27,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
+=======
+import java.util.ArrayList;
+>>>>>>> bug1
 
 
 /**
@@ -38,9 +42,10 @@ import java.util.Map;
  * @author Allison
  * @see ServerHelper , Task, Profile
  */
-public class ProviderViewTask extends Navigation implements PlaceBidDialog.PlaceBidDialogListener {
+public class ProviderViewTask extends Navigation implements PlaceBidDialog.PlaceBidDialogListener{
 
     //TODO below item is needed for protoype, part 5 persistence will remove this
+
 
 
     //TODO both items below can be put in controller (project part 5)
@@ -60,7 +65,11 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
     private TextView taskMyBidDollar;
     private ImageButton viewMapButton;
     private Button button5;
+<<<<<<< HEAD
     TextView taskLowBidDesc;
+=======
+    private ArrayList<String> photos;
+>>>>>>> bug1
 
 
     //both buttons start as invisible by default
@@ -103,12 +112,32 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
            getSupportFragmentManager().beginTransaction().replace(R.id.provider_view_task_frame, fragment).commit();
         }
 
+<<<<<<< HEAD
         providerTaskController.fillTask(statusTextField,userNameTextField,taskTitleTextField,taskDateTextField,taskDescriptionTextField,taskAddressTextField);
         providerTaskController.location(viewMapButton);
         checkStatus();
     }
+=======
+        else {
+            Log.i("ER", "checkOffline: "+task);
+            if (task.getLatLng() == null){
+                viewMapButton.setVisibility(View.INVISIBLE);
+            }
+            //getRequester();
+
+            checkStatus();
+            fillTask();
+            //System.out.println("------------------------------------------------------");
+            //System.out.println("------------------------------------------------------");
+            //System.out.println(task.getPhotos());
+            //System.out.println("------------------------------------------------------");
+            //System.out.println("------------------------------------------------------");
+            if (task.getPhotos() == null)
+                button5.setVisibility(View.GONE);
+>>>>>>> bug1
 
 
+<<<<<<< HEAD
 
 /*    public void photoClick(View view) {
         Intent yourIntent = new Intent(this, providerCheckImage.class);
@@ -119,6 +148,32 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
         startActivity(yourIntent);
     }*/
 //
+=======
+    }
+   public void photoClick(View view){
+                Intent yourIntent = new Intent(ProviderViewTask.this, providerCheckImage.class);
+                photos = task.getPhotos(); // store the image in your bitmap
+                yourIntent.putStringArrayListExtra("yourImage", photos);
+                //if(view != null){
+                //System.out.println("------------------------------------------------------");
+                //System.out.println("------------------------------------------------------");
+                //System.out.println(view);
+                //System.out.println("------------------------------------------------------");
+                //ystem.out.println("------------------------------------------------------");}
+                startActivity(yourIntent);
+
+        }
+
+    //public void photoClick(View view) {
+        //Intent yourIntent = new Intent(this, providerCheckImage.class);
+        //Bitmap bmp = task.getPhotos().get(0); // store the image in your bitmap
+        //ByteArrayOutputStream bao = new ByteArrayOutputStream();
+        //bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
+        //yourIntent.putExtra("yourImage", bao.toByteArray());
+        //startActivity(yourIntent);
+    //}
+
+>>>>>>> bug1
     public void mapClick(View view){
         Intent intent = new Intent(ProviderViewTask.this, MapsShowALocationActivity.class);
         Bundle bundle = providerTaskController.getLocation(intent);

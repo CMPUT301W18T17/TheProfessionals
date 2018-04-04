@@ -40,7 +40,7 @@ public class Task implements Serializable{
     private LatLng latLng;
     private Date date;
     private String uniqueID;
-    private ArrayList<Bitmap> photos;
+    private ArrayList<String> photos;
     private BidList bids;
     public String status;
 
@@ -70,7 +70,7 @@ public class Task implements Serializable{
      * @param date - String date for the task to be completed by
      * @param latLng - lat and longitude of task
      */
-    public Task(String profileName, String name, String description, String location, String date, LatLng latLng ,ArrayList<Bitmap> photos) {
+    public Task(String profileName, String name, String description, String location, String date, LatLng latLng ,ArrayList<String> photos) {
         this.profileName = profileName;
         this.name = name;
         this.description = description;
@@ -92,7 +92,7 @@ public class Task implements Serializable{
      * @param location - String location of the task
      * @param latLng -- lat and longitude of task
      */
-    public Task(String profileName, String name, String description, String location, LatLng latLng ,ArrayList<Bitmap> photos) {
+    public Task(String profileName, String name, String description, String location, LatLng latLng ,ArrayList<String> photos) {
         this.profileName = profileName;
         this.name = name;
         this.description = description;
@@ -228,20 +228,20 @@ public class Task implements Serializable{
      *
      * //TODO implement in project part 5
      */
-    public ArrayList<Bitmap> getPhotos() {return photos;}
+    public ArrayList<String> getPhotos() {return photos;}
 
 
     /**
      *
      * //TODO implement in project part 5
      */
-    //public void setPhotos(ArrayList<String> photos) {this.photos = photos;}
+    //public void getPhotosByIndex(ArrayList<String> photos , int n ) {return photos.get();}
 
     /**
      *
      * //TODO implement in project part 5
      */
-    public void addPhoto(Bitmap photo){
+    public void addPhoto(String photo){
         this.photos.add(photo);
     }
 
