@@ -39,6 +39,9 @@ public class TaskStatus {
         }
     }
 
+    public status getStatus(){
+        return this.getStatus();
+    }
     public Boolean isAssigned(){
         return (this.state == status.ASSIGNED);
     }
@@ -54,7 +57,14 @@ public class TaskStatus {
      * enum values for 3 states
      */
     public enum status {
-        REQUESTED, BIDDED, ASSIGNED, DONE
+        REQUESTED(0), BIDDED(1), ASSIGNED(2), DONE(3);
+        private final int value;
+        private status(int value) {
+            this.value = value;
+        }
+        public int getValue(){
+            return value;
+        }
     }
 
 }
