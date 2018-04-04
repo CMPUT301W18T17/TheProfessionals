@@ -1,5 +1,6 @@
 package professional.team17.com.professional;
 
+import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 
 
@@ -11,12 +12,11 @@ import java.util.Date;
 
 public class ServerHelperTest extends ActivityInstrumentationTestCase2 {
 
-
-    private final ServerHelper serverHelper = new ServerHelper();
+    private final ServerHelper serverHelper = new ServerHelper(getContext());
     private Date date = new Date();
-    Task task1 = new Task("TaskRequester1", "Title1", "Description1", "Location1", date, );
-    Task task2 = new Task("TaskRequester2", "Title2", "Description2", "Location2", date, );
-    Task task3 = new Task("TaskRequester3", "Title3", "Description3", "Location3", date, );
+    Task task1 = new Task("TaskRequester1", "Title1", "Description1");
+    Task task2 = new Task("TaskRequester2", "Title2", "Description2");
+    Task task3 = new Task("TaskRequester3", "Title3", "Description3");
 
 
     Profile profile1 = new Profile("Mary1", "mair1", "mair@email1.ca", "111-1111");
