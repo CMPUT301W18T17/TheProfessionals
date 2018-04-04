@@ -8,24 +8,19 @@ import professional.team17.com.professional.ConnectedState;
 import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
- * Created by ag on 2018-03-26.
+ * Class that will have build the navigation
  */
+public abstract class NavButton {
+    protected Intent intent;
+    protected Context context;
+    private ConnectedState c;
 
-public abstract class navButton {
-    Intent intent;
-    Context context;
-    ConnectedState c;
-
-    public navButton(Context con){
+    public NavButton(Context con){
         context = con;
         c = ConnectedState.getInstance();
     }
 
     public abstract Intent getIntent();
-
-
-
-
 
 }
 

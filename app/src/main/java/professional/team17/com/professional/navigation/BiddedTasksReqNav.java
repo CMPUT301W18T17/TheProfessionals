@@ -4,24 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 
 import professional.team17.com.professional.RequesterViewListActivity;
-import professional.team17.com.professional.navigation.navButton;
 
 
 /**
  * Created by ag on 2018-03-26.
  */
 
-public class requestedTaskR extends navButton {
+public class BiddedTasksReqNav extends NavButton {
 
-        public requestedTaskR(Context con) {
+        public BiddedTasksReqNav(Context con) {
             super(con);
         }
 
         public Intent getIntent() {
             intent = new Intent(context, RequesterViewListActivity.class);
-            intent.putExtra("Status", "Requested");
+            intent.putExtra("Status", "Bidded");
             return intent;
-
         }
+
+
 
 }
