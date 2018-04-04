@@ -58,5 +58,4 @@ public class providerCheckImage extends AppCompatActivity {
                 .into(imageUpload);
 
     }
-
 }
