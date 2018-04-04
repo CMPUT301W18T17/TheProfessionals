@@ -9,26 +9,26 @@ import professional.team17.com.professional.R;
  */
 
 public class NavFactory {
-    public static navButton makeFor(int id, Context cont) {
+    public static NavButton makeFor(int id, Context cont) {
         switch(id) {
             case R.id.switchViewRequesterButton:
-                return new switchViewR(cont);
+                return new SwitchViewReqNav(cont);
             case R.id.requestedTasksRequesterButton:
-                return new requestedTaskR(cont);
+                return new RequestedTaskReqNav(cont);
             case R.id.biddedTasksProviderButton:
-                return new biddedTaskP(cont);
+                return new BiddedTaskProviderNav(cont);
             case R.id.acceptedTasksProviderButton:
-                return new acceptedTasksP(cont);
+                return new AcceptedTasksProviderNav(cont);
             case R.id.searchTasksButton:
-                return new searchTasksP(cont);
+                return new SearchTasksProviderNav(cont);
             case R.id.switchViewProviderButton:
-                return new switchViewP(cont);
+                return new SwitchViewProviderNav(cont);
             case R.id.addTaskRequesterButton:
-                return new addTaskR(cont);
+                return new AddTaskReqNav(cont);
             case R.id.biddedTasksRequesterButton:
-                return new biddedTasksR(cont);
+                return new BiddedTasksReqNav(cont);
             case R.id.acceptedTasksRequesterButton:
-                return new acceptedTasksR(cont);
+                return new AcceptedTasksReqNav(cont);
         }
         return null;
     }

@@ -9,8 +9,8 @@ import professional.team17.com.professional.ProviderTaskListActivity;
  * Created by ag on 2018-03-26.
  */
 
-public class acceptedTasksP extends navButton {
-    public acceptedTasksP(Context con) {
+public class AcceptedTasksProviderNav extends NavButton {
+    public AcceptedTasksProviderNav(Context con) {
         super(con);
     }
 
