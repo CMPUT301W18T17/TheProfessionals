@@ -14,22 +14,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import professional.team17.com.professional.Adapters.ItemClickSupport;
+import professional.team17.com.professional.Adapters.ProviderListViewAdapter;
 
 /**
  *
  * An activity where the provider can see the tasks - with different ui depending
  * On the task status, and input
  * @author Allison
- * @see ServerHelper , ProviderCustomArrayAdapter TaskLIst, Profile
+ * @see TaskListController
  */
 public class ProviderTaskListActivity extends Navigation {
-    private ProviderCustomArrayAdapter adapterHelper;
-    private ListView listView;
     private TaskListController taskListController;
+    private RecyclerView recyclerView;
 
     /**
      * On creation of the activity, set all view objects
@@ -42,29 +46,24 @@ public class ProviderTaskListActivity extends Navigation {
         taskListController = new TaskListController(this);
         taskListController.setType(getIntent().getExtras());
         taskListController.createList();
-        adapterHelper = new ProviderCustomArrayAdapter(this, taskListController.tasklist);
-        listView = findViewById(R.id.provider_taskList_view_list);
-        listView.setAdapter(adapterHelper);
-        listView.setOnItemClickListener(clickListener);
-        adapterHelper.notifyDataSetChanged();
 
-        if (taskListController.checkOffline()){
+        if (taskListController.checkOffline()) {
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.provider_task_list_frame, fragment).commit();
         }
+
+        recyclerView = (RecyclerView) findViewById(R.id.provider_taskList_view_list);
+        recyclerView.setAdapter(new ProviderListViewAdapter(taskListController.tasklist));
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent intention = new Intent(ProviderTaskListActivity.this, ProviderViewTask.class);
+                intention = taskListController.findTask(position, intention);
+                startActivity(intention);
+            }
+        });
     }
-
-    /**
-     * This is an anonymous method to create a click listener for the listview rows. If the row
-     * is selected, it packages up the task selected and the position to ProviderViewTask
-     */
-    private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
-        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            Intent intention = new Intent(ProviderTaskListActivity.this, ProviderViewTask.class);
-            intention = taskListController.findTask(position, intention);
-            startActivity(intention);
-        }
-
-    };
-
 }

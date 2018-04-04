@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--    /**
+    * This method is sourced from https://www.littlerobots.nl/blog/Handle-Android-RecyclerView-Clicks/
+    * by Hugo Visser (it is free to use). This method helps create onClick listeners for recyclerview
+    */-->
+<resources>
+    <item name="item_click_support" type="id" />
+</resources>

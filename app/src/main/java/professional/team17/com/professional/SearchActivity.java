@@ -9,18 +9,17 @@
  */
 package professional.team17.com.professional;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
+
+import professional.team17.com.professional.Adapters.ItemClickSupport;
+import professional.team17.com.professional.Adapters.ProviderListViewAdapter;
 
 
 /**
@@ -32,11 +31,11 @@ import android.widget.Toast;
  * @author Allison
  * @see ProviderCustomArrayAdapter , TaskList, ElasticSearchController
  */
-public class SearchActivity extends Navigation {
-    private ProviderCustomArrayAdapter searchAdapterHelper;
-    private ListView listView;
+public class SearchActivity extends Navigation  {
     private SearchView searchView;
     private TaskListController taskListController;
+    private RecyclerView recyclerView;
+
 
     /**
      * On creation of the activity, set all view objects and onClickListeners.
@@ -51,15 +50,24 @@ public class SearchActivity extends Navigation {
         taskListController = new TaskListController(this);
         taskListController.addAllOpen();
 
-        if (taskListController.checkOffline()){
+        if (taskListController.checkOffline()) {
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.constraintLayoutsearch, fragment).commit();
         }
 
-        searchAdapterHelper = new ProviderCustomArrayAdapter(this, taskListController.tasklist);
-        listView =findViewById(R.id.provider_taskList_view_list);
-        listView.setAdapter(searchAdapterHelper);
-        listView.setOnItemClickListener(clickListener);
+        recyclerView = (RecyclerView) findViewById(R.id.provider_taskList_view_list);
+        recyclerView.setAdapter(new ProviderListViewAdapter(taskListController.tasklist));
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent intention = new Intent(SearchActivity.this, ProviderViewTask.class);
+                intention = taskListController.findTask(position, intention);
+                startActivity(intention);
+            }
+        });
 
         //initialize search input
         searchView = (SearchView) findViewById(R.id.Search_Activity_Input);
@@ -73,35 +81,24 @@ public class SearchActivity extends Navigation {
                 searchView.clearFocus(); //remove focus on submit
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
         });
+
     }
 
-    /**
-     * This will search the server for a match against the search input,
-     * and update the tasklist with the results. If there are no results, it
-     * will display an empty message.
-     * @param query - the string representing the task being searched for
-     */
-    private void search(String query) {
-        taskListController.search(query);
-        searchAdapterHelper.notifyDataSetChanged();
-    }
-
-    /**
-     * This is an anonymous method to create a click listener for the listview rows. If the row
-     * is selected, it packages up the task selected and the position to ViewTaskBidded
-     */
-    private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
-        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            Intent intention = new Intent(SearchActivity.this, ProviderViewTask.class);
-            intention = taskListController.findTask(position, intention);
-            startActivity(intention);
-        }
-
-    };
+            /**
+             * This will search the server for a match against the search input,
+             * and update the tasklist with the results. If there are no results, it
+             * will display an empty message.
+             *
+             * @param query - the string representing the task being searched for
+             */
+            private void search(String query) {
+                taskListController.search(query);
+            }
 
 }
