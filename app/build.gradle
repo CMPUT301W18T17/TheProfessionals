@@ -39,4 +39,5 @@ dependencies {
     implementation files('commons-validator-1.6/commons-validator-1.6.jar')
     compile 'com.google.maps.android:android-maps-utils:0.4+'
     compile 'com.github.bumptech.glide:glide:3.8.0'
+    implementation 'com.android.support:gridlayout-v7:26.1.0'
 }

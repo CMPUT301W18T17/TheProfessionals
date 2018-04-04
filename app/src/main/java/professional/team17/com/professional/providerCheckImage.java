@@ -1,8 +1,6 @@
 package professional.team17.com.professional;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -24,7 +22,7 @@ public class providerCheckImage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.provider_chech_photo);
+        setContentView(R.layout.provider_check_photo);
         imageUpload = (ImageView) findViewById(R.id.imageUpload);
         back = (Button) findViewById(R.id.back);
 
