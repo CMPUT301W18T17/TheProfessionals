@@ -52,13 +52,13 @@ public class Profile implements Serializable {
         this.userName = userName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-       this.reviewList = new ReviewList();
-       this.blackList = new ArrayList<String>();
-       this.blackListedBy = new ArrayList<String>();
-       this.photoString = photoString;
-       this.config = config;
-       this.width = width;
-       this.height = height;
+        this.reviewList = new ReviewList();
+        this.blackList = new ArrayList<String>();
+        this.blackListedBy = new ArrayList<String>();
+        this.photoString = photoString;
+        this.config = config;
+        this.width = width;
+        this.height = height;
         notificationList = new NotificationList();
     }
 

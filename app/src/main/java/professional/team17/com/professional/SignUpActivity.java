@@ -174,7 +174,6 @@ public class SignUpActivity extends AppCompatActivity {
      * Moves the user to a new activity
      */
     private void changeActivity(Class activity) {
-        //can change navigation, this is just a stand in
         Intent intent = new Intent(this, activity);
         // Put extra
 
