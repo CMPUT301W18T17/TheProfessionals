@@ -29,7 +29,7 @@ import professional.team17.com.professional.Adapters.ProviderListViewAdapter;
  *
  *
  * @author Allison
- * @see ProviderCustomArrayAdapter , TaskList, ElasticSearchController
+ * @see  TaskList, ElasticSearchController
  */
 public class SearchActivity extends Navigation  {
     private SearchView searchView;
