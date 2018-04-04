@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 //TODO implement this for project part 5
@@ -44,6 +45,7 @@ public class ProviderTaskController {
         setUsername();
     }
 
+
     private void setUsername() {
         SharedPreferences sharedpreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedpreferences.getString("username", "error");
@@ -60,6 +62,9 @@ public class ProviderTaskController {
         if (c.isOffline() && !task.isRequested()) {
             return true;
         } else return false;
+    }
+    public ArrayList<String> getPhotos(){
+        return this.task.getPhotos();
     }
 
     /**
