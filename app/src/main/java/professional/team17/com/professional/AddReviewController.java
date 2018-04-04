@@ -19,7 +19,7 @@ import android.content.SharedPreferences;
  *
  * @see Review
  * @see ReviewList
- *
+ * @see Profile
  */
 public class AddReviewController {
 

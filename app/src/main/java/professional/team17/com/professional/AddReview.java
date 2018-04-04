@@ -1,3 +1,13 @@
+/*
+ * AddReview
+ *
+ * April 02, 2018
+ *
+ * Copyright @ 2018 Team 17, CMPUT 301, University of Alberta - All Rights Reserved.
+ * You may use, distribute, or modify this code under terms and conditions of the Code of Student Behaviour at the University of Alberta.
+ * You can find a copy of the license in the github wiki for this project.
+ */
+
 package professional.team17.com.professional;
 
 import android.os.Bundle;
@@ -8,10 +18,19 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+/**
+ * Allows the user to add a review to a user who has completed a task for them
+ *
+ * @see AddReviewController
+ */
 public class AddReview extends AppCompatActivity {
 
     private String profile;
 
+    /**
+     * Initializes the activity and sets listeners for buttons
+     * @param savedInstanceState holds value from intent "profile"
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +56,11 @@ public class AddReview extends AppCompatActivity {
 
     }
 
+    /**
+     * retrieves the values from the view and sends them to the AddReviewController
+     *
+     * @see AddReviewController
+     */
     private void onSubmit(){
         AddReviewController controller = new AddReviewController(this);
         EditText commentBox = findViewById(R.id.commentBox);
