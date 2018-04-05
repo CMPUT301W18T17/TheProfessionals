@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="60dp"
         android:layout_marginTop="60dp"
+        android:background="#ffffff"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -30,8 +31,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/amiko"
                 android:text="@string/NA"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,8 +46,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/amiko"
                 android:text="@string/taskDate"
                 android:textColor="@color/colorRequester"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_tasktitleView" />
@@ -58,8 +62,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
+                android:fontFamily="@font/amiko"
                 android:text="@string/Description"
                 android:textColor="@color/colorRequester"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +74,9 @@
             <TextView
                 android:id="@+id/requester_view_taskdateView"
                 style="@style/TaskProviderFields"
+                android:fontFamily="@font/amiko"
                 android:text="@string/NA"
+                android:textSize="12sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/requester_view_taskdate"
                 app:layout_constraintStart_toEndOf="@+id/requester_view_taskdate" />
 
@@ -78,7 +86,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:fontFamily="@font/amiko"
                 android:text="@string/NA"
+                android:textSize="12sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/requester_view_taskstatus"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -89,8 +99,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="16dp"
+                android:fontFamily="@font/amiko"
                 android:text="@string/status"
                 android:textColor="@color/colorRequester"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/requester_view_taskstatusView"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_tasktitleView" />
@@ -103,8 +115,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/amiko"
                 android:text="@string/NA"
                 android:textAlignment="viewStart"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescription" />
@@ -113,31 +127,29 @@
                 android:id="@+id/requester_view_taskViewPhotosButton"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="110dp"
                 android:layout_marginTop="8dp"
+                android:background="#ffffff"
                 android:onClick="viewphoto"
-                android:backgroundTint="@color/cardview_shadow_end_color"
-                android:tint="@color/colorRequester"
+                android:scaleType="fitCenter"
                 app:layout_constraintEnd_toStartOf="@+id/viewLocationButton"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescriptionView"
-                app:srcCompat="@android:drawable/ic_menu_camera" />
+                app:srcCompat="@drawable/view_image_icon" />
 
             <ImageButton
                 android:id="@+id/requester_view_taskviewLocationButton"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="60dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:backgroundTint="@color/cardview_shadow_end_color"
-                android:tint="@color/colorRequester"
+                android:layout_marginTop="13dp"
+                android:background="#ffffff"
+                android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/requester_view_taskViewPhotosButton"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescriptionView"
-                app:srcCompat="@android:drawable/ic_dialog_map" />
+                app:srcCompat="@drawable/location_icon" />
 
             <ListView
                 android:id="@+id/requester_view_taskbidListView"
@@ -152,13 +164,13 @@
 
             <ImageButton
                 android:id="@+id/requester_view_taskbackButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:backgroundTint="@color/cardview_shadow_end_color"
-                android:tint="@android:color/darker_gray"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="#ffffff"
+                android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+                app:srcCompat="@drawable/back_icon" />
 
             <TextView
                 android:id="@+id/requester_view_taskbidder"
@@ -167,9 +179,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
+                android:fontFamily="@font/amiko"
                 android:text="@string/Task_Provider"
                 android:textColor="@color/colorRequester"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
@@ -182,9 +195,10 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
                 android:clickable="true"
+                android:fontFamily="@font/amiko"
                 android:onClick="viewProfileName"
                 android:text="@string/NA"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/requester_view_taskbidder"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
 
@@ -195,9 +209,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="32dp"
+                android:fontFamily="@font/amiko"
                 android:text="@string/Accepted_bid"
                 android:textColor="@color/colorRequester"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/requester_view_taskbidAmountView"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskviewLocationButton" />
@@ -209,15 +224,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="32dp"
+                android:fontFamily="@font/amiko"
                 android:text="@string/NA"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskviewLocationButton" />
 
             <TextView
                 android:id="@+id/requester_view_tasksetStatus"
                 style="@style/task_providerStyle"
+                android:fontFamily="@font/amiko"
                 android:text="Set Status To:"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskbidder" />
@@ -228,6 +246,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:background="#dddddd"
+                android:fontFamily="@font/amiko"
                 android:text="Requested"
                 app:layout_constraintStart_toEndOf="@+id/requester_view_tasksetStatus"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskacceptedBid" />
@@ -237,8 +257,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
+                android:background="#dddddd"
+                android:fontFamily="@font/amiko"
                 android:text="Done"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/requester_view_taskrequestedButton"

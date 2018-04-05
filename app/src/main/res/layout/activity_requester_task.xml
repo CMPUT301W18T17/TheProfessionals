@@ -15,6 +15,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="60dp"
         android:layout_marginTop="60dp"
+        android:background="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,9 +29,11 @@
             android:layout_marginLeft="28dp"
             android:layout_marginTop="8dp"
             android:ems="10"
+            android:fontFamily="@font/amiko"
             android:hint="@string/task_description_field"
             android:inputType="textPersonName"
             android:maxLength="300"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TaskNameField" />
@@ -45,8 +48,10 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:focusableInTouchMode="false"
+            android:fontFamily="@font/amiko"
             android:hint="@string/address_field"
             android:inputType=""
+            android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/map_task"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -60,9 +65,11 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:ems="10"
+            android:fontFamily="@font/amiko"
             android:hint="@string/task_title_field"
             android:inputType="textPersonName"
             android:maxLength="30"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -72,8 +79,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="25dp"
+            android:fontFamily="@font/amiko"
             android:text="@string/date_format"
             app:layout_constraintEnd_toStartOf="@+id/calendarButton"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,15 +89,15 @@
 
         <ImageButton
             android:id="@+id/addPhotoButton"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/textualAddressField"
-            app:layout_constraintStart_toEndOf="@+id/photoTextView"
+            android:layout_width="40"
+            android:layout_height="40"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="25dp"
+            android:background="@android:color/background_light"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toStartOf="@+id/deleteButton"
             app:layout_constraintTop_toBottomOf="@+id/textualDateView"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
+            app:srcCompat="@drawable/add_image_icon_grey" />
 
         <ImageButton
             android:id="@+id/calendarButton"
@@ -107,11 +115,11 @@
             android:id="@+id/map_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/submitButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textualAddressField" />
@@ -121,7 +129,8 @@
             android:layout_width="202dp"
             android:layout_height="34dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/amiko"
             android:text="@string/add_photo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textualDateView" />
@@ -133,26 +142,24 @@
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:background="#dddddd"
+            android:fontFamily="@font/amiko"
             android:text="@string/add_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/map_task" />
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
+        <ImageButton
             android:id="@+id/deleteButton"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="DELE"
-            app:layout_constraintBottom_toTopOf="@+id/textualAddressField"
+            android:layout_marginTop="25dp"
+            android:background="@android:color/background_light"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/addPhotoButton"
-            app:layout_constraintTop_toBottomOf="@+id/calendarButton" />
+            app:layout_constraintTop_toBottomOf="@+id/textualDateView"
+            app:srcCompat="@drawable/delete_icon" />
 
     </android.support.constraint.ConstraintLayout>
 
