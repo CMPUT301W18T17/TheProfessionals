@@ -214,7 +214,7 @@ public abstract class RequesterTaskActivity extends Navigation{
     public abstract void endActivity();
     public abstract void setTitle();
     public abstract void addToServer(String title, String description);
-    
+
     /**
      * Displays the DatePickerDialog fragment, allowing the user to select a date.
      */
