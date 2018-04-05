@@ -28,16 +28,25 @@ import java.util.Locale;
  * @see RequesterAddTaskActivity
  */
 public class RequesterEditTaskActivity extends RequesterTaskActivity {
+    /**
+     * Sets the title
+     */
     public void setTitle(){
         this.setActivityTitleRequester("Edit Task");
     }
 
+    /**
+     * Sets a new controller with current activity as context
+     */
     public void setController(){
         requesterTaskController = new RequesterTaskController(this);
     }
 
+    /**
+     * Get task ID from previous activity
+     */
     public void getTask(){
-        /* Get task ID from previous activity, then get task from server */
+        /* Get task ID  */
         try {
             getBundle();
         } catch (Exception e) {
@@ -47,6 +56,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
 
     /**
      * Gets the task ID from the previous activity. Throws an exception if the ID is not found.
+     * Then get task from server
      * @throws Exception If the bundle is empty (the task is not found).
      */
     private void getBundle() throws Exception{

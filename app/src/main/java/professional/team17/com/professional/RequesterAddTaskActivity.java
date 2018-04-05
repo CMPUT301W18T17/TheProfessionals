@@ -23,14 +23,23 @@ import android.os.Bundle;
 public class RequesterAddTaskActivity extends RequesterTaskActivity {
     private static final String TAG = "RequesterADTaskActivity";
 
+    /**
+     * Sets the title
+     */
     public void setTitle() {
         this.setActivityTitleRequester("Add a Task");
     }
 
+    /**
+     * Sets a new controller with current activity as context
+     */
     public void setController(){
         requesterTaskController = new RequesterTaskController(this);
     }
 
+    /**
+     * Does not get task since task is not pre-existent
+     */
     public void getTask(){}
 
     /**

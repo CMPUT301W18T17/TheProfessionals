@@ -43,7 +43,7 @@ public abstract class RequesterTaskActivity extends Navigation{
     protected SharedPreferences sharedPreferences;
     protected SharedPreferences.Editor editor;
     /* other variables */
-    protected Task task;
+
     protected String dateString;
     protected String locationString;
     protected LatLng latLng;
@@ -160,6 +160,9 @@ public abstract class RequesterTaskActivity extends Navigation{
 
     }
 
+    /**
+     * Upon clicking on add button, check task info before adding to server.
+     */
     public void setSubmitButtonOnClickListener() {
         submitButton.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -203,11 +206,15 @@ public abstract class RequesterTaskActivity extends Navigation{
         });
     }
 
+    /**
+     * Abstract methods
+     */
     public abstract void setController();
     public abstract void getTask();
     public abstract void endActivity();
     public abstract void setTitle();
     public abstract void addToServer(String title, String description);
+    
     /**
      * Displays the DatePickerDialog fragment, allowing the user to select a date.
      */
