@@ -7,25 +7,27 @@
 
     <ImageView
         android:id="@+id/biddedTasksProviderButton"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:scaleType="fitEnd"
+        android:layout_width="57dp"
+        android:layout_height="71dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:onClick="onClick"
+        android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/acceptedTasksProviderButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bidded_tasks_provider" />
 
     <ImageView
         android:id="@+id/acceptedTasksProviderButton"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:scaleType="fitEnd"
+        android:layout_width="55dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:onClick="onClick"
+        android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/searchTasksButton"
         app:layout_constraintHorizontal_bias="0.5"
@@ -34,11 +36,12 @@
 
     <ImageView
         android:id="@+id/searchTasksButton"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:scaleType="fitEnd"
+        android:layout_width="57dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:onClick="onClick"
+        android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/taskMapButton"
         app:layout_constraintHorizontal_bias="0.5"
@@ -47,27 +50,41 @@
 
     <ImageView
         android:id="@+id/taskMapButton"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:scaleType="fitEnd"
+        android:layout_width="59dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:onClick="onClick"
+        android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/switchViewProviderButton"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/searchTasksButton"
         app:srcCompat="@drawable/task_map_provider" />
 
     <ImageView
-        android:id="@+id/switchViewProviderButton"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:scaleType="fitEnd"
+        android:id="@+id/doneTasksProviderButton"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:clickable="true"
         android:onClick="onClick"
+        android:scaleType="fitEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/switchViewProviderButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/taskMapButton"
+        app:srcCompat="@drawable/task_map_provider" />
+
+    <ImageView
+        android:id="@+id/switchViewProviderButton"
+        android:layout_width="72dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:scaleType="fitEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/taskMapButton"
         app:srcCompat="@drawable/switch_view_provider" />
 
     <ImageView
@@ -109,7 +126,8 @@
         android:layout_height="409dp"
         app:layout_constraintBottom_toTopOf="@+id/biddedTasksProviderButton"
         app:layout_constraintTop_toBottomOf="@+id/titleBarBGProvider"
-        tools:layout_editor_absoluteX="-12dp">
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp">
 
     </android.support.constraint.ConstraintLayout>
 

@@ -42,12 +42,19 @@ public class TaskListController {
         if (TaskStatus.getInstance().isAssigned()) {
             tasklist = serverHelper.getTasksBidded(username, "Assigned");
         }
+        if (TaskStatus.getInstance().isDone()){
+            tasklist = serverHelper.getTasksBidded(username, "Done");
+
+        }
+        Log.i("ETETE", "createList: "+tasklist);
     }
 
     public Boolean checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
         if (c.isOffline()) {
             return true;
+
+
         } else return false;
     }
 
@@ -77,7 +84,10 @@ public class TaskListController {
             if (TaskStatus.getInstance().isBidded()) {
                 tasklist = serverHelper.getTasksRequester(username, "Bidded");
             }
+            if (TaskStatus.getInstance().isDone()) {
+                tasklist = serverHelper.getTasksRequester(username, "Done");
         }
+    }
 
     public void addAllOpen() {
         tasklist = serverHelper.getTasksSearch(username);

@@ -232,22 +232,21 @@
                                             app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_Date"
                                             app:layout_constraintStart_toEndOf="@+id/provider_view_task_Date" />
 
-                                        <Button
+                                        <ImageButton
                                             android:id="@+id/provider_view_task_photo"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginBottom="8dp"
-                                            android:layout_marginEnd="8dp"
-                                            android:onClick="photoClick"
-                                            android:layout_marginRight="16dp"
                                             android:layout_marginStart="8dp"
                                             android:layout_marginTop="8dp"
+                                            android:background="@color/cardview_shadow_end_color"
+                                            android:onClick="photoClick"
                                             android:text="check photo"
-                                            app:layout_constraintBottom_toBottomOf="parent"
-                                            app:layout_constraintEnd_toEndOf="parent"
-                                            app:layout_constraintHorizontal_bias="0.967"
-                                            app:layout_constraintRight_toRightOf="parent"
-                                            app:layout_constraintTop_toTopOf="parent" />
+                                            android:tint="@color/colorProvider"
+                                            app:layout_constraintBottom_toBottomOf="@+id/provider_view_task_description"
+                                            app:layout_constraintStart_toEndOf="@+id/provider_view_task_description"
+                                            app:layout_constraintTop_toTopOf="@+id/provider_view_task_description"
+                                            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
 
                                         <TextView
                                             android:id="@+id/provider_view_task_userName"
@@ -300,23 +299,6 @@
                                             android:textStyle="bold"
                                             app:layout_constraintBaseline_toBaselineOf="@+id/provider_view_task_statusType"
                                             app:layout_constraintStart_toStartOf="parent" />
-
-                                        <RatingBar
-                                            android:id="@+id/provider_view_rating_bar"
-                                            android:layout_width="54dp"
-                                            android:layout_height="40dp"
-                                            android:layout_weight="1"
-                                            android:isIndicator="true"
-                                            android:numStars="1"
-                                            android:scaleX=".5"
-                                            android:scaleY=".5"
-                                            android:stepSize=".1"
-                                            android:transformPivotX="0dp"
-                                            android:transformPivotY="0dp"
-                                            android:visibility="invisible"
-                                            app:layout_constraintEnd_toEndOf="parent"
-                                            app:layout_constraintStart_toEndOf="@+id/provider_view_task_userName"
-                                            app:layout_constraintTop_toTopOf="@+id/provider_view_rating" />
 
                                         <TextView
                                             android:id="@+id/provider_view_rating"

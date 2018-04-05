@@ -69,7 +69,7 @@ public class RequesterCustomArrayAdapter extends ArrayAdapter<Task> {
                                 v.setTag(requesterViewHolder);
                         }
 
-                        else if (task.isAssigned()) {
+                        else if (task.isAssigned() || task.isDone()) {
                                 v = LayoutInflater.from(getContext()).inflate(R.layout.requester_assigned_row, parent, false);
                                 //get view
                                 TextView statusTextField = (TextView) v.findViewById(R.id.requester_assigned_status);
@@ -89,7 +89,7 @@ public class RequesterCustomArrayAdapter extends ArrayAdapter<Task> {
                         else if (task.isBidded()){
                                 requesterViewHolder = (RequesterViewHolder) v.getTag();
                         }
-                        else if (task.isAssigned()) {
+                        else if (task.isAssigned() || task.isDone()) {
                                 requesterViewHolder = (RequesterViewHolder) v.getTag();
                         }
                 }
@@ -104,7 +104,7 @@ public class RequesterCustomArrayAdapter extends ArrayAdapter<Task> {
                         requesterViewHolder.getTaskTitleTextField().setText(task.getName());
                 }
 
-                else if (task.isAssigned()) {
+                else if (task.isAssigned() || task.isDone()) {
                         requesterViewHolder.getStatusTextField().setText(task.getStatus());
                         // Once assigned, all other bids are removed, only one left
                         requesterViewHolder.getUserNameTextField().setText(task.getBids().getBid(0).getName());

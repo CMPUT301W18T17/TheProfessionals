@@ -2,9 +2,6 @@ package professional.team17.com.professional;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-/**
- * Created by Logan Yue on 2018-02-20.
- */
 
 public class BidTest extends ActivityInstrumentationTestCase2 {
 
@@ -13,7 +10,7 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testGetName(){
-        String name = "person";
+        String name = "Tester";
         double amount = 10.99;
         Bid bid = new Bid(name,amount);
 
@@ -21,18 +18,18 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testSetName(){
-        String name = "person";
+        String name = "Tester";
         double amount = 10.99;
         Bid bid = new Bid(name,amount);
 
-        name = "notPerson";
-        bid.setName(name);
+        String name2 = "Tester2";
+        bid.setName(name2);
 
-        assertEquals(name, bid.getName());
+        assertEquals(name2, bid.getName());
     }
 
     public void testGetAmount(){
-        String name = "person";
+        String name = "Tester";
         double amount = 10.99;
         Bid bid = new Bid(name,amount);
 
@@ -40,56 +37,20 @@ public class BidTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testSetAmount(){
-        String name = "person";
+        String name = "Tester";
         double amount = 10.99;
         Bid bid = new Bid(name,amount);
 
-        amount = 9.99;
-        bid.setAmount(amount);
-        assertEquals(amount, bid.getAmount());
+        double amount2 = 9.99;
+        bid.setAmount(amount2);
+        assertEquals(amount2, bid.getAmount());
 
-        boolean exception = false;
-        try{
-            bid.setAmount(10.2831);
-        } catch(IllegalArgumentException e){
-            exception = true;
-        }
-
-        assertTrue(exception);
-
-    }
-
-    public void testUpdateAmount(){
-        String name = "person";
-        double amount = 10.99;
-        Bid bid = new Bid(name,amount);
-        bid.setAmount(34.99);
-        assertEquals(34.99, bid.getAmount());
     }
 
     public void testAmountString(){
-        String name = "person";
+        String name = "Tester";
         double amount = 10.99;
         Bid bid = new Bid(name,amount);
         assertEquals(bid.getAmountAsString(), "10.99");
-    }
-
-    public void testGetStatus(){
-        String name = "person";
-        double amount = 10.99;
-        Bid bid = new Bid(name,amount);
-        String status = "open";
-
-      //  assertEquals(bid.getStatus(), status);
-    }
-
-    public void testSetStatus(){
-        String name = "person";
-        double amount = 10.99;
-        Bid bid = new Bid(name,amount);
-
-       // bid.setStatus("accepted");
-
-       // assertEquals("accepted", bid.getStatus());
     }
 }

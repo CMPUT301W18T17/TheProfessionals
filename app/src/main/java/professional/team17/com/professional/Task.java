@@ -85,6 +85,19 @@ public class Task implements Serializable{
         this.photos = photos;
     }
 
+    public Task(String profileName, String name, String description) {
+        this.profileName = profileName;
+        this.name = name;
+        this.description = description;
+        this.location = "";
+        this.date = null;
+        this.uniqueID = null;
+        this.status = "Requested";
+        this.bids = new BidList();
+        this.latLng = null;
+        this.photos = new ArrayList<>();
+    }
+
     /**
      * @param profileName - String username of requested
      * @param name - String name of the task
@@ -104,6 +117,7 @@ public class Task implements Serializable{
         this.latLng = latLng;
         this.photos = photos;
     }
+
 
 
     /**
