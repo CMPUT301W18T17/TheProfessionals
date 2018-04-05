@@ -22,11 +22,20 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
     private String selectedImageName;
     private static final int RESULT_LOAD_IMAGE = 1;
     private static final int CAMERA_REQUEST= 2;
+    private String title, description, location, date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_photo);
+
+        Intent intent = getIntent();
+        title = intent.getStringExtra("Title");
+        description = intent.getStringExtra("Description");
+        location = intent.getStringExtra("Location");
+        date = intent.getStringExtra("Date");
+
+
         imageUpload = (ImageView)findViewById(R.id.imageUpload);
         bUpload = (Button)findViewById(R.id.bImageUpload);
         bTakePhoto = (Button)findViewById(R.id.bTakePhoto);
@@ -45,6 +54,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                 break;
             case R.id.bImageUpload:
                 Intent yourIntent = new Intent(this, RequesterAddTaskActivity.class);
+                putInfor(yourIntent);
                 Bitmap bmp = ((BitmapDrawable)imageUpload.getDrawable()).getBitmap(); // store the image in your bitmap
                 //System.out.println("------------------------------------------------------");
                 //System.out.println(((BitmapDrawable)imageUpload.getDrawable()).getBitmap());
@@ -89,4 +99,20 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                     break;
             }
         }
-    }}
+    }
+
+    private void putInfor(Intent intent) {
+        // Task Title
+        intent.putExtra("Title", title);
+
+        // Task Description
+        intent.putExtra("Description", description);
+
+        // Location
+        intent.putExtra("Location", location);
+
+        // Date
+        intent.putExtra("Date", date);
+    }
+
+}

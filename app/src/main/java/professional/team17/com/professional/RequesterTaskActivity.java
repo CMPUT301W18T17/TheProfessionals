@@ -52,6 +52,8 @@ public abstract class RequesterTaskActivity extends Navigation{
     protected String photo;
     protected Integer a = 1;
 
+    private String infor, title, description, location, date;
+
     protected RequesterTaskController requesterTaskController;
 
     /**
@@ -79,38 +81,26 @@ public abstract class RequesterTaskActivity extends Navigation{
         photoTextView = (TextView) findViewById(R.id.photoTextView);
         photos = new ArrayList<String>();
         sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        editor.putString("name", "Elena");
-        editor.putInt("idName", 12);
-        editor.apply();
+
+
+        Intent intent = getIntent();
+        title = intent.getStringExtra("Title");
+        description = intent.getStringExtra("Description");
+        location = intent.getStringExtra("Location");
+        date = intent.getStringExtra("Date");
+
+        // Set text back
+        setter(nameField, title);
+        setter(descriptionField, description);
+        setter(locationField, location);
+        textualDateView.setText(date);
 
         /* Set all onClickListeners */
         if(photos.size() <= 5){
             addPhotoButton.setOnClickListener(new ImageButton.OnClickListener() {
              @Override
                 public void onClick(View v) {
-                 String title = nameField.getText().toString();
-                 String description = descriptionField.getText().toString();
-                 locationString = locationField.getText().toString();
-                 dateString = (String) textualDateView.getText();
-                 //use the sharepreference to keep the data;
-                 if (title != null){
-                     editor.putString("title", title);
-                 }
-                 if (description != null) {
-                     editor.putString("description", description);
-                 }
-                 if (locationString != null){
-                     editor.putString("location", locationString);
-                 }
-                 if (dateString != null){
-                     editor.putString("dateString", dateString);
-                 }
-                 if (photos != null){
-                     editor.putString("dateString", dateString);
-                 }
-                 Intent intent = new Intent( RequesterTaskActivity.this, TaskPhotoActivity.class);
-                    startActivityForResult(intent, 0);
+                 changeActivity(TaskPhotoActivity.class);
                 }
              });}
         if(getIntent().hasExtra("yourImage")) {
@@ -251,5 +241,33 @@ public abstract class RequesterTaskActivity extends Navigation{
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
+    private void changeActivity(Class activity) {
+        Intent intent = new Intent(this, activity);
+        // Put extra
 
+        // Task Title
+        infor = nameField.getText().toString();
+        intent.putExtra("Title", infor);
+
+        // Task Description
+        infor = descriptionField.getText().toString();
+        intent.putExtra("Description", infor);
+
+        // Location
+        infor = locationField.getText().toString();
+        intent.putExtra("Location", infor);
+
+        // Date
+        infor = (String) textualDateView.getText();
+        intent.putExtra("Date", infor);
+
+        startActivityForResult(intent, 0);
+        finish();
+    }
+
+    private void setter(EditText name, String information) {
+        if (information != null) {
+            name.setText(information);
+        }
+    }
 }
