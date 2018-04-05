@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="professional.team17.com.professional.TaskPhotoActivity">
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
+        <ImageView
+            android:id="@+id/imageUpload"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="250dp"
+            android:layout_height="450dp" />
 
         <Button
             android:id="@+id/back"
@@ -26,8 +28,6 @@
             android:layout_height="wrap_content"
             android:onClick="next"
             android:text="next" />
-
-
     </LinearLayout>
 
 </ScrollView>
