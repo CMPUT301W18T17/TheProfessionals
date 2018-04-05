@@ -28,9 +28,12 @@ import java.util.Locale;
  * @see RequesterAddTaskActivity
  */
 public class RequesterEditTaskActivity extends RequesterTaskActivity {
-
     public void setTitle(){
         this.setActivityTitleRequester("Edit Task");
+    }
+
+    public void setController(){
+        requesterTaskController = new RequesterTaskController(this);
     }
 
     public void getTask(){
@@ -80,7 +83,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
      * @param description Task description
      */
     public void addToServer(String title, String description){
-        requesterTaskController.addTaskToServer(title, description, locationString, dateString, latLng, photos);
+        requesterTaskController.addOldTaskToServer(title, description, locationString, dateString, latLng, photos);
     }
 
     /**

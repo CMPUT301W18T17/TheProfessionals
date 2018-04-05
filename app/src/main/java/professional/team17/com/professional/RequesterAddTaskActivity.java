@@ -27,6 +27,9 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
         this.setActivityTitleRequester("Add a Task");
     }
 
+    public void setController(){
+        requesterTaskController = new RequesterTaskController(this);
+    }
 
     public void getTask(){}
 
@@ -44,7 +47,7 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
      */
     public void endActivity() {
         Bundle bundle = new Bundle(2);
-        bundle.putString("ID", task.getUniqueID());
+        bundle.putString("ID", requesterTaskController.getCurrentTaskId());
         bundle.putString("Status", "Requested");
         Intent intent = new Intent(RequesterAddTaskActivity.this, RequesterViewListActivity.class);
         intent.putExtras(bundle);
@@ -63,8 +66,6 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
 
         //TODO photo and location handling in project 5
         //for photos
-
-
 
 }
 

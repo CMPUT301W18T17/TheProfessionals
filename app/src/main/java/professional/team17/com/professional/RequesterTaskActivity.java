@@ -65,6 +65,7 @@ public abstract class RequesterTaskActivity extends Navigation{
 
         setContentView(R.layout.activity_requester_task);
         setTitle();
+        setController();
         /* Set all view objects */
         //Button submitButton = (Button) findViewById(R.id.button2);
         nameField = (EditText) findViewById(R.id.TaskNameField);
@@ -82,9 +83,6 @@ public abstract class RequesterTaskActivity extends Navigation{
         editor.putString("name", "Elena");
         editor.putInt("idName", 12);
         editor.apply();
-
-
-        requesterTaskController = new RequesterTaskController(this);
 
         /* Set all onClickListeners */
         if(photos.size() <= 5){
@@ -205,6 +203,7 @@ public abstract class RequesterTaskActivity extends Navigation{
         });
     }
 
+    public abstract void setController();
     public abstract void getTask();
     public abstract void endActivity();
     public abstract void setTitle();
