@@ -61,7 +61,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
     private TextView taskLowBidDollar;
     private TextView taskMyBidDollar;
     private ImageButton viewMapButton;
-    private Button button5;
+    private ImageButton  button5;
     TextView taskLowBidDesc;
 
     private ArrayList<String> photos;
@@ -97,7 +97,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
         appendButton = (ImageButton) findViewById(R.id.provider_view_task_manageBid);
         taskAddressTextField = (TextView) findViewById(R.id.provider_view_task_address);
         viewMapButton = (ImageButton) findViewById(R.id.provider_view_map_button);
-        button5 = (Button) findViewById(R.id.provider_view_task_photo);
+        button5 = (ImageButton) findViewById(R.id.provider_view_task_photo);
 
         this.setActivityTitleProvider("View Task");
 
