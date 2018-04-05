@@ -79,14 +79,4 @@ public class Bid implements Serializable{
         this.amount = amount;
     }
 
-    /* ???? CAN WE GET RID OF?
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    */
 }
