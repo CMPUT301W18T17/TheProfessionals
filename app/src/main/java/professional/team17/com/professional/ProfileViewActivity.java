@@ -42,6 +42,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
     protected Bitmap.Config photoConfig;
     protected int photoWidth;
     protected int photoHeight;
+    protected ProfilePhoto profilePhoto;
 
     protected ServerHelper serverHelper;
 
@@ -90,11 +91,12 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
 
     void addPhoto(Profile userProfile){
         // Photo Part
-        photoConfig = userProfile.getConfig();
+        profilePhoto = userProfile.getProfilePhoto();
+        photoConfig = profilePhoto.getConfig();
         if (photoConfig != null) {
-            photoString = userProfile.getPhoto();
-            photoHeight = userProfile.getHeight();
-            photoWidth = userProfile.getWidth();
+            photoString = profilePhoto.getPhotoString();
+            photoHeight = profilePhoto.getHeight();
+            photoWidth = profilePhoto.getWidth();
             photo = new Photo(photoString, photoConfig, photoWidth, photoHeight);
             profilePic.setImageDrawable(photo.toDrawable(photo.byteStringToBitMap()));
         }

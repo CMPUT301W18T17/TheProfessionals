@@ -39,6 +39,7 @@ public class Profile implements Serializable {
      private Bitmap.Config config;
      private  int width;
      private  int height;
+     private ProfilePhoto profilePhoto;
 
     /**
      *
@@ -47,7 +48,7 @@ public class Profile implements Serializable {
      * @param email  - the string email of the user
      * @param phoneNumber - the string phone number of the user
      */
-    public Profile(String name, String userName, String email, String phoneNumber, String photoString, Bitmap.Config config, int width, int height) {
+    public Profile(String name, String userName, String email, String phoneNumber, ProfilePhoto profilePhoto) {
         this.name = name;
         this.userName = userName;
         this.email = email;
@@ -55,10 +56,7 @@ public class Profile implements Serializable {
         this.reviewList = new ReviewList();
         this.blackList = new ArrayList<String>();
         this.blackListedBy = new ArrayList<String>();
-        this.photoString = photoString;
-        this.config = config;
-        this.width = width;
-        this.height = height;
+        this.profilePhoto = profilePhoto;
         notificationList = new NotificationList();
     }
 
@@ -203,27 +201,14 @@ public class Profile implements Serializable {
         blackList.remove(profile);
     }
 
-    public void setPhoto(String photoString){
-        this.photoString = photoString;
+    public void setProfilePhoto(ProfilePhoto profilePhoto){
+        this.profilePhoto = profilePhoto;
     }
 
-    public String getPhoto(){
-        return photoString;
+    public ProfilePhoto getProfilePhoto(){
+        return this.profilePhoto;
     }
 
-    public void setConfig(Bitmap.Config config){
-        this.config = config;
-    }
-
-    public Bitmap.Config getConfig(){return config;}
-
-    public void setWidth(int width){this.width = width;}
-
-    public int getWidth() {return width;}
-
-    public void setHeight(int height){this.height = height;}
-
-    public int getHeight() {return  height;}
 
     public void setNotificationList(NotificationList notificationList){
         this.notificationList = notificationList;

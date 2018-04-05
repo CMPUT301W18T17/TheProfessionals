@@ -53,6 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
     private int photoWidth;
     private int photoHeight;
     private ValidationController validationController;
+    private ProfilePhoto profilePhoto;
 
 
     @Override
@@ -144,7 +145,9 @@ public class SignUpActivity extends AppCompatActivity {
                     photoWidth = 0;
                 }
 
-                Profile profile = new Profile(name, username, email, phoneNumber, photoString, photoConfig, photoWidth, photoHeight);
+                profilePhoto = new ProfilePhoto(photoString, photoConfig, photoWidth, photoHeight);
+
+                Profile profile = new Profile(name, username, email, phoneNumber, profilePhoto);
 
                 if (!(serverHelper.addProfile(profile))) {
                     errorBox.setText(R.string.cannotCreateProfile);

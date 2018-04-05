@@ -47,6 +47,7 @@ public class EditMyProfileActivity extends AppCompatActivity {
     private String information;
     private String path, name, eMail, phoneNumber;
     private  int startTime;
+    private ProfilePhoto profilePhoto;
 
     private ServerHelper serverHelper;
 
@@ -83,11 +84,13 @@ public class EditMyProfileActivity extends AppCompatActivity {
         editPhone.setText(userProfile.getPhoneNumber());
 
         // Display photo Part
-        photoConfig = userProfile.getConfig();
+        // Photo Part
+        profilePhoto = userProfile.getProfilePhoto();
+        photoConfig = profilePhoto.getConfig();
         if (photoConfig != null) {
-            photoString = userProfile.getPhoto();
-            photoHeight = userProfile.getHeight();
-            photoWidth = userProfile.getWidth();
+            photoString = profilePhoto.getPhotoString();
+            photoHeight = profilePhoto.getHeight();
+            photoWidth = profilePhoto.getWidth();
             photo = new Photo(photoString, photoConfig, photoWidth, photoHeight);
             photoButton.setImageDrawable(photo.toDrawable(photo.byteStringToBitMap()));
         }
@@ -132,10 +135,9 @@ public class EditMyProfileActivity extends AppCompatActivity {
                     photoConfig = photo.pathGetConfig();
                     photoHeight = photo.pathGetHeight();
                     photoWidth = photo.pathGetWidth();
-                    userProfile.setPhoto(photoString);
-                    userProfile.setConfig(photoConfig);
-                    userProfile.setHeight(photoHeight);
-                    userProfile.setWidth(photoWidth);
+
+                    profilePhoto = new ProfilePhoto(photoString, photoConfig, photoWidth, photoHeight);
+                    userProfile.setProfilePhoto(profilePhoto);
                 }
                 else{
                     if (startTime == 1 && bitmap != null){
@@ -143,10 +145,9 @@ public class EditMyProfileActivity extends AppCompatActivity {
                         photoConfig = photo.bitmapGetConfig();
                         photoHeight = photo.bitmapGetHeight();
                         photoWidth = photo.bitmapGetWidth();
-                        userProfile.setPhoto(photoString);
-                        userProfile.setConfig(photoConfig);
-                        userProfile.setHeight(photoHeight);
-                        userProfile.setWidth(photoWidth);
+
+                        profilePhoto = new ProfilePhoto(photoString, photoConfig, photoWidth, photoHeight);
+                        userProfile.setProfilePhoto(profilePhoto);
                     }
                 }
                 serverHelper.addProfile(userProfile);
