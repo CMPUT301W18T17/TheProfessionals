@@ -99,7 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
-     * Overides the back button
+     * Overrides the back button
      */
 
     @Override
