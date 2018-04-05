@@ -32,9 +32,10 @@
                     android:layout_height="31dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/amiko"
                     android:text="TaskTitle - "
-                    android:textSize="21sp"
+                    android:textColor="@color/colorProvider"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
@@ -43,9 +44,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/amiko"
                     android:paddingRight="20dp"
                     android:text="Assigned"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/search_task_row_title"
                     app:layout_constraintStart_toEndOf="@+id/search_task_row_title" />
             </android.support.constraint.ConstraintLayout>
@@ -68,7 +70,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/amiko"
                     android:text="Lowbid: $"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
@@ -77,7 +81,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/amiko"
                     android:text="0.00"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/search_task_row_lowbid" />
 
                 <TextView
@@ -86,7 +92,9 @@
                     android:layout_height="20dp"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
+                    android:fontFamily="@font/amiko"
                     android:text="My bid: $"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/search_task_row_lowbidAmount"
                     tools:layout_editor_absoluteY="0dp" />
 
@@ -95,7 +103,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
+                    android:fontFamily="@font/amiko"
                     android:text="0.00"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/search_task_row_mybid" />
 
             </android.support.constraint.ConstraintLayout>
@@ -118,8 +128,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginRight="15dp"
+            android:fontFamily="@font/amiko"
             android:text="@string/username"
-            android:textSize="19sp"
+            android:textSize="12sp"
             tools:layout_width="wrap_content" />
 
     </LinearLayout>

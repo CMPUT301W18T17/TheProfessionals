@@ -32,7 +32,7 @@
     <string name="Address">Address</string>
     <string name="taskDate">Task Completed By</string>
     <string name="Description">Description</string>
-    <string name="Task_Requester">Task Requested</string>
+    <string name="Task_Requester">Task Requester</string>
     <string name="Task_Provider">Task Provider</string>
     <string name="Accepted_bid">Accepted Bid</string>
     <string name="title_activity_maps_search_tasks">Map</string>

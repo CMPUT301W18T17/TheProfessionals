@@ -9,12 +9,14 @@
 
     <ImageButton
         android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#ffffff"
         android:onClick="blowup"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+        app:srcCompat="@drawable/back_icon" />
 
     <ImageView
         android:id="@+id/imageView4"
