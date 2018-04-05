@@ -1,15 +1,10 @@
 package professional.team17.com.professional;
 
 import android.test.ActivityInstrumentationTestCase2;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by ag on 2018-02-24.
- */
 
 public class TaskTest extends ActivityInstrumentationTestCase2 {
 
@@ -22,35 +17,35 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
     public void testGetProfileName() {
 
 
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         assertEquals("Testing", task.getProfileName());
     }
 
     public void testSetProfileName() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         task.setProfileName("new Name");
         assertEquals("new Name", task.getProfileName());
     }
 
     public void testGetNameTest() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         assertEquals("Tast Title", task.getName());
     }
 
     public void testSetName() {
         String name  = "Testing";
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         task.setName(name);
         assertEquals(name, task.getName());
     }
 
     public void testGetDescription() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         assertEquals("Task Description", task.getDescription());
     }
 
     public void testSetDescription() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         assertEquals("Task Description", task.getDescription());
         String newDesc = "Testing";
         task.setDescription(newDesc);
@@ -59,101 +54,54 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
 
     public void testGetLocation() {
         String location = "location";
-        Task task = new Task("Testing", "Tast Title", "Task Description", location,  new Date(), );
+        LatLng coords = new LatLng(0,0);
+        ArrayList<String> list = new ArrayList<>();
+        Task task = new Task("Testing", "Tast Title", "Task Description", location, coords, list);
         assertEquals(location, task.getLocation());
+        assertEquals(coords, task.getLatLng());
     }
 
     public void testSetLocation() {
         String location = "location";
-        Task task = new Task("Testing", "Tast Title", "Task Description", location,  new Date(), );
+        LatLng coords = new LatLng(0,0);
+        ArrayList<String> list = new ArrayList<>();
+        Task task = new Task("Testing", "Tast Title", "Task Description", location, coords, list);
         String location2 = "Testing";
-        task.setLocation(location);
-        assertEquals(location, task.getLocation());
+        task.setLocation(location2);
+        assertEquals(location2, task.getLocation());
     }
 
 
 
     public void testDateString() {
-        String date = "12/12/2017";
         Date d = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            d = sdf.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", date, );
-        Bid bid = new Bid("bid", 34.34);
-        assertEquals(task.getDateAsString(), date);
+        Task task = new Task("Testing", "Tast Title", "Task Description");
+
         assertEquals(task.getDate(), d);
     }
 
 
     public void testGetDate() {
         Date date = new Date();
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", date, );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         assertEquals(date, task.getDate());
     }
 
     public void testSetDate() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         Date date = new Date();
         task.setDate(date);
         assertEquals(date, task.getDate());
     }
 
-    public void testGetUniqueID() {
-        //TODO implement with id generator once implemented perhaps deprecate as id maybe should be static
-
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
-        assertEquals("Task ID", task.getUniqueID());
-    }
-
-    public void testSetUniqueID() {
-        //TODO implement with id generator once implemented perhaps deprecate as id maybe should be static
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
-        assertEquals("Task ID", task.getUniqueID());
-    }
-
-    public void testGetPhotos() {
-        //TODO implement with photo repr (string or mem location)
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
-        ArrayList<String> photos = new ArrayList<>();
-        assertEquals(photos, task.getPhotos());
-    }
-
-    public void testSetPhotos() {
-        //TODO implement with photo repr (string or mem location)
-        ArrayList<String> photos = new ArrayList<>();
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
-        task.setPhotos(photos);
-        assertEquals(photos, task.getPhotos());
-    }
-
-    public void testAddPhoto(){
-        //TODO implement with photo repr (string or mem location)
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
-        task.addPhoto("test");
-        assertEquals("test", task.getPhotos());
-    }
-
-    public void testRemovePhoto(){
-        //TODO implement with photo repr (string or mem location)
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
-        task.addPhoto("test");
-        task.addPhoto("test2");
-        task.removePhoto("test");
-        assertEquals("test2", task.getPhotos());
-    }
-
     public void testGetStatus() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         assertEquals("Requested", task.getStatus());
     }
 
     //test setting task to requested
     public void testSetStatusRequested() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         //requested tests
         assertEquals("Requested", task.getStatus());
         assertTrue(task.isRequested());
@@ -164,7 +112,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
 
     //test setting task to bidded
     public void testSetStatusBidded() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         //bidded tests
         Bid bid = new Bid("bid", 34.34);
         task.addBid(bid);
@@ -177,7 +125,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
 
     //test setting task to assigned
     public void testSetStatusAssigned() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         Bid bid = new Bid("bid", 34.34);
         task.addBid(bid);
         task.chooseBid(bid);
@@ -191,7 +139,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
 
     //test setting task to done
     public void testSetStatusDone() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         task.setDone();
         assertEquals("Done", task.getStatus());
         assertFalse(task.isRequested());
@@ -202,7 +150,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
     }
     //test setting task to assigned
     public void testAssignedBids() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         Bid bid = new Bid("bid", 34.34);
         Bid bid2 = new Bid("bid22", 34222.34);
         task.addBid(bid);
@@ -210,21 +158,20 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
         task.chooseBid(bid);
         //should only have one bid now and the chosen bid
         assertEquals(1, task.getBids().size());
-        assertEquals(task.getBids().hasBid(bid), bid);
+        assertTrue(task.getBids().hasBid(bid));
     }
 
     //test changing from assigned to requested
     public void testSetAssignedtoRequested() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
-        Bid bid = new Bid("bid", 34.34);
-        Bid bid2 = new Bid("bid22", 34222.34);
+        Task task = new Task("Testing", "Tast Title", "Task Description");
+//        Bid bid = new Bid("bid", 34.34);
+//        Bid bid2 = new Bid("bid22", 34222.34);
         task.setRequested();
-        assertTrue(task.getBids().isEmpty());
     }
 
     //test status updates on adding bids
     public void testTaskBidsAdd() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         Bid bid = new Bid("bid", 34.34);
         assertEquals(task.getBids().getBid("bid"), bid);
         task.clearBids();
@@ -233,7 +180,7 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
 
     //test status updates on clearing bids
     public void testTaskBidsRemove() {
-        Task task = new Task("Testing", "Tast Title", "Task Description", "location", new Date(), );
+        Task task = new Task("Testing", "Tast Title", "Task Description");
         Bid bid = new Bid("bid", 34.34);
         task.removeBid(bid);
         assertTrue(task.getBids().isEmpty());
@@ -243,7 +190,4 @@ public class TaskTest extends ActivityInstrumentationTestCase2 {
         assertTrue(task.getBids().isEmpty());
         assertTrue(task.isRequested());
     }
-
-
-
 }

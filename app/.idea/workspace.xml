@@ -15,8 +15,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4a28198c-dc5d-4b56-8f6e-72b201ca9492" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskTest.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,16 +38,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BidList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/BidList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-189">
-              <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="BidTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/BidTest.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -62,8 +51,8 @@
       <file leaf-file-name="ReviewTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="792">
-              <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+            <state relative-caret-position="666">
+              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding>
                 <element signature="e#501#502#0" expanded="true" />
                 <element signature="e#555#556#0" expanded="true" />
@@ -88,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaskListTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TaskListTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+            <state relative-caret-position="267">
+              <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -100,21 +89,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Review.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Review.java">
+      <file leaf-file-name="TaskTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-42">
-              <caret line="18" column="3" lean-forward="false" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
+            <state relative-caret-position="42">
+              <caret line="2" column="53" lean-forward="false" selection-start-line="2" selection-start-column="53" selection-end-line="2" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Bid.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Bid.java">
+      <file leaf-file-name="Task.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Task.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+            <state relative-caret-position="-4431">
+              <caret line="69" column="64" lean-forward="false" selection-start-line="69" selection-start-column="64" selection-end-line="69" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Review.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Review.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-846">
+              <caret line="18" column="3" lean-forward="false" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -2097,6 +2096,7 @@
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskTest.java" />
       </list>
     </option>
   </component>
@@ -2146,12 +2146,6 @@
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="professional" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
-            <path>
-              <item name="app" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="professional" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -2166,7 +2160,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="settings.editor.selected.configurable" value="copyright" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522888402557" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522889415185" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.0.1" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="android.profiler.active" value="true" />
@@ -2188,7 +2182,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android JUnit.BidListTest">
+  <component name="RunManager" selected="Android JUnit.TaskTest.testDateString">
     <configuration name="BidListTest" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -2203,6 +2197,31 @@
       <option name="MAIN_CLASS_NAME" value="professional.team17.com.professional.BidListTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="TaskTest.testDateString" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="professional.team17.com.professional.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="app" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="professional.team17.com.professional" />
+      <option name="MAIN_CLASS_NAME" value="professional.team17.com.professional.TaskTest" />
+      <option name="METHOD_NAME" value="testDateString" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -2351,53 +2370,6 @@
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
-      <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" />
-      </method>
-    </configuration>
-    <configuration name="LogInActivityTest" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
-      <module name="app" />
-      <option name="TESTING_TYPE" value="2" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="professional.team17.com.professional.LogInActivityTest" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="EXTRA_OPTIONS" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="DEBUGGER_TYPE" value="Auto" />
-      <Auto>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Auto>
-      <Hybrid>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Hybrid>
-      <Java />
-      <Native>
-        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
-        <option name="SHOW_STATIC_VARS" value="true" />
-        <option name="WORKING_DIR" value="" />
-        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
-        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
-      </Native>
-      <Profilers>
-        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
-      </Profilers>
       <method>
         <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" />
       </method>
@@ -2695,19 +2667,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Android App.app" />
-      <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.LogInActivityTest" />
-      <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.ProviderViewRequeste..." />
-      <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.RequesterEditTaskAct..." />
-      <item index="4" class="java.lang.String" itemvalue="Android JUnit.professional in app" />
-      <item index="5" class="java.lang.String" itemvalue="Android JUnit.BidListTest" />
+      <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.ProviderViewRequeste..." />
+      <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.RequesterEditTaskAct..." />
+      <item index="3" class="java.lang.String" itemvalue="Android JUnit.professional in app" />
+      <item index="4" class="java.lang.String" itemvalue="Android JUnit.BidListTest" />
+      <item index="5" class="java.lang.String" itemvalue="Android JUnit.TaskTest.testDateString" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Android JUnit.BidListTest" />
-        <item index="1" class="java.lang.String" itemvalue="Android JUnit.professional in app" />
-        <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.RequesterEditTaskAct..." />
-        <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.ProviderViewRequeste..." />
-        <item index="4" class="java.lang.String" itemvalue="Android Instrumented Tests.LogInActivityTest" />
+        <item index="0" class="java.lang.String" itemvalue="Android JUnit.TaskTest.testDateString" />
+        <item index="1" class="java.lang.String" itemvalue="Android JUnit.BidListTest" />
+        <item index="2" class="java.lang.String" itemvalue="Android JUnit.professional in app" />
+        <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.RequesterEditTaskAct..." />
+        <item index="4" class="java.lang.String" itemvalue="Android Instrumented Tests.ProviderViewRequeste..." />
       </list>
     </recent_temporary>
   </component>
@@ -2770,7 +2742,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2786,7 +2757,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2008593" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2008593" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2941847" sideWeight="0.49462944" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -3173,14 +3144,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="96" column="27" lean-forward="true" selection-start-line="96" selection-start-column="27" selection-end-line="96" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterTaskActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1534">
@@ -3209,14 +3172,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/BidList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-189">
@@ -3237,14 +3192,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Review.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-42">
-          <caret line="18" column="3" lean-forward="false" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -3273,21 +3220,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="e#501#502#0" expanded="true" />
-            <element signature="e#555#556#0" expanded="true" />
-            <element signature="e#590#591#0" expanded="true" />
-            <element signature="e#648#649#0" expanded="true" />
-            <element signature="e#687#688#0" expanded="true" />
-            <element signature="e#750#751#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -3310,11 +3242,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state relative-caret-position="267">
+          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Review.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-846">
+          <caret line="18" column="3" lean-forward="false" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4431">
+          <caret line="69" column="64" lean-forward="false" selection-start-line="69" selection-start-column="64" selection-end-line="69" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="666">
+          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding>
+            <element signature="e#501#502#0" expanded="true" />
+            <element signature="e#555#556#0" expanded="true" />
+            <element signature="e#590#591#0" expanded="true" />
+            <element signature="e#648#649#0" expanded="true" />
+            <element signature="e#687#688#0" expanded="true" />
+            <element signature="e#750#751#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="53" lean-forward="false" selection-start-line="2" selection-start-column="53" selection-end-line="2" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
