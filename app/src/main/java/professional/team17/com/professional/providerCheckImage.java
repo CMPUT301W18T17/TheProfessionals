@@ -1,13 +1,16 @@
 package professional.team17.com.professional;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 public class providerCheckImage extends Navigation {
@@ -42,6 +45,7 @@ public class providerCheckImage extends Navigation {
         gridViewAdapter.notifyDataSetChanged();
 
         }
+
 
 
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {

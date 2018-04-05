@@ -64,8 +64,6 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
     private ImageButton  button5;
     TextView taskLowBidDesc;
 
-    private ArrayList<String> photos;
-
 
 
     //both buttons start as invisible by default
@@ -111,41 +109,17 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
 
         providerTaskController.fillTask(statusTextField,userNameTextField,taskTitleTextField,taskDateTextField,taskDescriptionTextField,taskAddressTextField);
         providerTaskController.location(viewMapButton);
+        providerTaskController.photos(button5);
         checkStatus();
 
-
-/*    public void photoClick(View view) {
-        Intent yourIntent = new Intent(this, providerCheckImage.class);
-        Bitmap bmp = task.getPhotos().get(0); // store the image in your bitmap
-        ByteArrayOutputStream bao = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
-        yourIntent.putExtra("yourImage", bao.toByteArray());
-        startActivity(yourIntent);
-    }*/
-//
     }
    public void photoClick(View view){
                 Intent yourIntent = new Intent(ProviderViewTask.this, providerCheckImage.class);
-                photos = providerTaskController.getPhotos(); // store the image in your bitmap
-                yourIntent.putStringArrayListExtra("yourImage", photos);
-                //if(view != null){
-                //System.out.println("------------------------------------------------------");
-                //System.out.println("------------------------------------------------------");
-                //System.out.println(view);
-                //System.out.println("------------------------------------------------------");
-                //ystem.out.println("------------------------------------------------------");}
+                yourIntent.putStringArrayListExtra("yourImage", providerTaskController.getPhotos());
                 startActivity(yourIntent);
 
         }
 
-    //public void photoClick(View view) {
-        //Intent yourIntent = new Intent(this, providerCheckImage.class);
-        //Bitmap bmp = task.getPhotos().get(0); // store the image in your bitmap
-        //ByteArrayOutputStream bao = new ByteArrayOutputStream();
-        //bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
-        //yourIntent.putExtra("yourImage", bao.toByteArray());
-        //startActivity(yourIntent);
-    //}
 
     public void mapClick(View view){
         Intent intent = new Intent(ProviderViewTask.this, MapsShowALocationActivity.class);

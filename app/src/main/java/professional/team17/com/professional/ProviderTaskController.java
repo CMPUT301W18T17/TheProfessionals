@@ -135,6 +135,12 @@ public class ProviderTaskController {
         }
     }
 
+    public void photos(ImageButton viewPhotoButton) {
+        if (task.getPhotos().isEmpty()) {
+            viewPhotoButton.setVisibility(View.INVISIBLE);
+        }
+    }
+
     public Bundle getLocation(Intent intent) {
         Bundle bundle = new Bundle();
         bundle.putParcelable("aTaskLatLng", task.getLatLng());
