@@ -20,7 +20,7 @@ public class ReviewListTest extends ActivityInstrumentationTestCase2 {
     public void testisEmpty() { //same as the test for hasReview
         ReviewList reviews = new ReviewList();
         assertTrue(reviews.isEmpty());
-        Review review = new Review(5.0, "reviewer","comment", "title");
+        Review review = new Review(5, "reviewer","comment");
         reviews.addReview(review);
         assertFalse(reviews.isEmpty());
     }
@@ -28,7 +28,7 @@ public class ReviewListTest extends ActivityInstrumentationTestCase2 {
 
     public void testAddReview() { //same as the test for hasReview
         ReviewList reviews = new ReviewList();
-        Review review = new Review(5.0, "reviewer","comment", "title");
+        Review review = new Review(5, "reviewer","comment");
         reviews.addReview(review);
         assertTrue(reviews.hasReview(review));
     }

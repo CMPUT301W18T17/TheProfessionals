@@ -26,16 +26,16 @@ public class BidListTest extends ActivityInstrumentationTestCase2 {
     public void testisEmpty() { //same as the test for hasReview
         BidList bids = new BidList();
         assertTrue(bids.isEmpty());
-        Bid bid = new Bid("Bob&Mary", 50.0);
+        Bid bid = new Bid("Tester", 50.0);
         bids.add(bid);
         assertFalse(bids.isEmpty());
     }
 
     public void testGetLowestAdd(){
         BidList bids = new BidList();
-        Bid bid = new Bid("Bob&Mary", 50.0);
+        Bid bid = new Bid("Tester", 50.0);
         bids.add(bid);
-        Bid bid1 = new Bid("Bob&Mary1", 501.0);
+        Bid bid1 = new Bid("Tester1", 501.0);
         bids.add(bid1);
         assertEquals(bids.getLowest(), bid);
 
@@ -43,11 +43,11 @@ public class BidListTest extends ActivityInstrumentationTestCase2 {
 
     public void testGetLowestDelete(){
         BidList bids = new BidList();
-        Bid bid = new Bid("Bob&Mary", 50.0);
+        Bid bid = new Bid("Tester", 50.0);
         bids.add(bid);
-        Bid bid1 = new Bid("Bob&Mary1", 501.0);
+        Bid bid1 = new Bid("Tester1", 501.0);
         bids.add(bid1);
-        Bid bid2 = new Bid("Bob&Mary2", 25.0);
+        Bid bid2 = new Bid("Tester2", 25.0);
         bids.add(bid2);
         assertEquals(bids.getLowest(), bid);
         bids.remove(bid);
