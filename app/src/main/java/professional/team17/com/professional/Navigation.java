@@ -121,7 +121,7 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
         if (view.getId() == R.id.userMenuButton){
             showPopup();
         }
-        else if (view.getId()==R.id.taskMapButton){
+        else if (view.getId()==R.id.taskMapProviderButton){
             if(checkServices()){
                 Intent intent = new Intent(this, MapsSearchTasksActivity.class);
                 startActivity(intent);

@@ -6,4 +6,5 @@
     <color name="colorProvider">#5fb76e</color>
     <color name="colorRequester">#8ad5d1</color>
     <color name="requester">#23a19f</color>
+    <color name="provider">#39a764</color>
 </resources>

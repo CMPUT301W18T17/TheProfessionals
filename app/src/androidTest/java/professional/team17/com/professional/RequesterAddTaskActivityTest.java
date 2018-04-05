@@ -54,12 +54,12 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
         solo.clickOnButton("Add");
 
         // Check
-        solo.clickOnView(solo.getView(R.id.requestedTasksRequesterButton));
+        solo.clickOnView(solo.getView(R.id.taskMapProviderButton));
         solo.clickOnView(solo.getView(R.id.requester_requested_title));
         assertTrue(solo.waitForText("Task Name 1"));
         assertTrue(solo.waitForText("Requested"));
         assertTrue(solo.waitForText("Task Description"));
-        solo.clickOnView(solo.getView(R.id.requestedTasksRequesterButton));
+        solo.clickOnView(solo.getView(R.id.taskMapProviderButton));
         solo.clickOnView(solo.getView(R.id.deleteTaskButton));
         solo.clickOnText("Yes");
     }

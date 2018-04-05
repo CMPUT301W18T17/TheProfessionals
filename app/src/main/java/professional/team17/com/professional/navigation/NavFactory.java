@@ -13,13 +13,13 @@ public class NavFactory {
         switch(id) {
             case R.id.switchViewRequesterButton:
                 return new SwitchViewReqNav(cont);
-            case R.id.requestedTasksRequesterButton:
+            case R.id.requestedTaskRequesterButton:
                 return new RequestedTaskReqNav(cont);
             case R.id.biddedTasksProviderButton:
                 return new BiddedTaskProviderNav(cont);
             case R.id.acceptedTasksProviderButton:
                 return new AcceptedTasksProviderNav(cont);
-            case R.id.searchTasksButton:
+            case R.id.taskSearchProviderButton:
                 return new SearchTasksProviderNav(cont);
             case R.id.switchViewProviderButton:
                 return new SwitchViewProviderNav(cont);

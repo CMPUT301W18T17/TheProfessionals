@@ -1,16 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/requester"
-        android:gravity="center_vertical|center_horizontal"
+        android:background="@color/provider"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/taskSearchProviderButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/provider"
+            android:clickable="true"
+            android:onClick="onClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/taskMapProviderButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/search_icon" />
+
+        <ImageView
+            android:id="@+id/taskMapProviderButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/provider"
+            android:clickable="true"
+            android:onClick="onClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/biddedTasksProviderButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/taskSearchProviderButton"
+            app:srcCompat="@drawable/task_map_icon" />
+
+        <ImageView
+            android:id="@+id/biddedTasksProviderButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/provider"
+            android:clickable="true"
+            android:onClick="onClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/acceptedTasksProviderButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/taskMapProviderButton"
+            app:srcCompat="@drawable/bidded_icon" />
+
+        <ImageView
+            android:id="@+id/acceptedTasksProviderButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/provider"
+            android:clickable="true"
+            android:onClick="onClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/doneTasksProviderButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/biddedTasksProviderButton"
+            app:srcCompat="@drawable/assigned_icon" />
+
+        <ImageView
+            android:id="@+id/doneTasksProviderButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/provider"
+            android:clickable="true"
+            android:onClick="onClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/switchViewProviderButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/acceptedTasksProviderButton"
+            app:srcCompat="@drawable/done_icon" />
+
+        <ImageView
+            android:id="@+id/switchViewProviderButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/provider"
+            android:clickable="true"
+            android:onClick="onClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/doneTasksProviderButton"
+            app:srcCompat="@drawable/switch_icon" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/provider"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,16 +118,14 @@
             android:layout_weight="1"
             android:fontFamily="@font/amiko"
             android:paddingLeft="8dp"
-            android:text="@string/requester_title"
+            android:text="@string/provider_title"
             android:textColor="#ffffff"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:typeface="normal"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="25dp" />
+            android:typeface="normal" />
 
         <TextView
-            android:id="@+id/requesteractivityTitleView"
+            android:id="@+id/provideractivityTitleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -55,108 +148,11 @@
     </LinearLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
     </android.support.constraint.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/requester"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:id="@+id/addTaskRequesterButton"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/requester"
-            android:clickable="true"
-            android:onClick="onClick"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/taskMapProviderButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/add_task_icon" />
-
-        <ImageView
-            android:id="@+id/requestedTaskRequesterButton"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/requester"
-            android:clickable="true"
-            android:onClick="onClick"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/biddedTasksProviderButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/taskSearchProviderButton"
-            app:srcCompat="@drawable/requested_icon" />
-
-        <ImageView
-            android:id="@+id/biddedTasksRequesterButton"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/requester"
-            android:clickable="true"
-            android:onClick="onClick"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/acceptedTasksProviderButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/taskMapProviderButton"
-            app:srcCompat="@drawable/bidded_icon" />
-
-        <ImageView
-            android:id="@+id/acceptedTasksRequesterButton"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/requester"
-            android:clickable="true"
-            android:onClick="onClick"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/doneTasksProviderButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/biddedTasksProviderButton"
-            app:srcCompat="@drawable/assigned_icon" />
-
-        <ImageView
-            android:id="@+id/doneTasksRequesterButton"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/requester"
-            android:clickable="true"
-            android:onClick="onClick"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/switchViewProviderButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/acceptedTasksProviderButton"
-            app:srcCompat="@drawable/done_icon" />
-
-        <ImageView
-            android:id="@+id/switchViewRequesterButton"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@color/requester"
-            android:clickable="true"
-            android:onClick="onClick"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/doneTasksProviderButton"
-            app:srcCompat="@drawable/switch_icon" />
-    </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>
