@@ -7,7 +7,6 @@ import android.widget.EditText;
 import com.robotium.solo.Solo;
 
 /**
- * Created by Logan Yue on 2018-03-12.
  *
  * @see LogInActivity
  */
@@ -15,7 +14,6 @@ import com.robotium.solo.Solo;
 public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInActivity> {
 
     private Solo solo;
-    private ServerHelper serverHelper = new ServerHelper();
 
     /**
      * test constructor
@@ -26,7 +24,6 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
 
     /**
      * Standard test setUp
-     * @throws Exception
      */
     public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
@@ -34,7 +31,6 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
 
     /**
      * tests activity start
-     * @throws Exception
      */
     public void testStart() throws Exception {
         Activity activity = getActivity();
@@ -56,11 +52,13 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
 
         Profile testProfile = new Profile("tester","TestUser",
                 "tester@ualberta.ca","123-456-7890");
-        serverHelper.addProfile(testProfile);
+        ElasticSearchController.AddProfile addProfile = new ElasticSearchController.AddProfile();
+        addProfile.execute(testProfile);
         solo.enterText((EditText) solo.getView(R.id.usernameBox), "TestUser");
         solo.clickOnButton("Sign In");
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-        serverHelper.deleteProfile(testProfile);
+        ElasticSearchController.DeleteProfile deleteProfile = new ElasticSearchController.DeleteProfile();
+        deleteProfile.execute(testProfile);
     }
 
     /**
@@ -76,7 +74,6 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
 
     /**
      * standard tearDown to end tests
-     * @throws Exception
      */
     @Override
     public void tearDown() throws Exception {
