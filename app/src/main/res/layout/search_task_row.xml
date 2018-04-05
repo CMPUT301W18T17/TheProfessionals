@@ -6,6 +6,7 @@
     android:id="@+id/list_row_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
     android:orientation="horizontal"
     android:paddingBottom="10dp"
     android:paddingTop="10dp">
@@ -16,99 +17,80 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/search_task_row_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/amiko"
+            android:text="TaskTitle - "
+            android:textColor="@color/colorProvider"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/search_task_row_statusText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/search_task_row_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="31dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/amiko"
-                    android:text="TaskTitle - "
-                    android:textColor="@color/colorProvider"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/search_task_row_statusText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/amiko"
-                    android:paddingRight="20dp"
-                    android:text="Assigned"
-                    android:textSize="12sp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/search_task_row_title"
-                    app:layout_constraintStart_toEndOf="@+id/search_task_row_title" />
-            </android.support.constraint.ConstraintLayout>
-
-        </LinearLayout>
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/amiko"
+            android:paddingRight="20dp"
+            android:text="Assigned"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/search_task_row_title"
+            app:layout_constraintStart_toEndOf="@+id/search_task_row_title" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <android.support.constraint.ConstraintLayout
+            <TextView
+                android:id="@+id/search_task_row_lowbid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/amiko"
+                android:text="Lowbid: $"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/search_task_row_lowbid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/amiko"
-                    android:text="Lowbid: $"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/search_task_row_lowbidAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/amiko"
+                android:text="0.00"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/search_task_row_lowbid" />
 
-                <TextView
-                    android:id="@+id/search_task_row_lowbidAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/amiko"
-                    android:text="0.00"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/search_task_row_lowbid" />
+            <TextView
+                android:id="@+id/search_task_row_mybid"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/amiko"
+                android:text="My bid: $"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/search_task_row_lowbidAmount"
+                tools:layout_editor_absoluteY="0dp" />
 
-                <TextView
-                    android:id="@+id/search_task_row_mybid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/amiko"
-                    android:text="My bid: $"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/search_task_row_lowbidAmount"
-                    tools:layout_editor_absoluteY="0dp" />
-
-                <TextView
-                    android:id="@+id/search_task_row_mybidAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
-                    android:fontFamily="@font/amiko"
-                    android:text="0.00"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toEndOf="@+id/search_task_row_mybid" />
-
-            </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/search_task_row_mybidAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/amiko"
+                android:text="0.00"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/search_task_row_mybid" />
 
         </LinearLayout>
 
