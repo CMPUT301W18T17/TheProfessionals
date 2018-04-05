@@ -11,21 +11,30 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/imageUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_width="280dp"
-            android:layout_height="450dp" />
+            android:layout_marginBottom="8dp" />
+
         <Button
             android:id="@+id/bImageUpload"
-            android:text = "Upload"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="#dddddd"
+            android:fontFamily="@font/amiko"
+            android:text="Upload" />
+
         <Button
             android:id="@+id/bTakePhoto"
-            android:text = "TakePhoto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="#dddddd"
+            android:fontFamily="@font/amiko"
+            android:text="TakePhoto" />
     </LinearLayout>
 
 </ScrollView>

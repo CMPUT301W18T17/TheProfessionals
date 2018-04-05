@@ -7,4 +7,5 @@
     <color name="colorRequester">#8ad5d1</color>
     <color name="requester">#23a19f</color>
     <color name="provider">#39a764</color>
+    <color name="general">#0a947d</color>
 </resources>

@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:backgroundTint="#ffffff"
     tools:context="professional.team17.com.professional.SignUpActivity">
 
     <EditText
@@ -14,8 +16,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="68dp"
         android:ems="10"
+        android:fontFamily="@font/amiko"
         android:hint="@string/PV_username"
         android:inputType="textPersonName"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +33,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/amiko"
         android:text="@string/sign_up"
+        android:textColor="@color/general"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/usernameBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -45,8 +52,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:fontFamily="@font/amiko"
         android:hint="@string/full_name"
         android:inputType="textPersonName"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameBox" />
@@ -59,8 +68,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:fontFamily="@font/amiko"
         android:hint="@string/email"
         android:inputType="textWebEmailAddress"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullNameBox" />
@@ -73,8 +84,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:fontFamily="@font/amiko"
         android:hint="@string/phone_number"
         android:inputType="textPersonName|phone"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailBox" />
@@ -85,21 +98,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="84dp"
         android:layout_marginTop="20dp"
+        android:background="#dddddd"
+        android:fontFamily="@font/amiko"
         android:onClick="saveProfile"
         android:text="@string/sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneNumberBox" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:onClick="back"
-        android:text="@string/back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/errorText"
@@ -107,17 +111,31 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="84dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/amiko"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button6" />
 
     <ImageButton
         android:id="@+id/add_new_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="80dp"
         android:layout_marginTop="20dp"
+        android:background="#ffffff"
         android:onClick="photoPicker"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneNumberBox"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
+        app:srcCompat="@drawable/add_image_icon_grey" />
+
+    <ImageButton
+        android:id="@+id/button3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#ffffff"
+        android:onClick="back"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/back_icon"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="0dp" />
 </android.support.constraint.ConstraintLayout>

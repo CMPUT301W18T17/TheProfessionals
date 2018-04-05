@@ -50,7 +50,6 @@
                 android:text="@string/taskDate"
                 android:textColor="@color/colorRequester"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_tasktitleView" />
 
@@ -66,7 +65,6 @@
                 android:text="@string/Description"
                 android:textColor="@color/colorRequester"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/requester_view_taskdate" />
@@ -103,7 +101,6 @@
                 android:text="@string/status"
                 android:textColor="@color/colorRequester"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/requester_view_taskstatusView"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_tasktitleView" />
 
@@ -183,7 +180,6 @@
                 android:text="@string/Task_Provider"
                 android:textColor="@color/colorRequester"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
 
@@ -198,6 +194,7 @@
                 android:fontFamily="@font/amiko"
                 android:onClick="viewProfileName"
                 android:text="@string/NA"
+                android:textColor="#dddddd"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/requester_view_taskbidder"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskViewPhotosButton" />
@@ -213,7 +210,6 @@
                 android:text="@string/Accepted_bid"
                 android:textColor="@color/colorRequester"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/requester_view_taskbidAmountView"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskviewLocationButton" />
 
@@ -236,7 +232,6 @@
                 android:fontFamily="@font/amiko"
                 android:text="Set Status To:"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskbidder" />
 

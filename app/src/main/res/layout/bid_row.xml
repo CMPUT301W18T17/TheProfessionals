@@ -6,6 +6,7 @@
     android:id="@+id/list_row_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#ffffff"
     android:orientation="horizontal"
     android:paddingBottom="10dp"
     android:paddingTop="10dp">
@@ -33,9 +34,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
                     android:clickable="true"
+                    android:fontFamily="@font/amiko"
                     android:onClick="viewProfileRow"
                     android:text="@string/username"
-                    android:textSize="19sp"
+                    android:textSize="14sp"
                     tools:layout_width="wrap_content" />
 
 
@@ -48,7 +50,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="$ Amount" />
+            android:fontFamily="@font/amiko"
+            android:text="$ Amount"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -63,21 +67,21 @@
 
         <ImageButton
             android:id="@+id/bid_row_accept"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/cardview_shadow_end_color"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#ffffff"
             android:onClick="acceptBid"
-            android:tint="@color/colorProvider"
-            app:srcCompat="@android:drawable/stat_sys_vp_phone_call" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/accept_icon" />
 
         <ImageButton
             android:id="@+id/bid_row_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/cardview_shadow_end_color"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#ffffff"
             android:onClick="deleteBid"
-            android:tint="@android:color/holo_red_dark"
-            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/delete_icon" />
     </LinearLayout>
 
 
