@@ -24,8 +24,8 @@
 
     <ImageButton
         android:id="@+id/back"
-        android:layout_width="25"
-        android:layout_height="25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/taskPhotoGrid"
         app:layout_constraintStart_toStartOf="parent"
