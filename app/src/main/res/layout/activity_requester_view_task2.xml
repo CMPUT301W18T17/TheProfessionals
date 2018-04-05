@@ -115,6 +115,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:onClick="viewphoto"
                 android:backgroundTint="@color/cardview_shadow_end_color"
                 android:tint="@color/colorRequester"
                 app:layout_constraintEnd_toStartOf="@+id/viewLocationButton"

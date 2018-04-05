@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ public class GridViewAdapter extends ArrayAdapter<String> {
         final String photo= getItem(position);
         if (v == null) {
             v = LayoutInflater.from(getContext()).inflate(R.layout.grid_cell, parent, false);
+            v.setLayoutParams(new GridView.LayoutParams(GridView.AUTO_FIT, 250));
         }
         //get view
         ImageView photoView = (ImageView) v.findViewById(R.id.gridPhotoView);

@@ -113,17 +113,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                 finish();
             }
         });
-
-        viewPhotos.setOnClickListener(new ImageButton.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent yourIntent = new Intent(RequesterViewTaskActivity.this, providerCheckImage.class);
-                photos = task.getPhotos(); // store the image in your bitmap
-                yourIntent.putStringArrayListExtra("yourImage", photos);
-                startActivity(yourIntent);
-
-            }
-        });
+        
 
         viewLocation.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
@@ -202,7 +192,13 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         }
     }
 
+    public void viewphoto(View v){
+        Intent yourIntent = new Intent(RequesterViewTaskActivity.this, providerCheckImage.class);
+        photos = task.getPhotos(); // store the image in your bitmap
+        yourIntent.putStringArrayListExtra("yourImage", photos);
+        startActivity(yourIntent);
 
+    }
     /**
      * Updates the TextViews with the task information.
      */
