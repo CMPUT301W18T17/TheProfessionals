@@ -20,7 +20,10 @@ public class ReviewListTest extends ActivityInstrumentationTestCase2 {
     public void testisEmpty() { //same as the test for hasReview
         ReviewList reviews = new ReviewList();
         assertTrue(reviews.isEmpty());
-        Review review = new Review(5, "reviewer","comment");
+        float score = (float) 5.0;
+        String reviewer = "reviewer";
+        String comment = "comment";
+        Review review = new Review(score, reviewer,comment);
         reviews.addReview(review);
         assertFalse(reviews.isEmpty());
     }
@@ -28,46 +31,42 @@ public class ReviewListTest extends ActivityInstrumentationTestCase2 {
 
     public void testAddReview() { //same as the test for hasReview
         ReviewList reviews = new ReviewList();
-        Review review = new Review(5, "reviewer","comment");
+        assertTrue(reviews.isEmpty());
+        float score = (float) 5.0;
+        String reviewer = "reviewer";
+        String comment = "comment";
+        Review review = new Review(score, reviewer,comment);
         reviews.addReview(review);
         assertTrue(reviews.hasReview(review));
     }
 
     public void testDeleteReview() {
         ReviewList reviews = new ReviewList();
-        Review review = new Review(5.0, "reviewer","comment", "title" );
+        assertTrue(reviews.isEmpty());
+        float score = (float) 5.0;
+        String reviewer = "reviewer";
+        String comment = "comment";
+        Review review = new Review(score, reviewer,comment);
         reviews.addReview(review);
         reviews.deleteReview(review);
         assertFalse(reviews.hasReview(review));
     }
 
-
-    public void testAddReviewDuplicate(){
-        ReviewList reviews = new ReviewList();
-        Review review1 = new Review(3.5, "a1", "t1");
-        reviews.addReview(review1);
-        try {
-            reviews.addReview(review1);
-            Assert.fail("Duplicate test failed - Duplicate Review added");
-        }
-        catch(Exception e){
-            String mess= "Duplicate Review - cannot be added";
-            Assert.assertEquals( "Duplicate test passed", mess, e.getMessage() );
-        }
-
-    }
-
-
     public void testHasReview(){
         ReviewList reviews = new ReviewList();
-        Review review1 = new Review(3.5, "a1", "t1");
-        assertFalse(reviews.hasReview(review1));
+        assertTrue(reviews.isEmpty());
+        float score = (float) 5.0;
+        String reviewer = "reviewer";
+        String comment = "comment";
+        Review review = new Review(score, reviewer,comment);
 
-        reviews.addReview(review1);
-        assertTrue(reviews.hasReview(review1));
+        assertFalse(reviews.hasReview(review));
+
+        reviews.addReview(review);
+        assertTrue(reviews.hasReview(review));
 
         //for list size >1
-        Review review2 = new Review(5.0, "a2", "t2");
+        Review review2 = new Review((float) 5.0, "a2", "t2");
         assertFalse(reviews.hasReview(review2));
 
     }
@@ -75,13 +74,13 @@ public class ReviewListTest extends ActivityInstrumentationTestCase2 {
     public void testGetReview(){
         ReviewList reviews = new ReviewList();
 
-        Review review1 = new Review(3.5, "a1", "t1");
+        Review review1 = new Review((float)3.5, "a1", "t1");
         reviews.addReview(review1);
 
-        Review review2 = new Review(5.0, "a2", "t2");
+        Review review2 = new Review((float)5.0, "a2", "t2");
         reviews.addReview(review2);
 
-        Review review3 = new Review(5.0, "a3", "t3");
+        Review review3 = new Review((float)5.0, "a3", "t3");
         reviews.addReview(review3);
 
 
@@ -93,15 +92,15 @@ public class ReviewListTest extends ActivityInstrumentationTestCase2 {
 
     public void testAvg() {
         ReviewList reviews = new ReviewList();
-        Review review1 = new Review(3.5, "a1", "t1");
+        Review review1 = new Review((float)3.5, "a1", "t1");
         reviews.addReview(review1);
         assertEquals(3.5, reviews.getAvg());
 
-        Review review2 = new Review(5.0, "a2", "t2");
+        Review review2 = new Review((float)5.0, "a2", "t2");
         reviews.addReview(review2);
         assertEquals(4.25, reviews.getAvg());
 
-        Review review3 = new Review(5.0, "a3", "t3");
+        Review review3 = new Review((float)5.0, "a3", "t3");
         reviews.addReview(review3);
         assertEquals(4.5, reviews.getAvg());
 

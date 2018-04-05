@@ -14,11 +14,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a28198c-dc5d-4b56-8f6e-72b201ca9492" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Bid.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Bid.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/BidListTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/BidListTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/BidTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/BidTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ExampleUnitTest.java" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -85,8 +80,8 @@
       <file leaf-file-name="ReviewListTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="30" column="36" lean-forward="false" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+            <state relative-caret-position="1974">
+              <caret line="102" column="43" lean-forward="false" selection-start-line="102" selection-start-column="43" selection-end-line="102" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -2124,7 +2119,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="settings.editor.selected.configurable" value="copyright" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522886978005" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522887507618" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.0.1" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="android.profiler.active" value="true" />
@@ -3259,8 +3254,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="30" column="36" lean-forward="false" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+        <state relative-caret-position="1974">
+          <caret line="102" column="43" lean-forward="false" selection-start-line="102" selection-start-column="43" selection-end-line="102" selection-end-column="43" />
           <folding />
         </state>
       </provider>
