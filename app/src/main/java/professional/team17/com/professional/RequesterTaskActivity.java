@@ -52,6 +52,8 @@ public abstract class RequesterTaskActivity extends Navigation{
     protected String photo;
     protected Integer a = 1;
 
+    protected RequesterTaskController requesterTaskController;
+
     /**
      * On creation of the activity, set all view objects and onClickListeners.
      * @param savedInstanceState The activity's previously saved state.
@@ -81,6 +83,8 @@ public abstract class RequesterTaskActivity extends Navigation{
         editor.putInt("idName", 12);
         editor.apply();
 
+
+        requesterTaskController = new RequesterTaskController(this);
 
         /* Set all onClickListeners */
         if(photos.size() <= 5){
@@ -154,14 +158,57 @@ public abstract class RequesterTaskActivity extends Navigation{
 
         setSubmitButtonOnClickListener();
 
-
+        getTask();
 
     }
 
-    public abstract void setSubmitButtonOnClickListener();
+    public void setSubmitButtonOnClickListener() {
+        submitButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /* Convert user entered values to strings */
+                String title = nameField.getText().toString();
+                String description = descriptionField.getText().toString();
+                locationString = locationField.getText().toString();
+                dateString = (String) textualDateView.getText();
+
+
+                if (title.length() > 30) {
+                    /* if the title is too long */
+                    message = "Title cannot be longer than 30 characters.";
+                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+                    toast.show();
+                } else if (description.length() > 300) {
+                    /* if the description is too long */
+                    message = "Description cannot be longer than 300 characters.";
+                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+                    toast.show();
+                } else if (title.isEmpty()) {
+                    /* if the title is empty */
+                    message = "You must include a title.";
+                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+                    toast.show();
+                } else if (description.isEmpty()) {
+                    /* if the title is empty */
+                    message = "You must include a description.";
+                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    /* Create an intent and bundle and store all task info */
+                    addToServer(title, description);
+
+                    /* Activity finished, start RequesterViewListActivity */
+                    endActivity();
+                }
+
+            }
+        });
+    }
+
+    public abstract void getTask();
     public abstract void endActivity();
     public abstract void setTitle();
-    public abstract void addToServer(String title, String description ,ArrayList<String> photos);
+    public abstract void addToServer(String title, String description);
     /**
      * Displays the DatePickerDialog fragment, allowing the user to select a date.
      */

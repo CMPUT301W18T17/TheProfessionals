@@ -10,18 +10,8 @@
 
 package professional.team17.com.professional;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 /**
  *
@@ -38,65 +28,15 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
     }
 
 
-    public void setSubmitButtonOnClickListener() {
-        submitButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /* Convert user entered values to strings */
-                String title = nameField.getText().toString();
-                String description = descriptionField.getText().toString();
-                locationString = locationField.getText().toString();
-                dateString = (String) textualDateView.getText();
-
-
-                if (title.length() > 30) {
-                    /* if the title is too long */
-                    message = "Title cannot be longer than 30 characters.";
-                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-                    toast.show();
-                } else if (description.length() > 300) {
-                    /* if the description is too long */
-                    message = "Description cannot be longer than 300 characters.";
-                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-                    toast.show();
-                } else if (title.isEmpty()) {
-                    /* if the title is empty */
-                    message = "You must include a title.";
-                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-                    toast.show();
-                } else if (description.isEmpty()) {
-                    /* if the title is empty */
-                    message = "You must include a description.";
-                    Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-                    toast.show();
-                } else {
-                    /* Create an intent and bundle and store all task info */
-                    addToServer(title, description , photos);
-
-                    /* Activity finished, start RequesterViewListActivity */
-                    endActivity();
-                }
-
-            }
-        });
-    }
-
-
+    public void getTask(){}
 
     /**
      * Add the task to the ElasticSearch server.
-     *
-     * @param title       Task title
-     * @param description Task description
      */
 
-    public void addToServer(String title, String description,ArrayList<String> photos) {
-        SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String username = pref.getString("username", "error");
-        task = new Task(username, title, description, locationString, dateString, latLng, photos);
-        task.setRequested();
-        serverHelper.addTasks(task);
-        Log.d(TAG, "Num1 onClick: " + task);
+    public void addToServer(String title, String description) {
+        requesterTaskController.addTaskToServer(title, description, locationString, dateString, latLng, photos);
+        requesterTaskController.setTaskToRequested();
     }
 
     /**
