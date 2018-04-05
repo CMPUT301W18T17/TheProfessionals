@@ -44,8 +44,9 @@ public class TaskListController {
         }
         if (TaskStatus.getInstance().isDone()){
             tasklist = serverHelper.getTasksBidded(username, "Done");
-            Log.i("ETETE", "createList: "+tasklist);
+
         }
+        Log.i("ETETE", "createList: "+tasklist);
     }
 
     public Boolean checkOffline() {

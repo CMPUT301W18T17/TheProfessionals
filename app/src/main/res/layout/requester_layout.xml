@@ -9,11 +9,12 @@
         android:id="@+id/addTaskRequesterButton"
         android:layout_width="50dp"
         android:layout_height="54dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:onClick="onClick"
         android:scaleType="fitEnd"
-        app:srcCompat="@drawable/add_task_requester"
-        tools:layout_editor_absoluteY="513dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/add_task_requester" />
 
     <ImageView
         android:id="@+id/biddedTasksRequesterButton"
