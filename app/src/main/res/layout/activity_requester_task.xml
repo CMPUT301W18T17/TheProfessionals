@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     tools:context="professional.team17.com.professional.RequesterAddTaskActivity">
 
-    <include layout="@layout/requester_layout" />
+    <include layout="@layout/requester_layout_2" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/requester_task_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="70dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
