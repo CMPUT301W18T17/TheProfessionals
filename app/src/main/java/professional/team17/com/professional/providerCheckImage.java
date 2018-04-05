@@ -47,12 +47,12 @@ public class providerCheckImage extends Navigation {
         }
 
 
-    private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
+    private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             String photo = photos.get(position);
             // do some stuff
 
         }
-
+    };
 
 }
