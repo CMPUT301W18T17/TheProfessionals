@@ -19,6 +19,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -53,6 +55,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
     /* Other variables */
     String ID;
     private Task task;
+    private ArrayList<String> photos;
     BidListAdapter bidAdapter;
     BidList bidList;
     Bid chosenBid;
@@ -114,7 +117,10 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         viewPhotos.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO implement viewing photos
+                Intent yourIntent = new Intent(RequesterViewTaskActivity.this, providerCheckImage.class);
+                photos = task.getPhotos(); // store the image in your bitmap
+                yourIntent.putStringArrayListExtra("yourImage", photos);
+                startActivity(yourIntent);
 
             }
         });
