@@ -27,7 +27,7 @@ import com.robotium.solo.Solo;
  */
 public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCase2<RequesterEditTaskActivity> {
     private Solo solo;
-    private MockTask mockTask;
+    private Task mockTask;
     private ServerHelper mockES;
     private Profile testProfile;
 
@@ -44,14 +44,15 @@ public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCa
      */
     public void setUp() throws Exception {
         /* Create mock task and push to server */
-        mockTask = new MockTask("TestUser", "Test Title", "Test Description", "Test Location", "01/01/2000");
-        mockES = new ServerHelper();
+        Context context = getInstrumentation().getTargetContext();
+        mockTask = new Task("TestUser", "Test Title", "Test Description");
+        mockES = new ServerHelper(context);
         String ID = mockES.addTasks(mockTask);
         testProfile = new Profile("tester","TestUser",
                 "tester@ualberta.ca","123-456-7890");
         mockES.addProfile(testProfile);
         mockTask.setId(ID);
-        Context context = getInstrumentation().getTargetContext();
+
         SharedPreferences pref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 

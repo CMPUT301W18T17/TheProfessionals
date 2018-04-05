@@ -1,6 +1,7 @@
 package professional.team17.com.professional;
 
 import android.app.Activity;
+import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
@@ -15,7 +16,7 @@ import com.robotium.solo.Solo;
 public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpActivity> {
 
     private Solo solo;
-    private ServerHelper serverHelper = new ServerHelper();
+    private ServerHelper serverHelper;
 
     /**
      * Test Constructor
@@ -30,6 +31,8 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
      */
     public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
+        Context context = getInstrumentation().getTargetContext();
+        serverHelper = new ServerHelper(context);
     }
 
     /**

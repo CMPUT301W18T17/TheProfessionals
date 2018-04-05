@@ -14,8 +14,7 @@ import com.robotium.solo.Solo;
 
 public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<SearchActivity> {
     private Solo solo;
-    private ServerHelper serverHelper = new ServerHelper();
-    private MockTask mockTask;
+    private Task mockTask;
     private Profile testProfile ;
 
     public ProviderPlaceBidTest() {
@@ -23,16 +22,15 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
     }
 
     public void setUp() throws Exception {
-        mockTask = new MockTask("kaixiang", "kaixiang's task", "Test Description", "Test Location", "01/01/2000");
-        ServerHelper mockES = new ServerHelper();
-        String ID = mockES.addTasks(mockTask);
-        mockTask.setId(ID);
+        mockTask = new Task("kaixiang", "kaixiang's task", "Test Description");
+        ElasticSearchController.AddTask addTask = new ElasticSearchController.AddTask();
+        addTask.execute(mockTask);
+        String id = addTask.get();
+        mockTask.setId(id);
         testProfile = new Profile("kaixiang","TestUser1", "tester@ualberta.ca","123-456-7890");
-        serverHelper.addProfile(testProfile);
-        /*Intent i = new Intent();
-        i.putExtra("Status", "Bidded");
-        setActivityIntent(i);
-        */
+        ElasticSearchController.AddProfile addProfile = new ElasticSearchController.AddProfile();
+        addProfile.execute(testProfile);
+
         solo = new Solo(getInstrumentation(), getActivity());
         Context context = getInstrumentation().getTargetContext();
         SharedPreferences pref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -82,8 +80,10 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
 
     @Override
     public void tearDown() throws Exception {
-        serverHelper.deleteTasks(mockTask);
-        serverHelper.deleteProfile(testProfile);
+        ElasticSearchController.DeleteProfile deleteProfile = new ElasticSearchController.DeleteProfile();
+        ElasticSearchController.DeleteTask deleteTask = new ElasticSearchController.DeleteTask();
+        deleteTask.execute(mockTask);
+        deleteProfile.execute(testProfile);
 
         solo.finishOpenedActivities();
 
