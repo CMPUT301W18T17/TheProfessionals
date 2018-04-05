@@ -23,12 +23,13 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
     }
 
     public void setUp() throws Exception{
-        profile = new Profile("zhipeng", "TestUser1", "abc@abc.com", "110");
-        serverHelper = new ServerHelper();
+
+        Context context = getInstrumentation().getTargetContext();
+        profile = new Profile("Tester", "TestUser1", "abc@abc.com", "110");
+        serverHelper = new ServerHelper(context);
         serverHelper.addProfile(profile);
 
         solo = new Solo(getInstrumentation(), getActivity());
-        Context context = getInstrumentation().getTargetContext();
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 

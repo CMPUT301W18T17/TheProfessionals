@@ -15,7 +15,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4a28198c-dc5d-4b56-8f6e-72b201ca9492" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderPlaceBidTest.java" afterPath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderPlaceBidTest.java" />
+      <change beforePath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderViewRequestedTaskTest.java" afterPath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderViewRequestedTaskTest.java" />
+      <change beforePath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterAddTaskActivityTest.java" afterPath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterAddTaskActivityTest.java" />
+      <change beforePath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterEditTaskActivityTest.java" afterPath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterEditTaskActivityTest.java" />
+      <change beforePath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java" afterPath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -68,11 +71,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProviderPlaceBidTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProviderPlaceBidTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderPlaceBidTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="504">
               <caret line="92" column="1" lean-forward="true" selection-start-line="92" selection-start-column="1" selection-end-line="92" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProviderViewRequestedTaskTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderViewRequestedTaskTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="32" column="49" lean-forward="false" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequesterAddTaskActivityTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterAddTaskActivityTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="28" column="47" lean-forward="false" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequesterEditTaskActivityTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterEditTaskActivityTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="47" column="4" lean-forward="false" selection-start-line="46" selection-start-column="66" selection-end-line="47" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SignUpActivityTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1014">
+              <caret line="34" column="49" lean-forward="false" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -1995,9 +2038,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/res/layout/activity_my_profile_view.xml" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/activity_other_profile_view.xml" />
         <option value="$PROJECT_DIR$/src/main/res/values/strings.xml" />
@@ -2042,10 +2082,13 @@
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java" />
-        <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java" />
         <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/LogInActivityTest.java" />
         <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/MyProfileViewActivityTest.java" />
         <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderPlaceBidTest.java" />
+        <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderViewRequestedTaskTest.java" />
+        <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterAddTaskActivityTest.java" />
+        <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterEditTaskActivityTest.java" />
+        <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java" />
       </list>
     </option>
   </component>
@@ -2109,7 +2152,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="settings.editor.selected.configurable" value="copyright" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522891593128" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522892033532" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.0.1" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="android.profiler.active" value="true" />
@@ -2766,31 +2809,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterViewListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1641">
-          <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_requester_view_task2.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-26/android.jar!/android/view/View.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4935">
-          <caret line="236" column="35" lean-forward="false" selection-start-line="236" selection-start-column="35" selection-end-line="236" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-26/android.jar!/android/os/Looper.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
@@ -3141,14 +3159,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1191">
-          <caret line="66" column="38" lean-forward="false" selection-start-line="66" selection-start-column="38" selection-end-line="66" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ExampleInstrumentedTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -3193,6 +3203,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="92" column="1" lean-forward="true" selection-start-line="92" selection-start-column="1" selection-end-line="92" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderViewRequestedTaskTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="32" column="49" lean-forward="false" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterAddTaskActivityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="47" lean-forward="false" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterEditTaskActivityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="47" column="4" lean-forward="false" selection-start-line="46" selection-start-column="66" selection-end-line="47" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1014">
+          <caret line="34" column="49" lean-forward="false" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
           <folding />
         </state>
       </provider>

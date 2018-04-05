@@ -14,7 +14,7 @@ import com.robotium.solo.Solo;
 public class ProviderViewRequestedTaskTest extends ActivityInstrumentationTestCase2<SearchActivity> {
     private Solo solo;
     private String taskDescription;
-    private MockTask mockTask;
+    private Task mockTask;
     private Profile profile;
     private ServerHelper serverHelper_1, serverHelper_2;
     private SharedPreferences sharedPreferences;
@@ -24,17 +24,18 @@ public class ProviderViewRequestedTaskTest extends ActivityInstrumentationTestCa
     }
 
     public void setUp() throws Exception{
-        mockTask = new MockTask("TestUser", "Test Name 1", "Task Description", "Task Location", "19/03/2018");
-        serverHelper_1 = new ServerHelper();
+        Context context = getInstrumentation().getTargetContext();
+        mockTask = new Task("TestUser", "Test Name 1", "Task Description");
+        serverHelper_1 = new ServerHelper(context);
         String ID = serverHelper_1.addTasks(mockTask);
         mockTask.setId(ID);
         profile = new Profile("Tester", "TestUser1", "abc@abc.com", "110");
-        serverHelper_2 = new ServerHelper();
+        serverHelper_2 = new ServerHelper(context);
         serverHelper_2.addProfile(profile);
 
         solo = new Solo(getInstrumentation(), getActivity());
 
-        Context context = getInstrumentation().getTargetContext();
+
         sharedPreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
