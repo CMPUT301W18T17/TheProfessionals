@@ -14,10 +14,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a28198c-dc5d-4b56-8f6e-72b201ca9492" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/BidTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/BidTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ProfileTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ProfileTest.java" />
       <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewTest.java" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -60,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReviewTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ReviewTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-426">
-              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state relative-caret-position="792">
+              <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding>
                 <element signature="e#501#502#0" expanded="true" />
                 <element signature="e#555#556#0" expanded="true" />
@@ -73,6 +71,16 @@
                 <element signature="e#687#688#0" expanded="true" />
                 <element signature="e#750#751#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerHelperTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-27">
+              <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -100,9 +108,11 @@
       <file leaf-file-name="ReviewListTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="105">
+              <caret line="5" column="24" lean-forward="false" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2065,13 +2075,13 @@
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Profile.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Task.java" />
-        <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/BidListTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Bid.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/BidTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ProfileTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java" />
       </list>
     </option>
   </component>
@@ -2141,7 +2151,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="settings.editor.selected.configurable" value="copyright" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522887967761" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522888277062" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.0.1" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="android.profiler.active" value="true" />
@@ -3156,16 +3166,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="4" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterTaskActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1534">
@@ -3266,18 +3266,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-426">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        <state relative-caret-position="792">
+          <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
             <element signature="e#501#502#0" expanded="true" />
             <element signature="e#555#556#0" expanded="true" />
@@ -3286,6 +3278,24 @@
             <element signature="e#687#688#0" expanded="true" />
             <element signature="e#750#751#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="24" lean-forward="false" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-27">
+          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>

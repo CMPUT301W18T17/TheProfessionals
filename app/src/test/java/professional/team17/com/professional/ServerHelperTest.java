@@ -2,15 +2,13 @@ package professional.team17.com.professional;
 
 import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.AndroidTestCase;
 
 
 import java.util.Date;
 
-/**
- * Created by Zhipeng Zhang on 2018/2/22.
- */
 
-public class ServerHelperTest extends ActivityInstrumentationTestCase2 {
+public class ServerHelperTest extends AndroidTestCase {
 
     private final ServerHelper serverHelper = new ServerHelper(getContext());
     private Date date = new Date();
@@ -25,7 +23,7 @@ public class ServerHelperTest extends ActivityInstrumentationTestCase2 {
 
 
     public ServerHelperTest() {
-        super(ServerHelper.class);
+        super();
     }
 
     public void testAddTaskTest() {

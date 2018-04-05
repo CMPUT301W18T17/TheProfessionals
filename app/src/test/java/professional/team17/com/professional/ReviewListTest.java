@@ -2,12 +2,8 @@ package professional.team17.com.professional;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import junit.framework.Assert;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 
 public class ReviewListTest extends ActivityInstrumentationTestCase2 {
     public ReviewListTest() {
@@ -81,7 +77,7 @@ public class ReviewListTest extends ActivityInstrumentationTestCase2 {
         reviews.addReview(review3);
 
 
-        ArrayList<Review> reviewList = new ArrayList<Review>(Arrays.asList(review1, review2, review3));
+        ArrayList<Review> reviewList = new ArrayList<>(Arrays.asList(review1, review2, review3));
 
         assertEquals(reviews.getReviews(), reviewList);
 
