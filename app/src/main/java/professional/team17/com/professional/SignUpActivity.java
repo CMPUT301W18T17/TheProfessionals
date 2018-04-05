@@ -99,6 +99,15 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     /**
+     * Overrides the back button
+     */
+
+    @Override
+    public void onBackPressed() {
+        changeActivity(LogInActivity.class);
+    }
+
+    /**
      * Creates the user's profile and moves them
      *
      * @see ServerHelper
@@ -214,6 +223,7 @@ public class SignUpActivity extends AppCompatActivity {
             name.setText(information);
         }
     }
+
 
 }
 
