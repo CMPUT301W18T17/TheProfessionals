@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -45,19 +46,14 @@ public class providerCheckImage extends Navigation {
 
         }
 
-    public void toTheBack(View view) {
-        finish();
-    }
-    public void next(){
-        k = k + 1;
-        a = photos.get(k);
-        byte[] decodedString = Base64.decode(a, Base64.DEFAULT);
-        Glide.with(this)
-                .load(decodedString)
-                .asBitmap()
-                //.placeholder(R.drawable.ic_broken)
-                .into(imageUpload);
 
-    }
+    private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
+        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+            String photo = photos.get(position);
+            // do some stuff
+
+        }
+
+    };
 
 }
