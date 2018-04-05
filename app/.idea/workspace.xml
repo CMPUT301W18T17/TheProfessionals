@@ -14,8 +14,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a28198c-dc5d-4b56-8f6e-72b201ca9492" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java" afterPath="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -75,12 +76,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerHelperTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ServerHelperTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-27">
-              <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-              <folding />
+            <state relative-caret-position="21">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TaskListTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2073,7 +2088,6 @@
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/providerCheckImage.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Profile.java" />
-        <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Task.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/BidListTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Bid.java" />
@@ -2082,6 +2096,7 @@
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ProfileTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ReviewListTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java" />
       </list>
     </option>
   </component>
@@ -2151,7 +2166,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="settings.editor.selected.configurable" value="copyright" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522888277062" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522888402557" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.0.1" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="android.profiler.active" value="true" />
@@ -3194,14 +3209,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="18" column="86" lean-forward="false" selection-start-line="18" selection-start-column="86" selection-end-line="18" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -3293,9 +3300,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/ServerHelperTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27">
-          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-          <folding />
+        <state relative-caret-position="21">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/professional/team17/com/professional/TaskListTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

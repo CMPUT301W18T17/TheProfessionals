@@ -1,7 +1,5 @@
 package professional.team17.com.professional;
 
-import android.content.Context;
-import android.test.ActivityInstrumentationTestCase2;
 import android.test.AndroidTestCase;
 
 
