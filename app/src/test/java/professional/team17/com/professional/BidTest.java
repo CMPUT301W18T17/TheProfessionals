@@ -2,9 +2,6 @@ package professional.team17.com.professional;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-/**
- * Created by Logan Yue on 2018-02-20.
- */
 
 public class BidTest extends ActivityInstrumentationTestCase2 {
 

@@ -4,9 +4,6 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.ArrayList;
 
-/**
- * Created by ag on 2018-02-24.
- */
 
 public class ProfileTest extends ActivityInstrumentationTestCase2 {
 

@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Hailan on 2018-02-20.
- */
 
 public class ReviewListTest extends ActivityInstrumentationTestCase2 {
     public ReviewListTest() {
