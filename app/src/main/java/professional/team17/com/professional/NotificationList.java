@@ -58,4 +58,11 @@ public class NotificationList {
        Notification notification = new Notification(task, user);
        notificationList.add(notification);
    }
+
+    /**
+     * Returns true if the list is empty
+     */
+    public boolean isEmpty(){
+        return notificationList.isEmpty();
+    }
 }
