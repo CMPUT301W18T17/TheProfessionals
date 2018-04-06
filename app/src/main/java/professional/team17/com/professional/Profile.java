@@ -72,6 +72,7 @@ public class Profile implements Serializable {
         this.config = null;
         this.width = 0;
         this.height = 0;
+        profilePhoto = new ProfilePhoto(photoString,config,width,height);
         notificationList = new NotificationList();
     }
 

@@ -23,9 +23,9 @@ public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<
     }
 
     public void setUp() throws Exception{
-        ElasticSearchController.AddProfile addProfile = new ElasticSearchController.AddProfile();
-        addProfile.execute(testProfile);
         Context context = getInstrumentation().getTargetContext();
+        ServerHelper serverHelper = new ServerHelper(context);
+        serverHelper.addProfile(testProfile);
         SharedPreferences pref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
