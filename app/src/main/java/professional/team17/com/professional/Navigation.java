@@ -48,13 +48,8 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
         // Create the custom object
         sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedpreferences.getString("username", "error");
-        notificationDot = (ImageView) findViewById(R.id.notificationDot);
-
         connectivityCheck();
-
         syncCheck();
-
-
     }
 
     /**
@@ -70,7 +65,6 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
         if (c.isNewOnline()){
             managesync();
         }
-
     }
 
     /**
@@ -84,10 +78,6 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
             createSync();
         }
     }
-
-
-
-
 
 
     /**
@@ -218,15 +208,12 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
     @Override
     protected void onStart() {
         super.onStart();
-
-
     }
 
     protected void createSync() {
         FragmentManager fm = getSupportFragmentManager();
         ConfirmDialog confirmDialog = new ConfirmDialog();
         confirmDialog.show(fm, "Sync");
-
     }
 
     @Override
@@ -240,8 +227,6 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
 
     @Override
     public void onFinishConfirmDialog(Boolean confirmed, String dialog) {
-
     }
-
 
 }
