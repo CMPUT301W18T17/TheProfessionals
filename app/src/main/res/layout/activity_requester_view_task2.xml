@@ -127,7 +127,7 @@
                 android:layout_marginStart="110dp"
                 android:layout_marginTop="8dp"
                 android:background="#ffffff"
-                android:onClick="viewphoto"
+                android:onClick="viewPhoto"
                 android:scaleType="fitCenter"
                 app:layout_constraintEnd_toStartOf="@+id/viewLocationButton"
                 app:layout_constraintStart_toStartOf="parent"
