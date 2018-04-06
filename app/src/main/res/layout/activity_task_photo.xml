@@ -17,23 +17,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-<<<<<<< Updated upstream
             android:layout_marginBottom="8dp" />
-
-=======
-            android:layout_width="280dp"
-            android:layout_height="320dp" />
         <Button
             android:id="@+id/bTakePhoto"
-            android:text = "TakePhoto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="#dddddd"
+            android:fontFamily="@font/amiko"
+            android:text="TakePhoto" />
         <Button
             android:id="@+id/bConfirm"
             android:text = "Confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
->>>>>>> Stashed changes
+
         <Button
             android:id="@+id/bImageUpload"
             android:layout_width="match_parent"
@@ -42,15 +39,6 @@
             android:background="#dddddd"
             android:fontFamily="@font/amiko"
             android:text="Upload" />
-
-        <Button
-<<<<<<< Updated upstream
-            android:id="@+id/bTakePhoto"
-=======
-            android:id="@+id/bImageDelete"
-            android:text = "Delete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
         <Button
             android:id="@+id/bImageBack"
             android:text = "back"
@@ -64,13 +52,8 @@
         <TextView
             android:id="@+id/errorText"
             android:layout_gravity="center_horizontal"
-            android:textSize="40sp"
->>>>>>> Stashed changes
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#dddddd"
-            android:fontFamily="@font/amiko"
-            android:text="TakePhoto" />
+            android:textSize="40sp"/>
+
     </LinearLayout>
 
 </ScrollView>
