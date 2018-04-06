@@ -40,8 +40,6 @@ public abstract class RequesterTaskActivity extends Navigation{
     protected ImageButton selectDateButton;
     protected MapView mapView;
     protected Button submitButton;
-    protected SharedPreferences sharedPreferences;
-    protected SharedPreferences.Editor editor;
     /* other variables */
 
     protected String dateString;
@@ -50,7 +48,7 @@ public abstract class RequesterTaskActivity extends Navigation{
     protected String message;
     protected ArrayList<String> photos;
     protected String photo;
-    protected Integer a = 1;
+
 
     private String infor, title, description, location, date;
 
@@ -80,43 +78,67 @@ public abstract class RequesterTaskActivity extends Navigation{
         submitButton = (Button) findViewById(R.id.submitButton);
         photoTextView = (TextView) findViewById(R.id.photoTextView);
         photos = new ArrayList<String>();
-        sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE);
+
+        //sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE);
 
 
-        Intent intent = getIntent();
-        title = intent.getStringExtra("Title");
-        description = intent.getStringExtra("Description");
-        location = intent.getStringExtra("Location");
-        date = intent.getStringExtra("Date");
 
+
+
+
+
+
+        /* Set all onClickListeners */
+
+            addPhotoButton.setOnClickListener(new ImageButton.OnClickListener() {
+             @Override
+                public void onClick(View v) {
+
+                 changeActivity(TaskPhotoActivity.class);
+
+                 Intent intent = new Intent( RequesterTaskActivity.this, TaskPhotoActivity.class);
+                 title = nameField.getText().toString();
+                 // Task Title
+                 intent.putExtra("Title", title);
+                 description = descriptionField.getText().toString();
+                 // Task Description
+                 intent.putExtra("Description", description);
+                 location = locationField.getText().toString();
+                 // Location
+                 intent.putExtra("Location", location);
+                 date = textualDateView.getText().toString();
+                 // Date
+                 intent.putExtra("Date", date);
+                 // photos
+                 intent.putStringArrayListExtra("photos", photos);
+                    startActivityForResult(intent, 0);
+                }
+             });
+        Intent i = getIntent();
+        if(getIntent().hasExtra("yourImage")) {
+            photos = i.getStringArrayListExtra("yourImage");}
+        title = i.getStringExtra("Title");
+        description = i.getStringExtra("Description");
+        location = i.getStringExtra("Location");
+        date = i.getStringExtra("Date");
         // Set text back
         setter(nameField, title);
         setter(descriptionField, description);
         setter(locationField, location);
         textualDateView.setText(date);
-
-        /* Set all onClickListeners */
-        if(photos.size() <= 5){
-            addPhotoButton.setOnClickListener(new ImageButton.OnClickListener() {
-             @Override
-                public void onClick(View v) {
-                 changeActivity(TaskPhotoActivity.class);
-                }
-             });}
-        if(getIntent().hasExtra("yourImage")) {
-            Bitmap bmp = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("yourImage"), 0, getIntent().getByteArrayExtra("yourImage").length);
-            bmp = compressFunction(bmp);
-            photo = toBase64(bmp);
+            //Bitmap bmp = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("yourImage"), 0, getIntent().getByteArrayExtra("yourImage").length);
+            //bmp = compressFunction(bmp);
+            //photo = toBase64(bmp);
             //System.out.println("------------------------------------------------------");
             //System.out.println(photos);
             //System.out.println("------------------------------------------------------");
-            photos.add(photo);
-            photoTextView.setText("image" + a);
+            //photos.add(photo);
+            //photoTextView.setText("image has been added");
             //System.out.println("------------------------------------------------------");
             //System.out.print(photos);
             //System.out.println("------------------------------------------------------");
 
-        }
+
 
         selectDateButton.setOnClickListener(new ImageButton.OnClickListener() {
             @Override
