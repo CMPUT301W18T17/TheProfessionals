@@ -3,6 +3,8 @@ package professional.team17.com.professional;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -17,11 +19,24 @@ public class MapsShowALocationActivity extends FragmentActivity implements OnMap
     private GoogleMap mMap;
     private LatLng taskLatLng;
     private String taskAddress;
+    private ImageView closeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps_show_alocation);
+        setContentView(R.layout.activity_maps_search_tasks);
+
+        ImageView currentLocationButton = findViewById(R.id.ic_currentlocation);
+        currentLocationButton.setVisibility(View.GONE);
+
+        closeButton = findViewById(R.id.ic_close);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
