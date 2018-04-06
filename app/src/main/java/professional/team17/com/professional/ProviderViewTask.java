@@ -62,6 +62,7 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
     private TextView taskMyBidDollar;
     private ImageButton viewMapButton;
     private ImageButton  button5;
+    private ImageButton back;
     TextView taskLowBidDesc;
 
 
@@ -96,6 +97,14 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
         taskAddressTextField = (TextView) findViewById(R.id.provider_view_task_address);
         viewMapButton = (ImageButton) findViewById(R.id.provider_view_map_button);
         button5 = (ImageButton) findViewById(R.id.provider_view_task_photo);
+        back = (ImageButton) findViewById(R.id.backProvider);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         this.setActivityTitleProvider("View Task");
 
@@ -254,4 +263,5 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
         ConfirmDialog confirmDialog = new ConfirmDialog();
         confirmDialog.show(fm, "Cancel Bid");
     }
+
 }

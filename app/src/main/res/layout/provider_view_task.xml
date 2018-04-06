@@ -16,6 +16,16 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+                <ImageButton
+                    android:id="@+id/backProvider"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="#ffffff"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/include"
+                    app:srcCompat="@drawable/back_icon" />
+
                 <TextView
                     android:id="@+id/provider_view_task_title"
                     android:layout_width="wrap_content"
@@ -346,6 +356,7 @@
         </android.support.constraint.ConstraintLayout>
 
         <include
+            android:id="@+id/include"
             layout="@layout/provider_layout_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
