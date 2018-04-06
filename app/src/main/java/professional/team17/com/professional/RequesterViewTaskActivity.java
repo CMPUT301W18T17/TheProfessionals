@@ -101,6 +101,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
 
         } catch (Exception e) {
             Log.i("Server", "Server failed to return a task for that ID");
+            return;
         }
         checkOffline();
         
@@ -182,7 +183,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
      */
     private void getFromServer() throws Exception{
         task = serverHelper.getTask(ID);
-        Log.d("RequesterViewTask", "getFromServer: "+ task.getUniqueID());
         if (task == null){
             throw new Exception();
         }

@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+
+import javax.security.auth.login.LoginException;
 
 public class NotificationActivity extends AppCompatActivity {
 
@@ -75,14 +78,15 @@ public class NotificationActivity extends AppCompatActivity {
             if (notification.getType().equals("New Bid")) {
                 Intent intent = new Intent(NotificationActivity.this, RequesterViewTaskActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("task", notification.getNotificationTaskID());
+                bundle.putString("ID", notification.getNotificationTaskID());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
             else if (notification.getType().equals("Task Assigned")){
                 Intent intent = new Intent(NotificationActivity.this, ProviderViewTask.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("Task", notification.getNotificationTaskID());
+                bundle.putString("ID", notification.getNotificationTaskID());
+                Log.i("TAD", "SFSF"+notification.getNotificationTaskID());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
