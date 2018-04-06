@@ -27,8 +27,12 @@ public class ValidationController {
         return emailValidator.isValid(email);
     }
 
+    /**
+     * Validates phone number
+     * @param phoneNumber - phone number entered by the user
+     * @return - boolean - whether it is a valid phone number
+     */
     public boolean validatePhoneNumber(String phoneNumber){
-
         matcher = pattern.matcher(phoneNumber);
         if (phoneNumber.length() >= 10) {
             if (android.util.Patterns.PHONE.matcher(phoneNumber).matches()) {

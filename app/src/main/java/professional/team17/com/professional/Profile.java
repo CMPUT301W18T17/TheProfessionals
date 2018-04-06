@@ -202,23 +202,42 @@ public class Profile implements Serializable {
         blackList.remove(profile);
     }
 
+    /**
+     *
+     * @param profilePhoto - the photo of current profile
+     */
     public void setProfilePhoto(ProfilePhoto profilePhoto){
         this.profilePhoto = profilePhoto;
     }
 
+    /**
+     *
+     * @return - the photo of current profile
+     */
     public ProfilePhoto getProfilePhoto(){
         return this.profilePhoto;
     }
 
-
+    /**
+     *
+     * @param notificationList - list of notifications of current profile
+     */
     public void setNotificationList(NotificationList notificationList){
         this.notificationList = notificationList;
     }
 
+    /**
+     *
+     * @param reviewList - set reviews for current profile
+     */
     public void setReviewList(ReviewList reviewList) {
         this.reviewList = reviewList;
     }
 
+    /**
+     *
+     * @return - get all notifications of current profile
+     */
     public NotificationList getNotificationList(){
         return notificationList;
     }

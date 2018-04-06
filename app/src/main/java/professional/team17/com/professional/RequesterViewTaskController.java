@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Hailan on 2018-04-05.
+ * Referenced from Allison's ProviderTaskController
  */
 
 public class RequesterViewTaskController {

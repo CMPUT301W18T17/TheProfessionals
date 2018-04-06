@@ -135,6 +135,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
 
     }
 
+    /**
+     * Check if device is currently offline
+     */
     void checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
         if (c.isOffline()) {
@@ -177,6 +180,10 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         }
     }
 
+    /**
+     * Go to providerCheckImage to
+     * @param v
+     */
     public void viewPhoto(View v){
         Intent intent = new Intent(RequesterViewTaskActivity.this, providerCheckImage.class);
         requesterViewTaskController.photos(intent);

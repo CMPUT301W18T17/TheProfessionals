@@ -90,15 +90,15 @@ public class SearchActivity extends Navigation  {
 
     }
 
-            /**
-             * This will search the server for a match against the search input,
-             * and update the tasklist with the results. If there are no results, it
-             * will display an empty message.
-             *
-             * @param query - the string representing the task being searched for
-             */
-            private void search(String query) {
-                taskListController.search(query);
-            }
+    /**
+     * This will search the server for a match against the search input,
+     * and update the tasklist with the results. If there are no results, it
+     * will display an empty message.
+     *
+     * @param query - the string representing the task being searched for
+     */
+    private void search(String query) {
+        taskListController.search(query);
+    }
 
 }

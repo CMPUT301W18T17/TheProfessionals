@@ -202,9 +202,6 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
         return false;
     }
 
-    /**
-     * When the activity starts, create the popup menu.
-     */
     @Override
     protected void onStart() {
         super.onStart();

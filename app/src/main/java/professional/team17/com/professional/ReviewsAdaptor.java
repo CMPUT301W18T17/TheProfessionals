@@ -29,9 +29,9 @@ public class ReviewsAdaptor extends ArrayAdapter {
 
     /**
      * Initialize adaptor
-     * @param context
-     * @param resource
-     * @param reviewList
+     * @param context  - context
+     * @param resource - resource
+     * @param reviewList - review list of current profile
      */
     public ReviewsAdaptor(Context context, int resource, ReviewList reviewList) {
         super(context, resource);
@@ -54,7 +54,7 @@ public class ReviewsAdaptor extends ArrayAdapter {
      * @param position position of box
      * @param convertView default
      * @param parent default
-     * @return
+     * @return - convertView
      */
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null){

@@ -13,8 +13,10 @@ import java.util.Locale;
 
 /**
  * Created by Hailan on 2018-04-04.
+ * Referenced from Allison's ProviderTaskController
+ * @see RequesterAddTaskActivity
+ * @see RequesterEditTaskActivity
  */
-
 public class RequesterTaskController {
     private Context context;
     private ServerHelper serverHelper;
@@ -28,22 +30,48 @@ public class RequesterTaskController {
         setUsername();
     }
 
+    /**
+     * set the task requester username for current task
+     */
     private void setUsername() {
         SharedPreferences sharedpreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedpreferences.getString("username", "error");
     }
 
+    /**
+     * Get an old task from server by using task id
+     * @param taskID - id of oldtask
+     * @return - old task
+     */
     public Task getOldTaskFromServer(String taskID){
         taskid = taskID;
         task = serverHelper.getTask(taskID);
         return task;
     }
 
+    /**
+     * Add a new task to server
+     * @param title - title of task
+     * @param description - description of task
+     * @param locationString - location of task
+     * @param dateString - due date for task
+     * @param latLng - latlng for the location
+     * @param photos - photos of task
+     */
     public void addTaskToServer(String title, String description, String locationString, String dateString, LatLng latLng, ArrayList<String> photos){
         task = new Task(username, title, description, locationString, dateString, latLng, photos);
         taskid = serverHelper.addTasks(task);
     }
 
+    /**
+     * Update info for an old task in the server
+     * @param title - title of task
+     * @param description - description of task
+     * @param locationString - location of task
+     * @param dateString - due date for task
+     * @param latLng - latlng for the location
+     * @param photos - photos of task
+     */
     public void addOldTaskToServer(String title, String description, String locationString, String dateString, LatLng latLng, ArrayList<String> photos){
         task.setName(title);
         task.setDate(parseDate(dateString));
@@ -54,6 +82,9 @@ public class RequesterTaskController {
         serverHelper.updateTasks(task);
     }
 
+    /**
+     * set task to requested state
+     */
     public void setTaskToRequested(){
         task.setRequested();
     }
@@ -77,6 +108,10 @@ public class RequesterTaskController {
         return input;
     }
 
+    /**
+     *
+     * @return - current task id
+     */
     public String getCurrentTaskId(){
         return taskid;
     }

@@ -22,16 +22,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-//TODO implement this for project part 5
-/**
- * Created by kaixiangzhang on 2018-03-11.
- *
- * Here since I am not very familiar with the provider part
- * However i gonna follow the Design Patterns - MVC Pattern:
- * Which is model--controller--view :
- * 1. controller use model to achieve goal
- * 2. the activity class only do the view(get info/ show info)
- */
 
 public class ProviderTaskController {
     private Context context;

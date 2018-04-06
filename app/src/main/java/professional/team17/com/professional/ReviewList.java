@@ -24,11 +24,19 @@ public class ReviewList {
         // Nothing
     }
 
+    /**
+     * @param review - a review with unknown existence
+     * @return - boolean
+     */
     public boolean hasReview(Review review){
         return reviews.contains(review);
     }
 
 
+    /**
+     * Add a review to list
+     * @param review - a review to be added
+     */
     public void addReview(Review review){
         if (this.hasReview(review)){
             throw new  IllegalArgumentException("Duplicate Review - cannot be added");
@@ -36,6 +44,10 @@ public class ReviewList {
         reviews.add(review);
    }
 
+    /**
+     * Delete a review from the list
+     * @param review - a review to be deleted
+     */
     public void deleteReview(Review review){
         reviews.remove(review);
     }
@@ -62,15 +74,20 @@ public class ReviewList {
         return String.format("%.2f", sum);
  }
 
-
-
+    /**
+     * Get all reviews
+     * @return - entire review list
+     */
     public ArrayList<Review> getReviews() {
         //TO DO implement using colletions.sort method to create sort by date list
         //see https://stackoverflow.com/questions/5927109/sort-objects-in-arraylist-by-date
         return reviews;
     }
 
-
+    /**
+     * See if list has no reviews
+     * @return boolean
+     */
     public boolean isEmpty(){
         return reviews.size()==0;
     }

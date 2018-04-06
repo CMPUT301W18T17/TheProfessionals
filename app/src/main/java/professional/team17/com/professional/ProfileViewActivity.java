@@ -90,8 +90,11 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
         }
     }
 
+    /**
+     * Add a profile photo for current user
+     * @param userProfile - profile of current user
+     */
     void addPhoto(Profile userProfile){
-        // Photo Part
         profilePhoto = userProfile.getProfilePhoto();
         photoConfig = profilePhoto.getConfig();
         if (photoConfig != null) {
@@ -103,8 +106,10 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
         }
     }
 
+    /**
+     * check if device is offline
+     */
     void offline() {
-
             Offline fragment = new Offline();
             getSupportFragmentManager().beginTransaction().replace(R.id.profile_view_layout, fragment).commit();
         }

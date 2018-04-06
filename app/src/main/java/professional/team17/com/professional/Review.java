@@ -12,9 +12,9 @@ package professional.team17.com.professional;
 import java.util.Date;
 
 /**
- * @Author
+ * @author Logan
  * @version 1.0
- * @See ReviewList
+ * @see ReviewList
  * this class is mainly created for describe a new review object
  */
 public class Review {

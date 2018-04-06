@@ -43,6 +43,10 @@ public class MapsShowALocationActivity extends FragmentActivity implements OnMap
         mapFragment.getMapAsync(this);
     }
 
+    /**
+     * Once map is ready, show location of task (passed from prior activity)
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;

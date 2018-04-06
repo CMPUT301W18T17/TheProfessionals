@@ -218,6 +218,11 @@ public class SignUpActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Set info into its corresponding EditText
+     * @param name - name of EditText
+     * @param information - info to be placed in EditText
+     */
     private void setter(EditText name, String information){
         if (information != null){
             name.setText(information);
