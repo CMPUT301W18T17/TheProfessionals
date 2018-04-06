@@ -18,7 +18,7 @@
 
         <TextView
             android:id="@+id/titleView"
-            android:layout_width="64dp"
+            android:layout_width="107dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/amiko"
@@ -33,11 +33,11 @@
 
         <TextView
             android:id="@+id/requesteractivityTitleView"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:fontFamily="@font/amiko"
+            android:gravity="left"
             android:text="TextView"
             android:textColor="#ffffff"
             android:textSize="13sp"
@@ -45,11 +45,13 @@
             app:layout_constraintStart_toEndOf="@+id/titleView" />
 
         <FrameLayout
-            android:layout_width="5dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_weight="1"
-            android:longClickable="false">
+            android:longClickable="false"
+            tools:layout_editor_absoluteX="303dp"
+            tools:layout_editor_absoluteY="60dp">
 
             <ImageView
                 android:id="@+id/userMenuButton"
