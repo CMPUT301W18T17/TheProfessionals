@@ -69,12 +69,12 @@ public class ProviderListViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 configureRequested(v, position);
                 break;
             case 1:
-                BiddedListProviderView v = (BiddedListProviderView) holder;
-                configureBidded(v, position);
+                BiddedListProviderView v2 = (BiddedListProviderView) holder;
+                configureBidded(v2, position);
                 break;
             case 2:
-                AssignedListProviderView v = (AssignedListProviderView) holder;
-                configureAssigned(v, position);
+                AssignedListProviderView v3 = (AssignedListProviderView) holder;
+                configureAssigned(v3, position);
                 break;
             default:
                 break;

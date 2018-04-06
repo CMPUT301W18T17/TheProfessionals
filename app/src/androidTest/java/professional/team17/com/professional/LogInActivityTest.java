@@ -1,6 +1,8 @@
 package professional.team17.com.professional;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
@@ -27,6 +29,11 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
      */
     public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
+        Context context = getInstrumentation().getTargetContext();
+        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.apply();
     }
 
     /**
@@ -52,13 +59,17 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
 
         Profile testProfile = new Profile("tester","TestUser",
                 "tester@ualberta.ca","123-456-7890");
-        ElasticSearchController.AddProfile addProfile = new ElasticSearchController.AddProfile();
-        addProfile.execute(testProfile);
+        Context context = getInstrumentation().getTargetContext();
+        ServerHelper serverHelper = new ServerHelper(context);
+        serverHelper.addProfile(testProfile);
         solo.enterText((EditText) solo.getView(R.id.usernameBox), "TestUser");
         solo.clickOnButton("Sign In");
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-        ElasticSearchController.DeleteProfile deleteProfile = new ElasticSearchController.DeleteProfile();
-        deleteProfile.execute(testProfile);
+        serverHelper.deleteProfile(testProfile);
+        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.apply();
     }
 
     /**
@@ -78,5 +89,6 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
     @Override
     public void tearDown() throws Exception {
         solo.finishOpenedActivities();
+
     }
 }

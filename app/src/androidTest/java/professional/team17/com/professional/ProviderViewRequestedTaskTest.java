@@ -51,7 +51,7 @@ public class ProviderViewRequestedTaskTest extends ActivityInstrumentationTestCa
     public void testProviderViewRequestedTaskActivity(){
         // Start
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-        solo.clickOnView(solo.getView(R.id.searchTasksButton));
+        //solo.clickOnView(solo.getView(R.id.searchTasksButton));
 
         assertTrue(solo.waitForText("Test Name 1"));
         assertTrue(solo.waitForText("Requested"));
