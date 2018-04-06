@@ -40,6 +40,11 @@
             android:fontFamily="@font/amiko"
             android:text="Upload" />
         <Button
+            android:id="@+id/bImageDelete"
+            android:text = "back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
             android:id="@+id/bImageBack"
             android:text = "back"
             android:layout_width="match_parent"
