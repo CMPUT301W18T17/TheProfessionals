@@ -7,9 +7,8 @@ import professional.team17.com.professional.RequesterAddTaskActivity;
 
 
 /**
- * Created by ag on 2018-03-26.
+ * Button to Move to Requester Activity to add task
  */
-
 public class AddTaskReqNav extends NavButton {
         public AddTaskReqNav(Context con) {
             super(con);

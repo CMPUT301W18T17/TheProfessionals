@@ -7,9 +7,8 @@ import professional.team17.com.professional.RequesterViewListActivity;
 
 
 /**
- * Created by ag on 2018-03-26.
+ * Button to Move to Requester Activity to see Assigned tasks
  */
-
 class AcceptedTasksReqNav extends NavButton {
         public AcceptedTasksReqNav(Context con) {
             super(con);

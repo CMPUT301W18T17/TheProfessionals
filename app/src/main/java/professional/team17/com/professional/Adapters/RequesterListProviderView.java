@@ -9,9 +9,9 @@ import org.w3c.dom.Text;
 import professional.team17.com.professional.R;
 
 /**
- * Created by ag on 2018-04-03.
+ * ViewHolder for the recyler view for providertasks. This holds the view
+ * for requested tasks
  */
-
 public class RequesterListProviderView extends RecyclerView.ViewHolder {
     private static TextView statusTextField, userNameTextField, taskTitleTextField;
     private static TextView taskLowBidAmountTextField, taskMyBidAmountTextField;
@@ -21,7 +21,6 @@ public class RequesterListProviderView extends RecyclerView.ViewHolder {
         statusTextField = (TextView) v.findViewById(R.id.provider_requested_status);
         userNameTextField = (TextView) v.findViewById(R.id.provider_requested_userName);
         taskTitleTextField = (TextView) v.findViewById(R.id.provider_requested_title);
-
     }
 
     public static TextView getStatus() {

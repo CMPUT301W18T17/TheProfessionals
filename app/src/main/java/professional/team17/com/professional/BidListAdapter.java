@@ -42,7 +42,6 @@ public class BidListAdapter extends ArrayAdapter<Bid> {
         super(context, 0,  bids);
     }
 
-
     /**
      * Gets and inflates the ListView associated with this adapter.
      * @param position The position of the row
@@ -65,8 +64,6 @@ public class BidListAdapter extends ArrayAdapter<Bid> {
         //plug in item to row
         userNameTextField.setText(bid.getName());
         taskBidTextField.setText(bid.getAmountAsString());
-
-
         return v;
     }
 

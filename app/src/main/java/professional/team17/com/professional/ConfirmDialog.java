@@ -35,8 +35,6 @@ import professional.team17.com.professional.Dialogs.CustomDialogFactory;
  * @author Allison
  */
 public class ConfirmDialog extends DialogFragment {
-
-
     /**
      * This is the interface used to talk to the activity.
      * It holds the user intput in variable "confirmed"
@@ -46,15 +44,12 @@ public class ConfirmDialog extends DialogFragment {
         void onFinishConfirmDialog(Boolean confirmed, String dialog);
     }
 
-
     private ConfirmDialogListener listener;
-
 
     /**
     * Implement the empty method from interface ConfirmDialogListener
     */
     public ConfirmDialog() {}
-
 
     /**
      *

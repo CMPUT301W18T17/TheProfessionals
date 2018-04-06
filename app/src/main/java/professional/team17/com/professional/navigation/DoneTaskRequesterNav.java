@@ -7,9 +7,8 @@ import professional.team17.com.professional.ProviderTaskListActivity;
 import professional.team17.com.professional.RequesterViewListActivity;
 
 /**
- * Created by ag on 2018-03-27.
+ * Button to Move to Requester Activity to see Done tasks
  */
-
 public  class DoneTaskRequesterNav extends NavButton {
         public DoneTaskRequesterNav(Context con) {
             super(con);

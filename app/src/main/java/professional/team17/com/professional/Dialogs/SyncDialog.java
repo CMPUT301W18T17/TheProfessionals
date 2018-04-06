@@ -3,9 +3,8 @@ package professional.team17.com.professional.Dialogs;
 import android.view.View;
 
 /**
- * Created by ag on 2018-04-03.
+ * Dialog to notify user of sync errors
  */
-
 public class SyncDialog extends DialogContent {
     public SyncDialog(View view) {
         super(view);

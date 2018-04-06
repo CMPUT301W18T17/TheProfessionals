@@ -6,9 +6,8 @@ import android.content.Intent;
 import professional.team17.com.professional.RequesterViewListActivity;
 
 /**
- * Created by ag on 2018-03-26.
+ * Button to Move from Provider Activity to switch to Requester View
  */
-
 public class SwitchViewProviderNav extends NavButton {
     public SwitchViewProviderNav(Context con) {
         super(con);

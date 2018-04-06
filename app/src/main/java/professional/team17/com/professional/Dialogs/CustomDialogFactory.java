@@ -7,11 +7,9 @@ import professional.team17.com.professional.R;
 
 
 /**
- * Created by ag on 2018-04-03.
+ * Factory to build the Dialogs and allow reuse
  */
-
 public class CustomDialogFactory {
-
 
     public DialogContent make(View view, String type) {
             switch(type) {

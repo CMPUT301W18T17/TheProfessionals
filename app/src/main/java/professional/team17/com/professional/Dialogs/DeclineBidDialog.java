@@ -3,9 +3,8 @@ package professional.team17.com.professional.Dialogs;
 import android.view.View;
 
 /**
- * Created by ag on 2018-04-03.
+ * Dialog to decline bid on task
  */
-
 public class DeclineBidDialog extends DialogContent {
     public DeclineBidDialog(View view) {
         super(view);

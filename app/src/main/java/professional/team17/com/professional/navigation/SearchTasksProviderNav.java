@@ -6,9 +6,8 @@ import android.content.Intent;
 import professional.team17.com.professional.SearchActivity;
 
 /**
- * Created by ag on 2018-03-26.
+ * Button to Move to Provider Activity to see searched for tasks
  */
-
 public class SearchTasksProviderNav extends NavButton {
         public SearchTasksProviderNav(Context con) {
             super(con);

@@ -3,9 +3,8 @@ package professional.team17.com.professional.Dialogs;
 import android.view.View;
 
 /**
- * Created by ag on 2018-04-03.
+ * Dialog to set task to Done
  */
-
 public class SetDoneDialog extends DialogContent {
     public SetDoneDialog(View view) {
         super(view);
