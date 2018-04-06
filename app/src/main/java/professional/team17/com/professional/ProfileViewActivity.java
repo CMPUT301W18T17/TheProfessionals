@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -32,7 +33,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
     protected TextView email;
     protected TextView phoneNumber;
     protected TextView currentMode;
-    protected Button doneButton;
+    protected ImageButton doneButton;
     protected ReviewsAdaptor reviewsAdaptor;
     protected ListView listView;
     protected RatingBar ratingBar;
@@ -55,7 +56,7 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_view);
         currentMode = (TextView) findViewById(R.id.currentModeTV);
-        doneButton = (Button) findViewById(R.id.doneButton);
+        doneButton = (ImageButton) findViewById(R.id.doneButton);
         listView = (ListView) findViewById(R.id.listViewID);
         serverHelper = new ServerHelper(this);
     }

@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -66,7 +67,7 @@ public class EditMyProfileActivity extends AppCompatActivity {
         /* initialization of objects on layout and user's info*/
         setContentView(R.layout.activity_edit_my_profile);
         Button saveButton = (Button) findViewById(R.id.saveButton);
-        Button cancelButton = (Button) findViewById(R.id.cancelButton);
+        ImageButton cancelButton = (ImageButton) findViewById(R.id.cancelButton);
         photoButton = findViewById(R.id.imageButton);
 
         showUserName = findViewById(R.id.showUserName);

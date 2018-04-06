@@ -56,6 +56,8 @@ public class RequesterViewListActivity extends Navigation {
 
         adapterHelper.notifyDataSetChanged();
 
+        setActivityTitle();
+
     }
 
     /**
@@ -109,6 +111,21 @@ public class RequesterViewListActivity extends Navigation {
         if (confirmed){
             taskListController.delete();
             adapterHelper.notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * Sets the activity's title depending on the task status.
+     */
+    private void setActivityTitle() {
+        if (TaskStatus.getInstance().isRequested()) {
+            setActivityTitleRequester("My Requested Tasks");
+        } else if (TaskStatus.getInstance().isBidded()){
+            setActivityTitleRequester("My Bidded Tasks");
+        } else if (TaskStatus.getInstance().isAssigned()){
+            setActivityTitleRequester("My Assigned Tasks");
+        } else if (TaskStatus.getInstance().isDone()){
+            setActivityTitleRequester("My Completed Tasks");
         }
     }
 }

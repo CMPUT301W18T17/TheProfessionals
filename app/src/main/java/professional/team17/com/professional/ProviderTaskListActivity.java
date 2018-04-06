@@ -65,5 +65,20 @@ public class ProviderTaskListActivity extends Navigation {
                 startActivity(intention);
             }
         });
+
+        setActivityTitle();
+    }
+
+    /**
+     * Sets the activity's title depending on the task status.
+     */
+    private void setActivityTitle() {
+        if (TaskStatus.getInstance().isBidded()){
+            setActivityTitleProvider("Bidded Tasks");
+        } else if (TaskStatus.getInstance().isAssigned()){
+            setActivityTitleProvider("Assigned Tasks");
+        } else if (TaskStatus.getInstance().isDone()){
+            setActivityTitleProvider("Completed Tasks");
+        }
     }
 }

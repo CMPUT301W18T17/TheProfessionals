@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permisson.READ_GSERVICES" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,11 +23,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LogInActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".SearchActivity" />
         <activity android:name=".ProviderViewTask" />
@@ -85,9 +79,9 @@
             android:name=".MapsShowALocationActivity"
             android:label="@string/title_activity_maps_show_alocation"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".AddReview"></activity>
-            android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".TaskPhotoActivity"></activity>
+        <activity android:name=".AddReview" />
+        android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".TaskPhotoActivity" />
         <activity
             android:name=".providerCheckImage"
             android:label="@string/title_activity_provider_check_image"
@@ -97,6 +91,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ProviderViewTask" />
+        </activity>
+        <activity android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
