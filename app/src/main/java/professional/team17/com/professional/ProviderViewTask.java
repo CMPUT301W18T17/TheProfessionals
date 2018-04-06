@@ -41,11 +41,6 @@ import java.util.ArrayList;
  */
 public class ProviderViewTask extends Navigation implements PlaceBidDialog.PlaceBidDialogListener{
 
-    //TODO below item is needed for protoype, part 5 persistence will remove this
-
-
-
-    //TODO both items below can be put in controller (project part 5)
     private ProviderTaskController providerTaskController;
 
     //Everything below maybe able to be set into the controller. Do not reflect in uml
@@ -57,20 +52,18 @@ public class ProviderViewTask extends Navigation implements PlaceBidDialog.Place
     private TextView taskLowBidTextField;
     private TextView taskMyBidTextField;
     private TextView taskAddressTextField;
-
     private TextView taskLowBidDollar;
     private TextView taskMyBidDollar;
-    private ImageButton viewMapButton;
-    private ImageButton  button5;
-    private ImageButton back;
-    TextView taskLowBidDesc;
-
+    private TextView taskLowBidDesc;
 
 
     //both buttons start as invisible by default
     private ImageButton bidButton;
     private ImageButton deleteButton;
     private ImageButton appendButton;
+    private ImageButton viewMapButton;
+    private ImageButton  button5;
+    private ImageButton back;
 
 
     /**
