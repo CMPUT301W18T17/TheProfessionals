@@ -94,8 +94,6 @@ public abstract class RequesterTaskActivity extends Navigation{
              @Override
                 public void onClick(View v) {
 
-                 changeActivity(TaskPhotoActivity.class);
-
                  Intent intent = new Intent( RequesterTaskActivity.this, TaskPhotoActivity.class);
                  title = nameField.getText().toString();
                  // Task Title
@@ -111,10 +109,10 @@ public abstract class RequesterTaskActivity extends Navigation{
                  intent.putExtra("Date", date);
                  // photos
                  intent.putStringArrayListExtra("photos", photos);
-                    startActivityForResult(intent, 0);
+                 startActivityForResult(intent, 0);
                 }
              });
-        Intent i = getIntent();
+/*        Intent i = getIntent();
         if(getIntent().hasExtra("yourImage")) {
             photos = i.getStringArrayListExtra("yourImage");}
         title = i.getStringExtra("Title");
@@ -125,7 +123,7 @@ public abstract class RequesterTaskActivity extends Navigation{
         setter(nameField, title);
         setter(descriptionField, description);
         setter(locationField, location);
-        textualDateView.setText(date);
+        textualDateView.setText(date);*/
             //Bitmap bmp = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("yourImage"), 0, getIntent().getByteArrayExtra("yourImage").length);
             //bmp = compressFunction(bmp);
             //photo = toBase64(bmp);
@@ -245,6 +243,11 @@ public abstract class RequesterTaskActivity extends Navigation{
             if (resultCode == RESULT_OK) {
                 latLng = intent.getParcelableExtra("taskLatLng");
                 locationField.setText(intent.getStringExtra("taskAddress"));
+            }
+        }
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                photos = intent.getStringArrayListExtra("yourImage");
             }
         }
     }

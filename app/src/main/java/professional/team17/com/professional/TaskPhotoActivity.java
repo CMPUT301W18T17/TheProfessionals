@@ -135,15 +135,15 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                         errorBox.setText("you already confirmed.");
                     break;
                 case R.id.bImageUpload:
-                    Intent yourIntent = new Intent(this, RequesterAddTaskActivity.class);
-                    putInfor(yourIntent);
+                    Intent yourIntent = new Intent();
+                    //putInfor(yourIntent);
                     yourIntent.putStringArrayListExtra("yourImage", photos);
+                    setResult(Activity.RESULT_OK, yourIntent);
                     //Bitmap bmp = ((BitmapDrawable) imageUpload.getDrawable()).getBitmap(); // store the image in your bitmap
                     //ByteArrayOutputStream bao = new ByteArrayOutputStream();
                     //bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
                     //yourIntent.putStringArrayListExtra("yourImage",photos);
-                    startActivity(yourIntent);
-                    break;
+                    finish();
                 case R.id.bTakePhoto:
                     c = c + 1;
                     if(a!=b){
@@ -253,6 +253,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
         }
     }
 
+/*
     private void putInfor(Intent intent) {
         // Task Title
         intent.putExtra("Title", title);
@@ -268,6 +269,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
         // photos
 
     }
+*/
 
     public Bitmap compressFunction(Bitmap bitmap) {
         int newWidth = 64;
