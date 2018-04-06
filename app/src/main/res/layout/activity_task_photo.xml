@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding= "10dp"
     android:layout_height="match_parent"
     tools:context="professional.team17.com.professional.TaskPhotoActivity">
 
@@ -14,17 +13,15 @@
 
         <ImageView
             android:id="@+id/imageUpload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="8dp" />
+            android:layout_width="250dp"
+            android:layout_height="250dp" />
         <Button
             android:id="@+id/bTakePhoto"
+            android:text = "TakePhoto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#dddddd"
-            android:fontFamily="@font/amiko"
-            android:text="TakePhoto" />
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/bConfirm"
             android:text = "Confirm"
@@ -32,16 +29,14 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/bImageUpload"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:background="#dddddd"
-            android:fontFamily="@font/amiko"
-            android:text="Upload" />
-        <Button
             android:id="@+id/bImageDelete"
-            android:text = "back"
+            android:text = "Delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/bImageNext"
+            android:text = "Next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
@@ -50,13 +45,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
-            android:id="@+id/bImageNext"
-            android:text = "Next"
+            android:id="@+id/bImageUpload"
+            android:text = "Upload"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/errorText"
             android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="40sp"/>
 
     </LinearLayout>

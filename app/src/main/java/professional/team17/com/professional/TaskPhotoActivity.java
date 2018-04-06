@@ -103,33 +103,41 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.imageUpload:
+                    c = c + 1;
                     if(a!=b){
+
                     Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);}
+                    startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
+                        }
+
                     else
                         errorBox.setText("you have confirmed plz delete first.");
                     break;
                 case R.id.bConfirm:
                         if(a!=b){
-                    Bitmap bmp = ((BitmapDrawable) imageUpload.getDrawable()).getBitmap(); // store the image in your bitmap
+                            if(a!=c){
+                    bmp = ((BitmapDrawable) imageUpload.getDrawable()).getBitmap(); // store the image in your bitmap
                     RPhotos.add(bmp);
                     ByteArrayOutputStream bao = new ByteArrayOutputStream();
                     bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
                     bmp = compressFunction(bmp);
                     photo = toBase64(bmp);
                     photos.add(photo);
-                    c = c + 1;
-                   // System.out.println("------------------------------------------------------");
+                   //System.out.println("------------------------------------------------------");
                     //System.out.println(RPhotos);
                     //System.out.println("a = " + a);
                     //System.out.println("------------------------------------------------------");
-                    b = a;}
+                    b = a;
+                    c = a + 1;}
+                    else
+                                errorBox.setText("Can u select photo before u press confirm.");}
                     else
                         errorBox.setText("you already confirmed.");
                     break;
                 case R.id.bImageUpload:
                     Intent yourIntent = new Intent(this, RequesterAddTaskActivity.class);
                     putInfor(yourIntent);
+                    yourIntent.putStringArrayListExtra("yourImage", photos);
                     //Bitmap bmp = ((BitmapDrawable) imageUpload.getDrawable()).getBitmap(); // store the image in your bitmap
                     //ByteArrayOutputStream bao = new ByteArrayOutputStream();
                     //bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
@@ -137,9 +145,12 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                     startActivity(yourIntent);
                     break;
                 case R.id.bTakePhoto:
+                    c = c + 1;
                     if(a!=b){
+
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(cameraIntent, CAMERA_REQUEST);}
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                    }
                     else
                         errorBox.setText("you have confirmed plz delete first.");
                     break;
@@ -152,6 +163,8 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                             imageUpload.setImageResource(0);
                             bmp = RPhotos.get(a);
                             imageUpload.setImageBitmap(bmp);
+                            b = 100000;
+                            c = c -1;
                         }
                         else{
                     imageUpload.setImageResource(0);
@@ -161,7 +174,8 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                     //System.out.println(RPhotos);
                     //System.out.println("a = " + a);
                     //System.out.println("------------------------------------------------------");
-                    b = 100000;}}
+                    b = 100000;
+                        c = c -1;}}
 
                     else
                         errorBox.setText("you have not selected anything yet !");
@@ -171,7 +185,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                         if (photos.size() < 5){
                     imageUpload.setImageResource(0);
                             System.out.println("------------------------------------------------------");
-                            System.out.println(RPhotos);
+                            System.out.println(photos);
                             System.out.println("a = " + a);
                             System.out.println("------------------------------------------------------");
 
@@ -252,7 +266,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
         // Date
         intent.putExtra("Date", date);
         // photos
-        intent.putStringArrayListExtra("photos", photos);
+
     }
 
     public Bitmap compressFunction(Bitmap bitmap) {
