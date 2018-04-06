@@ -22,22 +22,10 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
     }
 
     public void setUp() throws Exception {
-        mockTask = new Task("kaixiang", "kaixiang's task", "Test Description");
-        ElasticSearchController.AddTask addTask = new ElasticSearchController.AddTask();
-        addTask.execute(mockTask);
-        String id = addTask.get();
-        mockTask.setId(id);
-        testProfile = new Profile("kaixiang","TestUser1", "tester@ualberta.ca","123-456-7890");
-        ElasticSearchController.AddProfile addProfile = new ElasticSearchController.AddProfile();
-        addProfile.execute(testProfile);
+
 
         solo = new Solo(getInstrumentation(), getActivity());
-        Context context = getInstrumentation().getTargetContext();
-        SharedPreferences pref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
 
-        editor.putString("username", "TestUser1"); // Storing string
-        editor.commit();
 
     }
 
@@ -46,19 +34,32 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
     }
 
     public void testAddDeleteBid() {
+        Context context = getInstrumentation().getTargetContext();
+        ServerHelper serverHelper = new ServerHelper(context);
+
+        mockTask = new Task("TestUser", "test task", "Test Description");
+        serverHelper.addTasks(mockTask);
+
+        testProfile = new Profile("Tester","TestUser1", "tester@ualberta.ca","123-456-7890");
+        serverHelper.addProfile(testProfile);
+
+        SharedPreferences pref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("username", "TestUser1"); // Storing string
+        editor.commit();
+
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-        //solo.enterText((EditText) solo.getView(R.id.usernameBox), "kaixiang");
-        //solo.clickOnButton("Sign In");
-        solo.clickInList(0);
+        solo.clickOnView(solo.getView(R.id.taskSearchProviderButton));
+        solo.clickOnText("test task");
         solo.assertCurrentActivity("Wrong Activity", ProviderViewTask.class);
         //check add a new bid.
-        solo.clickOnImageButton(0);
+        solo.clickOnView(solo.getView(R.id.provider_view_task_AddBid));
         solo.enterText((EditText) solo.getView(R.id.place_bid_fragment_bid_input), "66.6");
         solo.clickOnButton("Add");
         assertTrue(solo.waitForText("66.6"));
         solo.assertCurrentActivity("Wrong Activity", ProviderViewTask.class);
         //check edit my bid.
-        solo.clickOnImageButton(1);
+//        solo.clickOnView(solo.getView(R.id.bid));
         solo.clearEditText((EditText) solo.getView(R.id.place_bid_fragment_bid_input));
         solo.enterText((EditText) solo.getView(R.id.place_bid_fragment_bid_input), "77.7");
         solo.clickOnButton("Add");
@@ -68,11 +69,6 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
         solo.clickOnImageButton(0);
         solo.clickOnButton("Yes");
         solo.assertCurrentActivity("Wrong Activity", ProviderViewTask.class);
-
-
-
-
-
 
 
     }

@@ -29,11 +29,6 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
      */
     public void setUp() throws Exception {
         solo = new Solo(getInstrumentation(), getActivity());
-        Context context = getInstrumentation().getTargetContext();
-        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.clear();
-        editor.apply();
     }
 
     /**
@@ -47,6 +42,11 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
      * tests logIn functionality and error handling
      */
     public void testLogIn(){
+        Context context = getInstrumentation().getTargetContext();
+        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.apply();
         solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
         solo.clickOnButton("Sign In");
         assertTrue(solo.waitForText("Please Enter a Username"));
@@ -59,15 +59,15 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
 
         Profile testProfile = new Profile("tester","TestUser",
                 "tester@ualberta.ca","123-456-7890");
-        Context context = getInstrumentation().getTargetContext();
+
         ServerHelper serverHelper = new ServerHelper(context);
         serverHelper.addProfile(testProfile);
         solo.enterText((EditText) solo.getView(R.id.usernameBox), "TestUser");
         solo.clickOnButton("Sign In");
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
         serverHelper.deleteProfile(testProfile);
-        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
+        pref = context.getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        editor = pref.edit();
         editor.clear();
         editor.apply();
     }
