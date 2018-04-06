@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,8 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
     protected ServerHelper serverHelper;
     protected SharedPreferences sharedpreferences;
     protected String username;
+
+
     /**
      * On creation of the activity, assign values to all variables.
      *
@@ -45,10 +48,12 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
         // Create the custom object
         sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedpreferences.getString("username", "error");
+        notificationDot = (ImageView) findViewById(R.id.notificationDot);
 
         connectivityCheck();
 
         syncCheck();
+
 
     }
 
@@ -237,4 +242,6 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
     public void onFinishConfirmDialog(Boolean confirmed, String dialog) {
 
     }
+
+
 }

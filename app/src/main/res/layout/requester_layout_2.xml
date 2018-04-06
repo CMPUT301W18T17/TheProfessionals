@@ -44,14 +44,34 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/titleView"
             app:layout_constraintStart_toEndOf="@+id/titleView" />
 
-        <ImageView
-            android:id="@+id/userMenuButton"
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
+        <FrameLayout
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
             android:layout_weight="1"
-            android:clickable="true"
-            android:onClick="onClick"
-            app:srcCompat="@drawable/settings" />
+            android:longClickable="false">
+
+            <ImageView
+                android:id="@+id/userMenuButton"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:onClick="onClick"
+                app:srcCompat="@drawable/settings" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/notification" />
+        </FrameLayout>
+
     </LinearLayout>
 
     <android.support.constraint.ConstraintLayout
