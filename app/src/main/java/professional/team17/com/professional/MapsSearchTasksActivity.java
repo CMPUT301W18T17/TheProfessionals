@@ -123,7 +123,7 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
                     Log.d(TAG, "onInfoWindowClick: "+ taskID);
 
                     Intent intent = new Intent(getBaseContext(), ProviderViewTask.class);
-                    intent.putExtra("Task", taskID);
+                    intent.putExtra("ID", taskID);
                     startActivity(intent);
                 } catch (NullPointerException e) {
                     Log.e(TAG, "OnInfoWindowClickListener:" + e.getMessage());
