@@ -5,159 +5,195 @@
     android:id="@+id/profile_view_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:backgroundTint="#ffffff"
     tools:context="professional.team17.com.professional.ProfileViewActivity">
 
-    <ListView
-        android:id="@+id/listViewID"
-        android:layout_width="0dp"
-        android:layout_height="189dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:scrollIndicators="top|bottom"
-        app:layout_constraintBottom_toTopOf="@+id/doneButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rating2" />
-
-    <RatingBar
-        android:id="@+id/rating2"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_marginTop="12dp"
-        android:isIndicator="true"
-        android:numStars="5"
-        android:stepSize="0.1"
-        app:layout_constraintStart_toStartOf="@+id/phoneTV"
-        app:layout_constraintTop_toBottomOf="@+id/phoneTV" />
-
-    <TextView
-        android:id="@+id/providerScoreTV"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/otherPV_pScore"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneTag" />
-
-    <TextView
-        android:id="@+id/phoneTV"
-        android:layout_width="0dp"
-        android:layout_height="15dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/phoneTag"
-        app:layout_constraintTop_toBottomOf="@+id/emailTV" />
-
-    <TextView
-        android:id="@+id/phoneTag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/phone_number"
-        app:layout_constraintBaseline_toBaselineOf="@+id/phoneTV"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/emailTV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/phoneTV"
-        app:layout_constraintStart_toStartOf="@+id/phoneTV"
-        app:layout_constraintTop_toBottomOf="@+id/nameTV" />
-
-    <TextView
-        android:id="@+id/emailTag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/email"
-        app:layout_constraintBaseline_toBaselineOf="@+id/emailTV"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/currentModeTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Profile"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/nameTV"
-        android:layout_width="0dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/emailTV"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/emailTV"
-        app:layout_constraintTop_toBottomOf="@+id/userNameTV" />
-
-    <TextView
-        android:id="@+id/userNameTV"
-        android:layout_width="0dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="128dp"
-        app:layout_constraintEnd_toEndOf="@+id/nameTV"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/nameTV"
-        app:layout_constraintTop_toBottomOf="@+id/currentModeTV" />
-
-    <TextView
-        android:id="@+id/userNameTag"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/PV_username"
-        app:layout_constraintBaseline_toBaselineOf="@+id/userNameTV"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/nameTag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/PV_name"
-        app:layout_constraintBaseline_toBaselineOf="@+id/nameTV"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/profilePicButton"
-        android:layout_width="111dp"
-        android:layout_height="107dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/userNameTV"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentModeTV"
-        app:srcCompat="@android:drawable/star_big_on" />
-
-    <Button
+    <ImageButton
         android:id="@+id/doneButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="DONE"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="60dp"
+        android:background="#ffffff"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_icon" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/general"
+        android:backgroundTint="@color/general"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/currentModeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/amiko"
+            android:text="Profile"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingTop="116dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <TextView
+            android:id="@+id/userNameTag"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/amiko"
+            android:text="@string/PV_username"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/providerScoreTV"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/amiko"
+            android:text="@string/otherPV_pScore"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneTag" />
+
+        <ListView
+            android:id="@+id/listViewID"
+            android:layout_width="0dp"
+            android:layout_height="189dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:scrollIndicators="top|bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rating2" />
+
+        <TextView
+            android:id="@+id/emailTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/amiko"
+            android:text="@string/email"
+            app:layout_constraintBaseline_toBaselineOf="@+id/emailTV"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/phoneTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/amiko"
+            android:text="@string/phone_number"
+            app:layout_constraintBaseline_toBaselineOf="@+id/phoneTV"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/userNameTV"
+            android:layout_width="0dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="128dp"
+            android:fontFamily="@font/amiko"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/nameTV"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/nameTV"
+            app:layout_constraintTop_toBottomOf="@+id/currentModeTV" />
+
+        <TextView
+            android:id="@+id/nameTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/amiko"
+            android:text="@string/PV_name"
+            app:layout_constraintBaseline_toBaselineOf="@+id/nameTV"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/phoneTV"
+            android:layout_width="0dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/amiko"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/phoneTag"
+            app:layout_constraintTop_toBottomOf="@+id/emailTV" />
+
+        <RatingBar
+            android:id="@+id/rating2"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginTop="12dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="0.1"
+            app:layout_constraintStart_toStartOf="@+id/phoneTV"
+            app:layout_constraintTop_toBottomOf="@+id/phoneTV" />
+
+        <ImageView
+            android:id="@+id/profilePicButton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/userNameTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/currentModeTV"
+            app:srcCompat="@android:drawable/star_big_on" />
+
+        <TextView
+            android:id="@+id/emailTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/amiko"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/phoneTV"
+            app:layout_constraintStart_toStartOf="@+id/phoneTV"
+            app:layout_constraintTop_toBottomOf="@+id/nameTV" />
+
+        <TextView
+            android:id="@+id/nameTV"
+            android:layout_width="0dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/amiko"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/emailTV"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/emailTV"
+            app:layout_constraintTop_toBottomOf="@+id/userNameTV" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

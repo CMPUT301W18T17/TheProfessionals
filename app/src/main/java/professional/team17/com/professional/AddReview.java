@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -46,7 +47,7 @@ public class AddReview extends AppCompatActivity {
             }
         });
 
-        final Button back = findViewById(R.id.backButton);
+        final ImageButton back = findViewById(R.id.backButton);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
