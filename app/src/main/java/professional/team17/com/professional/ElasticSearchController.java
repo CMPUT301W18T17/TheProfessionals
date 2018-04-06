@@ -17,31 +17,28 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
-/**
- * Created by ag on 2018-03-28.
- */
 
+/**
+ *  Class used to connect to server
+ */
 public class ElasticSearchController {
     private static JestDroidClient client;
     private static String server = "http://cmput301.softwareprocess.es:8080";
-    private static String indexname = "cmput301w18t17";
-    private static String tasktype = "task";
+    private static String INDEXNAME = "cmput301w18t17";
+    private static String TASKTYPE = "task";
     private static String profiletype = "profile";
-
-
 
     /**
      * This AsyncTask will add a profile to the db (can also be used to update profile)
      */
     public static class AddProfile extends AsyncTask<Profile, Void, Boolean> {
-
         @Override
         protected Boolean doInBackground(Profile... profiles) {
             verifySettings();
             Boolean success = true;
             for (Profile profile : profiles) {
                 Index index = new Index.Builder(profile)
-                        .index(indexname)
+                        .index(INDEXNAME)
                         .type(profiletype)
                         .id(profile.getUserName())
                         .build();
@@ -66,20 +63,17 @@ public class ElasticSearchController {
         protected Profile doInBackground(String... id) {
             verifySettings();
             Profile profile = null;
-            Get get = new Get.Builder(indexname, id[0])
+            Get get = new Get.Builder(INDEXNAME, id[0])
                     .type(profiletype)
                     .build();
             try {
-
                 JestResult result = client.execute(get);
                 if (result.isSucceeded()) {
                     profile = result.getSourceAsObject(Profile.class);
                 }
                 else{
                     Log.i("error", "Search query failed to find any thing =/");
-
                 }
-
             }
             catch (Exception e) {
                 new OfflineException();
@@ -87,7 +81,6 @@ public class ElasticSearchController {
             }
             return profile;
         }
-
     }
 
     /**
@@ -99,8 +92,8 @@ public class ElasticSearchController {
                 String id = "r";
         verifySettings();
                 Index index = new Index.Builder(task)
-                        .index(indexname)
-                        .type(tasktype)
+                        .index(INDEXNAME)
+                        .type(TASKTYPE)
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
@@ -118,15 +111,12 @@ public class ElasticSearchController {
             return id;
         }
 
-
-
     /**
      *  This AsyncTask will add a task to the db.
      *  It will then set the task.id equal to the db.id set at time of insertion.
      *
      */
     public static class AddTask extends AsyncTask<Task, Void, String> {
-
         @Override
         protected String doInBackground(Task... tasks) {
             verifySettings();
@@ -134,8 +124,8 @@ public class ElasticSearchController {
 
             for (Task task : tasks) {
                 Index index = new Index.Builder(task)
-                        .index(indexname)
-                        .type(tasktype)
+                        .index(INDEXNAME)
+                        .type(TASKTYPE)
                         .build();
                 try {
                     DocumentResult result = client.execute(index);
@@ -167,8 +157,8 @@ public class ElasticSearchController {
 
             for (Task task : tasks) {
                 Index index = new Index.Builder(task)
-                        .index(indexname)
-                        .type(tasktype)
+                        .index(INDEXNAME)
+                        .type(TASKTYPE)
                         .id(task.getUniqueID())
                         .build();
 
@@ -196,7 +186,7 @@ public class ElasticSearchController {
 
             for (Profile profile : profiles) {
                 Delete delete = new Delete.Builder(profile.getUserName())
-                        .index(indexname)
+                        .index(INDEXNAME)
                         .type(profiletype)
                         .build();
                 try {
@@ -222,8 +212,8 @@ public class ElasticSearchController {
 
             for (Task task : tasks) {
                 Delete delete = new Delete.Builder(task.getUniqueID())
-                        .index(indexname)
-                        .type(tasktype)
+                        .index(INDEXNAME)
+                        .type(TASKTYPE)
                         .build();
                 try {
                     DocumentResult result = client.execute(delete);
@@ -245,8 +235,8 @@ public class ElasticSearchController {
         protected Task doInBackground(String... id) {
             verifySettings();
             Task task = null;
-            Get get = new Get.Builder(indexname, id[0])
-                    .type(tasktype)
+            Get get = new Get.Builder(INDEXNAME, id[0])
+                    .type(TASKTYPE)
                     .build();
             try {
                 JestResult result = client.execute(get);
@@ -277,8 +267,8 @@ public class ElasticSearchController {
             TaskList taskList = new TaskList();
             Search search = new Search.Builder(search_para[0])
                     // multiple index or types can be added.
-                    .addIndex(indexname)
-                    .addType(tasktype)
+                    .addIndex(INDEXNAME)
+                    .addType(TASKTYPE)
                     .build();
             try {
                 SearchResult result = client.execute(search);
@@ -298,13 +288,6 @@ public class ElasticSearchController {
         }
     }
 
-
-
-    public static void notifyStateonline() {
-        ConnectedState c = ConnectedState.getInstance();
-        c.setOnline();
-    }
-
     public static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder(server);
@@ -315,6 +298,5 @@ public class ElasticSearchController {
             client = (JestDroidClient) factory.getObject();
         }
     }
-
 }
 

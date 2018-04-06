@@ -14,11 +14,10 @@ import professional.team17.com.professional.TaskList;
 import professional.team17.com.professional.TaskStatus;
 
 
-
 /**
- * Created by ag on 2018-04-03.
+ * This is the adapter to help with provider recycler lists This was implemented
+ * as the listview was quite slow.
  */
-
 public class ProviderListViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private TaskList items;

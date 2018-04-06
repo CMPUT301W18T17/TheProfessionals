@@ -7,9 +7,9 @@ import android.widget.TextView;
 import professional.team17.com.professional.R;
 
 /**
- * Created by ag on 2018-04-03.
+ * ViewHolder for the recyler view for providertasks. This holds the view
+ * for assigned tasks
  */
-
 public class AssignedListProviderView extends RecyclerView.ViewHolder {
     private TextView statusTextField, userNameTextField, taskTitleTextField, myBidAmount;
 

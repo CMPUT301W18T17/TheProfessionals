@@ -6,9 +6,8 @@ import android.content.Intent;
 import professional.team17.com.professional.ProviderTaskListActivity;
 
 /**
- * Created by ag on 2018-03-27.
+ * Button to Move to Provider Activity to see bidded tasks
  */
-
 public  class BiddedTaskProviderNav extends NavButton {
         public BiddedTaskProviderNav(Context con) {
             super(con);

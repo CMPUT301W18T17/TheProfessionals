@@ -5,9 +5,8 @@ import android.view.View;
 
 
 /**
- * Created by ag on 2018-04-03.
+ * Dialog to delete task
  */
-
 public class DeleteTaskDialog extends DialogContent {
     public DeleteTaskDialog(View view) {
         super(view);

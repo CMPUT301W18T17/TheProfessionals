@@ -5,9 +5,8 @@ import android.content.Context;
 import professional.team17.com.professional.R;
 
 /**
- * Created by ag on 2018-03-26.
+ * Factory to build the Navigation button controls and activities
  */
-
 public class NavFactory {
     public static NavButton makeFor(int id, Context cont) {
         switch(id) {

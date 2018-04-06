@@ -7,16 +7,15 @@ import android.widget.TextView;
 import professional.team17.com.professional.R;
 
 /**
- * Created by ag on 2018-04-03.
+ * Class that helps build the dialogs and allows for
+ * reuse of them
  */
-
 public abstract class DialogContent {
     View view;
     Button positive;
     Button negative;
     TextView dmessage;
     TextView dtitle;
-
 
     public DialogContent(View view){
         this.view = view;

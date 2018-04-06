@@ -7,9 +7,8 @@ import professional.team17.com.professional.RequesterViewListActivity;
 
 
 /**
- * Created by ag on 2018-03-26.
+ * Button to Move to Requester Activity to see Bidded tasks
  */
-
 public class BiddedTasksReqNav extends NavButton {
 
         public BiddedTasksReqNav(Context con) {

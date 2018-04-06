@@ -7,9 +7,8 @@ import professional.team17.com.professional.RequesterViewListActivity;
 
 
 /**
- * Created by ag on 2018-03-26.
+ * Button to Move to Requester Activity to see Requested tasks
  */
-
 public class RequestedTaskReqNav extends NavButton {
 
         public RequestedTaskReqNav(Context con) {

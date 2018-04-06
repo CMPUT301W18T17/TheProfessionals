@@ -6,9 +6,8 @@ import android.content.Intent;
 import professional.team17.com.professional.ProviderTaskListActivity;
 
 /**
- * Created by ag on 2018-03-26.
+ * Button to Move to Provider Activity to see Assigned tasks
  */
-
 public class AcceptedTasksProviderNav extends NavButton {
     public AcceptedTasksProviderNav(Context con) {
         super(con);

@@ -52,24 +52,28 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
 
     }
 
+    /**
+     * Used to check the if the app was recently pushed online
+     * If moving to online and tasks were added, it will sync the data
+     */
     private void syncCheck() {
         SyncController controller = new SyncController(getApplicationContext());
-       ConnectedState c = ConnectedState.getInstance();
+        ConnectedState c = ConnectedState.getInstance();
         if (c.isOnline()){
             controller.resetRequested(username);
         }
-
         if (c.isNewOnline()){
             managesync();
         }
 
     }
 
+    /**
+     * This will sync the activity
+     */
     private void managesync() {
         boolean success;
-
         SyncController controller = new SyncController(this);
-
         success = controller.sync();
         if (!success) {
             createSync();

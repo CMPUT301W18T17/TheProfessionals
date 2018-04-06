@@ -8,7 +8,9 @@ import professional.team17.com.professional.ConnectedState;
 import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
- * Class that will have build the navigation
+ * Class that will have build the navigation controls
+ * that will switch the views
+ * @see ConnectedState
  */
 public abstract class NavButton {
     protected Intent intent;
