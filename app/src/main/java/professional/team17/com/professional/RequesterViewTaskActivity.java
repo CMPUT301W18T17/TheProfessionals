@@ -21,9 +21,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-
 /**
  * The activity that is displayed when a user in the Requester role views one of their own tasks.
  * @author Lauren, Allison
@@ -54,12 +51,13 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
     Button doneButton;
     /* Other variables */
     String ID;
-    private Task task;
     private ArrayList<String> photos;
     BidListAdapter bidAdapter;
     BidList bidList;
     Bid chosenBid;
     String dialogFlag;
+
+    private RequesterViewTaskController requesterViewTaskController;
 
     /**
      * On creation of the activity, set the layout elements, onClickListeners, and retrieve
@@ -90,19 +88,15 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         bidAdapter = new BidListAdapter(this, bidList);
         listView.setAdapter(bidAdapter);
 
+        requesterViewTaskController = new RequesterViewTaskController(this);
+
 
         try {
             getBundle();
         } catch (Exception e) {
             Log.i("Bundle", "Bundle was empty (no task ID was passed to EditTask)");
         }
-        try {
-            getFromServer();
 
-        } catch (Exception e) {
-            Log.i("Server", "Server failed to return a task for that ID");
-            return;
-        }
         checkOffline();
         
 
@@ -120,10 +114,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RequesterViewTaskActivity.this, MapsShowALocationActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("aTaskLatLng", task.getLatLng());
-                intent.putExtras(bundle);
-                intent.putExtra("aTaskAddress", task.getLocation());
+                requesterViewTaskController.getLocation(intent);
                 startActivity(intent);
             }
         });
@@ -151,14 +142,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             getSupportFragmentManager().beginTransaction().replace(R.id.requester_view_task_frame, fragment).commit();
         } else {
             populateBidList();
-
-        /* Check Existence of Location */
-            if (task.getLatLng() == null) {
-                viewLocation.setVisibility(View.INVISIBLE);
-            }
-         else {
-            viewLocation.setVisibility(View.VISIBLE);
-        }
+            requesterViewTaskController.mapIconVisibility(viewLocation);
         }
     }
 
@@ -174,6 +158,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         }
         else {
             ID = extrasBundle.getString("ID");
+            getFromServer(ID);
         }
     }
 
@@ -181,9 +166,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
      * Gets the task information from the server using the ID.
      * @throws Exception If the server fails to return a task.
      */
-    private void getFromServer() throws Exception{
-        task = serverHelper.getTask(ID);
-        if (task == null){
+    private void getFromServer(String ID) throws Exception{
+        Task oldTask = requesterViewTaskController.getOldTaskFromServer(ID);
+        if (oldTask == null){
             throw new Exception();
         }
         else {
@@ -192,12 +177,10 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         }
     }
 
-    public void viewphoto(View v){
-        Intent yourIntent = new Intent(RequesterViewTaskActivity.this, providerCheckImage.class);
-        photos = task.getPhotos(); // store the image in your bitmap
-        yourIntent.putStringArrayListExtra("yourImage", photos);
-        startActivity(yourIntent);
-
+    public void viewPhoto(View v){
+        Intent intent = new Intent(RequesterViewTaskActivity.this, providerCheckImage.class);
+        requesterViewTaskController.photos(intent);
+        startActivity(intent);
     }
     /**
      * Updates the TextViews with the task information.
@@ -207,13 +190,10 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             @Override
             public void run() {
                 titleView = (TextView) findViewById(R.id.requester_view_tasktitleView);
-                titleView.setText(task.getName());
                 dateView = (TextView) findViewById(R.id.requester_view_taskdateView);
-                dateView.setText(task.getDateAsString());
                 descriptionView = (TextView) findViewById(R.id.requester_view_taskdescriptionView);
-                descriptionView.setText(task.getDescription());
                 statusView = (TextView) findViewById(R.id.requester_view_taskstatusView);
-                statusView.setText(task.getStatus());
+                requesterViewTaskController.setInfoInTaskViews(titleView, dateView, descriptionView, statusView);
             }
         });
     }
@@ -223,9 +203,9 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
      * status.
      */
     private void populateBidList(){
-        BidList temp = new BidList();
-        String status = task.getStatus();
         setTaskViews();
+        BidList temp = requesterViewTaskController.getCurrentTaskBidList();
+        String status = requesterViewTaskController.getCurrentTaskStatus();
         if (status.equals("Requested")){
             /* does not display additional information */
             setRequestedView();
@@ -233,24 +213,22 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         else if (status.equals("Bidded")){
             /* displays a list of bids */
             setBiddedView();
-            temp = task.getBids();
             bidList.addAll(temp);
             bidAdapter.notifyDataSetChanged();
         }
         else if (status.equals("Assigned")){
             /* displays provider info and requested/done buttons */
             setAssignedView();
-            bidList = task.getBids();
+            bidList = temp;
             chosenBid = bidList.getBid(0);
             setBidViews(chosenBid.getName(), chosenBid.getAmountAsString());
         }
         else if (status.equals("Done")){
             /* displays provider info and allows a review to be left */
             setDoneView();
-            bidList = task.getBids();
+            bidList = temp;
             chosenBid = bidList.getBid(0);
             setBidViews(chosenBid.getName(), chosenBid.getAmountAsString());
-
         }
     }
 
@@ -259,56 +237,32 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
      * Shows certain layout elements when the task status is Requested
      */
     private void setRequestedView(){
-        listView.setVisibility(View.GONE);
-        bidderName.setVisibility(View.GONE);
-        bidderNameView.setVisibility(GONE);
-        acceptedBid.setVisibility(GONE);
-        acceptedBidView.setVisibility(GONE);
-        setStatusTo.setVisibility(GONE);
-        requestedButton.setVisibility(GONE);
-        doneButton.setVisibility(GONE);
+        requesterViewTaskController.hide(listView,bidderName,bidderNameView,acceptedBid,acceptedBidView,setStatusTo,requestedButton,doneButton);
     }
 
     /**
      * Shows certain layout elements when the task status is Bidded
      */
     private void setBiddedView(){
-        listView.setVisibility(View.VISIBLE);
-        bidderName.setVisibility(View.GONE);
-        bidderNameView.setVisibility(GONE);
-        acceptedBid.setVisibility(GONE);
-        acceptedBidView.setVisibility(GONE);
-        setStatusTo.setVisibility(GONE);
-        requestedButton.setVisibility(GONE);
-        doneButton.setVisibility(GONE);
+        requesterViewTaskController.show(listView);
+        requesterViewTaskController.hide(bidderName,bidderNameView,acceptedBid,acceptedBidView,setStatusTo,requestedButton,doneButton);
     }
 
     /**
      * Shows certain layout elements when the task status is Assigned
      */
     private void setAssignedView(){
-        listView.setVisibility(View.GONE);
-        bidderName.setVisibility(VISIBLE);
-        bidderNameView.setVisibility(VISIBLE);
-        acceptedBid.setVisibility(VISIBLE);
-        acceptedBidView.setVisibility(VISIBLE);
-        setStatusTo.setVisibility(VISIBLE);
-        requestedButton.setVisibility(VISIBLE);
-        doneButton.setVisibility(VISIBLE);
+        requesterViewTaskController.hide(listView);
+        requesterViewTaskController.show(bidderName,bidderNameView,acceptedBid,acceptedBidView,setStatusTo,requestedButton,doneButton);
     }
 
     /**
      * Shows certain layout elements when the task status is Done
      */
     private void setDoneView(){
-        listView.setVisibility(View.GONE);
-        bidderName.setVisibility(VISIBLE);
-        bidderNameView.setVisibility(VISIBLE);
-        acceptedBid.setVisibility(VISIBLE);
-        acceptedBidView.setVisibility(VISIBLE);
-        setStatusTo.setVisibility(GONE);
-        requestedButton.setVisibility(GONE);
-        doneButton.setVisibility(GONE);
+        requesterViewTaskController.hide(listView);
+        requesterViewTaskController.show(bidderName,bidderNameView,acceptedBid,acceptedBidView);
+        requesterViewTaskController.hide(setStatusTo,requestedButton,doneButton);
     }
 
     /**
@@ -325,9 +279,6 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
             }
         });
     }
-
-
-
 
     /**
      * Handles the "Set task to requested" dialog fragment (populates it with text).
@@ -388,29 +339,24 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                  * sole bid, update the task's status to Assigned, update the page's layout to show
                  * the Assigned layout and fill the new layout with the chosen bid's info.
                  */
-                task.chooseBid(chosenBid);
-                task.setStatus("Assigned");
+
+                requesterViewTaskController.choseBid(chosenBid);
 
                 bidList.clear();
                 bidList.add(chosenBid);
-
 
                 setAssignedView();
                 setBidViews(chosenBid.getName(), chosenBid.getAmountAsString());
 
                 /* send notification to bidder */
                 String bidder = chosenBid.getName();
-                Profile bidderProfile = serverHelper.getProfile(bidder);
-                NotificationList notificationList = bidderProfile.getNotificationList();
-                notificationList.newAssignedNotification(task, task.getProfileName());
-                bidderProfile.setNotificationList(notificationList);
-                serverHelper.addProfile(bidderProfile);
+                requesterViewTaskController.sendNotifications(bidder);
 
             } else if (dialog.equals("Decline Bid")) {
                 /* Bid is declined by the user. Remove the bid from bidList and refresh the
                  *listview.
                  */
-                task.removeBid(chosenBid);
+                requesterViewTaskController.decline(chosenBid);
                 bidList.remove(chosenBid);
                 bidAdapter.notifyDataSetChanged();
             } else if (dialog.equals("Set Requested")) {
@@ -418,25 +364,25 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
                  * the layout to show the Requested Layout and remove the chosen bid.
                  */
                 bidList.clear();
-                task.setRequested();
+                requesterViewTaskController.setTaskToRequested();
                 setTaskViews();
                 setRequestedView();
             } else if (dialog.equals("Set Done")) {
                 /* User changes the task's status to done. Change the task status and update the
                  * layout to show the Done layout.
                  */
-                task.setDone();
+                requesterViewTaskController.setTaskToDone();
                 setTaskViews();
                 setDoneView();
                 addReview();
 
             } else if (dialog.equals("Set Review")) {
                 Intent intent = new Intent(this, AddReview.class);
-                String profile = task.getBids().getBid(0).getName();
+                String profile = requesterViewTaskController.getCurrentTaskBidList().getBid(0).getName();
                 intent.putExtra("profile", profile);
                 startActivity(intent);
             }
-            serverHelper.updateTasks(task);
+            requesterViewTaskController.addOldTaskToServer();
         }
     }
 
