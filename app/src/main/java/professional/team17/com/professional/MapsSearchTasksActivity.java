@@ -75,7 +75,7 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
         currentLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                afterLocationFoundEvent();
+                recreate();
             }
         });
         closeButton.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +148,7 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
         getCircleLatLngBounds(circle);
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(new LatLngBounds(bottomLeft, topRight), 0));
         tasks = serverHelper.getMapTasks(bottomLeft, topRight);
+        Log.d(TAG, "afterLocationFoundEvent: Tasks: " + tasks);
         //Toast.makeText()
         for(Task task: tasks) {
             if (!task.getProfileName().equals(username)) {
