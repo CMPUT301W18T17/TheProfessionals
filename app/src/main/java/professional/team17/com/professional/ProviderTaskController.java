@@ -23,6 +23,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * This class is used to help control any Task view for the
+ * Provider. It acts as a middle man between the
+ * Server and the activity.
+ * @see ServerHelper
+ * @see Task
+ */
 public class ProviderTaskController {
     private Context context;
     private ServerHelper serverHelper;
@@ -35,18 +43,29 @@ public class ProviderTaskController {
         setUsername();
     }
 
-
+    /**
+     * Username for session
+     */
     private void setUsername() {
         SharedPreferences sharedpreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedpreferences.getString("username", "error");
     }
 
+    /**
+     * This sets the task being looked at
+     * @param intent - The intent passed to the activity, of which
+     *               we pull out the id
+     */
     public void setTask(Bundle intent) {
         String id = intent.getString("ID");
         task = serverHelper.getTask(id);
         check();
     }
 
+    /**
+     *
+     * @return False means offline, true means online
+     */
     public Boolean checkOffline() {
         ConnectedState c = ConnectedState.getInstance();
         if (c.isOffline() && !task.isRequested()) {
@@ -58,9 +77,8 @@ public class ProviderTaskController {
     }
 
     /**
-     * Move to the profile view to see the requested info
      *
-     * @param v the view the button is located on
+     * @return - An intent with the profile being looked at (from the task object)
      */
     public Intent viewProfile() {
         Intent intention = new Intent(context, OtherProfileViewActivity.class);
@@ -68,10 +86,9 @@ public class ProviderTaskController {
         return intention;
     }
 
-    /***
-     * Interface method from PlaceBidDialog.PlaceBidDialogListener
-     * @param inputText boolean value representing the user response in the dialog
-     * true means the user add/changed the bid
+    /**
+     *
+     * @param bidAmount - The double amount being added to the task
      */
     public void placeBid(double bidAmount) {
         task.addBid(new Bid(username, bidAmount));
@@ -79,6 +96,10 @@ public class ProviderTaskController {
         setNotification(bidAmount);
     }
 
+    /**
+     *
+     * @param bidAmount ) - The double amount being added to the notification
+     */
     private void setNotification(Double bidAmount) {
         String requester = task.getProfileName();
         Profile requesterProfile = serverHelper.getProfile(requester);
@@ -88,7 +109,10 @@ public class ProviderTaskController {
         serverHelper.addProfile(requesterProfile);
     }
 
-
+    /**
+     *
+     * @param statusTextField - The textview that will change it the bid is deleted
+     */
     public void onDelete(TextView statusTextField) {
         Bid bid = task.getBids().getBid(username);
         task.removeBid(bid);
@@ -97,34 +121,63 @@ public class ProviderTaskController {
         TaskStatus.getInstance().setStatus(task.getStatus());
     }
 
+    /**
+     *
+     * @param values  - View objects that should be hidden
+     */
     public void hide(View... values) {
         for (View value : values) {
             value.setVisibility(View.GONE);
         }
     }
 
+    /**
+     *
+     * @param values - View objects that should be visible
+     */
     public void show(View... values) {
         for (View value : values) {
             value.setVisibility(View.VISIBLE);
         }
     }
 
+    /**
+     *
+     * @param bid - The user bid amount that should be set into the activity
+     */
     public void setUserBid(TextView bid) {
         BidList bids = task.getBids();
-        bid.setText(bids.getBid(username).getAmountAsString());
+        if (bids.getBid(username) != null) {
+            bid.setText(bids.getBid(username).getAmountAsString());
+        }
+        else{
+            bid.setText("Task is closed for bidding");
+        }
     }
-    
+
+    /**
+     *
+     * @param bid - The lowest bid that should be set into the task
+     */
     public void setLowestBid(TextView bid) {
         BidList bids = task.getBids();
         bid.setText(bids.getLowest().getAmountAsString());
     }
 
+    /**
+     *
+     * @param viewMapButton - The button to see the map
+     */
     public void location(ImageButton viewMapButton) {
         if (task.getLatLng() == null) {
             viewMapButton.setVisibility(View.INVISIBLE);
         }
     }
 
+    /**
+     *
+     * @param viewPhotoButton - The button to see the photos
+     */
     public void photos(ImageButton viewPhotoButton) {
         if (task.getPhotos().isEmpty()) {
             viewPhotoButton.setVisibility(View.INVISIBLE);
@@ -139,11 +192,23 @@ public class ProviderTaskController {
         return bundle;
     }
 
+    /**
+     * To check what state the task is in
+     */
     public void check() {
         TaskStatus taskstatus = TaskStatus.getInstance();
         taskstatus.setStatus(task.getStatus());
     }
 
+    /**
+     *
+     * @param status textview object to be set with the status
+     * @param name textview object to be set with the name
+     * @param title textview object to be set with the title
+     * @param date textview object to be set with the date
+     * @param descri textview object to be set with the desc
+     * @param address textview object to be set with the address
+     */
     public void fillTask(TextView status, TextView name, TextView title, TextView date, TextView descri, TextView address) {
         status.setText(task.getStatus());
         name.setText(task.getProfileName());
@@ -157,6 +222,10 @@ public class ProviderTaskController {
         }
     }
 
+    /**
+     *
+     * @return - True if session use has bid, false otherwise
+     */
     public boolean hasBid() {
         BidList bids = task.getBids();
         Bid bid = bids.getBid(username);

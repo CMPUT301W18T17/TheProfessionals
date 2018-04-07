@@ -39,8 +39,8 @@ public class TaskStatus {
         }
     }
 
-    public String getStatus(){
-        return this.getStatus();
+    public status getStatus(){
+        return this.state;
     }
     public Boolean isAssigned(){
         return (this.state == status.ASSIGNED);
