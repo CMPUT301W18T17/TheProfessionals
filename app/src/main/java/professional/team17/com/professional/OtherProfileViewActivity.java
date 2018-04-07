@@ -31,7 +31,7 @@ public class OtherProfileViewActivity extends ProfileViewActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        currentMode.setText("An User's Profile");
+        currentMode.setText("User Profile");
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
