@@ -151,7 +151,8 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
         Log.d(TAG, "afterLocationFoundEvent: Tasks: " + tasks);
         //Toast.makeText()
         for(Task task: tasks) {
-            if (!task.getProfileName().equals(username)) {
+            if (!task.getProfileName().equals(username) &&
+                    (task.status.equals("Requested") || task.status.equals("Bidded"))) {
                 markSpot(task);
             }
         }
