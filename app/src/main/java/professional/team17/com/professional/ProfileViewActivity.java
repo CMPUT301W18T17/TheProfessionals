@@ -9,9 +9,12 @@
  */
 package professional.team17.com.professional;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -27,7 +30,7 @@ import android.widget.TextView;
  * @see OtherProfileViewActivity
  * @see ReviewsAdaptor
  */
-public abstract class ProfileViewActivity extends AppCompatActivity{
+public abstract class ProfileViewActivity extends AppCompatActivity {
     protected TextView username;
     protected TextView name;
     protected TextView email;
@@ -44,11 +47,13 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
     protected int photoWidth;
     protected int photoHeight;
     protected ProfilePhoto profilePhoto;
+    protected String userName;
 
     protected ServerHelper serverHelper;
 
     /**
      * On selecting a profile
+     *
      * @param savedInstanceState
      */
     @Override
@@ -57,22 +62,23 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
         setContentView(R.layout.activity_profile_view);
         currentMode = (TextView) findViewById(R.id.currentModeTV);
         doneButton = (ImageButton) findViewById(R.id.doneButton);
-        listView = (ListView) findViewById(R.id.listViewID);
+        listView = (ListView) findViewById(R.id.reviewList);
         serverHelper = new ServerHelper(this);
     }
 
     /**
      * Set tags/hints of layout
+     *
      * @param aUserName
      */
     // don't call setInfo from here. Call it from MyProfileViewActivity or OtherProfileViewActivity
     protected void setInfo(String aUserName) {
-        Profile userProfile = serverHelper.getProfile(aUserName);
+        final Profile userProfile = serverHelper.getProfile(aUserName);
+        userName = aUserName;
         ConnectedState c = ConnectedState.getInstance();
         if (c.isOffline()) {
             offline();
-        }
-        else {
+        } else {
             username = findViewById(R.id.userNameTV);
             name = findViewById(R.id.nameTV);
             email = findViewById(R.id.emailTV);
@@ -87,14 +93,29 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
             reviewsAdaptor = new ReviewsAdaptor(this, R.layout.reviewlist_item_format, userProfile.getReviewList());
             listView.setAdapter(reviewsAdaptor);
             addPhoto(userProfile);
+
+            listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Review review = userProfile.getReviewList().getReviews().get(position);
+                    Intent intent = new Intent(getBaseContext(), OtherProfileViewActivity.class);
+                    intent.putExtra("profile", review.getProfileName());
+                    startActivity(intent);
+                    finish();
+                }
+            });
         }
+
+
     }
 
     /**
      * Add a profile photo for current user
+     *
      * @param userProfile - profile of current user
      */
-    void addPhoto(Profile userProfile){
+    void addPhoto(Profile userProfile) {
         profilePhoto = userProfile.getProfilePhoto();
         photoConfig = profilePhoto.getConfig();
         if (photoConfig != null) {
@@ -110,8 +131,8 @@ public abstract class ProfileViewActivity extends AppCompatActivity{
      * check if device is offline
      */
     void offline() {
-            Offline fragment = new Offline();
-            getSupportFragmentManager().beginTransaction().replace(R.id.profile_view_layout, fragment).commit();
-        }
+        Offline fragment = new Offline();
+        getSupportFragmentManager().beginTransaction().replace(R.id.profile_view_layout, fragment).commit();
     }
 
+}
