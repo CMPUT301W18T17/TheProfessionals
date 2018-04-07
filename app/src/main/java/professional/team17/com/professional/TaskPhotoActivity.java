@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -90,28 +91,6 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
 
                     Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-                    bmp = ((BitmapDrawable) imageUpload.getDrawable()).getBitmap(); // store the image in your bitmap
-                    RPhotos.add(bmp);
-                    ByteArrayOutputStream bao = new ByteArrayOutputStream();
-                    bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
-                    bmp = compressFunction(bmp);
-                    photo = toBase64(bmp);
-                    photos.add(photo);
-                    break;
-                case R.id.bConfirm:
-                        if(a!=b){
-                            if(a!=c){
-
-                   //System.out.println("------------------------------------------------------");
-                    //System.out.println(RPhotos);
-                    //System.out.println("a = " + a);
-                    //System.out.println("------------------------------------------------------");
-                    b = a;
-                    c = a + 1;}
-                    else
-                                errorBox.setText("Can u select photo before u press confirm.");}
-                    else
-                        errorBox.setText("you already confirmed.");
                     break;
                 case R.id.bImageUpload:
                     Intent yourIntent = new Intent();
@@ -224,7 +203,15 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                     Bitmap photo = (Bitmap) data.getExtras().get("data");
                     imageUpload.setImageBitmap(photo);
                     break;
-            }
+
+                bmp = ((BitmapDrawable) imageUpload.getDrawable()).getBitmap();
+                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
+                bmp = compressFunction(bmp);
+                String photo1 = toBase64(bmp);
+                photos.add(photo1);
+
+        }
         }
     }
 
