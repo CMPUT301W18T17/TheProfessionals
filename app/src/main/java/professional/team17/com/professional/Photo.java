@@ -77,6 +77,7 @@ public class Photo {
     }
 
     /**
+     * convert bitmap to drawable
      * @param bitmap of photo
      * @return drawable bitmap
      */
@@ -86,13 +87,12 @@ public class Photo {
     }
 
     /**
-     * Converts all pictures pointed by path to drawable
+     * Converts picture pointed by path to drawable
      * @return drawable
      */
     public Drawable pathToDrawable(){
-        bitmap = BitmapFactory.decodeFile(this.path);
-        uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
-        drawable = new BitmapDrawable(uploadBitmap);
+        bitmap = toBitMap();
+        drawable = new BitmapDrawable(bitmap);
         return drawable;
     }
 
@@ -107,8 +107,9 @@ public class Photo {
     }
 
     /**
+     * Convert bitmap to a BASE 64 string
      * @param bitmap of photo
-     * @return bitmap as a string in bytes
+     * @return bitmap as a BASE 64 string
      */
     private String toString(Bitmap bitmap){
         width = bitmap.getWidth();
@@ -123,6 +124,7 @@ public class Photo {
     }
 
     /**
+     * Converts picture pointed by path to BASE 64 string
      * @return - photo in string prior to upload
      */
     public String pathToString(){
