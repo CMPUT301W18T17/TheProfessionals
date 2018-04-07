@@ -16,6 +16,7 @@ import java.util.Comparator;
 
 /**
  * A custom ArrayList class for handling Review objects.
+ * @author Zhipeng
  */
 public class ReviewList {
     private ArrayList<Review> reviews = new ArrayList<Review>();

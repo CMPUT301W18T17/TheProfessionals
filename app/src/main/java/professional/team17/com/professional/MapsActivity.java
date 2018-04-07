@@ -37,7 +37,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
 /**
+ * Map Activity
+ * Handles functions relating to maps. Including: permissions, marking the map, camera movements and find user location
  * Based on: Mitch Tabian's Google Maps & Google Places Course - https://codingwithmitch.com/courses/ and https://www.youtube.com/watch?v=Vt6H9TOmsuo
+ * @see MapsSearchTasksActivity
+ * @see MapsShowALocationActivity
  */
 public abstract class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
     private static final String TAG = "MapActivity";

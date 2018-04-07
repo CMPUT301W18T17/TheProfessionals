@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * Allows the user to log in or move to a signup activity
- *
+ * @author Logan
  * @see ServerHelper
  * @see SignUpActivity
  */

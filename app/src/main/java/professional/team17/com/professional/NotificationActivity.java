@@ -14,6 +14,12 @@ import android.widget.ListView;
 
 import javax.security.auth.login.LoginException;
 
+/**
+ * Shows the notifications relating to current user
+ * @author Lauren
+ * @see Notification
+ * @see NotificationList
+ */
 public class NotificationActivity extends AppCompatActivity {
 
     private ListView notificationListView;

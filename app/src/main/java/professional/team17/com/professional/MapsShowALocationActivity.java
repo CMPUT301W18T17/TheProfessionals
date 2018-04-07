@@ -14,6 +14,11 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+/**
+ * Show a location relating to a task
+ * @author Hailan
+ * @version 2.0
+ */
 public class MapsShowALocationActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;

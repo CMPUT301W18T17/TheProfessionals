@@ -45,6 +45,8 @@ import java.util.ArrayList;
 
 /**
  * An activity which shows all tasks with status Requested and Bidded within 5km.
+ * @author Hailan
+ * @version 2.0
  */
 public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyCallback {
     // Init variables

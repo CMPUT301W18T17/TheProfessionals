@@ -46,6 +46,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * MapsSearchLocationActivity
+ * Finds the location that the user typed in EditText field
  * The following is a spinoff of Mitch Tablian's code in Google Maps & Google Places Course
  */
 public class MapsSearchLocationActivity extends MapsActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
@@ -95,7 +97,7 @@ public class MapsSearchLocationActivity extends MapsActivity implements OnMapRea
     }
 
     /**
-     * Initialize listeners prior relating to search
+     * Initialize on click listeners prior relating to search
      */
     public void MapsSearchEvent(){
         Log.d(TAG, "MapsSearchEvent()");

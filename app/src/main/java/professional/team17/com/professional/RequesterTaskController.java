@@ -12,8 +12,9 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- * Created by Hailan on 2018-04-04.
+ * Created by Hailan
  * Referenced from Allison's ProviderTaskController
+ * @since 2018-04-04.
  * @see RequesterAddTaskActivity
  * @see RequesterEditTaskActivity
  */

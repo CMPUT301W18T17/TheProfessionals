@@ -26,7 +26,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 
 /**
  * Allows the user to create a new profile
- *
+ * @author Logan
  * @see LogInActivity
  * @see Profile
  * @see SearchActivity
