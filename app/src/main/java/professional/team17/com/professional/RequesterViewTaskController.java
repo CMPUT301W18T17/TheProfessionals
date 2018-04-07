@@ -53,12 +53,16 @@ public class RequesterViewTaskController {
 
     /**
      *
-     * @return
+     * @return task's latlng
      */
     public LatLng checkTaskLatLng(){
         return task.getLatLng();
     }
 
+    /**
+     * sets visibility of map icon depending on the existence of location
+     * @param viewLocation - location's ImageButton
+     */
     public void mapIconVisibility(ImageButton viewLocation){
         /* Check Existence of Location */
         if (task.getLatLng() == null) {
@@ -66,6 +70,18 @@ public class RequesterViewTaskController {
         }
         else {
             viewLocation.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * sets visibility of photos icon depending on the existence of photos
+     * @param viewPhotos - photos' ImageButton
+     */
+    public void photoIconVisibility(ImageButton viewPhotos){
+        if (task.getPhotos().size()==0){
+            viewPhotos.setVisibility(View.INVISIBLE);
+        } else {
+            viewPhotos.setVisibility(View.VISIBLE);
         }
     }
 

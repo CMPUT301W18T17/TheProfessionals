@@ -146,6 +146,7 @@ public class RequesterViewTaskActivity extends Navigation implements ConfirmDial
         } else {
             populateBidList();
             requesterViewTaskController.mapIconVisibility(viewLocation);
+            requesterViewTaskController.photoIconVisibility(viewPhotos);
         }
     }
 
