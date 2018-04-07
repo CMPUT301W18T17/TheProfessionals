@@ -46,7 +46,6 @@ public class TaskListController {
             tasklist = serverHelper.getTasksBidded(username, "Done");
 
         }
-        Log.i("ETETE", "createList: "+tasklist);
     }
 
     public Boolean checkOffline() {
@@ -74,6 +73,9 @@ public class TaskListController {
         task = null;
     }
 
+    /**
+     *
+     */
     public void createListRequester() {
             if (TaskStatus.getInstance().isAssigned()) {
                 tasklist = serverHelper.getTasksRequester(username, "Assigned");
@@ -89,10 +91,17 @@ public class TaskListController {
         }
     }
 
+    /**
+     * This will add all open tasks
+     */
     public void addAllOpen() {
         tasklist = serverHelper.getTasksSearch(username);
         }
 
+    /**
+     *
+     * @param query  - the String search value being looked for
+     */
     public void search(String query) {
         TaskList temp = new TaskList();
         temp = serverHelper.getSearch(query);

@@ -35,7 +35,9 @@ public class ProviderTaskController {
         setUsername();
     }
 
-
+    /**
+     * Username for person online
+     */
     private void setUsername() {
         SharedPreferences sharedpreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         username = sharedpreferences.getString("username", "error");
@@ -111,7 +113,12 @@ public class ProviderTaskController {
 
     public void setUserBid(TextView bid) {
         BidList bids = task.getBids();
-        bid.setText(bids.getBid(username).getAmountAsString());
+        if (bids.getBid(username) != null) {
+            bid.setText(bids.getBid(username).getAmountAsString());
+        }
+        else{
+            bid.setText("Task is closed for bidding");
+        }
     }
     
     public void setLowestBid(TextView bid) {
