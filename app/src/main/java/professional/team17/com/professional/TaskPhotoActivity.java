@@ -87,19 +87,9 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.imageUpload:
-                    c = c + 1;
-                    if(a!=b){
 
                     Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-                        }
-
-                    else
-                        errorBox.setText("you have confirmed plz delete first.");
-                    break;
-                case R.id.bConfirm:
-                        if(a!=b){
-                            if(a!=c){
                     bmp = ((BitmapDrawable) imageUpload.getDrawable()).getBitmap(); // store the image in your bitmap
                     RPhotos.add(bmp);
                     ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -107,6 +97,11 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                     bmp = compressFunction(bmp);
                     photo = toBase64(bmp);
                     photos.add(photo);
+                    break;
+                case R.id.bConfirm:
+                        if(a!=b){
+                            if(a!=c){
+
                    //System.out.println("------------------------------------------------------");
                     //System.out.println(RPhotos);
                     //System.out.println("a = " + a);
