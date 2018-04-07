@@ -189,7 +189,7 @@ public abstract class RequesterTaskActivity extends Navigation{
     }
 
     /**
-     * Get data from MapsSearchLocationActivity.java
+     * Get data from MapsSearchLocationActivity.java or TaskPhotoActivity
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent){

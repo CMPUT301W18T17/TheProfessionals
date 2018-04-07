@@ -79,6 +79,7 @@ public class RequesterTaskController {
         task.setDescription(description);
         task.setLocation(locationString);
         task.setLatLng(latLng);
+        task.setPhotos(photos);
 
         serverHelper.updateTasks(task);
     }
