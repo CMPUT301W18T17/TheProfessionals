@@ -14,8 +14,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.ArrayList;
 // basically here I keep two arrayList one is for string (to upload) one is for bitmap(to delete)
 
@@ -46,12 +47,10 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_photo);
+        photos = new ArrayList<String>();
+        getPhotos();
 
-        Intent intent = getIntent();
-        title = intent.getStringExtra("Title");
-        description = intent.getStringExtra("Description");
-        location = intent.getStringExtra("Location");
-        date = intent.getStringExtra("Date");
+
         imageUpload = (ImageView) findViewById(R.id.imageUpload);
         errorBox = (TextView) findViewById(R.id.errorText);
         bUpload = (Button) findViewById(R.id.bImageUpload);
@@ -60,46 +59,31 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
         bImageNext = (Button) findViewById(R.id.bImageNext);
         bImageBack = (Button) findViewById(R.id.bImageBack);
         bConfirm = (Button) findViewById(R.id.bConfirm);
-        photos = new ArrayList<String>();
+
         RPhotos = new ArrayList<Bitmap>();
         imageUpload.setOnClickListener(this);
         bUpload.setOnClickListener(this);
         bTakePhoto.setOnClickListener(this);
         bConfirm.setOnClickListener(this);
         bImageDelete.setOnClickListener(this);
-
+        if (photos.size()>0){
+            photo = photos.get(0);
+            setImage(photo);
+            c = photos.size()-1;
+        }
         bImageNext.setOnClickListener(this);
         bImageBack.setOnClickListener(this);
         a = 0;
         c = 0;
-
     }
 
-    @Override
-/*<<<<<<< Updated upstream
-    public void onClick(View view) {
-        switch(view.getId()){
-            case R.id.imageUpload:
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryIntent,RESULT_LOAD_IMAGE);
-                break;
-            case R.id.bImageUpload:
-                Intent yourIntent = new Intent(this, RequesterAddTaskActivity.class);
-                putInfor(yourIntent);
-                Bitmap bmp = ((BitmapDrawable)imageUpload.getDrawable()).getBitmap(); // store the image in your bitmap
-                //System.out.println("------------------------------------------------------");
-                //System.out.println(((BitmapDrawable)imageUpload.getDrawable()).getBitmap());
-                //System.out.println("------------------------------------------------------");
-                ByteArrayOutputStream bao = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
-                yourIntent.putExtra("yourImage", bao.toByteArray());
-                startActivity(yourIntent);
-                break;
-            case R.id.bTakePhoto:
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-                break;
-=======*/
+    public void getPhotos(){
+        Intent intent = getIntent();
+        photos = intent.getStringArrayListExtra("photos");
+        //photos = new ArrayList<String>();
+    }
+
+
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.imageUpload:
@@ -135,15 +119,9 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                         errorBox.setText("you already confirmed.");
                     break;
                 case R.id.bImageUpload:
-                    Intent yourIntent = new Intent(this, RequesterAddTaskActivity.class);
-                    putInfor(yourIntent);
+                    Intent yourIntent = new Intent();
                     yourIntent.putStringArrayListExtra("yourImage", photos);
-                    startActivity(yourIntent);
-                    //setResult(Activity.RESULT_OK, yourIntent);
-                    //Bitmap bmp = ((BitmapDrawable) imageUpload.getDrawable()).getBitmap(); // store the image in your bitmap
-                    //ByteArrayOutputStream bao = new ByteArrayOutputStream();
-                    //bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
-                    //yourIntent.putStringArrayListExtra("yourImage",photos);
+                    setResult(Activity.RESULT_OK, yourIntent);
                     finish();
                     break;
                 case R.id.bTakePhoto:
@@ -256,21 +234,6 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
     }
 
 
-    private void putInfor(Intent intent) {
-        // Task Title
-        intent.putExtra("Title", title);
-
-        // Task Description
-        intent.putExtra("Description", description);
-
-        // Location
-        intent.putExtra("Location", location);
-
-        // Date
-        intent.putExtra("Date", date);
-        // photos
-
-    }
 
 
     public Bitmap compressFunction(Bitmap bitmap) {
@@ -284,5 +247,20 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream .toByteArray();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
+    public void setImage(String photo) {
+        byte[] decodedString = Base64.decode(photo, Base64.DEFAULT);
+        Glide.with(TaskPhotoActivity.this)
+                .load(decodedString)
+                .asBitmap()
+                //.placeholder(R.drawable.ic_broken)
+                .into(imageUpload);
+    }
+
+    public void setFirstImage(String firstImage) {
+        byte[] decodedString = Base64.decode(photo, Base64.DEFAULT);
+
+
     }
 }
