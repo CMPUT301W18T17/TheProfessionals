@@ -101,7 +101,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".TaskReviewpPhotoActivity"></activity>
-        <activity android:name=".TaskPhotoActivity2"></activity>
+        <activity android:name=".TaskPhotoActivity"></activity>
     </application>
 
 </manifest>

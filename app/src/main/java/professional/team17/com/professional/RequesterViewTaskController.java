@@ -52,14 +52,6 @@ public class RequesterViewTaskController {
     }
 
     /**
-     *
-     * @return task's latlng
-     */
-    public LatLng checkTaskLatLng(){
-        return task.getLatLng();
-    }
-
-    /**
      * sets visibility of map icon depending on the existence of location
      * @param viewLocation - location's ImageButton
      */

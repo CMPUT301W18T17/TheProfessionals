@@ -3,11 +3,8 @@ package professional.team17.com.professional;
 
 import android.annotation.SuppressLint;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Base64;
@@ -23,10 +20,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.ByteArrayOutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * @author Lauren, Hailan
@@ -90,7 +84,7 @@ public abstract class RequesterTaskActivity extends Navigation{
              @Override
                 public void onClick(View v) {
                 //changeActivity(TaskPhotoActivity.class);
-                 Intent intent = new Intent( RequesterTaskActivity.this, TaskPhotoActivity2.class);
+                 Intent intent = new Intent( RequesterTaskActivity.this, TaskPhotoActivity.class);
                  intent.putStringArrayListExtra("photos", photos);
                  startActivityForResult(intent, 0);
 
