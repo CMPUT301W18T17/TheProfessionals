@@ -15,9 +15,11 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 /**
  * MyProfileViewActivity displays information of current user
@@ -28,6 +30,7 @@ import android.widget.ImageView;
  */
 public class MyProfileViewActivity extends ProfileViewActivity {
     private ImageView profilePic;
+    private ServerHelper serverHelper;
     /**
      * Upon selecting UserMenuButton --> "My Profile", info is displayed until doneButton is selected
      * User can edit their info by clicking on their profile picture (goes to EditMyProfileActivity)
@@ -43,8 +46,9 @@ public class MyProfileViewActivity extends ProfileViewActivity {
      * setUp uses initiates everything identified in the layout
      * Is used in onCreate and onResume
      */
-    private void setUp(){
+    private void setUp() {
         currentMode.setText("My Profile");
+        serverHelper = new ServerHelper(this);
 
         /* profilePic and doneButton selection treatments */
         profilePic = (ImageView) findViewById(R.id.profilePicButton);
@@ -63,9 +67,10 @@ public class MyProfileViewActivity extends ProfileViewActivity {
         });
 
         SharedPreferences pref = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
-        String theUserName = pref.getString("username", "error");
+        final String theUserName = pref.getString("username", "error");
 
         setInfo(theUserName);
+
     }
 
     /**
