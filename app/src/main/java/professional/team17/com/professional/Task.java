@@ -438,12 +438,24 @@ public class Task implements Serializable{
         data.put("description", this.description);
         data.put("status", this.status);
         data.put("date", getDateAsString());
-        Log.i("WEWE", "toContent: "+this.latLng);
-        data.put("lon", "");
-        data.put("lat", "");
-      //  data.put("lon", this.latLng.longitude);
-       // data.put("lat", this.latLng.latitude);
+        String photosstr = convertArrayToString(this.photos);
+       // data.put("latlng", this.latLng);
+        data.put("photos", photosstr);
         return data;
     }
+
+    private String convertArrayToString(ArrayList<String> photos) {
+        String strSeparator = ",";
+        String str = "";
+        for (int i = 0;i<photos.size(); i++) {
+            str = str+photos.get(i);
+            if(i<photos.size()-1){
+                str = str+strSeparator;
+            }
+        }
+        return str;
+    }
+
+
 
 }

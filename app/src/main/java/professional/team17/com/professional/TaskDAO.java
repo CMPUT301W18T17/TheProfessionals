@@ -11,6 +11,7 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -72,7 +73,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
     private void createnew(SQLiteDatabase db){
         String query = "CREATE TABLE "+ TASKTABLE+
                 " (id Text Primary Key, profileName Text, name Text not Null, location Text,"+
-                " description Text, status Text, date Text, lon Text, lat Text, actionType Integer, online Boolean)";
+                " description Text, status Text, date Text, photos Text, actionType Integer, online Boolean)";
         db.execSQL(query);
     }
 
@@ -226,15 +227,30 @@ public class  TaskDAO extends SQLiteOpenHelper {
         String location = c.getString(c.getColumnIndex("location"));
         String description = c.getString(c.getColumnIndex("description"));
         String date = c.getString(c.getColumnIndex("date"));
-        Double lon = c.getDouble(c.getColumnIndex("lon"));
-        Double lat = c.getDouble(c.getColumnIndex("lat"));
-        LatLng latLon = new LatLng(lat, lon);
+        String photosstr = c.getString(c.getColumnIndex("photos"));
+
+       // Double lon = c.getDouble(c.getColumnIndex("lon"));
+        //Double lat = c.getDouble(c.getColumnIndex("lat"));
+       // LatLng latLon = new LatLng(lat, lon);
         //String ACTION = c.getString(c.getColumnIndex("actionType"));
         //Log.i("OFFLINE","TASK ACTIOn"+ACTION );
-        ArrayList<String> photos = new ArrayList<String>();
-        temp =  new Task(profileName, name, description, location, date, latLon , photos);
+        ArrayList<String> photos =  convertStringToArray(photosstr);
+        LatLng latLng = null;
+        temp =  new Task(profileName, name, description, location, date, latLng,  photos);
         temp.setId(id);
         return temp;
+    }
+
+    /**
+     *
+     * @param photostr - convert photo string back to array
+     * @return
+     */
+    public static ArrayList<String> convertStringToArray(String photostr){
+        String strSeparator = ",";
+        String[] arr = photostr.split(strSeparator);
+        ArrayList<String> photos = new ArrayList( Arrays.asList( arr) );
+        return photos;
     }
 
     /**
