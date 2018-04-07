@@ -172,7 +172,7 @@ public class TaskPhotoActivity2 extends AppCompatActivity implements ConfirmDial
             index =0;
         }
         else {
-            index = index + 1;
+            index = photos.size(); // The last of index
         }
     }
 
