@@ -24,7 +24,7 @@
         android:layout_height="250dp"
         android:layout_margin="10dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/taskPhotoGrid"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,17 +37,16 @@
         android:layout_width="368dp"
         android:layout_height="200dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginStart="8dp"
         android:columnWidth="50dp"
-        android:verticalSpacing="10dp"
         android:horizontalSpacing="10dp"
         android:numColumns="5"
         android:rowHeight="50dp"
+        android:verticalSpacing="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
