@@ -240,14 +240,19 @@ public class Task implements Serializable{
 
     /**
      *
-     * //TODO implement in project part 5
+     *  Get all photos in task
      */
     public ArrayList<String> getPhotos() {return photos;}
 
-
     /**
      *
-     * //TODO implement in project part 5
+     */
+    public void setPhotos(ArrayList<String> photos){
+        this.photos = photos;
+    }
+    /**
+     *
+     *
      */
     //public void getPhotosByIndex(ArrayList<String> photos , int n ) {return photos.get();}
 
