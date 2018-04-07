@@ -11,7 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="85c1aff1-b8c3-4d7c-8426-239cb5918e1a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterViewTaskController.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterViewTaskController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/MapsSearchTasksActivity.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/MapsSearchTasksActivity.java" />
     </list>
     <ignored path="$PROJECT_DIR$/../.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -65,11 +65,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RequesterViewTaskController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RequesterViewTaskController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterViewTaskController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="183" column="8" lean-forward="false" selection-start-line="183" selection-start-column="8" selection-end-line="183" selection-end-column="8" />
+            <state relative-caret-position="20">
+              <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProviderTaskController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ProviderTaskController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="117" column="22" lean-forward="false" selection-start-line="117" selection-start-column="22" selection-end-line="117" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MapsSearchTasksActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/MapsSearchTasksActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="158" column="5" lean-forward="false" selection-start-line="158" selection-start-column="5" selection-end-line="158" selection-end-column="5" />
+              <folding>
+                <element signature="e#2733#2880#0" expanded="true" />
+                <element signature="e#2879#2880#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ServerHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="126" column="66" lean-forward="false" selection-start-line="126" selection-start-column="66" selection-end-line="126" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -1824,7 +1859,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/MapsSearchTasksActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ProviderTaskController.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/MapsShowALocationActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Navigation.java" />
@@ -1841,11 +1875,12 @@
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ValidationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/TaskStatus.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterViewTaskController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/MapsSearchTasksActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="112" />
+    <option name="x" value="14" />
     <option name="y" value="23" />
     <option name="width" value="1467" />
     <option name="height" value="877" />
@@ -2296,7 +2331,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="112" y="23" width="1467" height="877" extended-state="0" />
+    <frame x="14" y="23" width="1467" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2355,17 +2390,6 @@
         <state relative-caret-position="-2568">
           <caret line="50" column="13" lean-forward="false" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/MapsSearchTasksActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1353">
-          <caret line="74" column="32" lean-forward="false" selection-start-line="74" selection-start-column="32" selection-end-line="74" selection-end-column="32" />
-          <folding>
-            <element signature="e#2733#2880#0" expanded="true" />
-            <element signature="e#2879#2880#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2628,22 +2652,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ServerHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4398">
-          <caret line="43" column="13" lean-forward="false" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/SearchActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="101" column="5" lean-forward="false" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/SignUpActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
@@ -2720,10 +2728,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding>
-            <element signature="e#1097#1098#0" expanded="true" />
-            <element signature="e#1136#1137#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2732,16 +2737,6 @@
         <state relative-caret-position="103">
           <caret line="114" column="0" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ProviderTaskController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-261">
-          <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2755,9 +2750,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterViewTaskController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="183" column="8" lean-forward="false" selection-start-line="183" selection-start-column="8" selection-end-line="183" selection-end-column="8" />
+        <state relative-caret-position="20">
+          <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/SearchActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="803">
+          <caret line="101" column="5" lean-forward="false" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
+          <folding>
+            <element signature="e#3660#3661#0" expanded="true" />
+            <element signature="e#3708#3709#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ProviderTaskController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="117" column="22" lean-forward="false" selection-start-line="117" selection-start-column="22" selection-end-line="117" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/ServerHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="126" column="66" lean-forward="false" selection-start-line="126" selection-start-column="66" selection-end-line="126" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/MapsSearchTasksActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="158" column="5" lean-forward="false" selection-start-line="158" selection-start-column="5" selection-end-line="158" selection-end-column="5" />
+          <folding>
+            <element signature="e#2733#2880#0" expanded="true" />
+            <element signature="e#2879#2880#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
