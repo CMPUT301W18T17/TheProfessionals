@@ -438,8 +438,16 @@ public class Task implements Serializable{
         data.put("description", this.description);
         data.put("status", this.status);
         data.put("date", getDateAsString());
+        if (latLng != null){
+            data.put("lat", this.latLng.latitude);
+            data.put("lon", this.latLng.longitude);
+        }
+        else {
+            data.put("lat", "");
+            data.put("lon", "" );
+
+        }
         String photosstr = convertArrayToString(this.photos);
-       // data.put("latlng", this.latLng);
         data.put("photos", photosstr);
         return data;
     }

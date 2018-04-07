@@ -73,7 +73,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
     private void createnew(SQLiteDatabase db){
         String query = "CREATE TABLE "+ TASKTABLE+
                 " (id Text Primary Key, profileName Text, name Text not Null, location Text,"+
-                " description Text, status Text, date Text, photos Text, actionType Integer, online Boolean)";
+                " description Text, status Text, date Text, lat double, lon double, photos Text, actionType Integer, online Boolean)";
         db.execSQL(query);
     }
 
@@ -171,7 +171,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
         ContentValues taskdata = task.toContent();
         String[] id = {task.getUniqueID()+""};
         if (!isOffline(task.getUniqueID())){
-            taskdata.put("actionType", ActionType.DELETE_NO_CONNECTION.getValue());
+            taskdata.put("actionType", ActionType.EDIT_NO_CONNECTION.getValue());
         }
         db.update(TASKTABLE, taskdata, "id=?", id);
         db.close();
@@ -228,15 +228,12 @@ public class  TaskDAO extends SQLiteOpenHelper {
         String description = c.getString(c.getColumnIndex("description"));
         String date = c.getString(c.getColumnIndex("date"));
         String photosstr = c.getString(c.getColumnIndex("photos"));
-
-       // Double lon = c.getDouble(c.getColumnIndex("lon"));
-        //Double lat = c.getDouble(c.getColumnIndex("lat"));
-       // LatLng latLon = new LatLng(lat, lon);
-        //String ACTION = c.getString(c.getColumnIndex("actionType"));
-        //Log.i("OFFLINE","TASK ACTIOn"+ACTION );
+        Double lon = c.getDouble(c.getColumnIndex("lon"));
+        Double lat = c.getDouble(c.getColumnIndex("lat"));
+        LatLng latLon = new LatLng(lat, lon);
         ArrayList<String> photos =  convertStringToArray(photosstr);
         LatLng latLng = null;
-        temp =  new Task(profileName, name, description, location, date, latLng,  photos);
+        temp =  new Task(profileName, name, description, location, date, latLon,  photos);
         temp.setId(id);
         return temp;
     }
