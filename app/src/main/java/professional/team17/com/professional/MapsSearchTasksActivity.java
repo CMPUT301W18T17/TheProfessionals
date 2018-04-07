@@ -162,7 +162,7 @@ public class MapsSearchTasksActivity extends MapsActivity implements OnMapReadyC
      * Mark the spot of a task
      * @param task a task that is within provider's 5km radius/box
      */
-    protected void markSpot(Task task) {
+    private void markSpot(Task task) {
         try{
             String taskInfo = "<b>" + "Task Description: " + "</b>" + task.getDescription() + "<br/>" +
                     "<b>" + "Task Due By: " + "</b>" + task.getDateAsString() + "<br/>" +
