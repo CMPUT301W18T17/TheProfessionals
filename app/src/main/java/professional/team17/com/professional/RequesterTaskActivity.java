@@ -90,7 +90,7 @@ public abstract class RequesterTaskActivity extends Navigation{
              @Override
                 public void onClick(View v) {
                 //changeActivity(TaskPhotoActivity.class);
-                 Intent intent = new Intent( RequesterTaskActivity.this, TaskPhotoActivity.class);
+                 Intent intent = new Intent( RequesterTaskActivity.this, TaskPhotoActivity2.class);
                  intent.putStringArrayListExtra("photos", photos);
                  startActivityForResult(intent, 0);
 
