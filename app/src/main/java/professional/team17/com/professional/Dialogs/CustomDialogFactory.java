@@ -31,6 +31,8 @@ public class CustomDialogFactory {
                     return new DeclineBidDialog(view);
                 case "Set Requested":
                     return new SetRequestedDialog(view);
+                case "Delete Photo":
+                    return new DeletePhotoDialog(view);
             }
             return null;
         }
