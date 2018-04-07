@@ -100,6 +100,7 @@ public class TaskPhotoActivity2 extends AppCompatActivity implements ConfirmDial
             if (photos.size()>0 && index>0) {
                 String photo = photos.get(index - 1);
                 setImage(photo);
+                index = index-1;
             }
             setView();
     }}
