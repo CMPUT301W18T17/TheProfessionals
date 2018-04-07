@@ -93,7 +93,8 @@ public abstract class RequesterTaskActivity extends Navigation{
             addPhotoButton.setOnClickListener(new ImageButton.OnClickListener() {
              @Override
                 public void onClick(View v) {
-
+                 if(photos.size() == 0){
+                //changeActivity(TaskPhotoActivity.class);
                  Intent intent = new Intent( RequesterTaskActivity.this, TaskPhotoActivity.class);
                  title = nameField.getText().toString();
                  // Task Title
@@ -108,22 +109,47 @@ public abstract class RequesterTaskActivity extends Navigation{
                  // Date
                  intent.putExtra("Date", date);
                  // photos
-                 intent.putStringArrayListExtra("photos", photos);
+                 //intent.putStringArrayListExtra("photos", photos);
                  startActivityForResult(intent, 0);
                 }
-             });
-/*        Intent i = getIntent();
+
+                else{
+
+                     //changeActivity(TaskReviewpPhotoActivity.class);
+
+                     Intent intent = new Intent( RequesterTaskActivity.this, TaskReviewpPhotoActivity.class);
+                     title = nameField.getText().toString();
+                     // Task Title
+                     intent.putExtra("Title", title);
+                     description = descriptionField.getText().toString();
+                     // Task Description
+                     intent.putExtra("Description", description);
+                     location = locationField.getText().toString();
+                     // Location
+                     intent.putExtra("Location", location);
+                     date = textualDateView.getText().toString();
+                     // Date
+                     intent.putExtra("Date", date);
+                     // photos
+                     intent.putStringArrayListExtra("photos", photos);
+                     startActivityForResult(intent, 0);
+                 }
+
+             }});
+        Intent i = getIntent();
+
         if(getIntent().hasExtra("yourImage")) {
             photos = i.getStringArrayListExtra("yourImage");}
         title = i.getStringExtra("Title");
         description = i.getStringExtra("Description");
         location = i.getStringExtra("Location");
         date = i.getStringExtra("Date");
-        // Set text back
+
         setter(nameField, title);
         setter(descriptionField, description);
         setter(locationField, location);
-        textualDateView.setText(date);*/
+        textualDateView.setText(date);
+        photoTextView.setText("you have added "+ photos.size() +" photos");
             //Bitmap bmp = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("yourImage"), 0, getIntent().getByteArrayExtra("yourImage").length);
             //bmp = compressFunction(bmp);
             //photo = toBase64(bmp);

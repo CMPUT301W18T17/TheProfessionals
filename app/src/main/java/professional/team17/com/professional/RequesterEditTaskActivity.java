@@ -84,6 +84,7 @@ public class RequesterEditTaskActivity extends RequesterTaskActivity {
         locationField.setText(oldTask.getLocation());
         textualDateView.setText(oldTask.getDateAsString());
         latLng = oldTask.getLatLng();
+        photos = oldTask.getPhotos();
     }
 
 

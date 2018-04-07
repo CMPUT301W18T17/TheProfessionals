@@ -135,15 +135,17 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                         errorBox.setText("you already confirmed.");
                     break;
                 case R.id.bImageUpload:
-                    Intent yourIntent = new Intent();
-                    //putInfor(yourIntent);
+                    Intent yourIntent = new Intent(this, RequesterAddTaskActivity.class);
+                    putInfor(yourIntent);
                     yourIntent.putStringArrayListExtra("yourImage", photos);
-                    setResult(Activity.RESULT_OK, yourIntent);
+                    startActivity(yourIntent);
+                    //setResult(Activity.RESULT_OK, yourIntent);
                     //Bitmap bmp = ((BitmapDrawable) imageUpload.getDrawable()).getBitmap(); // store the image in your bitmap
                     //ByteArrayOutputStream bao = new ByteArrayOutputStream();
                     //bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
                     //yourIntent.putStringArrayListExtra("yourImage",photos);
                     finish();
+                    break;
                 case R.id.bTakePhoto:
                     c = c + 1;
                     if(a!=b){
@@ -182,7 +184,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                     break;
                 case R.id.bImageNext:
                     if((a == b)&&(a == (photos.size()-1))){
-                        if (photos.size() < 5){
+                        if (photos.size() < 10){
                     imageUpload.setImageResource(0);
                             System.out.println("------------------------------------------------------");
                             System.out.println(photos);
@@ -192,7 +194,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
                     a = a + 1;}
 
                         else
-                        {errorBox.setText("u already input 5 images plz stop");}}
+                        {errorBox.setText("u already input 10 images plz stop");}}
                     else if (a < photos.size()-1){
                         a = a + 1;
                         imageUpload.setImageResource(0);
@@ -253,7 +255,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
         }
     }
 
-/*
+
     private void putInfor(Intent intent) {
         // Task Title
         intent.putExtra("Title", title);
@@ -269,7 +271,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ImageView.On
         // photos
 
     }
-*/
+
 
     public Bitmap compressFunction(Bitmap bitmap) {
         int newWidth = 64;
