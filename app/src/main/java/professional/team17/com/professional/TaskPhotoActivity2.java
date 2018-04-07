@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class TaskPhotoActivity2 extends AppCompatActivity implements ConfirmDialog.ConfirmDialogListener{
     private TextView emptyPhoto;
-    private ImageView imageUpload;
+    private ImageView viewImage;
     private ImageButton back;
     private ImageButton editPhoto;
     private ImageButton deletePhoto;
@@ -39,7 +39,7 @@ public class TaskPhotoActivity2 extends AppCompatActivity implements ConfirmDial
     private Bitmap bmp;
     private int index =-1;
     private GridViewAdapter gridViewAdapter;
-    private static final int RESULT_LOAD_IMAGE = 1;
+    private static final int FILE_REQUEST = 1;
     private static final int CAMERA_REQUEST = 2;
 
     @Override
@@ -54,7 +54,7 @@ public class TaskPhotoActivity2 extends AppCompatActivity implements ConfirmDial
         back = (ImageButton) findViewById(R.id.requester_photo_back);
         gridView = (GridView) findViewById(R.id.requester_taskPhotoGrid);
         addphoto = (Button) findViewById(R.id.requesteraddphoto);
-        imageUpload = findViewById(R.id.requester_task_photo);
+        viewImage = findViewById(R.id.requester_task_photo);
         setPhotos();
         setView();
         back.setOnClickListener(new View.OnClickListener() {
@@ -130,18 +130,20 @@ public class TaskPhotoActivity2 extends AppCompatActivity implements ConfirmDial
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && data != null) {
             switch (requestCode) {
-                case RESULT_LOAD_IMAGE:
+                case FILE_REQUEST:
                     Uri selectedImage = data.getData();
-                    imageUpload.setImageURI(selectedImage);
+                    viewImage.setImageURI(selectedImage);
+                    gridViewAdapter.notifyDataSetChanged();
                     break;
                 case CAMERA_REQUEST:
                     Bitmap photo = (Bitmap) data.getExtras().get("data");
-                    imageUpload.setImageBitmap(photo);
+                    viewImage.setImageBitmap(photo);
+                    gridViewAdapter.notifyDataSetChanged();
                     break;
             }
 
 
-            bmp = ((BitmapDrawable) imageUpload.getDrawable()).getBitmap();
+            bmp = ((BitmapDrawable) viewImage.getDrawable()).getBitmap();
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
             bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
             bmp = compressFunction(bmp);
@@ -209,7 +211,7 @@ public class TaskPhotoActivity2 extends AppCompatActivity implements ConfirmDial
                 .load(decodedString)
                 .asBitmap()
                 //.placeholder(R.drawable.ic_broken)
-                .into(imageUpload);
+                .into(viewImage);
     }
 
 
@@ -234,7 +236,7 @@ public class TaskPhotoActivity2 extends AppCompatActivity implements ConfirmDial
 
     private void toGallery(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, RESULT_LOAD_IMAGE);
+        startActivityForResult(intent, FILE_REQUEST);
     }
 
     private void toCamera(){
