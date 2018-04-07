@@ -46,6 +46,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ConfirmDialo
     private GridViewAdapter gridViewAdapter;
     private static final int FILE_REQUEST = 1;
     private static final int CAMERA_REQUEST = 2;
+    private float ratio, floatHeight, floatWidth;
 
     /**
      *
@@ -236,8 +237,11 @@ public class TaskPhotoActivity extends AppCompatActivity implements ConfirmDialo
      * @return
      */
     public Bitmap compressFunction(Bitmap bitmap) {
-        int newWidth = 64;
-        int newHeight = 64;
+        int newWidth = 128;
+        floatHeight = bitmap.getHeight();
+        floatWidth = bitmap.getWidth();
+        ratio = floatHeight / floatWidth;
+        int newHeight = Math.round(newWidth * ratio);
         Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         return newBitmap;
     }
