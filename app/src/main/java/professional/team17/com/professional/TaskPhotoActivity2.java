@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -26,17 +27,17 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 // basically here I keep two arrayList one is for string (to upload) one is for bitmap(to delete)
 
-public class TaskPhotoActivity2 extends AppCompatActivity {
-    TextView errorBox;
+public class TaskPhotoActivity2 extends AppCompatActivity implements ConfirmDialog.ConfirmDialogListener{
+    private TextView emptyPhoto;
     private ImageView imageUpload;
     private ImageButton back;
+    private ImageButton editPhoto;
+    private ImageButton deletePhoto;
     private Button addphoto;
-    Integer k = 0;
-    Integer j = 0;
-    String a;
     private ArrayList<String> photos;
     private GridView gridView;
     private Bitmap bmp;
+    private int index =-1;
     private GridViewAdapter gridViewAdapter;
     private static final int RESULT_LOAD_IMAGE = 1;
     private static final int CAMERA_REQUEST = 2;
@@ -46,13 +47,16 @@ public class TaskPhotoActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.photo_view2);
         photos = new ArrayList<String>();
-        getPhotos();
 
+        deletePhoto = findViewById(R.id.requester_photo_delete_photo);
+        editPhoto = findViewById(R.id.requester_photo_edit_photo);
+        emptyPhoto = findViewById(R.id.requester_photo_text);
         back = (ImageButton) findViewById(R.id.requester_photo_back);
         gridView = (GridView) findViewById(R.id.requester_taskPhotoGrid);
         addphoto = (Button) findViewById(R.id.requesteraddphoto);
         imageUpload = findViewById(R.id.requester_task_photo);
-
+        setPhotos();
+        setView();
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,19 +74,55 @@ public class TaskPhotoActivity2 extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                String photo = photos.get(position);
+                index = position;
+                String photo = photos.get(index);
                 setImage(photo);
-
             }
         });
 
     }
 
-    public void getPhotos(){
+
+    public void deletePhoto(View v){
+        declineBidDialog();
+
+    }
+
+    @Override
+    public void onFinishConfirmDialog(Boolean confirmed) {
+
+    }
+
+    public void onFinishConfirmDialog(Boolean confirmed, String dialog) {
+        if (confirmed == true){
+            photos.remove(index);
+            gridViewAdapter.notifyDataSetChanged();
+            if (photos.size()>0) {
+                String photo = photos.get(index - 1);
+                setImage(photo);
+            }
+            setView();
+    }}
+
+    private void setView() {
+        if (photos.size()==0){
+            deletePhoto.setVisibility(View.GONE);
+            editPhoto.setVisibility(View.GONE);
+        }
+        else {
+            deletePhoto.setVisibility(View.VISIBLE);
+            editPhoto.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setPhotos(){
         Intent intent = getIntent();
         photos = intent.getStringArrayListExtra("photos");
-        //photos = new ArrayList<String>();
+        if (photos.size() > 0){
+            setImage(photos.get(0));
+            index =0;
+            emptyPhoto.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -99,20 +139,54 @@ public class TaskPhotoActivity2 extends AppCompatActivity {
                     imageUpload.setImageBitmap(photo);
                     break;
             }
-                bmp = ((BitmapDrawable) imageUpload.getDrawable()).getBitmap();
-                ByteArrayOutputStream bao = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
-                bmp = compressFunction(bmp);
-                String photo1 = toBase64(bmp);
-                photos.add(photo1);
+
+
+            bmp = ((BitmapDrawable) imageUpload.getDrawable()).getBitmap();
+            ByteArrayOutputStream bao = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 50, bao);
+            bmp = compressFunction(bmp);
+            String photo1 = toBase64(bmp);
+            setPhoto(index, photo1);
+            emptyPhoto.setVisibility(View.INVISIBLE);
+            if (photos.size()==10){
+                addphoto.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void setPhoto(int index, String photo) {
+        if (photos.size()<=index){
+            photos.add(photo);
+            setView();
+        }
+        else {
+            photos.set(index, photo);
         }
     }
 
     public void addPhoto(View v){
         photoDialog();
+        if (index==-1){
+            index =0;
+        }
+        else {
+            index = index + 1;
+        }
+    }
+
+    public void editPhoto(View v){
+        photoDialog();
 
     }
 
+    /**
+     * Handles the "delete photo" dialog fragment (populates it with text).
+     */
+    private void declineBidDialog(){
+        FragmentManager fm = getSupportFragmentManager();
+        ConfirmDialog confirmDialog = new ConfirmDialog();
+        confirmDialog.show(fm, "Delete Photo");
+    }
 
 
 
