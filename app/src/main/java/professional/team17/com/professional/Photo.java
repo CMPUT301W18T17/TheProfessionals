@@ -25,8 +25,9 @@ public class Photo {
     private byte[] byteArray;
     private String byteArrayStr, uploadString;
     private Bitmap.Config config;
-    private int newWidth = 64;
-    private int newHeight = 64;
+    private int newWidth = 128;
+    private int newHeight;
+    private float ratio, floatHeight, floatWidth;
 
     /**
      * @param path that leads to the photo
@@ -62,6 +63,9 @@ public class Photo {
      */
     public Bitmap toBitMap(){
         bitmap = BitmapFactory.decodeFile(this.path);
+        newHeight = getNewHeight();
+        Log.i("message", "------------------------------------------------------------------------------width: "+newWidth);
+        Log.i("message", "------------------------------------------------------------------------------height: "+newHeight);
         uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         return uploadBitmap;
     }
@@ -71,6 +75,7 @@ public class Photo {
      * @return drawable bitmap after scaling
      */
     public Drawable bitmapToDrawable() {
+        newHeight = getNewHeight();
         uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         drawable = new BitmapDrawable(uploadBitmap);
         return drawable;
@@ -129,6 +134,7 @@ public class Photo {
      */
     public String pathToString(){
         bitmap = BitmapFactory.decodeFile(this.path);
+        newHeight = getNewHeight();
         uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         uploadString = toString(uploadBitmap);
         return uploadString;
@@ -139,6 +145,7 @@ public class Photo {
      * @return string format of photo prior to upload
      */
     public String bitmapToString(){
+        newHeight = getNewHeight();
         uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         uploadString = toString(uploadBitmap);
         return uploadString;
@@ -149,6 +156,7 @@ public class Photo {
      */
     public Bitmap.Config pathGetConfig(){
         bitmap = BitmapFactory.decodeFile(this.path);
+        newHeight = getNewHeight();
         uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         config = Bitmap.Config.valueOf(uploadBitmap.getConfig().name());
         return config;
@@ -158,6 +166,7 @@ public class Photo {
      * @return configuration of photo in bitmap
      */
     public Bitmap.Config bitmapGetConfig(){
+        newHeight = getNewHeight();
         uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         config = Bitmap.Config.valueOf(uploadBitmap.getConfig().name());
         return config;
@@ -168,6 +177,7 @@ public class Photo {
      */
     public int pathGetWidth(){
         bitmap = BitmapFactory.decodeFile(this.path);
+        newHeight = getNewHeight();
         uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         width = uploadBitmap.getWidth();
         return width;
@@ -177,6 +187,7 @@ public class Photo {
      * @return width of photo that is in bitmap
      */
     public int bitmapGetWidth(){
+        newHeight = getNewHeight();
         uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         width = uploadBitmap.getWidth();
         return width;
@@ -187,6 +198,7 @@ public class Photo {
      */
     public int pathGetHeight(){
         bitmap = BitmapFactory.decodeFile(this.path);
+        newHeight = getNewHeight();
         uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         height = uploadBitmap.getHeight();
         return height;
@@ -196,6 +208,7 @@ public class Photo {
      * @return height of photo that is in bitmap
      */
     public int bitmapGetHeight(){
+        newHeight = getNewHeight();
         uploadBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
         height = uploadBitmap.getHeight();
         return height;
@@ -218,4 +231,13 @@ public class Photo {
     public String getPath(){
         return path;
     }
+
+    public int getNewHeight() {
+        floatHeight = this.bitmap.getHeight();
+        floatWidth = this.bitmap.getWidth();
+        ratio = floatHeight / floatWidth;
+        newHeight = Math.round(newWidth * ratio);
+        return newHeight;
+    }
+
 }
