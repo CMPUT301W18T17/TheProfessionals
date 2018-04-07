@@ -163,6 +163,10 @@ public class EditMyProfileActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Put new/edited info into extra for activity:My Profile
+     * @param view
+     */
     public void toPicker(View view){
         Intent intent = new Intent(this, PhotoPicker.class);
         // Put extra

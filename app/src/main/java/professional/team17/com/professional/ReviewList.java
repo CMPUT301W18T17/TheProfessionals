@@ -20,6 +20,9 @@ import java.util.Comparator;
 public class ReviewList {
     private ArrayList<Review> reviews = new ArrayList<Review>();
 
+    /**
+     * Empty constructor for review
+     */
     public ReviewList(){
         // Nothing
     }

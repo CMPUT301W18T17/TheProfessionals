@@ -23,10 +23,8 @@ import professional.team17.com.professional.Adapters.ProviderListViewAdapter;
 
 
 /**
- *
  * An activity where the provider can search for tasks in either requested or bidded states ('open to bidding')
  * On default it will display the most recently requested tasks/
- *
  *
  * @author Allison
  * @see  TaskList, ElasticSearchController

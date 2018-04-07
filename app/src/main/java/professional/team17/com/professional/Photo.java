@@ -11,7 +11,9 @@ import java.lang.reflect.Array;
 import java.nio.ByteBuffer;
 
 /**
- * Created by Zhipeng Zhang on 2018/3/21.
+ * Photo
+ * @author  Zhipeng Zhang
+ * 2018/3/21.
  */
 
 public class Photo {

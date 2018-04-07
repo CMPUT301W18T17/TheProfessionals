@@ -17,7 +17,8 @@ import android.widget.ListView;
 /**
  * OtherProfileViewActivity displays information of another user
  * @author Hailan
- * @version 2.0 Last updated: Mar.12, 2018
+ * @version 2.0 Last
+ * @since Mar.12, 2018
  * @see ProfileViewActivity
  */
 public class OtherProfileViewActivity extends ProfileViewActivity{

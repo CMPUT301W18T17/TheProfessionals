@@ -179,7 +179,7 @@ public abstract class MapsActivity extends FragmentActivity implements OnMapRead
                             Log.d(TAG, "getCurrentLocation (OnComplete) got location");
                             currentLocation = (Location) task.getResult();
                             if(currentLocation == null){
-                                Toast.makeText(MapsActivity.this, "Please turn on Location for your phone!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MapsActivity.this, "Please turn on the location option for your device", Toast.LENGTH_LONG).show();
                             } else{
                                 currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng,11));

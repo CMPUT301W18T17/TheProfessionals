@@ -5,6 +5,9 @@ import org.apache.commons.validator.routines.EmailValidator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Validates email and phone number when user adds/updates their information
+ */
 public class ValidationController {
     private EmailValidator emailValidator;
     private Pattern pattern;

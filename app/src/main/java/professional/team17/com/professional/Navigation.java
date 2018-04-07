@@ -183,16 +183,20 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
         popup.show();
     }
 
+    /**
+     * Check if google services is in place (for preparation of map activity)
+     * @return boolean
+     */
     private boolean checkServices(){
         String TAG = "ProviderLayout";
         Log.d(TAG, "checkServices - google services version");
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
         if (available == ConnectionResult.SUCCESS){
-            Toast.makeText(this, "Google Services is OK", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Loading Map", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "checkServices - google services is ok");
             return true;
         } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
-            Toast.makeText(this, "Google Services is NOT Ok", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Google Services is missing", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "checkServices - okay error");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(this, available, 9001);
             dialog.show();
@@ -202,15 +206,21 @@ public  class Navigation extends AppCompatActivity implements ConfirmDialog.Conf
         return false;
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
+    /**
+     * Sync
+     */
     protected void createSync() {
         FragmentManager fm = getSupportFragmentManager();
         ConfirmDialog confirmDialog = new ConfirmDialog();
         confirmDialog.show(fm, "Sync");
+    }
+
+    /**
+     *  Override Methods
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override

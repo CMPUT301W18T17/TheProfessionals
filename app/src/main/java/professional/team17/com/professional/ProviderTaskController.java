@@ -23,11 +23,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
+ * Provider Task Controller
  * This class is used to help control any Task view for the
  * Provider. It acts as a middle man between the
  * Server and the activity.
+ * @author Allison
  * @see ServerHelper
  * @see Task
  */
@@ -37,6 +38,9 @@ public class ProviderTaskController {
     private Task task;
     private String username;
 
+    /**
+     * @param context - Activity context
+     */
     ProviderTaskController(Context context) {
         this.context = context;
         serverHelper = new ServerHelper(context);

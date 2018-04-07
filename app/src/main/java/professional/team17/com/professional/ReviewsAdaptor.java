@@ -19,7 +19,9 @@ import android.widget.TextView;
 
 /**
  * ReviewsAdaptor is used when looking at the profiles of both current user and other users.
- * @version 2.0 Last updated: Mar. 12, 2018
+ * @author Hailan
+ * @version 2.0
+ * @since Mar. 12, 2018
  * @see ReviewList
  */
 public class ReviewsAdaptor extends ArrayAdapter {
