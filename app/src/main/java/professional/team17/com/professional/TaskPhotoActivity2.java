@@ -51,6 +51,7 @@ public class TaskPhotoActivity2 extends AppCompatActivity {
         back = (ImageButton) findViewById(R.id.requester_photo_back);
         gridView = (GridView) findViewById(R.id.requester_taskPhotoGrid);
         addphoto = (Button) findViewById(R.id.requesteraddphoto);
+        imageUpload = findViewById(R.id.requester_task_photo);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,11 +67,9 @@ public class TaskPhotoActivity2 extends AppCompatActivity {
         gridView.setAdapter(gridViewAdapter);
         gridViewAdapter.notifyDataSetChanged();
 
-        ImageView photoView = (ImageView) findViewById(R.id.gridPhotoView);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("ITEM_CLICKED", "" + (String) (gridView.getItemAtPosition(position)));
 
                 String photo = photos.get(position);
                 setImage(photo);
@@ -86,17 +85,6 @@ public class TaskPhotoActivity2 extends AppCompatActivity {
         //photos = new ArrayList<String>();
     }
 
-
-    //@Override
-    //protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    //super.onActivityResult(requestCode, resultCode, data);
-    //if((requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null) || (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK)){
-    //Uri selectedImage = data.getData();
-    //imageUpload.setImageURI(selectedImage);
-    //selectedImageName = selectedImage.getLastPathSegment();
-
-    //}
-    //}
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -117,8 +105,6 @@ public class TaskPhotoActivity2 extends AppCompatActivity {
                 bmp = compressFunction(bmp);
                 String photo1 = toBase64(bmp);
                 photos.add(photo1);
-
-
         }
     }
 
