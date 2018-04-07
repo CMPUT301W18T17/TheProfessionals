@@ -25,6 +25,12 @@ public class Review {
 
     private Date date;
 
+    /**
+     * Constructor for Review
+     * @param score - score given by the reviewer
+     * @param reviewer - the task requester
+     * @param comment - comment given by the reviewer
+     */
     public Review(float score, String reviewer, String comment) {
         this.score = score;
         this.profileName = reviewer;
@@ -45,23 +51,39 @@ public class Review {
      * @return String or Double
      */
 
+    /**
+     *
+     * @return score
+     */
     public float getScore() {
         return this.score;
     }
 
+    /**
+     *
+     * @return comment of review
+     */
     public String getComment() {
         return this.comment;
     }
 
+    /**
+     *
+     * @return reviewer
+     */
     public String getProfileName() {
         return this.profileName;
     }
 
+    /**
+     *
+     * @return date the review was made
+     */
     public Date getDate(){return this.date;}
 
     /**
      * Set setters for updating all the attributes of the review object
-     * @param score
+     * @param score - set score for this review
      */
 
     /*SETTERS*/
@@ -69,12 +91,18 @@ public class Review {
         this.score = score;
     }
 
-
+    /**
+     *
+     * @param comment - comment for this review
+     */
     public void setComment(String comment) {
         this.comment = comment;
 
     }
 
+    /**
+     * @param name name of reviewer
+     */
     private void setProfileName(String name) {
         this.profileName = name;
     }

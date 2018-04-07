@@ -28,6 +28,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * @author Lauren, Hailan
+ * @see RequesterAddTaskActivity
+ * @see RequesterEditTaskActivity
+ * @see RequesterTaskController
+ */
 public abstract class RequesterTaskActivity extends Navigation{
     private static final String TAG = "RequesterTaskActivity";
     /* Layout objects */
@@ -67,7 +73,6 @@ public abstract class RequesterTaskActivity extends Navigation{
         setTitle();
         setController();
         /* Set all view objects */
-        //Button submitButton = (Button) findViewById(R.id.button2);
         nameField = (EditText) findViewById(R.id.TaskNameField);
         descriptionField = (EditText) findViewById(R.id.taskDescriptionField);
         locationField = (EditText) findViewById(R.id.textualAddressField);
@@ -78,15 +83,6 @@ public abstract class RequesterTaskActivity extends Navigation{
         submitButton = (Button) findViewById(R.id.submitButton);
         photoTextView = (TextView) findViewById(R.id.photoTextView);
         photos = new ArrayList<String>();
-
-        //sharedPreferences = getSharedPreferences("", Context.MODE_PRIVATE);
-
-
-
-
-
-
-
 
         /* Set all onClickListeners */
 
@@ -217,6 +213,10 @@ public abstract class RequesterTaskActivity extends Navigation{
         }
     }
 
+    /**
+     * @param bitmap - bitmap of photos
+     * @return - newBitmap: bitmap after rescaling
+     */
     public Bitmap compressFunction(Bitmap bitmap){
         int newWidth = 64;
         int newHeight = 64;
@@ -224,6 +224,10 @@ public abstract class RequesterTaskActivity extends Navigation{
         return newBitmap;
     }
 
+    /**
+     * @param bitmap of photos
+     * @return - String of bitmap
+     */
     public String toBase64(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
@@ -231,6 +235,10 @@ public abstract class RequesterTaskActivity extends Navigation{
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
+    /**
+     * put for variables in extra in preparation for next activity
+     * @param activity - the activity to be changed to
+     */
     private void changeActivity(Class activity) {
         Intent intent = new Intent(this, activity);
         // Put extra
@@ -255,6 +263,11 @@ public abstract class RequesterTaskActivity extends Navigation{
         finish();
     }
 
+    /**
+     * Put info in the EditText specified
+     * @param name - name of EditText
+     * @param information - info to be put into EditText
+     */
     private void setter(EditText name, String information) {
         if (information != null) {
             name.setText(information);

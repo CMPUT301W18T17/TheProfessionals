@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-
+/**
+ * Offline shows the layout for offine: R.layout.fragment_offline
+ */
 public class Offline extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

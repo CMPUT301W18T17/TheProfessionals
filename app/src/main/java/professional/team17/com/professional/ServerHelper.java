@@ -36,10 +36,9 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 
-
-
 /**
  * This class will handle the connection and async tasks to the es server
+ * @author Allison
  */
 public class ServerHelper {
     private static Context context;
@@ -210,6 +209,11 @@ public class ServerHelper {
         }
     }
 
+    /**
+     * get task
+     * @param taskid - id of task
+     * @return - task
+     */
     private Task onlineGetTask(String taskid){
         Task task;
         ElasticSearchController.GetTask gettask = new ElasticSearchController.GetTask();
@@ -224,7 +228,7 @@ public class ServerHelper {
     }
 
     /**
-     *
+     * add task
      */
     public String addTasks(Task task) {
         String id;
@@ -241,6 +245,11 @@ public class ServerHelper {
         }
     }
 
+    /**
+     * add task when online
+     * @param task - task
+     * @return - task id
+     */
     public String onlineAddTask(Task task){
         String id;
         ElasticSearchController.AddTask addtask = new ElasticSearchController.AddTask();

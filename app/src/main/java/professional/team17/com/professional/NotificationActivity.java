@@ -25,7 +25,10 @@ public class NotificationActivity extends AppCompatActivity {
     private NotificationListAdapter notificationAdapter;
     private ServerHelper serverHelper;
 
-
+    /**
+     *
+     * @param savedInstanceState - default bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +70,17 @@ public class NotificationActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Get notifications from server
+     */
     private void getFromServer(){
         profile = serverHelper.getProfile(username);
         notificationList = profile.getNotificationList();
     }
 
+    /**
+     * Adapter's OnItemClickListener - goes to the task that caused the notification
+     */
     private AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener(){
         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
             Notification notification = notificationList.get(position);
