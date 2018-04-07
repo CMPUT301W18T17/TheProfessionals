@@ -97,7 +97,7 @@ public class TaskPhotoActivity2 extends AppCompatActivity implements ConfirmDial
         if (confirmed == true){
             photos.remove(index);
             gridViewAdapter.notifyDataSetChanged();
-            if (photos.size()>0) {
+            if (photos.size()>0 && index>0) {
                 String photo = photos.get(index - 1);
                 setImage(photo);
             }
