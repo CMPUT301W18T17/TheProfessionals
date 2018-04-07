@@ -232,7 +232,6 @@ public class  TaskDAO extends SQLiteOpenHelper {
         Double lat = c.getDouble(c.getColumnIndex("lat"));
         LatLng latLon = new LatLng(lat, lon);
         ArrayList<String> photos =  convertStringToArray(photosstr);
-        LatLng latLng = null;
         temp =  new Task(profileName, name, description, location, date, latLon,  photos);
         temp.setId(id);
         return temp;
