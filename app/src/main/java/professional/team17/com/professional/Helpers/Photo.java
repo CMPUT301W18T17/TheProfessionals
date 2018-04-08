@@ -25,7 +25,7 @@ public class Photo {
     private byte[] byteArray;
     private String byteArrayStr, uploadString;
     private Bitmap.Config config;
-    private int newWidth = 128;
+    private int newWidth = 64;
     private int newHeight;
     private float ratio, floatHeight, floatWidth;
 

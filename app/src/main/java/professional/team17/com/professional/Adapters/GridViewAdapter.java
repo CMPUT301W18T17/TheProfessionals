@@ -15,6 +15,13 @@ import java.util.ArrayList;
 
 import professional.team17.com.professional.R;
 
+/**
+ * @author
+ * @version 1.0
+ * @see ArrayAdapter<String>
+ * 2018-4-6
+ */
+
 public class GridViewAdapter extends ArrayAdapter<String> {
 
     public GridViewAdapter(Activity context, ArrayList<String> photos){

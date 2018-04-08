@@ -20,6 +20,15 @@ import android.widget.TextView;
 
 import professional.team17.com.professional.Helpers.Photo;
 import professional.team17.com.professional.R;
+/**
+ * This activity is specific used for add the photo to the profile.
+ * when the user wanna add photo inside the profile this activities will work
+ * @author Zhipeng
+ * @version 1
+ * 2018/3/21.
+ * @see Photo
+ *
+ */
 
 public class PhotoPicker extends AppCompatActivity {
     private String userName;
@@ -38,6 +47,10 @@ public class PhotoPicker extends AppCompatActivity {
     private Bitmap photoBitmap, returnBitmap, oldBitmap;
     private int functionCode;
 
+    /**
+     * onCreate
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,10 +93,17 @@ public class PhotoPicker extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
     }
+    /**
+     * the back method is used for implement the back button on the add photo layout of the profile add photos
+     * first the previous activity will prompt the used photo's info to here (if there is one )
+     * when the user click on the back button, it will return the used one or the empty object
+     *
+     */
 
     public void back(View view) {
         if (isEditProfile == 0) {
@@ -119,15 +139,26 @@ public class PhotoPicker extends AppCompatActivity {
         }
     }
 
+    /**
+     * toGallery is used for let user to add photo from the gallery
+     */
+
     private void toGallery(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, SELECTED_PICTURE);
     }
-
+    /**
+     * toGallery is used for let user to add photo from the camera
+     */
     private void toCamera(){
         Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, CAMERA_REQUEST);
     }
+    /**
+     * override the onActivityResult
+     * first case : get the result from the gallery
+     * second case : get the result from the camera
+     */
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -171,6 +202,13 @@ public class PhotoPicker extends AppCompatActivity {
                 break;
         }
     }
+    /**
+     * happen when user press the seted button
+     * generate a photo object
+     * which used to deliver back to the profile
+     *
+     *
+     */
 
     public void seted(View view){
 
@@ -257,11 +295,23 @@ public class PhotoPicker extends AppCompatActivity {
         }
     }
 
+    /**
+     * if the user add a photo
+     * @param intent
+     * @param name
+     * @param infor
+     */
+
     private void adder(Intent intent, String name, String infor){
         if (infor != null){
             intent.putExtra(name, infor);
         }
     }
+
+    /**
+     * set the intent message
+     * @param intent
+     */
 
     private void putExtra(Intent intent){
         // Put Extra
@@ -285,6 +335,12 @@ public class PhotoPicker extends AppCompatActivity {
         // Phone Number
         adder(intent, "phoneNumber", phoneNumber);
     }
+
+    /**
+     * used to set the test which used to give info to the user
+     * prompt user to choose if they wanna use the camera or gallery
+     * @param view
+     */
 
     public void photoDialog(View view){
         new AlertDialog.Builder(this)
