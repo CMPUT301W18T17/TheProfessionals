@@ -61,7 +61,7 @@ public class ServerHelper {
         String search = "{ \"query\": {" +
                 " \"bool\": {" +
                 "\"must\": [ " +
-                "{\"match\": {\"profileName\": \"" + username + "\"}}," +
+                "{\"term\": {\"profileName\": \"" + username + "\"}}," +
                 "{\"match\": {\"status\": \"" + status + "\"}}]}}}";
         ConnectedState c = ConnectedState.getInstance();
         if (c.isOffline()){
