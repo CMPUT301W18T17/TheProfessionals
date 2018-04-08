@@ -65,7 +65,7 @@
                 android:layout_marginStart="50dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/amiko"
-                android:text="Lowbid: $"
+                android:text="Lowest bid: "
                 android:textSize="12sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/search_task_row_mybid"
                 app:layout_constraintStart_toEndOf="@+id/provider_bidded_mybidAmount" />
