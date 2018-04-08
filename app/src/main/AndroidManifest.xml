@@ -22,29 +22,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LogInActivity"></activity>
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".ProviderViewTask" />
-        <activity android:name=".ProfileViewActivity" />
-        <activity android:name=".OtherProfileViewActivity" />
-        <activity android:name=".MyProfileViewActivity" />
-        <activity android:name=".ProviderTaskListActivity" />
+        <activity android:name=".Activity.LogInActivity"></activity>
+        <activity android:name=".Activity.SearchActivity" />
+        <activity android:name=".Activity.ProviderViewTask" />
+        <activity android:name=".Activity.ProfileViewActivity" />
+        <activity android:name=".Activity.OtherProfileViewActivity" />
+        <activity android:name=".Activity.MyProfileViewActivity" />
+        <activity android:name=".Activity.ProviderTaskListActivity" />
         <activity
-            android:name=".SignUpActivity"
-            android:parentActivityName=".LogInActivity">
+            android:name=".Activity.SignUpActivity"
+            android:parentActivityName=".Activity.LogInActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LogInActivity" />
+                android:value=".Activity.LogInActivity" />
         </activity>
-        <activity android:name=".EditMyProfileActivity" />
+        <activity android:name=".Activity.EditMyProfileActivity" />
         <activity
-            android:name=".RequesterAddTaskActivity"
+            android:name=".Activity.RequesterAddTaskActivity"
             android:label="@string/title_activity_requester_add_task"
             android:theme="@style/AppTheme" />
-        <activity android:name=".RequesterEditTaskActivity" />
-        <activity android:name=".RequesterViewListActivity" />
+        <activity android:name=".Activity.RequesterEditTaskActivity" />
+        <activity android:name=".Activity.RequesterViewListActivity" />
         <activity
-            android:name=".RequesterViewTaskActivity"
+            android:name=".Activity.RequesterViewTaskActivity"
             android:label="@string/title_activity_requester_view_task"
             android:theme="@style/AppTheme" />
         <!--
@@ -63,36 +63,36 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".Activity.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".MapsSearchTasksActivity"
+            android:name=".Activity.MapsSearchTasksActivity"
             android:label="@string/title_activity_maps_search_tasks" />
         <activity
-            android:name=".MapsSearchLocationActivity"
+            android:name=".Activity.MapsSearchLocationActivity"
             android:label="@string/title_activity_maps2"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".PhotoPicker" />
-        <activity android:name=".NotificationActivity" />
+        <activity android:name=".Activity.PhotoPicker" />
+        <activity android:name=".Activity.NotificationActivity" />
         <activity
-            android:name=".MapsShowALocationActivity"
+            android:name=".Activity.MapsShowALocationActivity"
             android:label="@string/title_activity_maps_show_alocation"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".AddReview" />
+        <activity android:name=".Activity.AddReview" />
         android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".TaskPhotoActivity" />
+        <activity android:name=".Activity.TaskPhotoActivity" />
         <activity
-            android:name=".providerCheckImage"
+            android:name=".Activity.providerCheckImage"
             android:label="@string/title_activity_provider_check_image"
             android:theme="@style/AppTheme">
             android:parentActivityName=".ProviderViewTask">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ProviderViewTask" />
+                android:value=".Activity.ProviderViewTask" />
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".Activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -100,8 +100,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TaskReviewpPhotoActivity"></activity>
-        <activity android:name=".TaskPhotoActivity"></activity>
+        <activity android:name=".Activity.TaskPhotoActivity"></activity>
     </application>
 
 </manifest>

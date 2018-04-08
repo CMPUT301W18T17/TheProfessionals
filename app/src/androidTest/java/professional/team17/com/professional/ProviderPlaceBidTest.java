@@ -8,6 +8,13 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
+import professional.team17.com.professional.Activity.ProviderViewTask;
+import professional.team17.com.professional.Activity.SearchActivity;
+import professional.team17.com.professional.Controllers.ElasticSearchController;
+import professional.team17.com.professional.Controllers.ServerHelper;
+import professional.team17.com.professional.Entity.Profile;
+import professional.team17.com.professional.Entity.Task;
+
 /**
  * Created by kaixiangzhang on 2018-03-13.
  */

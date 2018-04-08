@@ -20,6 +20,13 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
+import professional.team17.com.professional.Activity.RequesterEditTaskActivity;
+import professional.team17.com.professional.Activity.RequesterViewListActivity;
+import professional.team17.com.professional.Activity.RequesterViewTaskActivity;
+import professional.team17.com.professional.Controllers.ServerHelper;
+import professional.team17.com.professional.Entity.Profile;
+import professional.team17.com.professional.Entity.Task;
+
 /**
  * An intent testing class to test RequesterEditTaskActivity.
  * @author Lauren

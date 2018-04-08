@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="professional.team17.com.professional.RequesterAddTaskActivity"
+    tools:context="professional.team17.com.professional.Activity.RequesterAddTaskActivity"
     tools:showIn="@layout/activity_requester_add_task2">
 
 </android.support.constraint.ConstraintLayout>

@@ -7,6 +7,11 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
+import professional.team17.com.professional.Activity.SearchActivity;
+import professional.team17.com.professional.Controllers.ServerHelper;
+import professional.team17.com.professional.Entity.Profile;
+import professional.team17.com.professional.Entity.Task;
+
 /**
  * Created by Zhipeng Zhang on 2018/3/16.
  */

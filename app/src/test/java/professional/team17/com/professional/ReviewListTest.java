@@ -5,6 +5,9 @@ import android.test.ActivityInstrumentationTestCase2;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import professional.team17.com.professional.Entity.Review;
+import professional.team17.com.professional.Entity.ReviewList;
+
 public class ReviewListTest extends ActivityInstrumentationTestCase2 {
     public ReviewListTest() {
         super(ReviewList.class);

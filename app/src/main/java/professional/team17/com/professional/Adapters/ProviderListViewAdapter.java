@@ -7,11 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import professional.team17.com.professional.ConfirmDialog;
 import professional.team17.com.professional.R;
-import professional.team17.com.professional.Task;
-import professional.team17.com.professional.TaskList;
-import professional.team17.com.professional.TaskStatus;
+import professional.team17.com.professional.Entity.Task;
+import professional.team17.com.professional.Entity.TaskList;
+import professional.team17.com.professional.Helpers.TaskStatus;
 
 
 /**

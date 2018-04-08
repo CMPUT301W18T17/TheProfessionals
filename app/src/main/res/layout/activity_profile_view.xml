@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:backgroundTint="#ffffff"
-    tools:context="professional.team17.com.professional.ProfileViewActivity">
+    tools:context="professional.team17.com.professional.Activity.ProfileViewActivity">
 
     <ImageButton
         android:id="@+id/doneButton"

@@ -2,6 +2,9 @@ package professional.team17.com.professional;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import professional.team17.com.professional.Entity.Bid;
+import professional.team17.com.professional.Entity.BidList;
+
 
 public class BidListTest extends ActivityInstrumentationTestCase2 {
     public BidListTest(){
