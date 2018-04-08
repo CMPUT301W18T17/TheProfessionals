@@ -95,7 +95,7 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
     public void testBack(){
         solo.assertCurrentActivity("Wrong Activity", SignUpActivity.class);
 
-        solo.clickOnButton("Back");
+        solo.clickOnView(solo.getView(R.id.backButton));
 
         solo.assertCurrentActivity("Wrong Activity", LogInActivity.class);
     }

@@ -57,7 +57,6 @@ public class PhotoPicker extends AppCompatActivity {
         isEditProfile = intent.getIntExtra("FromEditProfile", 0);
         oldBitmap = (Bitmap) intent.getParcelableExtra("photoBitmap");
 
-        Log.i("","*******************************************************"+filePath);
 
         if (filePath != null){
             returnPath = filePath;
@@ -67,9 +66,7 @@ public class PhotoPicker extends AppCompatActivity {
         }
 
         else{
-            Log.i("mesage","---------------------------------------------------------------");
             if (oldBitmap != null){
-                Log.i("mesage","#################################################################");
                 returnBitmap = oldBitmap;
                 oldPhoto = new Photo(oldBitmap);
                 viewPhoto.setImageDrawable(oldPhoto.bitmapToDrawable());
@@ -227,6 +224,32 @@ public class PhotoPicker extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
+        }
+
+        else if (oldPath != null){
+            if (isEditProfile == 0) {
+                Intent intent = new Intent(this, SignUpActivity.class);
+
+                putExtra(intent);
+
+                // Photo Path
+                adder(intent, "photoPath", oldPath);
+
+                startActivity(intent);
+                finish();
+            }
+            else{
+                Intent intent = new Intent(this, EditMyProfileActivity.class);
+
+                putExtra(intent);
+
+                // Photo Path
+                adder(intent, "photoPath", oldPath);
+
+                startActivity(intent);
+                finish();
+            }
+
         }
 
         else{
