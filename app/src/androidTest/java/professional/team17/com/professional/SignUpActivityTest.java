@@ -7,6 +7,12 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
+import professional.team17.com.professional.Activity.LogInActivity;
+import professional.team17.com.professional.Activity.SearchActivity;
+import professional.team17.com.professional.Activity.SignUpActivity;
+import professional.team17.com.professional.Controllers.ServerHelper;
+import professional.team17.com.professional.Entity.Profile;
+
 /**
  * Created by Logan Yue on 2018-03-12.
  *

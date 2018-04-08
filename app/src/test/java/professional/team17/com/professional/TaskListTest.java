@@ -5,6 +5,9 @@ import android.test.ActivityInstrumentationTestCase2;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import professional.team17.com.professional.Entity.Task;
+import professional.team17.com.professional.Entity.TaskList;
+
 /**
  * Created by Hailan on 2018-02-20.
  */

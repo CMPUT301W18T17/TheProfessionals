@@ -2,6 +2,8 @@ package professional.team17.com.professional;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import professional.team17.com.professional.Entity.Bid;
+
 
 public class BidTest extends ActivityInstrumentationTestCase2 {
 

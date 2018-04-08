@@ -5,6 +5,9 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.Date;
 
+import professional.team17.com.professional.Entity.Bid;
+import professional.team17.com.professional.Entity.Task;
+
 
 public class TaskTest extends ActivityInstrumentationTestCase2 {
 

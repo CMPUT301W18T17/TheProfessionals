@@ -4,6 +4,8 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.ArrayList;
 
+import professional.team17.com.professional.Entity.Profile;
+
 
 public class ProfileTest extends ActivityInstrumentationTestCase2 {
 

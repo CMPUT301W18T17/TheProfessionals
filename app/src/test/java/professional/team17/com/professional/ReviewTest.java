@@ -4,6 +4,8 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.Date;
 
+import professional.team17.com.professional.Entity.Review;
+
 
 public class ReviewTest extends ActivityInstrumentationTestCase2 {
 

@@ -8,6 +8,10 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
+import professional.team17.com.professional.Activity.RequesterAddTaskActivity;
+import professional.team17.com.professional.Controllers.ServerHelper;
+import professional.team17.com.professional.Entity.Profile;
+
 /**
  * Created by Zhipeng Zhang on 2018/3/14.
  */
