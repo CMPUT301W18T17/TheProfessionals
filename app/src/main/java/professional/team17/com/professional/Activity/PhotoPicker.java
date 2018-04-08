@@ -290,6 +290,31 @@ public class PhotoPicker extends AppCompatActivity {
 
         }
 
+        else if (oldBitmap != null){
+            if (isEditProfile == 0) {
+                Intent intent = new Intent(this, SignUpActivity.class);
+
+                putExtra(intent);
+
+                // Photo Path
+                intent.putExtra("photoBitmap", oldBitmap);
+
+                startActivity(intent);
+                finish();
+            }
+            else{
+                Intent intent = new Intent(this, EditMyProfileActivity.class);
+
+                putExtra(intent);
+
+                // Photo Path
+                intent.putExtra("photoBitmap", oldBitmap);
+
+                startActivity(intent);
+                finish();
+            }
+        }
+
         else{
             viewError.setText("Please pick a photo first.");
         }
