@@ -26,6 +26,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/amiko"
             android:text="@string/sign_up"
+            android:digits=" 1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:textAlignment="center"
             android:textColor="#ffffff"
             android:textSize="18sp"
