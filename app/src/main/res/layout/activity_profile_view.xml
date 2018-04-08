@@ -169,7 +169,6 @@
             app:layout_constraintBottom_toTopOf="@+id/userNameTV"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/currentModeTV"
             app:srcCompat="@android:drawable/star_big_on" />
 
         <TextView

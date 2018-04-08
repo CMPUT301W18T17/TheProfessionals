@@ -134,6 +134,9 @@ public class TaskPhotoActivity extends AppCompatActivity implements ConfirmDialo
             deletePhoto.setVisibility(View.VISIBLE);
             editPhoto.setVisibility(View.VISIBLE);
         }
+        if (photos.size()<10){
+            addphoto.setVisibility(View.VISIBLE);
+        }
     }
 
     /**

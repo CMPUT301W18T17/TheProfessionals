@@ -34,11 +34,9 @@ public class Profile implements Serializable {
     private ReviewList reviewList;
     private NotificationList notificationList;
     private ArrayList<String> blackList;
-     private ArrayList<String> blackListedBy;
-     private String photoString;
-     private Bitmap.Config config;
-     private  int width;
-     private  int height;
+    private ArrayList<String> blackListedBy;
+
+
      private ProfilePhoto profilePhoto;
 
     /**
@@ -68,14 +66,9 @@ public class Profile implements Serializable {
         this.reviewList = new ReviewList();
         this.blackList = new ArrayList<String>();
         this.blackListedBy = new ArrayList<String>();
-        this.photoString = "-1";
-        this.config = null;
-        this.width = 0;
-        this.height = 0;
-        profilePhoto = new ProfilePhoto(photoString,config,width,height);
+        profilePhoto = new ProfilePhoto("-1", null, 0, 0);
         notificationList = new NotificationList();
     }
-
     /**
      *
      * @return a string repr the users full name

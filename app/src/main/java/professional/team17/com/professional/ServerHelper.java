@@ -63,7 +63,6 @@ public class ServerHelper {
         } catch (Exception e) {
         }
         return tasklist;
-
     }
 
     /**
@@ -254,7 +253,6 @@ public class ServerHelper {
         String id;
         ElasticSearchController.AddTask addtask = new ElasticSearchController.AddTask();
         addtask.execute(task);
-
         try {
             id = addtask.get();
             task.setId(id);
