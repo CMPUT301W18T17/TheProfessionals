@@ -17,6 +17,11 @@ import java.util.ArrayList;
 import professional.team17.com.professional.Adapters.GridViewAdapter;
 import professional.team17.com.professional.R;
 
+/**
+ * This activity is used to display the image from the download task.photos()
+ * basically its the same as the requester add photos
+ * but just for check no edit
+ */
 public class providerCheckImage extends Navigation {
     private ImageView imageUpload;
     private ImageButton back;
