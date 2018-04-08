@@ -21,7 +21,7 @@ import professional.team17.com.professional.Entity.Profile;
 
 public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<MyProfileViewActivity>{
     private Solo solo;
-    private Profile testProfile = new Profile("tester","TestUser",
+    private Profile testProfile = new Profile("tester","testUser",
             "tester@ualberta.ca","123-456-7890");
 
     public MyProfileViewActivityTest() {
@@ -35,7 +35,7 @@ public class MyProfileViewActivityTest extends ActivityInstrumentationTestCase2<
         SharedPreferences pref = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
 
-        editor.putString("username", "TestUser"); // Storing string
+        editor.putString("username", "testUser"); // Storing string
         editor.commit();
         solo = new Solo(getInstrumentation(), getActivity());
 

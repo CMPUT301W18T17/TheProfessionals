@@ -34,7 +34,7 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
      * Standard test setUp
      */
     public void setUp() throws Exception {
-
+        solo = new Solo(getInstrumentation(),getActivity());
     }
 
     /**
@@ -63,12 +63,12 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
 
         solo.clearEditText((EditText) solo.getView(R.id.usernameBox));
 
-        Profile testProfile = new Profile("tester","TestUser",
+        Profile testProfile = new Profile("tester","testUser",
                 "tester@ualberta.ca","123-456-7890");
 
         ServerHelper serverHelper = new ServerHelper(context);
         serverHelper.addProfile(testProfile);
-        solo.enterText((EditText) solo.getView(R.id.usernameBox), "TestUser");
+        solo.enterText((EditText) solo.getView(R.id.usernameBox), "testUser");
         solo.clickOnButton("Sign In");
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
         serverHelper.deleteProfile(testProfile);

@@ -29,7 +29,7 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
     public void setUp() throws Exception{
 
         Context context = getInstrumentation().getTargetContext();
-        profile = new Profile("Tester", "TestUser1", "abc@abc.com", "110");
+        profile = new Profile("Tester", "testUser1", "abc@abc.com", "110");
         serverHelper = new ServerHelper(context);
         serverHelper.addProfile(profile);
 

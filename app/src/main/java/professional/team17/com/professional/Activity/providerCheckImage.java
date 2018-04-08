@@ -23,11 +23,7 @@ import professional.team17.com.professional.R;
  * but just for check no edit
  */
 public class providerCheckImage extends Navigation {
-    private ImageView imageUpload;
     private ImageButton back;
-    Integer k = 0;
-    Integer j = 0;
-    String a;
     private ArrayList<String> photos;
     private GridView gridView;
     private GridViewAdapter gridViewAdapter;
