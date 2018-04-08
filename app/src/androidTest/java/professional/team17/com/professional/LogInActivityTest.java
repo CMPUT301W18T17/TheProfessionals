@@ -34,7 +34,7 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
      * Standard test setUp
      */
     public void setUp() throws Exception {
-
+        solo = new Solo(getInstrumentation(),getActivity());
     }
 
     /**
