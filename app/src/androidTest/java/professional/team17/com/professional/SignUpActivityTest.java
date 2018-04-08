@@ -60,12 +60,12 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
 
         assertTrue(solo.waitForText("Please make sure all fields are filled"));
 
-        Profile testProfile = new Profile("tester","TestUser",
+        Profile testProfile = new Profile("tester","testUser",
                 "tester@ualberta.ca","123-456-7890");
         serverHelper.addProfile(testProfile);
 
 
-        solo.enterText((EditText) solo.getView(R.id.usernameBox), "TestUser");
+        solo.enterText((EditText) solo.getView(R.id.usernameBox), "testUser");
 
         solo.enterText((EditText) solo.getView(R.id.fullNameBox), "tester");
 
@@ -77,14 +77,14 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
 
         assertTrue(solo.waitForText("Username is already taken"));
 
-        Profile testUser = serverHelper.getProfile("TestUser");
+        Profile testUser = serverHelper.getProfile("testUser");
         serverHelper.deleteProfile(testUser);
 
         solo.clickOnButton("Sign Up");
 
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
 
-        testUser = serverHelper.getProfile("TestUser");
+        testUser = serverHelper.getProfile("testUser");
         serverHelper.deleteProfile(testUser);
 
     }
