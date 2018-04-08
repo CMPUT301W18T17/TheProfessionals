@@ -250,7 +250,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ConfirmDialo
      * @return newBitmap
      */
     public Bitmap compressFunction(Bitmap bitmap) {
-        int newWidth = 128;
+        int newWidth = 64;
         floatHeight = bitmap.getHeight();
         floatWidth = bitmap.getWidth();
         ratio = floatHeight / floatWidth;
