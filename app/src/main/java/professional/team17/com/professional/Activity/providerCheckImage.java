@@ -32,6 +32,13 @@ public class providerCheckImage extends Navigation {
     private GridView gridView;
     private GridViewAdapter gridViewAdapter;
 
+    /**
+     * onCreate
+     * 1. get intent from the Task
+     * 2. initialize the imageView
+     * @param savedInstanceState The activity's previously saved state.
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +73,11 @@ public class providerCheckImage extends Navigation {
             }
         });
     }
+
+    /**
+     * This activity is used for set Image to the photoView in order to let user check the photos.
+     * @param photo
+     */
 
     public void setImage(String photo) {
         ImageView photoView = (ImageView) findViewById(R.id.imageView4);

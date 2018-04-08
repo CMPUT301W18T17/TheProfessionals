@@ -97,6 +97,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ConfirmDialo
     }
 
     /**
+     * get the confirmation of the user if we need to delete this photo
      * @param v - the view that holds the photo to be deleted
      */
     public void deletePhoto(View v){
@@ -110,7 +111,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ConfirmDialo
     }
 
     /**
-     *
+     * delete the photo user just selected
      * @param confirmed - boolean
      * @param dialog - string
      */
@@ -157,6 +158,11 @@ public class TaskPhotoActivity extends AppCompatActivity implements ConfirmDialo
     }
 
     /**
+     *
+     * override the onActivityResult to get the photo back from other activities
+     * case1 get photo from the gallery
+     * case2 get photo from the camera
+     *
      * @param requestCode - in integer
      * @param resultCode - in interger
      * @param data - the result from prior activity (camera/gallery)
@@ -241,7 +247,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ConfirmDialo
     /**
      * Compress & scale photo
      * @param bitmap
-     * @return
+     * @return newBitmap
      */
     public Bitmap compressFunction(Bitmap bitmap) {
         int newWidth = 128;
@@ -254,6 +260,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ConfirmDialo
     }
 
     /**
+     * this function is used to transfer the bitmap object to the base64String
      * @param bitmap - bitmap of photo
      * @return - photo encoded to string of bytes
      */
@@ -265,6 +272,7 @@ public class TaskPhotoActivity extends AppCompatActivity implements ConfirmDialo
     }
 
     /**
+     * get the photo back and decode to bitmap then post on the imageView
      * @param photo - photo chosen by requester
      */
     public void setImage(String photo) {
