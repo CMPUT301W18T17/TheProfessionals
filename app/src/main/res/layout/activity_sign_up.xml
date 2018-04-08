@@ -136,7 +136,7 @@
         app:srcCompat="@drawable/add_image_icon_grey" />
 
     <ImageButton
-        android:id="@+id/button3"
+        android:id="@+id/backButton"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="#ffffff"
