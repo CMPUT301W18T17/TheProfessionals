@@ -30,11 +30,11 @@ public class ProviderViewRequestedTaskTest extends ActivityInstrumentationTestCa
 
     public void setUp() throws Exception{
         Context context = getInstrumentation().getTargetContext();
-        mockTask = new Task("TestUser", "Test Name 1", "Task Description");
+        mockTask = new Task("testUser", "Test Name 1", "Task Description");
         serverHelper_1 = new ServerHelper(context);
         String ID = serverHelper_1.addTasks(mockTask);
         mockTask.setId(ID);
-        profile = new Profile("Tester", "TestUser1", "abc@abc.com", "110");
+        profile = new Profile("Tester", "tester", "abc@abc.com", "110");
         serverHelper_2 = new ServerHelper(context);
         serverHelper_2.addProfile(profile);
 
