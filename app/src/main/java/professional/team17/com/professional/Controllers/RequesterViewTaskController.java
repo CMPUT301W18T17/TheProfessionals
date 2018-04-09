@@ -36,8 +36,8 @@ public class RequesterViewTaskController {
 
     /**
      * Get old task from server by ID
-     * @param taskID
-     * @return
+     * @param taskID id of task
+     * @return task
      */
     public Task getOldTaskFromServer(String taskID){
         taskid = taskID;
@@ -124,7 +124,7 @@ public class RequesterViewTaskController {
 
     /**
      * get status of current task
-     * @return
+     * @return task status
      */
     public String getCurrentTaskStatus(){
         return task.status;

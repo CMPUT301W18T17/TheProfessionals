@@ -93,7 +93,7 @@ public class ServerHelper {
 
     /**
      *
-     * @param bottomLeft- the bottomLeft corner of the Circle enclosing 5km
+     * @param bottomLeft - the bottomLeft corner of the Circle enclosing 5km
      * @param topRight - the topRight corner of the Circle enclosing 5km
      * @return - the tasklist of all tasks within the #### range of the user
      */

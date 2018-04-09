@@ -77,7 +77,7 @@ public class ConfirmDialog extends DialogFragment {
      *                           confirm: the text to display in confirm button text
      *                           message: the text to display as the question
      *                              (what displays within the fragment)
-     * @return
+     * @return rootView
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

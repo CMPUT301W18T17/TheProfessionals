@@ -139,7 +139,7 @@ public class BidList extends ArrayList<Bid> implements Serializable{
 
     /**
      *
-     * @param userName, representing the user name being looked for
+     * @param userName representing the user name being looked for
      * @return boolean true if user name was found in bidlist, false otherwise
      */
     public boolean userBidded(String userName) {
