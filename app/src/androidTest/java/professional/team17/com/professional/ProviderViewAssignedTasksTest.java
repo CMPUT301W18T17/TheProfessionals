@@ -16,14 +16,14 @@ import professional.team17.com.professional.Entity.Bid;
 import professional.team17.com.professional.Entity.Profile;
 import professional.team17.com.professional.Entity.Task;
 
-public class ProviderViewBiddedTasksTest extends ActivityInstrumentationTestCase2<ProviderTaskListActivity> {
+public class ProviderViewAssignedTasksTest extends ActivityInstrumentationTestCase2 {
 
     private Solo solo;
     private ServerHelper serverHelper;
     private Profile profile;
     private Task task;
 
-    public ProviderViewBiddedTasksTest() throws Exception{
+    public ProviderViewAssignedTasksTest() throws Exception{
         super(ProviderTaskListActivity.class);
     }
 
@@ -40,7 +40,7 @@ public class ProviderViewBiddedTasksTest extends ActivityInstrumentationTestCase
 
         Bid bid = new Bid("__testUsername", 10.00);
         task.addBid(bid);
-        task.setStatus("Bidded");
+        task.setStatus("Assigned");
         serverHelper.updateTasks(task);
 
         SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
@@ -50,7 +50,7 @@ public class ProviderViewBiddedTasksTest extends ActivityInstrumentationTestCase
 
         Intent i = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putString("Status", "Bidded");
+        bundle.putString("Status", "Assigned");
         i.putExtras(bundle);
         setActivityIntent(i);
         solo = new Solo(getInstrumentation(),getActivity());
