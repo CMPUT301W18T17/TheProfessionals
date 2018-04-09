@@ -5,6 +5,7 @@
     android:id="@+id/ConstrainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context="professional.team17.com.professional.Activity.TaskPhotoActivity">
 
     <ImageButton
@@ -57,10 +58,19 @@
         android:layout_height="200dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
+        android:background="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#ffffff"
+            app:srcCompat="@drawable/add_image_icon_grey" />
 
         <ImageView
             android:id="@+id/requester_task_photo"
@@ -73,17 +83,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@color/common_google_signin_btn_text_dark_disabled" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/requester_photo_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#ffffff"
             android:gravity="center_vertical|center_horizontal"
             android:text="Add a Photo!"
             android:textColor="@color/colorProvider"
-            android:textSize="50sp" />
+            android:textSize="50sp"
+            android:visibility="invisible" />
 
         <ImageButton
             android:id="@+id/requester_photo_delete_photo"
