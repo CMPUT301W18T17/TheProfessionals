@@ -75,7 +75,7 @@ public class LogInActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString("username", username); // Storing string
                 editor.apply(); // commit changes
-                changeActivity(SearchActivity.class);
+                changeActivity(RequesterViewListActivity.class);
 
             } else {
                 error.setText(R.string.nonExistentUser);
@@ -110,6 +110,9 @@ public class LogInActivity extends AppCompatActivity {
     private void changeActivity(Class activity){
         //can change navigation, this is just a stand in
         Intent intent = new Intent(this, activity);
+        Bundle bundle = new Bundle();
+        bundle.putString("Status", "Requested");
+        intent.putExtras(bundle);
 
         startActivity(intent);
         finish();
