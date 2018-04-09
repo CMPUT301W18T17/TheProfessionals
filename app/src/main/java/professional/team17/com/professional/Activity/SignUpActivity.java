@@ -170,7 +170,11 @@ public class SignUpActivity extends AppCompatActivity {
                     editor.apply(); // commit changes
 
                     //String test = pref.getString(username, "not working");
-                    changeActivity(RequesterViewListActivity.class);
+                    Intent intent = new Intent(this, RequesterViewListActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Status", "Requested");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             }
         }
@@ -215,7 +219,6 @@ public class SignUpActivity extends AppCompatActivity {
         else{
             intent.putExtra("photoBitmap", bitmap);
         }
-
         startActivity(intent);
         finish();
     }
