@@ -9,12 +9,10 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
-import professional.team17.com.professional.Activity.ProviderTaskListActivity;
 import professional.team17.com.professional.Activity.RequesterEditTaskActivity;
 import professional.team17.com.professional.Activity.RequesterViewListActivity;
 import professional.team17.com.professional.Activity.RequesterViewTaskActivity;
 import professional.team17.com.professional.Controllers.ServerHelper;
-import professional.team17.com.professional.Entity.Bid;
 import professional.team17.com.professional.Entity.Profile;
 import professional.team17.com.professional.Entity.Task;
 
@@ -25,8 +23,8 @@ public class RequesterViewRequestedTasksTest extends ActivityInstrumentationTest
     private Task task;
 
     /**
-     * This test primarily checks the navigation in all of the requester view list navigations
-     * @throws Exception
+     * This test primarily checks the navigation in all of the requester view bidded list navigations
+     *
      */
     public RequesterViewRequestedTasksTest() throws Exception{
         super(RequesterViewListActivity.class);
@@ -42,11 +40,6 @@ public class RequesterViewRequestedTasksTest extends ActivityInstrumentationTest
 
         task = new Task("__testUsername", "__testTask", "__test description");
         serverHelper.addTasks(task);
-
-//        Bid bid = new Bid("__testUsername", 10.00);
-//        task.addBid(bid);
-//        task.setStatus("Bidded");
-//        serverHelper.updateTasks(task);
 
         SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -101,19 +94,11 @@ public class RequesterViewRequestedTasksTest extends ActivityInstrumentationTest
 
     }
 
-//    public void testBiddedNavigation(){
-//        Bid bid = new Bid("__otherTester", 10.01);
-//        task.addBid(bid);
-//        task.setStatus("Bidded");
-//        serverHelper.updateTasks(task);
-//
-//        solo.clickOnView(solo.getView(R.id.biddedTasksRequesterButton));
-//        solo.assertCurrentActivity("Wrong Activity", RequesterViewListActivity.class);
-//    }
 
     @Override
     public void tearDown(){
         serverHelper.deleteProfile(profile);
+        serverHelper.deleteTasks(task);
 
         solo.finishOpenedActivities();
     }
