@@ -51,13 +51,4 @@ public class ProfileTest extends ActivityInstrumentationTestCase2 {
         profile.setEmail(newEmail);
         assertEquals(newPhoneNumber, profile.getEmail());
     }
-
-    public void testAddToBlacklist(){
-        Profile profile1 = new Profile(name, userName, email, phoneNumber);
-        Profile profile2 = new Profile("Mary", "mair", "mair@email.ca", "111-1111");
-        profile1.addToBlackList(profile2);
-
-        aList.add("mair");
-        assertEquals(aList, profile1.getBlackList());
-    }
 }
