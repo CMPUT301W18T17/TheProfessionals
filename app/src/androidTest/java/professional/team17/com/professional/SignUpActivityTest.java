@@ -8,6 +8,7 @@ import android.widget.EditText;
 import com.robotium.solo.Solo;
 
 import professional.team17.com.professional.Activity.LogInActivity;
+import professional.team17.com.professional.Activity.RequesterViewListActivity;
 import professional.team17.com.professional.Activity.SearchActivity;
 import professional.team17.com.professional.Activity.SignUpActivity;
 import professional.team17.com.professional.Controllers.ServerHelper;
@@ -82,7 +83,7 @@ public class SignUpActivityTest extends ActivityInstrumentationTestCase2<SignUpA
 
         solo.clickOnButton("Sign Up");
 
-        solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterViewListActivity.class);
 
         testUser = serverHelper.getProfile("testUser");
         serverHelper.deleteProfile(testUser);

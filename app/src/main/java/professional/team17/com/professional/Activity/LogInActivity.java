@@ -50,7 +50,7 @@ public class LogInActivity extends AppCompatActivity {
         serverHelper = new ServerHelper(this);
         SharedPreferences sharedpreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         if (sharedpreferences.contains("username")){
-            changeActivity(SearchActivity.class);
+            changeActivity(RequesterViewListActivity.class);
         }
 
     }
