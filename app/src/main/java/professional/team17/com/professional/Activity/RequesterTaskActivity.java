@@ -54,8 +54,6 @@ public abstract class RequesterTaskActivity extends Navigation {
     protected String photo;
 
 
-    private String infor, title, description, location, date;
-
     protected RequesterTaskController requesterTaskController;
 
     /**
@@ -211,36 +209,4 @@ public abstract class RequesterTaskActivity extends Navigation {
         }
     }
 
-    /**
-     * @param bitmap - bitmap of photos
-     * @return - newBitmap: bitmap after rescaling
-     */
-    public Bitmap compressFunction(Bitmap bitmap){
-        int newWidth = 64;
-        int newHeight = 64;
-        Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
-        return newBitmap;
-    }
-
-    /**
-     * @param bitmap of photos
-     * @return - String of bitmap
-     */
-    public String toBase64(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream .toByteArray();
-        return Base64.encodeToString(byteArray, Base64.DEFAULT);
-    }
-
-    /**
-     * Put info in the EditText specified
-     * @param name - name of EditText
-     * @param information - info to be put into EditText
-     */
-    private void setter(EditText name, String information) {
-        if (information != null) {
-            name.setText(information);
-        }
-    }
 }
