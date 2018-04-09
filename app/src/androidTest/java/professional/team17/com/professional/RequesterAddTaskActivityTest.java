@@ -58,13 +58,11 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
         solo.enterText((EditText) solo.getView(R.id.taskDescriptionField), "Task Description");
         solo.clickOnView(solo.getView(R.id.calendarButton));
         solo.clickOnText("OK");
-        // For photo and map
-        // Leave For now
+
         solo.clickOnButton("Add");
 
         solo.assertCurrentActivity("Wrong Activity", RequesterViewListActivity.class);
         // Check
-//        solo.clickOnView(solo.getView(R.id.taskMapProviderButton));
         try {
             solo.clickOnView(solo.getView(R.id.requester_requested_title));
         }catch (Exception e) {
