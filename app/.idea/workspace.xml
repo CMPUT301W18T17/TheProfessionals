@@ -11,7 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="85c1aff1-b8c3-4d7c-8426-239cb5918e1a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/SignUpActivity.java" afterPath="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/SignUpActivity.java" />
+      <change beforePath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderPlaceBidTest.java" afterPath="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderViewTaskTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/../.gradle/" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -64,68 +64,57 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RequesterViewListActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/RequesterViewListActivity.java">
+      <file leaf-file-name="ProviderViewTaskTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderViewTaskTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TaskStatus.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Helpers/TaskStatus.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-147">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SignUpActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/SignUpActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="221" column="30" lean-forward="false" selection-start-line="221" selection-start-column="30" selection-end-line="221" selection-end-column="30" />
+            <state relative-caret-position="525">
+              <caret line="85" column="38" lean-forward="false" selection-start-line="85" selection-start-column="38" selection-end-line="85" selection-end-column="38" />
               <folding>
-                <element signature="e#4108#4132#0" expanded="true" />
-                <element signature="e#4221#4248#0" expanded="true" />
-                <element signature="e#4339#4358#0" expanded="true" />
-                <element signature="e#4457#4478#0" expanded="true" />
-                <element signature="e#4589#4616#0" expanded="true" />
-                <element signature="e#5791#5819#0" expanded="true" />
+                <element signature="e#1087#1088#0" expanded="true" />
+                <element signature="e#1132#1133#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SignUpActivityTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java">
+      <file leaf-file-name="ProviderViewTask.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/ProviderViewTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+            <state relative-caret-position="-903">
+              <caret line="35" column="13" lean-forward="false" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LogInActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/LogInActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="112" column="0" lean-forward="false" selection-start-line="112" selection-start-column="0" selection-end-line="114" selection-end-column="33" />
+      <file leaf-file-name="provider_view_task.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/res/layout/provider_view_task.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Navigation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/Navigation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="129" column="64" lean-forward="false" selection-start-line="129" selection-start-column="59" selection-end-line="129" selection-end-column="64" />
+            <state relative-caret-position="-3423">
+              <caret line="48" column="19" lean-forward="false" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProviderTaskController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Controllers/ProviderTaskController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-462">
+              <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -2057,17 +2046,18 @@
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/OtherProfileViewActivity.java" />
         <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/MyProfileViewActivityTest.java" />
         <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderViewRequestedTaskTest.java" />
-        <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderPlaceBidTest.java" />
         <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterAddTaskActivityTest.java" />
         <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterEditTaskActivityTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/LogInActivity.java" />
         <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/LogInActivityTest.java" />
         <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/SignUpActivityTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/SignUpActivity.java" />
+        <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderPlaceBidTest.java" />
+        <option value="$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderViewTaskTest.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="5" />
     <option name="y" value="12" />
     <option name="width" value="1389" />
@@ -2114,7 +2104,7 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="professional" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="Activity" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="app" type="1abcf292:AndroidViewProjectNode" />
@@ -2143,7 +2133,7 @@
   <component name="PropertiesComponent">
     <property name="device.picker.selection" value="Pixel_2_API_27" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1523236052768" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1523240354866" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.0.1" />
     <property name="settings.editor.selected.configurable" value="instant.run" />
   </component>
@@ -2159,7 +2149,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android Instrumented Tests.SignUpActivityTest">
+  <component name="RunManager" selected="Android Instrumented Tests.ProviderViewTaskTest">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -2323,12 +2313,12 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" goal="" />
       </method>
     </configuration>
-    <configuration name="RequesterAddTaskActi..." type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
+    <configuration name="ProviderViewTaskTest" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
       <module name="app" />
       <option name="TESTING_TYPE" value="2" />
       <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
       <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="professional.team17.com.professional.RequesterAddTaskActivityTest" />
+      <option name="CLASS_NAME" value="professional.team17.com.professional.ProviderViewTaskTest" />
       <option name="PACKAGE_NAME" value="" />
       <option name="EXTRA_OPTIONS" value="" />
       <option name="CLEAR_LOGCAT" value="false" />
@@ -2734,19 +2724,19 @@
     <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Android App.app" />
       <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.Tests in 'professional.team17.com.professional'" />
-      <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.RequesterAddTaskActi..." />
-      <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.LogInActivityTest" />
-      <item index="4" class="java.lang.String" itemvalue="Android Instrumented Tests.SignUpActivityTest" />
-      <item index="5" class="java.lang.String" itemvalue="Android Instrumented Tests.RequesterEditTaskAct..." />
-      <item index="6" class="java.lang.String" itemvalue="Android Instrumented Tests.testBack()" />
+      <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.LogInActivityTest" />
+      <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.SignUpActivityTest" />
+      <item index="4" class="java.lang.String" itemvalue="Android Instrumented Tests.RequesterEditTaskAct..." />
+      <item index="5" class="java.lang.String" itemvalue="Android Instrumented Tests.testBack()" />
+      <item index="6" class="java.lang.String" itemvalue="Android Instrumented Tests.ProviderViewTaskTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Android Instrumented Tests.SignUpActivityTest" />
-        <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.testBack()" />
-        <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.LogInActivityTest" />
-        <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.RequesterEditTaskAct..." />
-        <item index="4" class="java.lang.String" itemvalue="Android Instrumented Tests.RequesterAddTaskActi..." />
+        <item index="0" class="java.lang.String" itemvalue="Android Instrumented Tests.ProviderViewTaskTest" />
+        <item index="1" class="java.lang.String" itemvalue="Android Instrumented Tests.SignUpActivityTest" />
+        <item index="2" class="java.lang.String" itemvalue="Android Instrumented Tests.testBack()" />
+        <item index="3" class="java.lang.String" itemvalue="Android Instrumented Tests.LogInActivityTest" />
+        <item index="4" class="java.lang.String" itemvalue="Android Instrumented Tests.RequesterEditTaskAct..." />
       </list>
     </recent_temporary>
   </component>
@@ -2767,35 +2757,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SignUpActivityTest - 2018.04.08 at 18h 46m 02s.xml">
-      <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="ProviderPlaceBidTest - 2018.04.08 at 19h 59m 55s.xml">
+      <configuration name="ProviderPlaceBidTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="SignUpActivityTest - 2018.04.08 at 18h 54m 51s.xml">
-      <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="ProviderPlaceBidTest - 2018.04.08 at 20h 08m 00s.xml">
+      <configuration name="ProviderPlaceBidTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="SignUpActivityTest - 2018.04.08 at 18h 56m 23s.xml">
-      <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="ProviderPlaceBidTest - 2018.04.08 at 20h 08m 36s.xml">
+      <configuration name="ProviderPlaceBidTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="SignUpActivityTest - 2018.04.08 at 18h 57m 30s.xml">
-      <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="ProviderPlaceBidTest - 2018.04.08 at 20h 10m 57s.xml">
+      <configuration name="ProviderPlaceBidTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="SignUpActivityTest - 2018.04.08 at 18h 57m 55s.xml">
-      <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="ProviderPlaceBidTest - 2018.04.08 at 20h 12m 02s.xml">
+      <configuration name="ProviderPlaceBidTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="SignUpActivityTest - 2018.04.08 at 19h 01m 10s.xml">
-      <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="ProviderPlaceBidTest - 2018.04.08 at 20h 13m 36s.xml">
+      <configuration name="ProviderPlaceBidTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="SignUpActivityTest - 2018.04.08 at 19h 04m 59s.xml">
-      <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="ProviderPlaceBidTest - 2018.04.08 at 20h 13m 54s.xml">
+      <configuration name="ProviderPlaceBidTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="SignUpActivityTest - 2018.04.08 at 19h 08m 01s.xml">
-      <configuration name="SignUpActivityTest" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="ProviderPlaceBidTest - 2018.04.08 at 20h 16m 02s.xml">
+      <configuration name="ProviderPlaceBidTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="testBack() - 2018.04.08 at 19h 07m 15s.xml">
-      <configuration name="testBack()" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="ProviderPlaceBidTest - 2018.04.08 at 20h 17m 59s.xml">
+      <configuration name="ProviderPlaceBidTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="testBack() - 2018.04.08 at 19h 07m 19s.xml">
-      <configuration name="testBack()" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="ProviderPlaceBidTest - 2018.04.08 at 20h 18m 34s.xml">
+      <configuration name="ProviderPlaceBidTest" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -2808,8 +2798,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="5" y="12" width="1389" height="877" extended-state="0" />
-    <editor active="true" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.49785176" order="6" side_tool="false" content_ui="tabs" />
@@ -2818,20 +2807,20 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32839224" sideWeight="0.13426423" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32719547" sideWeight="0.86573577" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26339796" sideWeight="0.86573577" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32839224" sideWeight="0.49785176" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32839224" sideWeight="0.49785176" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22348917" sideWeight="0.49516648" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29246002" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20622987" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4150513" sideWeight="0.49033296" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4305949" sideWeight="0.4914071" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42987457" sideWeight="0.4914071" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2921,7 +2910,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/RequesterViewListActivity.java</url>
-          <line>45</line>
+          <line>44</line>
           <properties />
           <option name="timeStamp" value="27" />
         </line-breakpoint>
@@ -2932,25 +2921,11 @@
           <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="29" />
+      <option name="time" value="31" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Adapters/BiddedListProviderView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Adapters/RequesterListProviderView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterEditTaskActivity.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/RequesterCustomArrayAdapter.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/TaskListController.java" />
@@ -3009,13 +2984,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Controllers/ProviderTaskController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-26/android.jar!/android/app/Activity.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -3027,14 +2995,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="305">
           <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderPlaceBidTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -3104,14 +3064,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterAddTaskActivityTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_requester_view_task2.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -3127,6 +3079,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="693">
           <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3157,14 +3110,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterEditTaskActivityTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="108" column="79" lean-forward="false" selection-start-line="108" selection-start-column="79" selection-end-line="108" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jayway.android.robotium/robotium-solo/5.6.3/3b5daf528712d8629c0af14dc24028c12136b61e/robotium-solo-5.6.3-sources.jar!/com/robotium/solo/Asserter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
@@ -3189,26 +3134,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/Navigation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="129" column="64" lean-forward="false" selection-start-line="129" selection-start-column="59" selection-end-line="129" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Helpers/TaskStatus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-147">
           <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/RequesterViewListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -3234,12 +3163,82 @@
         <state relative-caret-position="252">
           <caret line="221" column="30" lean-forward="false" selection-start-line="221" selection-start-column="30" selection-end-line="221" selection-end-column="30" />
           <folding>
-            <element signature="e#4108#4132#0" expanded="true" />
-            <element signature="e#4221#4248#0" expanded="true" />
-            <element signature="e#4339#4358#0" expanded="true" />
-            <element signature="e#4457#4478#0" expanded="true" />
-            <element signature="e#4589#4616#0" expanded="true" />
-            <element signature="e#5791#5819#0" expanded="true" />
+            <element signature="e#4108#4132#0" expanded="false" />
+            <element signature="e#4221#4248#0" expanded="false" />
+            <element signature="e#4339#4358#0" expanded="false" />
+            <element signature="e#4457#4478#0" expanded="false" />
+            <element signature="e#4589#4616#0" expanded="false" />
+            <element signature="e#5791#5819#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterAddTaskActivityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="889">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/RequesterEditTaskActivityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="71" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/RequesterViewListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/Navigation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3423">
+          <caret line="48" column="19" lean-forward="false" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Controllers/ProviderTaskController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-462">
+          <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/professional/team17/com/professional/Activity/ProviderViewTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-903">
+          <caret line="35" column="13" lean-forward="false" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/provider_view_task.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/androidTest/java/professional/team17/com/professional/ProviderViewTaskTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="85" column="38" lean-forward="false" selection-start-line="85" selection-start-column="38" selection-end-line="85" selection-end-column="38" />
+          <folding>
+            <element signature="e#1087#1088#0" expanded="true" />
+            <element signature="e#1132#1133#0" expanded="true" />
           </folding>
         </state>
       </provider>
