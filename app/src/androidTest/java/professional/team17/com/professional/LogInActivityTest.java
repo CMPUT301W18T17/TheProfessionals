@@ -9,6 +9,8 @@ import android.widget.EditText;
 import com.robotium.solo.Solo;
 
 import professional.team17.com.professional.Activity.LogInActivity;
+import professional.team17.com.professional.Activity.RequesterViewListActivity;
+import professional.team17.com.professional.Activity.RequesterViewTaskActivity;
 import professional.team17.com.professional.Activity.SearchActivity;
 import professional.team17.com.professional.Activity.SignUpActivity;
 import professional.team17.com.professional.Controllers.ServerHelper;
@@ -34,6 +36,11 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
      * Standard test setUp
      */
     public void setUp() throws Exception {
+        Context context = getInstrumentation().getTargetContext();
+        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.apply();
         solo = new Solo(getInstrumentation(),getActivity());
     }
 
@@ -70,7 +77,7 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
         serverHelper.addProfile(testProfile);
         solo.enterText((EditText) solo.getView(R.id.usernameBox), "testUser");
         solo.clickOnButton("Sign In");
-        solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", RequesterViewListActivity.class);
         serverHelper.deleteProfile(testProfile);
         pref = context.getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         editor = pref.edit();
