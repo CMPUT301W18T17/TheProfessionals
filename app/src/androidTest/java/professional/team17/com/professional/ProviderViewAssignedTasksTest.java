@@ -63,6 +63,11 @@ public class ProviderViewAssignedTasksTest extends ActivityInstrumentationTestCa
     public void testNavigation(){
         solo.assertCurrentActivity("Wrong Activity",ProviderTaskListActivity.class);
 
+        try {
+            solo.waitForText("__testTask");
+        } catch (Exception e){
+            solo.clickOnView(solo.getView(R.id.acceptedTasksProviderButton));
+        }
 //        solo.waitForText("__testTask");
         solo.clickOnText("__testTask");
 
