@@ -129,7 +129,6 @@
                 android:background="#ffffff"
                 android:onClick="viewPhoto"
                 android:scaleType="fitCenter"
-                app:layout_constraintEnd_toStartOf="@+id/viewLocationButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requester_view_taskdescriptionView"
                 app:srcCompat="@drawable/view_image_icon" />
