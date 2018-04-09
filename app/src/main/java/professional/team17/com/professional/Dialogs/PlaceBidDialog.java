@@ -81,7 +81,7 @@ public class PlaceBidDialog extends DialogFragment {
      * @param savedInstanceState - the string paremeters being passed, they are as follows
      *                           title: the title to display in the fragment
      *                           amount: the string representing the amount to be placed into the amount field
-     * @return
+     *
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

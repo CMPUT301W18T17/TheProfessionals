@@ -242,7 +242,7 @@ public class  TaskDAO extends SQLiteOpenHelper {
     /**
      *
      * @param photostr - convert photo string back to array
-     * @return
+     * @return photo as an ArrayList of Strings
      */
     public static ArrayList<String> convertStringToArray(String photostr){
         String strSeparator = ",";
