@@ -170,7 +170,7 @@ public class SignUpActivity extends AppCompatActivity {
                     editor.apply(); // commit changes
 
                     //String test = pref.getString(username, "not working");
-                    changeActivity(SearchActivity.class);
+                    changeActivity(RequesterViewListActivity.class);
                 }
             }
         }
