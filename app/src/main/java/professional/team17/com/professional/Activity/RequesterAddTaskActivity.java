@@ -23,7 +23,6 @@ import professional.team17.com.professional.Controllers.RequesterTaskController;
  * @see Navigation
  */
 public class RequesterAddTaskActivity extends RequesterTaskActivity {
-    private static final String TAG = "RequesterADTaskActivity";
 
     /**
      * Sets the title
@@ -65,18 +64,6 @@ public class RequesterAddTaskActivity extends RequesterTaskActivity {
         startActivity(intent);
         finish();
     }
-
-
-        /**
-         * Saves the task locally for offline functionality.
-         */
-        //private void saveInFile(){
-        //TODO offline functionality in project 5
-        //}
-
-
-        //TODO photo and location handling in project 5
-        //for photos
 
 }
 

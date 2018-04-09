@@ -234,34 +234,6 @@ public abstract class RequesterTaskActivity extends Navigation {
     }
 
     /**
-     * put for variables in extra in preparation for next activity
-     * @param activity - the activity to be changed to
-     */
-    private void changeActivity(Class activity) {
-        Intent intent = new Intent(this, activity);
-        // Put extra
-
-        // Task Title
-        infor = nameField.getText().toString();
-        intent.putExtra("Title", infor);
-
-        // Task Description
-        infor = descriptionField.getText().toString();
-        intent.putExtra("Description", infor);
-
-        // Location
-        infor = locationField.getText().toString();
-        intent.putExtra("Location", infor);
-
-        // Date
-        infor = (String) textualDateView.getText();
-        intent.putExtra("Date", infor);
-
-        startActivityForResult(intent, 0);
-        finish();
-    }
-
-    /**
      * Put info in the EditText specified
      * @param name - name of EditText
      * @param information - info to be put into EditText

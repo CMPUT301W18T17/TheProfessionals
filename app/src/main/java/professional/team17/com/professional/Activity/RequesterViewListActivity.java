@@ -35,7 +35,6 @@ public class RequesterViewListActivity extends Navigation {
     private RequesterCustomArrayAdapter adapterHelper;
     private ListView listView;
     private TaskListController taskListController;
-    private RecyclerView recyclerView;
 
     /**
      * On creation of the activity, set the layout and populate the task list.
