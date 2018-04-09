@@ -26,6 +26,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:background="#dddddd"
+        android:fontFamily="@font/amiko"
         android:onClick="addPhoto"
         android:text="Add Photo"
         app:layout_constraintBottom_toTopOf="@+id/requester_taskPhotoGrid"
@@ -85,23 +87,27 @@
 
         <ImageButton
             android:id="@+id/requester_photo_delete_photo"
-            android:layout_width="33dp"
-            android:layout_height="41dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="30dp"
             android:layout_weight="1"
-            android:onClick="deletePhoto"
+            android:background="@android:color/transparent"
             android:gravity="right"
+            android:onClick="deletePhoto"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/delete_icon"
             tools:layout_editor_absoluteY="0dp" />
 
         <ImageButton
             android:id="@+id/requester_photo_edit_photo"
-            android:layout_width="37dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="50dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="end"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:onClick="editPhoto"
-            android:scaleType="fitEnd"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/edit_icon"
             tools:layout_editor_absoluteY="0dp" />
     </FrameLayout>

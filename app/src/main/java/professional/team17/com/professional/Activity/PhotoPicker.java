@@ -369,15 +369,15 @@ public class PhotoPicker extends AppCompatActivity {
 
     public void photoDialog(View view){
         new AlertDialog.Builder(this)
-                .setTitle("Attention")
-                .setMessage("Please choose your way to pick photo.")
+                .setTitle("Photo Manager")
+                .setMessage("Please pick how you'd like to add a photo.")
                 .setCancelable(true)
-                .setPositiveButton("From File", new DialogInterface.OnClickListener() {
+                .setPositiveButton("From Gallery", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         toGallery();
                     }
                 })
-                .setNegativeButton("Using Camera", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Use Camera", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         toCamera();
                     }
