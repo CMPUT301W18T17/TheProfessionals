@@ -10,7 +10,7 @@ public class SyncDialog extends DialogContent {
         super(view);
         dmessage.setText("We were unable to sync all your edits as " +
                 "users have placed bids on your tasks." +
-                "Click yes to see these bids");
+                " Click yes to see these bids");
         dtitle.setText("Unable to Sync");
     }
 }
