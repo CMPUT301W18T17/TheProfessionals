@@ -98,18 +98,18 @@ public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCa
         solo.assertCurrentActivity("Wrong activity after clicking on task title", RequesterViewTaskActivity.class);
         assertTrue(solo.waitForText("Test Title"));
         assertTrue(solo.waitForText("Test Description"));
-        //don't display description
-        //assertTrue(solo.waitForText("Test Location"));
-        assertTrue(solo.waitForText("01/01/2000"));
+
     }
 
     public void testFillEditFields() {
         /* Check that this is the right activity */
         solo.assertCurrentActivity("Wrong Activity", RequesterEditTaskActivity.class);
         /*Change text fields */
+        solo.clearEditText((EditText) solo.getView(R.id.TaskNameField));
+        solo.clearEditText((EditText) solo.getView(R.id.taskDescriptionField));
         solo.enterText((EditText) solo.getView(R.id.TaskNameField), "Test Title Changed");
         solo.enterText((EditText) solo.getView(R.id.taskDescriptionField), "Test Description Changed");
-        solo.enterText((EditText) solo.getView(R.id.textualAddressField), "Test Location Changed");
+
         solo.clickOnView(solo.getView(R.id.calendarButton));
         /* Locate datepicker and set date */
         solo.getCurrentActivity().getFragmentManager().findFragmentByTag("datePicker");
@@ -117,15 +117,14 @@ public class RequesterEditTaskActivityTest extends ActivityInstrumentationTestCa
         solo.setDatePicker(0, 2001, 02, 02);
         solo.clickOnText("OK");
         /* Check that the submit button leads to the right place */
-        solo.clickOnButton("Edit");
+        solo.clickOnView(solo.getView(R.id.submitButton));
         solo.assertCurrentActivity("Wrong activity after pressing submit", RequesterViewListActivity.class);
         solo.clickOnView(solo.getView(R.id.requester_requested_title));
         /* Check that clicking on the task title leads to the right place */
         solo.assertCurrentActivity("Wrong activity after clicking on task title", RequesterViewTaskActivity.class);
         assertTrue(solo.waitForText("Test Title Changed"));
         assertTrue(solo.waitForText("Test Description Changed"));
-        //don't have location display
-        //assertTrue(solo.waitForText("Test Location Changed"));
+
         assertTrue(solo.waitForText("02/03/2001"));
     }
     /**

@@ -34,6 +34,11 @@ public class LogInActivityTest extends ActivityInstrumentationTestCase2<LogInAct
      * Standard test setUp
      */
     public void setUp() throws Exception {
+        Context context = getInstrumentation().getTargetContext();
+        SharedPreferences pref = context.getApplicationContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.apply();
         solo = new Solo(getInstrumentation(),getActivity());
     }
 
