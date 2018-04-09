@@ -48,6 +48,8 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
         Activity activity = getActivity();
     }
 
+    //If the server is slow at this time, this test will fail as the RequesterViewListActivity
+    //will not update in time to display the created task
     public void testRequesterAddTaskActivity(){
 
         // Start
@@ -63,7 +65,12 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
         solo.assertCurrentActivity("Wrong Activity", RequesterViewListActivity.class);
         // Check
 //        solo.clickOnView(solo.getView(R.id.taskMapProviderButton));
-        solo.clickOnView(solo.getView(R.id.requester_requested_title));
+        try {
+            solo.clickOnView(solo.getView(R.id.requester_requested_title));
+        }catch (Exception e) {
+            solo.clickOnView(solo.getView(R.id.requestedTaskRequesterButton));
+            solo.clickOnView(solo.getView(R.id.requester_requested_title));
+        }
 
         solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskActivity.class);
         assertTrue(solo.waitForText("Task Name 1"));
