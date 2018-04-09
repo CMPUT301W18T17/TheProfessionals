@@ -26,6 +26,7 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
     private Solo solo;
     private Task mockTask;
     private Profile testProfile ;
+    private ServerHelper serverHelper;
 
     public ProviderPlaceBidTest() {
         super(SearchActivity.class);
@@ -34,9 +35,9 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
     public void setUp() throws Exception {
 
         Context context = getInstrumentation().getTargetContext();
-        ServerHelper serverHelper = new ServerHelper(context);
+        serverHelper = new ServerHelper(context);
         //TODO add a proper task setup
-        mockTask = new Task("TestUser", "test task", "Test Description");
+        mockTask = new Task("testUser", "test task", "Test Description");
         String id = serverHelper.addTasks(mockTask);
         mockTask.setId(id);
         serverHelper.updateTasks(mockTask);
@@ -85,10 +86,8 @@ public class ProviderPlaceBidTest extends ActivityInstrumentationTestCase2<Searc
 
     @Override
     public void tearDown() throws Exception {
-        ElasticSearchController.DeleteProfile deleteProfile = new ElasticSearchController.DeleteProfile();
-        ElasticSearchController.DeleteTask deleteTask = new ElasticSearchController.DeleteTask();
-        deleteTask.execute(mockTask);
-        deleteProfile.execute(testProfile);
+        serverHelper.deleteProfile(testProfile);
+        serverHelper.deleteTasks(mockTask);
 
         solo.finishOpenedActivities();
     }

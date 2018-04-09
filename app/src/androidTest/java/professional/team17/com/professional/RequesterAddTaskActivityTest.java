@@ -9,6 +9,8 @@ import android.widget.EditText;
 import com.robotium.solo.Solo;
 
 import professional.team17.com.professional.Activity.RequesterAddTaskActivity;
+import professional.team17.com.professional.Activity.RequesterViewListActivity;
+import professional.team17.com.professional.Activity.RequesterViewTaskActivity;
 import professional.team17.com.professional.Controllers.ServerHelper;
 import professional.team17.com.professional.Entity.Profile;
 
@@ -29,16 +31,17 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
     public void setUp() throws Exception{
 
         Context context = getInstrumentation().getTargetContext();
-        profile = new Profile("Tester", "testUser1", "abc@abc.com", "110");
+        profile = new Profile("Tester", "testUser1", "abc@abc.com", "1234567890");
         serverHelper = new ServerHelper(context);
         serverHelper.addProfile(profile);
 
-        solo = new Solo(getInstrumentation(), getActivity());
         SharedPreferences sharedPreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString("username", profile.getUserName()); // Storing string
         editor.commit();
+
+        solo = new Solo(getInstrumentation(), getActivity());
     }
 
     public void testStart() throws Exception {
@@ -57,20 +60,25 @@ public class RequesterAddTaskActivityTest extends ActivityInstrumentationTestCas
         // Leave For now
         solo.clickOnButton("Add");
 
+        solo.assertCurrentActivity("Wrong Activity", RequesterViewListActivity.class);
         // Check
-        solo.clickOnView(solo.getView(R.id.taskMapProviderButton));
+//        solo.clickOnView(solo.getView(R.id.taskMapProviderButton));
         solo.clickOnView(solo.getView(R.id.requester_requested_title));
+
+        solo.assertCurrentActivity("Wrong Activity", RequesterViewTaskActivity.class);
         assertTrue(solo.waitForText("Task Name 1"));
         assertTrue(solo.waitForText("Requested"));
         assertTrue(solo.waitForText("Task Description"));
-        solo.clickOnView(solo.getView(R.id.taskMapProviderButton));
+        solo.clickOnView(solo.getView(R.id.requester_view_taskbackButton));
+//        solo.clickOnView(solo.getView(R.id.taskMapProviderButton));
         solo.clickOnView(solo.getView(R.id.deleteTaskButton));
-        solo.clickOnText("Yes");
+        solo.clickOnText("Confirm");
     }
 
     @Override
     public void tearDown() throws Exception {
         serverHelper.deleteProfile(profile);
+
         solo.finishOpenedActivities();
     }
 
